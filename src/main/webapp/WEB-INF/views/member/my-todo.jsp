@@ -39,8 +39,9 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/assets/css/jquery.mCustomScrollbar.css">
 	
-	<link rel="stylesheet" type="text/css"
-	href="/resources/srButton.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/srButton.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/pagination.css">
+	<link rel="stylesheet" type="text/css" href="/resources/js/pagination.js">
 </head>
 <body>
 	<!-- Pre-loader start -->
@@ -548,6 +549,8 @@
 															</tr>
 														</tbody>
 													</table>
+													<!-- 페이징 처리 -->
+													<%@ include file="/WEB-INF/views/fragments/pagination.jsp" %>
 												</div>
 											</div>
 											<!-- Color Open Accordion ends -->
@@ -561,7 +564,38 @@
 													<div class="card-header">
 														<h5 class="card-header-text">공지사항</h5>
 													</div>
-													<div class="card-block accordion-block"></div>
+													<table class="table table-hover">
+														<thead>
+															<tr>
+																<th scope="col">글 번호</th>
+																<th scope="col">제목</th>
+																<th scope="col">파일첨부</th>
+																<th scope="col">작성자</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<th scope="row">3</th>
+																<td>오티아이 휴가 사용 공지</td>
+																<td>-</td>
+																<td>최은종(관리자)</td>
+															</tr>
+															<tr>
+																<th scope="row">2</th>
+																<td>오티아이 워크샵 공지</td>
+																<td><img src="/resources/oti_images/attachFile.png" style="width: 20px;"></td>  
+																<td>신정은(관리자)</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>오티아이 회식 공지</td>
+																<td>-</td>
+																<td>한송민(관리자)</td>
+															</tr>
+														</tbody>
+													</table>
+													<!-- 페이징 처리 -->
+													<%@ include file="/WEB-INF/views/fragments/pagination.jsp" %>
 												</div>
 											</div>
 											<!-- Multiple Open Accordion ends -->
@@ -571,7 +605,38 @@
 													<div class="card-header">
 														<h5 class="card-header-text">문의사항</h5>
 													</div>
-													<div class="card-block accordion-block"></div>
+													<table class="table table-hover">
+														<thead>
+															<tr>
+																<th scope="col">글 번호</th>
+																<th scope="col">제목</th>
+																<th scope="col">작성자</th>
+																<th scope="col">답변상태</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<th scope="row">1</th>
+																<td>사이드바 색상 문의드립니다.</td>	
+																<td>홍길동</td>
+																<td>미답변</td>
+															</tr>
+															<tr>
+																<th scope="row">2</th>
+																<td>오티아이 워크샵 공지</td> 
+																<td>이순신</td>
+																<td>답변완료</td>
+															</tr>
+															<tr>
+																<th scope="row">1</th>
+																<td>오티아이 회식 공지</td>
+																<td>강감찬</td>
+																<td>미답변</td>
+															</tr>
+														</tbody>
+													</table>
+													<!-- 페이징 처리 -->
+													<%@ include file="/WEB-INF/views/fragments/pagination.jsp" %>
 												</div>
 											</div>
 											<!-- Single Open Accordion ends -->

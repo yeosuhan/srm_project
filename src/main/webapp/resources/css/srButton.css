@@ -7,3 +7,8 @@
 	width: 80%; 
 	font-size: 15px
 }
+
+.srbutton:hover, .srbutton-active, .srnbutton:active {
+	color: black;
+	outline:none !important;
+}
