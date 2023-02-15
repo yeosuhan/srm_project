@@ -25,7 +25,7 @@ public class exampleController {
 	public String home(HttpSession session, Model model,@RequestParam(defaultValue="1") int role) {		
 		session.removeAttribute("role");
 		session.setAttribute("role", role);
-		return "example2";
+		return "example";
 	}
 	
 }
