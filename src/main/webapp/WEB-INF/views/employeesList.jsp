@@ -2,19 +2,15 @@
 
 <html>
 	<head>
-		<%@include file="/WEB-INF/views/fragments/header.jsp"%>	
-		<script>
-			
-
+		<%@include file="/WEB-INF/views/fragments/header.jsp"%>
 		
-		</script>
-			
 		<style>
 			table,th,td{			
 				text-align:center;
 				line-height:35px;		
-			}		
-		</style>		
+			}
+		
+		</style>
 	</head>	
 	<body>
 		<div id="pcoded" class="pcoded">
@@ -35,7 +31,7 @@
 											<!-- Hover table card start -->
 											<div class="card">
 												<div class="card-header">
-													<h5>고객 관리</h5>
+													<h5>사원 관리</h5>
 									
 												<!-- 검색 -->	
 												<div class="mt-4 mr-5">							
@@ -45,11 +41,15 @@
 								                            <div class="col-sm-2">
 								                                <input type="text" class="form-control">
 								                            </div>
-								                            <label class="col-sm-1 col-form-label text-right">소속기관</label>
+								                            <label class="col-sm-1 col-form-label text-right">부서</label>
 								                            <div class="col-sm-2">
 								                                <input type="text" class="form-control">
-								                            </div>    
-								                            <div class="col-sm-6 d-flex justify-content-end pr-5">                      
+								                            </div>  
+								                            <label class="col-sm-1 col-form-label text-right">직급</label>
+								                            <div class="col-sm-2">
+								                                <input type="text" class="form-control">
+								                            </div>                       
+								                            <div class="col-sm-3 d-flex justify-content-end pr-5">                      
 								                            	<button class="btn btn-primary btn-round waves-effect waves-light">검색</button>
 								                            </div> 
 								                        </div>
@@ -75,18 +75,19 @@
 																	<th>번호</th>
 																	<th>아이디</th>
 																	<th>이름</th>											
-																	<th>전화번호</th>
-																	<th>소속기관</th>
-																	<th>기관번호</th>																
+																	<th>부서</th>
+																	<th>직급</th>
+																	<th>이메일</th>																
 																</tr>
 															</thead>
 															<tbody>
-																<tr onclick="show()" data-toggle="modal" data-target="ModalView">
-																	<th scope="row">1</th>																																				<td>test2</td>
+																<tr onclick="show()" data-toggle="modal" data-target="ModalView">	
+																	<th scope="row">1</th>
 																	<td>test1</td>
 																	<td>test1</td>
 																	<td>test1</td>
-																	<td>test1</td>																																														
+																	<td>test1</td>
+																	<td>test1</td>																
 																</tr>
 																<tr onclick="show()" data-toggle="modal" data-target="ModalView">
 																	<th scope="row">2</th>
@@ -94,7 +95,7 @@
 																	<td>test2</td>
 																	<td>test2</td>
 																	<td>test2</td>
-																	<td>test2</td>																																	
+																	<td>test2</td>																															
 																</tr>
 																<tr onclick="show()" data-toggle="modal" data-target="ModalView">
 																	<th scope="row">3</th>
@@ -102,16 +103,16 @@
 																	<td>test3</td>
 																	<td>test3</td>
 																	<td>test3</td>
-																	<td>test3</td>																
+																	<td>test3</td>	
 																</tr>
 															</tbody>
 														</table>
 													</div>
 												</div>
 												<!-- Modal 호출 include -->
-												<%@include file="/WEB-INF/views/modalClientManagement.jsp"%>												
+												<%@include file="/WEB-INF/views/modalEmployeeManagement.jsp"%>												
 											</div>
-											<!-- Hover table card end -->		
+											<!-- Hover table card end -->	
 										</div>
 										<!-- *********** -->
 										</div>

@@ -2,19 +2,14 @@
 
 <html>
 	<head>
-		<%@include file="/WEB-INF/views/fragments/header.jsp"%>	
-		<script>
-			
-
-		
-		</script>
-			
+		<%@include file="/WEB-INF/views/fragments/header.jsp"%>
 		<style>
 			table,th,td{			
 				text-align:center;
 				line-height:35px;		
-			}		
-		</style>		
+			}
+		
+		</style>
 	</head>	
 	<body>
 		<div id="pcoded" class="pcoded">
@@ -35,27 +30,29 @@
 											<!-- Hover table card start -->
 											<div class="card">
 												<div class="card-header">
-													<h5>고객 관리</h5>
-									
+													<h5>부서 관리</h5>		
 												<!-- 검색 -->	
 												<div class="mt-4 mr-5">							
 													<form>
 								                       <div class="form-group row">
-								                        	<label class="col-sm-1 col-form-label text-right">이름</label>
+								                        	<label class="col-sm-1 col-form-label text-right">부서명</label>
 								                            <div class="col-sm-2">
 								                                <input type="text" class="form-control">
 								                            </div>
-								                            <label class="col-sm-1 col-form-label text-right">소속기관</label>
+								                            <label class="col-sm-1 col-form-label text-right">부서 담당자</label>
 								                            <div class="col-sm-2">
 								                                <input type="text" class="form-control">
-								                            </div>    
-								                            <div class="col-sm-6 d-flex justify-content-end pr-5">                      
-								                            	<button class="btn btn-primary btn-round waves-effect waves-light">검색</button>
+								                            </div>  						                     
+								                            <div class="col-sm-3 ">                      
+								                            	<button class="btn btn-primary btn-round waves-effect waves-light" >검색</button>   
+								                            </div> 
+								                            <div class="col-sm-3 d-flex justify-content-end pr-4">				                                              
+								                            	<div class="btn btn-primary btn-round waves-effect waves-light" onclick="show1()" data-toggle="modal" data-target="ModalRegister">부서 등록</div>								                        
 								                            </div> 
 								                        </div>
-													</form>
+													</form>									
 												</div>
-
+												
 													<div class="card-header-right">
 														<ul class="list-unstyled card-option">
 															<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -73,45 +70,43 @@
 															<thead>
 																<tr>
 																	<th>번호</th>
-																	<th>아이디</th>
-																	<th>이름</th>											
-																	<th>전화번호</th>
-																	<th>소속기관</th>
-																	<th>기관번호</th>																
+																	<th>부서 코드</th>
+																	<th>부서명</th>											
+																	<th>사무실 전화번호</th>
+																	<th>담당자</th>																																	
 																</tr>
 															</thead>
 															<tbody>
 																<tr onclick="show()" data-toggle="modal" data-target="ModalView">
-																	<th scope="row">1</th>																																				<td>test2</td>
+																	<th scope="row">1</th>
 																	<td>test1</td>
 																	<td>test1</td>
 																	<td>test1</td>
-																	<td>test1</td>																																														
+																	<td>test1</td>															
 																</tr>
 																<tr onclick="show()" data-toggle="modal" data-target="ModalView">
 																	<th scope="row">2</th>
 																	<td>test2</td>
 																	<td>test2</td>
 																	<td>test2</td>
-																	<td>test2</td>
-																	<td>test2</td>																																	
+																	<td>test2</td>																														
 																</tr>
 																<tr onclick="show()" data-toggle="modal" data-target="ModalView">
 																	<th scope="row">3</th>
 																	<td>test3</td>
 																	<td>test3</td>
 																	<td>test3</td>
-																	<td>test3</td>
-																	<td>test3</td>																
+																	<td>test3</td>														
 																</tr>
 															</tbody>
 														</table>
 													</div>
 												</div>
 												<!-- Modal 호출 include -->
-												<%@include file="/WEB-INF/views/modalClientManagement.jsp"%>												
+												<%@include file="/WEB-INF/views/modalDeptManagementRegister.jsp"%>	
+												<%@include file="/WEB-INF/views/modalDeptManagementDetail.jsp"%>											
 											</div>
-											<!-- Hover table card end -->		
+											<!-- Hover table card end -->	
 										</div>
 										<!-- *********** -->
 										</div>
