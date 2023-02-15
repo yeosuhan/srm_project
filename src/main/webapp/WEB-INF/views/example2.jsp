@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 		<%@include file="/WEB-INF/views/fragments/header.jsp"%>
@@ -11,7 +11,15 @@
 				<%@include file="/WEB-INF/views/fragments/top.jsp"%>
 				<div class="pcoded-main-container">
 					<div class="pcoded-wrapper">
-						<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
+						<c:if test="${role eq 1 }">
+							<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
+						</c:if>
+						<c:if test="${role eq 2 }">
+							<%@include file="/WEB-INF/views/fragments/srSidebar.jsp"%>
+						</c:if>
+						<c:if test="${role eq 3 }">
+							<%@include file="/WEB-INF/views/fragments/manageSidebar.jsp"%>
+						</c:if>
 						<div class="pcoded-content">
 							<%@include file="/WEB-INF/views/fragments/pageHeader.jsp"%>
 							<div class="pcoded-inner-content pt-4">
@@ -23,7 +31,9 @@
 	
 	
 											여기에 내용 붙여넣으세요
-	
+											<a href="example?role=1">사용자</a>
+											<a href="example?role=2">개발자</a>
+											<a href="example?role=3">관리자</a>
 	
 											<!-- *********** -->
 										</div>
