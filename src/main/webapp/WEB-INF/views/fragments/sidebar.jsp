@@ -33,7 +33,7 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">MyPotal</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="">
-                <a href="index.html" class="waves-effect waves-dark">
+                <a href="todo" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">MyPotal</span>
                     <span class="pcoded-mcaret"></span>
@@ -44,14 +44,14 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">게시판</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>
-                <a href="form-elements-component.html" class="waves-effect waves-dark">
+                <a href="noticeList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">공지사항</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li>
-                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                <a href="inquiryList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">문의 사항</span>
                     <span class="pcoded-mcaret"></span>
@@ -63,14 +63,14 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">나의 정보 관리</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>
-                <a href="chart.html" class="waves-effect waves-dark">
+                <a href="modification" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">회원정보 수정</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li>
-                <a href="map-google.html" class="waves-effect waves-dark">
+                <a href="instList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">나의 기관 관리</span>
                     <span class="pcoded-mcaret"></span>

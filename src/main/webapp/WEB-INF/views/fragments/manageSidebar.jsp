@@ -33,28 +33,28 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">회원 관리</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="">
-                <a href="index.html" class="waves-effect waves-dark">
+                <a href="clientList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">고객 관리</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li class="">
-                <a href="index.html" class="waves-effect waves-dark">
+                <a href="empList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">사원관리</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li class="">
-                <a href="index.html" class="waves-effect waves-dark">
+                <a href="deptList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">부서관리</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
             <li class="">
-                <a href="index.html" class="waves-effect waves-dark">
+                <a href="instList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">기관관리</span>
                     <span class="pcoded-mcaret"></span>

@@ -33,7 +33,7 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">SR 관리</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="">
-                <a href="index.html" class="waves-effect waves-dark">
+                <a href="srDemandList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
                     <span class="pcoded-mcaret"></span>
@@ -41,7 +41,7 @@
             </li>
             <c:if test="${role eq 3 || role eq 2}">
 	            <li>
-	                <a href="form-elements-component.html" class="waves-effect waves-dark">
+	                <a href="srInformationList" class="waves-effect waves-dark">
 	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
 	                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">SR 진척 관리</span>
 	                    <span class="pcoded-mcaret"></span>
