@@ -144,7 +144,7 @@
 		                                                </div>
 		                                                <div class="card-block ">
 		                                                    <div class="row">
-	                                                            <form action="/">
+	                                                            <form  id="srSearchForm" >
 	                                                            	<div class="row">
 	                                                            		<div class="col-5">
 	                                                            			<label for="dmndYmdStart">조회 기간</label>
@@ -165,13 +165,13 @@
 	                                                            		</div>
 	                                                            		<div class="col-2"></div>
 	                                                            		<div class="col-5">
-	                                                            			<label for="">관련 시스템</label>
-	                                                            			<select id="" name="">
+	                                                            			<label for="sysCd">관련 시스템</label>
+	                                                            			<select id="sysCd" name="sysCd">
 	                                                            				<option value="0">워크넷</option>
 	                                                            				<option value="1">고용정보원</option>
 	                                                            				
 	                                                            			</select>
-	                                                            			<select id="" name="">
+	                                                            			<select id="taskSeCd" name="taskSeCd">
 	                                                            				<option value="0">내부망</option>
 	                                                            				<option value="1">외부망</option>
 	                                                            				
@@ -182,13 +182,13 @@
 	                                                            			<input type="text" name="keyWord" id="keyWord">
 	                                                            		</div>
 	                                                            		<div class="col-2">
-	                                                            			<button class="btn btn-info"><i class="ti-search"></i></button>
 	                                                            		</div>
 	                                                            	</div>
 	                                                            </form>
+	                                                            <button onclick="srSearch()" class="btn btn-info"><i class="ti-search"></i></button>
 	                                                        </div>
 	                                                       	<div class="row" style="width:100%;overflow-x: auto!important ">
-	                                                       		<table class="table table-hover" >
+	                                                       		<table class="table table-hover" id="srDemandTable">
 	                                                       			<thead>
 	                                                       				<tr>
 	                                                       					<th>순번</th>
@@ -265,6 +265,8 @@
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 		<!-- fullcalendar 언어 CDN -->
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+		<!-- 검색 -->
+		<script src="/resources/assets/js/srDemandList.js"></script>
 		
 		<!-- 모달 -->
 		<script src="/resources/assets/js/resourceSelectModal.js"></script>
