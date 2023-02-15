@@ -9,4 +9,4 @@
 			href="#">4</a> <a href="#">5</a> <a href="#">6</a>
 		</span> <a class="pagination-older" href="#">NEXT</a>
 	</div>
-</div>
+</div> 		
