@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="pcoded-navbar">
     <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
     <div class="pcoded-inner-navbar main-menu">
@@ -30,12 +31,12 @@
                 </div>
             </form>
         </div>
-        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">MyPotal</div>
+        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">MyPortal</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="">
                 <a href="todo" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">MyPotal</span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">MyPortal</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
@@ -65,253 +66,65 @@
             <li>
                 <a href="modification" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">회원정보 수정</span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">나의 정보 수정</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <li>
-                <a href="instList" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">나의 기관 관리</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            
+            <c:if test="${role eq 1 }">
+	            <li>
+	                <a href="instList" class="waves-effect waves-dark">
+	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+	                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">나의 기관 관리</span>
+	                    <span class="pcoded-mcaret"></span>
+	                </a>
+	            </li>
+            </c:if>
         </ul>
-		
-        
-    </div>
-</nav>
-<!-- <nav class="pcoded-navbar">
-    <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-    <div class="pcoded-inner-navbar main-menu">
-        <div class="">
-            <div class="main-menu-header">
-                <img class="img-80 img-radius" src="assets/images/avatar-4.jpg" alt="User-Profile-Image">
-                <div class="user-details">
-                    <span id="more-details">John Doe<i class="fa fa-caret-down"></i></span>
-                </div>
-            </div>
-
-            <div class="main-menu-content">
-                <ul>
-                    <li class="more-details">
-                        <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                        <a href="#!"><i class="ti-settings"></i>Settings</a>
-                        <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="p-15 p-b-0">
-            <form class="form-material">
-                <div class="form-group form-primary">
-                    <input type="text" name="footer-email" class="form-control" required="">
-                    <span class="form-bar"></span>
-                    <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>
-                </div>
-            </form>
-        </div>
-        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Layout</div>
+		<div class="pcoded-navigation-label" data-i18n="nav.category.navigation">SR 관리</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="">
-                <a href="index.html" class="waves-effect waves-dark">
+                <a href="srDemandList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <li class="pcoded-hasmenu active pcoded-trigger">
-                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Components</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-                <ul class="pcoded-submenu">
-                    <li class=" ">
-                        <a href="accordion.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Accordion</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="breadcrumb.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Breadcrumbs</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="button.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Button</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="tabs.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Tabs</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="color.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Color</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="label-badge.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Label Badge</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="tooltip.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tooltip</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="typography.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Typography</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="notification.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Notification</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="icon-themify.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Themify</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-    
-                </ul>
-            </li>
+            <c:if test="${role eq 3 }">
+	            <li>
+	                <a href="srInformationList" class="waves-effect waves-dark">
+	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+	                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">SR 진척 관리</span>
+	                    <span class="pcoded-mcaret"></span>
+	                </a>
+	            </li>
+            </c:if>
         </ul>
-        <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Forms &amp; Tables</div>
-        <ul class="pcoded-item pcoded-left-item">
-            <li>
-                <a href="form-elements-component.html" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Form Components</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="bs-basic-table.html" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Basic Table</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-
-        </ul>
-
-        <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Chart &amp; Maps</div>
-        <ul class="pcoded-item pcoded-left-item">
-            <li>
-                <a href="chart.html" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Chart</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li>
-                <a href="map-google.html" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Maps</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li class="pcoded-hasmenu">
-                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Pages</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-                <ul class="pcoded-submenu">
-                    <li class=" ">
-                        <a href="auth-normal-sign-in.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Login</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="auth-sign-up.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Register</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="sample-page.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Sample Page</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-        </ul>
-
-        <div class="pcoded-navigation-label" data-i18n="nav.category.other">Other</div>
-        <ul class="pcoded-item pcoded-left-item">
-            <li class="pcoded-hasmenu ">
-                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-                <ul class="pcoded-submenu">
-                    <li class="">
-                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class="pcoded-hasmenu ">
-                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                        <ul class="pcoded-submenu">
-                            <li class="">
-                                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-    
-                </ul>
-            </li>
-        </ul>
+        <c:if test="${role eq 3 }">
+	        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">회원 관리</div>
+	        <ul class="pcoded-item pcoded-left-item">
+	            <li class="">
+	                <a href="clientList" class="waves-effect waves-dark">
+	                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+	                    <span class="pcoded-mtext" data-i18n="nav.dash.main">고객 관리</span>
+	                    <span class="pcoded-mcaret"></span>
+	                </a>
+	            </li>
+	            <li class="">
+	                <a href="empList" class="waves-effect waves-dark">
+	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>D</b></span>
+	                    <span class="pcoded-mtext" data-i18n="nav.dash.main">사원관리</span>
+	                    <span class="pcoded-mcaret"></span>
+	                </a>
+	            </li>
+	            <li class="">
+	                <a href="deptList" class="waves-effect waves-dark">
+	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+	                    <span class="pcoded-mtext" data-i18n="nav.dash.main">부서관리</span>
+	                    <span class="pcoded-mcaret"></span>
+	                </a>
+	            </li>
+	            
+	        </ul>
+        </c:if>
     </div>
-</nav> -->
+</nav>
