@@ -3,6 +3,12 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<style>
+	.modal-header {
+      background-color:#4778FF;
+      color:white;
+   }
+</style>
 </head>
 <body themebg-pattern="theme1">
 	<!-- Pre-loader start -->
