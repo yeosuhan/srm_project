@@ -4,8 +4,7 @@
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/css/srModal.css">
-	
+
 </head>
 <script>
 	$(function() {

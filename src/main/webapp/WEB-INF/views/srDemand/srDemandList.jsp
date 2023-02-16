@@ -3,8 +3,7 @@
 <html>
 	<head>
 		<%@include file="/WEB-INF/views/fragments/header.jsp"%>
-	   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/srModal.css">
-	
+	   
 	</head>
 
 	<body>
