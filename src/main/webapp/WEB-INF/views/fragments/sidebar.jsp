@@ -34,7 +34,7 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">MyPortal</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="">
-                <a href="todo" class="waves-effect waves-dark">
+                <a href="myTodo class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">MyPortal</span>
                     <span class="pcoded-mcaret"></span>
@@ -52,9 +52,9 @@
                 </a>
             </li>
             <li>
-                <a href="inquiryList" class="waves-effect waves-dark">
+                <a href="qnaList" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">문의 사항</span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">QnA</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
@@ -64,7 +64,7 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">나의 정보 관리</div>
         <ul class="pcoded-item pcoded-left-item">
             <li>
-                <a href="modification" class="waves-effect waves-dark">
+                <a href="myinfo" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">나의 정보 수정</span>
                     <span class="pcoded-mcaret"></span>

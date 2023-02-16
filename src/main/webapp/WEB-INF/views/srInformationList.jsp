@@ -30,6 +30,30 @@
 				});
 	});
 	$(function() {
+		$("#addDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('#addDatepicker').datepicker('setDate', 'today');
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
 		$("#endDatepicker").datepicker({
 			showOn : "both",
 			buttonImage : "resources/assets/images/button.png",
@@ -53,10 +77,336 @@
 							new Date()).datepicker('hide').blur();
 				});
 	});
+	
+	$(function() {
+		$("#requestDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	
+	$(function() {
+		$("#endRequestDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	/*  */
+	$(function() {
+		$("#firStartDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#firEndDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#secStartDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#secEndDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#thrStartDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#thrEndDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#fourStartDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#fourEndDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#fiveStartDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#fiveEndDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#sixStartDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	$(function() {
+		$("#sixEndDatepicker").datepicker({
+			showOn : "both",
+			buttonImage : "resources/assets/images/button.png",
+			buttonImageOnly : true,
+			changeMonth : true,
+			changeYear : true,
+			showButtonPanel : true,
+			currentText : '오늘 날짜',
+			closeText : '닫기',
+			dateFormat : "yy-mm-dd",
+			minDate : -0,
+			todayHighlight : true,
+			language : "ko"
+
+		});
+		$('button.ui-datepicker-current').on(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide').blur();
+				});
+	});
+	/*  */
 	function selectResourceAll(selectResourceAll)  {
 		  const checkboxes 
 		       = document.getElementsByName('resource');
-		  
+	  
 		  checkboxes.forEach((checkbox) => {
 		    checkbox.checked = selectResourceAll.checked;
 		  })
@@ -77,6 +427,16 @@
 		    checkbox.checked = selectOutputAll.checked;
 		  })
 		}
+	$(document).on('click', '#addbtn', function(e) {
+		console.log("click event");
+		$('#addmodal').addClass('show');
+
+	});
+	$(document).on('click', '#closebtn', function(e) {
+		console.log("click event");
+		$('#addmodal').removeClass('show');
+
+	});
 </script>
 <style>
 img {
@@ -84,9 +444,19 @@ img {
 	vertical-align: top;
 }
 
-#startDatepicker, #endDatepicker {
+#startDatepicker, #endDatepicker, #addDatepicker {
 	width: 90px;
 }
+
+#requestDatepicker, #endRequestDatepicker, #firStartDatepicker,
+	#firEndDatepicker, #secStartDatepicker, #secEndDatepicker,
+	#thrStartDatepicker, #thrEndDatepicker, #fiveStartDatepicker,
+	#fiveEndDatepicker, #fourStartDatepicker, #fourEndDatepicker,
+	#sixStartDatepicker, #sixEndDatepicker{
+	width: 70px;
+	padding-right: 0px;
+}
+
 
 div.left {
 	width: 65%;
@@ -119,10 +489,11 @@ th {
 .card .card-block {
 	padding: 0px 5px !important;
 }
+
 .col-xl-1 {
 	padding-top: 8px;
-	padding-right:0px;
-	padding-left:10px;
+	padding-right: 0px;
+	padding-left: 10px;
 }
 </style>
 <body>
@@ -141,9 +512,52 @@ th {
 									<!-- Page-body start -->
 									<div class="page-body text">
 										<!-- *********** -->
-
-
-
+										<!-- *********************************** [ 산출물 추가 ] ***********************************-->
+										<div class="modal" id="addmodal">
+											<div class="modal_body">
+												<div class="m_head">
+													<div class="modal_title" style="color: white;">산출물 추가</div>
+												</div>
+												<div class="m_body">
+													<div class="form-group row">
+														<div class="col-sm-6">
+															<div class="col col-sm-4">산출물 구분</div>
+															<div class="col col-sm-6">
+																<div class="dropdown dropdown open">
+																	<form action="#">
+																		<select name="languages" id="lang">
+																			<option value="워크넷">분석</option>
+																			<option value="굴국밥">설계</option>
+																			<option value="고소미">개발</option>
+																			<option value="고소미">시험</option>
+																		</select>
+																	</form>
+																</div>
+															</div>
+														</div>
+														<div class="col-sm-6">
+															<div class="col col-sm-4">등록일</div>
+															<div class="col col-sm-6">
+																<input type="text" id="addDatepicker">
+															</div>
+														</div>
+														
+													</div>
+												
+													<div class="form-group row">
+														<label class="col-sm-2 col-form-label">첨부파일</label>
+														<div class="col-sm-9">
+															<input type="file" class="">
+														</div>
+													</div>
+						
+												</div>
+												<div class="m_footer">
+													<div class="modal_btn save center" id="savebtn">등록</div>
+													<div class="modal_btn danger cancle" id="closebtn">닫기</div>
+												</div>
+											</div>
+										</div>
 										<div class="row">
 											<!--  sale analytics start -->
 											<div class="col-xl-12">
@@ -151,7 +565,7 @@ th {
 													<div class="card-header">
 														<h5>SR 진척 관리</h5>
 														<hr />
-														<div class="col col-xl-1" style="width:90px;">시스템
+														<div class="col col-xl-1" style="width: 90px;">시스템
 															구분</div>
 														<div class="col col-xl-1" style="">
 															<div class="dropdown dropdown open">
@@ -164,8 +578,7 @@ th {
 																</form>
 															</div>
 														</div>
-														<div class="col col-xl-1" style="width:80px;">업무
-															구분</div>
+														<div class="col col-xl-1" style="width: 80px;">업무 구분</div>
 														<div class="col col-xl-1" style="">
 															<div class="dropdown dropdown open">
 																<form action="#">
@@ -177,7 +590,7 @@ th {
 																</form>
 															</div>
 														</div>
-														<div class="col col-xl-1" style="width:80px;">진행 상태</div>
+														<div class="col col-xl-1" style="width: 80px;">진행 상태</div>
 														<div class="col col-xl-1" style="">
 															<div class="dropdown dropdown open">
 																<form action="#">
@@ -189,17 +602,26 @@ th {
 																</form>
 															</div>
 														</div>
-														<div class="col col-xl-1" style="width:80px;padding-left:20px;">SR 제목</div>
+														<div class="col col-xl-1"
+															style="width: 80px; padding-left: 20px;">SR 제목</div>
 														<div class="col col-xl-1" style="">
 															<input type="text" class="form-control">
 														</div>
-														<div class="col col-xl-1" style="width:80px; padding-left:30px">SR 번호</div>
+														<div class="col col-xl-1"
+															style="width: 80px; padding-left: 30px">SR 번호</div>
 														<div class="col col-xl-1" style="">
-															
+
 															<input type="text" class="form-control">
 														</div>
-														<div class="col col-xl-1" style="padding-left:30px">내 처리건 <input type="checkbox"></div>
-														<div class="col col-xl-1" style="float:right"><button class="btn btn-info">검색</button></div>
+														<div class="col col-xl-1" style="padding-left: 30px">
+															내 처리건 <input type="checkbox">
+														</div>
+														<div class="col col-xl-1">
+															<button class="btn btn-info" style="margin-left: 30px;">검색</button>
+														</div>
+														<div class="col col-xl-1">
+															<button class="btn btn-info">엑셀 다운로드</button>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -448,28 +870,14 @@ th {
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청일</div>
-																	<div class="col col-sm-6">
-																		<div class="dropdown dropdown open">
-																			<form action="#">
-																				<select name="languages" id="lang">
-																					<option value="워크넷">워크넷</option>
-																					<option value="굴국밥">굴국밥</option>
-																					<option value="고소미">고소미</option>
-																				</select>
-																			</form>
-																		</div>
+																	<div class="col col-sm-8">
+																		<input type="text" id="requestDatepicker">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">완료요청일</div>
-																	<div class="dropdown dropdown open">
-																		<form action="#">
-																			<select name="languages" id="lang">
-																				<option value="워크넷">워크넷</option>
-																				<option value="굴국밥">굴국밥</option>
-																				<option value="고소미">고소미</option>
-																			</select>
-																		</form>
+																	<div class="col col-sm-8">
+																		<input type="text" id="endRequestDatepicker">
 																	</div>
 																</div>
 															</div>
@@ -579,7 +987,9 @@ th {
 																			<thead>
 																				<tr>
 																					<th style="width: 1px;">#</th>
-																					<th style="width: 1px;"><input type="checkbox" name="resource" value="selectResourceAll" onclick="selectResourceAll(this)"></th>
+																					<th style="width: 1px;"><input type="checkbox"
+																						name="resource" value="selectResourceAll"
+																						onclick="selectResourceAll(this)"></th>
 																					<th>담당자명</th>
 																					<th>역할</th>
 																					<th>투입시작일</th>
@@ -635,37 +1045,82 @@ th {
 																					<tr>
 																						<th style="width: 1px;">#</th>
 																						<th style="width: 1px;"><input
-																							type="checkbox" name="progress" value="selectProgressAll" onclick="selectProgressAll(this)"></th>
-																						<th>작업구분</th>
-																						<th>시작일</th>
-																						<th>종료일</th>
-																						<th>진척률(누적)</th>
+																							type="checkbox" name="progress"
+																							value="selectProgressAll"
+																							onclick="selectProgressAll(this)"></th>
+																						<th style="width: 50px;">작업구분</th>
+																						<th style="width: 300px;">시작일</th>
+																						<th style="width: 300px;">종료일</th>
+																						<th style="width: 50px;">진척률(누적)</th>
+																						<th>산출물</th>
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
 																						<th scope="row">1</th>
 																						<td><input type="checkbox" name="progress"></td>
-																						<td>Otto</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td>Mark</td>
+																						<td>요구정의</td>
+																						<td><input type="text"
+																							id="firStartDatepicker"></td>
+																						<td><input type="text" id="firEndDatepicker"></td>
+																						<td><input type="text" class="form-control"
+																							id="progress"></td>
+																						<td>산출물</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">2</th>
 																						<td><input type="checkbox" name="progress"></td>
-																						<td>Thornton</td>
-																						<td>@fat</td>
-																						<td>Jacob</td>
-																						<td>Thornton</td>
+																						<td>분석/설계</td>
+																						<td><input type="text"
+																							id="secStartDatepicker"></td>
+																						<td><input type="text" id="secEndDatepicker"></td>
+																						<td><input type="text" class="form-control"
+																							id="progress"></td>
+																						<td>산출물</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">3</th>
 																						<td><input type="checkbox" name="progress"></td>
-																						<td>the Bird</td>
-																						<td>@twitter</td>
-																						<td>Larry</td>
-																						<td>the Bird</td>
+																						<td>구현</td>
+																						<td><input type="text"
+																							id="thrStartDatepicker"></td>
+																						<td><input type="text" id="thrEndDatepicker"></td>
+																						<td><input type="text" class="form-control"
+																							id="progress"></td>
+																						<td>산출물</td>
+																					</tr>
+																					<tr>
+																						<th scope="row">4</th>
+																						<td><input type="checkbox" name="progress"></td>
+																						<td>시험</td>
+																						<td><input type="text"
+																							id="fourStartDatepicker"></td>
+																						<td><input type="text" id="fourEndDatepicker"></td>
+																						<td><input type="text" class="form-control"
+																							id="progress"></td>
+																						<td>산출물</td>
+																					</tr>
+																					<tr>
+																						<th scope="row">5</th>
+																						<td><input type="checkbox" name="progress"></td>
+																						<td>반영요청</td>
+																						<td><input type="text"
+																							id="fiveStartDatepicker"></td>
+																						<td><input type="text" id="fiveEndDatepicker"></td>
+																						<td><input type="text" class="form-control"
+																							id="progress"></td>
+																						<td>산출물</td>
+																					</tr>
+																					<tr>
+																						<th scope="row">6</th>
+																						<td><input type="checkbox" name="progress"></td>
+																						<td>운영반영</td>
+																						<td><input type="text"
+																							id="sixStartDatepicker"></td>
+																						<td><input type="text" id="sixEndDatepicker"></td>
+																						<td><input type="text" class="form-control"
+																							id="progress"></td>
+																						<td>산출물</td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -677,8 +1132,7 @@ th {
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
-																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</button>
+															
 															</div>
 															<div class="tab-pane" id="settings1" role="tabpanel"
 																style="padding-bottom: 20px;">
@@ -692,7 +1146,9 @@ th {
 																					<tr>
 																						<th style="width: 1px;">#</th>
 																						<th style="width: 1px;"><input
-																							type="checkbox" name="output" value="selectOutputAll" onclick="selectOutputAll(this)"></th>
+																							type="checkbox" name="output"
+																							value="selectOutputAll"
+																							onclick="selectOutputAll(this)"></th>
 																						<th>산출물구분</th>
 																						<th>첨부파일명</th>
 																						<th>등록일</th>
@@ -730,8 +1186,7 @@ th {
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
-																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</button>
+																<div class="btn btn-info" id="addbtn" style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</div>
 															</div>
 														</div>
 													</div>
