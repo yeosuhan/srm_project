@@ -39,7 +39,6 @@ public class JEController {
 		return "member/addInst";
 	}
 	
-
 	
 	@RequestMapping(value = "/noticeList", method = RequestMethod.GET)
 	public String home1(Locale locale, Model model) {		
@@ -56,6 +55,11 @@ public class JEController {
 		return "board/notice-write";
 	}
 	
+	@RequestMapping(value = "/notice-update", method = RequestMethod.GET)
+	public String nupdate(Locale locale, Model model) {		
+		return "board/notice-update";
+	}
+	
 	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
 	public String home4(Locale locale, Model model) {		
 		return "board/qnaList";
@@ -69,6 +73,11 @@ public class JEController {
 	@RequestMapping(value = "/qna-write", method = RequestMethod.GET)
 	public String home6(Locale locale, Model model) {		
 		return "board/qna-write";
+	}
+	
+	@RequestMapping(value = "/qna-update", method = RequestMethod.GET)
+	public String qupdate(Locale locale, Model model) {		
+		return "board/qna-update";
 	}
 	
 	
