@@ -8,9 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Handles requests for the application home page.
@@ -119,12 +121,19 @@ public class exampleController {
 	// 한길
 	@RequestMapping(value = "/srDemandList", method = RequestMethod.GET)
 	public String srDemandList(Model model) {
-		return "srDemandList";
+		return "srDemand/srDemandList";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/srSearch" , method = RequestMethod.POST )
+	public String srSearch(@RequestBody SrDemand srDemand) {
+		//System.out.println(srDemand);
+		logger.info(srDemand.toString());
+		return "success";
 	}
 
 	// 나
 	@RequestMapping(value = "/srInformationList", method = RequestMethod.GET)
 	public String srInformationList(Model model) {
-		return "srInformationList";
+		return "srInfo/srInformationList";
 	}
 }

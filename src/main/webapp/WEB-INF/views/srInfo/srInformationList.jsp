@@ -3,6 +3,9 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/assets/css/srModal.css">
+	
 </head>
 <script>
 	$(function() {
@@ -1031,7 +1034,8 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</button>
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"data-toggle="modal"
+													data-target="#addSrResourcesModal">추가</button>
 															</div>
 															<div class="tab-pane" id="messages1" role="tabpanel"
 																style="padding-bottom: 20px;">
@@ -1209,7 +1213,14 @@ th {
 			</div>
 		</div>
 	</div>
-
+	<!-- fullcalendar CDN -->
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+	<!-- fullcalendar 언어 CDN -->
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+	
+	<script src="/resources/assets/js/addSrResourcesModal.js"></script>
+	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
+		
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>

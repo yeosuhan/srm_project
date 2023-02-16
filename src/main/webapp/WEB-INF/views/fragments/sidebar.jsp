@@ -72,7 +72,7 @@
             </li>
             <c:if test="${role eq 1 }">
 	            <li>
-	                <a href="instList" class="waves-effect waves-dark">
+	                <a href="addInst" class="waves-effect waves-dark">
 	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
 	                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">나의 기관 관리</span>
 	                    <span class="pcoded-mcaret"></span>
@@ -82,14 +82,16 @@
         </ul>
 		<div class="pcoded-navigation-label" data-i18n="nav.category.navigation">SR 관리</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li class="">
-                <a href="srDemandList" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                    <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <c:if test="${role eq 3 }">
+        	<c:if test="${role ne 2}">
+	            <li class="">
+	                <a href="srDemandList" class="waves-effect waves-dark">
+	                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+	                    <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
+	                    <span class="pcoded-mcaret"></span>
+	                </a>
+	            </li>
+            </c:if>
+            <c:if test="${role ne 1}">
 	            <li>
 	                <a href="srInformationList" class="waves-effect waves-dark">
 	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
@@ -103,21 +105,21 @@
 	        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">회원 관리</div>
 	        <ul class="pcoded-item pcoded-left-item">
 	            <li class="">
-	                <a href="clientList" class="waves-effect waves-dark">
+	                <a href="clientsList" class="waves-effect waves-dark">
 	                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
 	                    <span class="pcoded-mtext" data-i18n="nav.dash.main">고객 관리</span>
 	                    <span class="pcoded-mcaret"></span>
 	                </a>
 	            </li>
 	            <li class="">
-	                <a href="empList" class="waves-effect waves-dark">
+	                <a href="employeesList" class="waves-effect waves-dark">
 	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>D</b></span>
 	                    <span class="pcoded-mtext" data-i18n="nav.dash.main">사원관리</span>
 	                    <span class="pcoded-mcaret"></span>
 	                </a>
 	            </li>
 	            <li class="">
-	                <a href="deptList" class="waves-effect waves-dark">
+	                <a href="departmentsList" class="waves-effect waves-dark">
 	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
 	                    <span class="pcoded-mtext" data-i18n="nav.dash.main">부서관리</span>
 	                    <span class="pcoded-mcaret"></span>
