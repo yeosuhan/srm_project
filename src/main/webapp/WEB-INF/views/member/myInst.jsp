@@ -25,7 +25,7 @@
 												<h5>나의 기관 </h5>
 											</div>
 											<div class="col-8 card-block">
-												<form method="post" action="myinst" id="myInstForm" class="form-material">
+												<form method="post" action="institution/update" id="myInstForm" class="form-material">
 													<div class="form-group form-default">
 														<input value="워크넷"type="text" name="footer-email"
 															class="form-control" required="" style="width: 50%">

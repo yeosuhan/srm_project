@@ -25,7 +25,7 @@
 												<h5>기관 등록하기</h5>
 											</div>
 											<div class="col-8 card-block">
-												<form class="form-material">
+												<form  method="post" id="myInfoForm" class="form-material">
 													<div class="form-group form-default">
 														<input type="text" name="footer-email"
 															class="form-control" required="" style="width: 50%">
@@ -58,8 +58,7 @@
 										</div>
 									</div>
 									<div class="d-flex justify-content-center">
-										<button
-											class="btn waves-effect waves-light hor-grd btn-grd-primary ">등록</button>
+										<button form="myInfoForm" class="btn waves-effect waves-light hor-grd btn-grd-primary ">등록</button>
 									</div>
 									<!-- Page body end -->
 								</div>
