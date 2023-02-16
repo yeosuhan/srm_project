@@ -32,19 +32,19 @@ public class exampleController {
 		return "example";
 	}
 	//은종
-	@RequestMapping(value = "/clientsList", method = RequestMethod.GET)
+	@RequestMapping(value = "/clientslist", method = RequestMethod.GET)
 	public String clientsList(Locale locale, Model model) {
-		return "clientsList";
+		return "management/clientsList";
 	}
 
-	@RequestMapping(value = "/employeesList", method = RequestMethod.GET)
+	@RequestMapping(value = "/employeeslist", method = RequestMethod.GET)
 	public String employeesList(Locale locale, Model model) {
-		return "employeesList";
+		return "management/employeesList";
 	}
 
-	@RequestMapping(value = "/departmentsList", method = RequestMethod.GET)
+	@RequestMapping(value = "/departmentslist", method = RequestMethod.GET)
 	public String departmentsList(Locale locale, Model model) {
-		return "departmentsList";
+		return "management/departmentsList";
 	}
 
 	// 정은
@@ -68,63 +68,63 @@ public class exampleController {
 		return "member/myinfo";
 	}
 
-	@RequestMapping(value = "/myTodo", method = RequestMethod.GET)
+	@RequestMapping(value = "/myportal", method = RequestMethod.GET)
 	public String myTodo(Locale locale, Model model) {
 		return "member/my-todo";
 	}
 
-	@RequestMapping(value = "/addInst", method = RequestMethod.GET)
+	@RequestMapping(value = "/addinst", method = RequestMethod.GET)
 	public String addInst(Locale locale, Model model) {
 		return "member/addInst";
 	}
 
-	@RequestMapping(value = "/noticeList", method = RequestMethod.GET)
+	@RequestMapping(value = "/noticelist", method = RequestMethod.GET)
 	public String noticeList(Locale locale, Model model) {
 		return "board/noticeList";
 	}
 
-	@RequestMapping(value = "/notice-detail", method = RequestMethod.GET)
+	@RequestMapping(value = "/noticedetail", method = RequestMethod.GET)
 	public String noticedetail(Locale locale, Model model) {
 		return "board/notice-detail";
 	}
 
-	@RequestMapping(value = "/notice-write", method = RequestMethod.GET)
+	@RequestMapping(value = "/noticewrite", method = RequestMethod.GET)
 	public String noticewrite(Locale locale, Model model) {
 		return "board/notice-write";
 	}
 
-	@RequestMapping(value = "/notice-update", method = RequestMethod.GET)
+	@RequestMapping(value = "/noticeupdate", method = RequestMethod.GET)
 	public String nupdate(Locale locale, Model model) {
 		return "board/notice-update";
 	}
 
-	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnalist", method = RequestMethod.GET)
 	public String qnaList(Locale locale, Model model) {
 		return "board/qnaList";
 	}
 
-	@RequestMapping(value = "/qna-detail", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnadetail", method = RequestMethod.GET)
 	public String qnadetail(Locale locale, Model model) {
 		return "board/qna-detail";
 	}
 
-	@RequestMapping(value = "/qna-write", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnawrite", method = RequestMethod.GET)
 	public String qnawrite(Locale locale, Model model) {
 		return "board/qna-write";
 	}
 
-	@RequestMapping(value = "/qna-update", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaupdate", method = RequestMethod.GET)
 	public String qupdate(Locale locale, Model model) {
 		return "board/qna-update";
 	}
 
 	// 한길
-	@RequestMapping(value = "/srDemandList", method = RequestMethod.GET)
+	@RequestMapping(value = "/srdemandList", method = RequestMethod.GET)
 	public String srDemandList(Model model) {
 		return "srDemand/srDemandList";
 	}
 	@ResponseBody
-	@RequestMapping(value = "/srSearch" , method = RequestMethod.POST )
+	@RequestMapping(value = "/srsearch" , method = RequestMethod.POST )
 	public String srSearch(@RequestBody SrDemand srDemand) {
 		//System.out.println(srDemand);
 		logger.info(srDemand.toString());
@@ -141,7 +141,7 @@ public class exampleController {
 	}
 
 	// 나
-	@RequestMapping(value = "/srInformationList", method = RequestMethod.GET)
+	@RequestMapping(value = "/srinformationList", method = RequestMethod.GET)
 	public String srInformationList(Model model) {
 		return "srInfo/srInformationList";
 	}

@@ -20,7 +20,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="index.html"> 
+			<a href="#"> 
 				<img class="img-fluid" src="${pageContext.request.contextPath}/resources/assets/images/logo.png" alt="Theme-Logo" />
 			</a> 
 			<a class="mobile-options waves-effect waves-light"> 
@@ -35,27 +35,14 @@
 						<a href="javascript:void(0)"><i class="ti-menu"></i></a>
 					</div>
 				</li>
-				<li class="header-search">
-					<div class="main-search morphsearch-search">
-						<div class="input-group">
-							<span class="input-group-addon search-close">
-								<i class="ti-close"></i>
-							</span> 
-							<input type="text" class="form-control">
-							<span class="input-group-addon search-btn">
-								<i class="ti-search"></i>
-							</span>
-						</div>
-					</div>
-				</li>
-				<li class="header-fullscreen" style="margin-top:18px">
+				<li class="header-fullscreen" style="margin-top:20px">
 				<a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light"> 
 				<i class="ti-fullscreen"></i>
 				</a>
 				</li>
 			</ul>
 			<ul class="nav-right">
-				<li class="header-notification" style="margin-top:18px">
+				<li class="header-notification" style="margin-top:20px">
 				<a href="#!" class="waves-effect waves-light"> 	
 				<i class="ti-bell"></i> 
 				<h4><span class="badge bg-c-red"></span></h4>
@@ -104,13 +91,10 @@
 				</a>
 					<ul class="show-notification profile-notification">
 						<li class="waves-effect waves-light">
-							<a href="#!"><i class="ti-settings"></i> Settings</a>
+							<a href="/myportal"><i class="ti-home"></i> My Portal</a>
 						</li>
 						<li class="waves-effect waves-light">
-							<a href="user-profile.html"><i class="ti-user"></i> Profile</a>
-						</li>
-						<li class="waves-effect waves-light">
-							<a href="email-inbox.html"> <i class="ti-email"></i> My Messages</a>
+							<a href="/myinfo"><i class="ti-user"></i> Profile</a>
 						</li>
 						<li class="waves-effect waves-light">
 							<a href="auth-lock-screen.html"> <i class="ti-lock"></i> Lock Screen</a>
