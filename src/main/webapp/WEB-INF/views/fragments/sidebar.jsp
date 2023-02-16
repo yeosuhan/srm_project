@@ -72,7 +72,7 @@
             </li>
             <c:if test="${role eq 1 }">
 	            <li>
-	                <a href="addInst" class="waves-effect waves-dark">
+	                <a href="myinst" class="waves-effect waves-dark">
 	                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
 	                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">나의 기관 관리</span>
 	                    <span class="pcoded-mcaret"></span>

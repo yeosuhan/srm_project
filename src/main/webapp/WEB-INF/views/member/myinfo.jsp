@@ -80,25 +80,10 @@
 																class="form-control" required="" style="width: 50%" value="워크넷(내부망)">
 															<label class="float-label">기관 소속</label>
 															<div class="btn-group dropright">
-																<button type="button"
-																	class="dropdown-toggle btn waves-effect waves-light hor-grd btn-grd-inverse ml-2"
-																	data-toggle="dropdown" aria-expanded="false">
-																	찾기</button>
-																<div class="dropdown-menu"
-																	style="padding: 10px; width: 300px; height: 300px; overflow-y: scroll">
-																	<!-- Dropdown menu links -->
-																	<div style="display: flex;">
-																		<input type="text" name="footer-email"
-																			class="form-control" required=""
-																			style="margin-left: 10px; width: 60%;">
-																		<button class="btn-sm ml-4" style="border: none;">검색</button>
-																	</div>
-																	<a class="dropdown-item" href="#">워크넷</a> <a
-																		class="dropdown-item" href="#">HRD-NET</a> <a
-																		class="dropdown-item" href="#">일모아시스템</a> <a
-																		class="dropdown-item" href="#">MDM(바로원시스템)</a> <a
-																		class="dropdown-item" href="#">EIS</a>
-																</div>
+																<a href="addInst" type="button" class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
+																	기관 등록
+																</a>
+																
 															</div>
 														</div>
 														<div class="form-group form-default"

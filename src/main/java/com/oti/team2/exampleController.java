@@ -131,6 +131,15 @@ public class exampleController {
 		return "success";
 	}
 
+	@RequestMapping(value = "/myinst", method = RequestMethod.GET)
+	public String myInst(Locale locale, Model model) {
+		return "member/myInst";
+	}
+	@RequestMapping(value = "/myinst", method = RequestMethod.POST)
+	public String myInstUpdate(Locale locale, Model model) {
+		return "redirect:myinfo";
+	}
+
 	// 나
 	@RequestMapping(value = "/srInformationList", method = RequestMethod.GET)
 	public String srInformationList(Model model) {
