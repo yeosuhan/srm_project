@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-	<%@include file="/WEB-INF/views/fragments/header.jsp"%>
-	<link rel="stylesheet" type="text/css" href="/resources/css/pagination.css">
-	<link rel="stylesheet" type="text/css" href="/resources/js/pagination.js">
+<%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/pagination.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/js/pagination.js">
 </head>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -28,6 +30,7 @@
 												<div class="card">
 													<div class="card-header">
 														<h5 class="card-header-text">문의사항</h5>
+														<form action="qna-detail"><button>상세보기</button></form>
 													</div>
 													<table class="table table-hover">
 														<thead>
@@ -39,7 +42,7 @@
 															</tr>
 														</thead>
 														<tbody>
-															<tr>
+															<tr >
 																<th scope="row" style="text-align: center;">1</th>
 																<td>사이드바 색상 문의드립니다.</td>
 																<td>홍길동</td>
@@ -60,7 +63,7 @@
 														</tbody>
 													</table>
 													<!-- 페이징 처리 -->
-													<%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>													
+													<%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>
 												</div>
 												<!-- Notification card end -->
 											</div>

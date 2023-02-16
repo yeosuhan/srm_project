@@ -71,13 +71,15 @@
 																		href="#" class="mr-3">2023-02-07_공지내용.pdf</a>
 																</div>
 															</div>
-															<div class="d-flex justify-content-center">
-																<button
-																	class="btn btn-inverse btn-round waves-effect waves-light mr-4">수정</button>
-																<button
-																	class="btn btn-inverse btn-round waves-effect waves-light">삭제</button>
-															</div>
 														</form>
+														<div class="d-flex justify-content-center">
+															<form action="qna-update">
+																<button class="btn btn-inverse btn-round waves-effect waves-light mr-4">수정</button>
+															</form>
+															<form action="#">
+																<button class="btn btn-inverse btn-round waves-effect waves-light">삭제</button>
+															</form>
+														</div>
 													</div>
 												</div>
 												<!-- Input Alignment card end -->
