@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="modal" id="resourceSelectModal" >
+<div class="modal" id="addSrResourcesModal" >
 	
 	<div class = "modal-body modal-dialog modal-lg">
 		<div class="m_head ">
@@ -25,6 +25,15 @@
 							<div class="col-6">요청기관 : </div>
 							<div class="col-6">
 								<input type="text" value="고용부" disabled>
+							</div>
+						</div>
+						<div class="row my-3">
+							<div class="col-6">부서 : </div>
+							<div class="col-6">
+								<select onchange="" id="empId" name="empId">
+									<option>개발1팀</option>
+									<option>개발2팀</option>
+								</select>
 							</div>
 						</div>
 						<div class="row my-3">

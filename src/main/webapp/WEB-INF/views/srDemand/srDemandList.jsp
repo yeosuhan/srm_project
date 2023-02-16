@@ -3,113 +3,8 @@
 <html>
 	<head>
 		<%@include file="/WEB-INF/views/fragments/header.jsp"%>
-	    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
-	    
-	    <style>
-			.modal {
-			   position: absolute;
-			   top: 0;
-			   left: 0;
-			   /* width: 100%; */
-			   /* height: 100%; */
-			   display: none;
-			   background-color: rgba(0, 0, 0, 0.4);
-			   padding: 20px;
-			}
-			
-			.modal.show {
-			   display: block;
-			}
-			
-			.modal_body {
-			   position: absolute;
-			   top: 50%;
-			   left: 50%;
-			   width: 800px;
-			  /*  height: 600px; */
-			   /* padding: 40px; */
-			   /* text-align: center; */
-			   background-color: rgb(255, 255, 255);
-			   border-radius: 10px;
-			   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-			   transform: translateX(-50%) translateY(-50%);
-			}
-			
-			.m_head {
-			  /*  height: 10%; */
-			   padding: 20px;
-			   display: flex;
-			   justify-content: space-between;
-			   background-color: #448aff;
-			   border-top-left-radius: 10px;
-			   border-top-right-radius: 10px;
-			}
-			
-			.m_body {
-			   /* height: 82%; */
-			   padding: 20px;
-			}
-			
-			.m_footer {
-			   height: 8%;
-			   padding: 10px;
-			   border-bottom-left-radius: 10px;
-			   border-bottom-right-radius: 10px;
-			   display: flex;
-			   justify-content: end;
-			}
-			
-			.modal_title {
-			   font-size: 18px;
-			   color: gray;
-			   font-weight: 500;
-			}
-			
-			.close_btn {
-			   font-size: 20px;
-			   color: rgb(139, 139, 139);
-			   font-weight: 900;
-			   cursor: pointer;
-			}
-			
-			.modal_label {
-			   padding-top: 10px;
-			}
-			
-			.input_box {
-			   width: 100%;
-			   border: 1px solid rgb(189, 189, 189);
-			   height: 30px;
-			}
-			
-			.modal_btn {
-			   width: 80px;
-			   height: 30px;
-			   border-radius: 5px;
-			   text-align: center;
-			   font-size: 14px;
-			   font-weight: bolder;
-			   padding-top: 5px;
-			   margin-left: 5px;
-			   font-family: sans-serif;
-			}
-			
-			.cancle {
-			   background-color: #448aff;
-			   color: white;
-			}
-			
-			.save {
-			   background-color: #448aff;
-			   color: white;
-			}
-			div .col {
-			   float: left;
-			}
-			.form-group {
-			   margin-left: 5px;
-			}
-		</style>
+	   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/srModal.css">
+	
 	</head>
 
 	<body>
@@ -138,7 +33,7 @@
 				                                                    <h5>SR 요청 관리</h5>
 		                                                		</div>
 		                                                		<div class="col-2">
-				                                                    <button class="btn btn-info">요청 등록</button>
+				                                                    <button class="btn btn-info" id="addbtn">요청 등록</button>
 		                                                		</div>
 		                                                	</div>
 		                                                </div>
@@ -182,10 +77,10 @@
 	                                                            			<input type="text" name="keyWord" id="keyWord">
 	                                                            		</div>
 	                                                            		<div class="col-2">
+				                                                            <button onclick="srSearch()" type="button" class="btn btn-info"><i class="ti-search"></i></button>
 	                                                            		</div>
 	                                                            	</div>
 	                                                            </form>
-	                                                            <button onclick="srSearch()" class="btn btn-info"><i class="ti-search"></i></button>
 	                                                        </div>
 	                                                       	<div class="row" style="width:100%;overflow-x: auto!important ">
 	                                                       		<table class="table table-hover" id="srDemandTable">
@@ -228,8 +123,19 @@
 	                                                       					<td>2023.2.28</td>
 	                                                       					<td>2023.2.28</td>
 	                                                       					<td>요청</td>
-	                                                       					<td><button class="btn btn-info btn-sm"  data-toggle="modal"
-													data-target="#resourceSelectModal">요청 수정</button></td>
+	                                                       					<td><button class="btn btn-info btn-sm"  id="modbtn">요청 수정</button></td>
+	                                                       				</tr>
+	                                                       				<tr>
+	                                                       					<td>3</td>
+	                                                       					<td>wok-3</td>
+	                                                       					<td>워크넷2</td>
+	                                                       					<td>외부망</td>
+	                                                       					<td>테스트</td>
+	                                                       					<td>홍길동</td>
+	                                                       					<td>2023.2.28</td>
+	                                                       					<td>2023.2.28</td>
+	                                                       					<td>접수</td>
+	                                                       					<td><button class="btn btn-info btn-sm"  id="devbtn">개발등록</button></td>
 	                                                       				</tr>
 	                                                       			</tbody>
 	                                                       		</table>
@@ -261,17 +167,14 @@
 		<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 			
 		
-		<!-- fullcalendar CDN -->
-		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-		<!-- fullcalendar 언어 CDN -->
-		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 		<!-- 검색 -->
 		<script src="/resources/assets/js/srDemandList.js"></script>
 		
 		<!-- 모달 -->
-		<script src="/resources/assets/js/resourceSelectModal.js"></script>
-		<jsp:include page="/WEB-INF/views/srDemandDetail.jsp"/>
-		<jsp:include page="/WEB-INF/views/resourceSelectModal.jsp"/><!-- 임시 -->
+		
+		<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp"/>
+		<jsp:include page="/WEB-INF/views/srDemand/modal.jsp"/>
+		
 	</body>
 
 </html>

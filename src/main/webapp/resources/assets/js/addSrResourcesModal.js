@@ -2,7 +2,7 @@ var modalOpened=1;
 var calendarEl=null;
 var calendar=null;
 $(document).ready(function(){
-	$("#resourceSelectModal").on('show.bs.modal',function() 
+	$("#addSrResourcesModal").on('show.bs.modal',function() 
 	{
 		if(modalOpened){
 			if(calendar==null){

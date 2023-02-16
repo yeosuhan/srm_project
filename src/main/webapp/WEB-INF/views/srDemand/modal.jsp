@@ -1,9 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
-<html>
+<%-- <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
-</head>
+</head> --%>
 <script>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -498,7 +498,7 @@ img {
 			</div>
 		</div>
 	</div>
-	<!-- *********************************** [ modal end ] ***********************************-->
+	<%-- <!-- *********************************** [ modal end ] ***********************************-->
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
 		<div class="pcoded-container navbar-wrapper">
@@ -536,4 +536,4 @@ img {
 	</div>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
-</html>
+</html> --%>
