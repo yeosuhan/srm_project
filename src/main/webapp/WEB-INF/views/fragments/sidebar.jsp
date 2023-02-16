@@ -34,7 +34,7 @@
         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">MyPortal</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="">
-                <a href="myTodo class="waves-effect waves-dark">
+                <a href="myTodo" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">MyPortal</span>
                     <span class="pcoded-mcaret"></span>
