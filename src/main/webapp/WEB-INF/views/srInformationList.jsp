@@ -430,12 +430,12 @@
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
-
+		document.body.style= `overflow: hidden`;
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#addmodal').removeClass('show');
-
+		document.body.style= `overflow: scroll`;
 	});
 </script>
 <style>
@@ -494,6 +494,15 @@ th {
 	padding-top: 8px;
 	padding-right: 0px;
 	padding-left: 10px;
+}
+.modal{
+  display: block;
+  position: fixed;
+  top:0; left: 0; bottom: 0; right: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+.m.body {
+	height: 50vh; overflow-y: auto; 
 }
 </style>
 <body>

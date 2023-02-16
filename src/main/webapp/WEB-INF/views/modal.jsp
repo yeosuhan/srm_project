@@ -8,33 +8,35 @@
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
-
+		document.body.style= `overflow: hidden`;
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#addmodal').removeClass('show');
-
+		document.body.style= `overflow: scroll`;
 	});
 	/* 요청 수정 */
 	$(document).on('click', '#modbtn', function(e) {
 		console.log("click event");
 		$('#modmodal').addClass('show');
+		document.body.style= `overflow: hidden`;
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#modmodal').removeClass('show');
-
+		document.body.style= `overflow: scroll`;
 	});
 	/* 개발 등록 */
 	$(document).on('click', '#devbtn', function(e) {
 		console.log("click event");
 		$('#devmodal').addClass('show');
+		document.body.style= `overflow: hidden`;
 
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#devmodal').removeClass('show');
-
+		document.body.style= `overflow: scroll`;
 	});
 	/* 달력 */
 	$(function() {
@@ -168,6 +170,15 @@ img {
 
 .col-sm-4 {
 	padding: 0px;
+}
+
+.modal {
+	position: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.4);
 }
 </style>
 <body>
@@ -346,7 +357,7 @@ img {
 	</div>
 	<!-- *********************************** [ SR 개발 등록 ] *********************************** -->
 	<div class="modal" id="devmodal">
-		<div class="modal_devbody">
+		<div class="modal_devbody" style="overflow: auto;">
 			<div class="m_devhead">
 				<div class="modal_title" style="color: white;">SR 개발 등록</div>
 			</div>
