@@ -22,24 +22,18 @@
 									<div class="page-body row d-flex justify-content-center">
 										<div class="card col-7">
 											<div class="card-header">
-												<h5>기관 등록하기</h5>
+												<h5>나의 기관 </h5>
 											</div>
 											<div class="col-8 card-block">
-												<form  method="post" id="myInfoForm" class="form-material">
+												<form method="post" action="institution/update" id="myInstForm" class="form-material">
 													<div class="form-group form-default">
-														<input type="text" name="footer-email"
+														<input value="워크넷"type="text" name="footer-email"
 															class="form-control" required="" style="width: 50%">
 														<span class="form-bar"></span> <label class="float-label">기업명</label>
 													</div>
+													
 													<div class="form-group form-default">
-														<input type="text" name="footer-email"
-															class="form-control" required="" style="width: 50%">
-														<span class="form-bar"></span> <label class="float-label">기업
-															영문명</label>
-													</div>
-
-													<div class="form-group form-default">
-														<input type="text" name="footer-email"
+														<input value="010-1234-1234" type="text" name="footer-email"
 															class="form-control" required="" style="width: 50%">
 														<span class="form-bar"></span> <label class="float-label">대표
 															번호</label>
@@ -58,7 +52,8 @@
 										</div>
 									</div>
 									<div class="d-flex justify-content-center">
-										<button form="myInfoForm" class="btn waves-effect waves-light hor-grd btn-grd-primary ">등록</button>
+										<button type="submit" form="myInstForm"
+											class="btn waves-effect waves-light hor-grd btn-grd-primary ">수정</button>
 									</div>
 									<!-- Page body end -->
 								</div>

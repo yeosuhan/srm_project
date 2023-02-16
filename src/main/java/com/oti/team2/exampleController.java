@@ -73,9 +73,14 @@ public class exampleController {
 		return "member/my-todo";
 	}
 
-	@RequestMapping(value = "/addinst", method = RequestMethod.GET)
+	@RequestMapping(value = "/institution/add", method = RequestMethod.GET)
 	public String addInst(Locale locale, Model model) {
 		return "member/addInst";
+	}
+
+	@RequestMapping(value = "/institution/add", method = RequestMethod.POST)
+	public String addInst( Model model) {
+		return "redirect:/myinfo";
 	}
 
 	@RequestMapping(value = "/noticelist", method = RequestMethod.GET)
@@ -129,6 +134,15 @@ public class exampleController {
 		//System.out.println(srDemand);
 		logger.info(srDemand.toString());
 		return "success";
+	}
+
+	@RequestMapping(value = "/institution", method = RequestMethod.GET)
+	public String myInst(Locale locale, Model model) {
+		return "member/myInst";
+	}
+	@RequestMapping(value = "/institution/update", method = RequestMethod.POST)
+	public String myInstUpdate(Locale locale, Model model) {
+		return "redirect:/myinfo";
 	}
 
 	// 나

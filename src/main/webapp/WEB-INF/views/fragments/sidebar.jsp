@@ -35,7 +35,7 @@
 	            </li>
 	            <c:if test="${role eq 1 }">
 		            <li>
-		                <a href="/addinst" class="waves-effect waves-dark">
+		                <a href="/institution" class="waves-effect waves-dark">
 		                    <span class="pcoded-micon"><i class="far fa-building pt-1"></i><b>FC</b></span>
 		                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">내 기관 관리</span>
 		                    <span class="pcoded-mcaret"></span>

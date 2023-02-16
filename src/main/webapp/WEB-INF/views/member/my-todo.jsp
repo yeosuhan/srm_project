@@ -9,6 +9,9 @@
 	href="/resources/css/pagination.css">
 <link rel="stylesheet" type="text/css"
 	href="/resources/js/pagination.js">
+	<!-- 모달 -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/srModal.css">
+	
 </head>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -82,7 +85,7 @@
 																			<td>신정은</td>
 																			<td>2023-02-19</td>
 																			<td>요청</td>
-																			<td><button class="srbutton">요청수정</button></td>
+																			<td><button id="modbtn" class="srbutton">요청수정</button></td>
 																		</tr>
 																		<tr>
 																			<th scope="row">2</th>
@@ -93,7 +96,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-18</td>
 																			<td>요청</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																		<tr>
 																			<th scope="row">3</th>
@@ -104,7 +111,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-17</td>
 																			<td>요청</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -134,7 +145,7 @@
 																			<td>신정은</td>
 																			<td>2023-02-19</td>
 																			<td>반려</td>
-																			<td><button class="srbutton">요청수정</button></td>
+																			<td><button id="modbtn" class="srbutton">요청수정</button></td>
 																		</tr>
 																		<tr>
 																			<th scope="row">2</th>
@@ -145,7 +156,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-18</td>
 																			<td>반려</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																		<tr>
 																			<th scope="row">3</th>
@@ -156,7 +171,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-17</td>
 																			<td>반려</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -186,7 +205,7 @@
 																			<td>신정은</td>
 																			<td>2023-02-19</td>
 																			<td>접수</td>
-																			<td><button class="srbutton">요청수정</button></td>
+																			<td><button id="modbtn" class="srbutton">요청수정</button></td>
 																		</tr>
 																		<tr>
 																			<th scope="row">2</th>
@@ -197,7 +216,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-18</td>
 																			<td>접수</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																		<tr>
 																			<th scope="row">3</th>
@@ -208,7 +231,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-17</td>
 																			<td>접수</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -238,7 +265,7 @@
 																			<td>신정은</td>
 																			<td>2023-02-19</td>
 																			<td>개발중</td>
-																			<td><button class="srbutton">요청수정</button></td>
+																			<td><button id="modbtn" class="srbutton">요청수정</button></td>
 																		</tr>
 																		<tr>
 																			<th scope="row">2</th>
@@ -249,7 +276,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-18</td>
 																			<td>개발중</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																		<tr>
 																			<th scope="row">3</th>
@@ -260,7 +291,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-17</td>
 																			<td>개발중</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -290,7 +325,7 @@
 																			<td>신정은</td>
 																			<td>2023-02-19</td>
 																			<td>테스트</td>
-																			<td><button class="srbutton">요청수정</button></td>
+																			<td><button id="modbtn" class="srbutton">요청수정</button></td>
 																		</tr>
 																		<tr>
 																			<th scope="row">2</th>
@@ -301,7 +336,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-18</td>
 																			<td>테스트</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																		<tr>
 																			<th scope="row">3</th>
@@ -312,7 +351,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-17</td>
 																			<td>테스트</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -342,7 +385,7 @@
 																			<td>신정은</td>
 																			<td>2023-02-19</td>
 																			<td>개발완료</td>
-																			<td><button class="srbutton">요청수정</button></td>
+																			<td><button id="modbtn" class="srbutton">요청수정</button></td>
 																		</tr>
 																		<tr>
 																			<th scope="row">2</th>
@@ -353,7 +396,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-18</td>
 																			<td>개발완료</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																		<tr>
 																			<th scope="row">3</th>
@@ -364,7 +411,11 @@
 																			<td>신정은</td>
 																			<td>2023-02-17</td>
 																			<td>개발완료</td>
-																			<td><button class="srbutton">요청상세</button></td>
+																			<td>
+																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
+																					요청상세
+																				</button>
+																			</td>
 																		</tr>
 																	</tbody>
 																</table>		
@@ -477,5 +528,10 @@
 			</div>
 		</div>
 		<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
+		<!-- 모달 -->
+		
+		<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp"/>
+		<jsp:include page="/WEB-INF/views/srDemand/modal.jsp"/>
+		
 </body>
 </html>
