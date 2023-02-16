@@ -781,7 +781,21 @@ th {
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
-														<h5>SR요청 상세정보</h5>
+														<div class="row">
+															<div class="col-6">
+																<h5>SR요청 상세정보</h5>
+															</div>
+															<div class="col-3">
+																<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addHistoryModal">
+																	예정일 변경
+																</button>
+															</div>
+															<div class="col-3">
+																<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addHistoryModal">
+																	개발 취소
+																</button>
+															</div>
+														</div>
 													</div>
 													<div class="card-block" style="height: 600px;">
 														<div class="card_body "
@@ -882,6 +896,7 @@ th {
 																		<input type="text" id="endRequestDatepicker">
 																	</div>
 																</div>
+																
 															</div>
 															<div class="form-group row">
 																<label class="col-sm-2 col-form-label"
@@ -1219,7 +1234,7 @@ th {
 	
 	<script src="/resources/assets/js/addSrResourcesModal.js"></script>
 	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
-		
+	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>

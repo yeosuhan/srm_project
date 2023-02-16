@@ -136,6 +136,22 @@
 	                                                       					<td>접수</td>
 	                                                       					<td><button class="btn btn-info btn-sm"  id="devbtn">개발등록</button></td>
 	                                                       				</tr>
+	                                                       				<tr>
+	                                                       					<td>4</td>
+	                                                       					<td>wok-4</td>
+	                                                       					<td>워크넷4</td>
+	                                                       					<td>외부망</td>
+	                                                       					<td>테스트 기간연장</td>
+	                                                       					<td>홍길동</td>
+	                                                       					<td>2023.2.28</td>
+	                                                       					<td>2023.2.28</td>
+	                                                       					<td>접수</td>
+	                                                       					<td>
+	                                                       						<button class="btn btn-info btn-sm" onclick=""  data-toggle="modal" data-target="#approvalHistoryModal">
+	                                                       							변경 요청 승인
+	                                                       						</button>
+	                                                       					</td>
+	                                                       				</tr>
 	                                                       			</tbody>
 	                                                       		</table>
 	                                                       	</div>
@@ -170,7 +186,7 @@
 		<script src="/resources/assets/js/srDemandList.js"></script>
 		
 		<!-- 모달 -->
-		
+		<jsp:include page="/WEB-INF/views/history/approvalHistoryModal.jsp"/>
 		<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp"/>
 		<jsp:include page="/WEB-INF/views/srDemand/modal.jsp"/>
 		
