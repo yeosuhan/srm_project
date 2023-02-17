@@ -156,10 +156,10 @@
 	});
 </script>
 <style>
-img {
+.ui-datepicker-trigger {
 	width: 29px;
 	vertical-align: top;
-}
+} 
 
 #addDatepicker, #addEndRequestDatepicker, #modDatepicker,
 	#modEndRequestDatepicker, #devDatepicker {

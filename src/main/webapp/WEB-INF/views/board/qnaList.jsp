@@ -30,7 +30,8 @@
 												<div class="card">
 													<div class="card-header">
 														<h5 class="card-header-text">문의사항</h5>
-														<form action="qna-detail"><button>상세보기</button></form>
+														<form action="qnadetail"><button>상세보기</button></form>
+														<form action="qnawrite"><button>글 작성</button></form>
 													</div>
 													<table class="table table-hover">
 														<thead>
