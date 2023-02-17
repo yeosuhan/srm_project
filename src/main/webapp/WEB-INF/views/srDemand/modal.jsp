@@ -37,7 +37,7 @@
 
 	});
 	/* 달력 */
-	$(function() {
+	/* $(function() {
 		$("#addDatepicker").datepicker({
 			showOn : "both",
 			buttonImage : "resources/assets/images/button.png",
@@ -153,7 +153,7 @@
 					$.datepicker._curInst.input.datepicker('setDate',
 							new Date()).datepicker('hide').blur();
 				});
-	});
+	}); */
 </script>
 <style>
 .ui-datepicker-trigger {
@@ -197,7 +197,7 @@
 					<div class="col-sm-6">
 						<div class="col col-sm-4">등록일</div>
 						<div class="col col-sm-6">
-							<input type="text" id="addDatepicker">
+							<input type="date" id="addDatepicker">
 						</div>
 
 					</div>
@@ -247,7 +247,7 @@
 					<div class="col-sm-6">
 						<div class="col col-sm-4">완료 요청일</div>
 						<div class="col col-sm-6">
-							<input type="text" id="addEndRequestDatepicker">
+							<input type="date" id="addEndRequestDatepicker">
 						</div>
 					</div>
 				</div>
@@ -284,7 +284,7 @@
 					<div class="col-sm-6">
 						<div class="col col-sm-4">등록일</div>
 						<div class="col col-sm-6">
-							<input type="text" id="modDatepicker">
+							<input type="date" id="modDatepicker">
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -332,7 +332,7 @@
 					<div class="col-sm-6">
 						<div class="col col-sm-4">완료 요청일</div>
 						<div class="col col-sm-6">
-							<input type="text" id="modEndRequestDatepicker">
+							<input type="date" id="modEndRequestDatepicker">
 						</div>
 					</div>
 				</div>
@@ -369,7 +369,7 @@
 					<div class="col-sm-6">
 						<div class="col col-sm-4">등록일</div>
 						<div class="col col-sm-6">
-							<input type="text" class="form-control">
+							<input type="date" class="form-control">
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -423,7 +423,7 @@
 					<div class="col-sm-6">
 						<div class="col col-sm-4">완료(예정)일</div>
 						<div class="col col-sm-6">
-							<input type="text" id="devDatepicker">
+							<input type="date" id="devDatepicker">
 						</div>
 					</div>
 				</div>
@@ -487,7 +487,7 @@
 					<div class="col-sm-6">
 						<div class="col col-sm-4">완료 요청일</div>
 						<div class="col col-sm-6">
-							<input type="text" class="form-control">
+							<input type="date" class="form-control">
 						</div>
 					</div>
 				</div>

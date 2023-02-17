@@ -3,9 +3,11 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<%-- 캘린더css --%>
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 </head>
 <script>
-	$(function() {
+	/* $(function() {
 		$("#startDatepicker").datepicker({
 			showOn : "both",
 			buttonImage : "resources/assets/images/button.png",
@@ -124,9 +126,9 @@
 					$.datepicker._curInst.input.datepicker('setDate',
 							new Date()).datepicker('hide').blur();
 				});
-	});
+	}); */
 	/*  */
-	$(function() {
+	/* $(function() {
 		$("#firStartDatepicker").datepicker({
 			showOn : "both",
 			buttonImage : "resources/assets/images/button.png",
@@ -401,7 +403,7 @@
 					$.datepicker._curInst.input.datepicker('setDate',
 							new Date()).datepicker('hide').blur();
 				});
-	});
+	}); */
 	/*  */
 	function selectResourceAll(selectResourceAll)  {
 		  const checkboxes 
@@ -551,7 +553,7 @@ th {
 														<div class="col-sm-6">
 															<div class="col col-sm-4">등록일</div>
 															<div class="col col-sm-6">
-																<input type="text" id="addDatepicker">
+																<input type="date" id="addDatepicker">
 															</div>
 														</div>
 
@@ -901,13 +903,13 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청일</div>
 																	<div class="col col-sm-8">
-																		<input type="text" id="requestDatepicker">
+																		<input type="date" id="requestDatepicker">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">완료요청일</div>
 																	<div class="col col-sm-8">
-																		<input type="text" id="endRequestDatepicker">
+																		<input type="date" id="endRequestDatepicker">
 																	</div>
 																</div>
 															</div>
@@ -990,14 +992,14 @@ th {
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획시작일</div>
 																		<div class="col col-sm-8">
-																			<input type="text" id="startDatepicker">
+																			<input type="date" id="startDatepicker">
 																		</div>
 
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획종료일</div>
 																		<div class="col col-sm-8">
-																			<input type="text" id="endDatepicker">
+																			<input type="date" id="endDatepicker">
 																		</div>
 																	</div>
 																</div>
@@ -1067,7 +1069,8 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</button>
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"data-toggle="modal"
+													data-target="#addSrResourcesModal">추가</button>
 															</div>
 															<!-- *********************************** [ 진척률 ] ***********************************-->
 															<div class="tab-pane" id="messages1" role="tabpanel"
@@ -1369,6 +1372,7 @@ th {
 	</div>
 	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
+	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>

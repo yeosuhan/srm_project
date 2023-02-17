@@ -5,7 +5,7 @@
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 </head>
 <script>
-	$(function() {
+	/* $(function() {
 		$("#startDatepicker").datepicker({
 			showOn : "both",
 			buttonImage : "resources/assets/images/button.png",
@@ -124,8 +124,9 @@
 					$.datepicker._curInst.input.datepicker('setDate',
 							new Date()).datepicker('hide').blur();
 				});
-	});
+	});*/
 	/*  */
+	/*
 	$(function() {
 		$("#firStartDatepicker").datepicker({
 			showOn : "both",
@@ -401,7 +402,7 @@
 					$.datepicker._curInst.input.datepicker('setDate',
 							new Date()).datepicker('hide').blur();
 				});
-	});
+	}); */
 	/*  */
 	function selectResourceAll(selectResourceAll)  {
 		  const checkboxes 
@@ -854,13 +855,13 @@ th {
 																			<div class="col-sm-6">
 																				<div class="col col-sm-4">요청일</div>
 																				<div class="col col-sm-8">
-																					<input type="text" id="requestDatepicker">
+																					<input type="date" id="requestDatepicker">
 																				</div>
 																			</div>
 																			<div class="col-sm-6">
 																				<div class="col col-sm-4">완료요청일</div>
 																				<div class="col col-sm-8">
-																					<input type="text" id="endRequestDatepicker">
+																					<input type="date" id="endRequestDatepicker">
 																				</div>
 																			</div>
 																		</div>
