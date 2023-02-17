@@ -441,7 +441,7 @@
 	});
 </script>
 <style>
-img {
+.ui-datepicker-trigger {
 	width: 29px;
 	vertical-align: top;
 }
@@ -586,9 +586,9 @@ th {
 															<div class="dropdown dropdown open">
 																<form action="#">
 																	<select name="languages" id="lang">
-																		<option value="워크넷">워크넷</option>
-																		<option value="굴국밥">굴국밥</option>
-																		<option value="고소미">고소미</option>
+																		<option value="워크넷">시스템3</option>
+																		<option value="굴국밥">시스템2</option>
+																		<option value="고소미">시스템1</option>
 																	</select>
 																</form>
 															</div>
@@ -598,9 +598,9 @@ th {
 															<div class="dropdown dropdown open">
 																<form action="#">
 																	<select name="languages" id="lang">
-																		<option value="워크넷">워크넷</option>
-																		<option value="굴국밥">굴국밥</option>
-																		<option value="고소미">고소미</option>
+																		<option value="워크넷">업무구분1</option>
+																		<option value="굴국밥">업무2</option>
+																		<option value="고소미">업무3</option>
 																	</select>
 																</form>
 															</div>
@@ -610,9 +610,9 @@ th {
 															<div class="dropdown dropdown open">
 																<form action="#">
 																	<select name="languages" id="lang">
-																		<option value="워크넷">워크넷</option>
-																		<option value="굴국밥">굴국밥</option>
-																		<option value="고소미">고소미</option>
+																		<option value="워크넷">개발중</option>
+																		<option value="굴국밥">테스트</option>
+																		<option value="고소미">반영요청</option>
 																	</select>
 																</form>
 															</div>
@@ -658,7 +658,7 @@ th {
 														</div>
 													</div>
 													<div class="card-block" id="list">
-														<div id="sales-analytics" style="height: 600px;">
+														<div id="sales-analytics" class="p-2">
 															<div class="card-block table-border-style">
 																<div class="table-responsive">
 																	<table class="table table-hover text-center"
@@ -850,8 +850,8 @@ th {
 																			<form action="#">
 																				<select name="languages" id="lang">
 																					<option value="워크넷">워크넷</option>
-																					<option value="굴국밥">굴국밥</option>
-																					<option value="고소미">고소미</option>
+																					<option value="굴국밥">시스템1</option>
+																					<option value="고소미">시스템2</option>
 																				</select>
 																			</form>
 																		</div>
@@ -862,9 +862,9 @@ th {
 																	<div class="dropdown dropdown open">
 																		<form action="#">
 																			<select name="languages" id="lang">
-																				<option value="워크넷">워크넷</option>
-																				<option value="굴국밥">굴국밥</option>
-																				<option value="고소미">고소미</option>
+																				<option value="워크넷">내부망</option>
+																				<option value="굴국밥">외부망</option>
+																				<option value="고소미">구매</option>
 																			</select>
 																		</form>
 																	</div>
@@ -872,14 +872,14 @@ th {
 															</div>
 															<div class="form-group row">
 																<div class="col-sm-6">
-																	<div class="col col-sm-4">요청팀</div>
+																	<div class="col col-sm-4">요청기관</div>
 																	<div class="col col-sm-6">
 																		<div class="dropdown dropdown open">
 																			<form action="#">
 																				<select name="languages" id="lang">
-																					<option value="워크넷">워크넷</option>
-																					<option value="굴국밥">굴국밥</option>
-																					<option value="고소미">고소미</option>
+																					<option value="워크넷">워크넷기관</option>
+																					<option value="굴국밥">고용부</option>
+																					<option value="고소미">네이버</option>
 																				</select>
 																			</form>
 																		</div>
@@ -891,9 +891,9 @@ th {
 																	<div class="dropdown dropdown open">
 																		<form action="#">
 																			<select name="languages" id="lang">
-																				<option value="워크넷">워크넷</option>
-																				<option value="굴국밥">굴국밥</option>
-																				<option value="고소미">고소미</option>
+																				<option value="워크넷">워크넷직원</option>
+																				<option value="굴국밥">공무원</option>
+																				<option value="고소미">직원</option>
 																			</select>
 																		</form>
 																	</div>
@@ -1028,7 +1028,7 @@ th {
 																					<th style="width: 1px;"><input type="checkbox"
 																						name="resource" value="selectResourceAll"
 																						onclick="selectResourceAll(this)"></th>
-																					<th>담당자명</th>
+																					<th>개발자명</th>
 																					<th>역할</th>
 																					<th>투입시작일</th>
 																					<th>투입종료일</th>

@@ -46,7 +46,7 @@
 								                            <div class="col-sm-3 ">                      
 								                            	<button class="btn btn-primary btn-round waves-effect waves-light" >검색</button>   
 								                            </div> 
-								                            <div class="col-sm-3 d-flex justify-content-end pr-4">				                                              
+								                            <div class="col-sm-3  justify-content-end pr-4">				                                              
 								                            	<div class="btn btn-primary btn-round waves-effect waves-light" onclick="show1()" data-toggle="modal" data-target="ModalRegister">부서 등록</div>								                        
 								                            </div> 
 								                        </div>

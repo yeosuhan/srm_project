@@ -32,4 +32,11 @@
 	<script	src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
      <!-- 카카오 주소 js  -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+	
+	<%-- 테이블 css --%>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/table.css">
+    
+	<%-- 버튼 css --%>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/button.css">
+    
+    

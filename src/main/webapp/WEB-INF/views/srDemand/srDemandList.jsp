@@ -814,9 +814,9 @@ th {
 																				<div class="dropdown dropdown open">
 																					<form action="#">
 																						<select name="languages" id="lang">
-																							<option value="워크넷">워크넷</option>
-																							<option value="굴국밥">굴국밥</option>
-																							<option value="고소미">고소미</option>
+																							<option value="워크넷">내부망</option>
+																							<option value="굴국밥">외부망</option>
+																							<option value="고소미">구매</option>
 																						</select>
 																					</form>
 																				</div>
@@ -824,14 +824,14 @@ th {
 																		</div>
 																		<div class="form-group row">
 																			<div class="col-sm-6">
-																				<div class="col col-sm-4">요청팀</div>
+																				<div class="col col-sm-4">요청기관</div>
 																				<div class="col col-sm-6">
 																					<div class="dropdown dropdown open">
 																						<form action="#">
 																							<select name="languages" id="lang">
-																								<option value="워크넷">워크넷</option>
-																								<option value="굴국밥">굴국밥</option>
-																								<option value="고소미">고소미</option>
+																								<option value="워크넷">고용부</option>
+																								<option value="굴국밥">오티아이</option>
+																								<option value="고소미">네이버</option>
 																							</select>
 																						</form>
 																					</div>
@@ -843,9 +843,9 @@ th {
 																				<div class="dropdown dropdown open">
 																					<form action="#">
 																						<select name="languages" id="lang">
-																							<option value="워크넷">워크넷</option>
-																							<option value="굴국밥">굴국밥</option>
-																							<option value="고소미">고소미</option>
+																							<option value="워크넷">워크넷 직원</option>
+																							<option value="굴국밥">공무원</option>
+																							<option value="고소미">직원</option>
 																						</select>
 																					</form>
 																				</div>
