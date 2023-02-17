@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="modal" id="approvalHistoryModal" >
+<div class="modal" id="addHistoryModalDetail" >
 	
 	<div class = "modal-body modal-dialog modal-lg" style="height:700px">
 		<div class="m_head ">
@@ -32,28 +32,30 @@
 					</div>
 					<div class="col-2"><label for="chgEndYmd">요청 예정일 : </label></div>
 					<div class="col-4">
-						<input type="text" value="2023.02.30." disabled>
+						<input type="date" id="chgEndYmd" name="chgEndYmd">
 					</div>
 				</div>
 				<div class="row my-3">
 					<div class="col-2">제목 : </div>
 					<div class="col-10">
-						<input style="width:100%" type="text" value="기간 연장" disabled>
+						<input style="width:100%" type="text" value="기간 연장" >
 					</div>
 				</div>
 				<div class="row my-3">
 					<div class="col-2">내용 : </div>
 					<div class="col-10">
-						<textarea style="width:100% " rows="5" disabled>기간연장을 요청합니다.</textarea>
+						<textarea style="width:100% " rows="10">기간연장을 요청합니다.</textarea>
 					</div>
 				</div>
+				
+				
 			</form>
 		</div>
 		<div class="m_footer bg-light">
 		
-			<button class="btn btn-info save center" data-dismiss="modal" >승인</button>
+			<button class="btn btn-info save center" data-dismiss="modal" >수정</button>
 		
-			<button class="btn btn-danger danger cancle" data-dismiss="modal">반려</button>
+			<button class="btn btn-danger danger cancle" data-dismiss="modal">확인</button>
 				
 		</div>
 	</div>

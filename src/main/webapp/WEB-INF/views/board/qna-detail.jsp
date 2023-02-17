@@ -73,7 +73,7 @@
 															</div>
 														</form>
 														<div class="d-flex justify-content-center">
-															<form action="qna-update">
+															<form action="qnaupdate">
 																<button class="btn btn-inverse btn-round waves-effect waves-light mr-4">수정</button>
 															</form>
 															<form action="#">
