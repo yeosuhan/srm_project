@@ -71,7 +71,7 @@
 															</div>
 														</form>
 															<div class="d-flex justify-content-center">
-																<form action="notice-update">
+																<form action="noticeupdate">
 																	<button class="btn btn-inverse btn-round waves-effect waves-light mr-4" type="submit" formmethod="get">수정</button>
 																</form>
 																<form action="#">
