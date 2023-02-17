@@ -346,7 +346,7 @@
 	</div>
 	<!-- *********************************** [ SR 개발 등록 ] *********************************** -->
 	<div class="modal" id="devmodal">
-		<div class="modal_devbody">
+		<div class="modal_devbody" style="overflow: auto;">
 			<div class="m_devhead">
 				<div class="modal_title" style="color: white;">SR 개발 등록</div>
 			</div>

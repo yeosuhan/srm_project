@@ -504,10 +504,10 @@ th {
 	background: rgba(0, 0, 0, 0.4);
 }
 
-.m.body {
+ .m.body {
 	height: 50vh;
 	overflow-y: auto;
-}
+} 
 </style>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -795,8 +795,22 @@ th {
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
-														<h5>SR요청 상세정보</h5>
-													</div>
+			                                          <div class="row">
+			                                             <div class="col-6">
+			                                                <h5>SR요청 상세정보</h5>
+			                                             </div>
+			                                             <div class="col-3">
+			                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addHistoryModal">
+																예정일 변경
+			                                                </button>
+			                                             </div>
+			                                             <div class="col-3">
+			                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addHistoryModal">
+																개발 취소
+			                                                </button>
+			                                             </div>
+			                                          </div>
+			                                        </div>
 													<div class="card-block" style="height: 600px;">
 														<div class="card_body "
 															style="font-size: 12px; padding-top: 20px;">
@@ -940,6 +954,9 @@ th {
 																data-toggle="tab" href="#settings1" role="tab">SR
 																	산출물</a>
 																<div class="slide"></div></li>
+															<li class="nav-item"><a class="nav-link"
+																data-toggle="tab" href="#history1" role="tab">SR 히스토리</a>
+																<div class="slide"></div></li>																
 														</ul>
 														<!-- *********************************** [ 계획정보 ] ***********************************-->
 														<div class="tab-content tabs card-block"
@@ -1276,6 +1293,62 @@ th {
 																<div class="btn btn-info" id="addbtn"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</div>
 															</div>
+
+
+															<!-- *********************************** [ SR 히스토리  ] ***********************************-->
+															<div class="tab-pane" id="history1" role="tabpanel"
+																style="padding-bottom: 20px;">
+																<div class="tab-pane" id="profile1" role="tabpanel">
+																	<div class="card-block table-border-style"
+																		style="padding: 0px;">
+																		<div class="table-responsive">
+																			<table class="table table-hover text-center"
+																				style="font-size: 12px; padding: 0px;">
+																				<thead>
+																					<tr>
+																						<th style="width: 1px;">순번</th>
+																						<th>담당자명</th>
+																						<th>기존 완료예정일</th>
+																						<th>변경된 완료예정일</th>
+																						<th>수락여부</th>
+																						<th>상세조회</th>																						
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<tr>
+																						<th scope="row">1</th>
+																						<td>Otto</td>
+																						<td>@mdo</td>
+																						<td>@mdo</td>
+																						<td>@mdo</td>
+																						<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHistoryModalDetail">상세조회</button></td>																						
+																					</tr>
+																					<tr>
+																						<th scope="row">2</th>
+																						<td>Thornton</td>
+																						<td>@fat</td>
+																						<td>Jacob</td>
+																						<td>@fat</td>
+																						<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHistoryModalDetail">상세조회</button></td>																						
+																					</tr>
+																					<tr>
+																						<th scope="row">3</th>
+																						<td>the Bird</td>
+																						<td>@twitter</td>
+																						<td>Larry</td>
+																						<td>@twitter</td>
+																						<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHistoryModalDetail">상세조회</button></td>																				
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+		
+															</div>															
+															
+															
+															
 														</div>
 													</div>
 												</div>
@@ -1294,7 +1367,8 @@ th {
 			</div>
 		</div>
 	</div>
-
+	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
+	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 window.onload = function(){	
 	document.getElementById("address_kakao").addEventListener("click", function(){
 		new daum.Postcode({
