@@ -8,9 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Handles requests for the application home page.
@@ -32,17 +34,17 @@ public class exampleController {
 	//은종
 	@RequestMapping(value = "/clientslist", method = RequestMethod.GET)
 	public String clientsList(Locale locale, Model model) {
-		return "clientsList";
+		return "management/clientsList";
 	}
 
 	@RequestMapping(value = "/employeeslist", method = RequestMethod.GET)
 	public String employeesList(Locale locale, Model model) {
-		return "employeesList";
+		return "management/employeesList";
 	}
 
 	@RequestMapping(value = "/departmentslist", method = RequestMethod.GET)
 	public String departmentsList(Locale locale, Model model) {
-		return "departmentsList";
+		return "management/departmentsList";
 	}
 
 	// 정은
@@ -66,14 +68,19 @@ public class exampleController {
 		return "member/myinfo";
 	}
 
-	@RequestMapping(value = "/mytodo", method = RequestMethod.GET)
+	@RequestMapping(value = "/myportal", method = RequestMethod.GET)
 	public String myTodo(Locale locale, Model model) {
 		return "member/my-todo";
 	}
 
-	@RequestMapping(value = "/addinst", method = RequestMethod.GET)
+	@RequestMapping(value = "/institution/add", method = RequestMethod.GET)
 	public String addInst(Locale locale, Model model) {
 		return "member/addInst";
+	}
+
+	@RequestMapping(value = "/institution/add", method = RequestMethod.POST)
+	public String addInst( Model model) {
+		return "redirect:/myinfo";
 	}
 
 	@RequestMapping(value = "/noticelist", method = RequestMethod.GET)
@@ -106,25 +113,41 @@ public class exampleController {
 		return "board/qna-detail";
 	}
 
-	@RequestMapping(value = "/qna-write", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnawrite", method = RequestMethod.GET)
 	public String qnawrite(Locale locale, Model model) {
 		return "board/qna-write";
 	}
 
-	@RequestMapping(value = "/qna-update", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaupdate", method = RequestMethod.GET)
 	public String qupdate(Locale locale, Model model) {
 		return "board/qna-update";
 	}
 
 	// 한길
-	@RequestMapping(value = "/srDemandList", method = RequestMethod.GET)
+	@RequestMapping(value = "/srdemandList", method = RequestMethod.GET)
 	public String srDemandList(Model model) {
-		return "srDemandList";
+		return "srDemand/srDemandList";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/srsearch" , method = RequestMethod.POST )
+	public String srSearch(@RequestBody SrDemand srDemand) {
+		//System.out.println(srDemand);
+		logger.info(srDemand.toString());
+		return "success";
+	}
+
+	@RequestMapping(value = "/institution", method = RequestMethod.GET)
+	public String myInst(Locale locale, Model model) {
+		return "member/myInst";
+	}
+	@RequestMapping(value = "/institution/update", method = RequestMethod.POST)
+	public String myInstUpdate(Locale locale, Model model) {
+		return "redirect:/myinfo";
 	}
 
 	// 나
-	@RequestMapping(value = "/srInformationList", method = RequestMethod.GET)
+	@RequestMapping(value = "/srinformationList", method = RequestMethod.GET)
 	public String srInformationList(Model model) {
-		return "srInformationList";
+		return "srInfo/srInformationList";
 	}
 }

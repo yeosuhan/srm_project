@@ -1,5 +1,5 @@
  <%@ page contentType="text/html; charset=UTF-8"%>
- 
+  
 <!-- Page-header start -->
 
 <div id="pageHeader" class="page-header">
@@ -7,14 +7,14 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Accordion</h5>
-                    <p class="m-b-0">Lorem Ipsum is simply dummy text of the printing</p>
+                    <h5 class="m-b-10">23년 02월 16일 12시 30분</h5>
+                    <p class="m-b-0">좋은 하루 되세요 * ^^ *</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <ul class="breadcrumb-title">
                     <li class="breadcrumb-item">
-                        <a href="index.html"> <i class="fa fa-home"></i> </a>
+                        <a href="/myportal"> <i class="fa fa-home"></i> </a>
                     </li>
                     <li class="breadcrumb-item"><a href="#!">Basic Components</a>
                     </li>

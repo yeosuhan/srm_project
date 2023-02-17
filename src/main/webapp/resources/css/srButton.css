@@ -1,0 +1,14 @@
+.srbutton {
+	border-radius: 10px; 
+	padding:6px; 
+	background-color: #8BA3B5; 
+	border: none; 
+	color: white; 
+	width: 80%; 
+	font-size: 15px
+}
+
+.srbutton:hover, .srbutton-active, .srnbutton:active {
+	color: black;
+	outline:none !important;
+}
