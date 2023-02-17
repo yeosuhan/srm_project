@@ -504,10 +504,10 @@ th {
 	background: rgba(0, 0, 0, 0.4);
 }
 
-/* .m.body {
+.m.body {
 	height: 50vh;
 	overflow-y: auto;
-} */
+}
 </style>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -748,7 +748,6 @@ th {
 															</ul>
 														</div>
 													</div>
-													<div class="card-block" style="padding-top: 10px;">
 														<ul class="nav nav-tabs  md-tabs" role="tablist">
 															<li class="nav-item"><a class="nav-link active"
 																data-toggle="tab" href="#srDemandDetail" role="tab">SR요청
@@ -925,62 +924,7 @@ th {
 																	</div>
 																</div>
 															</div>
-															<!-- *********************************** [ SR 히스토리  ] ***********************************-->
-															<div class="tab-pane" id="history1" role="tabpanel"
-																style="padding-bottom: 20px;">
-																<div class="tab-pane" id="profile1" role="tabpanel">
-																	<div class="card-block table-border-style"
-																		style="padding: 0px;">
-																		<div class="table-responsive">
-																			<table class="table table-hover text-center"
-																				style="font-size: 12px; padding: 0px;">
-																				<thead>
-																					<tr>
-																						<th style="width: 1px;">순번</th>
-																						<th>담당자명</th>
-																						<th>기존 완료예정일</th>
-																						<th>변경된 완료예정일</th>
-																						<th>수락여부</th>
-																						<th>상세조회</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-																					<tr>
-																						<th scope="row">1</th>
-																						<td>Otto</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">2</th>
-																						<td>Thornton</td>
-																						<td>@fat</td>
-																						<td>Jacob</td>
-																						<td>@fat</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">3</th>
-																						<td>the Bird</td>
-																						<td>@twitter</td>
-																						<td>Larry</td>
-																						<td>@twitter</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
-																	</div>
-																</div>
-															</div>
+														
 														</div>
 													</div>
 												</div>
@@ -997,7 +941,7 @@ th {
 				<div id="styleSelector"></div>
 			</div>
 		</div>
-	</div>
+	
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 검색 -->

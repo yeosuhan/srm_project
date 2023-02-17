@@ -46,9 +46,18 @@
 	        
 		<div class="pcoded-navigation-label" style="font-weight: bold;" data-i18n="nav.category.navigation">SR 관리</div>
 	        <ul class="pcoded-item pcoded-left-item">
-	            <c:if test="${role ne 2}">
+	            <c:if test="${role eq 1}">
 		            <li class="">
-		                <a href="/srdemandList" class="waves-effect waves-dark">
+		                <a href="/userSrdemandList" class="waves-effect waves-dark">
+		                    <span class="pcoded-micon"><i class="far fa-file-alt pt-1"></i><b>D</b></span>
+		                    <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
+		                    <span class="pcoded-mcaret"></span>
+		                </a>
+		            </li>
+	            </c:if>
+	             <c:if test="${role eq 3}">
+		            <li class="">
+		                <a href="/adminSrdemandList" class="waves-effect waves-dark">
 		                    <span class="pcoded-micon"><i class="far fa-file-alt pt-1"></i><b>D</b></span>
 		                    <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
 		                    <span class="pcoded-mcaret"></span>
