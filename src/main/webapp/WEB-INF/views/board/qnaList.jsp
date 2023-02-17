@@ -30,7 +30,8 @@
 												<div class="card">
 													<div class="card-header">
 														<h5 class="card-header-text">문의사항</h5>
-														<form action="qna-detail"><button>상세보기</button></form>
+														<form action="qnadetail"><button>상세보기</button></form>
+														<form action="qnawrite"><button>글 작성</button></form>
 													</div>
 													<table class="table table-hover">
 														<thead>
@@ -42,7 +43,7 @@
 															</tr>
 														</thead>
 														<tbody>
-															<tr >
+															<tr>
 																<th scope="row" style="text-align: center;">1</th>
 																<td>사이드바 색상 문의드립니다.</td>
 																<td>홍길동</td>
