@@ -3,8 +3,6 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
-<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
-
 </head>
 <script>
 	$(function() {
@@ -432,12 +430,12 @@
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
-
+		document.body.style= `overflow: hidden`;
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#addmodal').removeClass('show');
-
+		document.body.style= `overflow: scroll`;
 	});
 </script>
 <style>
@@ -454,11 +452,10 @@ img {
 	#firEndDatepicker, #secStartDatepicker, #secEndDatepicker,
 	#thrStartDatepicker, #thrEndDatepicker, #fiveStartDatepicker,
 	#fiveEndDatepicker, #fourStartDatepicker, #fourEndDatepicker,
-	#sixStartDatepicker, #sixEndDatepicker{
+	#sixStartDatepicker, #sixEndDatepicker {
 	width: 70px;
 	padding-right: 0px;
 }
-
 
 div.left {
 	width: 65%;
@@ -497,6 +494,20 @@ th {
 	padding-right: 0px;
 	padding-left: 10px;
 }
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.4);
+}
+
+.m.body {
+	height: 50vh;
+	overflow-y: auto;
+}
 </style>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -514,7 +525,7 @@ th {
 									<!-- Page-body start -->
 									<div class="page-body text">
 										<!-- *********** -->
-										<!-- *********************************** [ 산출물 추가 ] ***********************************-->
+										<!-- *********************************** [ 산출물 추가 모달 ] ***********************************-->
 										<div class="modal" id="addmodal">
 											<div class="modal_body">
 												<div class="m_head">
@@ -543,16 +554,16 @@ th {
 																<input type="text" id="addDatepicker">
 															</div>
 														</div>
-														
+
 													</div>
-												
+
 													<div class="form-group row">
 														<label class="col-sm-2 col-form-label">첨부파일</label>
 														<div class="col-sm-9">
 															<input type="file" class="">
 														</div>
 													</div>
-						
+
 												</div>
 												<div class="m_footer">
 													<div class="modal_btn save center" id="savebtn">등록</div>
@@ -561,7 +572,7 @@ th {
 											</div>
 										</div>
 										<div class="row">
-											<!--  sale analytics start -->
+											<!-- *********************************** [SR 진척 관리 ] ***********************************-->
 											<div class="col-xl-12">
 												<div class="card">
 													<div class="card-header">
@@ -627,6 +638,8 @@ th {
 													</div>
 												</div>
 											</div>
+											<!-- *********************************** [SR 처리 목록 ] ***********************************-->
+											
 											<div class="col-xl-8 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -778,24 +791,11 @@ th {
 													</div>
 												</div>
 											</div>
+											<!-- *********************************** [SR요청 상세정보 ] ***********************************-->
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
-														<div class="row">
-															<div class="col-6">
-																<h5>SR요청 상세정보</h5>
-															</div>
-															<div class="col-3">
-																<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addHistoryModal">
-																	예정일 변경
-																</button>
-															</div>
-															<div class="col-3">
-																<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addHistoryModal">
-																	개발 취소
-																</button>
-															</div>
-														</div>
+														<h5>SR요청 상세정보</h5>
 													</div>
 													<div class="card-block" style="height: 600px;">
 														<div class="card_body "
@@ -896,7 +896,6 @@ th {
 																		<input type="text" id="endRequestDatepicker">
 																	</div>
 																</div>
-																
 															</div>
 															<div class="form-group row">
 																<label class="col-sm-2 col-form-label"
@@ -918,6 +917,7 @@ th {
 													</div>
 												</div>
 											</div>
+											<!-- *********************************** [SR요청 처리정보 ] ***********************************-->
 											<div class="col-xl-12 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -941,6 +941,7 @@ th {
 																	산출물</a>
 																<div class="slide"></div></li>
 														</ul>
+														<!-- *********************************** [ 계획정보 ] ***********************************-->
 														<div class="tab-content tabs card-block"
 															style="padding: 0px; padding-top: 20px;">
 															<div class="tab-pane active" id="home1" role="tabpanel"
@@ -994,6 +995,7 @@ th {
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
 															</div>
+															<!-- *********************************** [ 자원정보 ] ***********************************-->
 															<div class="tab-pane" id="profile1" role="tabpanel"
 																style="padding-bottom: 20px;">
 																<div class="card-block table-border-style"
@@ -1048,9 +1050,9 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"data-toggle="modal"
-													data-target="#addSrResourcesModal">추가</button>
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</button>
 															</div>
+															<!-- *********************************** [ 진척률 ] ***********************************-->
 															<div class="tab-pane" id="messages1" role="tabpanel"
 																style="padding-bottom: 20px;">
 																<div class="tab-pane" id="profile1" role="tabpanel">
@@ -1083,7 +1085,19 @@ th {
 																						<td><input type="text" id="firEndDatepicker"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
-																						<td>산출물</td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#collapseOne" aria-expanded="true"
+																									aria-controls="collapseOne">첨부파일1</button>
+																								<div id="collapseOne" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div>
+																						</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">2</th>
@@ -1094,7 +1108,18 @@ th {
 																						<td><input type="text" id="secEndDatepicker"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
-																						<td>산출물</td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#collapseTwo" aria-expanded="true"
+																									aria-controls="collapseTwo">첨부파일1</button>
+																								<div id="collapseTwo" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
 																					</tr>
 																					<tr>
 																						<th scope="row">3</th>
@@ -1105,7 +1130,18 @@ th {
 																						<td><input type="text" id="thrEndDatepicker"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
-																						<td>산출물</td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#collapseThr" aria-expanded="true"
+																									aria-controls="collapseThr">첨부파일1</button>
+																								<div id="collapseThr" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
 																					</tr>
 																					<tr>
 																						<th scope="row">4</th>
@@ -1116,7 +1152,18 @@ th {
 																						<td><input type="text" id="fourEndDatepicker"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
-																						<td>산출물</td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#collapsefour" aria-expanded="true"
+																									aria-controls="collapsefour">첨부파일1</button>
+																								<div id="collapsefour" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
 																					</tr>
 																					<tr>
 																						<th scope="row">5</th>
@@ -1127,7 +1174,18 @@ th {
 																						<td><input type="text" id="fiveEndDatepicker"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
-																						<td>산출물</td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#collapsefive" aria-expanded="true"
+																									aria-controls="collapsefive">첨부파일1</button>
+																								<div id="collapsefive" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
 																					</tr>
 																					<tr>
 																						<th scope="row">6</th>
@@ -1138,7 +1196,18 @@ th {
 																						<td><input type="text" id="sixEndDatepicker"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
-																						<td>산출물</td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#collapsesix" aria-expanded="true"
+																									aria-controls="collapsesix">첨부파일1</button>
+																								<div id="collapsesix" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -1150,8 +1219,8 @@ th {
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
-															
 															</div>
+															<!-- *********************************** [ 산출물  ] ***********************************-->
 															<div class="tab-pane" id="settings1" role="tabpanel"
 																style="padding-bottom: 20px;">
 																<div class="tab-pane" id="profile1" role="tabpanel">
@@ -1204,15 +1273,13 @@ th {
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
-																<div class="btn btn-info" id="addbtn" style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</div>
+																<div class="btn btn-info" id="addbtn"
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</div>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-
-
-
 										</div>
 									</div>
 								</div>
@@ -1227,14 +1294,7 @@ th {
 			</div>
 		</div>
 	</div>
-	<!-- fullcalendar CDN -->
-	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-	<!-- fullcalendar 언어 CDN -->
-	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-	
-	<script src="/resources/assets/js/addSrResourcesModal.js"></script>
-	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
-	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
+
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>
