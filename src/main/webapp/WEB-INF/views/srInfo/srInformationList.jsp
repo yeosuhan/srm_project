@@ -3,6 +3,7 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
 </head>
 <script>
 	$(function() {
@@ -408,8 +409,8 @@
 		       = document.getElementsByName('resource');
 	  
 		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectResourceAll.checked;
-		  })
+			    checkbox.checked = selectResourceAll.checked;
+			  })
 		}
 	function selectProgressAll(selectProgressAll)  {
 		  const checkboxes 
@@ -427,7 +428,7 @@
 		    checkbox.checked = selectOutputAll.checked;
 		  })
 		}
-	$(document).on('click', '#addbtn', function(e) {
+	$(document).on('click', '#addDelbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
 		document.body.style= `overflow: hidden`;
@@ -639,7 +640,7 @@ th {
 												</div>
 											</div>
 											<!-- *********************************** [SR 처리 목록 ] ***********************************-->
-											
+
 											<div class="col-xl-8 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -795,7 +796,21 @@ th {
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
-														<h5>SR요청 상세정보</h5>
+														<div class="row">
+															<div class="col-6">
+																<h5>SR요청 상세정보</h5>
+															</div>
+															<div class="col-3">
+																<button type="button" class="btn btn-primary btn-sm"
+																	data-toggle="modal" data-target="#addHistoryModal">
+																	예정일 변경</button>
+															</div>
+															<div class="col-3">
+																<button type="button" class="btn btn-primary btn-sm"
+																	data-toggle="modal" data-target="#addHistoryModal">
+																	개발 취소</button>
+															</div>
+														</div>
 													</div>
 													<div class="card-block" style="height: 600px;">
 														<div class="card_body "
@@ -1087,7 +1102,8 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
 																									data-target="#collapseOne" aria-expanded="true"
 																									aria-controls="collapseOne">첨부파일1</button>
@@ -1096,8 +1112,7 @@ th {
 																									data-parent="#accordionExample">
 																									<div class="card-body">첨부파일2</div>
 																								</div>
-																							</div>
-																						</td>
+																							</div></td>
 																					</tr>
 																					<tr>
 																						<th scope="row">2</th>
@@ -1110,7 +1125,8 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
 																									data-target="#collapseTwo" aria-expanded="true"
 																									aria-controls="collapseTwo">첨부파일1</button>
@@ -1132,7 +1148,8 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
 																									data-target="#collapseThr" aria-expanded="true"
 																									aria-controls="collapseThr">첨부파일1</button>
@@ -1154,9 +1171,11 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
-																									data-target="#collapsefour" aria-expanded="true"
+																									data-target="#collapsefour"
+																									aria-expanded="true"
 																									aria-controls="collapsefour">첨부파일1</button>
 																								<div id="collapsefour" class="collapse"
 																									aria-labelledby="headingOne"
@@ -1176,9 +1195,11 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
-																									data-target="#collapsefive" aria-expanded="true"
+																									data-target="#collapsefive"
+																									aria-expanded="true"
 																									aria-controls="collapsefive">첨부파일1</button>
 																								<div id="collapsefive" class="collapse"
 																									aria-labelledby="headingOne"
@@ -1198,7 +1219,8 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
 																									data-target="#collapsesix" aria-expanded="true"
 																									aria-controls="collapsesix">첨부파일1</button>
@@ -1273,7 +1295,7 @@ th {
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
-																<div class="btn btn-info" id="addbtn"
+																<div class="btn btn-info" id="addDelbtn"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</div>
 															</div>
 														</div>
@@ -1294,7 +1316,6 @@ th {
 			</div>
 		</div>
 	</div>
-
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>
