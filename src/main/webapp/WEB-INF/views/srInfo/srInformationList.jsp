@@ -1,7 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
-
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
