@@ -1,3 +1,5 @@
+<%-- 작성자 : 신정은
+	작성날짜 : 2023-02-20 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <html>
@@ -195,10 +197,9 @@
 											</div>
 											<!-- Bootstrap modal end -->
 										</div>
-										<div class="d-flex justify-content-end">
+										<div class="d-flex justify-content-end" data-toggle="modal" data-target="#writeQna">
 											<img class="rounded newPost"
-												src="/resources/oti_images/newPost.png"
-												onclick="location.href='/qnawrite'">
+												src="/resources/oti_images/newPost.png">
 										</div>
 									</div>
 									<!-- Page body end -->
@@ -211,6 +212,7 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/board/qna-write.jsp"/> 
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>

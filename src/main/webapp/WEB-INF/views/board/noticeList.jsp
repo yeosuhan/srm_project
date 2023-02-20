@@ -1,3 +1,5 @@
+<%-- 작성자 : 신정은
+	작성날짜 : 2023-02-20 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <html>
@@ -217,8 +219,8 @@
 												<!-- Input Alignment card end -->
 											</div>
 										</div>
-										<div class="d-flex justify-content-end">
-											<img class="rounded newPost" src="/resources/oti_images/newPost.png" onclick="location.href='/noticewrite'">
+										<div class="d-flex justify-content-end" data-toggle="modal" data-target="#writeNotice">
+											<img class="rounded newPost" src="/resources/oti_images/newPost.png">
 										</div>
 									</div>
 									<!-- Page body end -->
@@ -231,6 +233,7 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/board/notice-write.jsp"/> 
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>
