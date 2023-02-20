@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%--
+	작성자: 안한길
+	작성일: 2023.02.17.
+	내용  : sr 요청 상세 모달
+ --%>
 <div class="modal" id="srDemandModal">
 
 	<div class="modal-body modal-dialog modal-lg">

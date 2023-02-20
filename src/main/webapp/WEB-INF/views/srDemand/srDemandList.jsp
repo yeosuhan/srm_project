@@ -1,5 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
+<%-- 작성자: 안한길, 최은종 
+	 작성일 : 2023.02.20.
+	 내용	  : sr요청 관리 페이지 --%>
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
@@ -440,10 +442,7 @@
 	});
 </script>
 <style>
-img {
-	width: 29px;
-	vertical-align: top;
-}
+
 
 #startDatepicker, #endDatepicker, #addDatepicker {
 	width: 90px;
@@ -765,7 +764,7 @@ th {
 															style="padding: 0px; padding-top: 20px;">
 															<div class="tab-pane active" id="srDemandDetail"
 																role="tabpanel">
-																<div class="card-block" style="height: 600px;">
+																<div class="card-block" >
 																	<div class="card_body "
 																		style="font-size: 12px; padding-top: 20px;">
 																		<div class="form-group row">
@@ -915,28 +914,39 @@ th {
 																		</div>
 
 																		<div class="row mt-3 ml-1">
-																			<label class="col-sm-2 col-form-label"
+																			<label class="col-sm-3 col-form-label px-0"
 																				style="line-height: 120px">반려 사유</label>
-																			<div class="col-sm-9 pl-0 pr-4">
+																			<div class="col-sm-9 pl-0 ">
 																				<textarea rows="5" cols="5" class="form-control"></textarea>
 																			</div>
 																		</div>
 																		<div class="form-group row">
-																			<label class="col-sm-2 col-form-label"
+																			<label class="col-sm-3 col-form-label px-0"
 																				style="line-height: 100px; font-size: 12px;">SR
 																				내용</label>
-																			<div class="col-sm-9">
+																			<div class="col-sm-9 pl-0">
 																				<textarea rows="5" cols="5" class="form-control"
 																					style="height: 100px;"></textarea>
 																			</div>
 																		</div>
 																		<div class="form-group row">
-																			<label class="col-sm-3 col-form-label"
+																			<label class="col-sm-3 col-form-label px-0"
 																				style="font-size: 12px;">첨부파일</label>
 																			<div class="col-sm-9">
 																				<input type="file" class="">
 																			</div>
 																		</div>
+																		<div class="row">
+																			<div class="col-6">
+																			</div>
+																			<div class="col-6" style="text-align:right">
+																				<button class="btn btn-primary btn-round save center" >승인</button>
+	
+																				<button class="btn btn-primary btn-round danger cancle" >반려</button>
+																			</div>
+																			
+																				
+																			</div>
 																	</div>
 																</div>
 															</div>
