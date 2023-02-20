@@ -1,17 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="pcoded-navbar">
-    <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-    <div class="pcoded-inner-navbar main-menu">
-        <div class="">
-            <div class="main-menu-header">
-                <img class="img-80 img-radius" src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg" alt="User-Profile-Image">
-                <div class="user-details" style="color:white">
-                    John Doe
-                </div>
-            </div>
-        </div>
+	<div class="sidebar_toggle">
+		<a href="#"><i class="icon-close icons"></i></a>
+	</div>
+	<div class="pcoded-inner-navbar main-menu">
+		<div class="">
+			<div class="main-menu-header">
+				<img class="img-80 img-radius"
+					src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg"
+					alt="User-Profile-Image">
+				<div class="user-details" style="color: white">John Doe</div>
+			</div>
+		</div>
+
 
         <div class="pcoded-navigation-label mt-3" data-i18n="nav.category.navigation">MY PORTAL</div>
 	        <ul class="pcoded-item pcoded-left-item">
@@ -46,9 +48,18 @@
 	        
 		<div class="pcoded-navigation-label" style="font-weight: bold;" data-i18n="nav.category.navigation">SR 관리</div>
 	        <ul class="pcoded-item pcoded-left-item">
-	            <c:if test="${role ne 2}">
+	            <c:if test="${role eq 1}">
 		            <li class="">
-		                <a href="/srdemandList" class="waves-effect waves-dark">
+		                <a href="/userSrdemandList" class="waves-effect waves-dark">
+		                    <span class="pcoded-micon"><i class="far fa-file-alt pt-1"></i><b>D</b></span>
+		                    <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
+		                    <span class="pcoded-mcaret"></span>
+		                </a>
+		            </li>
+	            </c:if>
+	             <c:if test="${role eq 3}">
+		            <li class="">
+		                <a href="/adminSrdemandList" class="waves-effect waves-dark">
 		                    <span class="pcoded-micon"><i class="far fa-file-alt pt-1"></i><b>D</b></span>
 		                    <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
 		                    <span class="pcoded-mcaret"></span>
@@ -112,4 +123,5 @@
 			        </ul>
 	        </c:if>
     </div>
+>>>>>>> branch 'main' of https://github.com/OTI-SRM/srm_project
 </nav>
