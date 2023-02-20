@@ -3,10 +3,11 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<%-- 캘린더css --%>
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 </head>
 <script>
-	<%-- 달력--%>
-	$(function() {
+	/* $(function() {
 		$("#startDatepicker").datepicker({
 			showOn : "both",
 			buttonImage : "resources/assets/images/button.png",
@@ -125,9 +126,9 @@
 					$.datepicker._curInst.input.datepicker('setDate',
 							new Date()).datepicker('hide').blur();
 				});
-	});
+	}); */
 	/*  */
-	$(function() {
+	/* $(function() {
 		$("#firStartDatepicker").datepicker({
 			showOn : "both",
 			buttonImage : "resources/assets/images/button.png",
@@ -402,7 +403,7 @@
 					$.datepicker._curInst.input.datepicker('setDate',
 							new Date()).datepicker('hide').blur();
 				});
-	});
+	}); */
 	<%-- 체크박스 전체 선택 --%>
 	function selectResourceAll(selectResourceAll)  {
 		  const checkboxes 
@@ -441,7 +442,7 @@
 	});
 </script>
 <style>
-img {
+.ui-datepicker-trigger {
 	width: 29px;
 	vertical-align: top;
 }
@@ -553,7 +554,7 @@ th {
 														<div class="col-sm-6">
 															<div class="col col-sm-4">등록일</div>
 															<div class="col col-sm-6">
-																<input type="text" id="addDatepicker">
+																<input type="date" id="addDatepicker">
 															</div>
 														</div>
 
@@ -586,9 +587,9 @@ th {
 															<div class="dropdown dropdown open">
 																<form action="#">
 																	<select name="languages" id="lang">
-																		<option value="워크넷">워크넷</option>
-																		<option value="굴국밥">굴국밥</option>
-																		<option value="고소미">고소미</option>
+																		<option value="워크넷">시스템3</option>
+																		<option value="굴국밥">시스템2</option>
+																		<option value="고소미">시스템1</option>
 																	</select>
 																</form>
 															</div>
@@ -598,9 +599,9 @@ th {
 															<div class="dropdown dropdown open">
 																<form action="#">
 																	<select name="languages" id="lang">
-																		<option value="워크넷">워크넷</option>
-																		<option value="굴국밥">굴국밥</option>
-																		<option value="고소미">고소미</option>
+																		<option value="워크넷">업무구분1</option>
+																		<option value="굴국밥">업무2</option>
+																		<option value="고소미">업무3</option>
 																	</select>
 																</form>
 															</div>
@@ -610,9 +611,9 @@ th {
 															<div class="dropdown dropdown open">
 																<form action="#">
 																	<select name="languages" id="lang">
-																		<option value="워크넷">워크넷</option>
-																		<option value="굴국밥">굴국밥</option>
-																		<option value="고소미">고소미</option>
+																		<option value="워크넷">개발중</option>
+																		<option value="굴국밥">테스트</option>
+																		<option value="고소미">반영요청</option>
 																	</select>
 																</form>
 															</div>
@@ -658,7 +659,7 @@ th {
 														</div>
 													</div>
 													<div class="card-block" id="list">
-														<div id="sales-analytics" style="height: 600px;">
+														<div id="sales-analytics" class="p-2">
 															<div class="card-block table-border-style">
 																<div class="table-responsive">
 																	<table class="table table-hover text-center"
@@ -850,8 +851,8 @@ th {
 																			<form action="#">
 																				<select name="languages" id="lang">
 																					<option value="워크넷">워크넷</option>
-																					<option value="굴국밥">굴국밥</option>
-																					<option value="고소미">고소미</option>
+																					<option value="굴국밥">시스템1</option>
+																					<option value="고소미">시스템2</option>
 																				</select>
 																			</form>
 																		</div>
@@ -862,9 +863,9 @@ th {
 																	<div class="dropdown dropdown open">
 																		<form action="#">
 																			<select name="languages" id="lang">
-																				<option value="워크넷">워크넷</option>
-																				<option value="굴국밥">굴국밥</option>
-																				<option value="고소미">고소미</option>
+																				<option value="워크넷">내부망</option>
+																				<option value="굴국밥">외부망</option>
+																				<option value="고소미">구매</option>
 																			</select>
 																		</form>
 																	</div>
@@ -872,14 +873,14 @@ th {
 															</div>
 															<div class="form-group row">
 																<div class="col-sm-6">
-																	<div class="col col-sm-4">요청팀</div>
+																	<div class="col col-sm-4">요청기관</div>
 																	<div class="col col-sm-6">
 																		<div class="dropdown dropdown open">
 																			<form action="#">
 																				<select name="languages" id="lang">
-																					<option value="워크넷">워크넷</option>
-																					<option value="굴국밥">굴국밥</option>
-																					<option value="고소미">고소미</option>
+																					<option value="워크넷">워크넷기관</option>
+																					<option value="굴국밥">고용부</option>
+																					<option value="고소미">네이버</option>
 																				</select>
 																			</form>
 																		</div>
@@ -891,9 +892,9 @@ th {
 																	<div class="dropdown dropdown open">
 																		<form action="#">
 																			<select name="languages" id="lang">
-																				<option value="워크넷">워크넷</option>
-																				<option value="굴국밥">굴국밥</option>
-																				<option value="고소미">고소미</option>
+																				<option value="워크넷">워크넷직원</option>
+																				<option value="굴국밥">공무원</option>
+																				<option value="고소미">직원</option>
 																			</select>
 																		</form>
 																	</div>
@@ -903,13 +904,13 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청일</div>
 																	<div class="col col-sm-8">
-																		<input type="text" id="requestDatepicker">
+																		<input type="date" id="requestDatepicker">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">완료요청일</div>
 																	<div class="col col-sm-8">
-																		<input type="text" id="endRequestDatepicker">
+																		<input type="date" id="endRequestDatepicker">
 																	</div>
 																</div>
 															</div>
@@ -992,14 +993,14 @@ th {
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획시작일</div>
 																		<div class="col col-sm-8">
-																			<input type="text" id="startDatepicker">
+																			<input type="date" id="startDatepicker">
 																		</div>
 
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획종료일</div>
 																		<div class="col col-sm-8">
-																			<input type="text" id="endDatepicker">
+																			<input type="date" id="endDatepicker">
 																		</div>
 																	</div>
 																</div>
@@ -1028,7 +1029,7 @@ th {
 																					<th style="width: 1px;"><input type="checkbox"
 																						name="resource" value="selectResourceAll"
 																						onclick="selectResourceAll(this)"></th>
-																					<th>담당자명</th>
+																					<th>개발자명</th>
 																					<th>역할</th>
 																					<th>투입시작일</th>
 																					<th>투입종료일</th>
@@ -1069,7 +1070,8 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</button>
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"data-toggle="modal"
+													data-target="#addSrResourcesModal">추가</button>
 															</div>
 															<%-- *********************************** [ 진척률 ] ***********************************--%>
 															<div class="tab-pane" id="messages1" role="tabpanel"
@@ -1371,6 +1373,7 @@ th {
 	</div>
 	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
+	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>
