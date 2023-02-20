@@ -123,5 +123,4 @@
 			        </ul>
 	        </c:if>
     </div>
->>>>>>> branch 'main' of https://github.com/OTI-SRM/srm_project
 </nav>
