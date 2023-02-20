@@ -1,0 +1,24 @@
+/* 
+	작성자: 안한길
+	작성일: 2023.02.17.
+	내용: 테이블 css
+ */
+.card .card-body table td ,.card-block table td, table td{
+	
+	font-size:12px;
+	vertical-align: middle;
+}
+
+
+.card .card-body table th,.card-block table th, table th{
+	font-size:12px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+.card .card-body table button ,.card-block table button, table button{
+	
+	height:16px;
+	font-size:8px;
+	text-align:center;
+	padding:0px 4px;
+}

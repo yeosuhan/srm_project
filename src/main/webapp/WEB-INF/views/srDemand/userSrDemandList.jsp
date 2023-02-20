@@ -7,8 +7,9 @@
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 </head>
 <script>
-	<%-- 달력--%>
-	$(function() {
+	
+<%-- 달력--%>
+	/* $(function() {
 		$("#startDatepicker").datepicker({
 			showOn : "both",
 			buttonImage : "resources/assets/images/button.png",
@@ -127,9 +128,9 @@
 					$.datepicker._curInst.input.datepicker('setDate',
 							new Date()).datepicker('hide').blur();
 				});
-	});
+	}); */
 	/*  */
-	$(function() {
+	/* $(function() {
 		$("#firStartDatepicker").datepicker({
 			showOn : "both",
 			buttonImage : "resources/assets/images/button.png",
@@ -404,25 +405,20 @@
 					$.datepicker._curInst.input.datepicker('setDate',
 							new Date()).datepicker('hide').blur();
 				});
-	});
-	<%-- 모달 실행 --%>
+	}); */
+<%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
-		document.body.style= `overflow: hidden`;
+		document.body.style = `overflow: hidden`;
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#addmodal').removeClass('show');
-		document.body.style= `overflow: scroll`;
+		document.body.style = `overflow: scroll`;
 	});
 </script>
 <style>
-img {
-	width: 29px;
-	vertical-align: top;
-}
-
 #startDatepicker, #endDatepicker, #addDatepicker {
 	width: 90px;
 }
@@ -460,6 +456,7 @@ th {
 .col-sm-4 {
 	padding: 0px;
 }
+
 .card .card-block {
 	padding: 0px 5px !important;
 }
@@ -573,7 +570,7 @@ th {
 														</div>
 													</div>
 													<div class="card-block" id="list">
-														<div id="sales-analytics" style="height: 600px;">
+														<div id="sales-analytics">
 															<div class="card-block table-border-style">
 																<div class="table-responsive">
 																	<table class="table table-hover text-center"
@@ -723,67 +720,54 @@ th {
 															</ul>
 														</div>
 													</div>
-														<ul class="nav nav-tabs  md-tabs" role="tablist">
-															<li class="nav-item"><a class="nav-link active"
-																data-toggle="tab" href="#srDemandDetail" role="tab">SR요청
-																	상세정보</a>
-																<div class="slide"></div></li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#srHistory" role="tab">SR
-																	히스토리</a>
-																<div class="slide"></div></li>
-														</ul>
+													<ul class="nav nav-tabs  md-tabs" role="tablist">
+														<li class="nav-item"><a class="nav-link active"
+															data-toggle="tab" href="#srDemandDetail" role="tab">SR요청
+																상세정보</a>
+															<div class="slide"></div></li>
+														<li class="nav-item"><a class="nav-link"
+															data-toggle="tab" href="#srHistory" role="tab">SR
+																히스토리</a>
+															<div class="slide"></div></li>
+													</ul>
 
-														<div class="tab-content tabs card-block"
-															style="padding: 0px; padding-top: 20px;">
-															<div class="tab-pane active" id="srDemandDetail"
-																role="tabpanel">
-																<div class="card-block" style="height: 600px;">
-																	<div class="card_body "
-																		style="font-size: 12px; padding-top: 20px;">
-																		<div class="form-group row">
-																			<div class="col-sm-6">
-																				<div class="col col-sm-4">SR번호</div>
-																				<div class="col col-sm-6">
-																					<input type="text" class="form-control">
-																				</div>
-																			</div>
-																			<div class="col-sm-6">
-																				<div class="col col-sm-4">요청구분</div>
-																				<div class="col col-sm-6">
-																					<input type="text" class="form-control">
-																				</div>
-																			</div>
-																		</div>
-																		<div class="form-group row">
-																			<div class="col col-sm-2">SR 제목</div>
-																			<div class="col col-sm-9">
+													<div class="tab-content tabs card-block"
+														style="padding: 0px; padding-top: 20px;">
+														<div class="tab-pane active" id="srDemandDetail"
+															role="tabpanel">
+															<div class="card-block">
+																<div class="card_body "
+																	style="font-size: 12px; padding-top: 20px;">
+																	<div class="form-group row">
+																		<div class="col-sm-6">
+																			<div class="col col-sm-4">SR번호</div>
+																			<div class="col col-sm-6">
 																				<input type="text" class="form-control">
 																			</div>
 																		</div>
-																		<div class="form-group row">
-																			<div class="col col-sm-2">관련 근거</div>
-																			<div class="col col-sm-9">
+																		<div class="col-sm-6">
+																			<div class="col col-sm-4">요청구분</div>
+																			<div class="col col-sm-6">
 																				<input type="text" class="form-control">
 																			</div>
 																		</div>
-																		<div class="form-group row">
-																			<div class="col-sm-6">
-																				<div class="col col-sm-4">시스템구분</div>
-																				<div class="col col-sm-6">
-																					<div class="dropdown dropdown open">
-																						<form action="#">
-																							<select name="languages" id="lang">
-																								<option value="워크넷">워크넷</option>
-																								<option value="굴국밥">굴국밥</option>
-																								<option value="고소미">고소미</option>
-																							</select>
-																						</form>
-																					</div>
-																				</div>
-																			</div>
-																			<div class="col-sm-6">
-																				<div class="col col-sm-4">업무구분</div>
+																	</div>
+																	<div class="form-group row">
+																		<div class="col col-sm-2">SR 제목</div>
+																		<div class="col col-sm-9">
+																			<input type="text" class="form-control">
+																		</div>
+																	</div>
+																	<div class="form-group row">
+																		<div class="col col-sm-2">관련 근거</div>
+																		<div class="col col-sm-9">
+																			<input type="text" class="form-control">
+																		</div>
+																	</div>
+																	<div class="form-group row">
+																		<div class="col-sm-6">
+																			<div class="col col-sm-4">시스템구분</div>
+																			<div class="col col-sm-6">
 																				<div class="dropdown dropdown open">
 																					<form action="#">
 																						<select name="languages" id="lang">
@@ -795,112 +779,189 @@ th {
 																				</div>
 																			</div>
 																		</div>
-																		<div class="form-group row">
-																			<div class="col-sm-6">
-																				<div class="col col-sm-4">요청팀</div>
-																				<div class="col col-sm-6">
-																					<div class="dropdown dropdown open">
-																						<form action="#">
-																							<select name="languages" id="lang">
-																								<option value="워크넷">워크넷</option>
-																								<option value="굴국밥">굴국밥</option>
-																								<option value="고소미">고소미</option>
-																							</select>
-																						</form>
-																					</div>
-																				</div>
-
+																		<div class="col-sm-6">
+																			<div class="col col-sm-4">업무구분</div>
+																			<div class="dropdown dropdown open">
+																				<form action="#">
+																					<select name="languages" id="lang">
+																						<option value="워크넷">내부망</option>
+																						<option value="굴국밥">외부망</option>
+																						<option value="고소미">구매</option>
+																					</select>
+																				</form>
 																			</div>
-																			<div class="col-sm-6">
-																				<div class="col col-sm-4">요청자</div>
+																		</div>
+																	</div>
+																	<div class="form-group row">
+																		<div class="col-sm-6">
+																			<div class="col col-sm-4">요청기관</div>
+																			<div class="col col-sm-6">
 																				<div class="dropdown dropdown open">
 																					<form action="#">
 																						<select name="languages" id="lang">
-																							<option value="워크넷">워크넷</option>
-																							<option value="굴국밥">굴국밥</option>
-																							<option value="고소미">고소미</option>
+																							<option value="워크넷">고용부</option>
+																							<option value="굴국밥">오티아이</option>
+																							<option value="고소미">네이버</option>
 																						</select>
 																					</form>
 																				</div>
 																			</div>
+
 																		</div>
-																		<div class="form-group row">
-																			<div class="col-sm-6">
-																				<div class="col col-sm-4">요청일</div>
-																				<div class="col col-sm-8">
-																					<input type="text" id="requestDatepicker">
-																				</div>
-																			</div>
-																			<div class="col-sm-6">
-																				<div class="col col-sm-4">완료요청일</div>
-																				<div class="col col-sm-8">
-																					<input type="text" id="endRequestDatepicker">
-																				</div>
-																			</div>
-																		</div>
-																		<div class="form-group row">
-																			<label class="col-sm-2 col-form-label"
-																				style="line-height: 100px; font-size: 12px;">SR
-																				내용</label>
-																			<div class="col-sm-9">
-																				<textarea rows="5" cols="5" class="form-control"
-																					style="height: 100px;"></textarea>
+																		<div class="col-sm-6">
+																			<div class="col col-sm-4">요청자</div>
+																			<div class="dropdown dropdown open">
+																				<form action="#">
+																					<select name="languages" id="lang">
+																						<option value="워크넷">워크넷 직원</option>
+																						<option value="굴국밥">공무원</option>
+																						<option value="고소미">직원</option>
+																					</select>
+																				</form>
 																			</div>
 																		</div>
-																		<div class="form-group row">
-																			<label class="col-sm-3 col-form-label"
-																				style="font-size: 12px;">첨부파일</label>
-																			<div class="col-sm-9">
-																				<input type="file" class="">
+																	</div>
+																	<div class="form-group row">
+																		<div class="col-sm-6">
+																			<div class="col col-sm-4">요청일</div>
+																			<div class="col col-sm-8">
+																				<input type="date" id="requestDatepicker">
 																			</div>
+																		</div>
+																		<div class="col-sm-6">
+																			<div class="col col-sm-4">완료요청일</div>
+																			<div class="col col-sm-8">
+																				<input type="date" id="endRequestDatepicker">
+																			</div>
+																		</div>
+																	</div>
+																	<div class="row mt-3">
+																		<div class="col-6">
+																			<div class="col col-sm-4">개발 담당자</div>
+																			<div class="col col-sm-6">
+																				<input type="text" class="form-control" value="개발자1"
+																					disabled>
+																			</div>
+																		</div>
+																		<div class="col-6">
+																			<div class="col col-sm-4">개발 부서</div>
+																			<div class="col col-sm-6">
+																				<input type="text" class="form-control" value="부서1"
+																					disabled>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="row mt-3">
+																		<div class="col-6">
+																			<div class="col col-sm-4">진행 상태</div>
+																			<div class="col col-sm-6">
+																				<input type="text" class="form-control" value="관리자1"
+																					disabled>
+																			</div>
+																		</div>
+																		<div class="col-6">
+																			<div class="col col-sm-4">완료(예정)일</div>
+																			<div class="col col-sm-6">
+																				<input type="text" class="form-control"
+																					value="000-0000-0000" disabled>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="row mt-3">
+																		<div class="col-6">
+																			<div class="col col-sm-4">검토자 이름</div>
+																			<div class="col col-sm-6">
+																				<input type="text" class="form-control" value="관리자1"
+																					disabled>
+																			</div>
+																		</div>
+																		<div class="col-6">
+																			<div class="col col-sm-4">부서 번호</div>
+																			<div class="col col-sm-6">
+																				<input type="text" class="form-control"
+																					value="000-0000-0000" disabled>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="row mt-3 ml-1">
+																		<label class="col-sm-3 col-form-label px-0"
+																			style="line-height: 120px">반려 사유</label>
+																		<div class="col-sm-9 pl-0 ">
+																			<textarea rows="5" cols="5" class="form-control"></textarea>
+																		</div>
+																	</div>
+																	<div class="form-group row">
+																		<label class="col-sm-2 col-form-label"
+																			style="line-height: 100px; font-size: 12px;">SR
+																			내용</label>
+																		<div class="col-sm-9">
+																			<textarea rows="5" cols="5" class="form-control"
+																				style="height: 100px;"></textarea>
+																		</div>
+																	</div>
+																	<div class="form-group row">
+																		<label class="col-sm-3 col-form-label"
+																			style="font-size: 12px;">첨부파일</label>
+																		<div class="col-sm-9">
+																			<input type="file" class="">
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-6"></div>
+																		<div class="col-6" style="text-align: right">
+																			<button class="btn btn-primary btn-round save center">승인</button>
+
+																			<button
+																				class="btn btn-primary btn-round danger cancle">반려</button>
 																		</div>
 																	</div>
 																</div>
 															</div>
-															<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
-															<div class="tab-pane" id="srHistory" role="tabpanel">
-																<div class="card-block table-border-style"
-																	style="padding: 0px;">
-																	<div class="table-responsive">
-																		<table class="table table-hover text-center"
-																			style="font-size: 12px; padding: 0px;">
-																			<thead>
-																				<tr>
-																					<th style="width: 1px;">순번</th>
-																					<th>제목</th>
-																					<th>변경된 완료예정일</th>
-																					<th>수락여부</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr data-toggle="modal"
-																					data-target="#addHistoryModalDetail">
-																					<th scope="row">1</th>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																				</tr>
-																				<tr data-toggle="modal"
-																					data-target="#addHistoryModalDetail">
-																					<th scope="row">2</th>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																				</tr>
-																				<tr data-toggle="modal"
-																					data-target="#addHistoryModalDetail">
-																					<th scope="row">3</th>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
-															</div>
-														
 														</div>
+														<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
+														<div class="tab-pane" id="srHistory" role="tabpanel">
+															<div class="card-block table-border-style"
+																style="padding: 0px;">
+																<div class="table-responsive">
+																	<table class="table table-hover text-center"
+																		style="font-size: 12px; padding: 0px;">
+																		<thead>
+																			<tr>
+																				<th style="width: 1px;">순번</th>
+																				<th>제목</th>
+																				<th>변경된 완료예정일</th>
+																				<th>수락여부</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr data-toggle="modal"
+																				data-target="#addHistoryModalDetail">
+																				<th scope="row">1</th>
+																				<td>@mdo</td>
+																				<td>@mdo</td>
+																				<td>@mdo</td>
+																			</tr>
+																			<tr data-toggle="modal"
+																				data-target="#addHistoryModalDetail">
+																				<th scope="row">2</th>
+																				<td>@mdo</td>
+																				<td>@mdo</td>
+																				<td>@mdo</td>
+																			</tr>
+																			<tr data-toggle="modal"
+																				data-target="#addHistoryModalDetail">
+																				<th scope="row">3</th>
+																				<td>@mdo</td>
+																				<td>@mdo</td>
+																				<td>@mdo</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+
 													</div>
 												</div>
 											</div>
@@ -909,14 +970,15 @@ th {
 								</div>
 							</div>
 						</div>
-						<!-- *********** -->
 					</div>
-					<!-- Page-body end -->
+					<!-- *********** -->
 				</div>
-				<div id="styleSelector"></div>
+				<!-- Page-body end -->
 			</div>
+			<div id="styleSelector"></div>
 		</div>
-	
+	</div>
+
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 검색 -->
