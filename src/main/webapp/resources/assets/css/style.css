@@ -11562,10 +11562,10 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
   padding-left: 30px; }
   #checkbox-select tr td.select-checkbox:before, #checkbox-select tr td.select-checkbox:after, #checkbox-select tr th.select-checkbox:before, #checkbox-select tr th.select-checkbox:after {
     left: 15px; }
-
+/*
 .table td, .table th {
   padding: 1.25rem 0.75rem; }
-
+*/
 .table thead th {
   border-bottom: 1px solid #d6dde1; }
 
