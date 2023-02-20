@@ -1,10 +1,13 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
+<%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 </head>
 <script>
+	<%-- 달력--%>
 	$(function() {
 		$("#startDatepicker").datepicker({
 			showOn : "both",
@@ -402,31 +405,7 @@
 							new Date()).datepicker('hide').blur();
 				});
 	});
-	/*  */
-	function selectResourceAll(selectResourceAll)  {
-		  const checkboxes 
-		       = document.getElementsByName('resource');
-	  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectResourceAll.checked;
-		  })
-		}
-	function selectProgressAll(selectProgressAll)  {
-		  const checkboxes 
-		       = document.getElementsByName('progress');
-		  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectProgressAll.checked;
-		  })
-		}
-	function selectOutputAll(selectOutputAll)  {
-		  const checkboxes 
-		       = document.getElementsByName('output');
-		  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectOutputAll.checked;
-		  })
-		}
+	<%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
@@ -452,7 +431,7 @@ img {
 	#firEndDatepicker, #secStartDatepicker, #secEndDatepicker,
 	#thrStartDatepicker, #thrEndDatepicker, #fiveStartDatepicker,
 	#fiveEndDatepicker, #fourStartDatepicker, #fourEndDatepicker,
-	#sixStartDatepicker, #sixEndDatepicker {
+	#sixStartDatepicker, #sixEndDatepicker, #startDatepicker, #endDatepicker {
 	width: 70px;
 	padding-right: 0px;
 }
@@ -504,10 +483,10 @@ th {
 	background: rgba(0, 0, 0, 0.4);
 }
 
-/* .m.body {
+.m.body {
 	height: 50vh;
 	overflow-y: auto;
-} */
+}
 </style>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -526,7 +505,7 @@ th {
 									<div class="page-body text">
 										<!-- *********** -->
 										<div class="row">
-											<!-- *********************************** [SR 요청 관리 ] ***********************************-->
+											<%-- *********************************** [SR 요청 관리 ] ***********************************--%>
 											<div class="col-xl-12">
 												<div class="card">
 													<div class="card-header">
@@ -552,10 +531,6 @@ th {
 																		상태</label> <select id="sttsCd" name="sttsCd">
 																		<option value="0">요청</option>
 																		<option value="1">반려</option>
-																		<option value="2">접수</option>
-																		<option value="3">개발중</option>
-																		<option value="4">테스트</option>
-																		<option value="5">개발 완료</option>
 																	</select>
 																</div>
 																<div class="col col-3 pr-0">
@@ -582,7 +557,7 @@ th {
 												</div>
 											</div>
 
-											<!-- *********************************** [SR 요청 목록 ] ***********************************-->
+											<%-- *********************************** [SR 요청 목록 ] ***********************************--%>
 											<div class="col-xl-8 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -733,7 +708,7 @@ th {
 												</div>
 											</div>
 
-											<!-- *********************************** [SR요청 처리정보 ] ***********************************-->
+											<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -748,15 +723,14 @@ th {
 															</ul>
 														</div>
 													</div>
-													<div class="card-block" style="padding-top: 10px;">
 														<ul class="nav nav-tabs  md-tabs" role="tablist">
 															<li class="nav-item"><a class="nav-link active"
 																data-toggle="tab" href="#srDemandDetail" role="tab">SR요청
 																	상세정보</a>
 																<div class="slide"></div></li>
 															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#srHistory" role="tab">SR
-																	히스토리</a>
+																data-toggle="tab" href="#srHistory" role="tab">SR 개발
+																	등록</a>
 																<div class="slide"></div></li>
 														</ul>
 
@@ -790,7 +764,7 @@ th {
 																		<div class="form-group row">
 																			<div class="col col-sm-2">관련 근거</div>
 																			<div class="col col-sm-9">
-																				<input type="text" class="form-control">
+																				<textarea rows="5" cols="5" class="form-control"></textarea>
 																			</div>
 																		</div>
 																		<div class="form-group row">
@@ -883,104 +857,51 @@ th {
 																	</div>
 																</div>
 															</div>
-															<!-- *********************************** [ SR 히스토리  ] ***********************************-->
+															<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
 															<div class="tab-pane" id="srHistory" role="tabpanel">
-																<div class="card-block table-border-style"
-																	style="padding: 0px;">
-																	<div class="table-responsive">
-																		<table class="table table-hover text-center"
-																			style="font-size: 12px; padding: 0px;">
-																			<thead>
-																				<tr>
-																					<th style="width: 1px;">순번</th>
-																					<th>제목</th>
-																					<th>변경된 완료예정일</th>
-																					<th>수락여부</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr data-toggle="modal"
-																					data-target="#addHistoryModalDetail">
-																					<th scope="row">1</th>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																				</tr>
-																				<tr data-toggle="modal"
-																					data-target="#addHistoryModalDetail">
-																					<th scope="row">2</th>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																				</tr>
-																				<tr data-toggle="modal"
-																					data-target="#addHistoryModalDetail">
-																					<th scope="row">3</th>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
-															</div>
-															<!-- *********************************** [ SR 히스토리  ] ***********************************-->
-															<div class="tab-pane" id="history1" role="tabpanel"
-																style="padding-bottom: 20px;">
-																<div class="tab-pane" id="profile1" role="tabpanel">
-																	<div class="card-block table-border-style"
-																		style="padding: 0px;">
-																		<div class="table-responsive">
-																			<table class="table table-hover text-center"
-																				style="font-size: 12px; padding: 0px;">
-																				<thead>
-																					<tr>
-																						<th style="width: 1px;">순번</th>
-																						<th>담당자명</th>
-																						<th>기존 완료예정일</th>
-																						<th>변경된 완료예정일</th>
-																						<th>수락여부</th>
-																						<th>상세조회</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-																					<tr>
-																						<th scope="row">1</th>
-																						<td>Otto</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">2</th>
-																						<td>Thornton</td>
-																						<td>@fat</td>
-																						<td>Jacob</td>
-																						<td>@fat</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">3</th>
-																						<td>the Bird</td>
-																						<td>@twitter</td>
-																						<td>Larry</td>
-																						<td>@twitter</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																<div class="card-block" style="height: 600px;">
+																	<div class="card_body "
+																		style="font-size: 12px; padding-top: 20px;">
+																		<div class="form-group row">
+																			<div class="col-sm-6">
+																				<div class="col col-sm-4">개발담당자</div>
+																				<div class="col col-sm-6">
+																					<input type="text" class="form-control">
+																				</div>
+																			</div>
+																			<div class="col-sm-6">
+																				<div class="col col-sm-4">개발부서</div>
+																				<div class="col col-sm-6">
+																					<input type="text" class="form-control">
+																				</div>
+																			</div>
 																		</div>
+																		<div class="form-group row">
+
+																			<div class="col-sm-6">
+																				<div class="col col-sm-4">완료(예정)일</div>
+																				<div class="col col-sm-6">
+																					<input type="text" id="endDatepicker">
+																				</div>
+																			</div>
+																			<div class="col-sm-6">
+																				<div class="col col-sm-4">계획 시작일</div>
+																				<div class="col col-sm-6">
+																					<input type="text" id="startDatepicker">
+																				</div>
+																			</div>
+																		</div>
+																		<div class="form-group row">
+																			<div class="col col-sm-2">관련 근거</div>
+																			<div class="col col-sm-9">
+																				<textarea rows="5" cols="5" class="form-control"></textarea>
+																			</div>
+																		</div>
+																		<button class="btn btn-info btn-lg" style="width:100%;">등록</button>
 																	</div>
 																</div>
 															</div>
+
 														</div>
 													</div>
 												</div>
@@ -997,7 +918,7 @@ th {
 				<div id="styleSelector"></div>
 			</div>
 		</div>
-	</div>
+
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 검색 -->
