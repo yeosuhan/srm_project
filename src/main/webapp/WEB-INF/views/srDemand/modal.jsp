@@ -1,40 +1,40 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
-<%-- <html>
-<head>
-<%@include file="/WEB-INF/views/fragments/header.jsp"%>
-</head> --%>
+<%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+
 <script>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
-
+		document.body.style = `overflow: hidden`;
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#addmodal').removeClass('show');
-
+		document.body.style = `overflow: scroll`;
 	});
 	/* 요청 수정 */
 	$(document).on('click', '#modbtn', function(e) {
 		console.log("click event");
 		$('#modmodal').addClass('show');
+		document.body.style = `overflow: hidden`;
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#modmodal').removeClass('show');
-
+		document.body.style = `overflow: scroll`;
 	});
 	/* 개발 등록 */
 	$(document).on('click', '#devbtn', function(e) {
 		console.log("click event");
 		$('#devmodal').addClass('show');
+		document.body.style = `overflow: hidden`;
 
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#devmodal').removeClass('show');
-
+		document.body.style = `overflow: scroll`;
 	});
 	/* 달력 */
 	$(function() {
@@ -159,7 +159,7 @@
 .ui-datepicker-trigger {
 	width: 29px;
 	vertical-align: top;
-} 
+}
 
 #addDatepicker, #addEndRequestDatepicker, #modDatepicker,
 	#modEndRequestDatepicker, #devDatepicker {
@@ -169,6 +169,19 @@
 .col-sm-4 {
 	padding: 0px;
 }
+
+.modal {
+	position: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.4);
+}
+.m.body {
+   height: 50vh;
+   overflow-y: auto;
+} 
 </style>
 <body>
 	<!-- *********************************** [ modal start ] ***********************************-->
@@ -498,42 +511,3 @@
 			</div>
 		</div>
 	</div>
-	<%-- <!-- *********************************** [ modal end ] ***********************************-->
-	<div id="pcoded" class="pcoded">
-		<div class="pcoded-overlay-box"></div>
-		<div class="pcoded-container navbar-wrapper">
-			<%@include file="/WEB-INF/views/fragments/top.jsp"%>
-			<div class="pcoded-main-container">
-				<div class="pcoded-wrapper">
-					<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
-					<div class="pcoded-content">
-						<%@include file="/WEB-INF/views/fragments/pageHeader.jsp"%>
-						<div class="pcoded-inner-content pt-4">
-							<div class="main-body">
-								<div id="pageWrapper" class="page-wrapper">
-									<!-- Page-body start -->
-									<div class="page-body">
-										<!-- *********** -->
-										<div class="card">
-											<div class="card-header">SpringFramework 복습</div>
-											<div class="card-body">
-												<div class="btn btn-info btn-sm" id="addbtn">요청 등록</div>
-												<div class="btn btn-info btn-sm" id="modbtn">요청 수정</div>
-												<div class="btn btn-info btn-sm" id="devbtn">개발 등록</div>
-											</div>
-										</div>
-										<!-- *********** -->
-									</div>
-									<!-- Page-body end -->
-								</div>
-								<div id="styleSelector"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
-</body>
-</html> --%>

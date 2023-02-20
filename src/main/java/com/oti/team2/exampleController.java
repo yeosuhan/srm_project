@@ -38,6 +38,11 @@ public class exampleController {
 	}
 
 	// 정은
+	@RequestMapping(value = "/check/pw", method = RequestMethod.GET)
+	public String checkPw(Locale locale, Model model) {
+		return "member/checkPw";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
 		return "member/login";
@@ -114,9 +119,13 @@ public class exampleController {
 	}
 
 	// 한길
-	@RequestMapping(value = "/srdemandList", method = RequestMethod.GET)
-	public String srDemandList(Model model) {
-		return "srDemand/srDemandList";
+	@RequestMapping(value = "/userSrdemandList", method = RequestMethod.GET)
+	public String userSrdemandList(Model model) {
+		return "srDemand/userSrDemandList";
+	}
+	@RequestMapping(value = "/adminSrdemandList", method = RequestMethod.GET)
+	public String adminSrdemandList(Model model) {
+		return "srDemand/adminSrDemandList";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/srsearch" , method = RequestMethod.POST )

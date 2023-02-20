@@ -1,17 +1,19 @@
+<%-- 작성자 : 신정은
+	작성날짜 : 2023-02-20 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<%@include file="/WEB-INF/views/fragments/header.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="/resources/css/srButton.css">
-<link rel="stylesheet" type="text/css"
-	href="/resources/css/pagination.css">
-<link rel="stylesheet" type="text/css"
-	href="/resources/js/pagination.js">
+	<%@include file="/WEB-INF/views/fragments/header.jsp"%>
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/srButton.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/pagination.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/js/pagination.js">
 	<!-- 모달 -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/srModal.css">
-	
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/srModal.css">
 </head>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -97,9 +99,8 @@
 																			<td>2023-02-18</td>
 																			<td>요청</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																		<tr>
@@ -112,9 +113,8 @@
 																			<td>2023-02-17</td>
 																			<td>요청</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																	</tbody>
@@ -157,9 +157,8 @@
 																			<td>2023-02-18</td>
 																			<td>반려</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																		<tr>
@@ -172,9 +171,8 @@
 																			<td>2023-02-17</td>
 																			<td>반려</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																	</tbody>
@@ -217,9 +215,8 @@
 																			<td>2023-02-18</td>
 																			<td>접수</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																		<tr>
@@ -232,9 +229,8 @@
 																			<td>2023-02-17</td>
 																			<td>접수</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																	</tbody>
@@ -277,9 +273,8 @@
 																			<td>2023-02-18</td>
 																			<td>개발중</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																		<tr>
@@ -292,9 +287,8 @@
 																			<td>2023-02-17</td>
 																			<td>개발중</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																	</tbody>
@@ -337,9 +331,8 @@
 																			<td>2023-02-18</td>
 																			<td>테스트</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																		<tr>
@@ -352,9 +345,8 @@
 																			<td>2023-02-17</td>
 																			<td>테스트</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																	</tbody>
@@ -397,9 +389,8 @@
 																			<td>2023-02-18</td>
 																			<td>개발완료</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																		<tr>
@@ -412,13 +403,12 @@
 																			<td>2023-02-17</td>
 																			<td>개발완료</td>
 																			<td>
-																				<button class="srbutton"  data-toggle="modal" data-target="#srDemandModal">
-																					요청상세
-																				</button>
+																				<button class="srbutton" data-toggle="modal"
+																					data-target="#srDemandModal">요청상세</button>
 																			</td>
 																		</tr>
 																	</tbody>
-																</table>		
+																</table>
 															</div>
 														</div>
 													</div>
@@ -527,11 +517,12 @@
 				</div>
 			</div>
 		</div>
-		<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
-		<!-- 모달 -->
-		
-		<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp"/>
-		<jsp:include page="/WEB-INF/views/srDemand/modal.jsp"/>
-		
+	</div>
+	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
+	<!-- 모달 -->
+
+	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
+	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
+
 </body>
 </html>
