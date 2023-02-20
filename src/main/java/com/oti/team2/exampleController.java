@@ -38,6 +38,11 @@ public class exampleController {
 	}
 
 	// 정은
+	@RequestMapping(value = "/check/pw", method = RequestMethod.GET)
+	public String checkPw(Locale locale, Model model) {
+		return "member/checkPw";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
 		return "member/login";

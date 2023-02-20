@@ -1,3 +1,4 @@
+
 .srbutton {
 	border-radius: 10px; 
 	padding:6px; 
@@ -11,4 +12,13 @@
 .srbutton:hover, .srbutton-active, .srnbutton:active {
 	color: black;
 	outline:none !important;
+}
+
+/**** 공지사항, 문의사항 새글 작성 이미지 *****/
+.newPost {
+	width: 60px; 
+	position:fixed; 
+	bottom: 30; 
+	right: 45;
+	cursor: pointer;
 }
