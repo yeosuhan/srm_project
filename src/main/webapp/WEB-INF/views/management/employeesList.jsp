@@ -6,7 +6,8 @@
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <%-- 카카오 주소 js --%>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/kakaoAddress.js"></script>
 <style>
 table, th, td {
@@ -15,12 +16,12 @@ table, th, td {
 }
 
 .form-group {
-  margin-bottom: 0;
-  }
-  	p{	
-		margin:auto;
-	} 
-  
+	margin-bottom: 0;
+}
+
+p {
+	margin: auto;
+}
 </style>
 </head>
 <body>
@@ -71,9 +72,7 @@ table, th, td {
 																</div>
 															</form>
 														</div>
-
 													</div>
-
 													<div class="card-block table-border-style">
 														<div class="table-responsive">
 															<table class="table table-hover" style="font-size: 12;">
@@ -116,18 +115,12 @@ table, th, td {
 															</table>
 														</div>
 													</div>
-
 												</div>
-
 											</div>
-
 											<%-- 사원 목록 끝--%>
 											<%-- 사원 상세조회 카드--%>
 											<div class="col-xl-4 col-md-12">
-
-
 												<div class="card">
-
 													<div class="card-header">
 														<h5 style="font-weight: bold;">사원명</h5>
 														<div class="card-header-right">
@@ -138,7 +131,6 @@ table, th, td {
 															</ul>
 														</div>
 													</div>
-
 													<div class="card-block"
 														style="justify-content: center; text-align: center;">
 														<div class="my-2">
@@ -146,7 +138,6 @@ table, th, td {
 																style="height: 200px; width: 200px; align-content: center;">
 														</div>
 													</div>
-
 													<div class="card-block">
 														<form class="form-material">
 															<div class="form-group row">
@@ -212,7 +203,6 @@ table, th, td {
 															</div>
 														</form>
 													</div>
-
 													<div class="card-footer">
 														<div align="center">
 															<form method="post">
@@ -223,20 +213,12 @@ table, th, td {
 															</form>
 														</div>
 													</div>
-
-
 												</div>
-
 											</div>
-
-
 										</div>
-
-
-										<!-- *********** -->
+										<%-- *********** --%>
 									</div>
-
-									<!-- Page-body end -->
+									<%-- Page-body end --%>
 								</div>
 							</div>
 							<div id="styleSelector"></div>

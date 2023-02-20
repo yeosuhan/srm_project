@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%-- 작성자: 최은종 --%>
+<%-- 작성자: 최은종 / 작성 날짜: 230217 --%>
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>

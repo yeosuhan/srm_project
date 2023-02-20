@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<a href="#"> 
-				<img class="img-fluid" src="${pageContext.request.contextPath}/resources/assets/images/logo.png" alt="Theme-Logo" />
+				<img class="img-fluid" src="${pageContext.request.contextPath}/resources/assets/images/otilogo.png" alt="Theme-Logo" />
 			</a> 
 			<a class="mobile-options waves-effect waves-light"> 
 				<i class="ti-more"></i>
