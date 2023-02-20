@@ -545,7 +545,7 @@ th {
 																		<select name="languages" id="lang">
 																			<option value="워크넷">분석</option>
 																			<option value="굴국밥">설계</option>
-																			<option value="고소미">개발</option>
+																			<option value="고소미">개발</option>	
 																			<option value="고소미">시험</option>
 																		</select>
 																	</form>

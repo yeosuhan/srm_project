@@ -27,23 +27,23 @@
 											<div class="col-8 card-block">
 												<form method="post" action="institution/update" id="myInstForm" class="form-material">
 													<div class="form-group form-default">
-														<input value="워크넷"type="text" name="footer-email"
+														<input value="워크넷"type="text" name="institutionName"
 															class="form-control" required="" style="width: 50%">
 														<span class="form-bar"></span> <label class="float-label">기업명</label>
 													</div>
 													
 													<div class="form-group form-default">
-														<input value="010-1234-1234" type="text" name="footer-email"
+														<input value="010-1234-1234" type="text" name="institutionTel"
 															class="form-control" required="" style="width: 50%">
 														<span class="form-bar"></span> <label class="float-label">대표
 															번호</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="footer-email" id="address_kakao"
+														<input type="text" name="institutionAddr" id="address_kakao"
 															class="form-control" required="" style="width: 50%"
 															value="	"> <input class="form-control"
-															type="text" name="address_detail" placeholder="상세주소"
+															type="text" name="institutionDetailAddr" placeholder="상세주소"
 															style="width: 70%"> <span class="form-bar"></span>
 														<label class="float-label">주소</label>
 													</div>
