@@ -27,31 +27,32 @@
 												<h5>기관 등록하기</h5>
 											</div>
 											<div class="col-8 card-block">
-												<form  method="post" id="myInfoForm" class="form-material">
+												<form  action="<c:url value='/institution/add'/>" method="post" id="myInfoForm" class="form-material">
 													<div class="form-group form-default">
-														<input type="text" name="institutionName"
+														<input type="text" name="InstNm"
 															class="form-control" required style="width: 50%">
 														<span class="form-bar"></span> <label class="float-label">기업명</label>
 													</div>
 													<div class="form-group form-default">
-														<input type="text" name="institutionCode"
+														<input type="text" name="InstCd"
 															class="form-control" required style="width: 50%">
 														<span class="form-bar"></span> <label class="float-label">기업
 															영문명</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="institutionTel"
+														<input type="text" name="InstTelno"
 															class="form-control" required style="width: 50%">
 														<span class="form-bar"></span> <label class="float-label">대표
 															번호</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="institutionAddr" id="address_kakao"
+														<input type="text" name="InstAddr" id="address_kakao"
 															class="form-control" required style="width: 50%"
-															value="	"> <input class="form-control"
-															type="text" name="institutionDetailAddr" placeholder="상세주소"
+															value="	"> 
+															<input class="form-control"
+															type="text" name="InstDetailAddr" placeholder="상세주소"
 															style="width: 70%"> <span class="form-bar"></span>
 														<label class="float-label">주소</label>
 													</div>

@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.oti.team2.dao.InstitutionDao"> <!-- 식별 이름은 전체 이름을 넣어야됨 -->
-	<select id="selectInst" parameterType="string" resultType="int">
-		select INST_NM, INST_TELNO, INST_ADDR, 
-		from INSTITUTION, MEMBERS
-		where MEMBER_ID = #{mid}
+<mapper namespace="com.oti.team2.institution.dao.InstitutionDao"> <!-- 식별 이름은 전체 이름을 넣어야됨 -->
+
+	<!-- 내 기관 관리(조회) -->
+	<select id="selectByInst" parameterType="String" resultType="institution">
+		select 
+			INST_NM AS instNm, INST_TELNO AS instTelno, INST_ADDR AS instAddr, INST_DETAILADDR AS instDetailAddr
+		from 
+			INSTITUTION I, MEMBERS M
+		where 
+			I.INST_CD = M.INST_CD
+		AND
+			MEMBER_ID = #{memberId}
 	</select>
-	<insert id="insertInst" parameterType="string">
-		insert into member (mid,mname,mpassword, menabled,mrole,memail)
-		values (#{mid}, #{mname}, #{mpassword}, #{menabled}, #{mrole},#{memail})
+	
+	<!-- 기관 등록 -->
+	<insert id="insertByInst" parameterType="String">
+		INSERT INTO 
+			INSTITUTION (INST_NM, INST_CD, INST_TELNO, INST_ADDR, INST_DETAILADDR)
+		VALUES 
+			(#{inst.instNm}, #{inst.instCd}, #{inst.instTelno}, #{inst.instAddr}, #{inst.instDetailAddr})
 	</insert>
-	<update id="updateInst" parameterType="string">
-		insert into member (mid,mname,mpassword, menabled,mrole,memail)
-		values (#{mid}, #{mname}, #{mpassword}, #{menabled}, #{mrole},#{memail})
+	
+	<!-- 기관 수정 -->
+	<update id="updateByInst" parameterType="String">
+		UPDATE 
+			INSTITUTION 
+		SET 
+			INST_NM = #{inst.instNm},
+			INST_TELNO = #{inst.instTelno},
+			INST_ADDR = #{inst.instAddr},
+			INST_DETAILADDR = #{inst.instDetailAddr}
+		WHERE
+			INST_CD = #{inst.instCd}
 	</update>
 </mapper>

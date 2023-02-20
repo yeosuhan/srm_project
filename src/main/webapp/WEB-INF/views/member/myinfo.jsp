@@ -79,8 +79,8 @@
 														<div class="form-group form-default"
 															style="display: flex;">
 															<input type="text" name="footer-email"
-																class="form-control" required="" style="width: 50%" value="워크넷(내부망)">
-															<label class="float-label">${inst.INST_NM}</label>
+																class="form-control" required="" style="width: 50%" value="${inst.INST_NM}">
+															<label class="float-label">기관</label>
 															<div class="btn-group dropright">
 																<a href="institution/add" type="button" class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
 																	기관 등록
