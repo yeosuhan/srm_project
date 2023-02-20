@@ -1,10 +1,13 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
+<%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 </head>
 <script>
+	<%-- 달력--%>
 	$(function() {
 		$("#startDatepicker").datepicker({
 			showOn : "both",
@@ -402,7 +405,7 @@
 							new Date()).datepicker('hide').blur();
 				});
 	});
-	/*  */
+	<%-- 체크박스 전체 선택 --%>
 	function selectResourceAll(selectResourceAll)  {
 		  const checkboxes 
 		       = document.getElementsByName('resource');
@@ -427,6 +430,7 @@
 		    checkbox.checked = selectOutputAll.checked;
 		  })
 		}
+	<%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
@@ -525,7 +529,7 @@ th {
 									<!-- Page-body start -->
 									<div class="page-body text">
 										<!-- *********** -->
-										<!-- *********************************** [ 산출물 추가 모달 ] ***********************************-->
+										<%-- *********************************** [ 산출물 추가 모달 ] ***********************************--%>
 										<div class="modal" id="addmodal">
 											<div class="modal_body">
 												<div class="m_head">
@@ -572,7 +576,7 @@ th {
 											</div>
 										</div>
 										<div class="row">
-											<!-- *********************************** [SR 진척 관리 ] ***********************************-->
+											<%-- *********************************** [SR 진척 관리 ] ***********************************--%>
 											<div class="col-xl-12">
 												<div class="card">
 													<div class="card-header">
@@ -638,7 +642,7 @@ th {
 													</div>
 												</div>
 											</div>
-											<!-- *********************************** [SR 처리 목록 ] ***********************************-->
+											<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 											
 											<div class="col-xl-8 col-md-12">
 												<div class="card">
@@ -791,7 +795,7 @@ th {
 													</div>
 												</div>
 											</div>
-											<!-- *********************************** [SR요청 상세정보 ] ***********************************-->
+											<%-- *********************************** [SR요청 상세정보 ] ***********************************--%>
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -931,7 +935,7 @@ th {
 													</div>
 												</div>
 											</div>
-											<!-- *********************************** [SR요청 처리정보 ] ***********************************-->
+											<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
 											<div class="col-xl-12 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -958,7 +962,7 @@ th {
 																data-toggle="tab" href="#history1" role="tab">SR 히스토리</a>
 																<div class="slide"></div></li>																
 														</ul>
-														<!-- *********************************** [ 계획정보 ] ***********************************-->
+														<%-- *********************************** [ 계획정보 ] ***********************************--%>
 														<div class="tab-content tabs card-block"
 															style="padding: 0px; padding-top: 20px;">
 															<div class="tab-pane active" id="home1" role="tabpanel"
@@ -1012,7 +1016,7 @@ th {
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
 															</div>
-															<!-- *********************************** [ 자원정보 ] ***********************************-->
+															<%-- *********************************** [ 자원정보 ] ***********************************--%>
 															<div class="tab-pane" id="profile1" role="tabpanel"
 																style="padding-bottom: 20px;">
 																<div class="card-block table-border-style"
@@ -1069,7 +1073,7 @@ th {
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</button>
 															</div>
-															<!-- *********************************** [ 진척률 ] ***********************************-->
+															<%-- *********************************** [ 진척률 ] ***********************************--%>
 															<div class="tab-pane" id="messages1" role="tabpanel"
 																style="padding-bottom: 20px;">
 																<div class="tab-pane" id="profile1" role="tabpanel">
@@ -1237,7 +1241,7 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 															</div>
-															<!-- *********************************** [ 산출물  ] ***********************************-->
+															<%-- *********************************** [ 산출물  ] ***********************************--%>
 															<div class="tab-pane" id="settings1" role="tabpanel"
 																style="padding-bottom: 20px;">
 																<div class="tab-pane" id="profile1" role="tabpanel">
@@ -1295,7 +1299,7 @@ th {
 															</div>
 
 
-															<!-- *********************************** [ SR 히스토리  ] ***********************************-->
+															<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
 															<div class="tab-pane" id="history1" role="tabpanel"
 																style="padding-bottom: 20px;">
 																<div class="tab-pane" id="profile1" role="tabpanel">

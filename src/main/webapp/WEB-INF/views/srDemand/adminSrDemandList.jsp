@@ -1,10 +1,13 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
+<%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 </head>
 <script>
+	<%-- 달력--%>
 	$(function() {
 		$("#startDatepicker").datepicker({
 			showOn : "both",
@@ -402,31 +405,7 @@
 							new Date()).datepicker('hide').blur();
 				});
 	});
-	/*  */
-	function selectResourceAll(selectResourceAll)  {
-		  const checkboxes 
-		       = document.getElementsByName('resource');
-	  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectResourceAll.checked;
-		  })
-		}
-	function selectProgressAll(selectProgressAll)  {
-		  const checkboxes 
-		       = document.getElementsByName('progress');
-		  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectProgressAll.checked;
-		  })
-		}
-	function selectOutputAll(selectOutputAll)  {
-		  const checkboxes 
-		       = document.getElementsByName('output');
-		  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectOutputAll.checked;
-		  })
-		}
+	<%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
@@ -526,7 +505,7 @@ th {
 									<div class="page-body text">
 										<!-- *********** -->
 										<div class="row">
-											<!-- *********************************** [SR 요청 관리 ] ***********************************-->
+											<%-- *********************************** [SR 요청 관리 ] ***********************************--%>
 											<div class="col-xl-12">
 												<div class="card">
 													<div class="card-header">
@@ -578,7 +557,7 @@ th {
 												</div>
 											</div>
 
-											<!-- *********************************** [SR 요청 목록 ] ***********************************-->
+											<%-- *********************************** [SR 요청 목록 ] ***********************************--%>
 											<div class="col-xl-8 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -729,7 +708,7 @@ th {
 												</div>
 											</div>
 
-											<!-- *********************************** [SR요청 처리정보 ] ***********************************-->
+											<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -878,7 +857,7 @@ th {
 																	</div>
 																</div>
 															</div>
-															<!-- *********************************** [ SR 히스토리  ] ***********************************-->
+															<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
 															<div class="tab-pane" id="srHistory" role="tabpanel">
 																<div class="card-block" style="height: 600px;">
 																	<div class="card_body "
