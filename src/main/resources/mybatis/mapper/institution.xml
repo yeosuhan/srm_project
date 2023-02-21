@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.institution.dao.InstitutionDao"> <!-- 식별 이름은 전체 이름을 넣어야됨 -->
+	
+	<!-- 내 기관 조회 -->
+	<select id="selectByInstCd" parameterType="string" resultType="institution">
+		SELECT
+			INST_NM as "instNm",
+			INST_TELNO as "instTelno",
+			INST_ADDR as "instAddr",
+			INST_DETAILADDR as "instDetailAddr"		
+		FROM INSTITUTION
+		WHERE INST_CD = #{instCd}
+	</select>
+	
+	<!-- 내 기관 관리(조회) -->
+	<select id="selectByInst" parameterType="String" resultType="institution">
+		select 
+			INST_NM AS instNm, INST_TELNO AS instTelno, INST_ADDR AS instAddr, INST_DETAILADDR AS instDetailAddr
+		from 
+			INSTITUTION I, MEMBERS M
+		where 
+			I.INST_CD = M.INST_CD
+		AND
+			MEMBER_ID = #{memberId}
+	</select>
+	
+	<!-- 기관 등록 -->
+	<insert id="insertByInst" parameterType="String">
+		INSERT INTO 
+			INSTITUTION (INST_NM, INST_CD, INST_TELNO, INST_ADDR, INST_DETAILADDR)
+		VALUES 
+			(#{inst.instNm}, #{inst.instCd}, #{inst.instTelno}, #{inst.instAddr}, #{inst.instDetailAddr})
+	</insert>
+	
+	<!-- 기관 수정 -->
+	<update id="updateByInst" parameterType="String">
+		UPDATE 
+			INSTITUTION 
+		SET 
+			INST_NM = #{inst.instNm},
+			INST_TELNO = #{inst.instTelno},
+			INST_ADDR = #{inst.instAddr},
+			INST_DETAILADDR = #{inst.instDetailAddr}
+		WHERE
+			INST_CD = #{inst.instCd}
+	</update>
+</mapper>

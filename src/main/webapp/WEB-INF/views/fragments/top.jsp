@@ -20,7 +20,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="#"> 
+			<a href="/"> 
 				<img class="img-fluid" src="${pageContext.request.contextPath}/resources/assets/images/otilogo.png" alt="Theme-Logo" />
 			</a> 
 			<a class="mobile-options waves-effect waves-light"> 
