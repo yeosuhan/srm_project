@@ -66,11 +66,11 @@ public class InstitutionController {
 			model.addAttribute("result", "longInstCd");
 			return "member/addInst";
 		} else {
+			// 기관코드 중복 체크
 			try {
 				institutionService.writeInst(institution);
 				return "redirect:/myinfo";
 			} catch (Exception e1) {
-				// 기관코드 중복 체크
 				for (int i = 1; i < 100; i++) {
 					String checkInstCd = InstCd + i;
 					try {
