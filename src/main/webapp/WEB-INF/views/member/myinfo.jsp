@@ -36,7 +36,7 @@
 													</div>
 												</div>
 												<div class="col-8 card-block">
-													<form class="form-material">
+													<form class="form-material" action="/member/myinfo" method="POST" >
 														<div class="form-group row">
 															<p class="col-sm-2 font-weight-bold">이름</p>
 															<div class="col-sm-10">${member.flnm}</div>
@@ -47,7 +47,7 @@
 														</div>
 
 														<div class="form-group form-default">
-															<input type="password" name="footer-email"
+															<input type="password" name="pswd"
 																class="form-control" required="" style="width: 50%"
 																value="${member.pswd}"> <span class="form-bar"></span>
 															<label class="float-label">비밀번호</label>
@@ -56,21 +56,21 @@
 
 
 														<div class="form-group form-default">
-															<input type="text" name="footer-email"
+															<input type="text" name="telNo"
 																class="form-control" required="" style="width: 50%"
 																value="${member.telNo }"> <span class="form-bar"></span>
 															<label class="float-label">전화번호</label>
 														</div>
 
 														<div class="form-group form-default">
-															<input type="text" name="footer-email"
+															<input type="text" name="eml"
 																class="form-control" required="" style="width: 50%"
 																value="${member.eml}"> <span class="form-bar"></span>
 															<label class="float-label">이메일 (exa@gmail.com)</label>
 														</div>
 
 														<div class="form-group form-default">
-															<input type="text" name="footer-email" id="address_kakao"
+															<input type="text" name="addr" id="address_kakao"
 																class="form-control" required="" style="width: 50%"
 																value="혜화역 4번출구"> <span class="form-bar"></span>
 															<label class="float-label">주소</label>
@@ -78,7 +78,7 @@
 
 														<div class="form-group form-default"
 															style="display: flex;">
-															<input type="text" name="footer-email"
+															<input type="text" name="instNm"
 																class="form-control" required="" style="width: 50%" value="${member.institution.instNm}">
 															<label class="float-label">기관 소속</label>
 															<div class="btn-group dropright">
@@ -88,7 +88,7 @@
 																
 															</div>
 														</div>
-														<div class="form-group form-default"
+														<!-- <div class="form-group form-default"
 															style="display: flex;">
 															<p class="col-sm-2 font-weight-bold">부서</p>
 															<div class="col-sm-10">신정은</div>
@@ -98,13 +98,13 @@
 															style="display: flex;">
 															<p class="col-sm-2 font-weight-bold">직급</p>
 															<div class="col-sm-10">사원</div>
-														</div>
+														</div> -->
 
 													</form>
 													<div class="d-flex">
-														<button
+														<div
 															class="btn btn-inverse btn-round waves-effect waves-light"
-															style="margin-left: 160px;">저장</button>
+															style="margin-left: 160px;">저장</div>
 													</div>
 												</div>
 											</div>

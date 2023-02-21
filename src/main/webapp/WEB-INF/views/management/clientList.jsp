@@ -28,10 +28,10 @@ table, th, td {
 	         $("#MEmployeeTel").text(res.telNo);
 	         
 	         $("#MEmployeeTel").text(res.telNo);
-	         $("#MClientIns").text(res.telNo);
-	         $("#MClientInsTel").text(res.telNo);
-	         $("#MClientInsAddr").text(res.telNo);
-	         $("#MClientInsAddrDetail").text(res.telNo);
+	         $("#MClientIns").text(res.institution.instNm);
+	         $("#MClientInsTel").text(res.institution.instTelno);
+	         $("#MClientInsAddr").text(res.institution.instAddr);
+	         $("#MClientInsAddrDetail").text(res.institution.instDetailAddr);
 	         
 		 }
 	 });

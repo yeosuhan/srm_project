@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oti.team2.member.dto.Member;
@@ -36,5 +37,18 @@ public class MemberController {
 		log.info(member);
 		model.addAttribute("member", member);
 		return"member/myinfo";
+	}
+	
+	/**
+	 * 모든 사용자의 자신의 정보 수정
+	 *@author : 신정은
+	 * @param member
+	 * @return
+	 */
+	@PostMapping("/myinfo")
+	public String updateMember() {
+		log.info("!!!!");
+//		log.info(member);
+		return" redirect:/member/myinfo";
 	}
 }
