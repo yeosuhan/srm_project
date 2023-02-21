@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.oti.team2.department.dto.Department;
 
 @Mapper
-public interface DepartmentDao {
+public interface IDepartmentDao {
 	/**
 	 * 부서목록 조회 메서드
 	 * 
@@ -36,4 +36,11 @@ public interface DepartmentDao {
 	 * @author 최은종
 	 */
 	public int deleteDept(String deptCd);
+	
+	/*
+	 * 부서 이름 목록
+	 * @author 안한길
+	 * @return 부서 이름 목록
+	 * */
+	public List<Department> selectDepartmentNameList();
 }

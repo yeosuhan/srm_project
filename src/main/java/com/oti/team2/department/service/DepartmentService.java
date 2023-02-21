@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.oti.team2.department.dao.DepartmentDao;
+import com.oti.team2.department.dao.IDepartmentDao;
 import com.oti.team2.department.dto.Department;
 
 import lombok.extern.log4j.Log4j2;
@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class DepartmentService implements IDepartmentService {
 	@Autowired
-	private DepartmentDao departmentDao;
+	private IDepartmentDao departmentDao;
 
 	/**
 	 * 부서목록 조회 메서드
@@ -59,6 +59,16 @@ public class DepartmentService implements IDepartmentService {
 	public int deleteDepartment(String deptCd) {
 		int rows = departmentDao.deleteDept(deptCd);
 		return rows;
+	}
+	
+	/*
+	 * 부서 이름 목록
+	 * @author 안한길
+	 * @return 부서 이름 목록
+	 * */
+	@Override
+	public List<Department> getDepartmentNameList() {
+		return departmentDao.selectDepartmentNameList();
 	}
 
 }
