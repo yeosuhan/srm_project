@@ -4,4 +4,3 @@
 /.DS_Store
 /target/
 pom.properties
-jdbc.properties
