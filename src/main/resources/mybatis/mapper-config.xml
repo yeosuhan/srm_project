@@ -4,9 +4,10 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
  	<typeAliases>
-		<typeAlias type="com.oti.team2.member.dto.Member" alias="member" />
-		<typeAlias type="com.oti.team2.department.dto.Department" alias="department"/>
 		<typeAlias type="com.oti.team2.institution.dto.Institution" alias="institution" />
+		<typeAlias type="com.oti.team2.member.dto.Member" alias="member"/>
+		<typeAlias type="com.oti.team2.jobGrade.dto.JobGrade" alias="jobGrade"/>
+		<typeAlias type="com.oti.team2.department.dto.Department" alias="department"/>
 		<typeAlias type="com.oti.team2.member.dto.ProfileImg" alias="profileImg" />
 		<typeAlias type="com.oti.team2.util.pager.Pager" alias="pager" />
 	</typeAliases> 

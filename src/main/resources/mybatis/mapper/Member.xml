@@ -19,7 +19,7 @@
             MEMBER_ID ,
             FLNM , 
             TELNO , 
-            EML as ,
+            EML ,
             MEMBER_TYPE 
             <if test="memberType == 'CLIENT'">
         		,INST_NM 
@@ -35,7 +35,6 @@
                   ROWNUM as RNUM,
                   MEMBER_ID ,
                   FLNM ,
-                  ADDR ,
                   TELNO ,
                   EML ,
                   MEMBER_TYPE
@@ -53,7 +52,6 @@
                   SELECT 
                      MEMBER_ID ,
                      FLNM ,
-                     ADDR ,
                      TELNO ,
                      EML ,
                      MEMBER_TYPE
@@ -100,8 +98,8 @@
 	         TELNO ,
 	         EML ,
 	         m.INST_CD ,
-	         JBGD_CD ,
-	         DEPT_CD ,
+	         m.JBGD_CD ,
+	         m.DEPT_CD ,
 	         MEMBER_TYPE ,
 	         FILE_TYPE ,
 	         FILE_DATA 
@@ -111,12 +109,24 @@
 	         , i.INST_ADDR
 	         , i.INST_DETAILADDR
 	         </if>
+	         <if test="memberType=='DEVELOPER'">
+               	,
+               	JBGD_NM ,
+               	DEPT_NM 
+             </if>
 	      FROM
 	         MEMBERS m
 	         <if test="memberType == 'CLIENT'">
                 INNER JOIN INSTITUTION i on m.INST_CD = i.INST_CD 
              </if>
+             <if test="memberType=='DEVELOPER'">
+            	, DEPARTMENTS d, JOB_GRADE j
+             </if>
 	      WHERE 
+	      	 <if test="memberType=='DEVELOPER'">
+                m.DEPT_CD = d.DEPT_CD and
+                m.JBGD_CD = j.JBGD_CD and
+             </if> 
 	         MEMBER_ID = #{memberId}
 	         AND
 	         MEMBER_TYPE = #{memberType}
@@ -138,6 +148,27 @@
   		WHERE MEMBER_ID = #{memberId}
     </select>
     
+    <!-- 사원삭제 -->
+	<delete id="deleteMemberByMemberId" parameterType="String">
+		DELETE FROM MEMBERS
+		WHERE MEMBER_ID=#{memberId}
+	</delete>
+	
+	<!-- 사원수정(관리자) -->
+	<update id="updateMemberByMemberId" parameterType="member" >
+		UPDATE MEMBERS
+			<set>
+				<if test="jbgdCd!=null">
+					JBGD_CD = #{jbgdCd},
+				</if>
+				<if test="deptCd!=null">
+					DEPT_CD = #{deptCd}
+				</if>
+			</set>
+		WHERE
+			MEMBER_ID = #{memberId}
+	</update>
+	
    <!-- Member 객체 안의 내부 객체와의 매핑을 위함 -->
    <resultMap type="member" id="memberResultMap">
 		<id property="memberId" column="MEMBER_ID"/>
@@ -158,6 +189,11 @@
 				<result property="instAddr" column="INST_ADDR"/>
 				<result property="instDetailAddr" column="INST_DETAILADDR"/>
 			</association>
-   
+	   		<association property="jobGrade" javaType="jobGrade">
+				<result property="jbgdNm" column="jbgd_nm"/>
+			</association>
+			<association property="department" javaType="department">
+				<result property="deptNm" column="dept_nm"/>
+			</association>
    </resultMap>
 </mapper>

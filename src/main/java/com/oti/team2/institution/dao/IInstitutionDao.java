@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.institution.dto.Institution;
 
-public interface InstitutionDao {
+public interface IInstitutionDao {
 	/**
 	 * 나의 기관 조회
 	 * @author 신정은

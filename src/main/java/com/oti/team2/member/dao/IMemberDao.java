@@ -3,7 +3,6 @@ package com.oti.team2.member.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.dto.ProfileImg;
@@ -53,4 +52,19 @@ public interface IMemberDao {
 	 * @return
 	 */
 	public ProfileImg selectFile(@Param("memberId")String memeberId);
-	}
+	
+	/*
+	 * 사원 삭제 (관리자) 
+	 * @author 안한길
+	 * @param  맴버아이디
+	 * @return 반영된 행수
+	 * */
+	public int deleteMemberByMemberId(String memberId);
+	/*
+	 * 사원 수정 (관리자)
+	 * @author 안한길
+	 * @param  수정된 값
+	 * @return 반영된 행수
+	 * */
+	public int updateMemberByMemberId(Member member);
+}

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.oti.team2.member.dao.IMemberDao;
 import com.oti.team2.member.dto.Member;
+
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.util.pager.Pager;
 
@@ -66,5 +67,26 @@ public class MemberService implements IMemberService {
 		
 		return null;
 	}
+	
+	/*
+	 * 맴버 삭제 
+	 * @author 안한길
+	 * @param  맴버아이디
+	 * @return 반영된 행수
+	 * */
+	@Override
+	public int deleteMember(String memberId) {
+		return memberDao.deleteMemberByMemberId(memberId);
+	}
 
+	/*
+	 * 맴버 수정
+	 * @author 안한길
+	 * @param  수정된 값
+	 * @return 반영된 행수
+	 * */
+	@Override
+	public int modifyMember(Member member) {
+		return memberDao.updateMemberByMemberId(member);
+	}
 }
