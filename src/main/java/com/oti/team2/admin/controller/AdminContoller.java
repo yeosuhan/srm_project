@@ -24,13 +24,13 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/admin")
 public class AdminContoller {
 	@Autowired
-	IMemberService memberService;
+	private IMemberService memberService;
 	
 	@Autowired
-	IJobGradeService jobGradeService;
+	private IJobGradeService jobGradeService;
 	
 	@Autowired
-	IDepartmentService departmentService;
+	private IDepartmentService departmentService;
 	/*
 	 * @author: 안한길
 	 * 작성일: 23.02.20.

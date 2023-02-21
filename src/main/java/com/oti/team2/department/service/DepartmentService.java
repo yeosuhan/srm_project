@@ -10,7 +10,7 @@ import com.oti.team2.department.dto.Department;
 @Service
 public class DepartmentService implements IDepartmentService {
 	@Autowired
-	IDepartmentDao departmentDao;
+	private IDepartmentDao departmentDao;
 	
 	/*
 	 * 부서 이름 목록

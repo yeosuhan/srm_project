@@ -10,7 +10,7 @@ public interface IMemberService {
 
 	public  List<Member> getMemberList(String memberType, Pager pager);
 	
-	int getTotalRows(String memberType);
+	public int getTotalRows(String memberType);
 	
 	public Member getMember(String memberId,String string);
 	/*
