@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oti.team2.institution.dao.InstitutionDao"> <!-- 식별 이름은 전체 이름을 넣어야됨 -->
-
+	
+	<!-- 내 기관 조회 -->
+	<select id="selectByInstCd" parameterType="string" resultType="institution">
+		SELECT
+			INST_NM as "instNm",
+			INST_TELNO as "instTelno",
+			INST_ADDR as "instAddr",
+			INST_DETAILADDR as "instDetailAddr"		
+		FROM INSTITUTION
+		WHERE INST_CD = #{instCd}
+	</select>
+	
 	<!-- 내 기관 관리(조회) -->
 	<select id="selectByInst" parameterType="String" resultType="institution">
 		select 
