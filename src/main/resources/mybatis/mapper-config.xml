@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>
+ 	<typeAliases>
+		<typeAlias type="com.oti.team2.department.dto.Department" alias="department"/>
 		<typeAlias type="com.oti.team2.institution.dto.Institution" alias="institution" />
 	</typeAliases>
 </configuration>
