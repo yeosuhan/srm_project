@@ -27,7 +27,9 @@ public class SrinformationController {
 	 */
 	@RequestMapping(value="/srinformationlist", method=RequestMethod.GET)
 	public String getList(Model model) {
-		List<Srinformation> list = srinformation.getList();
+		//로그인한 관리자의 ID를 받아와 pic_id와 같은지 비교하고 가져와야됨
+		List<Srinformation> srlist = srinformation.getList();
+		model.addAttribute("srlist", srlist);
 		return "srInfo/srInformationList";
 	}
 	

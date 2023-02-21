@@ -286,113 +286,19 @@ th {
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<tr>
-																				<th scope="row">1</th>
-																				<td>Mark</td>
-																				<td>Otto</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																				<td>Mark</td>
-																				<td>Otto</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																			</tr>
-																			<tr>
-																				<th scope="row">2</th>
-																				<td>Jacob</td>
-																				<td>Thornton</td>
-																				<td>@fat</td>
-																				<td>Jacob</td>
-																				<td>Thornton</td>
-																				<td>@fat</td>
-																				<td>Jacob</td>
-																				<td>Thornton</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
+																			<c:forEach var="srlist" items="${srlist}">
+																				<tr>
+																					<th scope="row">{srlist.dmndNo}</th>
+																					<td>{srlist.srNo}<</td>
+																					<td>{srlist.sysNm}<</td>
+																					<td>{srlist.teskSeNm}<</td>
+																					<td>{srlist.ttl}<</td>
+																					<td>{srlist.flnm}<</td>
+																					<td>{srlist.bgngYmd}<</td>
+																					<td>{srlist.endYmd}<</td>
+																					<td>{srlist.sttsNm}<</td>
+																				</tr>
+																			</c:forEach>
 																		</tbody>
 																	</table>
 																</div>
