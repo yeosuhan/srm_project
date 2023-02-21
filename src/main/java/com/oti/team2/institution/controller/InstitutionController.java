@@ -29,7 +29,7 @@ public class InstitutionController {
 	 * @author YEOSUHAN
 	 * @return 내 기관 관리(조회)
 	 */
-	@RequestMapping(value = "/institution", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/myinst", method = RequestMethod.GET)
 	public String myInst(Model model, HttpSession session) {
 		String memberId = (String) session.getAttribute("memberid");
 		Institution inst = institutionService.getInst(memberId);
@@ -43,7 +43,7 @@ public class InstitutionController {
 	 * @author YEOSUHAN
 	 * @return 기관 등록(페이지 이동)
 	 */
-	@RequestMapping(value = "/institution/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/addinst", method = RequestMethod.GET)
 	public String addInst(Locale locale, Model model) {
 		return "member/addInst";
 	}
@@ -54,7 +54,7 @@ public class InstitutionController {
 	 * @param InstCd1 중복된 기관코드 저장
 	 * @return 기관 등록(기관 등록)
 	 */
-	@RequestMapping(value = "/institution/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/addinst", method = RequestMethod.POST)
 	public String addInst(Institution institution, Model model) throws Exception {
 		institution.setInstCd(Jsoup.clean(institution.getInstCd(), Whitelist.basic()));
 		institution.setInstNm(Jsoup.clean(institution.getInstNm(), Whitelist.basic()));
@@ -91,7 +91,7 @@ public class InstitutionController {
 	 * @author YEOSUHAN
 	 * @return 내 기관 관리(조회)
 	 */
-	@RequestMapping(value = "/institution/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/updateinst", method = RequestMethod.POST)
 	public String myInstUpdate(Institution institution, Model model) {
 		institution.setInstNm(Jsoup.clean(institution.getInstNm(), Whitelist.basic()));
 		institution.setInstTelno(Jsoup.clean(institution.getInstTelno(), Whitelist.basic()));

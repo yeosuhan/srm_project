@@ -82,7 +82,7 @@
 																class="form-control" required="" style="width: 50%" value="${inst.INST_NM}">
 															<label class="float-label">기관</label>
 															<div class="btn-group dropright">
-																<a href="institution/add" type="button" class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
+																<a href="<c:url value='/member/addinst'/>" type="button" class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
 																	기관 등록
 																</a>
 																
