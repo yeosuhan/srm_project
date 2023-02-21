@@ -10,6 +10,7 @@ import com.oti.team2.member.dto.Member;
 import com.oti.team2.util.Auth;
 import com.oti.team2.util.pager.Pager;
 
+
 @Service
 public class MemberService implements IMemberService {
 	@Autowired
@@ -24,24 +25,31 @@ public class MemberService implements IMemberService {
 	   public int getTotalRows(String memberType) {
 	      return memberDao.countByMemberType(memberType);
 	   }
-	/*
-	 * 작성자: 안한길 
-	 * 작성일: 2023.02.20. 
-	 * 내용: 사원 rud
-	 */
+	
 	@Override
 	public Member getMember(String memberId,String memberType) {
 		return memberDao.selectByMemberIdAndBymemberType(memberId,memberType);
 	}
-
+	/*
+	 * 맴버 삭제 
+	 * @author 안한길
+	 * @param  맴버아이디
+	 * @return 반영된 행수
+	 * */
 	@Override
-	public int deleteDeveloper(String memberId) {
-		return memberDao.deleteDeveloperByMemberId(memberId);
+	public int deleteMember(String memberId) {
+		return memberDao.deleteMemberByMemberId(memberId);
 	}
 
+	/*
+	 * 맴버 수정
+	 * @author 안한길
+	 * @param  수정된 값
+	 * @return 반영된 행수
+	 * */
 	@Override
-	public int updateDeveloper(Member member) {
-		return memberDao.updateDeveloperByMemberId(member);
+	public int modifyMember(Member member) {
+		return memberDao.updateMemberByMemberId(member);
 	}
 
 }

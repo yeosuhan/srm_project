@@ -92,16 +92,16 @@ p {
 																	<%-- 
 																		수정:안한길 
 																		수정일:23.02.20.
-																		내용:jstl적용
+																		내용:사원목록 jstl적용
 																	 --%>
 																	<c:forEach var="employee" items="${employeesList}"
 																		varStatus="empStatus">
-																		<tr onclick="getEmployee('${employee.memberId}')">
+																		<tr id="${employee.memberId}Row" onclick="getEmployee('${employee.memberId}')">
 																			<th scope="row">${empStatus.count}</th>
 																			<td>${employee.memberId }</td>
 																			<td>${employee.flnm }</td>
-																			<td>${employee.department.deptNm }</td>
-																			<td>${employee.jobGrade.jbgdNm }</td>
+																			<td id="${employee.memberId}Dept">${employee.department.deptNm }</td>
+																			<td id="${employee.memberId}Jbgd">${employee.jobGrade.jbgdNm }</td>
 																			<td>${employee.eml }</td>
 																		</tr>
 																	</c:forEach>
@@ -184,6 +184,7 @@ p {
 																	<select name="selectJobGrade" class="form-control"
 																		style="width: 60%">
 																		<c:forEach var="jobGrade" items="${jobGradeList}" >
+																			<%-- 직급 select 태그 --%>
 																			<c:if test="${employeesList[0].jobGrade.jbgdNm eq jobGrade.jbgdNm}">
 																				<option value="${jobGrade.jbgdCd}" selected>${jobGrade.jbgdNm}</option>
 																			</c:if>
@@ -198,12 +199,10 @@ p {
 													</div>
 													<div class="card-footer">
 														<div align="center">
-															<form method="post">
-																<button type="button" id="deleteInfo"
-																	class="btn btn-primary btn-sm btn-round waves-effect waves-light">삭제</button>
-																<button type="button" id="modifyInfo"
-																	class="btn btn-primary btn-sm btn-out btn-round waves-effect waves-light">저장</button>
-															</form>
+															<button onclick="deleteInfo('${employeesList[0].memberId}')" type="button" id="deleteInfo"
+																class="btn btn-primary btn-sm btn-round waves-effect waves-light">삭제</button>
+															<button onclick="updateInfo('${employeesList[0].memberId}')" type="button" id="modifyInfo"
+																class="btn btn-primary btn-sm btn-out btn-round waves-effect waves-light">저장</button>
 														</div>
 													</div>
 												</div>

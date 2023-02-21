@@ -149,9 +149,9 @@
       <dependency>
          <groupId>org.hibernate</groupId>
          <artifactId>hibernate-validator-annotation-processor</artifactId>
-          <version>5.3.6.Final</version>
-      </dependency> 
-      
+         <version>5.3.6.Final</version>
+      </dependency>
+
       <!-- XSS 공격 대응을 위헤 컨트롤러에 직접 코딩하기 위한 의존성 주입 -->
       <dependency>
          <groupId>org.jsoup</groupId>
@@ -170,38 +170,16 @@
    <build>
       <plugins>
          <plugin>
-            <artifactId>maven-eclipse-plugin</artifactId>
-            <version>2.9</version>
-            <configuration>
-               <additionalProjectnatures>
-                  <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-               </additionalProjectnatures>
-               <additionalBuildcommands>
-                  <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-               </additionalBuildcommands>
-               <downloadSources>true</downloadSources>
-               <downloadJavadocs>true</downloadJavadocs>
-            </configuration>
-         </plugin>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.8.1</version>
             <configuration>
                <source>${java-version}</source>
                <target>${java-version}</target>
-               <compilerArgument>-Xlint:all</compilerArgument>
-               <showWarnings>true</showWarnings>
-               <showDeprecation>true</showDeprecation>
             </configuration>
          </plugin>
          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
+            <artifactId>maven-war-plugin</artifactId>
             <version>3.2.3</version>
-            <configuration>
-               <mainClass>org.test.int1.Main</mainClass>
-            </configuration>
          </plugin>
       </plugins>
    </build>

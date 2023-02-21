@@ -9,15 +9,22 @@ import com.oti.team2.util.pager.Pager;
 public interface IMemberService {
 
 	public  List<Member> getMemberList(String memberType, Pager pager);
+	
 	int getTotalRows(String memberType);
-	/*
-	 * 작성자: 안한길
-	 * 작성일: 2023.02.20.
-	 * 내용: 사원 rud
-	 * */
+	
 	public Member getMember(String memberId,String string);
-	
-	public int deleteDeveloper(String memberId);
-	
-	public int updateDeveloper(Member member);
+	/*
+	 * 맴버 삭제 
+	 * @author 안한길
+	 * @param  맴버아이디
+	 * @return 반영된 행수
+	 * */
+	public int deleteMember(String memberId);
+	/*
+	 * 맴버 수정 
+	 * @author 안한길
+	 * @param  수정된 값
+	 * @return 반영된 행수
+	 * */
+	public int modifyMember(Member member);
 }

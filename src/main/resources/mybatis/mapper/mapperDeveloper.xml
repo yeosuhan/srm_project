@@ -10,11 +10,7 @@
              WHERE MEMBER_TYPE = #{memberType}
           ]]>
    </select>
-	<!-- 
-	 * 작성자: 안한길
-	 * 작성일: 2023.02.20.
-	 * 내용: 사원 rud
-	 -->
+	
 	 <!-- 고객/사원 목록 조회 -->
    <select id="selectByMemberType" parameterType="map"
       resultMap="memberResult">  
@@ -128,24 +124,40 @@
 			MEMBER_ID = #{memberId}
 	</select>
 	<!-- 사원삭제 -->
-	<delete id="deleteDeveloperByMemberId" parameterType="String">
+	<delete id="deleteMemberByMemberId" parameterType="String">
 		DELETE FROM MEMBERS
 		WHERE MEMBER_ID=#{memberId}
 	</delete>
 	<!-- 사원수정 -->
-	<update id="updateDeveloperByMemberId" parameterType="member" >
+	<update id="updateMemberByMemberId" parameterType="member" >
 		UPDATE MEMBERS
-		SET 
-			PSWD = #{pswd},
-			FLNM = #{flnm},
-			ADDR = #{addr},
-			TELNO = #{telno},
-			EML = #{eml},
-			JBGD_CD = #{jbgdCd},
-			DEPT_CD = #{deptCd}
+			<set>
+				<if test="pswd!=null">
+					PSWD = #{pswd},
+				</if>
+				<if test="flnm!=null">		
+					FLNM = #{flnm},
+				</if>
+				<if test="addr!=null">
+					ADDR = #{addr},
+				</if>
+				<if test="telNo!=null">
+					TELNO = #{telNo},
+				</if>
+				<if test="eml!=null">
+					EML = #{eml},
+				</if>
+				<if test="jbgdCd!=null">
+					JBGD_CD = #{jbgdCd},
+				</if>
+				<if test="deptCd!=null">
+					DEPT_CD = #{deptCd}
+				</if>
+			</set>
 		WHERE
 			MEMBER_ID = #{memberId}
 	</update>
+	<!-- 맴버 resultMap -->
 	<resultMap type="member" id="memberResult">
 		<id property="memberId" column="member_id"/>
 		<id property="pswd" column="pswd"/>

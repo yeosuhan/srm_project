@@ -10,17 +10,23 @@ import com.oti.team2.util.pager.Pager;
 public interface IMemberDao {
 
 	public int countByMemberType(@Param("memberType")String memberType);
-	/*
-	 * 작성자: 안한길
-	 * 작성일: 2023.02.20.
-	 * 내용: 사원 rud
-	 * */
+	
 	public List<Member> selectByMemberType(@Param("memberType")String memberType, @Param("pager")Pager pager);
 
 	public Member selectByMemberIdAndBymemberType(@Param("memberId")String memberId,@Param("memberType")String memberType);
-
-	public int deleteDeveloperByMemberId(String memberId);
-	
-	public int updateDeveloperByMemberId(Member member);
+	/*
+	 * 맴버 삭제 
+	 * @author 안한길
+	 * @param  맴버아이디
+	 * @return 반영된 행수
+	 * */
+	public int deleteMemberByMemberId(String memberId);
+	/*
+	 * 맴버 수정 
+	 * @author 안한길
+	 * @param  수정된 값
+	 * @return 반영된 행수
+	 * */
+	public int updateMemberByMemberId(Member member);
 	
 }
