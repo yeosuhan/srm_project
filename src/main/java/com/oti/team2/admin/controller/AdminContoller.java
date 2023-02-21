@@ -32,9 +32,10 @@ public class AdminContoller {
 	@Autowired
 	private IDepartmentService departmentService;
 	/*
-	 * @author: 안한길
-	 * 작성일: 23.02.20.
-	 * 내용: 사원 전체 목록 , 사원 정보 보기
+	 * 사원 목록 페이지
+	 * @author 안한길
+	 * @param  page : 페이지
+	 * @return 사원 목록 페이지 url
 	 * */
 	@RequestMapping(value = "/employeelist", method = RequestMethod.GET)
 	public String getEmployeeList(@RequestParam(defaultValue="1")int page, Model model) {
@@ -51,21 +52,36 @@ public class AdminContoller {
 		model.addAttribute("employeesList",employeesList);
 		return "management/employeesList";
 	}
-	
+	/*
+	 * 사원 상세 정보
+	 * @author 안한길
+	 * @param  사원 아이디
+	 * @return 사원 정보 
+	 * */
 	@ResponseBody
 	@RequestMapping(value="/employee" , method=RequestMethod.GET)
 	public Member getEmployeeDetail(@RequestParam()String employeeId) {
 		log.info(employeeId);
 		return memberService.getMember(employeeId, Auth.DEVELOPER.toString());
 	}
-	
+	/*
+	 * 사원 삭제
+	 * @author 안한길
+	 * @param  사원 아이디
+	 * @return 반영 행수
+	 * */
 	@ResponseBody
 	@RequestMapping(value="/employee/delete" , method=RequestMethod.GET)
 	public int deleteEmployee(@RequestParam()String employeeId) {
 		log.info(employeeId);
 		return memberService.deleteMember(employeeId);
 	}
-	
+	/*
+	 * 사원 정보 수정
+	 * @author 안한길
+	 * @param  수정된 사원 정보
+	 * @return 반영 행수
+	 * */
 	@ResponseBody
 	@RequestMapping(value="/employee/modify" , method=RequestMethod.POST)
 	public int modifyEmployee(Member member) {
