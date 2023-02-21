@@ -5,7 +5,7 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
-<script src="/resources/js/kakaoAddress.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/kakaoAddress.js"></script>
 </head>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -36,7 +36,7 @@
 													</div>
 												</div>
 												<div class="col-8 card-block">
-													<form class="form-material" action="/member/myinfo" method="POST" >
+													<form class="form-material" enctype="multipart/form-data"id="myinfo" action="<c:url value='/member/myinfo'/>" method="post" >
 														<div class="form-group row">
 															<p class="col-sm-2 font-weight-bold">이름</p>
 															<div class="col-sm-10">${member.flnm}</div>
@@ -45,6 +45,7 @@
 															<p class="col-sm-2 font-weight-bold">아이디</p>
 															<div class="col-sm-10">${member.memberId}</div>
 														</div>
+														<input name="memberId" type="hidden" value="${member.memberId}"/>
 
 														<div class="form-group form-default">
 															<input type="password" name="pswd"
@@ -72,7 +73,7 @@
 														<div class="form-group form-default">
 															<input type="text" name="addr" id="address_kakao"
 																class="form-control" required="" style="width: 50%"
-																value="혜화역 4번출구"> <span class="form-bar"></span>
+																value="${member.addr}"> <span class="form-bar"></span>
 															<label class="float-label">주소</label>
 														</div>
 
@@ -102,9 +103,9 @@
 
 													</form>
 													<div class="d-flex">
-														<div
+														<button type="submit" form="myinfo"
 															class="btn btn-inverse btn-round waves-effect waves-light"
-															style="margin-left: 160px;">저장</div>
+															style="margin-left: 160px;">저장</button>
 													</div>
 												</div>
 											</div>

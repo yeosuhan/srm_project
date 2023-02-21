@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.oti.team2.institution.dto.Institution;
-import com.oti.team2.institution.service.IInstitutionService;
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.util.Auth;
@@ -26,9 +24,6 @@ public class AdminController {
 
 	@Autowired
 	private IMemberService memberService;
-	
-	@Autowired
-	private IInstitutionService institutionService;
 
 	/**
 	 관리자의 고객 목록 조회

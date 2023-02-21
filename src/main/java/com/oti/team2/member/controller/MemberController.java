@@ -3,13 +3,19 @@ package com.oti.team2.member.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oti.team2.member.dto.Member;
+import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.util.Auth;
 
@@ -23,9 +29,8 @@ public class MemberController {
 	private IMemberService memberService;
 	
 	/**
-	 * 
+	 * 멤버의 내 정보 조회
 	 *@author : 신정은
-	 * 작성일자 : 2023.02.21
 	 * @param session
 	 * @param model
 	 * @return
@@ -46,9 +51,28 @@ public class MemberController {
 	 * @return
 	 */
 	@PostMapping("/myinfo")
-	public String updateMember() {
-		log.info("!!!!");
-//		log.info(member);
-		return" redirect:/member/myinfo";
+	public String updateMember(Member member) {
+		log.info(member);
+		memberService.updateMember(member);
+		return "redirect:/member/myinfo";
+	}
+	
+	/**
+	 * 
+	 멤버의 프로필 사진 조회
+	 수정 필요 !!!
+	 *@author : 신정은
+	 * @param memberId
+	 * @return
+	 */
+	@GetMapping("/profile/{memberId}")
+	public ResponseEntity<byte[]> getProfile(@PathVariable String memberId) {
+		ProfileImg profileImg = memberService.getProfileImg(memberId);
+		log.info(profileImg);
+		HttpHeaders headers = new HttpHeaders();
+		String mtypes[] = profileImg.getFileType().split("/");
+		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));
+		return new ResponseEntity<byte[]>(profileImg.getFileData(),  headers, HttpStatus.OK);
+		
 	}
 }

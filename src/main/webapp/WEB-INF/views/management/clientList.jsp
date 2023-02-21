@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%-- 작성자: 최은종 / 작성 날짜: 230217 --%>
 <html>
@@ -13,29 +13,33 @@ table, th, td {
 }
 </style>
 <script>
- function getClient(cid) {
-	 console.log("~~" + cid);
-	 $.ajax({
-		 url : '/admin/client/' + cid,
-		 type : 'GET',
-		 data : {clientId : cid},
-		 success : function(res) {
-			 $("#MClientId").text(res.memberId);
-	         $("#MClientName").text(res.flnm);
-	         $("#MClientTel").text(res.telNo);
-	         $("#MClientemail").text(res.eml);
-	         $("#MEmployeeAddr").text(res.addr);
-	         $("#MEmployeeTel").text(res.telNo);
-	         
-	         $("#MEmployeeTel").text(res.telNo);
-	         $("#MClientIns").text(res.institution.instNm);
-	         $("#MClientInsTel").text(res.institution.instTelno);
-	         $("#MClientInsAddr").text(res.institution.instAddr);
-	         $("#MClientInsAddrDetail").text(res.institution.instDetailAddr);
-	         
-		 }
-	 });
- }
+	function getClient(cid) {
+		console.log("~~" + cid);
+		$
+				.ajax({
+					url : '/admin/client/' + cid,
+					type : 'GET',
+					data : {
+						clientId : cid
+					},
+					success : function(res) {
+						$("#MClientId").text(res.memberId);
+						$("#MClientName").text(res.flnm);
+						$("#MClientTel").text(res.telNo);
+						$("#MClientemail").text(res.eml);
+						$("#MEmployeeAddr").text(res.addr);
+						$("#MEmployeeTel").text(res.telNo);
+
+						$("#MEmployeeTel").text(res.telNo);
+						$("#MClientIns").text(res.institution.instNm);
+						$("#MClientInsTel").text(res.institution.instTelno);
+						$("#MClientInsAddr").text(res.institution.instAddr);
+						$("#MClientInsAddrDetail").text(
+								res.institution.instDetailAddr);
+
+					}
+				});
+	}
 </script>
 </head>
 <body>
@@ -95,7 +99,7 @@ table, th, td {
 																	</tr>
 																</thead>
 																<tbody>
-																	<c:forEach var ="client" items="${clientList}" varStatus="status">
+																	<c:forEach var="client" items="${clientList}" varStatus="status">
 																		<tr onclick="getClient('${client.memberId}')">
 																			<th>${status.count}</th>
 																			<td>${client.memberId}</td>
@@ -104,9 +108,11 @@ table, th, td {
 																			<td>${client.institution.instNm}</td>
 																		</tr>
 																	</c:forEach>
-																	
+
 																</tbody>
 															</table>
+															<!-- 페이징 처리 -->
+															<%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>
 														</div>
 													</div>
 												</div>

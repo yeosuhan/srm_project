@@ -123,6 +123,21 @@
          
    </select>
    
+   <!-- 멤버의 내 정보 수정 -->
+   <update id="updateMember" parameterType="member">
+   	 UPDATE MEMBERS
+   	 SET PSWD=#{member.pswd}, ADDR=#{member.addr}, TELNO=#{member.telNo}, EML=#{member.eml}
+   	 WHERE MEMBER_ID=#{member.memberId}
+   </update>   
+   
+    <!-- 멤버의 프로필사진 조회 -->
+    <select id="selectFile" parameterType="string" resultType="profileImg">
+    	SELECT FILE_TYPE as "fileType",
+   			FILE_DATA  as "fileData"
+  		FROM MEMBERS
+  		WHERE MEMBER_ID = #{memberId}
+    </select>
+    
    <!-- Member 객체 안의 내부 객체와의 매핑을 위함 -->
    <resultMap type="member" id="memberResultMap">
 		<id property="memberId" column="MEMBER_ID"/>
