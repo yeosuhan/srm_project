@@ -12,19 +12,30 @@ public class InstitutionService implements IInstitutionService{
 	@Autowired
 	InstitutionDao institutuonDao;
 	
-	@Autowired
-	InstitutionController institutionController;
-	/* 내 기관 관리(조회) */
+	/**
+	 * 
+	 * @author YEOSUHAN
+	 * @return 내 기관 관리(조회)
+	 */
 	@Override
 	public Institution getInst(String memberId) {
 		return institutuonDao.selectByInst(memberId);		
 	}
-	/* 기관 등록 */
+	/**
+	 * 
+	 * @author YEOSUHAN
+	 * @param InstCd1 중복된 기관코드 저장
+	 * @return 기관 등록(기관 등록)
+	 */
 	@Override
-	public void writeInst(Institution institution) {
+	public void addInst(Institution institution) {
 		institutuonDao.insertByInst(institution);
 	}
-	/* 기관 수정 */
+	/**
+	 * 
+	 * @author YEOSUHAN
+	 * @return 내 기관 관리(조회)
+	 */
 	@Override
 	public void updateInst(Institution institution) {
 		institutuonDao.updateByInst(institution);

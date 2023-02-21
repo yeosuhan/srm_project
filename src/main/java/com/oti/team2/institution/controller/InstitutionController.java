@@ -26,7 +26,7 @@ public class InstitutionController {
 
 	/**
 	 * 
-	 * @author YEOSUHAN
+	 * @author 여수한
 	 * @return 내 기관 관리(조회)
 	 */
 	@RequestMapping(value = "/member/myinst", method = RequestMethod.GET)
@@ -40,7 +40,7 @@ public class InstitutionController {
 
 	/**
 	 * 
-	 * @author YEOSUHAN
+	 * @author 여수한
 	 * @return 기관 등록(페이지 이동)
 	 */
 	@RequestMapping(value = "/member/addinst", method = RequestMethod.GET)
@@ -50,7 +50,7 @@ public class InstitutionController {
 
 	/**
 	 * 
-	 * @author YEOSUHAN
+	 * @author 여수한
 	 * @param InstCd1 중복된 기관코드 저장
 	 * @return 기관 등록(기관 등록)
 	 */
@@ -68,14 +68,14 @@ public class InstitutionController {
 		} else {
 			// 기관코드 중복 체크
 			try {
-				institutionService.writeInst(institution);
+				institutionService.addInst(institution);
 				return "redirect:/myinfo";
 			} catch (Exception e1) {
 				for (int i = 1; i < 100; i++) {
 					String checkInstCd = InstCd + i;
 					try {
 						institution.setInstCd(checkInstCd);
-						institutionService.writeInst(institution);
+						institutionService.addInst(institution);
 						return "redirect:/myinfo";
 					} catch (Exception e2) {
 						continue;
@@ -88,7 +88,7 @@ public class InstitutionController {
 
 	/**
 	 * 
-	 * @author YEOSUHAN
+	 * @author 여수한
 	 * @return 내 기관 관리(조회)
 	 */
 	@RequestMapping(value = "/member/updateinst", method = RequestMethod.POST)
