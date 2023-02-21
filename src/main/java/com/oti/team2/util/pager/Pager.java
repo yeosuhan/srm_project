@@ -14,12 +14,10 @@ public class Pager {
 	private int groupNo;		//현재 그룹 번호
 	private static int rowsPerPage = 10;	//페이지당 행 수 
 	private int startRowNo;		//페이지의 시작 행 번호(1, ..., n)
-	private int startRowIndex;	//페이지의 시작 행 인덱스(0, ..., n-1) for mysql
 	private int endRowNo;		//페이지의 마지막 행 번호
-	private int endRowIndex;	//페이지의 마지막 행 인덱스
 
 	public Pager(int totalRows, int pageNo) {
-		this.totalRows=totalRows;
+		this.totalRows = totalRows;
 		this.pageNo = pageNo;
 
 		totalPageNo = totalRows / rowsPerPage;
@@ -36,9 +34,7 @@ public class Pager {
 		if(groupNo == totalGroupNo) endPageNo = totalPageNo;
 		
 		startRowNo = (pageNo - 1) * rowsPerPage + 1;
-		startRowIndex = startRowNo - 1;
 		endRowNo = pageNo * rowsPerPage;
-		endRowIndex = endRowNo - 1; 
 	}
 }
 

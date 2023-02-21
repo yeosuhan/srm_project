@@ -1,6 +1,7 @@
 package com.oti.team2.member.dto;
 
 import com.oti.team2.department.dto.Department;
+import com.oti.team2.institution.dto.Institution;
 import com.oti.team2.jobGrade.dto.JobGrade;
 
 import lombok.Data;
@@ -19,8 +20,7 @@ public class Member {
 	private String memberType;
 	private String fileType;
 	private byte[] fileData;
-
-	/*테이블에 없는 컬럼*/
-	private JobGrade jobGrade;
+	private Institution institution;
 	private Department department;
+	private JobGrade jobGrade;
 }
