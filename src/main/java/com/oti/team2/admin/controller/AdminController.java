@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oti.team2.department.dto.Department;
 import com.oti.team2.department.service.IDepartmentService;
-import com.oti.team2.member.dto.Member;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -66,7 +65,6 @@ public class AdminController {
 	public String updateDepartment(Department department) {
 		log.info("department 수정");
 
-		department.setDeptCd(department.getDeptCd());
 		department.setFlnm(Jsoup.clean(department.getFlnm(), Whitelist.basic()));
 		department.setOfcTelno(Jsoup.clean(department.getOfcTelno(), Whitelist.basic()));
 
