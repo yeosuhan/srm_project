@@ -5,5 +5,6 @@
 <configuration>
  	<typeAliases>
 		<typeAlias type="com.oti.team2.department.dto.Department" alias="department"/>
+		<typeAlias type="com.oti.team2.institution.dto.Institution" alias="institution" />
 	</typeAliases>
 </configuration>
