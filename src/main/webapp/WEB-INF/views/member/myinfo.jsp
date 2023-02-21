@@ -39,17 +39,17 @@
 													<form class="form-material">
 														<div class="form-group row">
 															<p class="col-sm-2 font-weight-bold">이름</p>
-															<div class="col-sm-10">신정은</div>
+															<div class="col-sm-10">${member.flnm}</div>
 														</div>
 														<div class="form-group row">
 															<p class="col-sm-2 font-weight-bold">아이디</p>
-															<div class="col-sm-10">je1234</div>
+															<div class="col-sm-10">${member.memberId}</div>
 														</div>
 
 														<div class="form-group form-default">
 															<input type="password" name="footer-email"
 																class="form-control" required="" style="width: 50%"
-																value="dfdffffdf"> <span class="form-bar"></span>
+																value="${member.pswd}"> <span class="form-bar"></span>
 															<label class="float-label">비밀번호</label>
 														</div>
 
@@ -58,14 +58,14 @@
 														<div class="form-group form-default">
 															<input type="text" name="footer-email"
 																class="form-control" required="" style="width: 50%"
-																value="01012345678"> <span class="form-bar"></span>
+																value="${member.telNo }"> <span class="form-bar"></span>
 															<label class="float-label">전화번호</label>
 														</div>
 
 														<div class="form-group form-default">
 															<input type="text" name="footer-email"
 																class="form-control" required="" style="width: 50%"
-																value="test@gmail.com"> <span class="form-bar"></span>
+																value="${member.eml}"> <span class="form-bar"></span>
 															<label class="float-label">이메일 (exa@gmail.com)</label>
 														</div>
 
@@ -79,7 +79,7 @@
 														<div class="form-group form-default"
 															style="display: flex;">
 															<input type="text" name="footer-email"
-																class="form-control" required="" style="width: 50%" value="워크넷(내부망)">
+																class="form-control" required="" style="width: 50%" value="${member.institution.instNm}">
 															<label class="float-label">기관 소속</label>
 															<div class="btn-group dropright">
 																<a href="institution/add" type="button" class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">

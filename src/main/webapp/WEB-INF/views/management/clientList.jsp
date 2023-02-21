@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%-- 작성자: 최은종 / 작성 날짜: 230217 --%>
 <html>
@@ -11,6 +12,31 @@ table, th, td {
 	line-height: 35px;
 }
 </style>
+<script>
+ function getClient(cid) {
+	 console.log("~~" + cid);
+	 $.ajax({
+		 url : '/admin/client/' + cid,
+		 type : 'GET',
+		 data : {clientId : cid},
+		 success : function(res) {
+			 $("#MClientId").text(res.memberId);
+	         $("#MClientName").text(res.flnm);
+	         $("#MClientTel").text(res.telNo);
+	         $("#MClientemail").text(res.eml);
+	         $("#MEmployeeAddr").text(res.addr);
+	         $("#MEmployeeTel").text(res.telNo);
+	         
+	         $("#MEmployeeTel").text(res.telNo);
+	         $("#MClientIns").text(res.telNo);
+	         $("#MClientInsTel").text(res.telNo);
+	         $("#MClientInsAddr").text(res.telNo);
+	         $("#MClientInsAddrDetail").text(res.telNo);
+	         
+		 }
+	 });
+ }
+</script>
 </head>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -66,66 +92,19 @@ table, th, td {
 																		<th>이름</th>
 																		<th>전화번호</th>
 																		<th>소속기관</th>
-																		<th>기관번호</th>
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr>
-																		<th scope="row">1</th>
-																		<td>test2</td>
-																		<td>test1</td>
-																		<td>test1</td>
-																		<td>test1</td>
-																		<td>test1</td>
-																	</tr>
-																	<tr>
-																		<th scope="row">2</th>
-																		<td>test2</td>
-																		<td>test2</td>
-																		<td>test2</td>
-																		<td>test2</td>
-																		<td>test2</td>
-																	</tr>
-																	<tr>
-																		<th scope="row">3</th>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																	</tr>
-																	<tr>
-																		<th scope="row">4</th>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																	</tr>
-																	<tr>
-																		<th scope="row">5</th>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																	</tr>
-																	<tr>
-																		<th scope="row">6</th>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																	</tr>
-																	<tr>
-																		<th scope="row">7</th>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																	</tr>
+																	<c:forEach var ="client" items="${clientList}" varStatus="status">
+																		<tr onclick="getClient('${client.memberId}')">
+																			<th>${status.count}</th>
+																			<td>${client.memberId}</td>
+																			<td>${client.flnm}</td>
+																			<td>${client.telNo}</td>
+																			<td>${client.institution.instNm}</td>
+																		</tr>
+																	</c:forEach>
+																	
 																</tbody>
 															</table>
 														</div>
@@ -156,31 +135,39 @@ table, th, td {
 													<div class="card-block">
 														<div class="row">
 															<p class="col-sm-5 font-weight-bold">아이디</p>
-															<div class="col-sm-7" id="MClientId">je1234</div>
+															<div class="col-sm-7" id="MClientId">${client.memberId}</div>
 														</div>
 														<div class="row">
 															<p class="col-sm-5 font-weight-bold">이름</p>
-															<div class="col-sm-7" id="MClientName">신정은</div>
+															<div class="col-sm-7" id="MClientName">${client.flnm}</div>
 														</div>
 														<div class="row">
 															<p class="col-sm-5 font-weight-bold">전화번호</p>
-															<div class="col-sm-7" id="MClientTel">010-1234-5678</div>
+															<div class="col-sm-7" id="MClientTel">${client.telNo}</div>
 														</div>
 														<div class="row">
 															<p class="col-sm-5 font-weight-bold">이메일</p>
-															<div class="col-sm-7" id="MClientemail">abc@gmail.com</div>
+															<div class="col-sm-7" id="MClientemail">${client.eml}</div>
 														</div>
 														<div class="row">
 															<p class="col-sm-5 font-weight-bold">주소</p>
-															<div class="col-sm-7" id="MClientAddr">서울</div>
+															<div class="col-sm-7" id="MClientAddr">${client.addr}</div>
 														</div>
 														<div class="row">
 															<p class="col-sm-5 font-weight-bold">소속기관</p>
-															<div class="col-sm-7" id="MClientIns">한국고용원</div>
+															<div class="col-sm-7" id="MClientIns">${client.institution.instNm}</div>
 														</div>
 														<div class="row">
 															<p class="col-sm-5 font-weight-bold">기관 전화번호</p>
-															<div class="col-sm-7" id="MClientInsTel">02-123-1234</div>
+															<div class="col-sm-7" id="MClientInsTel">${client.institution.instTelno}</div>
+														</div>
+														<div class="row">
+															<p class="col-sm-5 font-weight-bold">기관 주소</p>
+															<div class="col-sm-7" id="MClientInsAddr">${client.institution.instAddr}</div>
+														</div>
+														<div class="row">
+															<p class="col-sm-5 font-weight-bold">상세 주소</p>
+															<div class="col-sm-7" id="MClientInsAddrDetail">${client.institution.instDetailAddr}</div>
 														</div>
 													</div>
 												</div>
