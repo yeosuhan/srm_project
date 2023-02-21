@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.department.dao.DepartmentDao">
+
+	<!-- 전체 부서 조회 -->
+	<select id="selectDeptList" resultType="department">
+		<![CDATA[
+		select d.dept_cd as deptCd, dept_nm as deptNm, ofc_telno as ofcTelno, mngr_id as mngrId, m.flnm as flnm, dept_nope as deptNope
+		from departments d, members m
+		where d.mngr_id = m.member_id
+		order by deptNm asc
+		]]>
+	</select>
+
+	<!-- 신규 부서 등록 -->
+	<insert id="insertDept" parameterType="department">
+		<selectKey keyProperty="member_id" resultType="String"
+			order="BEFORE">
+			select member_id
+			from members m
+			where m.flnm=#{department.flnm}
+		</selectKey>
+		insert into departments
+		(dept_nm, dept_cd, ofc_telno, mngr_id)
+		values
+		(#{department.deptNm}, #{department.deptCd}, #{department.ofcTelno},
+		#{member_id})
+	</insert>
+
+	<!-- 부서 정보 수정 -->
+	<update id="updateDept" parameterType="department">
+		<selectKey keyProperty="memberId" resultType="String"
+			order="BEFORE">
+			select member_id as memberId
+			from members m
+			where
+			m.flnm=#{department.flnm}
+		</selectKey>
+		update departments
+		set mngr_id = #{memberId},
+		ofc_telno =
+		#{department.ofcTelno}
+		where dept_cd = #{department.deptCd}
+	</update>
+
+	<!-- 부서 정보 삭제 -->
+	<delete id="deleteDept" parameterType="String">
+		delete
+		from departments
+		where dept_cd = #{department.deptCd}
+	</delete>
+
+</mapper>

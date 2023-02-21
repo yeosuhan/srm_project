@@ -4,7 +4,7 @@
 <%-- 작성자: 최은종 / 작성 날짜: 230217 --%>
 
 <script>
-	function show1() {
+	function show() {
 		$("#ModalRegister").modal("show");
 	}
 </script>
@@ -34,33 +34,39 @@
 			<div class="modal-body">
 				<div class="card mb-2" id="RegisterInfo">
 					<div class="card-block">
-						<form class="form-material">
+						<form class="form-material" id="registerDeptInfo" method="post"
+							action="<c:url value='/admin/department/add'/>">
 							<div class="form-group row">
 								<p class="col-sm-4 font-weight-bold mt-2">부서명 (한글)</p>
-								<div class="col-sm-8" id="MDepartmentKorName">
-									<input type="text" class="form-control" required=""
-										style="width: 90%" placeholder="부서명 (한글)">
+								<div class="col-sm-8" id="MDepartmentName">
+									<input name="deptNm" type="text" class="form-control"
+										required="" style="width: 90%" placeholder="부서명 (한글)"
+										value="${department.deptNm}">
 								</div>
 							</div>
 							<div class="form-group row">
-								<p class="col-sm-4 font-weight-bold mt-2">부서명 (영문)</p>
-								<div class="col-sm-8" id="MDepartmentEngName">
-									<input type="text" class="form-control form-control-uppercase"
-										required="" style="width: 90%" placeholder="부서명 (영문)">
+								<p class="col-sm-4 font-weight-bold mt-2">부서코드</p>
+								<div class="col-sm-8" id="MDepartmentCode">
+									<input name="deptCd" type="text"
+										class="form-control form-control-uppercase" required=""
+										style="width: 90%" placeholder="부서코드 (영문+숫자)"
+										value="${department.deptCd}">
 								</div>
 							</div>
 							<div class="form-group form-default row">
 								<p class="col-sm-4 font-weight-bold mt-2">부서 전화번호</p>
 								<div class="col-sm-8" id="MDepartmentTel">
-									<input type="text" class="form-control" required=""
-										style="width: 90%" placeholder="부서 전화번호">
+									<input name="ofcTelno" type="text" class="form-control"
+										required="" style="width: 90%" placeholder="부서 전화번호"
+										value="${department.ofcTelno}">
 								</div>
 							</div>
 							<div class="form-group row">
 								<p class="col-sm-4 font-weight-bold mt-2">부서 담당자</p>
 								<div class="col-sm-8" id="MDepartmentManager">
-									<input type="text" class="form-control" required=""
-										style="width: 90%" placeholder="부서 담당자">
+									<input name=flnm type="text" class="form-control" required=""
+										style="width: 90%" placeholder="부서 담당자"
+										value="${department.flnm}">
 								</div>
 							</div>
 						</form>
@@ -68,10 +74,8 @@
 				</div>
 			</div>
 			<div align="center">
-				<form method="post">
-					<button type="button" id="registerDepartment"
-						class="btn btn-primary btn-sm btn-round waves-effect waves-light mb-2">등록</button>
-				</form>
+				<button type="submit" form="registerDeptInfo"
+					class="btn btn-primary btn-sm btn-round waves-effect waves-light mb-2">등록</button>
 			</div>
 		</div>
 	</div>

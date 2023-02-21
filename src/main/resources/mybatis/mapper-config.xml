@@ -5,6 +5,7 @@
 <configuration>
  	<typeAliases>
 		<typeAlias type="com.oti.team2.member.dto.Member" alias="member" />
+		<typeAlias type="com.oti.team2.department.dto.Department" alias="department"/>
 		<typeAlias type="com.oti.team2.institution.dto.Institution" alias="institution" />
 		<typeAlias type="com.oti.team2.member.dto.ProfileImg" alias="profileImg" />
 		<typeAlias type="com.oti.team2.util.pager.Pager" alias="pager" />
