@@ -27,31 +27,37 @@
 												<h5>기관 등록하기</h5>
 											</div>
 											<div class="col-8 card-block">
-												<form  action="<c:url value='/institution/add'/>" method="post" id="myInfoForm" class="form-material">
+												<form action="<c:url value='/institution/add'/>"
+													method="post" id="myInfoForm" class="form-material">
 													<div class="form-group form-default">
-														<input type="text" name="InstNm"
-															class="form-control" required style="width: 50%">
-														<span class="form-bar"></span> <label class="float-label">기업명</label>
+														<input type="text" name="InstNm" class="form-control"
+															required style="width: 50%"> <span
+															class="form-bar"></span> <label class="float-label">기업명</label>
 													</div>
 													<div class="form-group form-default">
-														<input type="text" name="InstCd"
-															class="form-control" required style="width: 50%">
-														<span class="form-bar"></span> <label class="float-label">기업
+														<input type="text" name="InstCd" class="form-control"
+															required style="width: 50%"> <span
+															class="form-bar"></span> <label class="float-label">기업
 															영문명</label>
+														<c:if test="${result=='longInstCd'}">
+															<small id="InstCdHelp" class="form-text text-danger">코드명이 길어용~</small>
+														</c:if>
+														<c:if test="${result=='noInstCd'}">
+															<small id="InstCdHelp" class="form-text text-danger">코드명이 있어용~</small>
+														</c:if> 
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="InstTelno"
-															class="form-control" required style="width: 50%">
-														<span class="form-bar"></span> <label class="float-label">대표
+														<input type="text" name="InstTelno" class="form-control"
+															required style="width: 50%"> <span
+															class="form-bar"></span> <label class="float-label">대표
 															번호</label>
 													</div>
 
 													<div class="form-group form-default">
 														<input type="text" name="InstAddr" id="address_kakao"
 															class="form-control" required style="width: 50%"
-															value="	"> 
-															<input class="form-control"
+															value="	"> <input class="form-control"
 															type="text" name="InstDetailAddr" placeholder="상세주소"
 															style="width: 70%"> <span class="form-bar"></span>
 														<label class="float-label">주소</label>
@@ -61,7 +67,8 @@
 										</div>
 									</div>
 									<div class="d-flex justify-content-center">
-										<button form="myInfoForm" class="btn waves-effect waves-light hor-grd btn-grd-primary ">등록</button>
+										<button form="myInfoForm"
+											class="btn waves-effect waves-light hor-grd btn-grd-primary ">등록</button>
 									</div>
 									<!-- Page body end -->
 								</div>

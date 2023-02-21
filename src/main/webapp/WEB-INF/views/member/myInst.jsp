@@ -30,7 +30,7 @@
 												<form method="post" action="<c:url value='/institution/update'/>" id="myInstForm" class="form-material">
 													<div class="form-group form-default">
 														<input value="${inst.instNm}"type="text" name="InstNm"
-															class="form-control" required="" style="width: 50%">
+															class="form-control" required style="width: 50%">
 														<span class="form-bar"></span> <label class="float-label">기업명</label>
 													</div>
 													

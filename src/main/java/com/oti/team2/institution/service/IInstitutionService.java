@@ -9,4 +9,5 @@ public interface IInstitutionService {
 	void writeInst(Institution institution);
 	// 기관 수정
 	void updateInst(Institution institution);
+
 }
