@@ -26,12 +26,12 @@ public class exampleController {
 	public String clientsList(Locale locale, Model model) {
 		return "management/clientsList";
 	}
-
+/*
 	@RequestMapping(value = "/employeeslist", method = RequestMethod.GET)
 	public String employeesList(Locale locale, Model model) {
 		return "management/employeesList";
 	}
-
+*/
 	@RequestMapping(value = "/departmentslist", method = RequestMethod.GET)
 	public String departmentsList(Locale locale, Model model) {
 		return "management/departmentsList";

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 작성자: 최은종 --%>
 <html>
 <head>
@@ -9,6 +9,8 @@
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/kakaoAddress.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/employeesList.js"></script>
+
 <style>
 table, th, td {
 	text-align: center;
@@ -87,30 +89,23 @@ p {
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr>
-																		<th scope="row">1</th>
-																		<td>test1</td>
-																		<td>test1</td>
-																		<td>test1</td>
-																		<td>test1</td>
-																		<td>test1</td>
-																	</tr>
-																	<tr>
-																		<th scope="row">2</th>
-																		<td>test2</td>
-																		<td>test2</td>
-																		<td>test2</td>
-																		<td>test2</td>
-																		<td>test2</td>
-																	</tr>
-																	<tr>
-																		<th scope="row">3</th>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																		<td>test3</td>
-																	</tr>
+																	<%-- 
+																		수정:안한길 
+																		수정일:23.02.20.
+																		내용:jstl적용
+																	 --%>
+																	<c:forEach var="employee" items="${employeesList}"
+																		varStatus="empStatus">
+																		<tr onclick="getEmployee('${employee.memberId}')">
+																			<th scope="row">${empStatus.count}</th>
+																			<td>${employee.memberId }</td>
+																			<td>${employee.flnm }</td>
+																			<td>${employee.department.deptNm }</td>
+																			<td>${employee.jobGrade.jbgdNm }</td>
+																			<td>${employee.eml }</td>
+																		</tr>
+																	</c:forEach>
+
 																</tbody>
 															</table>
 														</div>
@@ -122,7 +117,7 @@ p {
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
-														<h5 style="font-weight: bold;">사원명</h5>
+														<h5 style="font-weight: bold;">사원 정보</h5>
 														<div class="card-header-right">
 															<ul class="list-unstyled card-option" align="right">
 																<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -142,34 +137,28 @@ p {
 														<form class="form-material">
 															<div class="form-group row">
 																<p class="col-sm-2 font-weight-bold">아이디</p>
-																<div class="col-sm-10" id="MEmployeeId">je1234</div>
+																<div class="col-sm-10" id="MEmployeeId">${employeesList[0].memberId}</div>
 															</div>
 															<div class="form-group row">
 																<p class="col-sm-2 font-weight-bold pt-3">이름</p>
-																<div class="col-sm-10 pt-3" id="MEmployeeName">신정은</div>
+																<div class="col-sm-10 pt-3" id="MEmployeeName">${employeesList[0].flnm }</div>
 															</div>
 															<div class="form-group form-default row">
 																<p class="col-sm-2 font-weight-bold pt-2">전화번호</p>
 																<div class="col-sm-10 pt-2" id="MEmployeeTel">
-																	<input type="text" class="form-control" required=""
-																		style="width: 70%" value="01012345678">
+																	${employeesList[0].telNo }
 																</div>
 															</div>
 															<div class="form-group form-default row">
 																<p class="col-sm-2 font-weight-bold">이메일</p>
 																<div class="col-sm-10" id="MEmployeeEmail">
-																	<input type="text" class="form-control" required=""
-																		style="width: 70%" value="abc@gmail.com">
+																	${employeesList[0].eml }
 																</div>
 															</div>
 															<div class="form-group form-default row">
 																<p class="col-sm-2 font-weight-bold">주소</p>
 																<div class="col-sm-10" id="MEmployeeAddr">
-																	<input type="text" id="address_kakao"
-																		class="form-control" required="" style="width: 90%"
-																		placeholder="도로명주소"> <input type="text"
-																		name="address_detail" class="form-control" required=""
-																		style="width: 90%" placeholder="상세주소">
+																	${employeesList[0].addr }
 																</div>
 															</div>
 															<div class="form-group form-default row">
@@ -177,11 +166,15 @@ p {
 																<div class="col-sm-10" id="MEmployeeDepartment">
 																	<select name="selectDepartment" class="form-control"
 																		style="width: 60%">
-																		<option value="" disabled selected>유지보수1팀</option>
-																		<option value="opt1">개발1팀</option>
-																		<option value="opt2">개발2팀</option>
-																		<option value="opt3">유지보수2팀</option>
-																		<option value="opt4">유지보수3팀</option>
+																		<%-- 부서 목록 --%>
+																		<c:forEach var="department" items="${departmentList}" >
+																			<c:if test="${employeesList[0].department.deptNm eq department.deptNm}">
+																				<option value="${department.deptCd}" selected>${department.deptNm}</option>
+																			</c:if>
+																			<c:if test="${employeesList[0].department.deptNm ne department.deptNm}">
+																				<option value="${department.deptCd}" >${department.deptNm}</option>
+																			</c:if>
+																		</c:forEach>
 																	</select>
 																</div>
 															</div>
@@ -190,14 +183,14 @@ p {
 																<div class="col-sm-10" id="MEmployeeJobGrade">
 																	<select name="selectJobGrade" class="form-control"
 																		style="width: 60%">
-																		<option value="" disabled selected>사원</option>
-																		<option value="opt1">대표이사</option>
-																		<option value="opt2">이사</option>
-																		<option value="opt3">부장</option>
-																		<option value="opt4">차장</option>
-																		<option value="opt5">과장</option>
-																		<option value="opt6">대리</option>
-																		<option value="opt7">사원</option>
+																		<c:forEach var="jobGrade" items="${jobGradeList}" >
+																			<c:if test="${employeesList[0].jobGrade.jbgdNm eq jobGrade.jbgdNm}">
+																				<option value="${jobGrade.jbgdCd}" selected>${jobGrade.jbgdNm}</option>
+																			</c:if>
+																			<c:if test="${employeesList[0].jobGrade.jbgdNm ne jobGrade.jbgdNm}">
+																				<option value="${jobGrade.jbgdCd}" >${jobGrade.jbgdNm}</option>
+																			</c:if>
+																		</c:forEach>
 																	</select>
 																</div>
 															</div>

@@ -16,4 +16,7 @@
 	</bean>
 
 	<!-- <mybatis-spring:scan base-package="com.mycompany.webapp.dao"/> -->
+	<mybatis-spring:scan base-package="com.oti.team2.member.dao"/>
+	<mybatis-spring:scan base-package="com.oti.team2.jobGrade.dao"/>
+	<mybatis-spring:scan base-package="com.oti.team2.department.dao"/>
 </beans>
