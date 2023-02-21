@@ -18,7 +18,7 @@
         <div class="pcoded-navigation-label mt-3" data-i18n="nav.category.navigation">MY PORTAL</div>
 	        <ul class="pcoded-item pcoded-left-item">
 	            <li class="">
-	                <a href="/myportal" class="waves-effect waves-dark">
+	                <a href="<c:url value='/myportal'/>" class="waves-effect waves-dark">
 	                    <span class="pcoded-micon"><i class="ti-home pt-1"></i><b>D</b></span>
 	                    <span class="pcoded-mtext" data-i18n="nav.dash.main">나의 할 일</span>
 	                    <span class="pcoded-mcaret"></span>
@@ -29,7 +29,7 @@
         <div class="pcoded-navigation-label" style="font-weight: bold;" data-i18n="nav.category.forms">회원정보 관리</div>
 	        <ul class="pcoded-item pcoded-left-item">
 	            <li>
-	                <a href="/myinfo" class="waves-effect waves-dark">
+	                <a href="<c:url value='/myinfo'/>" class="waves-effect waves-dark">
 	                    <span class="pcoded-micon"><i class="ti-user pt-1"></i><b>FC</b></span>
 	                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">내 정보 관리</span>
 	                    <span class="pcoded-mcaret"></span>
