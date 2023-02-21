@@ -60,7 +60,8 @@
 										<section id="departments" class="pb-5">
 											<div class="row">
 												<%-- 부서 카드 --%>
-												<c:forEach var="department" items="${departmentList}">
+												<c:forEach var="department" items="${departmentList}"
+													varStatus="status">
 													<div class="col-xs-12 col-sm-6 col-md-3">
 														<div class="image-flip">
 															<div class="mainflip flip-0">
@@ -106,8 +107,8 @@
 																				</div>
 																			</div>
 																			<div>
-																				<form class="form-material" id="modifyInfo"
-																					method="post"
+																				<form class="form-material"
+																					id="modifyInfo${status.count}" method="post"
 																					action="<c:url value='/admin/department/modify'/>">
 																					<input type="hidden" name="deptCd"
 																						value="${department.deptCd}">
@@ -136,7 +137,8 @@
 																				</form>
 																			</div>
 																			<div align="center">
-																				<button type="submit" form="modifyInfo"
+																				<button type="submit"
+																					form="modifyInfo${status.count}"
 																					class="btn btn-primary btn-sm btn-round waves-effect waves-light mt-2">수정</button>
 																			</div>
 																		</div>

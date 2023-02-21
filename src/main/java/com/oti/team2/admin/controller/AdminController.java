@@ -74,7 +74,6 @@ public class AdminController {
 	public String updateDepartment(Department department) {
 		log.info("department 수정");
 
-		department.setDeptCd(department.getDeptCd());
 		department.setFlnm(Jsoup.clean(department.getFlnm(), Whitelist.basic()));
 		department.setOfcTelno(Jsoup.clean(department.getOfcTelno(), Whitelist.basic()));
 
