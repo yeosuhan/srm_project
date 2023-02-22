@@ -30,7 +30,7 @@
 						<div class="row my-3">
 							<div class="col-6">부서 : </div>
 							<div class="col-6">
-								<select onchange="" id="deptCd" name="deptCd" disabled>
+								<select id="deptCd" name="deptCd" disabled>
 									<option value="DVLP01" selected>개발1팀</option>
 									<option value="DVLP02">개발2팀</option>
 								</select>
@@ -39,7 +39,7 @@
 						<div class="row my-3">
 							<div class="col-6">투입 인력 : </div>
 							<div class="col-6">
-								<select id="empId" name="empId" onchange="">
+								<select id="empId" name="empId" onchange="showSchedule()">
 									
 								</select>
 							</div>

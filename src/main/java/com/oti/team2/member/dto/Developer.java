@@ -13,7 +13,7 @@ import lombok.Data;
  * */
 @Data
 public class Developer {
-	private String memberId;
+	private String empId;
 	private String flnm;
 	private List<SrResourceOfDeveloper> srResourceByEmpId;
 }

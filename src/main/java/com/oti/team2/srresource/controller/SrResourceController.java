@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.srresource.dto.SrResource;
+import com.oti.team2.srresource.dto.SrResourceOfDeveloper;
 import com.oti.team2.srresource.service.ISrResourceService;
 
 import lombok.extern.log4j.Log4j2;
@@ -34,5 +34,18 @@ public class SrResourceController {
 	public List<SrResource> getSrResourceList(@RequestParam() String srNo){
 		log.info("srNo");
 		return srResourceService.getSrResourceListBySrNo(srNo);
+	}
+	
+	/** 
+	 * 선택된 개발자의 일정 정보 가져오기
+	 * @author : 안한길
+	 * @param empId
+	 * @return List<SrResourceOfDeveloper
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/resource/schedule", method=RequestMethod.GET)
+	public List<SrResourceOfDeveloper> getSrResourceOfDeveloperList(@RequestParam() String empId){
+		log.info(empId);
+		return srResourceService.getSrResourceListByEmpId(empId);
 	}
 }

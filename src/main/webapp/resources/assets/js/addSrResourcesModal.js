@@ -1,4 +1,4 @@
-
+var calendar=null;
 
 $(document).ready(function(){
 	/* 자원정보 추가 모달
@@ -7,7 +7,6 @@ $(document).ready(function(){
 	$("#addSrResourcesModal").on('show.bs.modal',function() 
 	{
 		var calendarEl=null;
-		var calendar=null;
 		var deptCd=$("#deptCd option:selected").val();
 		//console.log(deptCd);
 		if($("#empId option").length==0){
@@ -54,8 +53,27 @@ $(document).ready(function(){
 	});
 	
 });
-
+/* 선택된 개발자 일정 가져오는 함수
+ * @author: 안한길
+ * */
 function showSchedule(){
 	var empId=$("#empId option:selected").val();
-	
-}
+	$.ajax({
+		url:"/sr-resource/resource/schedule",
+		type:"GET",
+		data:{empId:empId},
+		success:function(result){
+			//이벤트 제거
+			calendar.getEvents().forEach((value)=>{
+				//console.log(value);
+				value.remove();
+			});
+			//이벤트 추가
+			console.log(result);
+			result.forEach((value)=>{
+				calendar.addEvent(value);
+				
+			});
+		}
+	});
+};

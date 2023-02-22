@@ -95,9 +95,9 @@ public class MemberController {
 	public List<Developer> getEmployeeList(@RequestParam() String deptCd){
 		log.info(deptCd);
 		List<Developer> employeeList = memberService.getEmployeeNameList(deptCd);
-		log.info(employeeList.get(0));
-		List<SrResourceOfDeveloper> resource = srResourceService.getSrResourceListByEmpId(employeeList.get(0).getMemberId());
-		log.info(resource);
+		//log.info(employeeList.get(0));
+		List<SrResourceOfDeveloper> resource = srResourceService.getSrResourceListByEmpId(employeeList.get(0).getEmpId());
+		//log.info(resource);
 		employeeList.get(0).setSrResourceByEmpId(resource);
 		return employeeList;
 	}
