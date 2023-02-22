@@ -9,31 +9,6 @@
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 </head>
 <script>
-	<%-- 체크박스 전체 선택 --%>
-	function selectResourceAll(selectResourceAll)  {
-		  const checkboxes 
-		       = document.getElementsByName('resource');
-	  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectResourceAll.checked;
-		  })
-		}
-	function selectProgressAll(selectProgressAll)  {
-		  const checkboxes 
-		       = document.getElementsByName('progress');
-		  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectProgressAll.checked;
-		  })
-		}
-	function selectOutputAll(selectOutputAll)  {
-		  const checkboxes 
-		       = document.getElementsByName('output');
-		  
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectOutputAll.checked;
-		  })
-		}
 	<%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -45,6 +20,32 @@
 		$('#addmodal').removeClass('show');
 		document.body.style= `overflow: scroll`;
 	});
+	<%-- 목록 상세보기 --%>
+	function getDetail(dmndNo) {
+		console.log("~~" + dmndNo);
+		$
+				.ajax({
+					url : '/srinformation/' + dmndNo,
+					type : 'GET',
+					data : {
+						dmndNo : dmndNo
+					},
+					success : function(detail) {
+						$("#SRDmndNo").text(detail.dmndNo);
+						$("#SRTitle").text(detail.ttl);
+						$("#SRRelgrund").text(detail.relGrund);
+						$("#SRSys").text(detail.sysNm);
+						$("#SRTask").text(detail.taskSeNm);
+						$("#SRInst").text(detail.instNm);
+						$("#SRFlnm").text(detail.flnm);
+						$("#SRDmndymd").text(detail.dmndYmd);
+						$("#SRCmptnDmndYmd").text(detail.cmptnDmndYmd);
+						$("#SRCn").text(detail.cn);
+						$("#SRFile").text(detail.fileNm);
+
+					}
+				});
+	}
 </script>
 <style>
 .ui-datepicker-trigger {
@@ -287,7 +288,7 @@ th {
 																		</thead>
 																		<tbody>
 																			<c:forEach var="srlist" items="${srlist}" varStatus="num">
-																				<tr onclick="location.href='/'">
+																				<tr onclick="getDetail('${srlist.dmndNo}')">
 																					<th scope="row">${num.count}</th>
 																					<td>${srlist.srNo}</td>
 																					<td>${srlist.sysNm}</td>
@@ -333,115 +334,76 @@ th {
 															style="font-size: 12px; padding-top: 20px;">
 															<div class="form-group row">
 																<div class="col-sm-6">
-																	<div class="col col-sm-4">SR번호</div>
-																	<div class="col col-sm-6">
-																		<input type="text" class="form-control">
-																	</div>
-																</div>
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">요청구분</div>
-																	<div class="col col-sm-6">
-																		<input type="text" class="form-control">
+																	<div class="col col-sm-4">요청 번호</div>
+																	<div class="col col-sm-8" id="SRDmndNo">
 																	</div>
 																</div>
 															</div>
+															<hr/>
 															<div class="form-group row">
 																<div class="col col-sm-2">SR 제목</div>
-																<div class="col col-sm-9">
-																	<input type="text" class="form-control">
+																<div class="col col-sm-9" id="SRTitle">
 																</div>
 															</div>
+															<hr/>
 															<div class="form-group row">
-																<div class="col col-sm-2">관련 근거</div>
-																<div class="col col-sm-9">
-																	<input type="text" class="form-control">
+																<div class="col col-sm-3">관련 근거</div>
+																<div class="col col-sm-9" id="SRRelgrund">
 																</div>
 															</div>
+															<hr/>
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">시스템구분</div>
-																	<div class="col col-sm-6">
-																		<div class="dropdown dropdown open">
-																			<form action="#">
-																				<select name="languages" id="lang">
-																					<option value="워크넷">워크넷</option>
-																					<option value="굴국밥">시스템1</option>
-																					<option value="고소미">시스템2</option>
-																				</select>
-																			</form>
-																		</div>
+																	<div class="col col-sm-6" id="SRSys">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">업무구분</div>
-																	<div class="dropdown dropdown open">
-																		<form action="#">
-																			<select name="languages" id="lang">
-																				<option value="워크넷">내부망</option>
-																				<option value="굴국밥">외부망</option>
-																				<option value="고소미">구매</option>
-																			</select>
-																		</form>
+																	<div class="col col-sm-6" id="SRTask">
 																	</div>
 																</div>
 															</div>
+															<hr/>
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청기관</div>
-																	<div class="col col-sm-6">
-																		<div class="dropdown dropdown open">
-																			<form action="#">
-																				<select name="languages" id="lang">
-																					<option value="워크넷">워크넷기관</option>
-																					<option value="굴국밥">고용부</option>
-																					<option value="고소미">네이버</option>
-																				</select>
-																			</form>
-																		</div>
+																	<div class="col col-sm-6" id="SRInst">
 																	</div>
-
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청자</div>
-																	<div class="dropdown dropdown open">
-																		<form action="#">
-																			<select name="languages" id="lang">
-																				<option value="워크넷">워크넷직원</option>
-																				<option value="굴국밥">공무원</option>
-																				<option value="고소미">직원</option>
-																			</select>
-																		</form>
+																	<div class="col col-sm-6" id="SRFlnm">
 																	</div>
 																</div>
 															</div>
+															<hr/>
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청일</div>
-																	<div class="col col-sm-8">
-																		<input type="date" id="requestDatepicker">
+																	<div class="col col-sm-8" id="SRDmndymd">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">완료요청일</div>
-																	<div class="col col-sm-8">
-																		<input type="date" id="endRequestDatepicker">
+																	<div class="col col-sm-8" id="SRCmptnDmndYmd">
 																	</div>
 																</div>
 															</div>
+															<hr/>
 															<div class="form-group row">
 																<label class="col-sm-2 col-form-label"
 																	style="line-height: 100px; font-size: 12px;">SR
 																	내용</label>
-																<div class="col-sm-9">
-																	<textarea rows="5" cols="5" class="form-control"
-																		style="height: 100px;"></textarea>
+																<div class="col-sm-9" id="SRCn">
 																</div>
 															</div>
+															<hr/>
 															<div class="form-group row">
 																<label class="col-sm-3 col-form-label"
 																	style="font-size: 12px;">첨부파일</label>
 																<div class="col-sm-9">
-																	<input type="file" class="">
+																	<input type="file" class="" id="SRFile">
 																</div>
 															</div>
 														</div>
@@ -599,10 +561,6 @@ th {
 																				<thead>
 																					<tr>
 																						<th style="width: 1px;">#</th>
-																						<th style="width: 1px;"><input
-																							type="checkbox" name="progress"
-																							value="selectProgressAll"
-																							onclick="selectProgressAll(this)"></th>
 																						<th style="width: 50px;">작업구분</th>
 																						<th style="width: 300px;">시작일</th>
 																						<th style="width: 300px;">종료일</th>
@@ -613,11 +571,9 @@ th {
 																				<tbody>
 																					<tr>
 																						<th scope="row">1</th>
-																						<td><input type="checkbox" name="progress"></td>
 																						<td>요구정의</td>
-																						<td><input type="text"
-																							id="firStartDatepicker"></td>
-																						<td><input type="text" id="firEndDatepicker"></td>
+																						<td><input type="date"></td>
+																						<td><input type="date"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
 																						<td><div class="accordion"
@@ -636,11 +592,9 @@ th {
 																					</tr>
 																					<tr>
 																						<th scope="row">2</th>
-																						<td><input type="checkbox" name="progress"></td>
 																						<td>분석/설계</td>
-																						<td><input type="text"
-																							id="secStartDatepicker"></td>
-																						<td><input type="text" id="secEndDatepicker"></td>
+																						<td><input type="date"></td>
+																						<td><input type="date"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
 																						<td><div class="accordion"
@@ -658,11 +612,9 @@ th {
 																					</tr>
 																					<tr>
 																						<th scope="row">3</th>
-																						<td><input type="checkbox" name="progress"></td>
 																						<td>구현</td>
-																						<td><input type="text"
-																							id="thrStartDatepicker"></td>
-																						<td><input type="text" id="thrEndDatepicker"></td>
+																						<td><input type="date"></td>
+																						<td><input type="date"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
 																						<td><div class="accordion"
@@ -680,11 +632,9 @@ th {
 																					</tr>
 																					<tr>
 																						<th scope="row">4</th>
-																						<td><input type="checkbox" name="progress"></td>
 																						<td>시험</td>
-																						<td><input type="text"
-																							id="fourStartDatepicker"></td>
-																						<td><input type="text" id="fourEndDatepicker"></td>
+																						<td><input type="date"></td>
+																						<td><input type="date"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
 																						<td><div class="accordion"
@@ -702,11 +652,9 @@ th {
 																					</tr>
 																					<tr>
 																						<th scope="row">5</th>
-																						<td><input type="checkbox" name="progress"></td>
 																						<td>반영요청</td>
-																						<td><input type="text"
-																							id="fiveStartDatepicker"></td>
-																						<td><input type="text" id="fiveEndDatepicker"></td>
+																						<td><input type="date"></td>
+																						<td><input type="date"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
 																						<td><div class="accordion"
@@ -724,11 +672,9 @@ th {
 																					</tr>
 																					<tr>
 																						<th scope="row">6</th>
-																						<td><input type="checkbox" name="progress"></td>
 																						<td>운영반영</td>
-																						<td><input type="text"
-																							id="sixStartDatepicker"></td>
-																						<td><input type="text" id="sixEndDatepicker"></td>
+																						<td><input type="date"></td>
+																						<td><input type="date"></td>
 																						<td><input type="text" class="form-control"
 																							id="progress"></td>
 																						<td><div class="accordion"
