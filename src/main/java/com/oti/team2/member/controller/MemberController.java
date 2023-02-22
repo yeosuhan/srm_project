@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oti.team2.member.dto.Developer;
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.member.service.IMemberService;
+import com.oti.team2.srresource.dto.SrResourceOfDeveloper;
+import com.oti.team2.srresource.service.ISrResourceService;
 import com.oti.team2.util.Auth;
 
 import lombok.extern.log4j.Log4j2;
@@ -31,7 +34,8 @@ import lombok.extern.log4j.Log4j2;
 public class MemberController {
 	@Autowired
 	private IMemberService memberService;
-	
+	@Autowired
+	private ISrResourceService srResourceService;
 	/**
 	 * 멤버의 내 정보 조회
 	 *@author : 신정은
@@ -84,12 +88,17 @@ public class MemberController {
 	 * 개발자 목록 조회
 	 * @author : 안한길
 	 * @param deptCd
-	 * @return List<member>
+	 * @return List<developer>
 	 */
 	@ResponseBody
 	@GetMapping("/department")
-	public List<Member> getEmployeeList(@RequestParam() String deptCd){
-		
-		return memberService.getEmployeeNameList(deptCd);
+	public List<Developer> getEmployeeList(@RequestParam() String deptCd){
+		log.info(deptCd);
+		List<Developer> employeeList = memberService.getEmployeeNameList(deptCd);
+		log.info(employeeList.get(0));
+		List<SrResourceOfDeveloper> resource = srResourceService.getSrResourceListByEmpId(employeeList.get(0).getMemberId());
+		log.info(resource);
+		employeeList.get(0).setSrResourceByEmpId(resource);
+		return employeeList;
 	}
 }

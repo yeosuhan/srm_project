@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oti.team2.member.dao.IMemberDao;
+import com.oti.team2.member.dto.Developer;
 import com.oti.team2.member.dto.Member;
-
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.util.pager.Pager;
 
@@ -96,7 +96,7 @@ public class MemberService implements IMemberService {
 	 * @return 개발자 목록
 	 * */
 	@Override
-	public List<Member> getEmployeeNameList(String deptCd) {
+	public List<Developer> getEmployeeNameList(String deptCd) {
 		return memberDao.selectByDeptCd(deptCd);
 	}
 }

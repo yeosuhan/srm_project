@@ -14,4 +14,20 @@
 		WHERE
 			SR_NO=#{srNo}
 	</select>
+	<!-- 자원정보 리스트 가져오기 -->
+	<select id="selectSrResourceListByEmpId" parameterType="String" resultType="srResourceOfDeveloper">
+		SELECT 
+			SR_SRC as "srSrc",
+			TTL as "title",
+			SCHDL_BGNG_YMD as "start",
+			SCHDL_END_YMD as "end"
+		FROM
+			SR_RESOURCES r, SR_INFORMATION i, SR_DEMAND d
+		WHERE
+			r.SR_NO=i.SR_NO AND
+			i.DMND_NO = d.DMND_NO AND
+			r.EMP_ID=#{empId}
+	</select>
+	
+	
 </mapper>

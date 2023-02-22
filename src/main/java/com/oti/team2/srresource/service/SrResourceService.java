@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.oti.team2.srresource.dao.ISrResourceDao;
 import com.oti.team2.srresource.dto.SrResource;
+import com.oti.team2.srresource.dto.SrResourceOfDeveloper;
 @Service
 public class SrResourceService implements ISrResourceService {
 	
@@ -19,8 +20,18 @@ public class SrResourceService implements ISrResourceService {
 	 * @return List<SrResource>
 	 */
 	@Override
-	public List<SrResource> getSrResourceList(String srNo) {
+	public List<SrResource> getSrResourceListBySrNo(String srNo) {
 		return srResourceDao.selectSrResourceListBySrNo(srNo);
+	}
+	/**
+	 * 개발자에 대한 자원 정보 가져오기
+	 * @author : 안한길
+	 * @param empId
+	 * @return List<SrResource>
+	 */
+	@Override
+	public List<SrResourceOfDeveloper> getSrResourceListByEmpId(String empId) {
+		return srResourceDao.selectSrResourceListByEmpId(empId);
 	}
 
 }

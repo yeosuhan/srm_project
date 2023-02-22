@@ -11,5 +11,7 @@
 		<typeAlias type="com.oti.team2.member.dto.ProfileImg" alias="profileImg" />
 		<typeAlias type="com.oti.team2.util.pager.Pager" alias="pager" />
 		<typeAlias type="com.oti.team2.srresource.dto.SrResource" alias="srResource" />
+		<typeAlias type="com.oti.team2.srresource.dto.SrResourceOfDeveloper" alias="srResourceOfDeveloper" />
+		<typeAlias type="com.oti.team2.member.dto.Developer" alias="developer" />
 	</typeAliases> 
 </configuration>

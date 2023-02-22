@@ -39,7 +39,8 @@
 						<div class="row my-3">
 							<div class="col-6">투입 인력 : </div>
 							<div class="col-6">
-								<select id="empId" name="empId">
+								<select id="empId" name="empId" onchange="">
+									
 								</select>
 							</div>
 						</div>

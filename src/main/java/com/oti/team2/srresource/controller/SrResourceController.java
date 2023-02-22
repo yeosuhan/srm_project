@@ -33,6 +33,6 @@ public class SrResourceController {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public List<SrResource> getSrResourceList(@RequestParam() String srNo){
 		log.info("srNo");
-		return srResourceService.getSrResourceList(srNo);
+		return srResourceService.getSrResourceListBySrNo(srNo);
 	}
 }

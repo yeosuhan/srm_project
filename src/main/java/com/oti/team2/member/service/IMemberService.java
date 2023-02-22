@@ -2,8 +2,8 @@ package com.oti.team2.member.service;
 
 import java.util.List;
 
+import com.oti.team2.member.dto.Developer;
 import com.oti.team2.member.dto.Member;
-
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.util.pager.Pager;
 
@@ -73,5 +73,5 @@ public interface IMemberService {
 	 * @param  부서 id
 	 * @return 개발자 목록
 	 * */
-	public List<Member> getEmployeeNameList(String deptCd);
+	public List<Developer> getEmployeeNameList(String deptCd);
 }
