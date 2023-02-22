@@ -1,4 +1,4 @@
-package com.oti.team2;
+package com.oti.team2.srdemand.dto;
 
 import java.util.Date;
 

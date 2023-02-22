@@ -8,6 +8,50 @@
 </head>
 <script>
 	
+<%-- JSON으로 받아온 HistoryList를 보여주기 위한 ajax --%>
+	function getHistoryList(srNo) {
+		console.log("srHistoryList 글번호: " + srNo);
+		$
+				.ajax({
+					url : "/history/list/" + srNo,
+					type : "GET",
+
+					success : function(result) {
+						console.log("성공" + result);
+						console.log(result.srInformationHistory[0].hstryTtl);
+
+						for (var i = 0; i < result.srInformationHistory.length; i++) {
+							var historyTtl = result.srInformationHistory[i].hstryTtl;
+							var requestChgYmd = new Date(
+									result.srInformationHistory[i].chgEndYmd);
+							var historyChgEndYmd = requestChgYmd.getFullYear()
+									+ "-"
+									+ ((requestChgYmd.getMonth() + 1) > 9 ? (requestChgYmd
+											.getMonth() + 1).toString()
+											: "0"
+													+ (requestChgYmd.getMonth() + 1))
+									+ "-"
+									+ (requestChgYmd.getDate() > 9 ? requestChgYmd
+											.getDate().toString()
+											: "0"
+													+ requestChgYmd.getDate()
+															.toString());
+
+							if (result.srInformationHistory[i].hstryStts == 'I') {
+								var historyStts = "요청 중";
+							} else if (result.srInformationHistory[i].hstryStts == 'N') {
+								var historyStts = "반려";
+							} else {
+								var historyStts = "승인";
+							}
+
+							$("#AhstryTtl").append(historyTtl);
+							$("#AchgEndYmd").append(historyChgEndYmd);
+							$("#AhstryStts").append(historyStts);
+						}
+					}
+				});
+	}
 <%-- 달력--%>
 	/* $(function() {
 		$("#startDatepicker").datepicker({
@@ -726,7 +770,8 @@ th {
 																상세정보</a>
 															<div class="slide"></div></li>
 														<li class="nav-item"><a class="nav-link"
-															data-toggle="tab" href="#srHistory" role="tab">SR
+															data-toggle="tab" href="#srHistory"
+															onclick="getHistoryList('${srNo}')" role="tab">SR
 																히스토리</a>
 															<div class="slide"></div></li>
 													</ul>
@@ -938,29 +983,17 @@ th {
 																			<tr data-toggle="modal"
 																				data-target="#addHistoryModalDetail">
 																				<th scope="row">1</th>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																			</tr>
-																			<tr data-toggle="modal"
-																				data-target="#addHistoryModalDetail">
-																				<th scope="row">2</th>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																			</tr>
-																			<tr data-toggle="modal"
-																				data-target="#addHistoryModalDetail">
-																				<th scope="row">3</th>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
+																				<td id="AhstryTtl"></td>
+																				<td id="AchgEndYmd"></td>
+																				<td id="AhstryStts"></td>
 																			</tr>
 																		</tbody>
 																	</table>
 																</div>
 															</div>
 														</div>
+
+
 
 													</div>
 												</div>

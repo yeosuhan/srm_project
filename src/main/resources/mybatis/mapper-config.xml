@@ -10,5 +10,7 @@
 		<typeAlias type="com.oti.team2.department.dto.Department" alias="department"/>
 		<typeAlias type="com.oti.team2.member.dto.ProfileImg" alias="profileImg" />
 		<typeAlias type="com.oti.team2.util.pager.Pager" alias="pager" />
+		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrInformationHistory" alias="srInformationHistory" />
+		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrHistoryListDto" alias="srHistoryListDto" />
 	</typeAliases> 
 </configuration>
