@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.srresource.dao.ISrResourceDao">
+	<!-- 자원정보 리스트 가져오기 -->
+	<select id="selectSrResourceListBySrNo" parameterType="String" resultType="srResource">
+		SELECT 
+			SR_SRC as "srSrc",
+			EMP_ID as "empId",
+			PTCPTN_ROLE_CD as "ptcptnRoleCd",
+			SCHDL_BGNG_YMD as "schdlBgngYmd",
+			SCHDL_END_YMD as "schdlEndYmd"
+		FROM
+			SR_RESOURCES
+		WHERE
+			SR_NO=#{srNo}
+	</select>
+</mapper>

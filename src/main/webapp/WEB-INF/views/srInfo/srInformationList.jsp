@@ -8,6 +8,8 @@
 <%-- 캘린더css --%>
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 </head>
+<script src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
+
 <script>
 	<%-- 체크박스 전체 선택 --%>
 	function selectResourceAll(selectResourceAll)  {
@@ -429,7 +431,7 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">SR번호</div>
 																	<div class="col col-sm-6">
-																		<input type="text" class="form-control">
+																		<input id="srNo" type="text" class="form-control" value="SR_NO_SEQ.nextval" disabled>
 																	</div>
 																</div>
 																<div class="col-sm-6">
@@ -643,31 +645,8 @@ th {
 																					<th>투입종료일</th>
 																				</tr>
 																			</thead>
-																			<tbody>
-																				<tr>
-																					<th scope="row">1</th>
-																					<td><input name="resource" type="checkbox"></td>
-																					<td>Otto</td>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																					<td>Mark</td>
-																				</tr>
-																				<tr>
-																					<th scope="row">2</th>
-																					<td><input name="resource" type="checkbox"></td>
-																					<td>Thornton</td>
-																					<td>@fat</td>
-																					<td>Jacob</td>
-																					<td>Thornton</td>
-																				</tr>
-																				<tr>
-																					<th scope="row">3</th>
-																					<td><input name="resource" type="checkbox"></td>
-																					<td>the Bird</td>
-																					<td>@twitter</td>
-																					<td>Larry</td>
-																					<td>the Bird</td>
-																				</tr>
+																			<tbody id="resourceTableRow">
+																				
 																			</tbody>
 																		</table>
 																	</div>
