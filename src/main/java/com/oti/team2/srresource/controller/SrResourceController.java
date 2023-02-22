@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,5 +48,18 @@ public class SrResourceController {
 	public List<SrResourceOfDeveloper> getSrResourceOfDeveloperList(@RequestParam() String empId){
 		log.info(empId);
 		return srResourceService.getSrResourceListByEmpId(empId);
+	}
+	
+	/** 입력한 자원 정보 추가
+	 * @author : 안한길
+	 * @param SrResource
+	 * @return int
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/resource/add" , method=RequestMethod.POST)
+	public int addSrResource(@RequestBody SrResource srResource) {
+		log.info(srResource);
+		int result = srResourceService.addSrResource(srResource);
+		return result;
 	}
 }

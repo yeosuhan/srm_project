@@ -33,5 +33,14 @@ public class SrResourceService implements ISrResourceService {
 	public List<SrResourceOfDeveloper> getSrResourceListByEmpId(String empId) {
 		return srResourceDao.selectSrResourceListByEmpId(empId);
 	}
+	/** 입력한 자원 정보 추가
+	 * @author : 안한길
+	 * @param SrResource
+	 * @return int
+	 * */
+	@Override
+	public int addSrResource(SrResource srResource) {
+		return srResourceDao.insertSrResource(srResource);
+	}
 
 }

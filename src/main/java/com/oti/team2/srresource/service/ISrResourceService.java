@@ -20,4 +20,10 @@ public interface ISrResourceService {
 	 * @return List<SrResource>
 	 */
 	List<SrResourceOfDeveloper> getSrResourceListByEmpId(String empId);
+	/** 입력한 자원 정보 추가
+	 * @author : 안한길
+	 * @param SrResource
+	 * @return int
+	 * */
+	int addSrResource(SrResource srResource);
 }

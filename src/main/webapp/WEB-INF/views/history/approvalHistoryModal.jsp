@@ -8,7 +8,7 @@
 			<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 		</div>
 		<div class="m_body bg-light">
-			<form id="resourceForm" action="/" method="POST">
+			<form id="approvalHistoryForm" action="/" method="POST">
 				<div class="row my-3">
 					<div class="col-2">SR제목 : </div>
 					<div class="col-10">

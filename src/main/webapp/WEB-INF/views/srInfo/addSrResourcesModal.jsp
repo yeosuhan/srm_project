@@ -18,7 +18,8 @@
 						<div class="row my-3">
 							<div class="col-6">SR제목 : </div>
 							<div class="col-6">
-								<input type="text" id="srNo" name="srNo" value="테스트" disabled>
+								<input type="hidden" id="srNo" name="srNo" value="WOR-SR-0001">
+								<input type="text" id="ttl" name="ttl" value="테스트" disabled>
 							</div>
 						</div>
 						<div class="row my-3">
@@ -71,7 +72,7 @@
 		</div>
 		<div class="m_footer bg-light">
 		
-			<button class="btn btn-info save center" data-dismiss="modal" >확인</button>
+			<button onclick="addResource()" class="btn btn-info save center" data-dismiss="modal" >확인</button>
 		
 			<button class="btn btn-danger danger cancle" data-dismiss="modal">닫기</button>
 				

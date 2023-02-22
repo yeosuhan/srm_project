@@ -29,5 +29,10 @@
 			r.EMP_ID=#{empId}
 	</select>
 	
-	
+	<!-- 자원정보 추가 -->
+	<insert id="insertSrResource" parameterType="srResource" >
+		INSERT INTO SR_RESOURCES (SR_SRC, SR_NO, EMP_ID, PTCPTN_ROLE_CD, SCHDL_BGNG_YMD, SCHDL_END_YMD)
+		VALUES (sr_src_seq.nextval,#{srNo}, #{empId}, #{ptcptnRoleCd}, #{schdlBgngYmd}, #{schdlEndYmd})  
+		
+	</insert>
 </mapper>

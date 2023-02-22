@@ -22,4 +22,6 @@ public interface ISrResourceDao {
 	 */
 	List<SrResourceOfDeveloper> selectSrResourceListByEmpId(String empId);
 
+	int insertSrResource(SrResource srResource);
+
 }
