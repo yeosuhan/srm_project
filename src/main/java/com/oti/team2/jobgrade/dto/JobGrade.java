@@ -1,4 +1,4 @@
-package com.oti.team2.jobGrade.dto;
+package com.oti.team2.jobgrade.dto;
 
 import lombok.Data;
 /*

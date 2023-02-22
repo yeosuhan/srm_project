@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.department.dto.Department;
 import com.oti.team2.department.service.IDepartmentService;
+import com.oti.team2.jobgrade.service.IJobGradeService;
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.util.Auth;
@@ -29,6 +32,9 @@ public class AdminController {
 	@Autowired
 	private IDepartmentService departmentService;
 
+	@Autowired
+	private IJobGradeService jobGradeService;
+	
 	@Autowired
 	private IMemberService memberService;
 	
@@ -134,5 +140,63 @@ public class AdminController {
 		Member cl = memberService.getMember(cid, Auth.CLIENT.toString());
 		log.info(cl);
 		return cl;
+	}
+	
+	/*
+	 * 사원 목록 페이지
+	 * @author 안한길
+	 * @param  page : 페이지
+	 * @return 사원 목록 페이지 url
+	 * */
+	@RequestMapping(value = "/employeelist", method = RequestMethod.GET)
+	public String getEmployeeList(@RequestParam(defaultValue="1")int page, Model model) {
+		log.info("getEmployeeList");
+		int totalRows=memberService.getTotalRows( Auth.DEVELOPER.toString());
+		Pager pager= new Pager(totalRows,page);
+		List<Member> employeesList = memberService.getMemberList( Auth.DEVELOPER.toString(), pager);
+		//사원 목록 첫번째 사원 정보 사원정보 카드에 추가
+		employeesList.set(0, memberService.getMember(employeesList.get(0).getMemberId(), Auth.DEVELOPER.toString()));
+		//사원 정보 카드 에서 직급, 부서 선택 목록
+		model.addAttribute("jobGradeList",jobGradeService.getJobGradeList());
+		model.addAttribute("departmentList",departmentService.getDepartmentNameList());
+		
+		model.addAttribute("employeesList",employeesList);
+		return "management/employeesList";
+	}
+	/*
+	 * 사원 상세 정보
+	 * @author 안한길
+	 * @param  사원 아이디
+	 * @return 사원 정보 
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/employee" , method=RequestMethod.GET)
+	public Member getEmployeeDetail(@RequestParam()String employeeId) {
+		log.info(employeeId);
+		return memberService.getMember(employeeId, Auth.DEVELOPER.toString());
+	}
+	/*
+	 * 사원 삭제
+	 * @author 안한길
+	 * @param  사원 아이디
+	 * @return 반영 행수
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/employee/delete" , method=RequestMethod.GET)
+	public int deleteEmployee(@RequestParam()String employeeId) {
+		log.info(employeeId);
+		return memberService.deleteMember(employeeId);
+	}
+	/*
+	 * 사원 정보 수정
+	 * @author 안한길
+	 * @param  수정된 사원 정보
+	 * @return 반영 행수
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/employee/modify" , method=RequestMethod.POST)
+	public int modifyEmployee(Member member) {
+		log.info(member);
+		return memberService.modifyMember(member);
 	}
 }

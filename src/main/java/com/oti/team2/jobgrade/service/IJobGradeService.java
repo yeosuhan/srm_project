@@ -1,8 +1,8 @@
-package com.oti.team2.jobGrade.service;
+package com.oti.team2.jobgrade.service;
 
 import java.util.List;
 
-import com.oti.team2.jobGrade.dto.JobGrade;
+import com.oti.team2.jobgrade.dto.JobGrade;
 /*
  * @author: 안한길
  * 작성일: 23.02.21.

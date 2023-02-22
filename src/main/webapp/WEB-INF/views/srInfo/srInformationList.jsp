@@ -553,7 +553,7 @@ th {
 															<li class="nav-item"><a class="nav-link active"
 																data-toggle="tab" href="#home1" role="tab">SR 계획정보</a>
 																<div class="slide"></div></li>
-															<li class="nav-item"><a class="nav-link"
+															<li class="nav-item"><a onclick="getResourceList()" class="nav-link"
 																data-toggle="tab" href="#profile1" role="tab">SR
 																	자원정보</a>
 																<div class="slide"></div></li>

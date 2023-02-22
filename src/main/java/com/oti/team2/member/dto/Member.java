@@ -2,7 +2,7 @@ package com.oti.team2.member.dto;
 
 import com.oti.team2.department.dto.Department;
 import com.oti.team2.institution.dto.Institution;
-import com.oti.team2.jobGrade.dto.JobGrade;
+import com.oti.team2.jobgrade.dto.JobGrade;
 
 import lombok.Data;
 
