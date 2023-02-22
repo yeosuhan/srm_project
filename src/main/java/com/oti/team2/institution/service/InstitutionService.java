@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.oti.team2.institution.dao.IInstitutionDao;
 import com.oti.team2.institution.dto.Institution;
+
+import lombok.extern.log4j.Log4j2;
 @Service
+@Log4j2
 public class InstitutionService implements IInstitutionService{
 
 	@Autowired
@@ -30,6 +33,7 @@ public class InstitutionService implements IInstitutionService{
 	 */
 	@Override
 	public Institution getInst(String memberId) {
+		log.info(memberId);
 		return institutionDao.selectByInst(memberId);		
 	}
 	

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.task.dao.ITaskDao">
+	<select id="selectBySysCd" parameterType="string" resultType="systemTask">
+		SELECT TASK_SE_CD as taskSeCd ,
+			TASK_SE_NM as taskSeNm
+		FROM TASK
+		WHERE SYS_CD=#{sysCd}
+	</select>
+</mapper>

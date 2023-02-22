@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.srdemand.dao.ISrDemandDao">
+	
+	<!-- sr요청 등록 -->
+	<insert id="insertSrDemand" parameterType="srRequestDto">
+		INSERT INTO SR_DEMAND (DMND_NO, DMND_YMD, CUST_ID, SYS_CD, TASK_SE_CD, TTL, CN, REL_GRUND, CMPTN_DMND_YMD)
+		VALUES(#{dmndNo}, #{dmndYmd}, #{custId}, #{sysCd}, #{taskSeCd}, #{ttl}, #{cn}, #{relGrund}, #{cmptnDmndYmd})
+	</insert>
+	
+	<!-- SR230222(SR+현재날짜)~ 로 시작하는 요청의 개수 구하기 -->
+	<select id="countByDmndNo" parameterType="string" resultType="int">
+		SELECT count(DMND_NO) as count
+		FROM sr_Demand
+		WHERE DMND_NO LIKE #{srCode}
+	</select>
+</mapper>
