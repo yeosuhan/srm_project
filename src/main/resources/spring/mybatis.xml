@@ -16,4 +16,5 @@
 	</bean>
 
 	<mybatis-spring:scan base-package="com.oti.team2.institution.dao"/>
+	<mybatis-spring:scan base-package="com.oti.team2.srinformation.dao"/>
 </beans>

@@ -286,17 +286,17 @@ th {
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<c:forEach var="srlist" items="${srlist}">
-																				<tr>
-																					<th scope="row">{srlist.dmndNo}</th>
-																					<td>{srlist.srNo}<</td>
-																					<td>{srlist.sysNm}<</td>
-																					<td>{srlist.teskSeNm}<</td>
-																					<td>{srlist.ttl}<</td>
-																					<td>{srlist.flnm}<</td>
-																					<td>{srlist.bgngYmd}<</td>
-																					<td>{srlist.endYmd}<</td>
-																					<td>{srlist.sttsNm}<</td>
+																			<c:forEach var="srlist" items="${srlist}" varStatus="num">
+																				<tr onclick="location.href='/'">
+																					<th scope="row">${num.count}</th>
+																					<td>${srlist.srNo}</td>
+																					<td>${srlist.sysNm}</td>
+																					<td>${srlist.taskSeNm}</td>
+																					<td>${srlist.ttl}</td>
+																					<td>${srlist.flnm}</td>
+																					<td>${srlist.bgngYmd}</td>
+																					<td>${srlist.endYmd}</td>
+																					<td>${srlist.sttsNm}</td>
 																				</tr>
 																			</c:forEach>
 																		</tbody>
