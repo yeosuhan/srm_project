@@ -127,7 +127,7 @@ public class exampleController {
 	}
 
 	// 나
-	@RequestMapping(value = "/srinformationList", method = RequestMethod.GET)
+	@RequestMapping(value = "/srinformationlist", method = RequestMethod.GET)
 	public String srInformationList(Model model) {
 		return "srInfo/srInformationList";
 	}
