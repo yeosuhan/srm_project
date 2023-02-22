@@ -5,7 +5,7 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
-<script src="/resources/js/kakaoAddress.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/kakaoAddress.js"></script>
 </head>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -36,51 +36,53 @@
 													</div>
 												</div>
 												<div class="col-8 card-block">
-													<form class="form-material">
+													<form class="form-material" enctype="multipart/form-data"id="myinfo" action="<c:url value='/member/myinfo'/>" method="post" >
 														<div class="form-group row">
 															<p class="col-sm-2 font-weight-bold">이름</p>
-															<div class="col-sm-10">신정은</div>
+															<div class="col-sm-10">${member.flnm}</div>
 														</div>
 														<div class="form-group row">
 															<p class="col-sm-2 font-weight-bold">아이디</p>
-															<div class="col-sm-10">je1234</div>
+															<div class="col-sm-10">${member.memberId}</div>
 														</div>
+														<input name="memberId" type="hidden" value="${member.memberId}"/>
 
 														<div class="form-group form-default">
-															<input type="password" name="footer-email"
+															<input type="password" name="pswd"
 																class="form-control" required="" style="width: 50%"
-																value="dfdffffdf"> <span class="form-bar"></span>
+																value="${member.pswd}"> <span class="form-bar"></span>
 															<label class="float-label">비밀번호</label>
 														</div>
 
 
 
 														<div class="form-group form-default">
-															<input type="text" name="footer-email"
+															<input type="text" name="telNo"
 																class="form-control" required="" style="width: 50%"
-																value="01012345678"> <span class="form-bar"></span>
+																value="${member.telNo }"> <span class="form-bar"></span>
 															<label class="float-label">전화번호</label>
 														</div>
 
 														<div class="form-group form-default">
-															<input type="text" name="footer-email"
+															<input type="text" name="eml"
 																class="form-control" required="" style="width: 50%"
-																value="test@gmail.com"> <span class="form-bar"></span>
+																value="${member.eml}"> <span class="form-bar"></span>
 															<label class="float-label">이메일 (exa@gmail.com)</label>
 														</div>
 
 														<div class="form-group form-default">
-															<input type="text" name="footer-email" id="address_kakao"
+															<input type="text" name="addr" id="address_kakao"
 																class="form-control" required="" style="width: 50%"
-																value="혜화역 4번출구"> <span class="form-bar"></span>
+																value="${member.addr}"> <span class="form-bar"></span>
 															<label class="float-label">주소</label>
 														</div>
 
 														<div class="form-group form-default"
 															style="display: flex;">
-															<input type="text" name="footer-email"
-																class="form-control" required="" style="width: 50%" value="${inst.INST_NM}">
-															<label class="float-label">기관</label>
+															<input type="text" name="instNm"
+																class="form-control" required="" style="width: 50%" value="${member.institution.instNm}">
+															<label class="float-label">기관 소속</label>
+
 															<div class="btn-group dropright">
 																<a href="<c:url value='/member/addinst'/>" type="button" class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
 																	기관 등록
@@ -88,7 +90,7 @@
 																
 															</div>
 														</div>
-														<div class="form-group form-default"
+														<!-- <div class="form-group form-default"
 															style="display: flex;">
 															<p class="col-sm-2 font-weight-bold">부서</p>
 															<div class="col-sm-10">신정은</div>
@@ -98,11 +100,11 @@
 															style="display: flex;">
 															<p class="col-sm-2 font-weight-bold">직급</p>
 															<div class="col-sm-10">사원</div>
-														</div>
+														</div> -->
 
 													</form>
 													<div class="d-flex">
-														<button
+														<button type="submit" form="myinfo"
 															class="btn btn-inverse btn-round waves-effect waves-light"
 															style="margin-left: 160px;">저장</button>
 													</div>
