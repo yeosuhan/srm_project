@@ -18,7 +18,7 @@
 						<div class="row my-3">
 							<div class="col-6">SR제목 : </div>
 							<div class="col-6">
-								<input type="text" value="테스트" disabled>
+								<input type="text" id="srNo" name="srNo" value="테스트" disabled>
 							</div>
 						</div>
 						<div class="row my-3">
@@ -30,9 +30,9 @@
 						<div class="row my-3">
 							<div class="col-6">부서 : </div>
 							<div class="col-6">
-								<select onchange="" id="empId" name="empId">
-									<option>개발1팀</option>
-									<option>개발2팀</option>
+								<select onchange="" id="deptCd" name="deptCd" disabled>
+									<option value="DVLP01" selected>개발1팀</option>
+									<option value="DVLP02">개발2팀</option>
 								</select>
 							</div>
 						</div>
@@ -40,8 +40,6 @@
 							<div class="col-6">투입 인력 : </div>
 							<div class="col-6">
 								<select id="empId" name="empId">
-									<option>홍길동</option>
-									<option>감자바</option>
 								</select>
 							</div>
 						</div>
@@ -49,8 +47,8 @@
 							<div class="col-6">역할 : </div>
 							<div class="col-6">
 								<select id="ptcptnRoleCd" name="ptcptnRoleCd">
-									<option>개발자</option>
-									<option>QA</option>
+									<option value="0">개발자</option>
+									<option value="1">QA</option>
 								</select>
 							</div>
 						</div>

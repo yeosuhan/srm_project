@@ -168,7 +168,15 @@
 		WHERE
 			MEMBER_ID = #{memberId}
 	</update>
-	
+	<!-- 개발자 목록 조회 -->
+	<select id="selectByDeptCd" parameterType="String" resultType="member">
+		SELECT 
+			FLNM as "flnm"
+		FROM
+			MEMBERS
+		WHERE
+			DEPT_CD = #{deptCd}
+	</select>
    <!-- Member 객체 안의 내부 객체와의 매핑을 위함 -->
    <resultMap type="member" id="memberResultMap">
 		<id property="memberId" column="MEMBER_ID"/>

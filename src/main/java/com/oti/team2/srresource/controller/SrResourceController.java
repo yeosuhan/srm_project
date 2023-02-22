@@ -31,7 +31,7 @@ public class SrResourceController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public List<SrResource> getSrResourceList(@RequestParam() String srNo, Model model){
+	public List<SrResource> getSrResourceList(@RequestParam() String srNo){
 		log.info("srNo");
 		return srResourceService.getSrResourceList(srNo);
 	}

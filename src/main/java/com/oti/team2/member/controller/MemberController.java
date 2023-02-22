@@ -1,5 +1,7 @@
 package com.oti.team2.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.dto.ProfileImg;
@@ -74,5 +78,18 @@ public class MemberController {
 		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));
 		return new ResponseEntity<byte[]>(profileImg.getFileData(),  headers, HttpStatus.OK);
 		
+	}
+	
+	/**
+	 * 개발자 목록 조회
+	 * @author : 안한길
+	 * @param deptCd
+	 * @return List<member>
+	 */
+	@ResponseBody
+	@GetMapping("/department")
+	public List<Member> getEmployeeList(@RequestParam() String deptCd){
+		
+		return memberService.getEmployeeNameList(deptCd);
 	}
 }

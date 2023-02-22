@@ -89,4 +89,14 @@ public class MemberService implements IMemberService {
 	public int modifyMember(Member member) {
 		return memberDao.updateMemberByMemberId(member);
 	}
+	/*
+	 * 개발자 목록 조회
+	 * @author 안한길
+	 * @param  부서 id
+	 * @return 개발자 목록
+	 * */
+	@Override
+	public List<Member> getEmployeeNameList(String deptCd) {
+		return memberDao.selectByDeptCd(deptCd);
+	}
 }
