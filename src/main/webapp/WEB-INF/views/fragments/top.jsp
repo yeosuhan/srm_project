@@ -91,13 +91,10 @@
 				</a>
 					<ul class="show-notification profile-notification">
 						<li class="waves-effect waves-light">
-							<a href="/myportal"><i class="ti-home"></i> My Portal</a>
+							<a href="${pageContext.request.contextPath}/myportal"><i class="ti-home"></i> My Portal</a>
 						</li>
 						<li class="waves-effect waves-light">
-							<a href="/myinfo"><i class="ti-user"></i> Profile</a>
-						</li>
-						<li class="waves-effect waves-light">
-							<a href="auth-lock-screen.html"> <i class="ti-lock"></i> Lock Screen</a>
+							<a href="${pageContext.request.contextPath}/member/myinfo"><i class="ti-user"></i> Profile</a>
 						</li>
 						<li class="waves-effect waves-light">
 							<a href="auth-normal-sign-in.html"> <i class="ti-layout-sidebar-left"></i> Logout</a>
