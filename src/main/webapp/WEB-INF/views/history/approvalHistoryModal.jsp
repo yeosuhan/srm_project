@@ -1,70 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%-- 작성자: 최은종 / 작성 날짜: 230223 --%>
+
+<script type="text/javascript">
+	function getHstryDetail(historyId) {
+		console.log("historyId: " + historyId);
+
+		$.ajax({
+			url : '/history/detail/' + historyId,
+			type : 'GET',
+			success : function(result) {
+				console.log(result);
+
+				$('#AsrNo').val(result.srNo);
+				$('#AinstNm').val(result.instNm);
+				$('#AsysNm').val(result.sysNm);
+				$('#AdeptNm').val(result.deptNm);
+				$('#AwrtYmd').val(result.wrtYmd);
+				$('#AcmptnDmndYmd').val(result.cmptnDmndYmd);
+				if(result.chgEndYmd == null){
+					$('#AchgEndYmd').val("-");
+				} else {
+					$('#AchgEndYmd').val(result.chgEndYmd);
+				}
+				$('#AhstryTtl').val(result.hstryTtl);
+				$('#AhstryCn').val(result.hstryCn);
+			}
+		});
+	}
+</script>
+
 <div class="modal fade" id="approvalHistoryModal">
-
-	<div class="modal-body modal-dialog modal-lg" style="height:600px;">
+	<div class="modal-body modal-dialog modal-lg" style="height: 600px;">
 		<div class="m_head ">
-			<div class="modal_title" style="color: white">완료 예정일 수정 요청/ 개발
-				취소 요청</div>
-
+			<div class="modal_title" style="color: white">진척 정보 변경 사항</div>
 		</div>
 		<div class="m_body bg-light">
 			<form id="approvalHistoryForm" action="/" method="POST">
 				<div class="row my-3">
 					<div class="col-2">SR 번호 :</div>
 					<div class="col-10">
-						<input style="width: 90%" type="text" value="테스트" disabled>
+						<input id="AsrNo" style="width: 91%" type="text" value="" disabled>
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">요청 기관 :</div>
+					<div class="col-2">기관 :</div>
 					<div class="col-4">
-						<input type="text" value="고용부" disabled>
+						<input id="AinstNm" type="text" value="" disabled>
 					</div>
 					<div class="col-2">요청 시스템 :</div>
 					<div class="col-4">
-						<input type="text" value="개발1팀" disabled>
+						<input id="AsysNm" type="text" value="" disabled>
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">담당부서 :</div>
+					<div class="col-2">담당 부서 :</div>
 					<div class="col-4">
-						<input type="text" value="고용부" disabled>
+						<input id="AdeptNm" type="text" value="" disabled>
 					</div>
-					<div class="col-2">작성일 :</div>
+					<div class="col-2 pr-0">변경요청 발신일 :</div>
 					<div class="col-4">
-						<input type="text" value="개발1팀" disabled>
+						<input id="AwrtYmd" type="text" value="" disabled>
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">
-						<label for="">기존 예정일 : </label>
+					<div class="col-2 pr-0">
+						<label for="">기존 완료예정일 : </label>
 					</div>
 					<div class="col-4">
-						<input type="text" value="2023.02.24." disabled>
+						<input id="AcmptnDmndYmd" type="text" value="" disabled>
 					</div>
 					<div class="col-2">
-						<label for="chgEndYmd">요청 예정일 : </label>
+						<label for="">변경될 완료일 : </label>
 					</div>
 					<div class="col-4">
-						<input type="text" value="2023.02.30." disabled>
+						<input id="AchgEndYmd" type="text" value="" disabled>
 					</div>
 				</div>
 				<div class="row my-3">
 					<div class="col-2">제목 :</div>
 					<div class="col-10">
-						<input style="width: 90%" type="text" value="기간 연장" disabled>
+						<input id="AhstryTtl" style="width: 90%" type="text" value=""
+							disabled>
 					</div>
 				</div>
 				<div class="row my-3">
 					<div class="col-2">내용 :</div>
 					<div class="col-10">
-						<textarea style="width: 90%" rows="5" disabled>기간연장을 요청합니다.</textarea>
+						<textarea id="AhstryCn" style="width: 90%" rows="5" disabled></textarea>
 					</div>
 				</div>
 			</form>
-
-
 			<div class="pt-3" align="center">
 				<button type="submit" form="" class="btn btn-info save center"
 					data-dismiss="modal">승인</button>
@@ -73,8 +100,5 @@
 					data-dismiss="modal">반려</button>
 			</div>
 		</div>
-
-
 	</div>
-
 </div>
