@@ -36,7 +36,7 @@ public class SrinformationController {
 	 * 작성일자 : 2023-02-22
 	 * @return sr진척 목록 조회 - 완료
 	 */
-	@RequestMapping(value="/srinformationlist", method=RequestMethod.GET)
+	@RequestMapping(value="/srinformation/list", method=RequestMethod.GET)
 	public String getList(Model model) {
 		List<SrinformationList> srlist = srinformationService.getList();
 		model.addAttribute("srlist", srlist);

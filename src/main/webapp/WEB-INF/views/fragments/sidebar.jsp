@@ -68,7 +68,7 @@
 	            </c:if>
 	            <c:if test="${role eq 2 || role eq 3}">
 		            <li>
-		                <a href="<c:url value='/srinformationlist'/>" class="waves-effect waves-dark">
+		                <a href="<c:url value='/srinformation/list'/>" class="waves-effect waves-dark">
 		                    <span class="pcoded-micon"><i class="fas fa-file-alt pt-1"></i><b>FC</b></span>
 		                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">SR 진척 관리</span>
 		                    <span class="pcoded-mcaret"></span>
