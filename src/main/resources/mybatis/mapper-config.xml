@@ -19,5 +19,6 @@
 		<typeAlias type="com.oti.team2.util.pager.Pager" alias="pager" />
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrInformationHistory" alias="srInformationHistory" />
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrHistoryListDto" alias="srHistoryListDto" />
+		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto" alias="srHistoryDetailDto" />
 	</typeAliases> 
 </configuration>

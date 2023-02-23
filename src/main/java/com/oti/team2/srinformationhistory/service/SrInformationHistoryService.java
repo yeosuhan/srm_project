@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao;
+import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.util.pager.Pager;
 
@@ -31,9 +32,9 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	}
 	
 	@Override
-	public SrInformationHistory getSrInformationHistory(int hstryId) {
-		SrInformationHistory srInformationHistory = srInformationHistoryDao.selectByHstryId(hstryId);
-		return srInformationHistory;
+	public SrHistoryDetailDto getSrInformationHistory(int hstryId) {
+		SrHistoryDetailDto srHistoryDetailDto = srInformationHistoryDao.selectByHstryId(hstryId);
+		return srHistoryDetailDto;
 	}
 
 	@Transactional

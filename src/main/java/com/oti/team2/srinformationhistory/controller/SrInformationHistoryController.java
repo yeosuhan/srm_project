@@ -3,13 +3,13 @@ package com.oti.team2.srinformationhistory.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.srinformationhistory.service.ISrInformationHistoryService;
@@ -17,7 +17,7 @@ import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
 
-@RestController // 리턴값에 자동으로 ResponseBody 붙어서 리턴
+@RestController
 @Log4j2
 @RequestMapping("/history")
 public class SrInformationHistoryController {
@@ -46,13 +46,14 @@ public class SrInformationHistoryController {
 		return srHistoryList;
 	}
 
-	@GetMapping("/detail")
-	public SrInformationHistory getSrInformationHistory(int hstryId, Model model) {
+	@GetMapping("/detail/{hstryId}")
+	public SrHistoryDetailDto getSrInformationHistory(@PathVariable("hstryId") int hstryId) {
 		log.info("srInformationHistory 상세조회");
 
-		SrInformationHistory srInformationHistory = srInformationHistoryService.getSrInformationHistory(hstryId);
-		model.addAttribute("srInformationHistory", srInformationHistory);
-
-		return srInformationHistory;
+		SrHistoryDetailDto srHistoryDetailDto = srInformationHistoryService.getSrInformationHistory(hstryId);
+		log.info(hstryId);
+		log.info("srHistoryDetailDto 조회 : " + srHistoryDetailDto + "/" + "hstryId : " + hstryId);
+		
+		return srHistoryDetailDto;
 	}
 }

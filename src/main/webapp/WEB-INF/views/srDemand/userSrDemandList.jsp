@@ -16,13 +16,18 @@
 					type : "GET",
 
 					success : function(result) {
-						console.log("성공" + result);
+						console.log(result);
 						console.log(result.srInformationHistory[0].hstryTtl);
 
 						for (var i = 0; i < result.srInformationHistory.length; i++) {
+							var historyId =  result.srInformationHistory[i].hstryId;
 							var historyCount = [ i + 1 ];
 							var historyTtl = result.srInformationHistory[i].hstryTtl;
-							var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
+							if(result.srInformationHistory[i].chgEndYmd === null){
+								var historyChgEndYmd = "-";
+							} else {
+								var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
+							}							
 							if (result.srInformationHistory[i].hstryStts == 'I') {
 								var historyStts = "요청 중";
 							} else if (result.srInformationHistory[i].hstryStts == 'N') {
@@ -31,23 +36,14 @@
 								var historyStts = "승인";
 							}
 
-							var param1 = '<tr data-toggle="modal" data-target="#addHistoryModalDetail">';
-							param1 += '<th scope="row" id="AhstryCount"></th>';
-							param1 += '<td id='+'AhstryTtl'+'></td>';
+							var param = '<tr data-toggle="modal" data-target="#approvalHistoryModal" onclick="getHstryDetail(' + historyId + ')">';
+								param += 	'<th scope="row">' + historyCount + '</th>';
+								param += 	'<td>' + historyTtl + '</td>';
+								param += 	'<td>' + historyChgEndYmd + '</td>';
+								param += 	'<td>' + historyStts + '</td>';
+								param +=  '</tr>';
 
-							param1 += '<td id='+'AchgEndYmd'+'></td>';
-							param1 += '<td id='+'AhstryStts'+'></td>';
-							param1 += '</tr>';
-
-							console.log(param1);
-
-							$("#historyList").append(param1);
-
-							$("#AhstryCount").append(historyCount);
-							$("#AhstryTtl").append(historyTtl);
-							$("#AchgEndYmd").append(historyChgEndYmd);
-							$("#AhstryStts").append(historyStts);
-
+							$("#history").append(param);
 						}
 					}
 				});
@@ -489,18 +485,12 @@ th {
 																			<tr>
 																				<th style="width: 1px;">순번</th>
 																				<th>제목</th>
-																				<th>변경된 완료예정일</th>
+																				<th>변경될 완료일</th>
 																				<th>수락여부</th>
 																			</tr>
 																		</thead>
 																		<tbody id="history">
-																			<tr data-toggle="modal"
-																				data-target="#approvalHistoryModal">
-																				<th scope="row" id="AhstryCount"></th>
-																				<td id="AhstryTtl"></td>
-																				<td id="AchgEndYmd"></td>
-																				<td id="AhstryStts"></td>
-																			</tr>
+																			
 																		</tbody>
 																	</table>
 																</div>
