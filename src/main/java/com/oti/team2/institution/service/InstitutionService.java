@@ -36,7 +36,6 @@ public class InstitutionService implements IInstitutionService{
 		log.info(memberId);
 		return institutionDao.selectByInst(memberId);		
 	}
-	
 	/**
 	 * 내 기관 등록
 	 * @author 여수한
@@ -45,10 +44,10 @@ public class InstitutionService implements IInstitutionService{
 	 * @return
 	 */
 	@Override
-	public void writeInst(Institution institution) {
+	public void addInst(Institution institution) {
 		institutionDao.insertByInst(institution);
 	}
-	
+
 	/**
 	 * 내 기관 수정
 	 * @author 여수한
