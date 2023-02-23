@@ -66,7 +66,6 @@ public interface IMemberService {
 	 * @return 반영된 행수
 	 * */
 	public int modifyMember(Member member);
-
 	/*
 	 * 개발자 목록 조회
 	 * @author 안한길

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.srinformation.dao.SrinformationDao"> <!-- 식별 이름은 전체 이름을 넣어야됨 -->
+
+	<!-- 모든 진척 목록(조회) -->
+	<select id="selectInfoAll" parameterType="String" resultType="srinformationlist">
+		SELECT
+			SI.DMND_NO AS dmndNo,
+			SI.SR_NO AS srNo,
+			S1.SYS_NM AS sysNm,
+			T.TASK_SE_NM AS taskSeNm,
+			SD.TTL AS ttl,
+			M.FLNM AS flnm,
+			SI.BGNG_YMD AS bgngYmd,
+			SI.END_YMD AS endYmd,
+			S2.STTS_NM AS sttsNm
+		FROM 
+			SR_INFORMATION SI, SR_DEMAND SD, TASK T, MEMBERS M, SYSTEMS S1, STATUS S2
+		WHERE 
+			SD.DMND_NO = SI.DMND_NO
+		AND
+			SD.TASK_SE_CD = T.TASK_SE_CD
+		AND
+			SD.CUST_ID = M.MEMBER_ID
+		AND
+			S1.SYS_CD = SD.SYS_CD
+		AND
+			S2.STTS_CD = SD.STTS_CD
+	</select>
+	
+	<!-- 진척 상세 조회 -->
+	<!-- 요청 상세 정보(완료) -->
+	<select id="selectDetailByDmndNo" parameterType="String" resultType="srdemandDetail">
+		SELECT
+			SD.DMND_NO AS dmndNo,
+			SD.TTL AS ttl,
+			SD.REL_GRUND AS relGrund,
+			S.SYS_NM AS sysNm,
+			T.TASK_SE_NM AS taskSeNm,
+			I.INST_NM AS instNm,
+			M.FLNM AS flnm,
+			to_char(SD.DMND_YMD, 'YYYY-MM-DD') AS dmndYmd,
+			to_char(SD.CMPTN_DMND_YMD, 'YYYY-MM-DD') AS cmptnDmndYmd,
+			SD.CN AS cn
+		FROM
+			SR_DEMAND SD, MEMBERS M, SYSTEMS S, TASK T, INSTITUTION I
+		WHERE
+			SD.DMND_NO = #{Detail}
+		AND
+			SD.CUST_ID = M.MEMBER_ID
+		AND
+			S.SYS_CD = SD.SYS_CD
+		AND
+			T.TASK_SE_CD = SD.TASK_SE_CD
+		AND
+			M.INST_CD = I.INST_CD
+	</select>
+	
+	<!-- 계획정보 -->
+	<select id="selectPlanByDmndNo" parameterType="String" resultType="srplanInfomaion">
+		SELECT
+			D.DEPT_NM AS deptNm,
+			M.FLNM AS flnm,
+			to_char(SI.BGNG_YMD, 'YYYY-MM-DD') AS bgngYmd,
+			to_char(SI.END_YMD, 'YYYY-MM-DD') AS endYmd,
+			SI.RVW_CN AS rvwCn
+		FROM
+			SR_INFORMATION SI, MEMBERS M, DEPARTMENTS D
+		WHERE
+			SI.DMND_NO = #{Plan}
+		AND
+			SI.DEPT_CD = D.DEPT_CD
+		AND
+			SI.PIC_ID = M.MEMBER_ID
+	</select>
+</mapper>

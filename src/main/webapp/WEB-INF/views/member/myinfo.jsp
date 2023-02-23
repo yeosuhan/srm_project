@@ -36,7 +36,7 @@
 													</div>
 												</div>
 												<div class="col-8 card-block">
-													<form class="form-material" enctype="multipart/form-data"id="myinfo" action="<c:url value='/member/myinfo'/>" method="post" >
+													<form class="form-material" enctype="multipart/form-data" id="myinfo" action="<c:url value='/member/myinfo'/>" method="post" >
 														<div class="form-group row">
 															<p class="col-sm-2 font-weight-bold">이름</p>
 															<div class="col-sm-10">${member.flnm}</div>
@@ -84,7 +84,7 @@
 															<label class="float-label">기관 소속</label>
 
 															<div class="btn-group dropright">
-																<a href="<c:url value='/member/addinst'/>" type="button" class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
+																<a href="<c:url value='/institution/add'/>" type="button" class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
 																	기관 등록
 																</a>
 																
