@@ -15,8 +15,8 @@ table, th, td {
 <script>
 	function getClient(cid) {
 		console.log("~~" + cid);
-		$
-				.ajax({
+		
+				$.ajax({
 					url : '/admin/client/' + cid,
 					type : 'GET',
 					data : {

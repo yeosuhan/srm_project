@@ -27,7 +27,7 @@
 												<h5>나의 기관 </h5>
 											</div>
 											<div class="col-8 card-block">
-												<form method="post" action="<c:url value='/member/updateinst'/>" id="myInstForm" class="form-material">
+												<form method="post" action="<c:url value='/institution/list'/>" id="myInstForm" class="form-material">
 													<div class="form-group form-default">
 														<input value="${inst.instNm}"type="text" name="InstNm"
 															class="form-control" required style="width: 50%">

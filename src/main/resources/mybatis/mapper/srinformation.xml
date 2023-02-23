@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.srinformation.dao.SrinformationDao"> <!-- 식별 이름은 전체 이름을 넣어야됨 -->
+
+	<!-- 모든 진척 목록(조회) -->
+	<select id="selectInfoAll" parameterType="String" resultType="srinformationlist">
+		SELECT
+			SI.DMND_NO AS dmndNo,
+			SI.SR_NO AS srNo,
+			S1.SYS_NM AS sysNm,
+			T.TASK_SE_NM AS taskSeNm,
+			SD.TTL AS ttl,
+			M.FLNM AS flnm,
+			SI.BGNG_YMD AS bgngYmd,
+			SI.END_YMD AS endYmd,
+			S2.STTS_NM AS sttsNm
+		FROM 
+			SR_INFORMATION SI, SR_DEMAND SD, TASK T, MEMBERS M, SYSTEMS S1, STATUS S2
+		WHERE 
+			SD.DMND_NO = SI.DMND_NO
+		AND
+			SD.TASK_SE_CD = T.TASK_SE_CD
+		AND
+			SD.CUST_ID = M.MEMBER_ID
+		AND
+			S1.SYS_CD = SD.SYS_CD
+		AND
+			S2.STTS_CD = SD.STTS_CD
+	</select>
+	
+	<!-- 계획정보 -->
+	<select id="selectPlanByDmndNo" parameterType="String" resultType="srplanInfomaion">
+		SELECT
+			D.DEPT_NM AS deptNm,
+			M.FLNM AS flnm,
+			to_char(SI.BGNG_YMD, 'YYYY-MM-DD') AS bgngYmd,
+			to_char(SI.END_YMD, 'YYYY-MM-DD') AS endYmd,
+			SI.RVW_CN AS rvwCn
+		FROM
+			SR_INFORMATION SI, MEMBERS M, DEPARTMENTS D
+		WHERE
+			SI.DMND_NO = #{Plan}
+		AND
+			SI.DEPT_CD = D.DEPT_CD
+		AND
+			SI.PIC_ID = M.MEMBER_ID
+	</select>
+</mapper>

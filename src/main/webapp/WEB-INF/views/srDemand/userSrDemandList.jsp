@@ -64,6 +64,7 @@
 		document.body.style = `overflow: scroll`;
 	});
 </script>
+
 <style>
 #startDatepicker, #endDatepicker, #addDatepicker {
 	width: 90px;
@@ -223,124 +224,34 @@ th {
 																		style="font-size: 12;">
 																		<thead>
 																			<tr>
-																				<th style="width: 1px;">#</th>
-																				<th>SR번호</th>
-																				<th>시스템구분</th>
-																				<th>업무구분</th>
-																				<th style="width: 200px;">SR제목</th>
-																				<th>담당자</th>
-																				<th>완료요청일</th>
-																				<th>완료예정일</th>
+																				<th style="width: 1px;"></th>
+																				<th>요청 번호</th>
+																				<th>제목</th>
+																				<th>관련시스템</th>
+																				<th style="width: 200px;">등록자</th>
+																				<th>소속</th>
+																				<th>검토자</th>
 																				<th>진행상태</th>
+																				<th>등록일</th>
+																				<th>완료예정일</th>
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<tr>
-																				<th scope="row">1</th>
-																				<td>Mark</td>
-																				<td>Otto</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																				<td>Mark</td>
-																				<td>Otto</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																			</tr>
-																			<tr>
-																				<th scope="row">2</th>
-																				<td>Jacob</td>
-																				<td>Thornton</td>
-																				<td>@fat</td>
-																				<td>Jacob</td>
-																				<td>Thornton</td>
-																				<td>@fat</td>
-																				<td>Jacob</td>
-																				<td>Thornton</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-
-																			</tr>
-																			<tr>
-																				<th scope="row">3</th>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																				<td>@twitter</td>
-																				<td>Larry</td>
-																				<td>the Bird</td>
-																			</tr>
+																			<c:forEach var="srDemand" items="${srDemandList}"
+																				varStatus="status">
+																				<tr>
+																					<th scope="row">${status.count}</th>
+																					<td>${srDemand.dmndNo}</td>
+																					<td>${srDemand.ttl}</td>
+																					<td>${srDemand.sysNm}</td>
+																					<td>${srDemand.custNm}</td>
+																					<td>${srDemand.instNm}</td>
+																					<td>${srDemand.rvwrNm}</td>
+																					<td>${srDemand.sttsNm}</td>
+																					<td>${srDemand.dmndYmd}</td>
+																					<td>${srDemand.endYmd}</td>
+																				</tr>
+																			</c:forEach>
 																		</tbody>
 																	</table>
 																</div>
@@ -557,10 +468,11 @@ th {
 																	<div class="row">
 																		<div class="col-6"></div>
 																		<div class="col-6" style="text-align: right">
-																			<button class="btn btn-primary btn-round save center">승인</button>
+																			<button id="modbtn"
+																				class="btn btn-primary btn-round save center">수정</button>
 
 																			<button
-																				class="btn btn-primary btn-round danger cancle">반려</button>
+																				class="btn btn-primary btn-round danger cancle">삭제</button>
 																		</div>
 																	</div>
 																</div>
@@ -582,7 +494,6 @@ th {
 																			</tr>
 																		</thead>
 																		<tbody id="history">
-
 																			<tr data-toggle="modal"
 																				data-target="#approvalHistoryModal">
 																				<th scope="row" id="AhstryCount"></th>
@@ -590,15 +501,11 @@ th {
 																				<td id="AchgEndYmd"></td>
 																				<td id="AhstryStts"></td>
 																			</tr>
-
 																		</tbody>
 																	</table>
 																</div>
 															</div>
 														</div>
-
-
-
 													</div>
 												</div>
 											</div>

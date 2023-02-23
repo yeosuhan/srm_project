@@ -21,4 +21,8 @@
 	<mybatis-spring:scan base-package="com.oti.team2.department.dao"/>
 	<mybatis-spring:scan base-package="com.oti.team2.institution.dao"/>
 	<mybatis-spring:scan base-package="com.oti.team2.srinformationhistory.dao"/>
+	<mybatis-spring:scan base-package="com.oti.team2.task.dao"/>
+	<mybatis-spring:scan base-package="com.oti.team2.srdemand.dao"/>
+	<mybatis-spring:scan base-package="com.oti.team2.system.dao"/>
+	<mybatis-spring:scan base-package="com.oti.team2.srinformation.dao"/>
 </beans>

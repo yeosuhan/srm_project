@@ -111,9 +111,6 @@ th {
 															<div class="col-10">
 																<h5>SR 요청 관리</h5>
 															</div>
-															<div class="col-2 pl-5">
-																<button class="btn btn-info" id="addbtn">요청 등록</button>
-															</div>
 														</div>
 														<hr />
 														<form id="srSearchForm">

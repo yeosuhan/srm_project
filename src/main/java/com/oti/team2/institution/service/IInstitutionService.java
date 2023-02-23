@@ -3,7 +3,6 @@ package com.oti.team2.institution.service;
 import com.oti.team2.institution.dto.Institution;
 
 public interface IInstitutionService {
-
 	/** 
 	 * 기관 정보 조회
 	 * @author 신정은
@@ -27,7 +26,7 @@ public interface IInstitutionService {
 	 * @param model
 	 * @return
 	 */
-	public void writeInst(Institution institution);
+	public void addInst(Institution institution);
 	
 	/**
 	 * 내 기관 수정
@@ -37,5 +36,4 @@ public interface IInstitutionService {
 	 * @return
 	 */
 	public void updateInst(Institution institution);
-
 }
