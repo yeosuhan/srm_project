@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.progress.dao.IProgressDao">
+	
+	<!-- sr요청 진척률 조회 -->
+	<select id="selectProgressByDmndNo" parameterType="string" resultType="progress">
+		SELECT
+			BGNG_YMD AS bgngYmd,
+			END_YMD AS endYmd,
+			PRGRS_YN AS prgrsYn
+		FROM
+			PROGRESS P
+		WHERE
+			P.SR_NO = #{dmndNo}
+	</select>
+
+
+</mapper>

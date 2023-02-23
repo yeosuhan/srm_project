@@ -5,15 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.oti.team2.srinformation.dao.SrinformationDao;
-import com.oti.team2.srinformation.dto.SrdemandDetail;
+import com.oti.team2.srinformation.dao.ISrinformationDao;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInfomaion;
 @Service
 public class SrinformationService implements ISrinformationService{
 	
 	@Autowired
-	SrinformationDao srinformationDao;
+	ISrinformationDao srinformationDao;
 	
 	/**
 	 * 
@@ -35,8 +34,8 @@ public class SrinformationService implements ISrinformationService{
 	 * @return sr진척 계획정보 조회
 	 */
 	@Override
-	public SrplanInfomaion getPlan(String Plan) {
-		return srinformationDao.selectPlanByDmndNo(Plan);
+	public SrplanInfomaion getPlan(String dmndNo) {
+		return srinformationDao.selectPlanByDmndNo(dmndNo);
 	}
 
 }

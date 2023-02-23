@@ -72,6 +72,7 @@ function showSchedule(){
 			});
 		}
 	});
+
 };
 /* 입력한 자원정보 추가
  * @author : 안한길
