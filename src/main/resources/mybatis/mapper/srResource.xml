@@ -35,4 +35,14 @@
 		VALUES (sr_src_seq.nextval,#{srNo}, #{empId}, #{ptcptnRoleCd}, #{schdlBgngYmd}, #{schdlEndYmd})  
 		
 	</insert>
+	
+	<!-- 자원정보 삭제 -->
+	<delete id="deleteBySrSrc" parameterType="map">
+		DELETE FROM SR_RESOURCES
+		<where>
+			<foreach item="src" collection="srSrc" separator="OR">
+				(SR_SRC = #{item})
+			</foreach>
+		</where>
+	</delete>
 </mapper>

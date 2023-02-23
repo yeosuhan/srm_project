@@ -21,7 +21,17 @@ public interface ISrResourceDao {
 	 * @return List<SrResource>
 	 */
 	List<SrResourceOfDeveloper> selectByEmpId(String empId);
-
+	/** 입력한 자원 정보 추가
+	 * @author : 안한길
+	 * @param SrResource
+	 * @return int
+	 * */
 	int insertSrResource(SrResource srResource);
+	/** 선택한 자원정보 삭제
+	 * @author : 안한길
+	 * @param SrSrc
+	 * @return int
+	 * */
+	int deleteBySrSrc(String[] srSrc);
 
 }

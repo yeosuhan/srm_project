@@ -38,3 +38,15 @@ $(document).ready(function(){
 	
 });
 
+function deleteResource(){
+	var srSrc=$("#resourceTableRow input[name='resource']:checked").val();
+	console.log(srSrc);
+	$.ajax({
+		url:"/sr-resource/resource/delete",
+		type:"POST",
+		data:srSrc,
+		success:function(result){
+			console.log(result);
+		}
+	});
+}

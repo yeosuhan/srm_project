@@ -26,4 +26,10 @@ public interface ISrResourceService {
 	 * @return int
 	 * */
 	int addSrResource(SrResource srResource);
+	/** 선택한 자원정보 삭제
+	 * @author : 안한길
+	 * @param SrSrc
+	 * @return int
+	 * */
+	int deleteSrResource(String[] srSrc);
 }

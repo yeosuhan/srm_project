@@ -42,5 +42,15 @@ public class SrResourceService implements ISrResourceService {
 	public int addSrResource(SrResource srResource) {
 		return srResourceDao.insertSrResource(srResource);
 	}
+	
+	/** 선택한 자원정보 삭제
+	 * @author : 안한길
+	 * @param SrSrc
+	 * @return int
+	 * */
+	@Override
+	public int deleteSrResource(String[] srSrc) {
+		return srResourceDao.deleteBySrSrc(srSrc);
+	}
 
 }

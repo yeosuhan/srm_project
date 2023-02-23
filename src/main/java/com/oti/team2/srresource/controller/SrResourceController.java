@@ -63,4 +63,18 @@ public class SrResourceController {
 		int result = srResourceService.addSrResource(srResource);
 		return result;
 	}
+	
+	/** 선택한 자원정보 삭제
+	 * @author : 안한길
+	 * @param SrSrc
+	 * @return int
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/resource/delete" , method=RequestMethod.POST)
+	public int deleteSrResource(String[] srSrc) {
+		log.info(srSrc);
+		
+		int result = srResourceService.deleteSrResource(srSrc);
+		return result;
+	}
 }
