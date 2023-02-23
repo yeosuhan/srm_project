@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%-- 작성자: 최은종 / 작성 날짜: 230223 --%>
+
 <script type="text/javascript">
 	function getHstryDetail(historyId) {
 		console.log("historyId: " + historyId);
@@ -34,7 +37,7 @@
 			<div class="modal_title" style="color: white">진척 정보 변경 사항</div>
 		</div>
 		<div class="m_body bg-light">
-			<form id="resourceForm" action="/" method="POST">
+			<form id="approvalHistoryForm" action="/" method="POST">
 				<div class="row my-3">
 					<div class="col-2">SR 번호 :</div>
 					<div class="col-10">

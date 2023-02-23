@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+<%-- 작성자: 최은종 / 작성 날짜: 230223 --%>
 
 <html>
 <head>
@@ -10,6 +11,9 @@
 	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css'
 	rel='stylesheet' />
 </head>
+<script
+	src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
+
 <script>
 	
 <%-- 모달 실행 --%>
@@ -45,7 +49,7 @@
 				$("#SRDCmptnDmndYmd").text(detail.dd.cmptnDmndYmd);
 				$("#SRDCn").text(detail.dd.cn);
 				$("#SRDFile").text(detail.dd.fileNm);
-				
+
 				$("#SRPDeptNm").text(detail.pi.deptNm);
 				$("#SRPFlnm").text(detail.pi.flnm);
 				$("#SRPBgngYmd").text(detail.pi.bgngYmd);
@@ -440,9 +444,9 @@ th {
 																class="nav-link active" data-toggle="tab" href="#home1"
 																role="tab">SR 계획정보</a>
 																<div class="slide"></div></li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#profile1" role="tab">SR
-																	자원정보</a>
+															<li class="nav-item"><a id="srResourceTab"
+																class="nav-link" data-toggle="tab" href="#profile1"
+																role="tab">SR 자원정보</a>
 																<div class="slide"></div></li>
 															<li class="nav-item"><a class="nav-link"
 																data-toggle="tab" href="#messages1" role="tab">SR
@@ -488,7 +492,8 @@ th {
 																	<div class="col col-sm-2" style="line-height: 90px;">검토
 																		내용</div>
 																	<div class="col col-sm-9">
-																		<textarea rows="5" cols="5" class="form-control" id="SRPRvwCn"></textarea>
+																		<textarea rows="5" cols="5" class="form-control"
+																			id="SRPRvwCn"></textarea>
 
 																	</div>
 																</div>
@@ -515,38 +520,15 @@ th {
 																					<th>투입종료일</th>
 																				</tr>
 																			</thead>
-																			<tbody>
-																				<tr>
-																					<th scope="row">1</th>
-																					<td><input name="resource" type="checkbox"></td>
-																					<td>Otto</td>
-																					<td>@mdo</td>
-																					<td>@mdo</td>
-																					<td>Mark</td>
-																				</tr>
-																				<tr>
-																					<th scope="row">2</th>
-																					<td><input name="resource" type="checkbox"></td>
-																					<td>Thornton</td>
-																					<td>@fat</td>
-																					<td>Jacob</td>
-																					<td>Thornton</td>
-																				</tr>
-																				<tr>
-																					<th scope="row">3</th>
-																					<td><input name="resource" type="checkbox"></td>
-																					<td>the Bird</td>
-																					<td>@twitter</td>
-																					<td>Larry</td>
-																					<td>the Bird</td>
-																				</tr>
+																			<tbody id="resourceTableRow">
+
 																			</tbody>
 																		</table>
 																	</div>
 																</div>
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
-																<button class="btn btn-info"
+																<button onclick="deleteResource()" class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 																<button class="btn btn-info"

@@ -25,6 +25,13 @@ public class SrInformationHistoryController {
 	@Autowired
 	private ISrInformationHistoryService srInformationHistoryService;
 
+	/**
+	 * SR처리 히스토리 내역 조회 메서드
+	 *
+	 * @author 최은종
+	 * @param pageNo, srNo srNo의 히스토리 목록을 조회하고 페이징처리를 하기 위해 pageNo와 srNo를 매개변수로 설정함 
+	 * @return srHistoryList 히스토리 리스트와 페이징 객체를 담은 Dto 리턴 
+	 */
 	@GetMapping("/list/{srNo}")
 	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
 			@PathVariable("srNo") String srNo) {
@@ -46,6 +53,13 @@ public class SrInformationHistoryController {
 		return srHistoryList;
 	}
 
+	/**
+	 * SR처리 히스토리 상세 조회 메서드
+	 *
+	 * @author 최은종
+	 * @param hstryId 히스토리 목록에서 하나의 히스토리를 상세 조회하기 위해 hstryId를 매개변수로 설정
+	 * @return srHistoryDetailDto 상세 내용을 담은 srHistoryDetailDto 리턴
+	 */
 	@GetMapping("/detail/{hstryId}")
 	public SrHistoryDetailDto getSrInformationHistory(@PathVariable("hstryId") int hstryId) {
 		log.info("srInformationHistory 상세조회");

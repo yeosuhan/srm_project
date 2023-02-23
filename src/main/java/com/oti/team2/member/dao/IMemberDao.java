@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.oti.team2.member.dto.Developer;
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.util.pager.Pager;
@@ -68,4 +69,12 @@ public interface IMemberDao {
 	 * @return 반영된 행수
 	 * */
 	public int updateMemberByMemberId(Member member);
+
+	/*
+	 * 개발자 목록 조회
+	 * @author 안한길
+	 * @param  부서 id
+	 * @return 개발자 목록
+	 * */
+	public List<Developer> selectByDeptCd(String deptCd);
 }

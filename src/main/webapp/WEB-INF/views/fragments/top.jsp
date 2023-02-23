@@ -91,16 +91,22 @@
 				</a>
 					<ul class="show-notification profile-notification">
 						<li class="waves-effect waves-light">
-							<a href="/myportal"><i class="ti-home"></i> My Portal</a>
+							<a href="${pageContext.request.contextPath}/myportal"><i class="ti-home"></i> My Portal</a>
 						</li>
 						<li class="waves-effect waves-light">
-							<a href="/myinfo"><i class="ti-user"></i> Profile</a>
-						</li>
-						<li class="waves-effect waves-light">
-							<a href="auth-lock-screen.html"> <i class="ti-lock"></i> Lock Screen</a>
+							<a href="${pageContext.request.contextPath}/member/myinfo"><i class="ti-user"></i> Profile</a>
 						</li>
 						<li class="waves-effect waves-light">
 							<a href="auth-normal-sign-in.html"> <i class="ti-layout-sidebar-left"></i> Logout</a>
+						</li>
+						<li class="waves-effect waves-light">
+							<a href="${pageContext.request.contextPath}/example?role=1"> <i class="ti-layout-sidebar-left"></i> 고객 로그인</a>
+						</li>
+						<li class="waves-effect waves-light">
+							<a href="${pageContext.request.contextPath}/example?role=2"> <i class="ti-layout-sidebar-left"></i> 개발자 로그인</a>
+						</li>
+						<li class="waves-effect waves-light">
+							<a href="${pageContext.request.contextPath}/example?role=3"> <i class="ti-layout-sidebar-left"></i> 관리자 로그인</a>
 						</li>
 					</ul>
 				</li>

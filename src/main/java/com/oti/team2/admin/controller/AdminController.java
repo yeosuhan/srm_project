@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.department.dto.Department;
 import com.oti.team2.department.service.IDepartmentService;
-import com.oti.team2.jobGrade.service.IJobGradeService;
+import com.oti.team2.jobgrade.service.IJobGradeService;
+//github.com/OTI-SRM/srm_project
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.util.Auth;

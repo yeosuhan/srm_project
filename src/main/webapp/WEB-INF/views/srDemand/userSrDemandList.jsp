@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+<%-- 작성자: 최은종 / 작성 날짜: 230223 --%>
 
 <html>
 <head>
@@ -489,8 +490,7 @@ th {
 																				<th>수락여부</th>
 																			</tr>
 																		</thead>
-																		<tbody id="history">
-																			
+																		<tbody id="history">																			
 																		</tbody>
 																	</table>
 																</div>

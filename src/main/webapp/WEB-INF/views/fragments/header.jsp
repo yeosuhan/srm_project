@@ -59,7 +59,9 @@
 	href="${pageContext.request.contextPath}/resources/css/table.css">
 
 <%-- 버튼 css --%>
+<%-- 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/button.css">
+--%>
 
 

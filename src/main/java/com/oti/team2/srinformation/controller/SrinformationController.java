@@ -52,10 +52,12 @@ public class SrinformationController {
 	@ResponseBody
 	@RequestMapping(value="/srinformation/{Detail}", method=RequestMethod.GET)
 	public SrTotal getDetail(@PathVariable("Detail")String Detail, Model model) {
+		
 		String Plan = Detail;
 		SrdemandDetail dd = srDemandService.getInfoDetail(Detail);
 		SrplanInfomaion pi = srinformationService.getPlan(Plan);
 		SrTotal total = new SrTotal(dd,pi);
+		log.info(total);
 		return total;
 	}
 	

@@ -14,7 +14,7 @@ public interface IDepartmentDao {
 	 * 
 	 * @author 최은종
 	 */
-	public List<Department> selectDeptList();
+	public List<Department> selectByMemberId();
 
 	/**
 	 * 신규부서 등록 메서드

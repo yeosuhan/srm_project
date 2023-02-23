@@ -4,7 +4,7 @@
 	namespace="com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao">
 
 	<!-- History 전체 내역 조회 -->
-	<select id="selectHstryList" parameterType="map" resultType="srInformationHistory">
+	<select id="selectBySrNo" parameterType="map" resultType="srInformationHistory">
 		<![CDATA[
 			select hstryId, srNo, hstryTtl, hstryStts, chgEndYmd
 			from 
@@ -22,7 +22,7 @@
 	</select>
 
 	<!-- History 테이블 전체 행수 -->
-	<select id="count" resultType="int">
+	<select id="countAll" resultType="int">
 		select count(*) 
 		from sr_information_history
 	</select>
