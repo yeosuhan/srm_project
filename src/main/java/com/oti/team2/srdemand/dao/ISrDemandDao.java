@@ -2,8 +2,11 @@ package com.oti.team2.srdemand.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
+import com.oti.team2.srinformation.dto.SrdemandDetail;
 
 public interface ISrDemandDao {
 
@@ -36,4 +39,12 @@ public interface ISrDemandDao {
 	 * @author 신정은
 	 */
 	public int updateByDmndNo(SrRequestDto srRequestDto);
+	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-02-22
+	 * @return sr요청 상세 조회
+	 */
+	public SrdemandDetail selectDetailByDmndNo(@Param("Detail")String Detail);
 }

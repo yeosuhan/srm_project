@@ -18,15 +18,8 @@ public interface ISrinformationService {
 	/**
 	 * 
 	 * @author 여수한
-	 * 작성일자 : 2023-02-22
-	 * @return sr요청 상세 조회
-	 */
-	SrdemandDetail getInfoDetail(String Detail);
-	/**
-	 * 
-	 * @author 여수한
 	 * 작성일자 : 2023-02-23
-	 * @return sr요청 계획정보 조회
+	 * @return sr진척 계획정보 조회
 	 */
 	SrplanInfomaion getPlan(String Plan);
 
