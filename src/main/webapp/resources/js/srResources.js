@@ -38,24 +38,3 @@ $(document).ready(function(){
 	
 });
 
-function addResource(){
-	//var resourceForm = $("#resourceForm").serialize();//serialize()로 생성되는 데이터는 json형식과 맞지 않는다.
-	var resourceForm ={
-			"srNo":$("#resourceForm #srNo").val(),
-			"empId":$("#resourceForm #empId").val(),
-			"ptcptnRoleCd":$("#resourceForm #ptcptnRoleCd").val(),
-			"schdlBgngYmd":$("#resourceForm #schdlBgngYmd").val(),
-			"schdlEndYmd":$("#resourceForm #schdlEndYmd").val()
-	}
-	console.log(resourceForm);
-	$.ajax({
-		url:"/sr-resource/resource/add",
-		type:"POST",
-		contentType:"application/json", //form데이터를 json 형식으로
-		data:resourceForm,
-		success:function(result){
-			console.log(result);
-			
-		}
-	});
-}

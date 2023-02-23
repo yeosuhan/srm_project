@@ -16,34 +16,30 @@ $(document).ready(function(){
 				type:"GET",
 				data:{deptCd:deptCd},
 				success:function(result){
-					result.forEach((value,index)=>{
+					result.developers.forEach((value,index)=>{
 						$("#empId").append(
 								"<option value='"+value.empId+"'>" +value.flnm+"</option>"
 						);
-						//console.log(index);
-						if(index==0){
-							/*달력*/
-							console.log(value.srResourceByEmpId);
-							calendarEl= $('#calendar')[0];
-						
-							calendar = new FullCalendar.Calendar(calendarEl,{
-								headerToolbar:{
-									left : 'prev, next',
-									center: 'title',
-									right:''
-								},
-								height:400,
-								initialView: 'dayGridMonth',
-								events:
-									value.srResourceByEmpId
-								
-							});
-							calendar.render();
-							//처음 모달을 열때 달력이 안보이는 문제
-							$(".fc-scroller td, th").css('width','50px');
-							
-						}
 					});
+					/*달력*/
+					console.log(result.schedule);
+					calendarEl= $('#calendar')[0];
+				
+					calendar = new FullCalendar.Calendar(calendarEl,{
+						headerToolbar:{
+							left : 'prev, next',
+							center: 'title',
+							right:''
+						},
+						height:400,
+						initialView: 'dayGridMonth',
+						events:
+							result.schedule
+						
+					});
+					calendar.render();
+					//처음 모달을 열때 달력이 안보이는 문제
+					$(".fc-scroller td, th").css('width','50px');
 					
 					
 				}
@@ -77,3 +73,27 @@ function showSchedule(){
 		}
 	});
 };
+/* 입력한 자원정보 추가
+ * @author : 안한길
+ * */
+function addResource(){
+	//var resourceForm = $("#addResourceForm").serialize();//serialize()로 생성되는 데이터는 json형식과 맞지 않는다.
+	var resourceForm ={
+			"srNo":$("#addResourceForm #srNo").val(),
+			"empId":$("#addResourceForm #empId").val(),
+			"ptcptnRoleCd":$("#addResourceForm #ptcptnRoleCd").val(),
+			"schdlBgngYmd":$("#addResourceForm #schdlBgngYmd").val(),
+			"schdlEndYmd":$("#addResourceForm #schdlEndYmd").val()
+	}
+	console.log(resourceForm);
+	$.ajax({
+		url:"/sr-resource/resource/add",
+		type:"POST",
+		//contentType:"application/json", //form데이터를 json 형식으로
+		data:resourceForm,
+		success:function(result){
+			console.log(result);
+			
+		}
+	});
+}

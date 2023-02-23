@@ -21,7 +21,7 @@ public class SrResourceService implements ISrResourceService {
 	 */
 	@Override
 	public List<SrResource> getSrResourceListBySrNo(String srNo) {
-		return srResourceDao.selectSrResourceListBySrNo(srNo);
+		return srResourceDao.selectBySrNo(srNo);
 	}
 	/**
 	 * 개발자에 대한 자원 정보 가져오기
@@ -31,7 +31,7 @@ public class SrResourceService implements ISrResourceService {
 	 */
 	@Override
 	public List<SrResourceOfDeveloper> getSrResourceListByEmpId(String empId) {
-		return srResourceDao.selectSrResourceListByEmpId(empId);
+		return srResourceDao.selectByEmpId(empId);
 	}
 	/** 입력한 자원 정보 추가
 	 * @author : 안한길

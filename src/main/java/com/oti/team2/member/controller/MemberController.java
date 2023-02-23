@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.member.dto.Developer;
+import com.oti.team2.member.dto.EmployeeList;
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.member.service.IMemberService;
@@ -92,13 +93,13 @@ public class MemberController {
 	 */
 	@ResponseBody
 	@GetMapping("/department")
-	public List<Developer> getEmployeeList(@RequestParam() String deptCd){
+	public EmployeeList getEmployeeList(@RequestParam() String deptCd){
 		log.info(deptCd);
-		List<Developer> employeeList = memberService.getEmployeeNameList(deptCd);
-		//log.info(employeeList.get(0));
-		List<SrResourceOfDeveloper> resource = srResourceService.getSrResourceListByEmpId(employeeList.get(0).getEmpId());
-		//log.info(resource);
-		employeeList.get(0).setSrResourceByEmpId(resource);
+		EmployeeList employeeList = new EmployeeList();
+		employeeList.setDevelopers(memberService.getEmployeeNameList(deptCd));
+		
+		employeeList.setSchedule(srResourceService.getSrResourceListByEmpId(employeeList.getDevelopers().get(0).getEmpId()));
+		
 		return employeeList;
 	}
 }

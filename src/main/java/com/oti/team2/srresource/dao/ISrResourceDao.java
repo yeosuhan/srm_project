@@ -12,7 +12,7 @@ public interface ISrResourceDao {
 	 * @param srNo
 	 * @return List<SrResource>
 	 */
-	List<SrResource> selectSrResourceListBySrNo(String srNo);
+	List<SrResource> selectBySrNo(String srNo);
 
 	/**
 	 * 개발자에 대한 자원 정보 가져오기
@@ -20,7 +20,7 @@ public interface ISrResourceDao {
 	 * @param empId
 	 * @return List<SrResource>
 	 */
-	List<SrResourceOfDeveloper> selectSrResourceListByEmpId(String empId);
+	List<SrResourceOfDeveloper> selectByEmpId(String empId);
 
 	int insertSrResource(SrResource srResource);
 

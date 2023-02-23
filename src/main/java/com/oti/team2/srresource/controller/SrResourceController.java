@@ -57,8 +57,9 @@ public class SrResourceController {
 	 * */
 	@ResponseBody
 	@RequestMapping(value="/resource/add" , method=RequestMethod.POST)
-	public int addSrResource(@RequestBody SrResource srResource) {
+	public int addSrResource(SrResource srResource) {
 		log.info(srResource);
+		
 		int result = srResourceService.addSrResource(srResource);
 		return result;
 	}

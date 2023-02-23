@@ -14,12 +14,12 @@
 					
 				</div>
 				<div class="col-6 border-left-1">
-					<form id="resourceForm" action="/" method="POST">
+					<form id="addResourceForm" action="/" method="POST">
 						<div class="row my-3">
 							<div class="col-6">SR제목 : </div>
 							<div class="col-6">
 								<input type="hidden" id="srNo" name="srNo" value="WOR-SR-0001">
-								<input type="text" id="ttl" name="ttl" value="테스트" disabled>
+								<input type="text" id="ttl"  value="테스트" disabled>
 							</div>
 						</div>
 						<div class="row my-3">
@@ -31,7 +31,7 @@
 						<div class="row my-3">
 							<div class="col-6">부서 : </div>
 							<div class="col-6">
-								<select id="deptCd" name="deptCd" disabled>
+								<select id="deptCd"  disabled>
 									<option value="DVLP01" selected>개발1팀</option>
 									<option value="DVLP02">개발2팀</option>
 								</select>

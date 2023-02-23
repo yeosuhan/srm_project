@@ -653,7 +653,7 @@ th {
 																</div>
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
-																<button class="btn btn-info"
+																<button onclick="deleteResource()" class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 																<button class="btn btn-info"
