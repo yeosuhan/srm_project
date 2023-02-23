@@ -45,7 +45,9 @@ public class InstitutionService implements IInstitutionService{
 	 */
 	@Override
 	public void addInst(Institution institution) {
-		institutionDao.insertByInst(institution);
+		log.info("서비스 들어옴");
+		int row = institutionDao.insertByInst(institution);
+		log.info(row);
 	}
 
 	/**

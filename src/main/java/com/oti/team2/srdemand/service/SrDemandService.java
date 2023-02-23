@@ -101,8 +101,8 @@ public class SrDemandService implements ISrDemandService{
 	 * 작성일자 : 2023-02-22
 	 * @return sr요청 상세 조회
 	 */
-	public SrdemandDetail getInfoDetail(String Detail) {
-		return srDemandDao.selectDetailByDmndNo(Detail);
+	public SrdemandDetail getInfoDetail(String dmndNo) {
+		return srDemandDao.selectDetailByDmndNo(dmndNo);
 	}
 
 }
