@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao">
+
+	<!-- History 전체 내역 조회 -->
+	<select id="selectHstryList" parameterType="map" resultType="srInformationHistory">
+		<![CDATA[
+			select srNo, hstryTtl, hstryStts, chgEndYmd
+			from 
+			    (select rownum as rnum, srNo, hstryTtl, hstryStts, chgEndYmd
+			    from(
+			        select hstry_id as hstryId, sr_no as srNo, hstry_ttl as hstryTtl, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd
+			        from sr_information_history
+			        where sr_no like #{srNo}
+			        order by hstryId asc
+			    )
+			    where rownum <= #{pager.endRowNo}
+			    )
+			where rnum >= #{pager.startRowNo}	
+		]]>
+	</select>
+
+	<!-- History 테이블 전체 행수 -->
+	<select id="count" resultType="int">
+		select count(*) from sr_information_history
+	</select>
+
+
+</mapper>

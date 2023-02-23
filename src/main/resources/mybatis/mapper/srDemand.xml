@@ -31,6 +31,33 @@
 		WHERE CUST_ID=#{custId}
 	</select>
 	
+	<!-- 요청 상세 정보(완료) -->
+	<select id="selectDetailByDmndNo" parameterType="String" resultType="srdemandDetail">
+		SELECT
+			SD.DMND_NO AS dmndNo,
+			SD.TTL AS ttl,
+			SD.REL_GRUND AS relGrund,
+			S.SYS_NM AS sysNm,
+			T.TASK_SE_NM AS taskSeNm,
+			I.INST_NM AS instNm,
+			M.FLNM AS flnm,
+			to_char(SD.DMND_YMD, 'YYYY-MM-DD') AS dmndYmd,
+			to_char(SD.CMPTN_DMND_YMD, 'YYYY-MM-DD') AS cmptnDmndYmd,
+			SD.CN AS cn
+		FROM
+			SR_DEMAND SD, MEMBERS M, SYSTEMS S, TASK T, INSTITUTION I
+		WHERE
+			SD.DMND_NO = #{Detail}
+		AND
+			SD.CUST_ID = M.MEMBER_ID
+		AND
+			S.SYS_CD = SD.SYS_CD
+		AND
+			T.TASK_SE_CD = SD.TASK_SE_CD
+		AND
+			M.INST_CD = I.INST_CD
+	</select>
+	
 	
 	
 	

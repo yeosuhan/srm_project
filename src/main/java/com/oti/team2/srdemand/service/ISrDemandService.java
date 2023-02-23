@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
+import com.oti.team2.srinformation.dto.SrdemandDetail;
 
 public interface ISrDemandService {
 
@@ -31,4 +32,11 @@ public interface ISrDemandService {
 	 */
 	public int updateSrDemand(SrRequestDto srRequestDto);
 	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-02-22
+	 * @return sr요청 상세 조회
+	 */
+	SrdemandDetail getInfoDetail(String Detail);
 }

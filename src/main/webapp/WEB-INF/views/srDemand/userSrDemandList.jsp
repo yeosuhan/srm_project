@@ -1,11 +1,70 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 </head>
+<script>
+	
+<%-- JSON으로 받아온 HistoryList를 보여주기 위한 ajax --%>
+	function getHistoryList(srNo) {
+		console.log("srHistoryList 글번호: " + srNo);
+		$
+				.ajax({
+					url : "/history/list/" + srNo,
+					type : "GET",
+
+					success : function(result) {
+						console.log("성공" + result);
+						console.log(result.srInformationHistory[0].hstryTtl);
+
+						for (var i = 0; i < result.srInformationHistory.length; i++) {
+							var historyCount = [ i + 1 ];
+							var historyTtl = result.srInformationHistory[i].hstryTtl;
+							var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
+							if (result.srInformationHistory[i].hstryStts == 'I') {
+								var historyStts = "요청 중";
+							} else if (result.srInformationHistory[i].hstryStts == 'N') {
+								var historyStts = "반려";
+							} else {
+								var historyStts = "승인";
+							}
+
+							var param1 = '<tr data-toggle="modal" data-target="#addHistoryModalDetail">';
+							param1 += '<th scope="row" id="AhstryCount"></th>';
+							param1 += '<td id='+'AhstryTtl'+'></td>';
+
+							param1 += '<td id='+'AchgEndYmd'+'></td>';
+							param1 += '<td id='+'AhstryStts'+'></td>';
+							param1 += '</tr>';
+
+							console.log(param1);
+
+							$("#historyList").append(param1);
+
+							$("#AhstryCount").append(historyCount);
+							$("#AhstryTtl").append(historyTtl);
+							$("#AchgEndYmd").append(historyChgEndYmd);
+							$("#AhstryStts").append(historyStts);
+
+						}
+					}
+				});
+	}
+<%-- 모달 실행 --%>
+	$(document).on('click', '#addbtn', function(e) {
+		console.log("click event");
+		$('#addmodal').addClass('show');
+		document.body.style = `overflow: hidden`;
+	});
+	$(document).on('click', '#closebtn', function(e) {
+		console.log("click event");
+		$('#addmodal').removeClass('show');
+		document.body.style = `overflow: scroll`;
+	});
+</script>
+
 <style>
 #startDatepicker, #endDatepicker, #addDatepicker {
 	width: 90px;
@@ -165,7 +224,7 @@ th {
 																		style="font-size: 12;">
 																		<thead>
 																			<tr>
-																				<th style="width: 1px;"> </th>
+																				<th style="width: 1px;"></th>
 																				<th>요청 번호</th>
 																				<th>제목</th>
 																				<th>관련시스템</th>
@@ -178,7 +237,8 @@ th {
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<c:forEach var="srDemand" items="${srDemandList}" varStatus="status">
+																			<c:forEach var="srDemand" items="${srDemandList}"
+																				varStatus="status">
 																				<tr>
 																					<th scope="row">${status.count}</th>
 																					<td>${srDemand.dmndNo}</td>
@@ -190,8 +250,8 @@ th {
 																					<td>${srDemand.sttsNm}</td>
 																					<td>${srDemand.dmndYmd}</td>
 																					<td>${srDemand.endYmd}</td>
-																				</tr>	
-																			</c:forEach>																
+																				</tr>
+																			</c:forEach>
 																		</tbody>
 																	</table>
 																</div>
@@ -223,7 +283,8 @@ th {
 																상세정보</a>
 															<div class="slide"></div></li>
 														<li class="nav-item"><a class="nav-link"
-															data-toggle="tab" href="#srHistory" role="tab">SR
+															data-toggle="tab" href="#srHistory"
+															onclick="getHistoryList('${srNo}')" role="tab">SR
 																히스토리</a>
 															<div class="slide"></div></li>
 													</ul>
@@ -407,7 +468,8 @@ th {
 																	<div class="row">
 																		<div class="col-6"></div>
 																		<div class="col-6" style="text-align: right">
-																			<button id="modbtn" class="btn btn-primary btn-round save center">수정</button>
+																			<button id="modbtn"
+																				class="btn btn-primary btn-round save center">수정</button>
 
 																			<button
 																				class="btn btn-primary btn-round danger cancle">삭제</button>
@@ -431,34 +493,19 @@ th {
 																				<th>수락여부</th>
 																			</tr>
 																		</thead>
-																		<tbody>
+																		<tbody id="history">
 																			<tr data-toggle="modal"
-																				data-target="#addHistoryModalDetail">
-																				<th scope="row">1</th>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																			</tr>
-																			<tr data-toggle="modal"
-																				data-target="#addHistoryModalDetail">
-																				<th scope="row">2</th>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																			</tr>
-																			<tr data-toggle="modal"
-																				data-target="#addHistoryModalDetail">
-																				<th scope="row">3</th>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
-																				<td>@mdo</td>
+																				data-target="#approvalHistoryModal">
+																				<th scope="row" id="AhstryCount"></th>
+																				<td id="AhstryTtl"></td>
+																				<td id="AchgEndYmd"></td>
+																				<td id="AhstryStts"></td>
 																			</tr>
 																		</tbody>
 																	</table>
 																</div>
 															</div>
 														</div>
-
 													</div>
 												</div>
 											</div>
@@ -485,7 +532,8 @@ th {
 	<jsp:include page="/WEB-INF/views/history/approvalHistoryModal.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
-	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
-	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
+	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
+	<jsp:include page="/WEB-INF/views/history/addHistoryModalDetail.jsp" />
+
 </body>
 </html>

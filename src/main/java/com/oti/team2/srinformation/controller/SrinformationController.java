@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oti.team2.srdemand.service.ISrDemandService;
+import com.oti.team2.srdemand.service.SrDemandService;
 import com.oti.team2.srinformation.dto.SrTotal;
 import com.oti.team2.srinformation.dto.SrdemandDetail;
 import com.oti.team2.srinformation.dto.SrinformationList;
@@ -24,6 +26,9 @@ public class SrinformationController {
 	
 	@Autowired
 	ISrinformationService srinformationService;
+	
+	@Autowired
+	ISrDemandService srDemandService;
 	
 	/**
 	 * 
@@ -48,7 +53,7 @@ public class SrinformationController {
 	@RequestMapping(value="/srinformation/{Detail}", method=RequestMethod.GET)
 	public SrTotal getDetail(@PathVariable("Detail")String Detail, Model model) {
 		String Plan = Detail;
-		SrdemandDetail dd = srinformationService.getInfoDetail(Detail);
+		SrdemandDetail dd = srDemandService.getInfoDetail(Detail);
 		SrplanInfomaion pi = srinformationService.getPlan(Plan);
 		SrTotal total = new SrTotal(dd,pi);
 		return total;
