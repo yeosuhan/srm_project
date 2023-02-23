@@ -91,7 +91,7 @@ public class InstitutionController {
 	 * @author 여수한
 	 * @return 내 기관 관리(수정)
 	 */
-	@RequestMapping(value = "/institution/list", method = RequestMethod.POST)
+	@RequestMapping(value = "/institution/update", method = RequestMethod.POST)
 	public String myInstUpdate(Institution institution, Model model) {
 		institution.setInstNm(Jsoup.clean(institution.getInstNm(), Whitelist.basic()));
 		institution.setInstTelno(Jsoup.clean(institution.getInstTelno(), Whitelist.basic()));

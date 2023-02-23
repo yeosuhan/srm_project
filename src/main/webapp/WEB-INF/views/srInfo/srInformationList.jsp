@@ -10,7 +10,8 @@
 	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css'
 	rel='stylesheet' />
 </head>
-<script src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
 
 <script>
 	
@@ -26,32 +27,32 @@
 		document.body.style = `overflow: scroll`;
 	});
 <%-- SR요청 상세보기 --%>
-	function getDetail(Detail) {
-		console.log("Detail: " + Detail);
+	function getDetail(dmndNo) {
+		console.log("dmndNo: " + dmndNo);
 		$.ajax({
-			url : '/srinformation/' + Detail,
+			url : '/srinformation/detail/' + dmndNo,
 			type : 'GET',
 			data : {
-				Detail : Detail
+				dmndNo : dmndNo
 			},
 			success : function(detail) {
 				console.log(detail);
-				$("#SRDDmndNo").text(detail.dd.dmndNo);
-				$("#SRDTitle").text(detail.dd.ttl);
-				$("#SRDRelgrund").text(detail.dd.relGrund);
-				$("#SRDSys").text(detail.dd.sysNm);
-				$("#SRDTask").text(detail.dd.taskSeNm);
-				$("#SRDInst").text(detail.dd.instNm);
-				$("#SRDFlnm").text(detail.dd.flnm);
-				$("#SRDDmndymd").text(detail.dd.dmndYmd);
-				$("#SRDCmptnDmndYmd").text(detail.dd.cmptnDmndYmd);
-				$("#SRDCn").text(detail.dd.cn);
-				$("#SRDFile").text(detail.dd.fileNm);
-				
-				$("#SRPDeptNm").text(detail.pi.deptNm);
-				$("#SRPFlnm").text(detail.pi.flnm);
-				$("#SRPBgngYmd").text(detail.pi.bgngYmd);
-				$("#SRPEndYmd").text(detail.pi.endYmd);
+				$("#SRDDmndNo").val(detail.dd.dmndNo);
+				$("#SRDTitle").val(detail.dd.ttl);
+				$("#SRDRelgrund").val(detail.dd.relGrund);
+				$("#SRDSys").val(detail.dd.sysNm);
+				$("#SRDTask").val(detail.dd.taskSeNm);
+				$("#SRDInst").val(detail.dd.instNm);
+				$("#SRDFlnm").val(detail.dd.flnm);
+				$("#SRDDmndymd").val(detail.dd.dmndYmd);
+				$("#SRDCmptnDmndYmd").val(detail.dd.cmptnDmndYmd);
+				$("#SRDCn").val(detail.dd.cn);
+				$("#SRDFile").val(detail.dd.fileNm);
+
+				$("#SRPDeptNm").val(detail.pi.deptNm);
+				$("#SRPFlnm").val(detail.pi.flnm);
+				$("#SRPBgngYmd").val(detail.pi.bgngYmd);
+				$("#SRPEndYmd").val(detail.pi.endYmd);
 				$("#SRPRvwCn").text(detail.pi.rvwCn);
 			}
 		});
@@ -61,17 +62,34 @@
 		$("#SRDDmndNo").text();
 		console.log("Plan: " + $("#SRDDmndNo").text());
 		$.ajax({
-			url : '/srinformation1/' + $("#SRDDmndNo").text(),
+			url : '/srinformation/plan/' + $("#SRDDmndNo").text(),
 			type : 'GET',
 			data : {
 				Plan : $("#SRDDmndNo").text()
 			},
 			success : function(Plan) {
-				$("#SRPDeptNm").text(Plan.deptNm);
-				$("#SRPFlnm").text(Plan.flnm);
-				$("#SRPBgngYmd").text(Plan.bgngYmd);
-				$("#SRPEndYmd").text(Plan.endYmd);
-				$("#SRPRvwCn").text(Plan.rvwCn);
+				$("#SRPlDeptNm").text(Plan.deptNm);
+				$("#SRPlFlnm").text(Plan.flnm);
+				$("#SRPlBgngYmd").text(Plan.bgngYmd);
+				$("#SRPlEndYmd").text(Plan.endYmd);
+				$("#SRPlRvwCn").text(Plan.rvwCn);
+			}
+		});
+	}
+<%-- SR요청 진척률 --%>
+	function getProgress() {
+		$("#SRDDmndNo").text();
+		console.log("Progress: " + $("#SRDDmndNo").text());
+		$.ajax({
+			url : '/srinformation/progress/' + $("#SRDDmndNo").text(),
+			type : 'GET',
+			data : {
+				Progress : $("#SRDDmndNo").text()
+			},
+			success : function(Progress) {
+				$("#SRPgBgngYmd").text(Progress.bgngYmd);
+				$("#SRPgEndYmd").text(Progress.endYmd);
+				$("#SRPgPrgrsYn").text(Progress.prgrsYn);
 			}
 		});
 	}
@@ -81,9 +99,11 @@
 	width: 29px;
 	vertical-align: top;
 }
+
 #startDatepicker, #endDatepicker, #addDatepicker {
 	width: 90px;
 }
+
 #requestDatepicker, #endRequestDatepicker, #firStartDatepicker,
 	#firEndDatepicker, #secStartDatepicker, #secEndDatepicker,
 	#thrStartDatepicker, #thrEndDatepicker, #fiveStartDatepicker,
@@ -92,23 +112,28 @@
 	width: 70px;
 	padding-right: 0px;
 }
+
 div.left {
 	width: 65%;
 	float: left;
 	box-sizing: border-box;
 }
+
 div.right {
 	width: 35%;
 	float: right;
 	box-sizing: border-box;
 	border-left: 1px solid black;
 }
+
 div .right .form-control {
 	height: 20px;
 }
+
 th {
 	text-align: center;
 }
+
 .col-sm-4 {
 	padding: 0px;
 }
@@ -119,11 +144,13 @@ th {
 .card .card-block {
 	padding: 0px 5px !important;
 }
+
 .col-xl-1 {
 	padding-top: 8px;
 	padding-right: 0px;
 	padding-left: 10px;
 }
+
 .modal {
 	position: fixed;
 	top: 0;
@@ -132,9 +159,13 @@ th {
 	right: 0;
 	background: rgba(0, 0, 0, 0.4);
 }
+
 .m.body {
 	height: 50vh;
 	overflow-y: auto;
+}
+.form-control {
+	font-size:inherit;
 }
 </style>
 <body>
@@ -353,52 +384,75 @@ th {
 														<div class="card_body "
 															style="font-size: 12px; padding-top: 20px;">
 															<div class="form-group row">
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">요청 번호</div>
-																	<div class="col col-sm-8" id="SRDDmndNo"></div>
+
+																<div class="col col-sm-3">요청 번호</div>
+																<div class="col col-sm-9">
+																	<input readonly class="form-control"
+																		style="width: 150px;" id="SRDDmndNo">
+																</div>
+
+
+															</div>
+															<hr />
+															<div class="form-group row">
+																<div class="col col-sm-3">SR 제목</div>
+																<div class="col col-sm-9">
+																	<input readonly class="form-control"
+																		style="width: 150px;" id="SRDTitle">
 																</div>
 															</div>
 															<hr />
 															<div class="form-group row">
-																<div class="col col-sm-2">SR 제목</div>
-																<div class="col col-sm-9" id="SRDTitle"></div>
-															</div>
-															<hr />
-															<div class="form-group row">
 																<div class="col col-sm-3">관련 근거</div>
-																<div class="col col-sm-9" id="SRDRelgrund"></div>
+																<div class="col col-sm-9">
+																	<input readonly class="form-control"
+																		style="width: 150px;" id="SRDRelgrund">
+																</div>
 															</div>
 															<hr />
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">시스템구분</div>
-																	<div class="col col-sm-6" id="SRDSys"></div>
+																	<div class="col col-sm-6">
+																		<input readonly class="form-control" style="width:200%;" id="SRDSys">
+																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">업무구분</div>
-																	<div class="col col-sm-6" id="SRDTask"></div>
+																	<div class="col col-sm-6">
+																		<input readonly class="form-control" style="width:150%;" id="SRDTask">
+																	</div>
 																</div>
 															</div>
 															<hr />
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청기관</div>
-																	<div class="col col-sm-6" id="SRDInst"></div>
+																	<div class="col col-sm-6">
+																		<input readonly class="form-control" style="width:200%;" id="SRDInst">
+																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청자</div>
-																	<div class="col col-sm-6" id="SRDFlnm"></div>
+																	<div class="col col-sm-6">
+																		<input readonly class="form-control" style="width:150%;" id="SRDFlnm">
+																	</div>
 																</div>
 															</div>
 															<hr />
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청일</div>
-																	<div class="col col-sm-8" id="SRDDmndymd"></div>
+																	<div class="col col-sm-8">
+																		<input readonly class="form-control" id="SRDDmndymd">
+																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">완료요청일</div>
-																	<div class="col col-sm-8" id="SRDCmptnDmndYmd"></div>
+																	<div class="col col-sm-8">
+																		<input readonly class="form-control"
+																			id="SRDCmptnDmndYmd">
+																	</div>
 																</div>
 															</div>
 															<hr />
@@ -406,7 +460,10 @@ th {
 																<label class="col-sm-2 col-form-label"
 																	style="line-height: 100px; font-size: 12px;">SR
 																	내용</label>
-																<div class="col-sm-9" id="SRDCn"></div>
+																<div class="col-sm-9">
+																	<input readonly class="form-control"
+																		style="width: 300px; height: 110px;" id="SRDCn">
+																</div>
 															</div>
 															<hr />
 															<div class="form-group row">
@@ -436,9 +493,9 @@ th {
 																data-toggle="tab" href="#profile1" role="tab">SR
 																	자원정보</a>
 																<div class="slide"></div></li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#messages1" role="tab">SR
-																	진척율</a>
+															<li class="nav-item" onclick="getProgress()"><a
+																class="nav-link" data-toggle="tab" href="#messages1"
+																role="tab">SR 진척율</a>
 																<div class="slide"></div></li>
 															<li class="nav-item"><a class="nav-link"
 																data-toggle="tab" href="#settings1" role="tab">SR
@@ -457,30 +514,39 @@ th {
 																<div class="form-group row">
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">처리팀</div>
-																		<div class="col col-sm-6" id="SRPDeptNm"></div>
+																		<div class="col col-sm-6">
+																			<input readonly class="form-control" id="SRPlDeptNm">
+																		</div>
 
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">담당자</div>
-																		<div class="col col-sm-6" id="SRPFlnm"></div>
+																		<div class="col col-sm-6">
+																			<input readonly class="form-control" id="SRPlFlnm">
+																		</div>
 																	</div>
 																</div>
 																<div class="form-group row">
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획시작일</div>
-																		<div class="col col-sm-8" id="SRPBgngYmd"></div>
+																		<div class="col col-sm-6">
+																			<input readonly class="form-control" id="SRPlBgngYmd">
+																		</div>
 
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획종료일</div>
-																		<div class="col col-sm-8" id="SRPEndYmd"></div>
+																		<div class="col col-sm-6">
+																		<input readonly class="form-control" id="SRPlEndYmd">
+																			</div>
 																	</div>
 																</div>
 																<div class="form-group row">
 																	<div class="col col-sm-2" style="line-height: 90px;">검토
 																		내용</div>
 																	<div class="col col-sm-9">
-																		<textarea rows="5" cols="5" class="form-control" id="SRPRvwCn"></textarea>
+																		<textarea rows="5" cols="5" class="form-control"
+																			id="SRPlRvwCn"></textarea>
 
 																	</div>
 																</div>
@@ -508,7 +574,7 @@ th {
 																				</tr>
 																			</thead>
 																			<tbody id="resourceTableRow">
-																				
+
 																			</tbody>
 																		</table>
 																	</div>
@@ -519,8 +585,8 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"data-toggle="modal"
-													data-target="#addSrResourcesModal">추가</button>
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
+																	data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
 															</div>
 															<%-- *********************************** [ 진척률 ] ***********************************--%>
 															<div class="tab-pane" id="messages1" role="tabpanel"
@@ -545,10 +611,10 @@ th {
 																					<tr>
 																						<th scope="row">1</th>
 																						<td>요구정의</td>
-																						<td><input type="date"></td>
-																						<td><input type="date"></td>
+																						<td><input type="date" id="SRPgBgngYmd"></td>
+																						<td><input type="date" id="SRPgEndYmd"></td>
 																						<td><input type="text" class="form-control"
-																							id="progress"></td>
+																							id="SRPgPrgrsYn"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button

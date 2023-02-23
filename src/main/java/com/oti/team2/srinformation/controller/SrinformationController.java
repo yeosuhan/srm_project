@@ -50,14 +50,11 @@ public class SrinformationController {
 	 * @return sr요청 상세 조회 - 완료  => 계획정보도 같이 가져와야될듯
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/{Detail}", method=RequestMethod.GET)
-	public SrTotal getDetail(@PathVariable("Detail")String Detail, Model model) {
-		
-		String Plan = Detail;
-		SrdemandDetail dd = srDemandService.getInfoDetail(Detail);
-		SrplanInfomaion pi = srinformationService.getPlan(Plan);
+	@RequestMapping(value="/srinformation/detail/{dmndNo}", method=RequestMethod.GET)
+	public SrTotal getDetail(@PathVariable("dmndNo")String dmndNo) {
+		SrdemandDetail dd = srDemandService.getInfoDetail(dmndNo);
+		SrplanInfomaion pi = srinformationService.getPlan(dmndNo);
 		SrTotal total = new SrTotal(dd,pi);
-		log.info(total);
 		return total;
 	}
 	
@@ -68,15 +65,12 @@ public class SrinformationController {
 	 * @return sr요청 계획정보 조회 - 탭 누를 때
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation1/{Plan}", method=RequestMethod.GET)
-	public SrplanInfomaion getPlanInfo(@PathVariable("Plan")String Plan, Model model) {
-		SrplanInfomaion pi = srinformationService.getPlan(Plan);
+	@RequestMapping(value="/srinformation1/plan/{dmndNo}", method=RequestMethod.GET)
+	public SrplanInfomaion getPlanInfo(@PathVariable("dmndNo")String dmndNo) {
+		SrplanInfomaion pi = srinformationService.getPlan(dmndNo);
 		return pi;
 	}
 
-	
-	
-	
 	
 	
 	
