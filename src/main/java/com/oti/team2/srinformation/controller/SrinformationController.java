@@ -71,6 +71,7 @@ public class SrinformationController {
 	@RequestMapping(value="/srinformation1/{Plan}", method=RequestMethod.GET)
 	public SrplanInfomaion getPlanInfo(@PathVariable("Plan")String Plan, Model model) {
 		SrplanInfomaion pi = srinformationService.getPlan(Plan);
+		log.info(pi);
 		return pi;
 	}
 
