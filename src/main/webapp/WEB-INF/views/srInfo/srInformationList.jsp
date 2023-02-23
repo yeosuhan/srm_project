@@ -10,8 +10,7 @@
 	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css'
 	rel='stylesheet' />
 </head>
-<script
-	src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
 
 <script>
 	
@@ -48,7 +47,7 @@
 				$("#SRDCmptnDmndYmd").text(detail.dd.cmptnDmndYmd);
 				$("#SRDCn").text(detail.dd.cn);
 				$("#SRDFile").text(detail.dd.fileNm);
-
+				
 				$("#SRPDeptNm").text(detail.pi.deptNm);
 				$("#SRPFlnm").text(detail.pi.flnm);
 				$("#SRPBgngYmd").text(detail.pi.bgngYmd);
@@ -82,11 +81,9 @@
 	width: 29px;
 	vertical-align: top;
 }
-
 #startDatepicker, #endDatepicker, #addDatepicker {
 	width: 90px;
 }
-
 #requestDatepicker, #endRequestDatepicker, #firStartDatepicker,
 	#firEndDatepicker, #secStartDatepicker, #secEndDatepicker,
 	#thrStartDatepicker, #thrEndDatepicker, #fiveStartDatepicker,
@@ -95,28 +92,23 @@
 	width: 70px;
 	padding-right: 0px;
 }
-
 div.left {
 	width: 65%;
 	float: left;
 	box-sizing: border-box;
 }
-
 div.right {
 	width: 35%;
 	float: right;
 	box-sizing: border-box;
 	border-left: 1px solid black;
 }
-
 div .right .form-control {
 	height: 20px;
 }
-
 th {
 	text-align: center;
 }
-
 .col-sm-4 {
 	padding: 0px;
 }
@@ -127,13 +119,11 @@ th {
 .card .card-block {
 	padding: 0px 5px !important;
 }
-
 .col-xl-1 {
 	padding-top: 8px;
 	padding-right: 0px;
 	padding-left: 10px;
 }
-
 .modal {
 	position: fixed;
 	top: 0;
@@ -142,7 +132,6 @@ th {
 	right: 0;
 	background: rgba(0, 0, 0, 0.4);
 }
-
 .m.body {
 	height: 50vh;
 	overflow-y: auto;
@@ -491,8 +480,7 @@ th {
 																	<div class="col col-sm-2" style="line-height: 90px;">검토
 																		내용</div>
 																	<div class="col col-sm-9">
-																		<textarea rows="5" cols="5" class="form-control"
-																			id="SRPRvwCn"></textarea>
+																		<textarea rows="5" cols="5" class="form-control" id="SRPRvwCn"></textarea>
 
 																	</div>
 																</div>
@@ -520,7 +508,7 @@ th {
 																				</tr>
 																			</thead>
 																			<tbody id="resourceTableRow">
-
+																				
 																			</tbody>
 																		</table>
 																	</div>
@@ -531,8 +519,8 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
-																	data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"data-toggle="modal"
+													data-target="#addSrResourcesModal">추가</button>
 															</div>
 															<%-- *********************************** [ 진척률 ] ***********************************--%>
 															<div class="tab-pane" id="messages1" role="tabpanel"
