@@ -1,7 +1,5 @@
 package com.oti.team2.srdemand.controller;
 
-<<<<<<<HEAD
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +67,7 @@ public class SrDemandController {
 	 * 
 	 * @author 신정은
 	 */
+	/*
 	@GetMapping("/list")
 	public String getSrDemaneList(HttpSession session, Model model) {
 		// 고객인 경우
@@ -84,7 +83,7 @@ public class SrDemandController {
 
 		return "srDemand/adminSrDemandList";
 	}
-
+*/
 	@GetMapping("/modify")
 	public String updateSrDemand(String dmndNo) {
 		// sr요청이 아직 요청단계인 경우에만 수정 가능하다.
@@ -102,7 +101,7 @@ public class SrDemandController {
 	 * @author 최은종 / 테스트용
 	 * @param model
 	 * @return
-	 */
+*/
 	@GetMapping("/list")
 		public String getSrDemandList(Model model) {
 			log.info("srDemandList 조회");
@@ -111,5 +110,6 @@ public class SrDemandController {
 			log.info(model.getAttribute("srNo"));
 			return "srDemand/userSrDemandList";
 	}
+		 
 	
 }
