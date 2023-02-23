@@ -28,7 +28,7 @@
 		document.body.style = `overflow: scroll`;
 	});
 <%-- SR요청 상세보기 --%>
-	function getDetail(Detail) {
+	function getDetail(Detail, srNo) {
 		console.log("Detail: " + Detail);
 		$.ajax({
 			url : '/srinformation/' + Detail,
@@ -55,6 +55,14 @@
 				$("#SRPBgngYmd").text(detail.pi.bgngYmd);
 				$("#SRPEndYmd").text(detail.pi.endYmd);
 				$("#SRPRvwCn").text(detail.pi.rvwCn);
+				/*자원 정보 모달*/
+				$("#srPlanTab").tab("show");
+				$("#srNo").val(srNo);
+				$("#ttl").val(detail.dd.ttl);
+				$("#deptCd").val(detail.pi.deptCd);
+				$("#deptNm").val(detail.pi.deptNm);
+				$("#resourceInst").val(detail.dd.instNm);
+				$("#resourceTableRow").empty();
 			}
 		});
 	}
@@ -320,7 +328,7 @@ th {
 																		<tbody>
 																			<c:forEach var="srlist" items="${srlist}"
 																				varStatus="num">
-																				<tr onclick="getDetail('${srlist.dmndNo}')">
+																				<tr onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}')">
 																					<th scope="row">${num.count}</th>
 																					<td>${srlist.srNo}</td>
 																					<td>${srlist.sysNm}</td>
@@ -440,7 +448,7 @@ th {
 													</div>
 													<div class="card-block" style="padding-top: 10px;">
 														<ul class="nav nav-tabs  md-tabs" role="tablist">
-															<li class="nav-item" onclick="getPlan()"><a
+															<li class="nav-item" onclick="getPlan()"><a id="srPlanTab" 
 																class="nav-link active" data-toggle="tab" href="#home1"
 																role="tab">SR 계획정보</a>
 																<div class="slide"></div></li>
