@@ -24,7 +24,7 @@ public class DepartmentService implements IDepartmentService {
 	 */
 	@Override
 	public List<Department> getDepartmentList() {
-		List<Department> department = departmentDao.selectDeptList();
+		List<Department> department = departmentDao.selectByMemberId();
 		return department;
 	}
 

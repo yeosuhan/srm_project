@@ -14,7 +14,7 @@
             <div class="col-md-4">
                 <ul class="breadcrumb-title">
                     <li class="breadcrumb-item">
-                        <a href="<c:url value='/myportal'/>" > <i class="fa fa-home"></i> </a>
+                        <a href="${pageContext.request.contextPath}/myportal"> <i class="fa fa-home"></i> </a>
                     </li>
                     <li class="breadcrumb-item"><a href="#!">Basic Components</a>
                     </li>
