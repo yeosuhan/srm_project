@@ -6,45 +6,72 @@
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <%-- 캘린더css --%>
-<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+<link
+	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css'
+	rel='stylesheet' />
 </head>
 <script>
-	<%-- 모달 실행 --%>
+	
+<%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
 		$('#addmodal').addClass('show');
-		document.body.style= `overflow: hidden`;
+		document.body.style = `overflow: hidden`;
 	});
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#addmodal').removeClass('show');
-		document.body.style= `overflow: scroll`;
+		document.body.style = `overflow: scroll`;
 	});
-	<%-- 목록 상세보기 --%>
-	function getDetail(dmndNo) {
-		console.log("~~" + dmndNo);
-		$
-				.ajax({
-					url : '/srinformation/' + dmndNo,
-					type : 'GET',
-					data : {
-						dmndNo : dmndNo
-					},
-					success : function(detail) {
-						$("#SRDmndNo").text(detail.dmndNo);
-						$("#SRTitle").text(detail.ttl);
-						$("#SRRelgrund").text(detail.relGrund);
-						$("#SRSys").text(detail.sysNm);
-						$("#SRTask").text(detail.taskSeNm);
-						$("#SRInst").text(detail.instNm);
-						$("#SRFlnm").text(detail.flnm);
-						$("#SRDmndymd").text(detail.dmndYmd);
-						$("#SRCmptnDmndYmd").text(detail.cmptnDmndYmd);
-						$("#SRCn").text(detail.cn);
-						$("#SRFile").text(detail.fileNm);
-
-					}
-				});
+<%-- SR요청 상세보기 --%>
+	function getDetail(Detail) {
+		console.log("Detail: " + Detail);
+		$.ajax({
+			url : '/srinformation/' + Detail,
+			type : 'GET',
+			data : {
+				Detail : Detail
+			},
+			success : function(detail) {
+				console.log(detail);
+				$("#SRDDmndNo").text(detail.dd.dmndNo);
+				$("#SRDTitle").text(detail.dd.ttl);
+				$("#SRDRelgrund").text(detail.dd.relGrund);
+				$("#SRDSys").text(detail.dd.sysNm);
+				$("#SRDTask").text(detail.dd.taskSeNm);
+				$("#SRDInst").text(detail.dd.instNm);
+				$("#SRDFlnm").text(detail.dd.flnm);
+				$("#SRDDmndymd").text(detail.dd.dmndYmd);
+				$("#SRDCmptnDmndYmd").text(detail.dd.cmptnDmndYmd);
+				$("#SRDCn").text(detail.dd.cn);
+				$("#SRDFile").text(detail.dd.fileNm);
+				
+				$("#SRPDeptNm").text(detail.pi.deptNm);
+				$("#SRPFlnm").text(detail.pi.flnm);
+				$("#SRPBgngYmd").text(detail.pi.bgngYmd);
+				$("#SRPEndYmd").text(detail.pi.endYmd);
+				$("#SRPRvwCn").text(detail.pi.rvwCn);
+			}
+		});
+	}
+<%-- SR요청 계획정보 --%>
+	function getPlan() {
+		$("#SRDDmndNo").text();
+		console.log("Plan: " + $("#SRDDmndNo").text());
+		$.ajax({
+			url : '/srinformation1/' + $("#SRDDmndNo").text(),
+			type : 'GET',
+			data : {
+				Plan : $("#SRDDmndNo").text()
+			},
+			success : function(Plan) {
+				$("#SRPDeptNm").text(Plan.deptNm);
+				$("#SRPFlnm").text(Plan.flnm);
+				$("#SRPBgngYmd").text(Plan.bgngYmd);
+				$("#SRPEndYmd").text(Plan.endYmd);
+				$("#SRPRvwCn").text(Plan.rvwCn);
+			}
+		});
 	}
 </script>
 <style>
@@ -113,10 +140,10 @@ th {
 	background: rgba(0, 0, 0, 0.4);
 }
 
- .m.body {
+.m.body {
 	height: 50vh;
 	overflow-y: auto;
-} 
+}
 </style>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -150,7 +177,7 @@ th {
 																		<select name="languages" id="lang">
 																			<option value="워크넷">분석</option>
 																			<option value="굴국밥">설계</option>
-																			<option value="고소미">개발</option>	
+																			<option value="고소미">개발</option>
 																			<option value="고소미">시험</option>
 																		</select>
 																	</form>
@@ -240,9 +267,9 @@ th {
 														</div>
 														<div class="col col-xl-1">
 															<button onclick="srSearch()" type="button"
-																		class="btn btn-lg btn-info">
-																		<i class="ti-search"></i>
-																	</button>
+																class="btn btn-lg btn-info">
+																<i class="ti-search"></i>
+															</button>
 														</div>
 														<div class="col col-xl-1">
 															<button class="btn btn-info">엑셀 다운로드</button>
@@ -251,7 +278,7 @@ th {
 												</div>
 											</div>
 											<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
-											
+
 											<div class="col-xl-8 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -287,7 +314,8 @@ th {
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<c:forEach var="srlist" items="${srlist}" varStatus="num">
+																			<c:forEach var="srlist" items="${srlist}"
+																				varStatus="num">
 																				<tr onclick="getDetail('${srlist.dmndNo}')">
 																					<th scope="row">${num.count}</th>
 																					<td>${srlist.srNo}</td>
@@ -313,97 +341,87 @@ th {
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
-			                                          <div class="row">
-			                                             <div class="col-6">
-			                                                <h5>SR요청 상세정보</h5>
-			                                             </div>
-			                                             <div class="col-3">
-			                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addHistoryModal">
-																예정일 변경
-			                                                </button>
-			                                             </div>
-			                                             <div class="col-3">
-			                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addHistoryModal">
-																개발 취소
-			                                                </button>
-			                                             </div>
-			                                          </div>
-			                                        </div>
+														<div class="row">
+															<div class="col-6">
+																<h5>SR요청 상세정보</h5>
+															</div>
+															<div class="col-3">
+																<button type="button" class="btn btn-primary btn-sm"
+																	data-toggle="modal" data-target="#addHistoryModal">
+																	예정일 변경</button>
+															</div>
+															<div class="col-3">
+																<button type="button" class="btn btn-primary btn-sm"
+																	data-toggle="modal" data-target="#addHistoryModal">
+																	개발 취소</button>
+															</div>
+														</div>
+													</div>
 													<div class="card-block" style="height: 600px;">
 														<div class="card_body "
 															style="font-size: 12px; padding-top: 20px;">
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청 번호</div>
-																	<div class="col col-sm-8" id="SRDmndNo">
-																	</div>
+																	<div class="col col-sm-8" id="SRDDmndNo"></div>
 																</div>
 															</div>
-															<hr/>
+															<hr />
 															<div class="form-group row">
 																<div class="col col-sm-2">SR 제목</div>
-																<div class="col col-sm-9" id="SRTitle">
-																</div>
+																<div class="col col-sm-9" id="SRDTitle"></div>
 															</div>
-															<hr/>
+															<hr />
 															<div class="form-group row">
 																<div class="col col-sm-3">관련 근거</div>
-																<div class="col col-sm-9" id="SRRelgrund">
-																</div>
+																<div class="col col-sm-9" id="SRDRelgrund"></div>
 															</div>
-															<hr/>
+															<hr />
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">시스템구분</div>
-																	<div class="col col-sm-6" id="SRSys">
-																	</div>
+																	<div class="col col-sm-6" id="SRDSys"></div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">업무구분</div>
-																	<div class="col col-sm-6" id="SRTask">
-																	</div>
+																	<div class="col col-sm-6" id="SRDTask"></div>
 																</div>
 															</div>
-															<hr/>
+															<hr />
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청기관</div>
-																	<div class="col col-sm-6" id="SRInst">
-																	</div>
+																	<div class="col col-sm-6" id="SRDInst"></div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청자</div>
-																	<div class="col col-sm-6" id="SRFlnm">
-																	</div>
+																	<div class="col col-sm-6" id="SRDFlnm"></div>
 																</div>
 															</div>
-															<hr/>
+															<hr />
 															<div class="form-group row">
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청일</div>
-																	<div class="col col-sm-8" id="SRDmndymd">
-																	</div>
+																	<div class="col col-sm-8" id="SRDDmndymd"></div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">완료요청일</div>
-																	<div class="col col-sm-8" id="SRCmptnDmndYmd">
-																	</div>
+																	<div class="col col-sm-8" id="SRDCmptnDmndYmd"></div>
 																</div>
 															</div>
-															<hr/>
+															<hr />
 															<div class="form-group row">
 																<label class="col-sm-2 col-form-label"
 																	style="line-height: 100px; font-size: 12px;">SR
 																	내용</label>
-																<div class="col-sm-9" id="SRCn">
-																</div>
+																<div class="col-sm-9" id="SRDCn"></div>
 															</div>
-															<hr/>
+															<hr />
 															<div class="form-group row">
 																<label class="col-sm-3 col-form-label"
 																	style="font-size: 12px;">첨부파일</label>
 																<div class="col-sm-9">
-																	<input type="file" class="" id="SRFile">
+																	<input type="file" class="" id="SRDFile">
 																</div>
 															</div>
 														</div>
@@ -418,8 +436,9 @@ th {
 													</div>
 													<div class="card-block" style="padding-top: 10px;">
 														<ul class="nav nav-tabs  md-tabs" role="tablist">
-															<li class="nav-item"><a class="nav-link active"
-																data-toggle="tab" href="#home1" role="tab">SR 계획정보</a>
+															<li class="nav-item" onclick="getPlan()"><a
+																class="nav-link active" data-toggle="tab" href="#home1"
+																role="tab">SR 계획정보</a>
 																<div class="slide"></div></li>
 															<li class="nav-item"><a class="nav-link"
 																data-toggle="tab" href="#profile1" role="tab">SR
@@ -434,8 +453,9 @@ th {
 																	산출물</a>
 																<div class="slide"></div></li>
 															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#history1" role="tab">SR 히스토리</a>
-																<div class="slide"></div></li>																
+																data-toggle="tab" href="#history1" role="tab">SR
+																	히스토리</a>
+																<div class="slide"></div></li>
 														</ul>
 														<%-- *********************************** [ 계획정보 ] ***********************************--%>
 														<div class="tab-content tabs card-block"
@@ -445,47 +465,31 @@ th {
 																<div class="form-group row">
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">처리팀</div>
-																		<div class="col col-sm-6">
-																			<div class="dropdown dropdown open">
-																				<form action="#">
-																					<select name="languages" id="lang">
-																						<option value="1팀">1팀</option>
-																						<option value="2팀">2팀</option>
-																						<option value="3팀">3팀</option>
-																					</select>
-																				</form>
-																			</div>
-																		</div>
+																		<div class="col col-sm-6" id="SRPDeptNm"></div>
 
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">담당자</div>
-																		<div class="col col-sm-6" style="height: 30px;">
-																			<input type="text" class="form-control">
-																		</div>
+																		<div class="col col-sm-6" id="SRPFlnm"></div>
 																	</div>
 																</div>
 																<div class="form-group row">
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획시작일</div>
-																		<div class="col col-sm-8">
-																			<input type="date" id="startDatepicker">
-																		</div>
+																		<div class="col col-sm-8" id="SRPBgngYmd"></div>
 
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획종료일</div>
-																		<div class="col col-sm-8">
-																			<input type="date" id="endDatepicker">
-																		</div>
+																		<div class="col col-sm-8" id="SRPEndYmd"></div>
 																	</div>
 																</div>
 																<div class="form-group row">
 																	<div class="col col-sm-2" style="line-height: 90px;">검토
 																		내용</div>
 																	<div class="col col-sm-9">
-																		<input type="text" class="form-control"
-																			style="height: 100px;">
+																		<textarea rows="5" cols="5" class="form-control" id="SRPRvwCn"></textarea>
+
 																	</div>
 																</div>
 																<button class="btn btn-info"
@@ -546,8 +550,8 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																	삭제</button>
 																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"data-toggle="modal"
-													data-target="#addSrResourcesModal">추가</button>
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
+																	data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
 															</div>
 															<%-- *********************************** [ 진척률 ] ***********************************--%>
 															<div class="tab-pane" id="messages1" role="tabpanel"
@@ -578,7 +582,8 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
 																									data-target="#collapseOne" aria-expanded="true"
 																									aria-controls="collapseOne">첨부파일1</button>
@@ -587,8 +592,7 @@ th {
 																									data-parent="#accordionExample">
 																									<div class="card-body">첨부파일2</div>
 																								</div>
-																							</div>
-																						</td>
+																							</div></td>
 																					</tr>
 																					<tr>
 																						<th scope="row">2</th>
@@ -599,7 +603,8 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
 																									data-target="#collapseTwo" aria-expanded="true"
 																									aria-controls="collapseTwo">첨부파일1</button>
@@ -619,7 +624,8 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
 																									data-target="#collapseThr" aria-expanded="true"
 																									aria-controls="collapseThr">첨부파일1</button>
@@ -639,9 +645,11 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
-																									data-target="#collapsefour" aria-expanded="true"
+																									data-target="#collapsefour"
+																									aria-expanded="true"
 																									aria-controls="collapsefour">첨부파일1</button>
 																								<div id="collapsefour" class="collapse"
 																									aria-labelledby="headingOne"
@@ -659,9 +667,11 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
-																									data-target="#collapsefive" aria-expanded="true"
+																									data-target="#collapsefive"
+																									aria-expanded="true"
 																									aria-controls="collapsefive">첨부파일1</button>
 																								<div id="collapsefive" class="collapse"
 																									aria-labelledby="headingOne"
@@ -679,7 +689,8 @@ th {
 																							id="progress"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
-																								<button class="btn btn-link btn-block text-center"
+																								<button
+																									class="btn btn-link btn-block text-center"
 																									type="button" data-toggle="collapse"
 																									data-target="#collapsesix" aria-expanded="true"
 																									aria-controls="collapsesix">첨부파일1</button>
@@ -775,7 +786,7 @@ th {
 																						<th>기존 완료예정일</th>
 																						<th>변경된 완료예정일</th>
 																						<th>수락여부</th>
-																						<th>상세조회</th>																						
+																						<th>상세조회</th>
 																					</tr>
 																				</thead>
 																				<tbody>
@@ -785,7 +796,9 @@ th {
 																						<td>@mdo</td>
 																						<td>@mdo</td>
 																						<td>@mdo</td>
-																						<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHistoryModalDetail">상세조회</button></td>																						
+																						<td><button class="btn btn-info btn-sm"
+																								data-toggle="modal"
+																								data-target="#addHistoryModalDetail">상세조회</button></td>
 																					</tr>
 																					<tr>
 																						<th scope="row">2</th>
@@ -793,7 +806,9 @@ th {
 																						<td>@fat</td>
 																						<td>Jacob</td>
 																						<td>@fat</td>
-																						<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHistoryModalDetail">상세조회</button></td>																						
+																						<td><button class="btn btn-info btn-sm"
+																								data-toggle="modal"
+																								data-target="#addHistoryModalDetail">상세조회</button></td>
 																					</tr>
 																					<tr>
 																						<th scope="row">3</th>
@@ -801,18 +816,20 @@ th {
 																						<td>@twitter</td>
 																						<td>Larry</td>
 																						<td>@twitter</td>
-																						<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHistoryModalDetail">상세조회</button></td>																				
+																						<td><button class="btn btn-info btn-sm"
+																								data-toggle="modal"
+																								data-target="#addHistoryModalDetail">상세조회</button></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
 																	</div>
 																</div>
-		
-															</div>															
-															
-															
-															
+
+															</div>
+
+
+
 														</div>
 													</div>
 												</div>

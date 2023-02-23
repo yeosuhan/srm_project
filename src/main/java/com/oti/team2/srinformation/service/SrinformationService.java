@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.oti.team2.srinformation.dao.SrinformationDao;
 import com.oti.team2.srinformation.dto.SrdemandDetail;
 import com.oti.team2.srinformation.dto.SrinformationList;
+import com.oti.team2.srinformation.dto.SrplanInfomaion;
 @Service
 public class SrinformationService implements ISrinformationService{
 	
@@ -18,7 +19,7 @@ public class SrinformationService implements ISrinformationService{
 	 * 
 	 * @author 여수한
 	 * 작성일자 : 2023-02-22
-	 * @return sr요청 상세 조회
+	 * @return sr진척 목록 조회
 	 */
 	@Override
 	public List<SrinformationList> getList() {
@@ -33,8 +34,19 @@ public class SrinformationService implements ISrinformationService{
 	 * @return sr요청 상세 조회
 	 */
 	@Override
-	public SrdemandDetail getInfoDetail(String dmndNo) {
-		return srinformationDao.selectInfoDetail(dmndNo);
+	public SrdemandDetail getInfoDetail(String Detail) {
+		return srinformationDao.selectDetailByDmndNo(Detail);
+	}
+	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-02-23
+	 * @return sr요청 계획정보 조회
+	 */
+	@Override
+	public SrplanInfomaion getPlan(String Plan) {
+		return srinformationDao.selectPlanByDmndNo(Plan);
 	}
 
 }

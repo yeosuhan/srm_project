@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.srinformation.dto.SrdemandDetail;
 import com.oti.team2.srinformation.dto.SrinformationList;
+import com.oti.team2.srinformation.dto.SrplanInfomaion;
 
 @Mapper
 public interface SrinformationDao {
@@ -25,5 +26,12 @@ public interface SrinformationDao {
 	 * 작성일자 : 2023-02-22
 	 * @return sr요청 상세 조회
 	 */
-	public SrdemandDetail selectInfoDetail(@Param("dmndNo")String dmndNo);
+	public SrdemandDetail selectDetailByDmndNo(@Param("Detail")String Detail);
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-02-23
+	 * @return sr요청 계획정보 조회
+	 */
+	public SrplanInfomaion selectPlanByDmndNo(@Param("Plan") String Plan);
 }

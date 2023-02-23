@@ -27,7 +27,7 @@
 												<h5>기관 등록하기</h5>
 											</div>
 											<div class="col-8 card-block">
-												<form action="<c:url value='/member/addinst'/>"
+												<form action="<c:url value='/institution/add'/>"
 													method="post" id="myInfoForm" class="form-material">
 													<div class="form-group form-default">
 														<input type="text" name="InstNm" class="form-control"
