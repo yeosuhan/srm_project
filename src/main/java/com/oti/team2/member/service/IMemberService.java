@@ -66,4 +66,5 @@ public interface IMemberService {
 	 * @return 반영된 행수
 	 * */
 	public int modifyMember(Member member);
+	
 }

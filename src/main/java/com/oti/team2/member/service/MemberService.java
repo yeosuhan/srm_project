@@ -89,4 +89,5 @@ public class MemberService implements IMemberService {
 	public int modifyMember(Member member) {
 		return memberDao.updateMemberByMemberId(member);
 	}
+
 }

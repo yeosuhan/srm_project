@@ -60,6 +60,7 @@ public interface IMemberDao {
 	 * @return 반영된 행수
 	 * */
 	public int deleteMemberByMemberId(String memberId);
+	
 	/*
 	 * 사원 수정 (관리자)
 	 * @author 안한길

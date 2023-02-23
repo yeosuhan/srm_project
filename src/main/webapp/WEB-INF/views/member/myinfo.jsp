@@ -36,7 +36,7 @@
 													</div>
 												</div>
 												<div class="col-8 card-block">
-													<form class="form-material" enctype="multipart/form-data"id="myinfo" action="<c:url value='/member/myinfo'/>" method="post" >
+													<form class="form-material" enctype="multipart/form-data" id="myinfo" action="<c:url value='/member/myinfo'/>" method="post" >
 														<div class="form-group row">
 															<p class="col-sm-2 font-weight-bold">이름</p>
 															<div class="col-sm-10">${member.flnm}</div>
