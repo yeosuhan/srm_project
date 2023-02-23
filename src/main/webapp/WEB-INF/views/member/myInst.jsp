@@ -29,6 +29,7 @@
 											<div class="col-8 card-block">
 												<form method="post" action="<c:url value='/institution/update'/>" id="myInstForm" class="form-material">
 													<div class="form-group form-default">
+													<input type="hidden" value="${inst.instCd}" name="instCd">
 														<input value="${inst.instNm}"type="text" name="InstNm"
 															class="form-control" required style="width: 50%">
 														<span class="form-bar"></span> <label class="float-label">기업명</label>
@@ -43,7 +44,7 @@
 
 													<div class="form-group form-default">
 														<input type="text" name="InstAddr" id="address_kakao"
-															class="form-control" required="" style="width: 50%"
+															class="form-control" required style="width: 50%"
 															value="${inst.instAddr}"> 
 															<input value="${inst.instDetailAddr}" class="form-control"
 															type="text" name="InstDetailAddr" placeholder="상세주소"

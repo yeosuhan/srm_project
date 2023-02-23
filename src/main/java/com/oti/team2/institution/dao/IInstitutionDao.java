@@ -21,7 +21,7 @@ public interface IInstitutionDao {
 	 * 기관 등록 
 	 * @author YEOSUHAN
 	 */
-	public void insertByInst(@Param("inst") Institution institution);
+	public int insertByInst(@Param("inst") Institution institution);
 	
 	/** 
 	 * 기관 수정 
