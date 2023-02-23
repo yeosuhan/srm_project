@@ -1,5 +1,4 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 
 <html>
@@ -21,22 +20,9 @@
 						console.log(result.srInformationHistory[0].hstryTtl);
 
 						for (var i = 0; i < result.srInformationHistory.length; i++) {
+							var historyCount = [ i + 1 ];
 							var historyTtl = result.srInformationHistory[i].hstryTtl;
-							var requestChgYmd = new Date(
-									result.srInformationHistory[i].chgEndYmd);
-							var historyChgEndYmd = requestChgYmd.getFullYear()
-									+ "-"
-									+ ((requestChgYmd.getMonth() + 1) > 9 ? (requestChgYmd
-											.getMonth() + 1).toString()
-											: "0"
-													+ (requestChgYmd.getMonth() + 1))
-									+ "-"
-									+ (requestChgYmd.getDate() > 9 ? requestChgYmd
-											.getDate().toString()
-											: "0"
-													+ requestChgYmd.getDate()
-															.toString());
-
+							var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
 							if (result.srInformationHistory[i].hstryStts == 'I') {
 								var historyStts = "요청 중";
 							} else if (result.srInformationHistory[i].hstryStts == 'N') {
@@ -45,411 +31,27 @@
 								var historyStts = "승인";
 							}
 
+							var param1 = '<tr data-toggle="modal" data-target="#addHistoryModalDetail">';
+							param1 += '<th scope="row" id="AhstryCount"></th>';
+							param1 += '<td id='+'AhstryTtl'+'></td>';
+
+							param1 += '<td id='+'AchgEndYmd'+'></td>';
+							param1 += '<td id='+'AhstryStts'+'></td>';
+							param1 += '</tr>';
+
+							console.log(param1);
+
+							$("#historyList").append(param1);
+
+							$("#AhstryCount").append(historyCount);
 							$("#AhstryTtl").append(historyTtl);
 							$("#AchgEndYmd").append(historyChgEndYmd);
 							$("#AhstryStts").append(historyStts);
+
 						}
 					}
 				});
 	}
-<%-- 달력--%>
-	/* $(function() {
-		$("#startDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('#addDatepicker').datepicker('setDate', 'today');
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#addDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('#addDatepicker').datepicker('setDate', 'today');
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#endDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('#addDatepicker').datepicker('setDate', 'today');
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	
-	$(function() {
-		$("#requestDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	
-	$(function() {
-		$("#endRequestDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	}); */
-	/*  */
-	/* $(function() {
-		$("#firStartDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#firEndDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#secStartDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#secEndDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#thrStartDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#thrEndDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#fourStartDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#fourEndDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#fiveStartDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#fiveEndDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#sixStartDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	});
-	$(function() {
-		$("#sixEndDatepicker").datepicker({
-			showOn : "both",
-			buttonImage : "resources/assets/images/button.png",
-			buttonImageOnly : true,
-			changeMonth : true,
-			changeYear : true,
-			showButtonPanel : true,
-			currentText : '오늘 날짜',
-			closeText : '닫기',
-			dateFormat : "yy-mm-dd",
-			minDate : -0,
-			todayHighlight : true,
-			language : "ko"
-
-		});
-		$('button.ui-datepicker-current').on(
-				'click',
-				function() {
-					$.datepicker._curInst.input.datepicker('setDate',
-							new Date()).datepicker('hide').blur();
-				});
-	}); */
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -979,14 +581,16 @@ th {
 																				<th>수락여부</th>
 																			</tr>
 																		</thead>
-																		<tbody>
+																		<tbody id="history">
+
 																			<tr data-toggle="modal"
-																				data-target="#addHistoryModalDetail">
-																				<th scope="row">1</th>
+																				data-target="#approvalHistoryModal">
+																				<th scope="row" id="AhstryCount"></th>
 																				<td id="AhstryTtl"></td>
 																				<td id="AchgEndYmd"></td>
 																				<td id="AhstryStts"></td>
 																			</tr>
+
 																		</tbody>
 																	</table>
 																</div>
@@ -1021,7 +625,8 @@ th {
 	<jsp:include page="/WEB-INF/views/history/approvalHistoryModal.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
-	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
-	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
+	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
+	<jsp:include page="/WEB-INF/views/history/addHistoryModalDetail.jsp" />
+
 </body>
 </html>
