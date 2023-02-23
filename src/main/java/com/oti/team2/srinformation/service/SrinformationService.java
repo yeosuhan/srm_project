@@ -27,22 +27,12 @@ public class SrinformationService implements ISrinformationService{
 		return srlist;
 	}
 	
-	/**
-	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-02-22
-	 * @return sr요청 상세 조회
-	 */
-	@Override
-	public SrdemandDetail getInfoDetail(String Detail) {
-		return srinformationDao.selectDetailByDmndNo(Detail);
-	}
 	
 	/**
 	 * 
 	 * @author 여수한
 	 * 작성일자 : 2023-02-23
-	 * @return sr요청 계획정보 조회
+	 * @return sr진척 계획정보 조회
 	 */
 	@Override
 	public SrplanInfomaion getPlan(String Plan) {
