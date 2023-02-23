@@ -17,5 +17,7 @@
 		<typeAlias type="com.oti.team2.srdemand.dto.SrRequestDto" alias="srRequestDto"/>
 		<typeAlias type="com.oti.team2.srdemand.dto.SrDemand" alias="srDemand"/>
 		<typeAlias type="com.oti.team2.util.pager.Pager" alias="pager" />
-	</typeAliases>
+		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrInformationHistory" alias="srInformationHistory" />
+		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrHistoryListDto" alias="srHistoryListDto" />
+	</typeAliases> 
 </configuration>
