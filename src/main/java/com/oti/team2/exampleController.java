@@ -110,11 +110,11 @@ public class exampleController {
 	}
 
 	// 한길
-	@RequestMapping(value = "/userSrdemandList", method = RequestMethod.GET)
+	@RequestMapping(value = "/userSrdemandlist", method = RequestMethod.GET)
 	public String userSrdemandList(Model model) {
 		return "srDemand/userSrDemandList";
 	}
-	@RequestMapping(value = "/adminSrdemandList", method = RequestMethod.GET)
+	@RequestMapping(value = "/adminSrdemandlist", method = RequestMethod.GET)
 	public String adminSrdemandList(Model model) {
 		return "srDemand/adminSrDemandList";
 	}
@@ -124,11 +124,5 @@ public class exampleController {
 		//System.out.println(srDemand);
 		//logger.info(srDemand.toString());
 		return "success";
-	}
-
-	// 나
-	@RequestMapping(value = "/srinformationList", method = RequestMethod.GET)
-	public String srInformationList(Model model) {
-		return "srInfo/srInformationList";
 	}
 }
