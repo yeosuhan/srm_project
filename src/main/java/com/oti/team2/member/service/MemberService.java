@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oti.team2.member.dao.IMemberDao;
+import com.oti.team2.member.dto.Developer;
 import com.oti.team2.member.dto.Member;
-
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.util.pager.Pager;
 
@@ -89,5 +89,14 @@ public class MemberService implements IMemberService {
 	public int modifyMember(Member member) {
 		return memberDao.updateMemberByMemberId(member);
 	}
-
+	/*
+	 * 개발자 목록 조회
+	 * @author 안한길
+	 * @param  부서 id
+	 * @return 개발자 목록
+	 * */
+	@Override
+	public List<Developer> getEmployeeNameList(String deptCd) {
+		return memberDao.selectByDeptCd(deptCd);
+	}
 }

@@ -1,5 +1,7 @@
 package com.oti.team2.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oti.team2.member.dto.Developer;
+import com.oti.team2.member.dto.EmployeeList;
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.member.service.IMemberService;
+import com.oti.team2.srresource.dto.SrResourceOfDeveloper;
+import com.oti.team2.srresource.service.ISrResourceService;
 import com.oti.team2.util.Auth;
 
 import lombok.extern.log4j.Log4j2;
@@ -27,7 +35,8 @@ import lombok.extern.log4j.Log4j2;
 public class MemberController {
 	@Autowired
 	private IMemberService memberService;
-	
+	@Autowired
+	private ISrResourceService srResourceService;
 	/**
 	 * 멤버의 내 정보 조회
 	 *@author : 신정은
@@ -74,5 +83,23 @@ public class MemberController {
 		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));
 		return new ResponseEntity<byte[]>(profileImg.getFileData(),  headers, HttpStatus.OK);
 		
+	}
+	
+	/**
+	 * 개발자 목록 조회
+	 * @author : 안한길
+	 * @param deptCd
+	 * @return List<developer>
+	 */
+	@ResponseBody
+	@GetMapping("/department")
+	public EmployeeList getEmployeeList(@RequestParam() String deptCd){
+		log.info(deptCd);
+		EmployeeList employeeList = new EmployeeList();
+		employeeList.setDevelopers(memberService.getEmployeeNameList(deptCd));
+		
+		employeeList.setSchedule(srResourceService.getSrResourceListByEmpId(employeeList.getDevelopers().get(0).getEmpId()));
+		
+		return employeeList;
 	}
 }

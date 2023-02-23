@@ -1,9 +1,0 @@
-/* 
-	작성자: 안한길
-	작성일: 2023.02.17.
-	내용: 버튼 css
- */
-.card button,.card .btn{
-	padding : 2px 4px;
-	vertical-align: middle;
-}
