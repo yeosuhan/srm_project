@@ -3,11 +3,13 @@ package com.oti.team2.srdemand.service;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oti.team2.srdemand.dao.ISrDemandDao;
+import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 
 import lombok.extern.log4j.Log4j2;
@@ -63,6 +65,33 @@ public class SrDemandService implements ISrDemandService{
 		log.info("오늘의 요청 수 : " + count);	
 		log.info("최종 sr요청코드 : " + srCode);
 		return srCode;
+	}
+
+	/**
+	 * 고객의 나의 sr요청 목록 조회
+	 * @author 신정은
+	 */
+	public List<SrDemand> getSrDemandList(String custId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/** 
+	 * sr요청 이 결재 전 상태이면 수정하기 위해 기존 데이터 제공
+	 * @author 신정은
+	 */
+	public SrRequestDto getSrReuestDto(String dmndNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * sr요청 수정 진행
+	 * @author 신정은
+	 */
+	public int updateSrDemand(SrRequestDto srRequestDto) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
