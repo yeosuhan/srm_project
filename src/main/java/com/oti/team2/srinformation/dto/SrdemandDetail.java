@@ -1,5 +1,9 @@
 package com.oti.team2.srinformation.dto;
 
+import java.sql.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -9,9 +13,22 @@ public class SrdemandDetail {
 	private String dmndNo;
 	private String ttl;
 	private String relGrund;
-	private String dmndYmd;
-	private String cmptnDmndYmd;
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
+	private Date dmndYmd;
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
+	private Date cmptnDmndYmd;
+	private String rjctRsn;
 	private String cn;
+	
+	//SR진척
+	private Date endYmd;
+	
+	// 부서
+	private String picNm; // 개발 담당자 이름
+	private String deptNm; // 개발 부서 이름
+	
+	//진행상태
+	private String sttsNm;
 	
 	//시스템 테이블
 	private String sysNm;
@@ -20,11 +37,10 @@ public class SrdemandDetail {
 	private String taskSeNm;
 	
 	//기관 테이블
-	private String instNm;
+	private String instNm; // 요청 기관
 	
 	//member 테이블
-	private String flnm;
+	private String clientNm; // 요청자(고객)
+	private String rvwrNm; //검토자 이름
 	
-	//첨부파일 테이블
-	private String fileNm;
 }

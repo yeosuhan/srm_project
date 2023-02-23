@@ -50,12 +50,12 @@ public class SrinformationController {
 	 * @return sr요청 상세 조회 - 완료  => 계획정보도 같이 가져와야될듯
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/{Detail}", method=RequestMethod.GET)
-	public SrTotal getDetail(@PathVariable("Detail")String Detail, Model model) {
+	@RequestMapping(value="/srinformation/{detail}", method=RequestMethod.GET)
+	public SrTotal getDetail(@PathVariable("detail")String detail, Model model) {
 		
-		String Plan = Detail;
-		SrdemandDetail dd = srDemandService.getInfoDetail(Detail);
-		SrplanInfomaion pi = srinformationService.getPlan(Plan);
+		String plan = detail;
+		SrdemandDetail dd = srDemandService.getSrDemandDetail(detail);
+		SrplanInfomaion pi = srinformationService.getPlan(plan);
 		SrTotal total = new SrTotal(dd,pi);
 		log.info(total);
 		return total;

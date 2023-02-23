@@ -42,9 +42,9 @@ public interface ISrDemandDao {
 	
 	/**
 	 * 
-	 * @author 여수한
+	 * @author 여수한, 신정은
 	 * 작성일자 : 2023-02-22
 	 * @return sr요청 상세 조회
 	 */
-	public SrdemandDetail selectDetailByDmndNo(@Param("Detail")String Detail);
+	public SrdemandDetail selectDetailByDmndNo(@Param("dmndNo")String dmndNo);
 }

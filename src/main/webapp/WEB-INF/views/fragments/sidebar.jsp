@@ -50,7 +50,7 @@
 	        <ul class="pcoded-item pcoded-left-item">
 	            <c:if test="${role eq 1}">
 		            <li class="">"
-		                <a href="<c:url value='/userSrdemandlist'/>" class="waves-effect waves-dark">
+		                <a href="<c:url value='/srdemand/list'/>" class="waves-effect waves-dark">
 		                    <span class="pcoded-micon"><i class="far fa-file-alt pt-1"></i><b>D</b></span>
 		                    <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
 		                    <span class="pcoded-mcaret"></span>
@@ -59,7 +59,7 @@
 	            </c:if>
 	             <c:if test="${role eq 3}">
 		            <li class="">
-		                <a href="<c:url value='/adminSrdemandlist'/>" class="waves-effect waves-dark">
+		                <a href="<c:url value='/srdemand/list'/>" class="waves-effect waves-dark">
 		                    <span class="pcoded-micon"><i class="far fa-file-alt pt-1"></i><b>D</b></span>
 		                    <span class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
 		                    <span class="pcoded-mcaret"></span>

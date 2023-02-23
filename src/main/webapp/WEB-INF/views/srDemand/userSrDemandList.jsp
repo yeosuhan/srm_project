@@ -63,6 +63,34 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+	
+<%-- 작성자 : 신정은  SR 요청을 가져오기--%>
+	function getSrDemandDetail(dmNo) {
+		$
+		.ajax({
+			url : "${pageContext.request.contextPath}/srdemand/detail/" + dmNo,
+			type : "GET",
+			success : function(res) {
+				$("#dmndNo").val(res.dmndNo);
+				$("#ttl").val(res.ttl);
+				$("#relGrund").val(res.relGrund);
+				$("#dmndYmd").text(res.dmndYmd);
+				$("#cmptnDmndYmd").text(res.cmptnDmndYmd);
+				$("#rjctRsn").text(res.rjctRsn);
+
+				$("#cn").text(res.cn);
+				$("#endYmd").text(res.endYmd);
+				$("#picNm").val(res.picNm);
+				$("#deptNm").val(res.deptNm);
+				$("#sttsNm").val(res.sttsNm);
+				$("#sysNm").text(res.sysNm);
+				$("#taskSeNm").text(res.taskSeNm);
+				$("#instNm").text(res.instNm);
+				$("#clientNm").text(res.clientNm);
+				$("#rvwrNm").val(res.rvwrNm);
+			}
+		});
+	}
 </script>
 
 <style>
@@ -205,7 +233,7 @@ th {
 											<div class="col-xl-8 col-md-12">
 												<div class="card">
 													<div class="card-header">
-														<h5>SR 요청 목록</h5>
+														<h5> 고객용! SR 요청 목록</h5>
 														<div class="card-header-right">
 															<ul class="list-unstyled card-option">
 																<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -237,9 +265,9 @@ th {
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<c:forEach var="srDemand" items="${srDemandList}"
+																			<c:forEach var="srDemand" items="${mySrDemandList}"
 																				varStatus="status">
-																				<tr>
+																				<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
 																					<th scope="row">${status.count}</th>
 																					<td>${srDemand.dmndNo}</td>
 																					<td>${srDemand.ttl}</td>
@@ -266,7 +294,7 @@ th {
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
 													<div class="card-header">
-														<h5>SR요청 처리정보</h5>
+														<h5>SR요청 상세</h5>
 														<div class="card-header-right">
 															<ul class="list-unstyled card-option">
 																<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -284,7 +312,7 @@ th {
 															<div class="slide"></div></li>
 														<li class="nav-item"><a class="nav-link"
 															data-toggle="tab" href="#srHistory"
-															onclick="getHistoryList('${srNo}')" role="tab">SR
+															onclick="getHistoryList('${srDemand.dmndNo}')" role="tab">SR
 																히스토리</a>
 															<div class="slide"></div></li>
 													</ul>
@@ -300,111 +328,64 @@ th {
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4">SR번호</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control">
-																			</div>
-																		</div>
-																		<div class="col-sm-6">
-																			<div class="col col-sm-4">요청구분</div>
-																			<div class="col col-sm-6">
-																				<input type="text" class="form-control">
+																				<input type="text" class="form-control" id="dmndNo">
 																			</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col col-sm-2">SR 제목</div>
 																		<div class="col col-sm-9">
-																			<input type="text" class="form-control">
+																			<input type="text" class="form-control" id="ttl">
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col col-sm-2">관련 근거</div>
 																		<div class="col col-sm-9">
-																			<input type="text" class="form-control">
+																			<input type="text" class="form-control" id="relGrund">
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4">시스템구분</div>
-																			<div class="col col-sm-6">
-																				<div class="dropdown dropdown open">
-																					<form action="#">
-																						<select name="languages" id="lang">
-																							<option value="워크넷">워크넷</option>
-																							<option value="굴국밥">굴국밥</option>
-																							<option value="고소미">고소미</option>
-																						</select>
-																					</form>
-																				</div>
-																			</div>
+																			<div class="col col-sm-6" id="sysNm"></div>
 																		</div>
 																		<div class="col-sm-6">
-																			<div class="col col-sm-4">업무구분</div>
-																			<div class="dropdown dropdown open">
-																				<form action="#">
-																					<select name="languages" id="lang">
-																						<option value="워크넷">내부망</option>
-																						<option value="굴국밥">외부망</option>
-																						<option value="고소미">구매</option>
-																					</select>
-																				</form>
-																			</div>
+																			<div class="col col-sm-4" id="taskSeNm">업무구분</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4">요청기관</div>
-																			<div class="col col-sm-6">
-																				<div class="dropdown dropdown open">
-																					<form action="#">
-																						<select name="languages" id="lang">
-																							<option value="워크넷">고용부</option>
-																							<option value="굴국밥">오티아이</option>
-																							<option value="고소미">네이버</option>
-																						</select>
-																					</form>
-																				</div>
-																			</div>
+																			<div class="col col-sm-6" id="instNm"></div>
 
 																		</div>
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4">요청자</div>
-																			<div class="dropdown dropdown open">
-																				<form action="#">
-																					<select name="languages" id="lang">
-																						<option value="워크넷">워크넷 직원</option>
-																						<option value="굴국밥">공무원</option>
-																						<option value="고소미">직원</option>
-																					</select>
-																				</form>
-																			</div>
+																			<div class="dropdown dropdown open" id="clientNm"></div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4">요청일</div>
-																			<div class="col col-sm-8">
-																				<input type="date" id="requestDatepicker">
-																			</div>
+																			<div class="col col-sm-8" id="dmndYmd"></div>
 																		</div>
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4">완료요청일</div>
-																			<div class="col col-sm-8">
-																				<input type="date" id="endRequestDatepicker">
-																			</div>
+																			<div class="col col-sm-8" id="cmptnDmndYmd"></div>
 																		</div>
 																	</div>
 																	<div class="row mt-3">
 																		<div class="col-6">
 																			<div class="col col-sm-4">개발 담당자</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control" value="개발자1"
+																				<input type="text" class="form-control" id="picNm"
 																					disabled>
 																			</div>
 																		</div>
 																		<div class="col-6">
 																			<div class="col col-sm-4">개발 부서</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control" value="부서1"
+																				<input type="text" class="form-control" id="deptNm"
 																					disabled>
 																			</div>
 																		</div>
@@ -413,31 +394,21 @@ th {
 																		<div class="col-6">
 																			<div class="col col-sm-4">진행 상태</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control" value="관리자1"
+																				<input type="text" class="form-control" id="sttsNm"
 																					disabled>
 																			</div>
 																		</div>
 																		<div class="col-6">
 																			<div class="col col-sm-4">완료(예정)일</div>
-																			<div class="col col-sm-6">
-																				<input type="text" class="form-control"
-																					value="000-0000-0000" disabled>
-																			</div>
+																			<div class="col col-sm-6" id="endYmd"> </div>
 																		</div>
 																	</div>
 																	<div class="row mt-3">
 																		<div class="col-6">
 																			<div class="col col-sm-4">검토자 이름</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control" value="관리자1"
+																				<input type="text" class="form-control" id="rvwrNm"
 																					disabled>
-																			</div>
-																		</div>
-																		<div class="col-6">
-																			<div class="col col-sm-4">부서 번호</div>
-																			<div class="col col-sm-6">
-																				<input type="text" class="form-control"
-																					value="000-0000-0000" disabled>
 																			</div>
 																		</div>
 																	</div>
@@ -446,7 +417,7 @@ th {
 																		<label class="col-sm-3 col-form-label px-0"
 																			style="line-height: 120px">반려 사유</label>
 																		<div class="col-sm-9 pl-0 ">
-																			<textarea rows="5" cols="5" class="form-control"></textarea>
+																			<textarea rows="5" cols="5" class="form-control" id="rjctRsn"></textarea>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -455,7 +426,7 @@ th {
 																			내용</label>
 																		<div class="col-sm-9">
 																			<textarea rows="5" cols="5" class="form-control"
-																				style="height: 100px;"></textarea>
+																				style="height: 100px;" id="cn"></textarea>
 																		</div>
 																	</div>
 																	<div class="form-group row">

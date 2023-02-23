@@ -17,7 +17,7 @@ table, th, td {
 		console.log("~~" + cid);
 		
 				$.ajax({
-					url : '/admin/client/' + cid,
+					url : '${pageContext.request.contextPath}/admin/client/' + cid,
 					type : 'GET',
 					data : {
 						clientId : cid
