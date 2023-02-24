@@ -6,11 +6,11 @@
 <head>
 	<%@include file="/WEB-INF/views/fragments/header.jsp"%>
 	<link rel="stylesheet" type="text/css"
-		href="/resources/css/srButton.css">
+		href="${pageContext.request.contextPath}/resources/css/srButton.css">
 	<link rel="stylesheet" type="text/css"
-		href="/resources/css/pagination.css">
+		href="${pageContext.request.contextPath}/resources/css/pagination.css">
 	<link rel="stylesheet" type="text/css"
-		href="/resources/js/pagination.js">
+		href="${pageContext.request.contextPath}/resources/js/pagination.js">
 	<!-- 모달 -->
 	<link rel="stylesheet" type="text/css"
 		href="${pageContext.request.contextPath}/resources/css/srModal.css">
