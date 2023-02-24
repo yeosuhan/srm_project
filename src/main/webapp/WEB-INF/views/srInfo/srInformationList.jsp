@@ -27,7 +27,8 @@
 		document.body.style = `overflow: scroll`;
 	});
 <%-- SR요청 상세보기 --%>
-	function getDetail(dmndNo) {
+
+	function getDetail(dmndNo, srNo) {
 		console.log("dmndNo: " + dmndNo);
 		$.ajax({
 			url : '/srinformation/detail/' + dmndNo,
@@ -49,30 +50,38 @@
 				$("#SRDCn").val(detail.dd.cn);
 				$("#SRDFile").val(detail.dd.fileNm);
 
-				$("#SRPDeptNm").val(detail.pi.deptNm);
-				$("#SRPFlnm").val(detail.pi.flnm);
-				$("#SRPBgngYmd").val(detail.pi.bgngYmd);
-				$("#SRPEndYmd").val(detail.pi.endYmd);
-				$("#SRPRvwCn").text(detail.pi.rvwCn);
+				$("#SRPlDeptNm").val(detail.pi.deptNm);
+				$("#SRPlFlnm").val(detail.pi.flnm);
+				$("#SRPlBgngYmd").val(detail.pi.bgngYmd);
+				$("#SRPlEndYmd").val(detail.pi.endYmd);
+				$("#SRPlRvwCn").text(detail.pi.rvwCn);
+				/*자원 정보 모달*/
+				$("#srPlanTab").tab("show");
+				$("#srNo").val(srNo);
+				$("#ttl").val(detail.dd.ttl);
+				$("#deptCd").val(detail.pi.deptCd);
+				$("#deptNm").val(detail.pi.deptNm);
+				$("#resourceInst").val(detail.dd.instNm);
+				$("#resourceTableRow").empty();
 			}
 		});
 	}
 <%-- SR요청 계획정보 --%>
 	function getPlan() {
-		$("#SRDDmndNo").text();
-		console.log("Plan: " + $("#SRDDmndNo").text());
+		$("#SRDDmndNo").val();
+		console.log("Plan: " + $("#SRDDmndNo").val());
 		$.ajax({
-			url : '/srinformation/plan/' + $("#SRDDmndNo").text(),
+			url : '/srinformation/plan/' + $("#SRDDmndNo").val(),
 			type : 'GET',
 			data : {
-				Plan : $("#SRDDmndNo").text()
+				plan : $("#SRDDmndNo").val()
 			},
-			success : function(Plan) {
-				$("#SRPlDeptNm").text(Plan.deptNm);
-				$("#SRPlFlnm").text(Plan.flnm);
-				$("#SRPlBgngYmd").text(Plan.bgngYmd);
-				$("#SRPlEndYmd").text(Plan.endYmd);
-				$("#SRPlRvwCn").text(Plan.rvwCn);
+			success : function(plan) {
+				$("#SRPlDeptNm").val(plan.deptNm);
+				$("#SRPlFlnm").val(plan.flnm);
+				$("#SRPlBgngYmd").val(plan.bgngYmd);
+				$("#SRPlEndYmd").val(plan.endYmd);
+				$("#SRPlRvwCn").val(plan.rvwCn);
 			}
 		});
 	}
@@ -339,7 +348,7 @@ th {
 																		<tbody>
 																			<c:forEach var="srlist" items="${srlist}"
 																				varStatus="num">
-																				<tr onclick="getDetail('${srlist.dmndNo}')">
+																				<tr onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}')">
 																					<th scope="row">${num.count}</th>
 																					<td>${srlist.srNo}</td>
 																					<td>${srlist.sysNm}</td>
@@ -485,11 +494,11 @@ th {
 													</div>
 													<div class="card-block" style="padding-top: 10px;">
 														<ul class="nav nav-tabs  md-tabs" role="tablist">
-															<li class="nav-item" onclick="getPlan()"><a
+															<li class="nav-item" onclick="getPlan()"><a id="srPlanTab" 
 																class="nav-link active" data-toggle="tab" href="#home1"
 																role="tab">SR 계획정보</a>
 																<div class="slide"></div></li>
-															<li class="nav-item"><a class="nav-link"
+															<li class="nav-item"><a id="srResourceTab" class="nav-link"
 																data-toggle="tab" href="#profile1" role="tab">SR
 																	자원정보</a>
 																<div class="slide"></div></li>

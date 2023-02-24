@@ -49,7 +49,7 @@ public class SrResourceService implements ISrResourceService {
 	 * @return int
 	 * */
 	@Override
-	public int deleteSrResource(String[] srSrc) {
+	public int deleteSrResource(List<String> srSrc) {
 		return srResourceDao.deleteBySrSrc(srSrc);
 	}
 

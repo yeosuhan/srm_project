@@ -8,7 +8,7 @@
 <%-- 카카오 주소 js --%>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/resources/js/kakaoAddress.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/kakaoAddress.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/employeesList.js"></script>
 
 <style>
@@ -129,7 +129,7 @@ p {
 													<div class="card-block"
 														style="justify-content: center; text-align: center;">
 														<div class="my-2">
-															<img src="/resources/assets/images/ejexample.png"
+															<img src="${pageContext.request.contextPath}/resources/assets/images/ejexample.png"
 																style="height: 200px; width: 200px; align-content: center;">
 														</div>
 													</div>
