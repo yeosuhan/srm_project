@@ -9,11 +9,12 @@
 <script>
 	
 <%-- JSON으로 받아온 HistoryList를 보여주기 위한 ajax --%>
-	function getHistoryList(srNo) {
-		console.log("srHistoryList 글번호: " + srNo);
+	function getHistoryList() {
+		var dmndNo = $("#dmndNo").val();
+		console.log("srHistoryList 글번호: " + dmndNo);
 		$
 				.ajax({
-					url : "/history/list/" + srNo,
+					url : "/history/list?dmndNo=" + dmndNo,
 					type : "GET",
 
 					success : function(result) {
@@ -309,7 +310,7 @@ th {
 															<div class="slide"></div></li>
 														<li class="nav-item"><a class="nav-link"
 															data-toggle="tab" href="#srHistory"
-															onclick="getHistoryList('${srDemand.dmndNo}')" role="tab">SR
+															onclick="getHistoryList()" role="tab">SR
 																히스토리</a>
 															<div class="slide"></div></li>
 													</ul>
