@@ -19,9 +19,10 @@ import lombok.extern.log4j.Log4j2;
 public class SrInformationHistoryService implements ISrInformationHistoryService {
 	@Autowired
 	private ISrInformationHistoryDao srInformationHistoryDao;
-	
+
 	@Autowired
 	private ISrDemandDao srDemandDao;
+
 	/**
 	 * SR처리 히스토리 내역 조회 메서드
 	 * 
@@ -32,11 +33,12 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectBySrNo(pager, srNo);
 		return srInformationHistoryList;
 	}
-	
+
 	@Override
 	public String getSrNo(String dmndNo) {
-		String srNo= srDemandDao.selectBySrDmndNo(dmndNo);
-		
+		String srNo = srDemandDao.selectBySrDmndNo(dmndNo);
+
+		log.info(srNo);
 		return srNo;
 	}
 

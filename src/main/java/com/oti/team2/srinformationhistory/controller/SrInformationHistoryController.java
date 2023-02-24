@@ -59,12 +59,13 @@ public class SrInformationHistoryController {
 		int totalRows = srInformationHistoryService.getTotalRows();
 		Pager pager = new Pager(totalRows, pageNO);
 		String srNo = srInformationHistoryService.getSrNo(dmndNo);
+		log.info("dmndNo 1 조회" + dmndNo);
 		// ${srInformationHistory.srNo}
 		// srNo = "WOR-SR-0001";
 		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryList(pager,
 				srNo);
 		log.info("srInformationHistoryList 조회" + srInformationHistory);
-		log.info("srNo 조회" + srNo);
+		log.info("srNo 2 조회" + srNo);
 		SrHistoryListDto srHistoryList = new SrHistoryListDto();
 		srHistoryList.setSrInformationHistory(srInformationHistory);
 		srHistoryList.setPager(pager);
