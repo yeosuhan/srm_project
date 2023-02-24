@@ -35,4 +35,6 @@ public interface ISrInformationHistoryService {
 	 * @author 최은종
 	 */
 	public int updateSrInformationHistory();
+
+	public String getSrNo(String dmndNo);
 }
