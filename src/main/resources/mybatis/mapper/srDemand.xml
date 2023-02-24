@@ -119,7 +119,11 @@
 		    where t.MNGR_ID = mem.member_id
 	</select>
 	
-	
-	
+	<!-- 사용자에게 받은 SR요청번호와 SR진척번호를 연결하기 위한 쿼리 -->
+	<select id="selectBySrDmndNo" parameterType="string" resultType="string">
+		select SI.sr_no as srNo
+		from sr_information SI
+		where SI.dmnd_no=#{dmndNo}
+	</select>
 	
 </mapper>
