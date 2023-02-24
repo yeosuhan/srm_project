@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
-import com.oti.team2.srinformation.dto.SrdemandDetail;
+import com.oti.team2.srdemand.dto.SrdemandDetail;
 
 public interface ISrDemandDao {
 
@@ -42,7 +42,7 @@ public interface ISrDemandDao {
 	
 	/**
 	 * 
-	 * @author 여수한
+	 * @author 여수한, 신정은
 	 * 작성일자 : 2023-02-22
 	 * @return sr요청 상세 조회
 	 */

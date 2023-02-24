@@ -68,7 +68,7 @@ public class AdminController {
 		log.info("department 신규 등록");
 
 		departmentService.addDepartment(department);
-		return "redirect:/admin/departmentlist";
+		return "redirect:/admin/department/list";
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class AdminController {
 		department.setOfcTelno(Jsoup.clean(department.getOfcTelno(), Whitelist.basic()));
 
 		departmentService.updateDepartment(department);
-		return "redirect:/admin/departmentlist";
+		return "redirect:/admin/department/list";
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class AdminController {
 		log.info("department 삭제");
 
 		departmentService.deleteDepartment(deptCd);
-		return "redirect:/admin/departmentlist";
+		return "redirect:/admin/department/list";
 	}
 
 	/**
