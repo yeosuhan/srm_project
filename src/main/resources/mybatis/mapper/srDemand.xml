@@ -18,7 +18,7 @@
 	<!-- 고객의 나의 요청 목록 조회  -->
 	<select id="selectByCustId" parameterType="string" resultType="srDemand">
 		 SELECT 
-	        DMND_NO as dmndNo ,
+	        DISTINCT DMND_NO as dmndNo ,
 	        TTL as ttl ,
 	        SYS_NM  as sysNm ,
 	        clientNm as custNm ,
@@ -43,6 +43,7 @@
 		    and m.inst_cd = i.inst_cd
 		    and sd.stts_cd = s.stts_cd
 		    and sd.sys_cd = sy.sys_cd 
+		    and sd.dmnd_no = si.dmnd_no
 		   
 		    ) w , members c 
 		where w.rvwr_id = c.member_id(+) 
@@ -106,6 +107,7 @@
 		                end_ymd
 		        FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sys, sr_information si, departments d, task tk
 		        WHERE sd.DMND_NO = #{dmndNo}
+		        and sd.dmnd_no = si.dmnd_no
 		        and sd.cust_id = m.member_id
 		        and m.inst_cd = i.inst_cd
 		        and sd.stts_cd = s.stts_cd

@@ -45,8 +45,8 @@ public class SrDemandController {
 	public WriterDto addSrDemand(HttpSession session) {
 		log.info("기본정보 세팅");
 		// 세션에서 사용자의 이름을 가져와야 됨.
-		String userId = "client2";
-		String user = "고객2";
+		String userId = "client1";
+		String user = "고객1";
 
 		String instName = institutionService.getInst(userId).getInstNm();
 		WriterDto writerDto = new WriterDto(userId, user, instName);
@@ -78,12 +78,14 @@ public class SrDemandController {
 		String auth = Auth.CLIENT.toString();
 //		String auth = Auth.ADMIN.toString();
 		
-
 		if (auth.equals(Auth.CLIENT.toString())) {
-			String custId = "client2";
+			String custId = "client1";
 			List<SrDemand> list = srdemandService.getSrDemandList(custId);
-			model.addAttribute("mySrDemandList", list);
 			log.info(list);
+//			SrdemandDetail sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
+			
+//			model.addAttribute("srDemand", sd);
+			model.addAttribute("mySrDemandList", list);
 			return "srDemand/userSrDemandList";
 		}
 
@@ -114,23 +116,5 @@ public class SrDemandController {
 		// 수정 진행
 		return "";
 	}
-	
-	/**
-	 * 
-	 * 
-	 * @author 최은종 / 테스트용
-	 * @param model
-	 * @return
-
-	@GetMapping("/list")
-		public String getSrDemandList(Model model) {
-			log.info("srDemandList 조회");
-			
-			model.addAttribute("srNo", "WOR-SR-0001");
-			log.info(model.getAttribute("srNo"));
-			return "srDemand/userSrDemandList";
-	}
-	*/
-		 
-	
+			 	
 }
