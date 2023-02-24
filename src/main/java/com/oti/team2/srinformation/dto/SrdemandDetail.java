@@ -6,6 +6,7 @@ import lombok.Data;
 public class SrdemandDetail {
 	
 	//srDemand 테이블
+	private String srNo;
 	private String dmndNo;
 	private String ttl;
 	private String relGrund;

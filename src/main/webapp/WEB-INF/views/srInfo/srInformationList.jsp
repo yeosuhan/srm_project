@@ -37,6 +37,7 @@
 			},
 			success : function(detail) {
 				console.log(detail);
+				$("#SRDSrNo").val(detail.dd.srNo);
 				$("#SRDDmndNo").val(detail.dd.dmndNo);
 				$("#SRDTitle").val(detail.dd.ttl);
 				$("#SRDRelgrund").val(detail.dd.relGrund);
@@ -49,47 +50,48 @@
 				$("#SRDCn").val(detail.dd.cn);
 				$("#SRDFile").val(detail.dd.fileNm);
 
-				$("#SRPDeptNm").val(detail.pi.deptNm);
-				$("#SRPFlnm").val(detail.pi.flnm);
-				$("#SRPBgngYmd").val(detail.pi.bgngYmd);
-				$("#SRPEndYmd").val(detail.pi.endYmd);
-				$("#SRPRvwCn").text(detail.pi.rvwCn);
+				$("#SRPlDeptNm").val(detail.pi.deptNm);
+				$("#SRPlFlnm").val(detail.pi.flnm);
+				$("#SRPlBgngYmd").val(detail.pi.bgngYmd);
+				$("#SRPlEndYmd").val(detail.pi.endYmd);
+				$("#SRPlRvwCn").text(detail.pi.rvwCn);
 			}
 		});
 	}
 <%-- SR요청 계획정보 --%>
 	function getPlan() {
-		$("#SRDDmndNo").text();
-		console.log("Plan: " + $("#SRDDmndNo").text());
+		$("#SRDDmndNo").val();
+		console.log("Plan: " + $("#SRDDmndNo").val());
 		$.ajax({
-			url : '/srinformation/plan/' + $("#SRDDmndNo").text(),
+			url : '/srinformation/plan/' + $("#SRDDmndNo").val(),
 			type : 'GET',
 			data : {
-				Plan : $("#SRDDmndNo").text()
+				Plan : $("#SRDDmndNo").val()
 			},
 			success : function(Plan) {
-				$("#SRPlDeptNm").text(Plan.deptNm);
-				$("#SRPlFlnm").text(Plan.flnm);
-				$("#SRPlBgngYmd").text(Plan.bgngYmd);
-				$("#SRPlEndYmd").text(Plan.endYmd);
+				$("#SRPlDeptNm").val(Plan.deptNm);
+				$("#SRPlFlnm").val(Plan.flnm);
+				$("#SRPlBgngYmd").val(Plan.bgngYmd);
+				$("#SRPlEndYmd").val(Plan.endYmd);
 				$("#SRPlRvwCn").text(Plan.rvwCn);
 			}
 		});
 	}
 <%-- SR요청 진척률 --%>
 	function getProgress() {
-		$("#SRDDmndNo").text();
-		console.log("Progress: " + $("#SRDDmndNo").text());
+		$("#SRDSrNo").val();
+		console.log("getProgress: " + $("#SRDSrNo").val());
 		$.ajax({
-			url : '/srinformation/progress/' + $("#SRDDmndNo").text(),
+			url : '/srinformation/progress/' + $("#SRDSrNo").val(),
 			type : 'GET',
 			data : {
-				Progress : $("#SRDDmndNo").text()
+				Progress : $("#SRDSrNo").val()
 			},
 			success : function(Progress) {
-				$("#SRPgBgngYmd").text(Progress.bgngYmd);
-				$("#SRPgEndYmd").text(Progress.endYmd);
-				$("#SRPgPrgrsYn").text(Progress.prgrsYn);
+				$("#SRPgPrgrsId").val(Progress.pgPrgrsId);
+				$("#SRPgBgngYmd").val(Progress.bgngYmd);
+				$("#SRPgEndYmd").val(Progress.endYmd);
+				$("#SRPgPrgrsRt").val(Progress.prgrsYn);
 			}
 		});
 	}
@@ -387,6 +389,7 @@ th {
 
 																<div class="col col-sm-3">요청 번호</div>
 																<div class="col col-sm-9">
+																<input type="hidden" id="SRDSrNo">
 																	<input readonly class="form-control"
 																		style="width: 150px;" id="SRDDmndNo">
 																</div>
@@ -608,13 +611,15 @@ th {
 																					</tr>
 																				</thead>
 																				<tbody>
+																				<c:forEach var="srlist" items="${srlist}"
+																				varStatus="num">
 																					<tr>
-																						<th scope="row">1</th>
-																						<td>요구정의</td>
+																						<th scope="row">${num.count}</th>
+																						<td id="SRPgPrgrsSeNm"></td>
 																						<td><input type="date" id="SRPgBgngYmd"></td>
 																						<td><input type="date" id="SRPgEndYmd"></td>
 																						<td><input type="text" class="form-control"
-																							id="SRPgPrgrsYn"></td>
+																							id="SRPgPrgrsRt"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -627,115 +632,10 @@ th {
 																									data-parent="#accordionExample">
 																									<div class="card-body">첨부파일2</div>
 																								</div>
-																							</div></td>
+																							</div>
+																						</td>
 																					</tr>
-																					<tr>
-																						<th scope="row">2</th>
-																						<td>분석/설계</td>
-																						<td><input type="date"></td>
-																						<td><input type="date"></td>
-																						<td><input type="text" class="form-control"
-																							id="progress"></td>
-																						<td><div class="accordion"
-																								id="accordionExample">
-																								<button
-																									class="btn btn-link btn-block text-center"
-																									type="button" data-toggle="collapse"
-																									data-target="#collapseTwo" aria-expanded="true"
-																									aria-controls="collapseTwo">첨부파일1</button>
-																								<div id="collapseTwo" class="collapse"
-																									aria-labelledby="headingOne"
-																									data-parent="#accordionExample">
-																									<div class="card-body">첨부파일2</div>
-																								</div>
-																							</div></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">3</th>
-																						<td>구현</td>
-																						<td><input type="date"></td>
-																						<td><input type="date"></td>
-																						<td><input type="text" class="form-control"
-																							id="progress"></td>
-																						<td><div class="accordion"
-																								id="accordionExample">
-																								<button
-																									class="btn btn-link btn-block text-center"
-																									type="button" data-toggle="collapse"
-																									data-target="#collapseThr" aria-expanded="true"
-																									aria-controls="collapseThr">첨부파일1</button>
-																								<div id="collapseThr" class="collapse"
-																									aria-labelledby="headingOne"
-																									data-parent="#accordionExample">
-																									<div class="card-body">첨부파일2</div>
-																								</div>
-																							</div></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">4</th>
-																						<td>시험</td>
-																						<td><input type="date"></td>
-																						<td><input type="date"></td>
-																						<td><input type="text" class="form-control"
-																							id="progress"></td>
-																						<td><div class="accordion"
-																								id="accordionExample">
-																								<button
-																									class="btn btn-link btn-block text-center"
-																									type="button" data-toggle="collapse"
-																									data-target="#collapsefour"
-																									aria-expanded="true"
-																									aria-controls="collapsefour">첨부파일1</button>
-																								<div id="collapsefour" class="collapse"
-																									aria-labelledby="headingOne"
-																									data-parent="#accordionExample">
-																									<div class="card-body">첨부파일2</div>
-																								</div>
-																							</div></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">5</th>
-																						<td>반영요청</td>
-																						<td><input type="date"></td>
-																						<td><input type="date"></td>
-																						<td><input type="text" class="form-control"
-																							id="progress"></td>
-																						<td><div class="accordion"
-																								id="accordionExample">
-																								<button
-																									class="btn btn-link btn-block text-center"
-																									type="button" data-toggle="collapse"
-																									data-target="#collapsefive"
-																									aria-expanded="true"
-																									aria-controls="collapsefive">첨부파일1</button>
-																								<div id="collapsefive" class="collapse"
-																									aria-labelledby="headingOne"
-																									data-parent="#accordionExample">
-																									<div class="card-body">첨부파일2</div>
-																								</div>
-																							</div></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">6</th>
-																						<td>운영반영</td>
-																						<td><input type="date"></td>
-																						<td><input type="date"></td>
-																						<td><input type="text" class="form-control"
-																							id="progress"></td>
-																						<td><div class="accordion"
-																								id="accordionExample">
-																								<button
-																									class="btn btn-link btn-block text-center"
-																									type="button" data-toggle="collapse"
-																									data-target="#collapsesix" aria-expanded="true"
-																									aria-controls="collapsesix">첨부파일1</button>
-																								<div id="collapsesix" class="collapse"
-																									aria-labelledby="headingOne"
-																									data-parent="#accordionExample">
-																									<div class="card-body">첨부파일2</div>
-																								</div>
-																							</div></td>
-																					</tr>
+																					</c:forEach>
 																				</tbody>
 																			</table>
 																		</div>

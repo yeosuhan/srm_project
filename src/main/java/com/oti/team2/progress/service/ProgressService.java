@@ -1,5 +1,7 @@
 package com.oti.team2.progress.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,8 @@ public class ProgressService implements IProgressService{
 	 * @return sr요청 진척률 조회
 	 */
 	@Override
-	public Progress getProgress(String dmndNo) {
-		return progressDao.selectProgressByDmndNo(dmndNo);
+	public List<Progress> getProgress(String srNo) {
+		return progressDao.selectProgressByDmndNo(srNo);
 	}
 
 }

@@ -1,17 +1,22 @@
 package com.oti.team2.srdemand.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.institution.service.IInstitutionService;
+import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
+import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.dto.WriterDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.util.Auth;
@@ -40,8 +45,8 @@ public class SrDemandController {
 	public WriterDto addSrDemand(HttpSession session) {
 		log.info("기본정보 세팅");
 		// 세션에서 사용자의 이름을 가져와야 됨.
-		String userId = "client2";
-		String user = "고객2";
+		String userId = "client1";
+		String user = "고객1";
 
 		String instName = institutionService.getInst(userId).getInstNm();
 		WriterDto writerDto = new WriterDto(userId, user, instName);
@@ -67,15 +72,20 @@ public class SrDemandController {
 	 * 
 	 * @author 신정은
 	 */
-	/*
 	@GetMapping("/list")
-	public String getSrDemaneList(HttpSession session, Model model) {
+	public String getSrDemandList(HttpSession session, Model model) {
 		// 고객인 경우
 		String auth = Auth.CLIENT.toString();
 //		String auth = Auth.ADMIN.toString();
-
+		
 		if (auth.equals(Auth.CLIENT.toString())) {
-
+			String custId = "client2";
+			List<SrDemand> list = srdemandService.getSrDemandList(custId);
+			log.info(list);
+//			SrdemandDetail sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
+			
+//			model.addAttribute("srDemand", sd);
+			model.addAttribute("mySrDemandList", list);
 			return "srDemand/userSrDemandList";
 		}
 
@@ -83,7 +93,19 @@ public class SrDemandController {
 
 		return "srDemand/adminSrDemandList";
 	}
-*/
+	
+	/**
+	 * SR요청 상세보기
+	 * @author 신정은
+	 */
+	@ResponseBody
+	@GetMapping("/detail/{dmNo}")
+	public SrdemandDetail getSrDemandDetail(@PathVariable String dmNo) {
+		SrdemandDetail sd = srdemandService.getSrDemandDetail(dmNo);
+		log.info(sd);
+		return sd;
+	}
+
 	@GetMapping("/modify")
 	public String updateSrDemand(String dmndNo) {
 		// sr요청이 아직 요청단계인 경우에만 수정 가능하다.
@@ -94,22 +116,5 @@ public class SrDemandController {
 		// 수정 진행
 		return "";
 	}
-	
-	/**
-	 * 
-	 * 
-	 * @author 최은종 / 테스트용
-	 * @param model
-	 * @return
-*/
-	@GetMapping("/list")
-		public String getSrDemandList(Model model) {
-			log.info("srDemandList 조회");
-			
-			model.addAttribute("srNo", "WOR-SR-0001");
-			log.info(model.getAttribute("srNo"));
-			return "srDemand/userSrDemandList";
-	}
-		 
-	
+			 	
 }
