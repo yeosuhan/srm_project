@@ -20,5 +20,5 @@
 <script src="${pageContext.request.contextPath}/resources/assets/js/vertical-layout.min.js "></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/script.js"></script>
-
+<script src="${pageContext.request.contextPath}/resources/js/getContextPath.js"></script>
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp"/> 

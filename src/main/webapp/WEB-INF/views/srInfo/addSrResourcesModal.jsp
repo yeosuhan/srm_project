@@ -18,23 +18,21 @@
 						<div class="row my-3">
 							<div class="col-6">SR제목 : </div>
 							<div class="col-6">
-								<input type="hidden" id="srNo" name="srNo" value="WOR-SR-0001">
-								<input type="text" id="ttl"  value="테스트" disabled>
+								<input type="hidden" id="srNo" name="srNo" value="">
+								<input type="text" id="ttl"  value="" disabled>
 							</div>
 						</div>
 						<div class="row my-3">
 							<div class="col-6">요청기관 : </div>
 							<div class="col-6">
-								<input type="text" value="고용부" disabled>
+								<input id="resourceInst" type="text" value="" disabled>
 							</div>
 						</div>
 						<div class="row my-3">
 							<div class="col-6">부서 : </div>
 							<div class="col-6">
-								<select id="deptCd"  disabled>
-									<option value="DVLP01" selected>개발1팀</option>
-									<option value="DVLP02">개발2팀</option>
-								</select>
+								<input id="deptCd" type="hidden" value="" disabled>
+								<input id="deptNm" type="text" value="" disabled>
 							</div>
 						</div>
 						<div class="row my-3">

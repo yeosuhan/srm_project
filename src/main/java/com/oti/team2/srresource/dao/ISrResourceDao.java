@@ -2,6 +2,8 @@ package com.oti.team2.srresource.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.oti.team2.srresource.dto.SrResource;
 import com.oti.team2.srresource.dto.SrResourceOfDeveloper;
 
@@ -32,6 +34,6 @@ public interface ISrResourceDao {
 	 * @param SrSrc
 	 * @return int
 	 * */
-	int deleteBySrSrc(String[] srSrc);
+	int deleteBySrSrc(@Param("srSrc") List<String> srSrc);
 
 }

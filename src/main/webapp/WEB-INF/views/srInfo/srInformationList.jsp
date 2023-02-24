@@ -66,14 +66,14 @@
 			url : '/srinformation/plan/' + $("#SRDDmndNo").val(),
 			type : 'GET',
 			data : {
-				Plan : $("#SRDDmndNo").val()
+				plan : $("#SRDDmndNo").val()
 			},
-			success : function(Plan) {
-				$("#SRPlDeptNm").val(Plan.deptNm);
-				$("#SRPlFlnm").val(Plan.flnm);
-				$("#SRPlBgngYmd").val(Plan.bgngYmd);
-				$("#SRPlEndYmd").val(Plan.endYmd);
-				$("#SRPlRvwCn").text(Plan.rvwCn);
+			success : function(plan) {
+				$("#SRPlDeptNm").val(plan.deptNm);
+				$("#SRPlFlnm").val(plan.flnm);
+				$("#SRPlBgngYmd").val(plan.bgngYmd);
+				$("#SRPlEndYmd").val(plan.endYmd);
+				$("#SRPlRvwCn").val(plan.rvwCn);
 			}
 		});
 	}
@@ -141,7 +141,7 @@ th {
 }
 /* 
 .table td, .table th {
-	padding: 0.75rem;
+   padding: 0.75rem;
 } */
 .card .card-block {
 	padding: 0px 5px !important;
@@ -166,8 +166,9 @@ th {
 	height: 50vh;
 	overflow-y: auto;
 }
+
 .form-control {
-	font-size:inherit;
+	font-size: inherit;
 }
 </style>
 <body>
@@ -341,7 +342,8 @@ th {
 																		<tbody>
 																			<c:forEach var="srlist" items="${srlist}"
 																				varStatus="num">
-																				<tr onclick="getDetail('${srlist.dmndNo}')">
+																				<tr
+																					onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}')">
 																					<th scope="row">${num.count}</th>
 																					<td>${srlist.srNo}</td>
 																					<td>${srlist.sysNm}</td>
@@ -389,11 +391,10 @@ th {
 
 																<div class="col col-sm-3">요청 번호</div>
 																<div class="col col-sm-9">
-																<input type="hidden" id="SRDSrNo">
-																	<input readonly class="form-control"
-																		style="width: 150px;" id="SRDDmndNo">
+																	<input type="hidden" id="SRDSrNo"> <input
+																		readonly class="form-control" style="width: 150px;"
+																		id="SRDDmndNo">
 																</div>
-
 
 															</div>
 															<hr />
@@ -417,13 +418,15 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">시스템구분</div>
 																	<div class="col col-sm-6">
-																		<input readonly class="form-control" style="width:200%;" id="SRDSys">
+																		<input readonly class="form-control"
+																			style="width: 200%;" id="SRDSys">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">업무구분</div>
 																	<div class="col col-sm-6">
-																		<input readonly class="form-control" style="width:150%;" id="SRDTask">
+																		<input readonly class="form-control"
+																			style="width: 150%;" id="SRDTask">
 																	</div>
 																</div>
 															</div>
@@ -432,13 +435,15 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청기관</div>
 																	<div class="col col-sm-6">
-																		<input readonly class="form-control" style="width:200%;" id="SRDInst">
+																		<input readonly class="form-control"
+																			style="width: 200%;" id="SRDInst">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청자</div>
 																	<div class="col col-sm-6">
-																		<input readonly class="form-control" style="width:150%;" id="SRDFlnm">
+																		<input readonly class="form-control"
+																			style="width: 150%;" id="SRDFlnm">
 																	</div>
 																</div>
 															</div>
@@ -489,12 +494,12 @@ th {
 													<div class="card-block" style="padding-top: 10px;">
 														<ul class="nav nav-tabs  md-tabs" role="tablist">
 															<li class="nav-item" onclick="getPlan()"><a
-																class="nav-link active" data-toggle="tab" href="#home1"
-																role="tab">SR 계획정보</a>
+																id="srPlanTab" class="nav-link active" data-toggle="tab"
+																href="#home1" role="tab">SR 계획정보</a>
 																<div class="slide"></div></li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#profile1" role="tab">SR
-																	자원정보</a>
+															<li class="nav-item"><a id="srResourceTab"
+																class="nav-link" data-toggle="tab" href="#profile1"
+																role="tab">SR 자원정보</a>
 																<div class="slide"></div></li>
 															<li class="nav-item" onclick="getProgress()"><a
 																class="nav-link" data-toggle="tab" href="#messages1"
@@ -540,8 +545,8 @@ th {
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획종료일</div>
 																		<div class="col col-sm-6">
-																		<input readonly class="form-control" id="SRPlEndYmd">
-																			</div>
+																			<input readonly class="form-control" id="SRPlEndYmd">
+																		</div>
 																	</div>
 																</div>
 																<div class="form-group row">
@@ -577,7 +582,6 @@ th {
 																				</tr>
 																			</thead>
 																			<tbody id="resourceTableRow">
-
 																			</tbody>
 																		</table>
 																	</div>
@@ -611,30 +615,30 @@ th {
 																					</tr>
 																				</thead>
 																				<tbody>
-																				<c:forEach var="srlist" items="${srlist}"
-																				varStatus="num">
-																					<tr>
-																						<th scope="row">${num.count}</th>
-																						<td id="SRPgPrgrsSeNm"></td>
-																						<td><input type="date" id="SRPgBgngYmd"></td>
-																						<td><input type="date" id="SRPgEndYmd"></td>
-																						<td><input type="text" class="form-control"
-																							id="SRPgPrgrsRt"></td>
-																						<td><div class="accordion"
-																								id="accordionExample">
-																								<button
-																									class="btn btn-link btn-block text-center"
-																									type="button" data-toggle="collapse"
-																									data-target="#collapseOne" aria-expanded="true"
-																									aria-controls="collapseOne">첨부파일1</button>
-																								<div id="collapseOne" class="collapse"
-																									aria-labelledby="headingOne"
-																									data-parent="#accordionExample">
-																									<div class="card-body">첨부파일2</div>
-																								</div>
-																							</div>
-																						</td>
-																					</tr>
+																					<c:forEach var="srlist" items="${srlist}"
+																						varStatus="num">
+																						<tr>
+																							<th scope="row">${num.count}</th>
+																							<td id="SRPgPrgrsSeNm"></td>
+																							<td><input type="date" id="SRPgBgngYmd"></td>
+																							<td><input type="date" id="SRPgEndYmd"></td>
+																							<td><input type="text" class="form-control"
+																								id="SRPgPrgrsRt"></td>
+																							<td><div class="accordion"
+																									id="accordionExample">
+																									<button
+																										class="btn btn-link btn-block text-center"
+																										type="button" data-toggle="collapse"
+																										data-target="#collapseOne"
+																										aria-expanded="true"
+																										aria-controls="collapseOne">첨부파일1</button>
+																									<div id="collapseOne" class="collapse"
+																										aria-labelledby="headingOne"
+																										data-parent="#accordionExample">
+																										<div class="card-body">첨부파일2</div>
+																									</div>
+																								</div></td>
+																						</tr>
 																					</c:forEach>
 																				</tbody>
 																			</table>
@@ -705,6 +709,7 @@ th {
 															</div>
 
 
+
 															<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
 															<div class="tab-pane" id="history1" role="tabpanel"
 																style="padding-bottom: 20px;">
@@ -762,9 +767,6 @@ th {
 																</div>
 
 															</div>
-
-
-
 														</div>
 													</div>
 												</div>

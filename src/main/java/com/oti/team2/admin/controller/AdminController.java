@@ -46,7 +46,7 @@ public class AdminController {
 	 * @author 최은종
 	 * @return 부서 목록으로 리턴
 	 */
-	@GetMapping("/departmentlist")
+	@GetMapping("/department/list")
 	public String getDepartmentList(Model model) {
 		log.info("departmentList 조회");
 
@@ -68,7 +68,7 @@ public class AdminController {
 		log.info("department 신규 등록");
 
 		departmentService.addDepartment(department);
-		return "redirect:/admin/departmentlist";
+		return "redirect:/admin/department/list";
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class AdminController {
 		department.setOfcTelno(Jsoup.clean(department.getOfcTelno(), Whitelist.basic()));
 
 		departmentService.updateDepartment(department);
-		return "redirect:/admin/departmentlist";
+		return "redirect:/admin/department/list";
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class AdminController {
 		log.info("department 삭제");
 
 		departmentService.deleteDepartment(deptCd);
-		return "redirect:/admin/departmentlist";
+		return "redirect:/admin/department/list";
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/clientlist")
+	@GetMapping("/client/list")
 	public String getMemberList(Model model) {
 		int totalRows = memberService.getTotalRows(Auth.CLIENT.toString());
 		Pager pager = new Pager(totalRows, 1);
@@ -151,7 +151,7 @@ public class AdminController {
 	 * 
 	 * @return 사원 목록 페이지 url
 	 */
-	@RequestMapping(value = "/employeelist", method = RequestMethod.GET)
+	@RequestMapping(value = "/employee/list", method = RequestMethod.GET)
 	public String getEmployeeList(@RequestParam(defaultValue = "1") int page, Model model) {
 		log.info("getEmployeeList");
 		int totalRows = memberService.getTotalRows(Auth.DEVELOPER.toString());

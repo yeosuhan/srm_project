@@ -3,50 +3,66 @@ $(document).ready(function(){
 	 * @author:안한길
 	 * 
 	 */	
-	$("#srResourceTab").on("show.bs.tab",function(){
-		var srNo=$("#srNo").val();
-		if($("#resourceTableRow tr").length==0){
-			
-			$.ajax({
-				url:"/sr-resource/list",
-				type:"GET",
-				data:{srNo:srNo},
-				success:function(result){
-					//console.log(result);
-					result.forEach((value,index)=>{
-						var count = index+1;
-						$("#resourceTableRow").append(
-								"<tr>" +
-								"	<th scope='row'>"+count+"</th>" +
-								"	<td>" +
-								"		<input value='"+value.srSrc+"' name='resource' type='checkbox'>" +
-								"	</td>" +
-								"	<td>"+value.empId+"</td>" +
-								"	<td>"+value.ptcptnRoleCd+"</td>" +
-								"	<td>"+value.schdlBgngYmd+"</td>" +
-								"	<td>"+value.schdlEndYmd+"</td>" +
-								"</tr>"
-						);
-						
-					});
-				}
-			});
-		}
-		
-	});
-	
+	$("#srResourceTab").on("shown.bs.tab",function(){
+		getResourceTableRow();
+		});
 	
 });
 
+function getResourceTableRow(){
+	var srNo=$("#srNo").val();
+	console.log(srNo);
+
+    console.log(getContextPath());
+	if($("#resourceTableRow tr").length==0){
+		
+		$.ajax({
+			url:"/sr-resource/list",
+			type:"GET",
+			data:{srNo:srNo},
+			success:function(result){
+				//console.log(result);
+				result.forEach((value,index)=>{
+					var count = index+1;
+					$("#resourceTableRow").append(
+							"<tr>" +
+							"	<th scope='row'>"+count+"</th>" +
+							"	<td>" +
+							"		<input value='"+value.srSrc+"' name='resource' type='checkbox'>" +
+							"	</td>" +
+							"	<td>"+value.empNm+"</td>" +
+							"	<td>"+value.ptcptnRoleNm+"</td>" +
+							"	<td>"+value.schdlBgngYmd+"</td>" +
+							"	<td>"+value.schdlEndYmd+"</td>" +
+							"</tr>"
+					);
+					
+				});
+			}
+		});
+	}
+	
+}
 function deleteResource(){
-	var srSrc=$("#resourceTableRow input[name='resource']:checked").val();
-	console.log(srSrc);
+	var srSrcList=new Array();
+	
+	$("#resourceTableRow input[name='resource']:checked").each(function(){
+		srSrcList.push($(this).val());
+	});
+	
+	console.log(srSrcList);
 	$.ajax({
 		url:"/sr-resource/resource/delete",
-		type:"POST",
-		data:srSrc,
+		type:"GET",
+		dataType:"json",
+		data:{srSrc:srSrcList},
 		success:function(result){
-			console.log(result);
+			//console.log(result+""+srSrcList.length);
+			if(result==srSrcList.length){
+				$("#resourceTableRow input[name='resource']:checked").each(function(){
+					$(this).parent("td").parent("tr").remove();
+				});
+			}
 		}
 	});
 }

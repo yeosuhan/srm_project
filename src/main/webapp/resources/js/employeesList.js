@@ -6,7 +6,7 @@
 /* 사원 정보 가져오는 함수 */
 function getEmployee(employeeId){
 	$.ajax({
-		url:"/admin/employee",
+		url:getContextPath()+"/employee",
 		type:"GET",
 		data:{employeeId:employeeId},
 		success:function(result){
@@ -32,7 +32,7 @@ function deleteInfo(employeeId){
 }
 function deleteEmployee(employeeId){
 	$.ajax({
-		url:"/admin/employee/delete",
+		url:getContextPath()+"/employee/delete",
 		type:"GET",
 		data:{employeeId:employeeId},
 		success:function(result){
@@ -63,7 +63,7 @@ function modifyEmployee(employeeId){
 			jbgdCd:$("#MEmployeeJobGrade option:selected").val()
 	};
 	$.ajax({
-		url:"/admin/employee/modify",
+		url:getContextPath()+"/employee/modify",
 		type:"POST",
 		data:employeeInfo,
 		success:function(result){

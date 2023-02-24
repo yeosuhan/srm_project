@@ -7,8 +7,10 @@ $(document).ready(function(){
    $("#addSrResourcesModal").on('show.bs.modal',function() 
    {
       var calendarEl=null;
-      var deptCd=$("#deptCd option:selected").val();
-      //console.log(deptCd);
+      var deptCd=$("#deptCd").val();
+      console.log(deptCd);
+
+      console.log(getContextPath());
       if($("#empId option").length==0){
          /*개발자 목록*/
          $.ajax({
@@ -22,7 +24,7 @@ $(document).ready(function(){
                   );
                });
                /*달력*/
-               console.log(result.schedule);
+               //console.log(result.schedule);
                calendarEl= $('#calendar')[0];
             
                calendar = new FullCalendar.Calendar(calendarEl,{
@@ -65,13 +67,14 @@ function showSchedule(){
             value.remove();
          });
          //이벤트 추가
-         console.log(result);
+         //console.log(result);
          result.forEach((value)=>{
             calendar.addEvent(value);
             
          });
       }
    });
+
 };
 /* 입력한 자원정보 추가
  * @author : 안한길
@@ -85,15 +88,19 @@ function addResource(){
          "schdlBgngYmd":$("#addResourceForm #schdlBgngYmd").val(),
          "schdlEndYmd":$("#addResourceForm #schdlEndYmd").val()
    }
-   console.log(resourceForm);
+   //console.log(resourceForm);
    $.ajax({
       url:"/sr-resource/resource/add",
       type:"POST",
       //contentType:"application/json", //form데이터를 json 형식으로
       data:resourceForm,
       success:function(result){
-         console.log(result);
-         
+         //console.log(result);
+         if(result!=0){
+            $("#resourceTableRow").empty();
+            getResourceTableRow();
+         }
       }
    });
+   
 }
