@@ -67,12 +67,12 @@ public class SrDemandController {
 	 * 
 	 * @author 신정은
 	 */
-	/*
+
 	@GetMapping("/list")
 	public String getSrDemaneList(HttpSession session, Model model) {
-		// 고객인 경우
-		String auth = Auth.CLIENT.toString();
-//		String auth = Auth.ADMIN.toString();
+		// 고객인 경우 String auth = Auth.CLIENT.toString();
+		//
+		String auth = Auth.ADMIN.toString();
 
 		if (auth.equals(Auth.CLIENT.toString())) {
 
@@ -83,33 +83,16 @@ public class SrDemandController {
 
 		return "srDemand/adminSrDemandList";
 	}
-*/
+
 	@GetMapping("/modify")
 	public String updateSrDemand(String dmndNo) {
 		// sr요청이 아직 요청단계인 경우에만 수정 가능하다.
-		//  진행단계 확인하는 코드 
-		
+		// 진행단계 확인하는 코드
+
 		// 기존 작성 데이터 제공
-		
+
 		// 수정 진행
 		return "";
 	}
-	
-	/**
-	 * 
-	 * 
-	 * @author 최은종 / 테스트용
-	 * @param model
-	 * @return
-*/
-	@GetMapping("/list")
-		public String getSrDemandList(Model model) {
-			log.info("srDemandList 조회");
-			
-			model.addAttribute("srNo", "WOR-SR-0001");
-			log.info(model.getAttribute("srNo"));
-			return "srDemand/userSrDemandList";
-	}
-		 
-	
+
 }

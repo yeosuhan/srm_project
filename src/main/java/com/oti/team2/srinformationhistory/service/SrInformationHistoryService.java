@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
@@ -18,7 +19,9 @@ import lombok.extern.log4j.Log4j2;
 public class SrInformationHistoryService implements ISrInformationHistoryService {
 	@Autowired
 	private ISrInformationHistoryDao srInformationHistoryDao;
-
+	
+	@Autowired
+	private ISrDemandDao srDemandDao;
 	/**
 	 * SR처리 히스토리 내역 조회 메서드
 	 * 
@@ -28,6 +31,13 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	public List<SrInformationHistory> getSrInformationHistoryList(Pager pager, String srNo) {
 		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectBySrNo(pager, srNo);
 		return srInformationHistoryList;
+	}
+	
+	@Override
+	public String getSrNo(String dmndNo) {
+		String srNo= srDemandDao.selectBySrDmndNo(dmndNo);
+		
+		return srNo;
 	}
 
 	/**

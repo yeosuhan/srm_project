@@ -13,7 +13,7 @@
 		console.log("srHistoryList 글번호: " + srNo);
 		$
 				.ajax({
-					url : "/history/list/" + srNo,
+					url : "/history/list?srNo=" + srNo,
 					type : "GET",
 
 					success : function(result) {

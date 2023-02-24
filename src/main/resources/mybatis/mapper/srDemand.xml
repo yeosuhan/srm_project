@@ -58,7 +58,11 @@
 			M.INST_CD = I.INST_CD
 	</select>
 	
-	
-	
+	<!-- 사용자에게 받은 SR요청번호와 SR진척번호를 연결하기 위한 쿼리 -->
+	<select id="selectBySrDmndNo" parameterType="String" resultType="String">
+		select SI.sr_no as srNo
+		from sr_demand SD, sr_information SI
+		where SD.dmnd_no=#{dmndNo}
+	</select>
 	
 </mapper>
