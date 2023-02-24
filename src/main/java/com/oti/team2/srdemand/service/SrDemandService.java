@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
-import com.oti.team2.srinformation.dto.SrdemandDetail;
+import com.oti.team2.srdemand.dto.SrdemandDetail;
 
 import lombok.extern.log4j.Log4j2;
 

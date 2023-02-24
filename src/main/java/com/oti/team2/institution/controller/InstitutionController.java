@@ -29,9 +29,11 @@ public class InstitutionController {
 	 * @author 여수한
 	 * @return 내 기관 관리(조회)
 	 */
-	@RequestMapping(value = "/institution/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/institution/detail", method = RequestMethod.GET)
 	public String myInst(Model model, HttpSession session) {
-		String memberId = (String) session.getAttribute("memberid");
+/*		String memberId = (String) session.getAttribute("memberid");
+*/		
+		String memberId = "client1";
 		Institution inst = institutionService.getInst(memberId);
 		log.info(inst);
 		model.addAttribute("inst", inst);
@@ -44,7 +46,7 @@ public class InstitutionController {
 	 * @return 기관 등록(페이지 이동)
 	 */
 	@RequestMapping(value = "/institution/add", method = RequestMethod.GET)
-	public String addInst(Locale locale, Model model) {
+	public String addInst1() {
 		return "member/addInst";
 	}
 
@@ -61,16 +63,20 @@ public class InstitutionController {
 		institution.setInstTelno(Jsoup.clean(institution.getInstTelno(), Whitelist.basic()));
 		institution.setInstAddr(Jsoup.clean(institution.getInstAddr(), Whitelist.basic()));
 		institution.setInstDetailAddr(Jsoup.clean(institution.getInstDetailAddr(), Whitelist.basic()));
+		log.info(institution);
 		String InstCd = institution.getInstCd();
 		if (institution.getInstCd().length() > 5) {
+			//기관코드 길이 체크
 			model.addAttribute("result", "longInstCd");
 			return "member/addInst";
 		} else {
 			// 기관코드 중복 체크
 			try {
+				log.info(institution);
 				institutionService.addInst(institution);
 				return "redirect:/myinfo";
 			} catch (Exception e1) {
+				log.info("에러발생");
 				for (int i = 1; i < 100; i++) {
 					String checkInstCd = InstCd + i;
 					try {
@@ -91,12 +97,14 @@ public class InstitutionController {
 	 * @author 여수한
 	 * @return 내 기관 관리(수정)
 	 */
-	@RequestMapping(value = "/institution/list", method = RequestMethod.POST)
-	public String myInstUpdate(Institution institution, Model model) {
+	@RequestMapping(value = "/institution/update", method = RequestMethod.POST)
+	public String myInstUpdate(Institution institution) {
+		institution.setInstCd(institution.getInstCd());
 		institution.setInstNm(Jsoup.clean(institution.getInstNm(), Whitelist.basic()));
 		institution.setInstTelno(Jsoup.clean(institution.getInstTelno(), Whitelist.basic()));
 		institution.setInstAddr(Jsoup.clean(institution.getInstAddr(), Whitelist.basic()));
 		institution.setInstDetailAddr(Jsoup.clean(institution.getInstDetailAddr(), Whitelist.basic()));
+		log.info(institution);
 		institutionService.updateInst(institution);
 		return "redirect:/myinfo";
 	}

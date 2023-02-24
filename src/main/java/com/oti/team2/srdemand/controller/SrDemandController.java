@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.oti.team2.institution.service.IInstitutionService;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
+import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.dto.WriterDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
-import com.oti.team2.srinformation.dto.SrdemandDetail;
 import com.oti.team2.util.Auth;
 
 import lombok.extern.log4j.Log4j2;

@@ -16,7 +16,7 @@ $(document).ready(function(){
             type:"GET",
             data:{deptCd:deptCd},
             success:function(result){
-            	console.log("~~~~~~~~~~~~~~~~~~~~~");
+        	   console.log("~~~~~~~~~~~~~~~~~~~~~");
                result.developers.forEach((value,index)=>{
                   $("#empId").append(
                         "<option value='"+value.empId+"'>" +value.flnm+"</option>"

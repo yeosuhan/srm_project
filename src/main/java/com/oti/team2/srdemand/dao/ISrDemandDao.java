@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
-import com.oti.team2.srinformation.dto.SrdemandDetail;
+import com.oti.team2.srdemand.dto.SrdemandDetail;
 
 public interface ISrDemandDao {
 

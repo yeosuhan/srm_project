@@ -3,7 +3,7 @@
 <mapper namespace="com.oti.team2.department.dao.IDepartmentDao">
 
 	<!-- 전체 부서 조회 -->
-	<select id="selectDeptList" resultType="department">
+	<select id="selectByMemberId" resultType="department">
 		<![CDATA[
 		select d.dept_cd as deptCd, dept_nm as deptNm, ofc_telno as ofcTelno, mngr_id as mngrId, m.flnm as flnm, dept_nope as deptNope
 		from departments d, members m

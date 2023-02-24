@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+<%-- 작성자: 최은종 / 작성 날짜: 230223 --%>
 
 <html>
 <head>
@@ -16,13 +17,18 @@
 					type : "GET",
 
 					success : function(result) {
-						console.log("성공" + result);
+						console.log(result);
 						console.log(result.srInformationHistory[0].hstryTtl);
 
 						for (var i = 0; i < result.srInformationHistory.length; i++) {
+							var historyId =  result.srInformationHistory[i].hstryId;
 							var historyCount = [ i + 1 ];
 							var historyTtl = result.srInformationHistory[i].hstryTtl;
-							var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
+							if(result.srInformationHistory[i].chgEndYmd === null){
+								var historyChgEndYmd = "-";
+							} else {
+								var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
+							}							
 							if (result.srInformationHistory[i].hstryStts == 'I') {
 								var historyStts = "요청 중";
 							} else if (result.srInformationHistory[i].hstryStts == 'N') {
@@ -31,23 +37,14 @@
 								var historyStts = "승인";
 							}
 
-							var param1 = '<tr data-toggle="modal" data-target="#addHistoryModalDetail">';
-							param1 += '<th scope="row" id="AhstryCount"></th>';
-							param1 += '<td id='+'AhstryTtl'+'></td>';
+							var param = '<tr data-toggle="modal" data-target="#approvalHistoryModal" onclick="getHstryDetail(' + historyId + ')">';
+								param += 	'<th scope="row">' + historyCount + '</th>';
+								param += 	'<td>' + historyTtl + '</td>';
+								param += 	'<td>' + historyChgEndYmd + '</td>';
+								param += 	'<td>' + historyStts + '</td>';
+								param +=  '</tr>';
 
-							param1 += '<td id='+'AchgEndYmd'+'></td>';
-							param1 += '<td id='+'AhstryStts'+'></td>';
-							param1 += '</tr>';
-
-							console.log(param1);
-
-							$("#historyList").append(param1);
-
-							$("#AhstryCount").append(historyCount);
-							$("#AhstryTtl").append(historyTtl);
-							$("#AchgEndYmd").append(historyChgEndYmd);
-							$("#AhstryStts").append(historyStts);
-
+							$("#history").append(param);
 						}
 					}
 				});
@@ -326,64 +323,65 @@ th {
 																	style="font-size: 12px; padding-top: 20px;">
 																	<div class="form-group row">
 																		<div class="col-sm-6">
-																			<div class="col col-sm-4">SR번호</div>
+																			<div class="col col-sm-4 font-weight-bold">SR번호</div>
 																			<div class="col col-sm-6">
 																				<input type="text" class="form-control" id="dmndNo">
 																			</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
-																		<div class="col col-sm-2">SR 제목</div>
+																		<div class="col col-sm-2 font-weight-bold">SR 제목</div>
 																		<div class="col col-sm-9">
 																			<input type="text" class="form-control" id="ttl">
 																		</div>
 																	</div>
 																	<div class="form-group row">
-																		<div class="col col-sm-2">관련 근거</div>
+																		<div class="col col-sm-2 font-weight-bold">관련 근거</div>
 																		<div class="col col-sm-9">
 																			<input type="text" class="form-control" id="relGrund">
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col-sm-6">
-																			<div class="col col-sm-4">시스템구분</div>
+																			<div class="col col-sm-4 font-weight-bold">시스템구분</div>
 																			<div class="col col-sm-6" id="sysNm"></div>
 																		</div>
 																		<div class="col-sm-6">
-																			<div class="col col-sm-4" id="taskSeNm">업무구분</div>
+																			<div class="col col-sm-4 font-weight-bold">업무구분</div>
+																			<div class="col col-sm-4" id="taskSeNm"></div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col-sm-6">
-																			<div class="col col-sm-4">요청기관</div>
+																			<div class="col col-sm-4 font-weight-bold">요청기관</div>
 																			<div class="col col-sm-6" id="instNm"></div>
 
 																		</div>
 																		<div class="col-sm-6">
-																			<div class="col col-sm-4">요청자</div>
+																			<div class="col col-sm-4 font-weight-bold">요청자</div>
 																			<div class="dropdown dropdown open" id="clientNm"></div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col-sm-6">
-																			<div class="col col-sm-4">요청일</div>
+																			<div class="col col-sm-4 font-weight-bold">요청일</div>
 																			<div class="col col-sm-8" id="dmndYmd"></div>
 																		</div>
 																		<div class="col-sm-6">
-																			<div class="col col-sm-4">완료요청일</div>
+																			<div class="col col-sm-4 font-weight-bold">완료요청일</div>
 																			<div class="col col-sm-8" id="cmptnDmndYmd"></div>
 																		</div>
 																	</div>
 																	<div class="row mt-3">
 																		<div class="col-6">
-																			<div class="col col-sm-4">개발 담당자</div>
+																			<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
 																			<div class="col col-sm-6">
 																				<input type="text" class="form-control" id="picNm"
 																					disabled>
 																			</div>
 																		</div>
 																		<div class="col-6">
-																			<div class="col col-sm-4">개발 부서</div>
+																			<div class="col col-sm-4 font-weight-bold">개발 부서</div>
 																			<div class="col col-sm-6">
 																				<input type="text" class="form-control" id="deptNm"
 																					disabled>
@@ -392,20 +390,20 @@ th {
 																	</div>
 																	<div class="row mt-3">
 																		<div class="col-6">
-																			<div class="col col-sm-4">진행 상태</div>
+																			<div class="col col-sm-4 font-weight-bold">진행 상태</div>
 																			<div class="col col-sm-6">
 																				<input type="text" class="form-control" id="sttsNm"
 																					disabled>
 																			</div>
 																		</div>
 																		<div class="col-6">
-																			<div class="col col-sm-4">완료(예정)일</div>
+																			<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
 																			<div class="col col-sm-6" id="endYmd"> </div>
 																		</div>
 																	</div>
 																	<div class="row mt-3">
 																		<div class="col-6">
-																			<div class="col col-sm-4">검토자 이름</div>
+																			<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
 																			<div class="col col-sm-6">
 																				<input type="text" class="form-control" id="rvwrNm"
 																					disabled>
@@ -414,14 +412,14 @@ th {
 																	</div>
 
 																	<div class="row mt-3 ml-1">
-																		<label class="col-sm-3 col-form-label px-0"
+																		<label class="col-sm-3 col-form-label px-0 font-weight-bold"
 																			style="line-height: 120px">반려 사유</label>
 																		<div class="col-sm-9 pl-0 ">
 																			<textarea rows="5" cols="5" class="form-control" id="rjctRsn"></textarea>
 																		</div>
 																	</div>
 																	<div class="form-group row">
-																		<label class="col-sm-2 col-form-label"
+																		<label class="col-sm-2 col-form-label font-weight-bold"
 																			style="line-height: 100px; font-size: 12px;">SR
 																			내용</label>
 																		<div class="col-sm-9">
@@ -430,7 +428,7 @@ th {
 																		</div>
 																	</div>
 																	<div class="form-group row">
-																		<label class="col-sm-3 col-form-label"
+																		<label class="col-sm-3 col-form-label font-weight-bold"
 																			style="font-size: 12px;">첨부파일</label>
 																		<div class="col-sm-9">
 																			<input type="file" class="">
@@ -460,18 +458,11 @@ th {
 																			<tr>
 																				<th style="width: 1px;">순번</th>
 																				<th>제목</th>
-																				<th>변경된 완료예정일</th>
+																				<th>변경될 완료일</th>
 																				<th>수락여부</th>
 																			</tr>
 																		</thead>
-																		<tbody id="history">
-																			<tr data-toggle="modal"
-																				data-target="#approvalHistoryModal">
-																				<th scope="row" id="AhstryCount"></th>
-																				<td id="AhstryTtl"></td>
-																				<td id="AchgEndYmd"></td>
-																				<td id="AhstryStts"></td>
-																			</tr>
+																		<tbody id="history">																			
 																		</tbody>
 																	</table>
 																</div>
