@@ -15,47 +15,108 @@
 		WHERE DMND_NO LIKE #{srCode}
 	</select>
 	
-	<!-- 고객의 나의 요청 목록 조회 *********************** 수정 필요 -->
+	<!-- 고객의 나의 요청 목록 조회  -->
 	<select id="selectByCustId" parameterType="string" resultType="srDemand">
-		SELECT
-			DMND_NO as dmndNo ,
-			TTL as ttl,
-			SYS_NM as sysNm ,
-			CUST_NM as custNm,
-			INST_NM as instNm,
-			RVWR_ID as rvwrNm,
-			STTS_NM  as sysNm,
-			DMND_YMD as dmndYmd,
-			END_YMD as endYmd
-		FROM SR_DEMAND sd, MEMBERS as m , INSTITUTION as in , STATUS as s
-		WHERE CUST_ID=#{custId}
+		 SELECT 
+	        DMND_NO as dmndNo ,
+	        TTL as ttl ,
+	        SYS_NM  as sysNm ,
+	        clientNm as custNm ,
+	        INST_NM as instNm ,
+	        STTS_NM  as sttsNm ,
+	        DMND_YMD as dmndYmd ,
+	        c.flnm as rvwrNm ,
+	        END_YMD as endYmd
+		from ( SELECT 
+		            DISTINCT sd.DMND_NO ,
+		            sd.TTL  ,
+		            sy.SYS_NM ,
+		            m.flnm as clientNm ,
+		            i.INST_NM ,
+		            sd.rvwr_id , 
+		            s.STTS_NM ,
+		            sd.DMND_YMD ,
+		            si.END_YMD
+		    FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, sr_information si
+		    WHERE sd.CUST_ID = #{custId}
+		    and sd.cust_id = m.member_id
+		    and m.inst_cd = i.inst_cd
+		    and sd.stts_cd = s.stts_cd
+		    and sd.sys_cd = sy.sys_cd 
+		   
+		    ) w , members c 
+		where w.rvwr_id = c.member_id(+) 
+		order by dmndNo DESC
 	</select>
 	
-	<!-- 요청 상세 정보(완료) -->
-	<select id="selectDetailByDmndNo" parameterType="String" resultType="srdemandDetail">
-		SELECT
-			SD.DMND_NO AS dmndNo,
-			SD.TTL AS ttl,
-			SD.REL_GRUND AS relGrund,
-			S.SYS_NM AS sysNm,
-			T.TASK_SE_NM AS taskSeNm,
-			I.INST_NM AS instNm,
-			M.FLNM AS flnm,
-			to_char(SD.DMND_YMD, 'YYYY-MM-DD') AS dmndYmd,
-			to_char(SD.CMPTN_DMND_YMD, 'YYYY-MM-DD') AS cmptnDmndYmd,
-			SD.CN AS cn
-		FROM
-			SR_DEMAND SD, MEMBERS M, SYSTEMS S, TASK T, INSTITUTION I
-		WHERE
-			SD.DMND_NO = #{Detail}
-		AND
-			SD.CUST_ID = M.MEMBER_ID
-		AND
-			S.SYS_CD = SD.SYS_CD
-		AND
-			T.TASK_SE_CD = SD.TASK_SE_CD
-		AND
-			M.INST_CD = I.INST_CD
+	<!-- SR요청 상세 정보 -->
+	<select id="selectDetailByDmndNo" parameterType="string" resultType="srdemandDetail">
+		 select   
+		 	DMND_NO as dmndNo,
+            TTL as ttl,
+            cn as cn,
+            rel_grund as relGrund,
+            rjct_rsn as rjctRsn,
+            SYS_NM  as sysNm,
+            clientNm as clientNm,
+            INST_NM as instNm,
+            STTS_NM  as sttsNm,
+            DMND_YMD as dmndYmd,
+            rvwrNm ,
+            dept_nm as deptNm,
+            MNGR_ID as picNm,
+            CMPTN_DMND_YMD as cmptnDmndYmd,
+            end_ymd as endYmd,
+            task_se_nm as taskSeNm
+		 from (
+		     SELECT 
+	            distinct DMND_NO ,
+	            TTL ,
+	            cn ,
+	            rel_grund ,
+	            rjct_rsn ,
+	            SYS_NM  ,
+	            clientNm ,
+	            INST_NM ,
+	            STTS_NM  ,
+	            DMND_YMD ,
+	            c.flnm as rvwrNm ,
+	            dept_nm ,
+	            MNGR_ID,
+	            CMPTN_DMND_YMD ,
+	            end_ymd ,
+	            TASK_SE_NM
+		            
+		    from ( SELECT 
+		                sd.DMND_NO as DMND_NO,
+		                sd.TTL as TTL ,
+		                sd.cn ,
+		                sd.rel_grund ,
+		                sd. rjct_rsn ,
+		                sys.SYS_NM as SYS_NM ,
+		                d.dept_nm ,
+		                d.MNGR_ID ,
+		                m.flnm as clientNm,
+		                i.INST_NM as INST_NM,
+		                sd.rvwr_id as rvwr_id, 
+		                s.STTS_NM  as STTS_NM,
+		                sd.DMND_YMD as DMND_YMD ,
+		                sd.CMPTN_DMND_YMD ,
+		                tk.TASK_SE_NM ,
+		                end_ymd
+		        FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sys, sr_information si, departments d, task tk
+		        WHERE sd.DMND_NO = #{dmndNo}
+		        and sd.cust_id = m.member_id
+		        and m.inst_cd = i.inst_cd
+		        and sd.stts_cd = s.stts_cd
+		        and sd.sys_cd = sys.sys_cd 
+		        and d.dept_cd = sys.dept_cd
+		        and sd.TASK_SE_CD = tk.TASK_SE_CD
+		       
+		        ) w , members c 
+		    where w.rvwr_id = c.member_id(+)
+		    )t , members mem
+		    where t.MNGR_ID = mem.member_id
 	</select>
 	
 	<!-- 사용자에게 받은 SR요청번호와 SR진척번호를 연결하기 위한 쿼리 -->

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.srdemand.service.SrDemandService;
 import com.oti.team2.srinformation.dto.SrTotal;
-import com.oti.team2.srinformation.dto.SrdemandDetail;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInfomaion;
 import com.oti.team2.srinformation.service.ISrinformationService;
@@ -36,7 +36,7 @@ public class SrinformationController {
 	 * 작성일자 : 2023-02-22
 	 * @return sr진척 목록 조회 - 완료
 	 */
-	@RequestMapping(value="/srinformationlist", method=RequestMethod.GET)
+	@RequestMapping(value="/srinformation/list", method=RequestMethod.GET)
 	public String getList(Model model) {
 		List<SrinformationList> srlist = srinformationService.getList();
 		model.addAttribute("srlist", srlist);
@@ -50,14 +50,11 @@ public class SrinformationController {
 	 * @return sr요청 상세 조회 - 완료  => 계획정보도 같이 가져와야될듯
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/{Detail}", method=RequestMethod.GET)
-	public SrTotal getDetail(@PathVariable("Detail")String Detail, Model model) {
-		
-		String Plan = Detail;
-		SrdemandDetail dd = srDemandService.getInfoDetail(Detail);
-		SrplanInfomaion pi = srinformationService.getPlan(Plan);
+	@RequestMapping(value="/srinformation/detail/{dmndNo}", method=RequestMethod.GET)
+	public SrTotal getDetail(@PathVariable("dmndNo")String dmndNo) {
+		SrdemandDetail dd = srDemandService.getSrDemandDetail(dmndNo);
+		SrplanInfomaion pi = srinformationService.getPlan(dmndNo);
 		SrTotal total = new SrTotal(dd,pi);
-		log.info(total);
 		return total;
 	}
 	
@@ -68,15 +65,13 @@ public class SrinformationController {
 	 * @return sr요청 계획정보 조회 - 탭 누를 때
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation1/{Plan}", method=RequestMethod.GET)
-	public SrplanInfomaion getPlanInfo(@PathVariable("Plan")String Plan, Model model) {
-		SrplanInfomaion pi = srinformationService.getPlan(Plan);
+
+	@RequestMapping(value="/srinformation/plan/{dmndNo}", method=RequestMethod.GET)
+	public SrplanInfomaion getPlanInfo(@PathVariable("dmndNo")String dmndNo) {
+		SrplanInfomaion pi = srinformationService.getPlan(dmndNo);
 		return pi;
 	}
 
-	
-	
-	
 	
 	
 	

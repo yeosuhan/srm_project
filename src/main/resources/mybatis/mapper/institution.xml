@@ -5,6 +5,7 @@
 	<!-- 내 기관 조회 -->
 	<select id="selectByInstCd" parameterType="string" resultType="institution">
 		SELECT
+			INST_CD AS instCd,
 			INST_NM as "instNm",
 			INST_TELNO as "instTelno",
 			INST_ADDR as "instAddr",
@@ -14,19 +15,19 @@
 	</select>
 	
 	<!-- 내 기관 관리(조회) -->
-	<select id="selectByInst" parameterType="String" resultType="institution">
+	<select id="selectByInst" parameterType="string" resultType="institution">
 		select 
-			INST_NM AS instNm, INST_TELNO AS instTelno, INST_ADDR AS instAddr, INST_DETAILADDR AS instDetailAddr
+			I.INST_CD AS instCd, INST_NM AS instNm, INST_TELNO AS instTelno, INST_ADDR AS instAddr, INST_DETAILADDR AS instDetailAddr
 		from 
 			INSTITUTION I, MEMBERS M
 		where 
 			I.INST_CD = M.INST_CD
 		AND
-			MEMBER_ID = #{memberId}
+			M.MEMBER_ID = #{memberId}
 	</select>
 	
 	<!-- 기관 등록 -->
-	<insert id="insertByInst" parameterType="String">
+	<insert id="insertByInst" parameterType="string">
 		INSERT INTO 
 			INSTITUTION (INST_NM, INST_CD, INST_TELNO, INST_ADDR, INST_DETAILADDR)
 		VALUES 
@@ -34,7 +35,7 @@
 	</insert>
 	
 	<!-- 기관 수정 -->
-	<update id="updateByInst" parameterType="String">
+	<update id="updateByInst" parameterType="string">
 		UPDATE 
 			INSTITUTION 
 		SET 

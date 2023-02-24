@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
-import com.oti.team2.srinformation.dto.SrdemandDetail;
+import com.oti.team2.srdemand.dto.SrdemandDetail;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -73,10 +73,9 @@ public class SrDemandService implements ISrDemandService{
 	 * @author 신정은
 	 */
 	public List<SrDemand> getSrDemandList(String custId) {
-		// TODO Auto-generated method stub
-		return null;
+		return srDemandDao.selectByCustId(custId);
 	}
-
+	
 	/** 
 	 * sr요청 이 결재 전 상태이면 수정하기 위해 기존 데이터 제공
 	 * @author 신정은
@@ -101,8 +100,9 @@ public class SrDemandService implements ISrDemandService{
 	 * 작성일자 : 2023-02-22
 	 * @return sr요청 상세 조회
 	 */
-	public SrdemandDetail getInfoDetail(String Detail) {
-		return srDemandDao.selectDetailByDmndNo(Detail);
+	public SrdemandDetail getSrDemandDetail(String dmndNo) {
+		return srDemandDao.selectDetailByDmndNo(dmndNo);
 	}
+
 
 }

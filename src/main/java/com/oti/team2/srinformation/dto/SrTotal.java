@@ -1,5 +1,7 @@
 package com.oti.team2.srinformation.dto;
 
+import com.oti.team2.srdemand.dto.SrdemandDetail;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

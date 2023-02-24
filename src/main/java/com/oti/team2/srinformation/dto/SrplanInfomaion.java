@@ -10,4 +10,5 @@ public class SrplanInfomaion {
 	private String bgngYmd;
 	private String endYmd;
 	private String rvwCn;
+	private String deptCd;
 }

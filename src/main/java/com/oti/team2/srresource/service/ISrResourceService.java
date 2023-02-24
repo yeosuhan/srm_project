@@ -31,5 +31,5 @@ public interface ISrResourceService {
 	 * @param SrSrc
 	 * @return int
 	 * */
-	int deleteSrResource(String[] srSrc);
+	int deleteSrResource(List<String> srSrcList);
 }

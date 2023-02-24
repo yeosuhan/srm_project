@@ -6,7 +6,7 @@
 	<typeAliases>
 		<typeAlias type="com.oti.team2.institution.dto.Institution" alias="institution" />
 		<typeAlias type="com.oti.team2.srinformation.dto.SrinformationList" alias="srinformationlist" />
-		<typeAlias type="com.oti.team2.srinformation.dto.SrdemandDetail" alias="srdemandDetail" />
+		<typeAlias type="com.oti.team2.srdemand.dto.SrdemandDetail" alias="srdemandDetail" />
 		<typeAlias type="com.oti.team2.srinformation.dto.SrplanInfomaion" alias="srplanInfomaion" />
 		<typeAlias type="com.oti.team2.member.dto.Member" alias="member"/>
 		<typeAlias type="com.oti.team2.jobgrade.dto.JobGrade" alias="jobGrade"/>
@@ -22,6 +22,8 @@
 		<typeAlias type="com.oti.team2.member.dto.Developer" alias="developer" />
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrInformationHistory" alias="srInformationHistory" />
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrHistoryListDto" alias="srHistoryListDto" />
+		<typeAlias type="com.oti.team2.progress.dto.Progress" alias="progress" />
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto" alias="srHistoryDetailDto" />
+		
 	</typeAliases> 
 </configuration>

@@ -100,21 +100,21 @@
 				<div class="pcoded-navigation-label" style="font-weight: bold;" data-i18n="nav.category.navigation">회원 관리</div>
 			        <ul class="pcoded-item pcoded-left-item">
 			            <li class="">
-			                <a href="${pageContext.request.contextPath}/admin/clientlist" class="waves-effect waves-dark">
+			                <a href="${pageContext.request.contextPath}/admin/client/list" class="waves-effect waves-dark">
 			                    <span class="pcoded-micon"><i class="far fa-id-card pt-1"></i><b>D</b></span>
 			                    <span class="pcoded-mtext" data-i18n="nav.dash.main">고객 관리</span>
 			                    <span class="pcoded-mcaret"></span>
 			                </a>
 			            </li>
 			            <li class="">
-			                <a href="${pageContext.request.contextPath}/admin/employeelist" class="waves-effect waves-dark">
+			                <a href="${pageContext.request.contextPath}/admin/employee/list" class="waves-effect waves-dark">
 			                    <span class="pcoded-micon"><i class="fas fa-id-card pt-1"></i><b>D</b></span>
 			                    <span class="pcoded-mtext" data-i18n="nav.dash.main">사원 관리</span>
 			                    <span class="pcoded-mcaret"></span>
 			                </a>
 			            </li>
 			            <li class="">
-			                <a href="${pageContext.request.contextPath}/admin/departmentlist" class="waves-effect waves-dark">
+			                <a href="${pageContext.request.contextPath}/admin/department/list" class="waves-effect waves-dark">
 			                    <span class="pcoded-micon"><i class="fas fa-sitemap pt-1"></i><b>FC</b></span>
 			                    <span class="pcoded-mtext" data-i18n="nav.dash.main">부서 관리</span>
 			                    <span class="pcoded-mcaret"></span>

@@ -2,7 +2,7 @@ package com.oti.team2.srinformation.service;
 
 import java.util.List;
 
-import com.oti.team2.srinformation.dto.SrdemandDetail;
+import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInfomaion;
 
