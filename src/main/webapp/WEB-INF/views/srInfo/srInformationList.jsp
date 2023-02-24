@@ -30,6 +30,7 @@
 
    function getDetail(dmndNo, srNo) {
       console.log("dmndNo: " + dmndNo);
+      console.log(getContextPath());
       $.ajax({
          url : '/srinformation/detail/' + dmndNo,
          type : 'GET',

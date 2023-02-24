@@ -9,6 +9,8 @@ $(document).ready(function(){
       var calendarEl=null;
       var deptCd=$("#deptCd").val();
       console.log(deptCd);
+
+      console.log(getContextPath());
       if($("#empId option").length==0){
          /*개발자 목록*/
          $.ajax({
