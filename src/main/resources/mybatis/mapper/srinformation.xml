@@ -37,7 +37,8 @@
 			M.FLNM AS flnm,
 			to_char(SI.BGNG_YMD, 'YYYY-MM-DD') AS bgngYmd,
 			to_char(SI.END_YMD, 'YYYY-MM-DD') AS endYmd,
-			SI.RVW_CN AS rvwCn
+			SI.RVW_CN AS rvwCn,
+			SI.DEPT_CD AS deptCd
 		FROM
 			SR_INFORMATION SI, MEMBERS M, DEPARTMENTS D
 		WHERE

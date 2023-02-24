@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +32,7 @@ public class SrResourceController {
 	@ResponseBody
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public List<SrResource> getSrResourceList(@RequestParam("srNo") String srNo){
-		log.info("srNo");
+		log.info(srNo);
 		return srResourceService.getSrResourceListBySrNo(srNo);
 	}
 	
@@ -70,11 +69,11 @@ public class SrResourceController {
 	 * @return int
 	 * */
 	@ResponseBody
-	@RequestMapping(value="/resource/delete" , method=RequestMethod.POST)
-	public int deleteSrResource(String[] srSrc) {
-		log.info(srSrc);
+	@RequestMapping(value="/resource/delete" , method=RequestMethod.GET)
+	public int deleteSrResource(@RequestParam(value="srSrc[]" , required=false) List<String> srSrcList) {
+		log.info(srSrcList);
 		
-		int result = srResourceService.deleteSrResource(srSrc);
+		int result = srResourceService.deleteSrResource(srSrcList);
 		return result;
 	}
 }

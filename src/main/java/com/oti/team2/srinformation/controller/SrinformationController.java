@@ -65,7 +65,8 @@ public class SrinformationController {
 	 * @return sr요청 계획정보 조회 - 탭 누를 때
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation1/plan/{dmndNo}", method=RequestMethod.GET)
+
+	@RequestMapping(value="/srinformation/plan/{dmndNo}", method=RequestMethod.GET)
 	public SrplanInfomaion getPlanInfo(@PathVariable("dmndNo")String dmndNo) {
 		SrplanInfomaion pi = srinformationService.getPlan(dmndNo);
 		return pi;
