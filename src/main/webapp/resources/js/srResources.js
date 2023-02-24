@@ -11,6 +11,7 @@ $(document).ready(function(){
 
 function getResourceTableRow(){
 	var srNo=$("#srNo").val();
+	console.log(srNo);
 	if($("#resourceTableRow tr").length==0){
 		
 		$.ajax({

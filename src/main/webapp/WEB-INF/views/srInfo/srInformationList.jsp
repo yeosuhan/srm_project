@@ -28,7 +28,7 @@
 	});
 <%-- SR요청 상세보기 --%>
 
-	function getDetail(dmndNo) {
+	function getDetail(dmndNo, srNo) {
 		console.log("dmndNo: " + dmndNo);
 		$.ajax({
 			url : '/srinformation/detail/' + dmndNo,
@@ -50,11 +50,11 @@
 				$("#SRDCn").val(detail.dd.cn);
 				$("#SRDFile").val(detail.dd.fileNm);
 
-				$("#SRPDeptNm").val(detail.pi.deptNm);
-				$("#SRPFlnm").val(detail.pi.flnm);
-				$("#SRPBgngYmd").val(detail.pi.bgngYmd);
-				$("#SRPEndYmd").val(detail.pi.endYmd);
-				$("#SRPRvwCn").text(detail.pi.rvwCn);
+				$("#SRPlDeptNm").val(detail.pi.deptNm);
+				$("#SRPlFlnm").val(detail.pi.flnm);
+				$("#SRPlBgngYmd").val(detail.pi.bgngYmd);
+				$("#SRPlEndYmd").val(detail.pi.endYmd);
+				$("#SRPlRvwCn").text(detail.pi.rvwCn);
 				/*자원 정보 모달*/
 				$("#srPlanTab").tab("show");
 				$("#srNo").val(srNo);
@@ -68,20 +68,20 @@
 	}
 <%-- SR요청 계획정보 --%>
 	function getPlan() {
-		$("#SRDDmndNo").text();
-		console.log("Plan: " + $("#SRDDmndNo").text());
+		$("#SRDDmndNo").val();
+		console.log("Plan: " + $("#SRDDmndNo").val());
 		$.ajax({
-			url : '/srinformation/plan/' + $("#SRDDmndNo").text(),
+			url : '/srinformation/plan/' + $("#SRDDmndNo").val(),
 			type : 'GET',
 			data : {
-				Plan : $("#SRDDmndNo").text()
+				plan : $("#SRDDmndNo").val()
 			},
-			success : function(Plan) {
-				$("#SRPlDeptNm").text(Plan.deptNm);
-				$("#SRPlFlnm").text(Plan.flnm);
-				$("#SRPlBgngYmd").text(Plan.bgngYmd);
-				$("#SRPlEndYmd").text(Plan.endYmd);
-				$("#SRPlRvwCn").text(Plan.rvwCn);
+			success : function(plan) {
+				$("#SRPlDeptNm").val(plan.deptNm);
+				$("#SRPlFlnm").val(plan.flnm);
+				$("#SRPlBgngYmd").val(plan.bgngYmd);
+				$("#SRPlEndYmd").val(plan.endYmd);
+				$("#SRPlRvwCn").val(plan.rvwCn);
 			}
 		});
 	}

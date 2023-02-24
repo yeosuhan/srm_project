@@ -66,7 +66,7 @@ public class SrinformationController {
 	 */
 	@ResponseBody
 
-	@RequestMapping(value="/srinformation1/plan/{dmndNo}", method=RequestMethod.GET)
+	@RequestMapping(value="/srinformation/plan/{dmndNo}", method=RequestMethod.GET)
 	public SrplanInfomaion getPlanInfo(@PathVariable("dmndNo")String dmndNo) {
 		SrplanInfomaion pi = srinformationService.getPlan(dmndNo);
 		return pi;
