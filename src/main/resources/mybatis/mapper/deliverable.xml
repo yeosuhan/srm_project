@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.deliverable.dao.IDeliverableDao">
+	<resultMap type="deliverable" id="deliverableResultMap">
+		<id property="delivId" column="DELIV_ID"/>
+		<result property="prgrsId" column="PRGRS_ID"/>
+		<result property="prgrsSeNm" column="PRGRS_SE_NM"/>
+		<result property="delivUrl" column="DELIV_URL"/>
+		<result property="delivNm" column="DELIV_NM"/>
+		<result property="rgtrId" column="RGTR_ID"/>
+		<result property="rgtrNm" column="FLNM"/>
+		<result property="regYmd" column="REG_YMD"/>
+	</resultMap>
+	<select id="selectBySrNo" resultMap="deliverableResultMap">
+		SELECT 
+			DELIV_ID,
+			d.PRGRS_ID,
+			p.PRGRS_SE_NM,
+			DELIV_URL,
+			DELIV_NM,
+			m.RGTR_ID,
+			m.FLNM,
+			REG_YMD
+		FROM
+			DELIVERABLES d, PROGRESS p, MEMBERS m
+		WHERE
+			d.PRGRS_ID=p.PRGRS_ID AND
+			d.RGTR_ID = m.MEMBER_ID
+	</select>
+</mapper>
