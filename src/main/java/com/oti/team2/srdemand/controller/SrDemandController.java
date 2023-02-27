@@ -106,15 +106,11 @@ public class SrDemandController {
 		return sd;
 	}
 
-	@GetMapping("/modify")
-	public String updateSrDemand(String dmndNo) {
-		// sr요청이 아직 요청단계인 경우에만 수정 가능하다.
-		//  진행단계 확인하는 코드 
-		
-		// 기존 작성 데이터 제공
-		
+	@PostMapping("/modify")
+	public String updateSrDemand(SrRequestDto srRequestDto) {
 		// 수정 진행
-		return "";
+		srdemandService.updateSrDemand(srRequestDto);
+		return "redirect:/srdemand/detail/" + srRequestDto.getDmndNo();
 	}
 			 	
 }

@@ -121,7 +121,23 @@
 		    where t.MNGR_ID = mem.member_id
 	</select>
 	
+	<!-- 사용자에게 받은 SR요청번호와 SR진척번호를 연결하기 위한 쿼리 -->
+	<select id="selectBySrDmndNo" parameterType="string" resultType="string">
+		select SI.sr_no as srNo
+		from sr_information SI
+		where SI.dmnd_no=#{dmndNo}
+	</select>
 	
-	
+	<!-- SR 요청 수정 -->
+	<update id="updateByDmndNo" parameterType="srRequestDto">
+	 UPDATE	SR_DEMAND
+		set TTL = #{srRequestDto.ttl}
+			, CN = #{srRequestDto.cn}
+			, REL_GRUND = #{srRequestDto.relGrussnd}
+			, CMPTN_DMND_YMD = #{srRequestDto.cmptnDmndYmd}
+			, SYS_CD = #{srRequestDto.sysCd}
+			, TASK_SE_CD = #{srRequestDto.taskSeCd}
+		where DMND_NO = #{srRequestDto.dmndNo}
+	</update>
 	
 </mapper>

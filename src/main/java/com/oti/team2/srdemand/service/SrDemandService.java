@@ -90,7 +90,8 @@ public class SrDemandService implements ISrDemandService{
 	 * @author 신정은
 	 */
 	public int updateSrDemand(SrRequestDto srRequestDto) {
-		// TODO Auto-generated method stub
+		int row = 0;
+		srDemandDao.updateByDmndNo(srRequestDto);
 		return 0;
 	}
 	

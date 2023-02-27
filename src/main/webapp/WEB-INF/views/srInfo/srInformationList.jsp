@@ -30,6 +30,7 @@
 
    function getDetail(dmndNo, srNo) {
       console.log("dmndNo: " + dmndNo);
+      console.log(getContextPath());
       $.ajax({
          url : '/srinformation/detail/' + dmndNo,
          type : 'GET',
@@ -781,22 +782,22 @@ th {
                                                                <tr>
                                                                   <th scope="row">1</th>
                                                                   <td><input type="checkbox" name="output"></td>
-                                                                  <td>Otto</td>
-                                                                  <td>@mdo</td>
+                                                                  <td>요구정의</td>
+                                                                  <td>a서비스 유스케이스</td>
                                                                   <td>@mdo</td>
                                                                </tr>
                                                                <tr>
                                                                   <th scope="row">2</th>
                                                                   <td><input type="checkbox" name="output"></td>
-                                                                  <td>Thornton</td>
-                                                                  <td>@fat</td>
+                                                                  <td>분석/설계</td>
+                                                                  <td>a분석</td>
                                                                   <td>Jacob</td>
                                                                </tr>
                                                                <tr>
                                                                   <th scope="row">3</th>
                                                                   <td><input type="checkbox" name="output"></td>
-                                                                  <td>the Bird</td>
-                                                                  <td>@twitter</td>
+                                                                  <td>구현</td>
+                                                                  <td>a 명세서1</td>
                                                                   <td>Larry</td>
                                                                </tr>
                                                             </tbody>

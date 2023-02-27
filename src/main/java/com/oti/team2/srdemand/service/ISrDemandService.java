@@ -2,6 +2,8 @@ package com.oti.team2.srdemand.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
@@ -30,7 +32,7 @@ public interface ISrDemandService {
 	 * sr요청 수정 진행
 	 * @author 신정은
 	 */
-	public int updateSrDemand(SrRequestDto srRequestDto);
+	public int updateSrDemand(@Param("srRequestDto")SrRequestDto srRequestDto);
 	
 	/**
 	 * 
