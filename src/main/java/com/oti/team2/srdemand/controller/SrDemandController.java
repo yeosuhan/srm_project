@@ -109,7 +109,8 @@ public class SrDemandController {
 	@PostMapping("/modify")
 	public String updateSrDemand(SrRequestDto srRequestDto) {
 		// 수정 진행
-		srdemandService.updateSrDemand(srRequestDto);
+		log.info(srRequestDto);
+		//srdemandService.updateSrDemand(srRequestDto);
 		return "redirect:/srdemand/detail/" + srRequestDto.getDmndNo();
 	}
 			 	

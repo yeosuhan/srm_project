@@ -3,36 +3,30 @@
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 
 <script>
-	$(document)
-			.on(
-					'click',
-					'#addbtn',
-					function(e) {
-						console.log("userSrDemandList  요청 등록")
-						<%--  작성자의 기본 정보 세팅 --%>
-						 writerBase();
-						<%-- sr 요청 작성시, 모든 시스템 데이터 드롭다운에 표시하기 위함--%>
-						 setSystems();
-						$('#addmodal').addClass('show');
-						document.body.style = `overflow: hidden`;
-				});
-	
-	<%-- 작성자 : 신정은
+	$(document).on('click', '#addbtn', function(e) {
+		console.log("userSrDemandList  요청 등록")
+<%--  작성자의 기본 정보 세팅 --%>
+	writerBase();
+<%-- sr 요청 작성시, 모든 시스템 데이터 드롭다운에 표시하기 위함--%>
+	setSystems();
+		$('#addmodal').addClass('show');
+		document.body.style = `overflow: hidden`;
+	});
+<%-- 작성자 : 신정은
 		내용 : sr 요청 작성시, 작성자의 기본 정보 세팅 --%>
-		function writerBase() {
-			$.ajax({
-				url : '/srdemand/add',
-				type : 'GET',
-				success : function(res) {
-					$("#writerName").text(res.memberName);
-					$("#instName").text(res.instName);
-					$("#custId").val(res.memberId);
-					console.log(res.memberId);
-				}
-			});
-		}
-	
-	<%-- 작성자 : 신정은
+	function writerBase() {
+		$.ajax({
+			url : '/srdemand/add',
+			type : 'GET',
+			success : function(res) {
+				$("#writerName").text(res.memberName);
+				$("#instName").text(res.instName);
+				$("#custId").val(res.memberId);
+				console.log(res.memberId);
+			}
+		});
+	}
+<%-- 작성자 : 신정은
 	내용 : sr 요청 작성시, 모든 시스템 데이터 드롭다운에 표시하기 위함--%>
 	function setSystems() {
 		$.ajax({
@@ -42,33 +36,23 @@
 				console.log(res);
 				for (var idx = 0; idx < res.length; idx++) {
 					var option = $("<option value="+  res[idx].sysCd + ">"
-							+ res[idx].sysNm
-							+ "</option>")
+							+ res[idx].sysNm + "</option>")
 					$('.srSystems').append(option);
 				}
 			}
 		});
 	}
-	
-	
 <%-- 작성자 : 신정은
 	내용 : sr 요청 작성시 시스템 선택시 해당되는 업무구분 데이터 목록 가져오기 위함--%>
-	function changeSystem() {
-		console.log("changeSystem ----------")
-		var selectedElement = $(this).options[selectedElement.selectedIndex].value;
-		console.log("selectedElement :" + selectedElement)
-		// 선택한 option의 value, 텍스트
-		var sysCd = selectedElement.options[selectedElement.selectedIndex].value;
-		var sysNm = selectedElement.options[selectedElement.selectedIndex].text;
-		console.log("선택된 시스템 :" + sysCd)
+	function changeSystem(sysCd) {
+		console.log("changeSystem ----------")		
+		$('.sysTask').empty();
 
 		$.ajax({
 			url : '/task/list/' + sysCd,
 			type : 'GET',
 			success : function(res) {
 				console.log(res);
-				var mid = $("#custId").val();
-				console.log(">>> " + mid);
 				for (var idx = 0; idx < res.length; idx++) {
 					var option = $("<option value="+  res[idx].taskSeCd + ">"
 							+ res[idx].taskSeNm + "</option>")
@@ -174,7 +158,8 @@
 							<div class="col col-sm-4">시스템구분</div>
 							<div class="col col-sm-6">
 								<div class="dropdown dropdown open">
-									<select name="sysCd" class="srSystems" onchange="changeSystem()">
+									<select name="sysCd" class="srSystems"
+										onchange="changeSystem(this.value)">
 									</select>
 								</div>
 							</div>
