@@ -3,66 +3,74 @@ $(document).ready(function(){
 	 * @author:안한길
 	 * 
 	 */	
-	$("a[href='#settings1']").on("shown.bs.tab",function(){
-		getDeliverablesTableRow();
+	$(".collapse").on("shown.bs.collapse",function(){
+		console.log($(this).parent("tbody").children("tr").children("#prgrsIdTd").children("#prgrsId").val());
+		getDeliverablesTableRow($(this).parent("tbody").children("tr").children("#prgrsIdTd").children("#prgrsId").val()); //진척율 아이디
 		});
-	
+	$("a[href='#messages1']").on("hide.bs.tab",function(){
+		
+		$(".collapse").collapse("hide");
+	});
 	/* 산출물 추가 모달 (산출물 구분 목록 가져오는 기능)
     * @author: 안한길
     * */
    $("#addModal").on('show.bs.modal',function() 
    {
-      var deptCd=$("#deptCd").val();
-      console.log(deptCd);
+      var srNo=$("#srNo").val();
+      console.log(srNo);
 
       console.log(getContextPath());
       if($("#addModal option").length==0){
          //산출뭏 구분 목록
-         $.ajax({
-            url:"/member/department",
+         /*$.ajax({
+            url:"",
             type:"GET",
+            data:srNo,
             success:function(result){
                result.forEach((value,index)=>{
+               	  $("#addModal select").empty();
                   $("#addModal select").append(
                         "<option value='"+value.prgrsId+"'>" +value.prgrsSeNm+"</option>"
                   );
                });
             }
-         });
+         });*/
       }
       
    });
 });
 
-function getDeliverablesTableRow(){
-	var srNo=$("#srNo").val();
-	console.log(srNo);
-	$("#settings1 tbody").empty();//상세정보 변경 함수에 넣기
-    console.log(getContextPath());
-	if($("#settings1 tr").length==0){
+function getDeliverablesTableRow(prgrsId){
+	
+    console.log(prgrsId);
+	if($("#deliverableTable"+prgrsId+" tbody tr").length==0){
 		
 		$.ajax({
 			url:"/deliverable/list",
 			type:"GET",
-			data:{srNo:srNo},
+			data:{prgrsId:prgrsId},
 			success:function(result){
 				//console.log(result);
-				result.forEach((value,index)=>{
-					var count = index+1;
-					$("#settings1 tbody").append(
-							"<tr>" +
-							"	<th scope='row'>"+count+"</th>" +
-							"	<td>" +
-							"		<input value='"+value.delivId+"' name='resource' type='checkbox'>" +
-							"	</td>" +
-							"	<td>"+value.prgrsSeNm+"</td>" +
-							"	<td>"+value.delivNm+"</td>" +
-							"	<td>"+value.regYmd+"</td>" +
-							"</tr>"
-					);
-					console.log(value.delivUrl);
-					console.log(value.rgtrId);
-				});
+				if(result != null){
+					result.forEach((value,index)=>{
+						var count = index+1;
+						$("#deliverableTable"+prgrsId+" tbody").append(
+								"<tr>" +
+								"	<th scope='row'>"+count+"</th>" +
+								"	<td>" +
+								"		<input value='"+value.delivId+"' name='delivId' type='checkbox'>" +
+								"	</td>" +
+								"	<td>"+value.prgrsSeNm+"</td>" +
+								"	<td>"+value.delivNm+"</td>" +
+								"	<td>"+value.delivUrl+"</td>" +
+								"	<td>"+value.rgtrNm+"</td>" +
+								"	<td>"+value.regYmd+"</td>" +
+								"</tr>"
+						);
+					});
+				}else{
+					
+				}
 			}
 		});
 	}
@@ -74,7 +82,7 @@ function getDeliverablesTableRow(){
 function deleteDeliverable(){
 	var srDeliverableList=new Array();
 	
-	$("#settings1 tbody input[name='resource']:checked").each(function(){
+	$(".deliverableTable tbody input[name='delivId']:checked").each(function(){
 		srDeliverableList.push($(this).val());
 	});
 	
@@ -87,7 +95,7 @@ function deleteDeliverable(){
 		success:function(result){
 			//console.log(result+""+srDeliverableList.length);
 			if(result==srDeliverableList.length){
-				$("#settings1 tbody input[name='resource']:checked").each(function(){
+				$(".deliverableTable tbody input[name='delivId']:checked").each(function(){
 					$(this).parent("td").parent("tr").remove();
 				});
 			}
@@ -101,11 +109,10 @@ function deleteDeliverable(){
 function addDeliverable(){
    //var deliverableForm = $("#deliverableForm").serialize();//serialize()로 생성되는 데이터는 json형식과 맞지 않는다.
    var deliverableForm ={
-         "prgrsId":$("#addModal select").val(),
-         //"delivUrl":$("#addResourceForm #empId").val(),
-         //"delivNm":$("#addResourceForm #ptcptnRoleCd").val(),
-         //"rgtrId":$("#addResourceForm #schdlBgngYmd").val(),
-         "regYmd":$("#addModal input[type='date']").val()
+         "prgrsId":$("#prgrsIdSelect").val(),
+         "delivUrl":$("#delivUrl").val(),
+         "delivNm":$("#delivNm").val(),
+         "regYmd":$("#regYmd").val()
    }
    //console.log(resourceForm);
    $.ajax({
@@ -116,8 +123,9 @@ function addDeliverable(){
       success:function(result){
          //console.log(result);
          if(result!=0){
-            $("#settings1 tbody").empty();
-            getDeliverablesTableRow();
+            $("#deliverableTable"+$("#prgrsIdSelect").val()+" tbody").empty();
+            getDeliverablesTableRow($("#prgrsIdSelect").val());
+            
          }
       }
    });

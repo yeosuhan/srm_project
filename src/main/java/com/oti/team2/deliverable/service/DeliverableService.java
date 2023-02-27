@@ -14,8 +14,21 @@ public class DeliverableService implements IDeliverableService {
 	private IDeliverableDao deliverableDao;
 	
 	@Override
-	public List<Deliverable> getDeliverableList(String srNo) {
-		return deliverableDao.selectBySrNo(srNo);
+	public List<Deliverable> getDeliverableList(String prgrsId) {
+		return deliverableDao.selectByPrgrsId(prgrsId);
+	}
+
+	@Override
+	public int addDeliverable(Deliverable deliverable) {
+		return deliverableDao.insertDeliverable(deliverable);
+	}
+
+	@Override
+	public int deleteDeliverable(List<String> delivIdList) {
+		if(delivIdList!=null) {
+			return deliverableDao.updateDelYn(delivIdList);
+		}
+		return 0;
 	}
 
 }

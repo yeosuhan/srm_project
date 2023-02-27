@@ -11,20 +11,53 @@
 		<result property="rgtrNm" column="FLNM"/>
 		<result property="regYmd" column="REG_YMD"/>
 	</resultMap>
-	<select id="selectBySrNo" resultMap="deliverableResultMap">
+	<select id="selectByPrgrsId" parameterType="String" resultMap="deliverableResultMap">
 		SELECT 
 			DELIV_ID,
 			d.PRGRS_ID,
 			p.PRGRS_SE_NM,
 			DELIV_URL,
 			DELIV_NM,
-			m.RGTR_ID,
+			RGTR_ID,
 			m.FLNM,
 			REG_YMD
 		FROM
 			DELIVERABLES d, PROGRESS p, MEMBERS m
 		WHERE
 			d.PRGRS_ID=p.PRGRS_ID AND
-			d.RGTR_ID = m.MEMBER_ID
+			d.RGTR_ID = m.MEMBER_ID AND
+			d.PRGRS_ID = #{prgrsId} AND
+			d.DEL_YN = 0
 	</select>
+	
+	<insert id="insertDeliverable" parameterType="deliverable">
+		INSERT INTO DELIVERABLES
+			(
+				DELIV_ID,
+				PRGRS_ID,
+				DELIV_NM,
+				DELIV_URL,
+				RGTR_ID,
+				REG_YMD
+			)
+		VALUES
+			(
+				DELIV_ID_SEQ.NEXTVAL,
+				#{prgrsId},
+				#{delivNm},
+				#{delivUrl},
+				#{rgtrId},
+				sysdate
+			)
+			
+	</insert>
+	<update id="updateDelYn" parameterType="deliverable">
+		UPDATE DELIVERABLES SET
+		DEL_YN = 1
+		<where>
+			<foreach item="delivId"  collection="delivIdList" separator="OR" open="(" close=")">
+				DELIV_ID = #{delivId}
+			</foreach>
+		</where>
+	</update>
 </mapper>
