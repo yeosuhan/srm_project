@@ -69,7 +69,7 @@ function getDeliverablesTableRow(prgrsId){
 						);
 					});
 				}else{
-					
+					$(".collapse").collapse("hide");
 				}
 			}
 		});
