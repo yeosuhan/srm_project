@@ -45,8 +45,8 @@ public class SrDemandController {
    public WriterDto addSrDemand(HttpSession session) {
       log.info("기본정보 세팅");
       // 세션에서 사용자의 이름을 가져와야 됨.
-      String userId = "client2";
-      String user = "고객2";
+      String userId = "client1";
+      String user = "고객1";
 
       String instName = institutionService.getInst(userId).getInstNm();
       WriterDto writerDto = new WriterDto(userId, user, instName);
