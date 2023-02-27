@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.service.ISrDemandService;
-import com.oti.team2.srdemand.service.SrDemandService;
 import com.oti.team2.srinformation.dto.SrTotal;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInfomaion;
@@ -39,6 +38,7 @@ public class SrinformationController {
 	@RequestMapping(value="/srinformation/list", method=RequestMethod.GET)
 	public String getList(Model model) {
 		List<SrinformationList> srlist = srinformationService.getList();
+		log.info("진척목록: " + srlist);
 		model.addAttribute("srlist", srlist);
 		return "srInfo/srInformationList";
 	}

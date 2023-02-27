@@ -5,10 +5,9 @@
 	<!-- sr요청 진척률 조회 -->
 	<select id="selectProgressByDmndNo" parameterType="string" resultType="progress">
 		SELECT
-			PRGRS_ID as prgrsId,
-			PRGRS_SE_NM AS prgrsSeNm,
-			BGNG_YMD AS bgngYmd,
-			END_YMD AS endYmd,
+			PRGRS_ID AS prgrsId,
+			to_char(BGNG_YMD, 'YYYY-MM-DD') AS bgngYmd,
+			to_char(END_YMD, 'YYYY-MM-DD') AS endYmd,
 			PRGRS_RT AS prgrsRt
 		FROM
 			PROGRESS P

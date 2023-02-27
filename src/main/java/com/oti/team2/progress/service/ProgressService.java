@@ -23,5 +23,20 @@ public class ProgressService implements IProgressService{
 	public List<Progress> getProgress(String srNo) {
 		return progressDao.selectProgressByDmndNo(srNo);
 	}
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-02-27
+	 * @return sr요청 진척률 수정
+	 */
+	@Override
+	public String addProgress(List<String> prgrs) {
+		for(int i=0; i<prgrs.size(); i++) {
+			if(i==0) {
+				
+			}
+		}
+		return null;
+	}
 
 }

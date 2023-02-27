@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 
@@ -14,7 +15,6 @@
 	src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
 
 <script>
-	
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -27,8 +27,8 @@
 		document.body.style = `overflow: scroll`;
 	});
 <%-- SR요청 상세보기 --%>
-	function getDetail(dmndNo) {
-		console.log("dmndNo: " + dmndNo);
+	function getDetail(dmndNo, srNo) {
+		console.log("상세보기 : " + dmndNo + srNo);
 		$.ajax({
 			url : '/srinformation/detail/' + dmndNo,
 			type : 'GET',
@@ -36,8 +36,9 @@
 				dmndNo : dmndNo
 			},
 			success : function(detail) {
+				console.log(srNo);
 				console.log(detail);
-				$("#SRDSrNo").val(detail.dd.srNo);
+				$("#SRDSrNo").val(srNo);
 				$("#SRDDmndNo").val(detail.dd.dmndNo);
 				$("#SRDTitle").val(detail.dd.ttl);
 				$("#SRDRelgrund").val(detail.dd.relGrund);
@@ -61,7 +62,7 @@
 <%-- SR요청 계획정보 --%>
 	function getPlan() {
 		$("#SRDDmndNo").val();
-		console.log("Plan: " + $("#SRDDmndNo").val());
+		console.log("계획정보 : " + $("#SRDDmndNo").val());
 		$.ajax({
 			url : '/srinformation/plan/' + $("#SRDDmndNo").val(),
 			type : 'GET',
@@ -80,18 +81,56 @@
 <%-- SR요청 진척률 --%>
 	function getProgress() {
 		$("#SRDSrNo").val();
-		console.log("getProgress: " + $("#SRDSrNo").val());
+		console.log("진척률: " + $("#SRDSrNo").val());
 		$.ajax({
-			url : '/srinformation/progress/' + $("#SRDSrNo").val(),
+			url : '/srinformation/progress/list/' + $("#SRDSrNo").val(),
 			type : 'GET',
 			data : {
 				Progress : $("#SRDSrNo").val()
 			},
 			success : function(Progress) {
-				$("#SRPgPrgrsId").val(Progress.pgPrgrsId);
-				$("#SRPgBgngYmd").val(Progress.bgngYmd);
-				$("#SRPgEndYmd").val(Progress.endYmd);
-				$("#SRPgPrgrsRt").val(Progress.prgrsYn);
+				console.log(Progress[0]);
+				for (var i = 0; i < Progress.length; i++) {
+					$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
+					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
+					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
+					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
+
+				}
+			}
+		});
+	}
+	/* 진척률 추가 */
+	function addProgress() {
+		$("#SRPgPrgrsRt0").val();
+		$("#SRPgPrgrsRt1").val();
+		$("#SRPgPrgrsRt2").val();
+		$("#SRPgPrgrsRt3").val();
+		$("#SRPgPrgrsRt4").val();
+		$("#SRPgPrgrsRt5").val();
+		console.log("요구정의: " + $("#SRPgPrgrsRt0").val());
+		console.log("분석/설계	: " + $("#SRPgPrgrsRt1").val());
+		console.log("구현: " + $("#SRPgPrgrsRt2").val());
+		console.log("테스트: " + $("#SRPgPrgrsRt3").val());
+		console.log("반영요청	: " + $("#SRPgPrgrsRt4").val());
+		console.log("운영반영 : " + $("#SRPgPrgrsRt5").val());
+		var prgrs = [];
+		for(var i=0; i<6; i++) {
+			prgrs[i] = $("#SRPgPrgrsRt" + i).val();
+		}
+		$.ajax({
+			url : '/srinformation/progress/add',
+			type : 'POST',
+			data : {
+				prgrs : prgrs
+			},
+			success : function(prgrs) {
+				for (var i = 0; i < prgrs.length; i++) {
+					$("#SRPgBgngYmd" + i).val(prgrs[i].bgngYmd);
+					$("#SRPgEndYmd" + i).val(prgrs[i].endYmd);
+					$("#SRPgPrgrsRt" + i).val(prgrs[i].prgrsRt);
+
+				}
 			}
 		});
 	}
@@ -342,10 +381,9 @@ th {
 																		<tbody>
 																			<c:forEach var="srlist" items="${srlist}"
 																				varStatus="num">
-																				<tr
-																					onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}')">
+																				<tr	onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
 																					<th scope="row">${num.count}</th>
-																					<td>${srlist.srNo}</td>
+																					<td id="">${srlist.srNo}</td>
 																					<td>${srlist.sysNm}</td>
 																					<td>${srlist.taskSeNm}</td>
 																					<td>${srlist.ttl}</td>
@@ -615,37 +653,138 @@ th {
 																					</tr>
 																				</thead>
 																				<tbody>
-																					<c:forEach var="srlist" items="${srlist}"
-																						varStatus="num">
-																						<tr>
-																							<th scope="row">${num.count}</th>
-																							<td id="SRPgPrgrsSeNm"></td>
-																							<td><input type="date" id="SRPgBgngYmd"></td>
-																							<td><input type="date" id="SRPgEndYmd"></td>
-																							<td><input type="text" class="form-control"
-																								id="SRPgPrgrsRt"></td>
-																							<td><div class="accordion"
-																									id="accordionExample">
-																									<button
-																										class="btn btn-link btn-block text-center"
-																										type="button" data-toggle="collapse"
-																										data-target="#collapseOne"
-																										aria-expanded="true"
-																										aria-controls="collapseOne">첨부파일1</button>
-																									<div id="collapseOne" class="collapse"
-																										aria-labelledby="headingOne"
-																										data-parent="#accordionExample">
-																										<div class="card-body">첨부파일2</div>
-																									</div>
-																								</div></td>
-																						</tr>
-																					</c:forEach>
+																					<tr>
+																						<th scope="row">1</th>
+																						<td>요구정의<input type="hidden" id="SRPgPrgrsId0"></td>
+																						<td><input type="date" id="SRPgBgngYmd0"></td>
+																						<td><input type="date" id="SRPgEndYmd0"></td>
+																						<td><input type="text" class="form-control"
+																							id="SRPgPrgrsRt0"></td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button
+																									class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#first" aria-expanded="true"
+																									aria-controls="first">첨부파일1</button>
+																								<div id="first" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
+																					</tr>
+																					<tr>
+																						<th scope="row">2</th>
+																						<td>분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
+																						<td><input type="date" id="SRPgBgngYmd1"></td>
+																						<td><input type="date" id="SRPgEndYmd1"></td>
+																						<td><input type="text" class="form-control"
+																							id="SRPgPrgrsRt1"></td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button
+																									class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#second" aria-expanded="true"
+																									aria-controls="second">첨부파일1</button>
+																								<div id="second" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
+																					</tr>
+																					<tr>
+																						<th scope="row">3</th>
+																						<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
+																						<td><input type="date" id="SRPgBgngYmd2"></td>
+																						<td><input type="date" id="SRPgEndYmd2"></td>
+																						<td><input type="text" class="form-control"
+																							id="SRPgPrgrsRt2"></td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button
+																									class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#third" aria-expanded="true"
+																									aria-controls="third">첨부파일1</button>
+																								<div id="third" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
+																					</tr>
+																					<tr>
+																						<th scope="row">4</th>
+																						<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
+																						<td><input type="date" id="SRPgBgngYmd3"></td>
+																						<td><input type="date" id="SRPgEndYmd3"></td>
+																						<td><input type="text" class="form-control"
+																							id="SRPgPrgrsRt3"></td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button
+																									class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#fourth" aria-expanded="true"
+																									aria-controls="fourth">첨부파일1</button>
+																								<div id="fourth" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
+																					</tr>
+																					<tr>
+																						<th scope="row">5</th>
+																						<td>반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
+																						<td><input type="date" id="SRPgBgngYmd4"></td>
+																						<td><input type="date" id="SRPgEndYmd4"></td>
+																						<td><input type="text" class="form-control"
+																							id="SRPgPrgrsRt4"></td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button
+																									class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#fifth" aria-expanded="true"
+																									aria-controls="fifth">첨부파일1</button>
+																								<div id="fifth" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
+																					</tr>
+																					<tr>
+																						<th scope="row">6</th>
+																						<td>운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
+																						<td><input type="date" id="SRPgBgngYmd5"></td>
+																						<td><input type="date" id="SRPgEndYmd5"></td>
+																						<td><input type="text" class="form-control"
+																							id="SRPgPrgrsRt5"></td>
+																						<td><div class="accordion"
+																								id="accordionExample">
+																								<button
+																									class="btn btn-link btn-block text-center"
+																									type="button" data-toggle="collapse"
+																									data-target="#sixth" aria-expanded="true"
+																									aria-controls="sixth">첨부파일1</button>
+																								<div id="sixth" class="collapse"
+																									aria-labelledby="headingOne"
+																									data-parent="#accordionExample">
+																									<div class="card-body">첨부파일2</div>
+																								</div>
+																							</div></td>
+																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
 																	</div>
 																</div>
-																<button class="btn btn-info"
+																<button class="btn btn-info" onclick="addProgress()"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
 																<button class="btn btn-info"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
