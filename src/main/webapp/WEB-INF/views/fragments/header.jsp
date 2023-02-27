@@ -57,11 +57,10 @@
 <%-- 테이블 css --%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/table.css">
-
 <%-- 버튼 css --%>
 <%-- 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/button.css">
 --%>
-
-
+<%-- tr onclick 이벤트 --%>
+<script src="${pageContext.request.contextPath}/resources/js/onclickTr.js"></script>
