@@ -13,6 +13,7 @@
 		<config>src/main/resources/spring/multipart_resolver.xml</config>
 		<config>src/main/resources/spring/datasource.xml</config>
 		<config>src/main/resources/spring/component_scan.xml</config>
+		<config>src/main/resources/spring/security.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -96,7 +96,8 @@
 					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
 					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
 					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
-					document.getElementById('SRPgEndYmd'+i).setAttribute("min", $("#SRPgBgngYmd"+i).val());
+					document.getElementById('SRPgEndYmd' + i).setAttribute(
+							"min", $("#SRPgBgngYmd" + i).val());
 				}
 			}
 		});
@@ -105,7 +106,7 @@
 	function updateProgress1() {
 		var bgngYmd = $("#SRPgBgngYmd0").val();
 		var prgrsId = $("#SRPgPrgrsId0").val();
-		var endYmd  = $("#SRPgEndYmd0").val();
+		var endYmd = $("#SRPgEndYmd0").val();
 		var prgrsRt = $("#SRPgPrgrsRt0").val();
 		$.ajax({
 			url : '/srinformation/progress/update',
@@ -125,7 +126,7 @@
 	function updateProgress2() {
 		var bgngYmd = $("#SRPgBgngYmd1").val();
 		var prgrsId = $("#SRPgPrgrsId1").val();
-		var endYmd  = $("#SRPgEndYmd1").val();
+		var endYmd = $("#SRPgEndYmd1").val();
 		var prgrsRt = $("#SRPgPrgrsRt1").val();
 		$.ajax({
 			url : '/srinformation/progress/update',
@@ -144,7 +145,7 @@
 	function updateProgress3() {
 		var bgngYmd = $("#SRPgBgngYmd2").val();
 		var prgrsId = $("#SRPgPrgrsId2").val();
-		var endYmd  = $("#SRPgEndYmd2").val();
+		var endYmd = $("#SRPgEndYmd2").val();
 		var prgrsRt = $("#SRPgPrgrsRt2").val();
 		$.ajax({
 			url : '/srinformation/progress/update',
@@ -163,7 +164,7 @@
 	function updateProgress4() {
 		var bgngYmd = $("#SRPgBgngYmd3").val();
 		var prgrsId = $("#SRPgPrgrsId3").val();
-		var endYmd  = $("#SRPgEndYmd3").val();
+		var endYmd = $("#SRPgEndYmd3").val();
 		var prgrsRt = $("#SRPgPrgrsRt3").val();
 		$.ajax({
 			url : '/srinformation/progress/update',
@@ -182,7 +183,7 @@
 	function updateProgress5() {
 		var bgngYmd = $("#SRPgBgngYmd4").val();
 		var prgrsId = $("#SRPgPrgrsId4").val();
-		var endYmd  = $("#SRPgEndYmd4").val();
+		var endYmd = $("#SRPgEndYmd4").val();
 		var prgrsRt = $("#SRPgPrgrsRt4").val();
 		$.ajax({
 			url : '/srinformation/progress/update',
@@ -201,7 +202,7 @@
 	function updateProgress6() {
 		var bgngYmd = $("#SRPgBgngYmd5").val();
 		var prgrsId = $("#SRPgPrgrsId5").val();
-		var endYmd  = $("#SRPgEndYmd5").val();
+		var endYmd = $("#SRPgEndYmd5").val();
 		var prgrsRt = $("#SRPgPrgrsRt5").val();
 		$.ajax({
 			url : '/srinformation/progress/update',
@@ -627,10 +628,6 @@ th {
 																role="tab">SR 진척율</a>
 																<div class="slide"></div></li>
 															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#settings1" role="tab">SR
-																	산출물</a>
-																<div class="slide"></div></li>
-															<li class="nav-item"><a class="nav-link"
 																data-toggle="tab" href="#history1" role="tab">SR
 																	히스토리</a>
 																<div class="slide"></div></li>
@@ -904,6 +901,13 @@ th {
 																		</div>
 																	</div>
 																</div>
+																<button class="btn btn-info"
+																	onclick="deleteDeliverable()"
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택된
+																	산출물 삭제</button>
+																<button class="btn btn-info" id="addbtn"
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
+																	추가</button>
 															</div>
 															<%-- *********************************** [ 산출물  ] ***********************************--%>
 															<div class="tab-pane" id="settings1" role="tabpanel"
@@ -913,6 +917,7 @@ th {
 																		style="padding: 0px;">
 																		<div class="table-responsive">
 																			<table class="table table-hover text-center"
+																				id="deliverableTable"
 																				style="font-size: 12px; padding: 0px;">
 																				<thead>
 																					<tr>
@@ -922,7 +927,9 @@ th {
 																							value="selectOutputAll"
 																							onclick="selectOutputAll(this)"></th>
 																						<th>산출물구분</th>
-																						<th>첨부파일명</th>
+																						<th>산출물명</th>
+																						<th>산출물 경로</th>
+																						<th>등록자</th>
 																						<th>등록일</th>
 																					</tr>
 																				</thead>
@@ -930,23 +937,23 @@ th {
 																					<tr>
 																						<th scope="row">1</th>
 																						<td><input type="checkbox" name="output"></td>
-																						<td>Otto</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
+																						<td>요구정의</td>
+																						<td>요구사항_명세서.pdf</td>
+																						<td>2023-02-24</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">2</th>
 																						<td><input type="checkbox" name="output"></td>
-																						<td>Thornton</td>
-																						<td>@fat</td>
-																						<td>Jacob</td>
+																						<td>분석/설계</td>
+																						<td>소프트웨어_설계서.pdf</td>
+																						<td>2023-02-28</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">3</th>
 																						<td><input type="checkbox" name="output"></td>
-																						<td>the Bird</td>
-																						<td>@twitter</td>
-																						<td>Larry</td>
+																						<td></td>
+																						<td></td>
+																						<td></td>
 																					</tr>
 																				</tbody>
 																			</table>

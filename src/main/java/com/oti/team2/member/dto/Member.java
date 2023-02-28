@@ -13,6 +13,8 @@ import lombok.Data;
 public class Member {
 	private String memberId;
 	private String pswd;
+	private boolean enabled;
+	private String authority;
 	private String flnm;
 	private String addr;
 	private String telNo;

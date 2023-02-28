@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.institution.service.IInstitutionService;
@@ -73,29 +74,43 @@ public class SrDemandController {
 	 * @author 신정은
 	 */
 	@GetMapping("/list")
-	public String getSrDemandList(HttpSession session, Model model) {
+	public String getSrDemandList(HttpSession session, Model model,
+			@RequestParam(required = false, name = "dmndno") String dmndno) {
 		// 고객인 경우
-		String auth = Auth.CLIENT.toString();
-//		String auth = Auth.ADMIN.toString();
-		
-		if (auth.equals(Auth.CLIENT.toString())) {
+		String auth = Auth.ROLE_CLIENT.toString();
+//      String auth = Auth.ADMIN.toString();
+		System.out.println("Sdfkjnldfjsdfjlfjlksdjklsj");
+		// 목록
+		List<SrDemand> list = null;
+		if (auth.equals(Auth.ROLE_CLIENT.toString())) {
 			String custId = "client1";
-			List<SrDemand> list = srdemandService.getSrDemandList(custId);
-			log.info(list);
-//			SrdemandDetail sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
-			
-//			model.addAttribute("srDemand", sd);
+			list = srdemandService.getSrDemandList(custId);
 			model.addAttribute("mySrDemandList", list);
-			return "srDemand/userSrDemandList";
 		}
 
 		// 관리자인 경우
 
+		// 기본 첫번째 상세 or 선택된 상세
+		log.info("--------------재");
+		SrdemandDetail sd = null;
+		if (dmndno != null) {
+			sd = srdemandService.getSrDemandDetail(dmndno);
+			log.info("sd 존재" + sd);
+		} else {
+			sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
+		}
+		log.info(sd);
+		model.addAttribute("sd", sd);
+
+		if (auth.equals(Auth.ROLE_CLIENT.toString())) {
+			return "srDemand/userSrDemandList";
+		}
 		return "srDemand/adminSrDemandList";
 	}
-	
+
 	/**
 	 * SR요청 상세보기
+	 * 
 	 * @author 신정은
 	 */
 	@ResponseBody
@@ -106,15 +121,12 @@ public class SrDemandController {
 		return sd;
 	}
 
-	@GetMapping("/modify")
-	public String updateSrDemand(String dmndNo) {
-		// sr요청이 아직 요청단계인 경우에만 수정 가능하다.
-		//  진행단계 확인하는 코드 
-		
-		// 기존 작성 데이터 제공
-		
+	@PostMapping("/modify")
+	public String updateSrDemand(SrRequestDto srRequestDto) {
 		// 수정 진행
-		return "";
+		log.info(srRequestDto);
+		srdemandService.updateSrDemand(srRequestDto);
+		return "redirect:/srdemand/list?dmndno=" + srRequestDto.getDmndNo();
 	}
-			 	
+
 }
