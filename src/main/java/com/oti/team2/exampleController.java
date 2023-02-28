@@ -46,11 +46,11 @@ public class exampleController {
 		return "member/checkPw";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
 		return "member/login";
 	}
-
+*/
 	@RequestMapping(value = "/join1", method = RequestMethod.GET)
 	public String join1(Locale locale, Model model) {
 		return "member/join-client";
