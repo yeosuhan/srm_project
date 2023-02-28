@@ -7,6 +7,49 @@
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 </head>
 <script>
+<%-- JSON으로 받아온 HistoryList를 보여주기 위한 ajax --%>
+function getHistoryList() {
+	var srNo = $("#srNo").val();
+	console.log("srHistoryList 글번호: " + srNo);
+	$
+			.ajax({
+				url : "/history/list?srNo=" + srNo,
+				type : "GET",
+
+				success : function(result) {
+					console.log(result);
+					console.log(result.srInformationHistory[0].hstryTtl);
+
+					for (var i = 0; i < result.srInformationHistory.length; i++) {
+						var historyId =  result.srInformationHistory[i].hstryId;
+						var historyCount = [ i + 1 ];
+						var historyTtl = result.srInformationHistory[i].hstryTtl;
+						if(result.srInformationHistory[i].chgEndYmd === null){
+							var historyChgEndYmd = "-";
+						} else {
+							var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
+						}							
+						if (result.srInformationHistory[i].hstryStts == 'I') {
+							var historyStts = "요청 중";
+						} else if (result.srInformationHistory[i].hstryStts == 'N') {
+							var historyStts = "반려";
+						} else {
+							var historyStts = "승인";
+						}
+
+						var param = '<tr data-toggle="modal" data-target="#approvalHistoryModal" onclick="getHstryDetail(' + historyId + ')">';
+							param += 	'<th scope="row">' + historyCount + '</th>';
+							param += 	'<td>' + historyTtl + '</td>';
+							param += 	'<td>' + historyChgEndYmd + '</td>';
+							param += 	'<td>' + historyStts + '</td>';
+							param +=  '</tr>';
+
+						$("#history").append(param);
+					}
+				}
+			});
+}
+
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");

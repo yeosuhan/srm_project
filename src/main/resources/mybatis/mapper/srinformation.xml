@@ -48,4 +48,12 @@
 		AND
 			SI.PIC_ID = M.MEMBER_ID
 	</select>
+	
+	<!-- History 등록을 위해 연관된 SR정보를 가져오는 쿼리-->
+	<select id="selectSrInfoForHstryBySrNo" parameterType="string" resultType="srHistoryDetailDto">
+	
+	
+	
+	</select>
+	
 </mapper>

@@ -13,7 +13,7 @@
 			success : function(result) {
 				console.log(result);
 
-				$('#AsrNo').val(result.srNo);
+				$('#AsrNo').val(result.dmndNo);
 				$('#AinstNm').val(result.instNm);
 				$('#AsysNm').val(result.sysNm);
 				$('#AdeptNm').val(result.deptNm);

@@ -10,6 +10,7 @@ import lombok.Data;
 public class SrHistoryDetailDto {
 	private int hstryId;
 	private String srNo;
+	private String dmndNo;
 	//private String instCd;
 	private String instNm;
 	private String sysNm;
