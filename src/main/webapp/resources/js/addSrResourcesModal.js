@@ -42,7 +42,7 @@ $(document).ready(function(){
                calendar.render();
                //처음 모달을 열때 달력이 안보이는 문제
                $(".fc-scroller td, th").css('width','50px');
-               
+               $(".fc-event-time").empty();
                
             }
          });
@@ -70,7 +70,7 @@ function showSchedule(){
          //console.log(result);
          result.forEach((value)=>{
             calendar.addEvent(value);
-            
+            $(".fc-event-time").empty();
          });
       }
    });

@@ -32,7 +32,7 @@ public class SrInformationHistoryController {
 	 * @param pageNo, srNo srNo의 히스토리 목록을 조회하고 페이징처리를 하기 위해 pageNo와 srNo를 매개변수로 설정함
 	 * @return srHistoryList 히스토리 리스트와 페이징 객체를 담은 Dto 리턴
 	 */
-	/*
+	/* srNo로 받아옴
 	 * @GetMapping("/list/{srNo}") public SrHistoryListDto
 	 * getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
 	 * 
@@ -51,6 +51,7 @@ public class SrInformationHistoryController {
 	 * log.info("srHistoryList 조회" + srHistoryList); return srHistoryList; }
 	 */
 
+	
 	@GetMapping("/list")
 	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
 			@RequestParam String dmndNo) {
@@ -74,6 +75,32 @@ public class SrInformationHistoryController {
 		return srHistoryList;
 	}
 
+	/*
+	@GetMapping("/list")
+	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
+			@RequestParam String dmndNo, @RequestParam String srNo) {
+		log.info("srInformationHistoryList 조회");
+
+		int totalRows = srInformationHistoryService.getTotalRows();
+		Pager pager = new Pager(totalRows, pageNO);
+		if(dmndNo != null) {
+			srNo = srInformationHistoryService.getSrNo(dmndNo);
+			log.info("dmndNo 조회" + dmndNo);
+		} 
+		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryList(pager,
+				srNo);
+		log.info("srInformationHistoryList 조회" + srInformationHistory);
+		log.info("srNo 조회" + srNo);
+		
+		SrHistoryListDto srHistoryList = new SrHistoryListDto();
+		srHistoryList.setSrInformationHistory(srInformationHistory);
+		srHistoryList.setPager(pager);
+
+		log.info("srHistoryList 조회" + srHistoryList);
+		return srHistoryList;
+	}
+*/
+	
 	/**
 	 * SR처리 히스토리 상세 조회 메서드
 	 *

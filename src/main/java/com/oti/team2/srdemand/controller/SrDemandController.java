@@ -76,12 +76,12 @@ public class SrDemandController {
 	@GetMapping("/list")
 	public String getSrDemandList(HttpSession session, Model model, @RequestParam(required=false, name="dmndno")String dmndno) {
 		// 고객인 경우
-		String auth = Auth.CLIENT.toString();
+		String auth = Auth.ROLE_CLIENT.toString();
 //		String auth = Auth.ADMIN.toString();
 		System.out.println("Sdfkjnldfjsdfjlfjlksdjklsj");
 		// 목록
 		List<SrDemand> list = null;
-		if (auth.equals(Auth.CLIENT.toString())) {
+		if (auth.equals(Auth.ROLE_CLIENT.toString())) {
 			String custId = "client1";
 			list = srdemandService.getSrDemandList(custId);
 			model.addAttribute("mySrDemandList", list);
@@ -100,7 +100,7 @@ public class SrDemandController {
 		log.info(sd);
 		model.addAttribute("sd", sd);
 		
-		if (auth.equals(Auth.CLIENT.toString())) {
+		if (auth.equals(Auth.ROLE_CLIENT.toString())) {
 			return "srDemand/userSrDemandList";
 		}
 		return "srDemand/adminSrDemandList";

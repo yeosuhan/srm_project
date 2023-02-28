@@ -50,25 +50,25 @@ p {
 														<h5 style="font-weight: bold;">사원 관리</h5>
 														<%-- 검색 기능 --%>
 														<div class="mt-4 mr-5" style="height: 30px;">
-															<form>
+															<form action="${pageContext.request.contextPath}/admin/employee/list">
 																<div class="form-group row">
 																	<label class="col-sm-1 col-form-label text-right"
 																		style="font-size: 14;">이름</label>
 																	<div class="col-sm-2">
-																		<input type="text" class="form-control">
+																		<input type="text" class="form-control" name="flnm" value="${flnm}">
 																	</div>
 																	<label class="col-sm-1 col-form-label text-right"
 																		style="font-size: 14;">부서</label>
 																	<div class="col-sm-2">
-																		<input type="text" class="form-control">
+																		<input type="text" class="form-control" name = "deptNm" value="${deptNm}">
 																	</div>
 																	<label class="col-sm-1 col-form-label text-right"
 																		style="font-size: 14;">직급</label>
 																	<div class="col-sm-2">
-																		<input type="text" class="form-control">
+																		<input type="text" class="form-control" name="jbgdNm" value="${jbgdNm}">
 																	</div>
 																	<div class="col-sm-3 d-flex justify-content-end">
-																		<button
+																		<button type="submit"
 																			class="btn btn-primary btn-round btn-sm waves-effect waves-light">검색</button>
 																	</div>
 																</div>
@@ -108,6 +108,33 @@ p {
 
 																</tbody>
 															</table>
+															<div class="pagination-container">
+																<div class="pagination" style="display:inline-block">
+																	<c:if test="${pager.groupNo ne 1}">
+																		<a class="pagination-newer" href="${pageContext.request.contextPath}/admin/employee/list?page=${pager.startPageNo-1}&flnm=${flnm}&deptNm=${deptNm}&jbgdNm=${jbgdNm}">PREV</a> 
+																	</c:if>
+																	<c:if test="${pager.groupNo eq 1}">
+																		<a style="visibility:hidden" class="pagination-newer" href="#">PREV</a> 
+																	</c:if>
+																		<span class="pagination-inner"> 
+																			<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" varStatus="status">
+																				<c:if test="${pager.pageNo ne (status.index)}">
+																					<a href="${pageContext.request.contextPath}/admin/employee/list?page=${status.index}&flnm=${flnm}&deptNm=${deptNm}&jbgdNm=${jbgdNm}">${status.index}</a> 
+																				</c:if>
+																				<c:if test="${pager.pageNo eq (status.index)}">
+																					<a class="pagination-active" href="${pageContext.request.contextPath}/admin/employee/list?page=${status.index}&flnm=${flnm}&deptNm=${deptNm}&jbgdNm=${jbgdNm}">${status.index}</a> 
+																				</c:if>
+																			</c:forEach>
+																			
+																		</span> 
+																	<c:if test="${pager.groupNo ne pager.totalGroupNo}">
+																		<a class="pagination-older" href="${pageContext.request.contextPath}/admin/employee/list?page=${pager.endPageNo+1}&flnm=${flnm}&deptNm=${deptNm}&jbgdNm=${jbgdNm}">NEXT</a>
+																	</c:if>
+																	<c:if test="${pager.groupNo eq pager.totalGroupNo}">
+																		<a style="visibility:hidden" class="pagination-older" href="#">NEXT</a>
+																	</c:if>
+																</div>
+															</div> 
 														</div>
 													</div>
 												</div>

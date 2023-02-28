@@ -30,11 +30,11 @@
 	<!-- History Id에 따른 상세조회 -->
 	<select id="selectByHstryId" parameterType="int" resultType="srHistoryDetailDto">
 		<![CDATA[
-			select hstry_id as hstryId, srH.sr_no as srNo, instNm, sysNm, deptNm, wrt_ymd as wrtYmd, cmptnDmndYmd, chg_end_ymd as chgEndYmd, hstry_ttl as hstryTtl, hstry_cn as hstryCn
+			select hstry_id as hstryId, srH.sr_no as srNo, dmndNo, instNm, sysNm, deptNm, wrt_ymd as wrtYmd, cmptnDmndYmd, chg_end_ymd as chgEndYmd, hstry_ttl as hstryTtl, hstry_cn as hstryCn
 			from(
-			    select member_id as mid, m.inst_cd as instCd, i.inst_nm as instNm, srNo, bgngYmd, endYmd, cmptnDmndYmd, deptCd, d.dept_nm as deptNm, picId, rvwrId, prgrsYn, sysCd, s.sys_cd as ssysCd, sys_nm as sysNm
+			    select member_id as mid, m.inst_cd as instCd, i.inst_nm as instNm, srNo, dmndNo, bgngYmd, endYmd, cmptnDmndYmd, deptCd, d.dept_nm as deptNm, picId, rvwrId, prgrsYn, sysCd, s.sys_cd as ssysCd, sys_nm as sysNm
 			    from(
-			        select cust_id as cid, sr_no as srNo, bgng_ymd as bgngYmd, end_ymd as endYmd, cmptn_dmnd_ymd as cmptnDmndYmd, dept_cd as deptCd, pic_id as picId, rvwr_id as rvwrId, prgrs_yn as prgrsYn, sys_cd as sysCd
+			        select cust_id as cid, sr_no as srNo, si.dmnd_no as dmndNo, bgng_ymd as bgngYmd, end_ymd as endYmd, cmptn_dmnd_ymd as cmptnDmndYmd, dept_cd as deptCd, pic_id as picId, rvwr_id as rvwrId, prgrs_yn as prgrsYn, sys_cd as sysCd
 			        from sr_information si, sr_demand sd
 			        where si.dmnd_no = sd.dmnd_no)srTable, members m, systems s, institution i, departments d
 			    where srTable.cid=m.member_id and s.sys_cd=srTable.sysCd and i.inst_cd=m.inst_cd and d.dept_cd=srTable.deptCd)srM, sr_information_history srH

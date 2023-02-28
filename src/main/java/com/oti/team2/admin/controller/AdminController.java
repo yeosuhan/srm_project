@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.oti.team2.department.dto.Department;
 import com.oti.team2.department.service.IDepartmentService;
 import com.oti.team2.jobgrade.service.IJobGradeService;
+import com.oti.team2.member.dto.FilteringMember;
 //github.com/OTI-SRM/srm_project
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.service.IMemberService;
@@ -112,19 +113,30 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/client/list")
-	public String getMemberList(Model model) {
-		int totalRows = memberService.getTotalRows(Auth.CLIENT.toString());
+	public String getMemberList(@RequestParam(value="page",defaultValue = "1") int page,@RequestParam(value="flnm",required=false)String flnm,@RequestParam(value="instNm",required=false)String instNm,Model model) {
+		FilteringMember filtering = new FilteringMember();
+		if(instNm!=null) {
+			filtering.setDeptNm(instNm);
+			model.addAttribute("instNm",instNm);
+		}
+		if(flnm!=null) {
+			filtering.setFlnm(flnm);
+			model.addAttribute("flnm",flnm);
+		}
+		int totalRows = memberService.getTotalRows(Auth.ROLE_CLIENT.toString(),filtering);
 		Pager pager = new Pager(totalRows, 1);
-		log.info(pager);
+		//log.info(pager);
 
 		// 목록 가져오기
-		List<Member> clientList = memberService.getMemberList(Auth.CLIENT.toString(), pager);
+		List<Member> clientList = memberService.getMemberList(Auth.ROLE_CLIENT.toString(), pager,filtering);
 		model.addAttribute("clientList", clientList);
 		// log.info(clientList);
 		// 상세 가져오기
-		Member client = memberService.getMember(clientList.get(0).getMemberId(), Auth.CLIENT.toString());
+		Member client = memberService.getMember(clientList.get(0).getMemberId(), Auth.ROLE_CLIENT.toString());
 		log.info(client);
 		model.addAttribute("client", client);
+		model.addAttribute("pager",pager);
+		
 		return "management/clientList";
 	}
 
@@ -137,7 +149,7 @@ public class AdminController {
 	@ResponseBody
 	@GetMapping("/client/{cid}")
 	public Member getClient(@PathVariable("cid") String cid) {
-		Member cl = memberService.getMember(cid, Auth.CLIENT.toString());
+		Member cl = memberService.getMember(cid, Auth.ROLE_CLIENT.toString());
 		log.info(cl);
 		return cl;
 	}
@@ -147,23 +159,39 @@ public class AdminController {
 	 * 
 	 * @author 안한길
 	 * 
-	 * @param page : 페이지
+	 * @param page : 페이지  flnm:이름  deptNm:부서명  jbgdNm:부서명
 	 * 
 	 * @return 사원 목록 페이지 url
 	 */
 	@RequestMapping(value = "/employee/list", method = RequestMethod.GET)
-	public String getEmployeeList(@RequestParam(defaultValue = "1") int page, Model model) {
-		log.info("getEmployeeList");
-		int totalRows = memberService.getTotalRows(Auth.DEVELOPER.toString());
+	public String getEmployeeList(@RequestParam(value="page",defaultValue = "1") int page,@RequestParam(value="flnm",required=false)String flnm,@RequestParam(value="deptNm",required=false)String deptNm,@RequestParam(value="jbgdNm",required=false)String jbgdNm , Model model) {
+		log.info("getEmployeeList"+page+flnm);
+		FilteringMember filtering = new FilteringMember();
+		if(deptNm!=null) {
+			filtering.setDeptNm(deptNm);
+			model.addAttribute("deptNm",deptNm);
+		}
+		if(flnm!=null) {
+			filtering.setFlnm(flnm);
+			model.addAttribute("flnm",flnm);
+		}
+		if(jbgdNm!=null) {
+			filtering.setJbgdNm(jbgdNm);
+			model.addAttribute("jbgdNm",jbgdNm);
+		}
+		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(),filtering);
 		Pager pager = new Pager(totalRows, page);
-		List<Member> employeesList = memberService.getMemberList(Auth.DEVELOPER.toString(), pager);
+		
+		List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager,filtering);
+		
 		// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
-		employeesList.set(0, memberService.getMember(employeesList.get(0).getMemberId(), Auth.DEVELOPER.toString()));
+		employeesList.set(0, memberService.getMember(employeesList.get(0).getMemberId(), Auth.ROLE_DEVELOPER.toString()));
 		// 사원 정보 카드 에서 직급, 부서 선택 목록
 		model.addAttribute("jobGradeList", jobGradeService.getJobGradeList());
 		model.addAttribute("departmentList", departmentService.getDepartmentNameList());
 
 		model.addAttribute("employeesList", employeesList);
+		model.addAttribute("pager",pager);
 		return "management/employeesList";
 	}
 
@@ -180,7 +208,7 @@ public class AdminController {
 	@RequestMapping(value = "/employee", method = RequestMethod.GET)
 	public Member getEmployeeDetail(@RequestParam() String employeeId) {
 		log.info(employeeId);
-		return memberService.getMember(employeeId, Auth.DEVELOPER.toString());
+		return memberService.getMember(employeeId, Auth.ROLE_DEVELOPER.toString());
 	}
 
 	/*
