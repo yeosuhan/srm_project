@@ -4,8 +4,9 @@ $(document).ready(function(){
 	 * 
 	 */	
 	$(".collapse").on("shown.bs.collapse",function(){
-		console.log($(this).parent("tbody").children("tr").children("#prgrsIdTd").children("#prgrsId").val());
-		getDeliverablesTableRow($(this).parent("tbody").children("tr").children("#prgrsIdTd").children("#prgrsId").val()); //진척율 아이디
+		//console.log($(this).parent("tbody").children("tr").children(".prgrsIdTd").children("input").val());
+		console.log($(this).attr("id"));
+		getDeliverablesTableRow($(this).attr("id")); //진척율 아이디
 		});
 	$("a[href='#messages1']").on("hide.bs.tab",function(){
 		
@@ -40,10 +41,11 @@ $(document).ready(function(){
    });
 });
 
-function getDeliverablesTableRow(prgrsId){
+function getDeliverablesTableRow(collapseId){
 	
+	var prgrsId=$("#SRPgPrgrsId"+collapseId.charAt(8)).val();
     console.log(prgrsId);
-	if($("#deliverableTable"+prgrsId+" tbody tr").length==0){
+	if($("#"+collapseId+" .deliverableTable tbody tr").length==0){
 		
 		$.ajax({
 			url:"/deliverable/list",
@@ -54,7 +56,7 @@ function getDeliverablesTableRow(prgrsId){
 				if(result != null){
 					result.forEach((value,index)=>{
 						var count = index+1;
-						$("#deliverableTable"+prgrsId+" tbody").append(
+						$("#"+collapseId+" .deliverableTable tbody").append(
 								"<tr>" +
 								"	<th scope='row'>"+count+"</th>" +
 								"	<td>" +
@@ -69,7 +71,7 @@ function getDeliverablesTableRow(prgrsId){
 						);
 					});
 				}else{
-					$(".collapse").collapse("hide");
+					$("#"+collapseId).collapse("hide");
 				}
 			}
 		});
@@ -123,9 +125,8 @@ function addDeliverable(){
       success:function(result){
          //console.log(result);
          if(result!=0){
-            $("#deliverableTable"+$("#prgrsIdSelect").val()+" tbody").empty();
-            getDeliverablesTableRow($("#prgrsIdSelect").val());
-            
+            $(".deliverableTable tbody").empty();
+            $(".collapse").collapse("hide");
          }
       }
    });
