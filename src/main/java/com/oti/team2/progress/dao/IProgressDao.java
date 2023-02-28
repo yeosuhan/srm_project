@@ -1,5 +1,7 @@
 package com.oti.team2.progress.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,6 +14,6 @@ public interface IProgressDao {
 	 * 작성일자 : 2023-02-23
 	 * @return sr요청 진척률 조회
 	 */
-	public Progress selectProgressByDmndNo(@Param("dmndNo") String dmndNo);
+	public List<Progress> selectProgressByDmndNo(@Param("srNo") String srNo);
 
 }
