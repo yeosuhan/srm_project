@@ -15,6 +15,7 @@
 	src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
 
 <script>
+	
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -78,7 +79,7 @@
 			}
 		});
 	}
-<%-- SR요청 진척률 --%>
+<%-- SR요청 진척률 조회 --%>
 	function getProgress() {
 		$("#SRDSrNo").val();
 		console.log("진척률: " + $("#SRDSrNo").val());
@@ -89,48 +90,130 @@
 				Progress : $("#SRDSrNo").val()
 			},
 			success : function(Progress) {
-				console.log(Progress[0]);
 				for (var i = 0; i < Progress.length; i++) {
+					$("#SRPgSrNo").val(Progress[i].srNo);
 					$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
 					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
 					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
 					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
-
+					document.getElementById('SRPgEndYmd'+i).setAttribute("min", $("#SRPgBgngYmd"+i).val());
 				}
 			}
 		});
 	}
-	/* 진척률 추가 */
-	function addProgress() {
-		$("#SRPgPrgrsRt0").val();
-		$("#SRPgPrgrsRt1").val();
-		$("#SRPgPrgrsRt2").val();
-		$("#SRPgPrgrsRt3").val();
-		$("#SRPgPrgrsRt4").val();
-		$("#SRPgPrgrsRt5").val();
-		console.log("요구정의: " + $("#SRPgPrgrsRt0").val());
-		console.log("분석/설계	: " + $("#SRPgPrgrsRt1").val());
-		console.log("구현: " + $("#SRPgPrgrsRt2").val());
-		console.log("테스트: " + $("#SRPgPrgrsRt3").val());
-		console.log("반영요청	: " + $("#SRPgPrgrsRt4").val());
-		console.log("운영반영 : " + $("#SRPgPrgrsRt5").val());
-		var prgrs = [];
-		for(var i=0; i<6; i++) {
-			prgrs[i] = $("#SRPgPrgrsRt" + i).val();
-		}
+<%-- SR요청 진척률 수정 --%>
+	function updateProgress1() {
+		var bgngYmd = $("#SRPgBgngYmd0").val();
+		var prgrsId = $("#SRPgPrgrsId0").val();
+		var endYmd  = $("#SRPgEndYmd0").val();
+		var prgrsRt = $("#SRPgPrgrsRt0").val();
 		$.ajax({
-			url : '/srinformation/progress/add',
+			url : '/srinformation/progress/update',
 			type : 'POST',
 			data : {
-				prgrs : prgrs
+				prgrsRt : prgrsRt,
+				bgngYmd : bgngYmd,
+				endYmd : endYmd,
+				prgrsId : prgrsId,
+				srNo : $("#SRPgSrNo").val()
 			},
 			success : function(prgrs) {
-				for (var i = 0; i < prgrs.length; i++) {
-					$("#SRPgBgngYmd" + i).val(prgrs[i].bgngYmd);
-					$("#SRPgEndYmd" + i).val(prgrs[i].endYmd);
-					$("#SRPgPrgrsRt" + i).val(prgrs[i].prgrsRt);
-
-				}
+				console.log("예~");
+			}
+		});
+	}
+	function updateProgress2() {
+		var bgngYmd = $("#SRPgBgngYmd1").val();
+		var prgrsId = $("#SRPgPrgrsId1").val();
+		var endYmd  = $("#SRPgEndYmd1").val();
+		var prgrsRt = $("#SRPgPrgrsRt1").val();
+		$.ajax({
+			url : '/srinformation/progress/update',
+			type : 'POST',
+			data : {
+				prgrsRt : prgrsRt,
+				bgngYmd : bgngYmd,
+				endYmd : endYmd,
+				prgrsId : prgrsId,
+				srNo : $("#SRPgSrNo").val()
+			},
+			success : function(prgrs) {
+			}
+		});
+	}
+	function updateProgress3() {
+		var bgngYmd = $("#SRPgBgngYmd2").val();
+		var prgrsId = $("#SRPgPrgrsId2").val();
+		var endYmd  = $("#SRPgEndYmd2").val();
+		var prgrsRt = $("#SRPgPrgrsRt2").val();
+		$.ajax({
+			url : '/srinformation/progress/update',
+			type : 'POST',
+			data : {
+				prgrsRt : prgrsRt,
+				bgngYmd : bgngYmd,
+				endYmd : endYmd,
+				prgrsId : prgrsId,
+				srNo : $("#SRPgSrNo").val()
+			},
+			success : function(prgrs) {
+			}
+		});
+	}
+	function updateProgress4() {
+		var bgngYmd = $("#SRPgBgngYmd3").val();
+		var prgrsId = $("#SRPgPrgrsId3").val();
+		var endYmd  = $("#SRPgEndYmd3").val();
+		var prgrsRt = $("#SRPgPrgrsRt3").val();
+		$.ajax({
+			url : '/srinformation/progress/update',
+			type : 'POST',
+			data : {
+				prgrsRt : prgrsRt,
+				bgngYmd : bgngYmd,
+				endYmd : endYmd,
+				prgrsId : prgrsId,
+				srNo : $("#SRPgSrNo").val()
+			},
+			success : function(prgrs) {
+			}
+		});
+	}
+	function updateProgress5() {
+		var bgngYmd = $("#SRPgBgngYmd4").val();
+		var prgrsId = $("#SRPgPrgrsId4").val();
+		var endYmd  = $("#SRPgEndYmd4").val();
+		var prgrsRt = $("#SRPgPrgrsRt4").val();
+		$.ajax({
+			url : '/srinformation/progress/update',
+			type : 'POST',
+			data : {
+				prgrsRt : prgrsRt,
+				bgngYmd : bgngYmd,
+				endYmd : endYmd,
+				prgrsId : prgrsId,
+				srNo : $("#SRPgSrNo").val()
+			},
+			success : function(prgrs) {
+			}
+		});
+	}
+	function updateProgress6() {
+		var bgngYmd = $("#SRPgBgngYmd5").val();
+		var prgrsId = $("#SRPgPrgrsId5").val();
+		var endYmd  = $("#SRPgEndYmd5").val();
+		var prgrsRt = $("#SRPgPrgrsRt5").val();
+		$.ajax({
+			url : '/srinformation/progress/update',
+			type : 'POST',
+			data : {
+				prgrsRt : prgrsRt,
+				bgngYmd : bgngYmd,
+				endYmd : endYmd,
+				prgrsId : prgrsId,
+				srNo : $("#SRPgSrNo").val()
+			},
+			success : function(prgrs) {
 			}
 		});
 	}
@@ -343,7 +426,6 @@ th {
 												</div>
 											</div>
 											<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
-
 											<div class="col-xl-8 col-md-12">
 												<div class="card">
 													<div class="card-header">
@@ -381,7 +463,8 @@ th {
 																		<tbody>
 																			<c:forEach var="srlist" items="${srlist}"
 																				varStatus="num">
-																				<tr	onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
+																				<tr
+																					onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
 																					<th scope="row">${num.count}</th>
 																					<td id="">${srlist.srNo}</td>
 																					<td>${srlist.sysNm}</td>
@@ -646,20 +729,24 @@ th {
 																					<tr>
 																						<th style="width: 1px;">#</th>
 																						<th style="width: 50px;">작업구분</th>
-																						<th style="width: 300px;">시작일</th>
-																						<th style="width: 300px;">종료일</th>
+																						<th style="width: 250px;">시작일</th>
+																						<th style="width: 250px;">종료일</th>
 																						<th style="width: 50px;">진척률(누적)</th>
 																						<th>산출물</th>
+																						<th style="width: 50px;"></th>
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
 																						<th scope="row">1</th>
-																						<td>요구정의<input type="hidden" id="SRPgPrgrsId0"></td>
+																						<td>요구정의 <input type="hidden"
+																							id="SRPgPrgrsId0"> <input type="hidden"
+																							id="SRPgSrNo">
+																						</td>
 																						<td><input type="date" id="SRPgBgngYmd0"></td>
 																						<td><input type="date" id="SRPgEndYmd0"></td>
-																						<td><input type="text" class="form-control"
-																							id="SRPgPrgrsRt0"></td>
+																						<td><input type="number" class="form-control"
+																							id="SRPgPrgrsRt0" min="0" max="10"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -673,14 +760,20 @@ th {
 																									<div class="card-body">첨부파일2</div>
 																								</div>
 																							</div></td>
+																						<td style="padding: 0px; margin: 0px;">
+																							<button class="btn btn-info btn-lg"
+																								onclick="updateProgress1()"
+																								style="width: 100%; height: 100%">저장</button>
+																						</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">2</th>
-																						<td>분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
+																						<td>분석/설계<input type="hidden"
+																							id="SRPgPrgrsId1"></td>
 																						<td><input type="date" id="SRPgBgngYmd1"></td>
 																						<td><input type="date" id="SRPgEndYmd1"></td>
-																						<td><input type="text" class="form-control"
-																							id="SRPgPrgrsRt1"></td>
+																						<td><input type="number" class="form-control"
+																							id="SRPgPrgrsRt1" min="11" max="40"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -694,14 +787,19 @@ th {
 																									<div class="card-body">첨부파일2</div>
 																								</div>
 																							</div></td>
+																						<td style="padding: 0px; margin: 0px;">
+																							<button class="btn btn-info btn-lg"
+																								onclick="updateProgress2()"
+																								style="width: 100%; height: 100%">저장</button>
+																						</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">3</th>
 																						<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
 																						<td><input type="date" id="SRPgBgngYmd2"></td>
 																						<td><input type="date" id="SRPgEndYmd2"></td>
-																						<td><input type="text" class="form-control"
-																							id="SRPgPrgrsRt2"></td>
+																						<td><input type="number" class="form-control"
+																							id="SRPgPrgrsRt2" min="41" max="70"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -715,14 +813,19 @@ th {
 																									<div class="card-body">첨부파일2</div>
 																								</div>
 																							</div></td>
+																						<td style="padding: 0px; margin: 0px;">
+																							<button class="btn btn-info btn-lg"
+																								onclick="updateProgress3()"
+																								style="width: 100%; height: 100%">저장</button>
+																						</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">4</th>
 																						<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
 																						<td><input type="date" id="SRPgBgngYmd3"></td>
 																						<td><input type="date" id="SRPgEndYmd3"></td>
-																						<td><input type="text" class="form-control"
-																							id="SRPgPrgrsRt3"></td>
+																						<td><input type="number" class="form-control"
+																							id="SRPgPrgrsRt3" min="71" max="80"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -736,14 +839,20 @@ th {
 																									<div class="card-body">첨부파일2</div>
 																								</div>
 																							</div></td>
+																						<td style="padding: 0px; margin: 0px;">
+																							<button class="btn btn-info btn-lg"
+																								onclick="updateProgress4()"
+																								style="width: 100%; height: 100%">저장</button>
+																						</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">5</th>
-																						<td>반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
+																						<td>반영요청<input type="hidden"
+																							id="SRPgPrgrsId4"></td>
 																						<td><input type="date" id="SRPgBgngYmd4"></td>
 																						<td><input type="date" id="SRPgEndYmd4"></td>
-																						<td><input type="text" class="form-control"
-																							id="SRPgPrgrsRt4"></td>
+																						<td><input type="number" class="form-control"
+																							id="SRPgPrgrsRt4" min="81" max="90"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -757,14 +866,20 @@ th {
 																									<div class="card-body">첨부파일2</div>
 																								</div>
 																							</div></td>
+																						<td style="padding: 0px; margin: 0px;">
+																							<button class="btn btn-info btn-lg"
+																								onclick="updateProgress5()"
+																								style="width: 100%; height: 100%">저장</button>
+																						</td>
 																					</tr>
 																					<tr>
 																						<th scope="row">6</th>
-																						<td>운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
+																						<td>운영반영<input type="hidden"
+																							id="SRPgPrgrsId5"></td>
 																						<td><input type="date" id="SRPgBgngYmd5"></td>
 																						<td><input type="date" id="SRPgEndYmd5"></td>
-																						<td><input type="text" class="form-control"
-																							id="SRPgPrgrsRt5"></td>
+																						<td><input type="number" class="form-control"
+																							id="SRPgPrgrsRt5" min="91" max="100"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -778,17 +893,17 @@ th {
 																									<div class="card-body">첨부파일2</div>
 																								</div>
 																							</div></td>
+																						<td style="padding: 0px; margin: 0px;">
+																							<button class="btn btn-info btn-lg"
+																								onclick="updateProgress6()"
+																								style="width: 100%; height: 100%">저장</button>
+																						</td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
 																	</div>
 																</div>
-																<button class="btn btn-info" onclick="addProgress()"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
-																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
-																	삭제</button>
 															</div>
 															<%-- *********************************** [ 산출물  ] ***********************************--%>
 															<div class="tab-pane" id="settings1" role="tabpanel"

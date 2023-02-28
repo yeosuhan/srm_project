@@ -5,6 +5,7 @@
 	<!-- sr요청 진척률 조회 -->
 	<select id="selectProgressByDmndNo" parameterType="string" resultType="progress">
 		SELECT
+			SR_NO AS srNo,
 			PRGRS_ID AS prgrsId,
 			to_char(BGNG_YMD, 'YYYY-MM-DD') AS bgngYmd,
 			to_char(END_YMD, 'YYYY-MM-DD') AS endYmd,
@@ -14,6 +15,34 @@
 		WHERE
 			P.SR_NO = #{srNo}
 	</select>
-
-
+	<!-- sr요청 진척률 수정 -->
+	<update id="updateProgressByPrgrsId" parameterType="map">
+		UPDATE
+			PROGRESS
+		SET
+			BGNG_YMD = #{bgngYmd},
+			END_YMD = #{endYmd},
+			PRGRS_RT = #{prgrsRt}
+		WHERE
+			PRGRS_ID = #{prgrsId}
+			
+	
+	</update>
+	<!-- sr요청 진행사항 수정 -->
+	<update id="updateSttsByPrgrsId" parameterType="map">
+		UPDATE
+			SR_DEMAND
+		SET
+			STTS_CD = #{sttsCd}
+		WHERE
+			DMND_NO = (
+						SELECT 
+							DMND_NO
+						FROM 
+							SR_INFORMATION
+						WHERE
+							SR_NO=#{srNo} 
+						)
+			
+	</update>
 </mapper>
