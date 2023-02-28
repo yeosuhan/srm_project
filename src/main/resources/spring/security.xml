@@ -9,6 +9,7 @@
 	<security:http pattern="/resources/**" security="none" />
 
 	<security:http use-expressions="true">
+		<security:csrf disabled="true"/>
 		<!-- URL 권한 설정 -->
 		<security:intercept-url pattern="/**" access="permitAll" />
 		<!-- 로그인/로그아웃 핸들러 -->

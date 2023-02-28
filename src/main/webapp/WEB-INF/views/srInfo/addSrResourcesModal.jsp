@@ -14,7 +14,7 @@
 					
 				</div>
 				<div class="col-6 border-left-1">
-					<form id="addResourceForm" action="/" method="POST">
+					<form id="addResourceForm" >
 						<div class="row my-3">
 							<div class="col-6">SR제목 : </div>
 							<div class="col-6">
@@ -46,9 +46,7 @@
 						<div class="row my-3">
 							<div class="col-6">역할 : </div>
 							<div class="col-6">
-								<select id="ptcptnRoleCd" name="ptcptnRoleCd">
-									<option value="0">개발자</option>
-									<option value="1">QA</option>
+								<select id="ptcptnRoleCd" name="ptcptnRoleCd" onclick="getPtcptnRoleCd()">
 								</select>
 							</div>
 						</div>
