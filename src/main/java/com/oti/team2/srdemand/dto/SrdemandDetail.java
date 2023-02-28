@@ -29,12 +29,15 @@ public class SrdemandDetail {
 	
 	//진행상태
 	private String sttsNm;
+	private int sttsCd;
 	
 	//시스템 테이블
 	private String sysNm;
+	private String sysCd;
 	
 	//업무구분 테이블
 	private String taskSeNm;
+	private String taskCd;
 	
 	//기관 테이블
 	private String instNm; // 요청 기관

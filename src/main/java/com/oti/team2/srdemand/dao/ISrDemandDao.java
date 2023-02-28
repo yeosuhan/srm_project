@@ -43,7 +43,7 @@ public interface ISrDemandDao {
 	 * 
 	 * @author 신정은
 	 */
-	public int updateByDmndNo(SrRequestDto srRequestDto);
+	public int updateByDmndNo(@Param("srRequestDto")SrRequestDto srRequestDto);
 
 	/**
 	 * 

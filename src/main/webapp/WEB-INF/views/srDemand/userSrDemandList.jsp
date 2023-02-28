@@ -69,23 +69,31 @@
 			url : "${pageContext.request.contextPath}/srdemand/detail/" + dmNo,
 			type : "GET",
 			success : function(res) {
-				$(".dmndNo").val(res.dmndNo);
+				$(".dmndNo").text(res.dmndNo);
+				$(".ttl").text(res.ttl);
 				$(".ttl").val(res.ttl);
+				$(".relGrund").text(res.relGrund);
 				$(".relGrund").val(res.relGrund);
 				$(".dmndYmd").text(res.dmndYmd);
 				$(".cmptnDmndYmd").text(res.cmptnDmndYmd);
 				$(".rjctRsn").text(res.rjctRsn);
 
 				$(".cn").text(res.cn);
+				$(".cn").val(res.cn);
 				$(".endYmd").text(res.endYmd);
-				$(".picNm").val(res.picNm);
-				$(".deptNm").val(res.deptNm);
-				$(".sttsNm").val(res.sttsNm);
+				$(".picNm").text(res.picNm);
+				$(".deptNm").text(res.deptNm);
+				$(".sttsNm").text(res.sttsNm);
 				$(".sysNm").text(res.sysNm);
+
+				/* var sysCd = res.sysCd;
+				console.log("~~~~~~~~~ sys cd ~~~~~~~~  " + sysCd);
+				$(".srSystems").val(sysCd).prop("selected", true); */
+
 				$(".taskSeNm").text(res.taskSeNm);
 				$(".instNm").text(res.instNm);
 				$(".clientNm").text(res.clientNm);
-				$(".rvwrNm").val(res.rvwrNm);
+				$(".rvwrNm").text(res.rvwrNm);
 			}
 		});
 
@@ -327,51 +335,51 @@ th {
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4 font-weight-bold">SR번호</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control dmndNo">
+																				<div type="text" class="form-control dmndNo">${sd.dmndNo}</div>
 																			</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col col-sm-2 font-weight-bold">SR 제목</div>
 																		<div class="col col-sm-9">
-																			<input type="text" class="form-control ttl">
+																			<div type="text" class="form-control ttl">${sd.ttl}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col col-sm-2 font-weight-bold">관련 근거</div>
 																		<div class="col col-sm-9">
-																			<input type="text" class="form-control relGrund">
+																			<div type="text" class="form-control relGrund">${sd.relGrund}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4 font-weight-bold">시스템구분</div>
-																			<div class="col col-sm-6 sysNm"></div>
+																			<div class="col col-sm-6 sysNm">${sd.sysNm}</div>
 																		</div>
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4 font-weight-bold">업무구분</div>
-																			<div class="col col-sm-4 taskSeNm"></div>
+																			<div class="col col-sm-4 taskSeNm">${sd.taskSeNm}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4 font-weight-bold">요청기관</div>
-																			<div class="col col-sm-6 instNm"></div>
+																			<div class="col col-sm-6 instNm">${sd.instNm}</div>
 
 																		</div>
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4 font-weight-bold">요청자</div>
-																			<div class="dropdown dropdown open clientNm"></div>
+																			<div class="dropdown dropdown open clientNm">${sd.clientNm}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4 font-weight-bold">요청일</div>
-																			<div class="col col-sm-8 dmndYmd"></div>
+																			<div class="col col-sm-8 dmndYmd">${sd.dmndYmd}</div>
 																		</div>
 																		<div class="col-sm-6">
 																			<div class="col col-sm-4 font-weight-bold">완료요청일</div>
-																			<div class="col col-sm-8 cmptnDmndYmd"></div>
+																			<div class="col col-sm-8 cmptnDmndYmd">${sd.cmptnDmndYmd}</div>
 																		</div>
 																	</div>
 																	<div class="row mt-3">
@@ -379,16 +387,14 @@ th {
 																			<div class="col col-sm-4 font-weight-bold">개발
 																				담당자</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control picNm"
-																					disabled>
+																				<div type="text" class="form-control picNm">${sd.picNm}</div>
 																			</div>
 																		</div>
 																		<div class="col-6">
 																			<div class="col col-sm-4 font-weight-bold">개발
 																				부서</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control deptNm"
-																					disabled>
+																				<div type="text" class="form-control deptNm">${sd.deptNm}</div>
 																			</div>
 																		</div>
 																	</div>
@@ -397,13 +403,12 @@ th {
 																			<div class="col col-sm-4 font-weight-bold">진행
 																				상태</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control sttsNm"
-																					disabled>
+																				<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
 																			</div>
 																		</div>
 																		<div class="col-6">
 																			<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
-																			<div class="col col-sm-6 endYmd"></div>
+																			<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
 																		</div>
 																	</div>
 																	<div class="row mt-3">
@@ -411,8 +416,7 @@ th {
 																			<div class="col col-sm-4 font-weight-bold">검토자
 																				이름</div>
 																			<div class="col col-sm-6">
-																				<input type="text" class="form-control rvwrNm"
-																					disabled>
+																				<div type="text" class="form-control rvwrNm">${sd.rvwrNm}</div>
 																			</div>
 																		</div>
 																	</div>
@@ -423,7 +427,7 @@ th {
 																			style="line-height: 120px">반려 사유</label>
 																		<div class="col-sm-9 pl-0 ">
 																			<textarea rows="5" cols="5"
-																				class="form-control rjctRsn"></textarea>
+																				class="form-control rjctRsn" value="${sd.rjctRsn}"></textarea>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -433,7 +437,7 @@ th {
 																			내용</label>
 																		<div class="col-sm-9">
 																			<textarea rows="5" cols="5" class="form-control cn"
-																				style="height: 100px;"></textarea>
+																				style="height: 100px;" value="${sd.cn}"></textarea>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -446,13 +450,15 @@ th {
 																	</div>
 																	<div class="row">
 																		<div class="col-6"></div>
-																		<div class="col-6" style="text-align: right">
-																			<button id="modbtn"
-																				class="btn btn-primary btn-round save center">수정</button>
+																		<c:if test="${sd.sttsCd == 0}">
+																			<div class="col-6" style="text-align: right">
+																				<button id="modbtn"
+																					class="btn btn-primary btn-round save center">수정</button>
 
-																			<button
-																				class="btn btn-primary btn-round danger cancle">삭제</button>
-																		</div>
+																				<button
+																					class="btn btn-primary btn-round danger cancle">삭제</button>
+																			</div>
+																		</c:if>
 																	</div>
 																</div>
 																<%------------- 요청 수정 ----------------------------------- --%>
@@ -460,12 +466,13 @@ th {
 																	style="font-size: 12px; padding-top: 20px; display: none;">
 																	<form action="/srdemand/modify" method="post"
 																		id="sdUpdateForm">
+																		<input type="hidden" name="dmndNo"
+																			value="${sd.dmndNo}">
 																		<div class="form-group row">
 																			<div class="col-sm-6">
 																				<div class="col col-sm-4 font-weight-bold">SR번호ss</div>
 																				<div class="col col-sm-6">
-																					<input type="text" class="form-control dmndNo"
-																						readonly>
+																					<div type="text" class="dmndNo">${sd.dmndNo}</div>
 																				</div>
 																			</div>
 																		</div>
@@ -473,35 +480,26 @@ th {
 																			<div class="col col-sm-2 font-weight-bold">SR
 																				제목</div>
 																			<div class="col col-sm-9">
-																				<input type="text" class="form-control ttl">
+																				<input type="text" class="form-control ttl"
+																					name="ttl">
 																			</div>
 																		</div>
 																		<div class="form-group row">
 																			<div class="col col-sm-2 font-weight-bold">관련
 																				근거</div>
 																			<div class="col col-sm-9">
-																				<input type="text" class="form-control relGrund">
+																				<input type="text" class="form-control relGrund"
+																					name="relGrund">
 																			</div>
 																		</div>
 																		<div class="form-group row">
-																			<div class="col-sm-5">
+																			<div class="col-sm-6">
 																				<div class="col col-sm-4 font-weight-bold">시스템구분</div>
-																				<div class="col col-sm-4">
-																					<div class="dropdown dropdown open">
-																						<select name="sysCd" class="srSystems sysNm"
-																							onchange="changeSystem(this.value)">
-																						</select>
-																					</div>
-																				</div>
+																				<div class="col col-sm-6 sysNm">${sd.sysNm}</div>
 																			</div>
-																			<div class="col-sm-7">
+																			<div class="col-sm-6">
 																				<div class="col col-sm-4 font-weight-bold">업무구분</div>
-																				<div class="col col-sm-6">
-																					<div class="dropdown dropdown open">
-																						<select name="taskSeCd" class="sysTask taskSeNm">
-																						</select>
-																					</div>
-																				</div>
+																				<div class="col col-sm-4 taskSeNm">${sd.taskSeNm}</div>
 																			</div>
 																		</div>
 																		<div class="form-group row">
@@ -523,7 +521,8 @@ th {
 																			<div class="col-sm-6">
 																				<div class="col col-sm-4 font-weight-bold">완료요청일</div>
 																				<div class="col col-sm-8 cmptnDmndYmd">
-																					<input type="date" name="cmptnDmndYmd">
+																					<input type="date" name="cmptnDmndYmd"
+																						name="cmptnDmndYmd">
 																				</div>
 																			</div>
 																		</div>
@@ -532,8 +531,7 @@ th {
 																				<div class="col col-sm-4 font-weight-bold">진행
 																					상태</div>
 																				<div class="col col-sm-6">
-																					<input type="text" class="form-control sttsNm"
-																						disabled>
+																					<div class="form-control sttsNm" disabled></div>
 																				</div>
 																			</div>
 																		</div>
@@ -544,7 +542,7 @@ th {
 																				내용</label>
 																			<div class="col-sm-9">
 																				<textarea rows="5" cols="5" class="form-control cn"
-																					style="height: 100px;"></textarea>
+																					style="height: 100px;" name="cn"></textarea>
 																			</div>
 																		</div>
 																		<div class="form-group row">
