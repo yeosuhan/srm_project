@@ -75,10 +75,10 @@ public class SrDemandController {
 	@GetMapping("/list")
 	public String getSrDemandList(HttpSession session, Model model) {
 		// 고객인 경우
-		String auth = Auth.CLIENT.toString();
+		String auth = Auth.ROLE_CLIENT.toString();
 //		String auth = Auth.ADMIN.toString();
 		
-		if (auth.equals(Auth.CLIENT.toString())) {
+		if (auth.equals(Auth.ROLE_CLIENT.toString())) {
 			String custId = "client1";
 			List<SrDemand> list = srdemandService.getSrDemandList(custId);
 			log.info(list);
