@@ -4,8 +4,7 @@ $(document).ready(function(){
    /* 자원정보 추가 모달
     * @author: 안한길
     * */
-   $("#addSrResourcesModal").on('show.bs.modal',function() 
-   {
+   $("#addSrResourcesModal").on('show.bs.modal',function(){
       var calendarEl=null;
       var deptCd=$("#deptCd").val();
       console.log(deptCd);
@@ -46,10 +45,15 @@ $(document).ready(function(){
                
             }
          });
+      }else{
+    	  showSchedule();
       }
       
    });
-   
+   $("#addSrResourcesModal").on('hide.bs.modal',function(){
+	   $("#addResourceForm #schdlEndYmd").val("");
+	   $("#addResourceForm #schdlBgngYmd").val("");
+   });
 });
 /* 선택된 개발자 일정 가져오는 함수
  * @author: 안한길
@@ -103,4 +107,26 @@ function addResource(){
       }
    });
    
+}
+/* 개발자의 역할 목록을 가져오는 함수
+ * @Author : 안한길
+ * */
+function getPtcptnRoleCd(){
+	if(!$("#ptcptnRoleCd option").length){
+		$.ajax({
+			url:"/roles",
+			type:"GET",
+			success:function(result){
+				result.forEach((value)=>{
+					console.log(value);
+					$("#ptcptnRoleCd").append(
+							"<option value='"+value.roleCd+"'>" +
+									value.roleNm+
+							"</option>"
+					);
+				});
+			}
+		})
+	}
+	
 }
