@@ -4,8 +4,8 @@
    
    <!-- sr요청 등록 -->
    <insert id="insertSrDemand" parameterType="srRequestDto">
-      INSERT INTO SR_DEMAND (DMND_NO, DMND_YMD, CUST_ID, SYS_CD, TASK_SE_CD, TTL, CN, REL_GRUND, CMPTN_DMND_YMD)
-      VALUES(#{dmndNo}, #{dmndYmd}, #{custId}, #{sysCd}, #{taskSeCd}, #{ttl}, #{cn}, #{relGrund}, #{cmptnDmndYmd})
+      INSERT INTO SR_DEMAND (DMND_NO, CUST_ID, SYS_CD, TASK_SE_CD, TTL, CN, REL_GRUND, CMPTN_DMND_YMD)
+      VALUES(#{dmndNo}, #{custId}, #{sysCd}, #{taskSeCd}, #{ttl}, #{cn}, #{relGrund}, #{cmptnDmndYmd})
    </insert>
    
    <!-- SR230222(SR+현재날짜)~ 로 시작하는 요청의 개수 구하기 -->
@@ -121,11 +121,37 @@
           where t.MNGR_ID = mem.member_id
    </select>
    
-   <!-- 사용자에게 받은 SR요청번호와 SR진척번호를 연결하기 위한 쿼리 (히스토리에서 사용) -->
+   <!-- 사용자에게 받은 SR요청번호와 SR진척번호를 연결하기 위한 쿼리 -->
    <select id="selectBySrDmndNo" parameterType="string" resultType="string">
       select SI.sr_no as srNo
       from sr_information SI
       where SI.dmnd_no=#{dmndNo}
    </select>
-	
+   
+   <!-- SR 요청 수정 -->
+   <update id="updateByDmndNo" parameterType="srRequestDto">
+    UPDATE   SR_DEMAND
+      set 
+      <if test='srRequestDto.ttl != null and srRequestDto.ttl != "" '>
+         TTL = #{srRequestDto.ttl} 
+      </if> 
+      <if test="srRequestDto.cn != null">
+         , CN = #{srRequestDto.cn} 
+      </if>
+      <if test="srRequestDto.relGrund != null">
+         , REL_GRUND = #{srRequestDto.relGrund} 
+       </if>
+       <if test="srRequestDto.cmptnDmndYmd != null">
+         , CMPTN_DMND_YMD = #{srRequestDto.cmptnDmndYmd} 
+      </if>
+      <if test="srRequestDto.sysCd != null">
+         , SYS_CD = #{srRequestDto.sysCd} 
+      </if>
+      <if test="srRequestDto.taskSeCd != null">
+         , TASK_SE_CD = #{srRequestDto.taskSeCd} 
+      </if>
+      where DMND_NO = #{srRequestDto.dmndNo}
+      
+   </update>
+   
 </mapper>

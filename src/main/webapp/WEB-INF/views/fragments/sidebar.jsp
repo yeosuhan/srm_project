@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <nav class="pcoded-navbar">
 	<div class="sidebar_toggle">
 		<a href="#"><i class="icon-close icons"></i></a>
@@ -10,7 +13,11 @@
 				<img class="img-80 img-radius"
 					src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg"
 					alt="User-Profile-Image">
-				<div class="user-details" style="color: white">John Doe</div>
+				<div class="user-details" style="color: white">
+				<sec:authorize access="isAuthenticated()">
+					<b><sec:authentication property="principal.flnm"/> 님</b>
+				</sec:authorize>
+				</div>
 			</div>
 		</div>
 

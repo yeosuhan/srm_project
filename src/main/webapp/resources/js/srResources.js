@@ -7,6 +7,8 @@ $(document).ready(function(){
 		getResourceTableRow();
 		});
 	
+
+	
 });
 
 function getResourceTableRow(){

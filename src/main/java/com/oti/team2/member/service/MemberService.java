@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.oti.team2.member.dao.IMemberDao;
 import com.oti.team2.member.dto.Developer;
+import com.oti.team2.member.dto.FilteringMember;
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.util.pager.Pager;
@@ -24,8 +25,8 @@ public class MemberService implements IMemberService {
 	 *@author : 신정은
 	 */
 	@Override
-	public int getTotalRows(String memberType) {
-		return memberDao.countByMemberType(memberType);
+	public int getTotalRows(String memberType , FilteringMember filtering) {
+		return memberDao.countByMemberType(memberType,filtering);
 	}
 	
 	/**
@@ -33,8 +34,8 @@ public class MemberService implements IMemberService {
 	 *@author : 신정은
 	 */
 	@Override
-	public List<Member> getMemberList(String memberType, Pager pager) {
-		return memberDao.selectByMemberType(memberType, pager);		
+	public List<Member> getMemberList(String memberType, Pager pager,FilteringMember filtering) {
+		return memberDao.selectByMemberType(memberType, pager,filtering);		
 	}
 
 	/**

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.service.ISrDemandService;
-import com.oti.team2.srdemand.service.SrDemandService;
 import com.oti.team2.srinformation.dto.SrTotal;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInfomaion;
@@ -39,6 +38,7 @@ public class SrinformationController {
 	@RequestMapping(value="/srinformation/list", method=RequestMethod.GET)
 	public String getList(Model model) {
 		List<SrinformationList> srlist = srinformationService.getList();
+		log.info("진척목록: " + srlist);
 		model.addAttribute("srlist", srlist);
 		return "srInfo/srInformationList";
 	}
@@ -65,7 +65,6 @@ public class SrinformationController {
 	 * @return sr요청 계획정보 조회 - 탭 누를 때
 	 */
 	@ResponseBody
-
 	@RequestMapping(value="/srinformation/plan/{dmndNo}", method=RequestMethod.GET)
 	public SrplanInfomaion getPlanInfo(@PathVariable("dmndNo")String dmndNo) {
 		SrplanInfomaion pi = srinformationService.getPlan(dmndNo);
@@ -80,19 +79,8 @@ public class SrinformationController {
 	
 	
 	
+		
 	/**
-	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-02-23
-	 * @return sr요청 진척률 조회
-	 *//*
-	@ResponseBody
-	@RequestMapping(value="/srinformation/{dmndNo}", method=RequestMethod.GET)
-	public SrdemandDetail getProgress(@PathVariable("dmndNo")String dmndNo, Model model) {
-		return null;
-	}
-	
-	*//**
 	 * 
 	 * @author 여수한
 	 * 작성일자 : 2023-02-23

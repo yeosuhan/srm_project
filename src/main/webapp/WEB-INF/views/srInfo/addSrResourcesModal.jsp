@@ -83,4 +83,4 @@
 <!-- fullcalendar 언어 CDN -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 
-<script src="/resources/assets/js/addSrResourcesModal.js"></script>
+<script src="/resources/js/addSrResourcesModal.js"></script>
