@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- 작성자: 최은종 / 작성 날짜: 230223 --%>
+
+<%-- 작성자: 최은종 / 작성 날짜: 2023-02-28 --%>
 
 <script type="text/javascript">
-	function getHstryDetail(historyId) {
+	function getInfoHstryDetail(historyId) {
 		console.log("historyId: " + historyId);
 
 		$.ajax({
@@ -12,9 +13,10 @@
 			type : 'GET',
 			success : function(result) {
 				console.log(result);
+
 				var AhstryType = result.hstryType;
 
-				$('#AsrNo').val(result.dmndNo);
+				$('#AsrNo').val(result.srNo);
 				$('#AinstNm').val(result.instNm);
 				$('#AsysNm').val(result.sysNm);
 				$('#AdeptNm').val(result.deptNm);
@@ -34,13 +36,13 @@
 	}
 </script>
 
-<div class="modal fade" id="approvalHistoryModal">
+<div class="modal fade" id="approvalInfoHistoryModal">
 	<div class="modal-body modal-dialog modal-lg" style="height: 600px;">
 		<div class="m_head ">
 			<div class="modal_title" style="color: white">진척 정보 변경 사항</div>
 		</div>
-		<div class="m_body bg-light">
-			<form id="approvalHistoryForm" action="/" method="POST">
+		<div class="m_body bg-light detailDiv">
+			<form id="historyDetailForm" action="/" method="POST">
 				<div class="row my-3">
 					<div class="col-2">SR 번호 :</div>
 					<div class="col-10">
@@ -98,7 +100,6 @@
 			<div class="pt-3" align="center">
 				<button type="submit" form="" class="btn btn-info save center"
 					data-dismiss="modal">승인</button>
-
 				<button type="submit" form="" class="btn btn-danger danger cancle"
 					data-dismiss="modal">반려</button>
 			</div>

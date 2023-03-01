@@ -1,7 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+<%-- 작성자 : 최은종 / 작성 날짜 : 2023-02-28 --%>
 
 <html>
 <head>
@@ -18,6 +20,60 @@
 
 <script>
 	
+<%-- JSON으로 받아온 HistoryList를 보여주기 위한 ajax --%>
+	function getSrHistoryList() {
+		var srNo = $("#srNo").val();
+		console.log("srHistoryList 글번호: " + srNo);
+		$
+				.ajax({
+					url : "/history/emp/list?srNo=" + srNo,
+					type : "GET",
+
+					success : function(result) {
+						console.log(result);
+						console.log(result.srInformationHistory[0].hstryId);
+						$("#srhistory1").empty();
+
+						for (var i = 0; i < result.srInformationHistory.length; i++) {
+							var historyId = result.srInformationHistory[i].hstryId;
+							var historyCount = [ i + 1 ];
+
+							var historyWriter = result.srInformationHistory[i].flnm;
+							if (result.srInformationHistory[i].hstryType == 'A'
+									|| result.srInformationHistory[i].hstryType == 'B') {
+								var historyType = "완료일 변경";
+							} else {
+								var historyType = "개발 취소";
+							}
+							if (result.srInformationHistory[i].hstryType == 'C') {
+								var historyChgEndYmd = "-";
+							} else {
+								var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
+							}
+							if (result.srInformationHistory[i].hstryStts == 'I') {
+								var historyStts = "미승인";
+							} else if (result.srInformationHistory[i].hstryStts == 'N') {
+								var historyStts = "반려";
+							} else {
+								var historyStts = "승인";
+							}
+
+							var param = '<tr data-toggle="modal" data-target="#approvalInfoHistoryModal" onclick="getInfoHstryDetail('
+									+ historyId + ')">';
+							param += '<th scope="row">' + historyCount
+									+ '</th>';
+							param += '<td>' + historyWriter + '</td>';
+							param += '<td>' + historyType + '</td>';
+							param += '<td>' + historyChgEndYmd + '</td>';
+							param += '<td>' + historyStts + '</td>';
+							param += '</tr>';
+
+							$("#srhistory1").append(param);
+						}
+					}
+				});
+	}
+	
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -29,6 +85,7 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+	
 <%-- SR요청 상세보기 --%>
 	function getDetail(dmndNo, srNo) {
 		console.log("상세보기 : " + dmndNo + srNo);
@@ -68,9 +125,11 @@
 
 				$("#resourceTableRow").empty();
 				$(".deliverableTable tbody").empty();
+				$(".historyTable tbody").empty();
 			}
 		});
 	}
+	
 <%-- SR요청 계획정보 --%>
 	function getPlan() {
 		$("#SRDDmndNo").val();
@@ -90,6 +149,7 @@
 			}
 		});
 	}
+	
 <%-- SR요청 진척률 --%>
 	function getProgress() {
 		$("#SRDSrNo").val();
@@ -145,6 +205,7 @@
 		});
 	}
 </script>
+
 <style>
 .ui-datepicker-trigger {
 	width: 29px;
@@ -220,6 +281,7 @@ th {
 	font-size: inherit;
 }
 </style>
+
 <body>
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
@@ -267,9 +329,7 @@ th {
 																</div>
 															</div> --%>
 														</div>
-
 													</div>
-
 													<div class="form-group row">
 														<div class="col-sm-6">
 															<div class="row">
@@ -371,12 +431,10 @@ th {
 												</div>
 											</div>
 											<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
-
 											<div class="col-xl-8 col-md-12">
 												<div class="card">
 													<div class="card-header">
 														<h5>SR 처리 목록</h5>
-
 														<div class="card-header-right">
 															<ul class="list-unstyled card-option">
 																<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -426,7 +484,6 @@ th {
 																	</table>
 																</div>
 															</div>
-
 														</div>
 													</div>
 												</div>
@@ -436,18 +493,13 @@ th {
 												<div class="card">
 													<div class="card-header">
 														<div class="row">
-															<div class="col-6">
+															<div class="col-8">
 																<h5>SR요청 상세정보</h5>
 															</div>
-															<div class="col-3">
-																<button type="button" class="btn btn-primary btn-sm"
-																	data-toggle="modal" data-target="#addHistoryModal">
-																	예정일 변경</button>
-															</div>
-															<div class="col-3">
-																<button type="button" class="btn btn-primary btn-sm"
-																	data-toggle="modal" data-target="#addHistoryModal">
-																	개발 취소</button>
+															<div class="col-3 ml-4">
+																<button class="btn btn-primary btn-sm"
+																	onclick="addHistory('${srNo}')" data-toggle="modal"
+																	data-target="#addHistoryModal">SR 변경요청</button>
 															</div>
 														</div>
 													</div>
@@ -455,16 +507,13 @@ th {
 														<div class="card_body "
 															style="font-size: 12px; padding-top: 20px;">
 															<div class="form-group row">
-
 																<div class="col col-sm-3">요청 번호</div>
 																<div class="col col-sm-9">
 																	<input type="hidden" id="SRDSrNo"> <input
 																		readonly class="form-control" style="width: 150px;"
 																		id="SRDDmndNo">
 																</div>
-
 															</div>
-
 															<hr />
 															<div class="form-group row">
 																<div class="col col-sm-3">SR 제목</div>
@@ -574,9 +623,9 @@ th {
 																role="tab">SR 진척율</a>
 																<div class="slide"></div></li>
 
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#history1" role="tab">SR
-																	히스토리</a>
+															<li class="nav-item" onclick="getSrHistoryList()"><a
+																class="nav-link" data-toggle="tab" href="#srInfhistory"
+																role="tab">SR 히스토리</a>
 																<div class="slide"></div></li>
 														</ul>
 														<%-- *********************************** [ 계획정보 ] ***********************************--%>
@@ -620,7 +669,6 @@ th {
 																	<div class="col col-sm-9">
 																		<textarea rows="5" cols="5" class="form-control"
 																			id="SRPlRvwCn"></textarea>
-
 																	</div>
 																</div>
 																<button class="btn btn-info"
@@ -683,8 +731,8 @@ th {
 																				<tbody>
 																					<tr>
 																						<th scope="row">1</th>
-																						<td class="prgrsIdTd">요구정의<input type="hidden"
-																							value="" id="SRPgPrgrsId0"></td>
+																						<td class="prgrsIdTd">요구정의<input
+																							type="hidden" value="" id="SRPgPrgrsId0"></td>
 																						<td><input type="date" id="SRPgBgngYmd0"></td>
 																						<td><input type="date" id="SRPgEndYmd0"></td>
 																						<td><input type="text" class="form-control"
@@ -706,7 +754,6 @@ th {
 																							<div>
 																								<table
 																									class="table table-border text-center deliverableTable"
-																									
 																									style="font-size: 12px; padding: 0px;">
 																									<thead>
 																										<tr>
@@ -754,7 +801,6 @@ th {
 																							<div>
 																								<table
 																									class="table table-border text-center deliverableTable"
-																									
 																									style="font-size: 12px; padding: 0px;">
 																									<thead>
 																										<tr>
@@ -801,7 +847,6 @@ th {
 																							<div>
 																								<table
 																									class="table table-border text-center deliverableTable"
-																									
 																									style="font-size: 12px; padding: 0px;">
 																									<thead>
 																										<tr>
@@ -848,7 +893,6 @@ th {
 																							<div>
 																								<table
 																									class="table table-border text-center deliverableTable"
-																									
 																									style="font-size: 12px; padding: 0px;">
 																									<thead>
 																										<tr>
@@ -896,7 +940,6 @@ th {
 																							<div>
 																								<table
 																									class="table table-border text-center deliverableTable"
-																									
 																									style="font-size: 12px; padding: 0px;">
 																									<thead>
 																										<tr>
@@ -944,7 +987,6 @@ th {
 																							<div>
 																								<table
 																									class="table table-border text-center deliverableTable"
-																									
 																									style="font-size: 12px; padding: 0px;">
 																									<thead>
 																										<tr>
@@ -1043,64 +1085,29 @@ th {
 																<div class="btn btn-info" id="addbtn"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">추가</div>
 															</div> --%>
-
-
 															<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
-															<div class="tab-pane" id="history1" role="tabpanel"
+															<div class="tab-pane" id="srInfhistory" role="tabpanel"
 																style="padding-bottom: 20px;">
-																<div class="tab-pane" id="profile1" role="tabpanel">
-																	<div class="card-block table-border-style"
-																		style="padding: 0px;">
-																		<div class="table-responsive">
-																			<table class="table table-hover text-center"
-																				style="font-size: 12px; padding: 0px;">
-																				<thead>
-																					<tr>
-																						<th style="width: 1px;">순번</th>
-																						<th>담당자명</th>
-																						<th>기존 완료예정일</th>
-																						<th>변경된 완료예정일</th>
-																						<th>수락여부</th>
-																						<th>상세조회</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-																					<tr>
-																						<th scope="row">1</th>
-																						<td>Otto</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">2</th>
-																						<td>Thornton</td>
-																						<td>@fat</td>
-																						<td>Jacob</td>
-																						<td>@fat</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">3</th>
-																						<td>the Bird</td>
-																						<td>@twitter</td>
-																						<td>Larry</td>
-																						<td>@twitter</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
+																<div class="card-block table-border-style"
+																	style="padding: 0px;">
+																	<div class="table-responsive">
+																		<table
+																			class="table table-hover text-center historyTable"
+																			style="font-size: 12px; padding: 0px;">
+																			<thead>
+																				<tr>
+																					<th style="width: 1px;">순번</th>
+																					<th>요청자명</th>
+																					<th>요청유형</th>
+																					<th>변경될 완료예정일</th>
+																					<th>승인여부</th>
+																				</tr>
+																			</thead>
+																			<tbody id="srhistory1">
+																			</tbody>
+																		</table>
 																	</div>
 																</div>
-
 															</div>
 														</div>
 													</div>
@@ -1110,7 +1117,6 @@ th {
 									</div>
 								</div>
 							</div>
-
 						</div>
 						<!-- *********** -->
 					</div>
@@ -1120,8 +1126,8 @@ th {
 			</div>
 		</div>
 	</div>
+	<%@include file="/WEB-INF/views/history/approvalInfoHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
-	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
 	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>

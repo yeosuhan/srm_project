@@ -31,4 +31,11 @@ public interface ISrInformationHistoryDao {
 	 */
 	public SrHistoryDetailDto selectByHstryId(@Param("hstryId") int hstryId);
 
+	/**
+	 * SR처리 히스토리 등록 메서드 (요청일 변경)
+	 * 
+	 * @author 최은종
+	 */
+	public void insertSrHistory(SrInformationHistory srInformationHistory);
+
 }

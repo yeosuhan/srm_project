@@ -19,62 +19,68 @@ import lombok.extern.log4j.Log4j2;
 public class MemberService implements IMemberService {
 	@Autowired
 	private IMemberDao memberDao;
-	
+
 	/**
 	 * 멤버 타입별 총 행수 조회
-	 *@author : 신정은
+	 * 
+	 * @author : 신정은
 	 */
 	@Override
-	public int getTotalRows(String memberType , FilteringMember filtering) {
-		return memberDao.countByMemberType(memberType,filtering);
+	public int getTotalRows(String memberType, FilteringMember filtering) {
+		return memberDao.countByMemberType(memberType, filtering);
 	}
-	
+
 	/**
 	 * 멤버 타입 별 목록 조회 (관리자가 수행)
-	 *@author : 신정은
+	 * 
+	 * @author : 신정은
 	 */
 	@Override
-	public List<Member> getMemberList(String memberType, Pager pager,FilteringMember filtering) {
-		return memberDao.selectByMemberType(memberType, pager,filtering);		
+	public List<Member> getMemberList(String memberType, Pager pager, FilteringMember filtering) {
+		return memberDao.selectByMemberType(memberType, pager, filtering);
 	}
 
 	/**
 	 * 멤버 타입 별 내 정보 조회
-	 *@author : 신정은
-	 */
-	@Override
-	public Member getMember(String memberId, String memberType) {
-		return memberDao.selectByMemberIdAndMemberType(memberId, memberType);	
-	}
-
-	/**
-	 * 멤버 타입 별 내 정보 수정
-	 * 고객만 수정, 관리자/개발자 수정 필요
+	 * 
 	 * @author : 신정은
 	 */
 	@Override
-	public void updateMember(Member member) {		
+	public Member getMember(String memberId, String memberType) {
+		return memberDao.selectByMemberIdAndMemberType(memberId, memberType);
+	}
+
+	/**
+	 * 멤버 타입 별 내 정보 수정 고객만 수정, 관리자/개발자 수정 필요
+	 * 
+	 * @author : 신정은
+	 */
+	@Override
+	public void updateMember(Member member) {
 		int row = memberDao.updateMember(member);
 		log.info("row : " + row);
 	}
 
 	/**
-	 * 멤버의 프로필 사진 조회
-	 * 수정 필요
-	 *@author : 신정은
+	 * 멤버의 프로필 사진 조회 수정 필요
+	 * 
+	 * @author : 신정은
 	 */
 	@Override
 	public ProfileImg getProfileImg(String memberId) {
-		
+
 		return null;
 	}
-	
+
 	/*
-	 * 맴버 삭제 
+	 * 맴버 삭제
+	 * 
 	 * @author 안한길
-	 * @param  맴버아이디
+	 * 
+	 * @param 맴버아이디
+	 * 
 	 * @return 반영된 행수
-	 * */
+	 */
 	@Override
 	public int deleteMember(String memberId) {
 		return memberDao.deleteMemberByMemberId(memberId);
@@ -82,20 +88,27 @@ public class MemberService implements IMemberService {
 
 	/*
 	 * 맴버 수정
+	 * 
 	 * @author 안한길
-	 * @param  수정된 값
+	 * 
+	 * @param 수정된 값
+	 * 
 	 * @return 반영된 행수
-	 * */
+	 */
 	@Override
 	public int modifyMember(Member member) {
 		return memberDao.updateMemberByMemberId(member);
 	}
+
 	/*
 	 * 개발자 목록 조회
+	 * 
 	 * @author 안한길
-	 * @param  부서 id
+	 * 
+	 * @param 부서 id
+	 * 
 	 * @return 개발자 목록
-	 * */
+	 */
 	@Override
 	public List<Developer> getEmployeeNameList(String deptCd) {
 		return memberDao.selectByDeptCd(deptCd);

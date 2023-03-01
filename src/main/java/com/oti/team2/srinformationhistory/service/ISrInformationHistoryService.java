@@ -36,5 +36,18 @@ public interface ISrInformationHistoryService {
 	 */
 	public int updateSrInformationHistory();
 
+	/**
+	 * 히스토리 조회시 권한에 따라 sr요청번호를 다르게 보여 주기 위한 메서드
+	 * 
+	 * @author 최은종
+	 */
 	public String getSrNo(String dmndNo);
+	
+	/**
+	 * SR 요청일 변경을 위한 insert 메서드
+	 * 
+	 * @author 최은종
+	 */
+	public void addSrInformationHistory(SrInformationHistory srInformationHistory);
+	
 }

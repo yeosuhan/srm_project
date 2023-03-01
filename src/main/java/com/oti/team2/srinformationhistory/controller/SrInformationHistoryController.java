@@ -3,8 +3,10 @@ package com.oti.team2.srinformationhistory.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,69 +31,26 @@ public class SrInformationHistoryController {
 	 * SR처리 히스토리 내역 조회 메서드
 	 *
 	 * @author 최은종
-	 * @param pageNo, srNo srNo의 히스토리 목록을 조회하고 페이징처리를 하기 위해 pageNo와 srNo를 매개변수로 설정함
+	 * @param pageNo, dmndNo/srNo 각 요청번호의 히스토리 목록을 조회하고 페이징처리를 하기 위해 pageNo와 sr번호를
+	 *        매개변수로 설정함
 	 * @return srHistoryList 히스토리 리스트와 페이징 객체를 담은 Dto 리턴
 	 */
-	/* srNo로 받아옴
-	 * @GetMapping("/list/{srNo}") public SrHistoryListDto
-	 * getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
-	 * 
-	 * @PathVariable("srNo") String srNo) { log.info("srInformationHistoryList 조회");
-	 * 
-	 * int totalRows = srInformationHistoryService.getTotalRows(); Pager pager = new
-	 * Pager(totalRows, pageNO); //${srInformationHistory.srNo} //srNo =
-	 * "WOR-SR-0001"; List<SrInformationHistory> srInformationHistory =
-	 * srInformationHistoryService.getSrInformationHistoryList(pager, srNo);
-	 * log.info("srInformationHistoryList 조회" + srInformationHistory);
-	 * log.info("srNo 조회" + srNo); SrHistoryListDto srHistoryList = new
-	 * SrHistoryListDto();
-	 * srHistoryList.setSrInformationHistory(srInformationHistory);
-	 * srHistoryList.setPager(pager);
-	 * 
-	 * log.info("srHistoryList 조회" + srHistoryList); return srHistoryList; }
-	 */
-
-	
 	@GetMapping("/list")
 	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
-			@RequestParam String dmndNo) {
+			@RequestParam String dmndNo, Authentication auth) {
 		log.info("srInformationHistoryList 조회");
 
 		int totalRows = srInformationHistoryService.getTotalRows();
 		Pager pager = new Pager(totalRows, pageNO);
+
 		String srNo = srInformationHistoryService.getSrNo(dmndNo);
-		log.info("dmndNo 1 조회" + dmndNo);
-		// ${srInformationHistory.srNo}
-		// srNo = "WOR-SR-0001";
-		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryList(pager,
-				srNo);
-		log.info("srInformationHistoryList 조회" + srInformationHistory);
-		log.info("srNo 2 조회" + srNo);
-		SrHistoryListDto srHistoryList = new SrHistoryListDto();
-		srHistoryList.setSrInformationHistory(srInformationHistory);
-		srHistoryList.setPager(pager);
 
-		log.info("srHistoryList 조회" + srHistoryList);
-		return srHistoryList;
-	}
+		log.info("dmndNo 조회" + dmndNo);
 
-	/*
-	@GetMapping("/list")
-	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
-			@RequestParam String dmndNo, @RequestParam String srNo) {
-		log.info("srInformationHistoryList 조회");
-
-		int totalRows = srInformationHistoryService.getTotalRows();
-		Pager pager = new Pager(totalRows, pageNO);
-		if(dmndNo != null) {
-			srNo = srInformationHistoryService.getSrNo(dmndNo);
-			log.info("dmndNo 조회" + dmndNo);
-		} 
 		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryList(pager,
 				srNo);
 		log.info("srInformationHistoryList 조회" + srInformationHistory);
 		log.info("srNo 조회" + srNo);
-		
 		SrHistoryListDto srHistoryList = new SrHistoryListDto();
 		srHistoryList.setSrInformationHistory(srInformationHistory);
 		srHistoryList.setPager(pager);
@@ -99,8 +58,27 @@ public class SrInformationHistoryController {
 		log.info("srHistoryList 조회" + srHistoryList);
 		return srHistoryList;
 	}
-*/
-	
+
+	@GetMapping("/emp/list")
+	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
+			@RequestParam String srNo) {
+		log.info("srInformationHistoryList 조회");
+
+		int totalRows = srInformationHistoryService.getTotalRows();
+		Pager pager = new Pager(totalRows, pageNO);
+
+		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryList(pager,
+				srNo);
+		log.info("srInformationHistoryList 조회" + srInformationHistory);
+		log.info("srNo 조회" + srNo);
+		SrHistoryListDto srHistoryList = new SrHistoryListDto();
+		srHistoryList.setSrInformationHistory(srInformationHistory);
+		srHistoryList.setPager(pager);
+
+		log.info("srHistoryList 조회" + srHistoryList);
+		return srHistoryList;
+	}
+
 	/**
 	 * SR처리 히스토리 상세 조회 메서드
 	 *
@@ -117,5 +95,37 @@ public class SrInformationHistoryController {
 		log.info("srHistoryDetailDto 조회 : " + srHistoryDetailDto + "/" + "hstryId : " + hstryId);
 
 		return srHistoryDetailDto;
+	}
+
+	/**
+	 * SR처리 히스토리 등록 메서드 (GET)
+	 *
+	 * @author 최은종
+	 * @param srNo srNo를 알아와 그에 대한 히스토리를 등록하기 위해 srNo 매개변수로 설정
+	 * @return srNo 리턴
+	 */
+	@GetMapping("/add")
+	public String getSrHistoryWriteForm(@RequestParam String srNo) {
+		log.info("getSrHistoryWriteForm 등록");
+
+		return srNo;
+	}
+
+	/**
+	 * SR처리 히스토리 등록 메서드 (POST)
+	 *
+	 * @author 최은종
+	 * @param SrInformationHistory 객체에 데이터를 입출력하기 위해 매개변수로 설정
+	 * @return 진척정보 페이지 리턴
+	 */
+	@PostMapping("/add")
+	public String addSrInformationHistory(SrInformationHistory srInformationHistory) {
+		log.info("addSrInformationHistory POST");
+
+		srInformationHistoryService.addSrInformationHistory(srInformationHistory);
+
+		log.info("컨트롤러" + srInformationHistory);
+
+		return "srInfo/srInformationList";
 	}
 }
