@@ -44,6 +44,13 @@ public interface ISrDemandService {
 	public SrdemandDetail getSrDemandDetail(String Detail);
 	
 	/**
+	 * SR요청 삭제하기
+	 * 
+	 * @author 신정은
+	 */
+	public void deleteSrdemand(String dmndNo);
+	
+	/**
 	 * 고객용
 	 * 나의 요청 총 행의 수 구하기
 	 * @author 신정은
@@ -63,4 +70,11 @@ public interface ISrDemandService {
 	 * @author 신정은
 	 */
 	public List<SrDemand> getSrDemandListBy(Pager pager);
+	
+	/**
+	 * 관리자의 sr요청  결재 기능 
+	 * 
+	 * @author 신정은
+	 */
+	public void getSrDemandApproval(String dmndNo, int val, String rjctRsn);
 }

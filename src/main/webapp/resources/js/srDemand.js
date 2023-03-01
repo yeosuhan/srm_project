@@ -102,10 +102,18 @@ $(document).on('click', '#modbtn', function(e) {
 
 /* sr요청 승인*/
 function goAccept(dmndNo) {
-	console.log(dmndNo);
+	
+	var jsonData = { 
+			"dmndNo" : dmndNo,
+			"val" : "1"
+		}; 
+	console.log(jsonData);
 	$.ajax({
-		url : '/admin/srdemand/approval?dmndno=' + dmndNo + '&val=1',
-		type : 'GET',
+		url : '/admin/srdemand/approval',
+		type : 'POST',
+		data : JSON.stringify(jsonData) ,
+		contentType: 'application/json',
+		dataType : "json",
 		success : function(res) {
 		}
 	});
@@ -120,15 +128,38 @@ function goDecline(dmndNo) {
       alert('\n입력하여주세요.');
       $('#srRjctRsn').focus();
 	} else {
+		var jsonData = { 
+				"dmndNo" : dmndNo,
+				"val" : "0" ,
+				"rjctRsn" : rjctRsn
+			}; 
+		
 		$.ajax({
-			url : '/admin/srdemand/approval?dmndno=' + dmndNo + '&val=0',
-			type : 'GET',
+			url : '/admin/srdemand/approval',
+			type : 'POST',
+			data : JSON.stringify(jsonData) ,
+			contentType: 'application/json',
+			dataType : "json",
 			success : function(res) {
+				console.log(res);
 			}
+		
 		});
 	}
 	
 	
+}
+
+/*사용자의 srDemand 삭제*/
+function deleteSr(dmndNo) {
+	$.ajax({
+		url : '/srdemand/delete/' + dmndNo,
+		type : 'GET',
+		success : function(res) {
+			console.log(res);
+		}
+	
+	});
 }
 
 

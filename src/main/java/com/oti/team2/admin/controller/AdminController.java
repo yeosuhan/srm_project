@@ -1,6 +1,7 @@
 package com.oti.team2.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -291,16 +293,24 @@ public class AdminController {
 	 * 
 	 * @author 신정은
 	 */
-	@GetMapping("/srdemand/approval")
-	public String getSrDemandApproval(@RequestParam(required = true, name = "dmndno") String dmndno, @RequestParam(required = true, name = "val") int val) {
-		log.info("dmndno : " + dmndno);
-		log.info("val : " + val);
+	@PostMapping("/srdemand/approval")
+	public String getSrDemandApproval(Authentication auth, @RequestBody Map<String, String> param) {
+		String adminId = auth.getName();
+		String dmndNo = param.get("dmndNo");
+		String val = param.get("val");
+		
+		log.info(dmndNo);
+		log.info(val);
 		// 검토자 이름 반드시 넣어주기!!!
 		// 승인일 경우
-		
-		// 반려일 경우
-		
-		return"srDemand/adminSrDemandList"; //해당sr상세 화면으로 이동하기
+		if(val.equals(1)) {
+			
+		} else {// 반려일 경우
+			String rjctRsn = param.get("rjctRsn");
+			
+		}
+				
+		return "redirect:/srdemand/detail/" + dmndNo; //해당sr상세 화면으로 이동하기
 	}
 
 }

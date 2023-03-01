@@ -119,12 +119,28 @@ public class SrDemandController {
 		return sd;
 	}
 
+	/**
+	 * SR요청 수정하기
+	 * 
+	 * @author 신정은
+	 */
 	@PostMapping("/modify")
 	public String updateSrDemand(SrRequestDto srRequestDto) {
 		// 수정 진행
 		log.info(srRequestDto);
 		srdemandService.updateSrDemand(srRequestDto);
 		return "redirect:/srdemand/list?dmndno=" + srRequestDto.getDmndNo();
+	}
+	
+	/**
+	 * SR요청 삭제하기
+	 * 
+	 * @author 신정은
+	 */
+	@GetMapping("/delete/{dmndNo}") 
+	public String deleteSrDemand(@PathVariable("dmndNo")String dmndNo) {
+		srdemandService.deleteSrdemand(dmndNo);
+		return "";
 	}
 
 }

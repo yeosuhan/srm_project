@@ -425,8 +425,8 @@ th {
 																				<button id="modbtn"
 																					class="btn btn-primary btn-round save center">수정</button>
 
-																				<button
-																					class="btn btn-primary btn-round danger cancle">삭제</button>
+																				<div
+																					class="btn btn-primary btn-round danger cancle" onclick="deleteSr('${sd.dmndNo}')">삭제</div>
 																			</div>
 																		</c:if>
 																	</div>

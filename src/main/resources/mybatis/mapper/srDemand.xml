@@ -39,6 +39,7 @@
 		            si.END_YMD
 		    FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, sr_information si
 		    WHERE sd.CUST_ID = #{custId}
+		    and sd.DEL_YN = 0
 		    and sd.cust_id = m.member_id
 		    and m.inst_cd = i.inst_cd
 		    and sd.stts_cd = s.stts_cd
@@ -169,12 +170,14 @@
 		SELECT COUNT(DMND_NO)
 		FROM SR_DEMAND
 		WHERE CUST_ID=#{clientId}
+			and DEL_YN = 0
 	</select>
 	
 	<!-- 관리자의 모든 요청의 총 행의 수 구하기-->
 	<select id="countAllSrDemand" resultType="int">
 		SELECT COUNT(DMND_NO)
 		FROM SR_DEMAND
+		WHERE DEL_YN = 0
 	</select>
 	
 	<!--관리자  모든 요청 목록 가져오기 -->
@@ -201,6 +204,7 @@
 		            si.END_YMD
 		    FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, sr_information si
 		    where sd.cust_id = m.member_id
+		    and sd.DEL_YN = 0
 		    and m.inst_cd = i.inst_cd
 		    and sd.stts_cd = s.stts_cd
 		    and sd.sys_cd = sy.sys_cd 
@@ -211,5 +215,27 @@
 		order by dmndNo DESC
 		OFFSET ${pager.startRowNo}-1 ROWS FETCH NEXT ${pager.endRowNo} ROWS ONLY
 	</select>
+	
+	<!-- 관리자의 sr결재 진행 -->
+	<update id="updateSttsCdAndRjctRsnByDmndNo" parameterType="map">
+		UPDATE SR_DEMNAD
+		SET 
+		<if test="val == 1">
+			STTS_CD = 2
+		</if>
+		<if test="val == 0">
+			STTS_CD = 1 ,
+			RJCT_RSN = #{rjctRsn}
+		</if>
+		WHERE DMND_NO = #{dmndNo}
+	</update>
+	
+	<!-- sr 요청 삭제 -->
+	<update id="updateDelYnByDmndNo" parameterType="string">
+		UPDATE SR_DEMAND
+		SET 
+			DEL_YN = 1 
+		WHERE DMND_NO = #{dmndNo}
+	</update>
 	
 </mapper>

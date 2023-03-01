@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srdemand.dto.SrDemand;
@@ -109,6 +110,15 @@ public class SrDemandService implements ISrDemandService{
 	}
 
 	/**
+	 * SR요청 삭제하기
+	 * 
+	 * @author 신정은
+	 */
+	public void deleteSrdemand(String dmndNo) {
+		srDemandDao.updateDelYnByDmndNo(dmndNo);	
+	}
+	
+	/**
 	 * 고객용
 	 * 나의 요청 총 행의 수 구하기
 	 * @author 신정은
@@ -134,6 +144,26 @@ public class SrDemandService implements ISrDemandService{
 	public List<SrDemand> getSrDemandListBy(Pager pager) {
 		return srDemandDao.selectAllSrDemand(pager);
 	}
+
+	/**
+	 * 관리자의 sr요청  결재 기능 
+	 * @author 신정은
+	 */
+	@Transactional
+	public void getSrDemandApproval(String dmndNo, int val, String rjctRsn) {
+		if(val == 1) { // 승인일 경우 
+			// 시스템코드 가져오기
+			// 해당 시스템코드로 시작하는 srInformation의 수 가져오기
+			// 현재의 년도 를 더한다.
+			// sr information에 insert
+			
+		} 
+		// 반려일 경우 1
+		srDemandDao.updateSttsCdAndRjctRsnByDmndNo(dmndNo, val, rjctRsn);
+		
+	}
+
+	
 
 
 }
