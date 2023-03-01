@@ -39,9 +39,12 @@
 											</div>
 
 											<div class="col-7 card-block">
-												<form class="form-material">
+												<form class="form-material" id="joinForm" action="/join"
+													method="post">
+													<input type="hidden" name="memberType" value="ROLE_CLIENT">
+													<input type="hidden" name="instCd">
 													<div class="form-group form-default" style="display: flex;">
-														<input type="text" name="footer-email"
+														<input type="text" name="memberId"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">아이디</label>
 														<button
@@ -50,31 +53,31 @@
 													</div>
 
 													<div class="form-group form-default">
-														<input type="password" name="footer-email"
+														<input type="password" name="pswd"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">비밀번호</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="footer-email"
+														<input type="text" name="flnm"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">이름</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="footer-email"
+														<input type="text" name="telNo"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">전화번호</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="footer-email"
+														<input type="text" name="eml"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">이메일 (exa@gmail.com)</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="footer-email" id="address_kakao"
+														<input type="text" name="addr" id="address_kakao"
 															class="form-control" required="" style="width: 50%"
 															value="혜화역 4번출구"> <input class="form-control"
 															type="text" name="address_detail" placeholder="상세주소"
@@ -83,7 +86,7 @@
 													</div>
 
 													<div class="form-group form-default" style="display: flex;">
-														<input type="text" name="footer-email"
+														<input type="text" name="deptCd"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">부서</label>
 														<div class="btn-group dropright">
@@ -95,8 +98,8 @@
 																style="padding: 10px; width: 300px; height: 300px; overflow-y: scroll">
 																<!-- Dropdown menu links -->
 																<div style="display: flex;">
-																	<input type="text" name="footer-email"
-																		class="form-control" required=""
+																	<input type="text" 
+																		class="form-control"
 																		style="margin-left: 10px; width: 60%;">
 																	<button class="btn-sm ml-4" style="border: none;">검색</button>
 																</div>
@@ -115,7 +118,7 @@
 													</div>
 
 													<div class="form-group form-default" style="display: flex;">
-														<input type="text" name="footer-email"
+														<input type="text" name="jbgdCd"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">직급</label>
 														<div class="btn-group dropright">
@@ -142,7 +145,7 @@
 								</div>
 							</div>
 							<div style="justify-content: center; text-align: center;">
-								<button
+								<button form="joinForm"
 									class="btn waves-effect waves-light hor-grd btn-grd-primary ">Sign
 									Up</button>
 							</div>

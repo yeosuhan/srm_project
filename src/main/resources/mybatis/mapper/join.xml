@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.member.dao.IJoinDao">
+	<insert id="insertJoin" parameterType="join">
+		INSERT INTO MEMBERS
+			(
+				MEMBER_ID,
+				PSWD,
+				FLNM,
+				ADDR,
+				TELNO,
+				EML,
+				INST_CD,
+				JBGD_CD,
+				DEPT_CD,
+				MEMBER_TYPE,
+				FILE_TYPE,
+				FILE_DATA,
+				ENABLED,
+				ADDR_DETAIL
+			)
+		VALUES
+			(
+				#{join.memberId},
+				#{join.pswd},
+				#{join.flnm},
+				#{join.addr},
+				#{join.telNo},
+				#{join.eml},
+				#{join.instCd},
+				#{join.jbgdCd},
+				#{join.deptCd},
+				#{join.memberType},
+				#{join.fileType},
+				#{join.fileData},
+				'1',
+				#{join.addrDetail}
+			)
+			
+	</insert>
+</mapper>
