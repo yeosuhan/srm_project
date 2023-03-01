@@ -261,7 +261,7 @@ public class AdminController {
 	 * 
 	 * @author 신정은
 	 */
-	@GetMapping("srdemand/list")
+	@GetMapping("/srdemand/list")
 	public String getSrDemandList(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page) {
 
@@ -284,6 +284,23 @@ public class AdminController {
 		model.addAttribute("sd", sd);
 
 		return "srDemand/adminSrDemandList";
+	}
+	
+	/**
+	 * 관리자의 sr요청  결재 기능 ********************************
+	 * 
+	 * @author 신정은
+	 */
+	@GetMapping("/srdemand/approval")
+	public String getSrDemandApproval(@RequestParam(required = true, name = "dmndno") String dmndno, @RequestParam(required = true, name = "val") int val) {
+		log.info("dmndno : " + dmndno);
+		log.info("val : " + val);
+		// 검토자 이름 반드시 넣어주기!!!
+		// 승인일 경우
+		
+		// 반려일 경우
+		
+		return"srDemand/adminSrDemandList"; //해당sr상세 화면으로 이동하기
 	}
 
 }

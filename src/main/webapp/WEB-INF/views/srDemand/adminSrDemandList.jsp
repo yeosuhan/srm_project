@@ -394,8 +394,12 @@ th {
 																			class="col-sm-3 col-form-label px-0 font-weight-bold"
 																			style="line-height: 120px">반려 사유</label>
 																		<div class="col-sm-9 pl-0 ">
-																			<textarea rows="5" cols="5"
-																				class="form-control rjctRsn" value="${sd.rjctRsn}"></textarea>
+																			<c:if test="${sd.sttsCd == 0}">
+																				<textarea rows="5" cols="5" class="form-control rjctRsn" id="srRjctRsn"></textarea>
+																			</c:if>	
+																			<c:if test="${sd.sttsCd != 0}">
+																				<div class="form-control rjctRsn">${sd.rjctRsn}</div>
+																			</c:if>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -421,10 +425,10 @@ th {
 																		<c:if test="${sd.sttsCd == 0}">
 																			<div class="col-6" style="text-align: right">
 																				<div id="srAccept"
-																					class="btn btn-primary btn-round save center" onclick="goAccept(${sd.dmndNo})">승인</div>
+																					class="btn btn-primary btn-round save center" onclick="goAccept('${sd.dmndNo}')">승인</div>
 
 																				<div id="srDecline"
-																					class="btn btn-primary btn-round danger cancle">반려</div>
+																					class="btn btn-primary btn-round danger cancle" onclick="goDecline('${sd.dmndNo}')">반려</div>
 																			</div>
 																		</c:if>
 																	</div>

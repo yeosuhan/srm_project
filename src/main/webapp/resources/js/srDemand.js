@@ -102,9 +102,33 @@ $(document).on('click', '#modbtn', function(e) {
 
 /* sr요청 승인*/
 function goAccept(dmndNo) {
-	
+	console.log(dmndNo);
+	$.ajax({
+		url : '/admin/srdemand/approval?dmndno=' + dmndNo + '&val=1',
+		type : 'GET',
+		success : function(res) {
+		}
+	});
 }
 
 /* sr요청 반려*/
+function goDecline(dmndNo) {
+	// 반려사유 작성하지 않을 경우 g화면 다시 이동시키기
+	var rjctRsn = $('#srRjctRsn').val();
+	
+	if (!rjctRsn) {
+      alert('\n입력하여주세요.');
+      $('#srRjctRsn').focus();
+	} else {
+		$.ajax({
+			url : '/admin/srdemand/approval?dmndno=' + dmndNo + '&val=0',
+			type : 'GET',
+			success : function(res) {
+			}
+		});
+	}
+	
+	
+}
 
 
