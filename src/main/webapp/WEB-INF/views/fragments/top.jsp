@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <nav class="navbar header-navbar pcoded-header">
@@ -44,65 +45,120 @@
 				</a></li>
 			</ul>
 			<ul class="nav-right">
-				<li class="header-notification" style="margin-top: 20px"><a
-					href="#!" class="waves-effect waves-light"> <i class="ti-bell"></i>
+				<%-- 알림 --%>
+				<li class="header-notification" style="margin-top: 20px">
+					<a href="#!" class="waves-effect waves-light"> 
+						<i class="ti-bell"></i>
 						<h4>
 							<span class="badge bg-c-red"></span>
 						</h4>
-				</a>
-					<ul class="show-notification">
-						<li>
-							<h6>Notifications</h6> <label class="label label-danger">New</label>
-						</li>
-						<li class="waves-effect waves-light">
-							<div class="media">
-								<img class="d-flex align-self-center img-radius"
-									src="${pageContext.request.contextPath}/resources/assets/images/avatar-2.jpg"
-									alt="Generic placeholder image">
-								<div class="media-body">
-									<h5 class="notification-user">John Doe</h5>
-									<p class="notification-msg">Lorem ipsum dolor sit amet,
-										consectetuer elit.</p>
-									<span class="notification-time">30 minutes ago</span>
-								</div>
-							</div>
-						</li>
-						<li class="waves-effect waves-light">
-							<div class="media">
-								<img class="d-flex align-self-center img-radius"
-									src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg"
-									alt="Generic placeholder image">
-								<div class="media-body">
-									<h5 class="notification-user">Joseph William</h5>
-									<p class="notification-msg">Lorem ipsum dolor sit
-										amet,consectetuer elit.</p>
-									<span class="notification-time">30 minutes ago</span>
-								</div>
-							</div>
-						</li>
-						<li class="waves-effect waves-light">
-							<div class="media">
-								<img class="d-flex align-self-center img-radius"
-									src="${pageContext.request.contextPath}/resources/assets/images/avatar-3.jpg"
-									alt="Generic placeholder image">
-								<div class="media-body">
-									<h5 class="notification-user">Sara Soudein</h5>
-									<p class="notification-msg">Lorem ipsum dolor sit amet,
-										consectetuer elit.</p>
-									<span class="notification-time">30 minutes ago</span>
-								</div>
-							</div>
-						</li>
-					</ul></li>
-					
-				<li class="user-profile header-notification">
-					<a href="#!" class="waves-effect waves-light"> 
-						<img src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> 
-						<sec:authorize access="isAuthenticated()">
-							<span><sec:authentication property="principal.flnm"/> 님</span> 
-						</sec:authorize>
-						<i class="ti-angle-down"></i>
 					</a>
+					<div class="show-notification">
+						<ul>
+							<li>
+								<h6>Notifications</h6> <label onclick="refreshAlert()" class="label label-danger">New</label>
+							</li>
+						</ul>
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs md-tabs " role="tablist" style="width:100%; margin:0px">
+							<li class="nav-item" style="padding:0px"><a class="nav-link active" style="font-size:10px;"
+								data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
+								<div class="slide"></div></li>
+							<li class="nav-item" style="padding:0px"><a class="nav-link" style="font-size:10px;"
+								data-toggle="tab" href="#chgDmndTab" role="tab">예정일 변경</a>
+								<div class="slide"></div></li>
+							<li class="nav-item" style="padding:0px"><a class="nav-link" style="font-size:10px;"
+								data-toggle="tab" href="#developerTab" role="tab">예정일 변경(개발자)</a>
+								<div class="slide"></div></li>
+							<li class="nav-item" style="padding:0px"><a class="nav-link" style="font-size:10px;"
+								data-toggle="tab" href="#cancleTab" role="tab">개발 취소</a>
+								<div class="slide"></div></li>
+							
+						</ul>
+						<div class="tab-content card-block ">
+							<!-- 반영 요청 알림 -->
+							<div class="tab-pane active" id="rfltTab" role="tabpanel">
+								<ul>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="${pageContext.request.contextPath}/resources/assets/images/avatar-2.jpg"
+												alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">John Doe</h5>
+												<p class="notification-msg"></p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<%-- 요청일 변경 알림 --%>
+							<div class="tab-pane" id="chgDmndTab" role="tabpanel">
+								<ul>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="${pageContext.request.contextPath}/resources/assets/images/avatar-3.jpg"
+												alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">Sara Soudein</h5>
+												<p class="notification-msg">Lorem ipsum dolor sit amet,
+													consectetuer elit.</p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<%-- 요청일 변경 알림 --%>
+							<div class="tab-pane" id="developerTab" role="tabpanel">
+								<ul>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="${pageContext.request.contextPath}/resources/assets/images/avatar-3.jpg"
+												alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">Sara Soudein</h5>
+												<p class="notification-msg">Lorem ipsum dolor sit amet,
+													consectetuer elit.</p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<%-- 개발취소알림 --%>
+							<div class="tab-pane" id="cancleTab" role="tabpanel">
+								<ul>
+									<li class="waves-effect waves-light">
+										<div class="media">
+											<img class="d-flex align-self-center img-radius"
+												src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg"
+												alt="Generic placeholder image">
+											<div class="media-body">
+												<h5 class="notification-user">Joseph William</h5>
+												<p class="notification-msg">Lorem ipsum dolor sit
+													amet,consectetuer elit.</p>
+												<span class="notification-time">30 minutes ago</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</li>
+				<%-- 사용자 드롭다운 --%>
+				<li class="user-profile header-notification"><a href="#!"
+					class="waves-effect waves-light"> <img
+						src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg"
+						class="img-radius" alt="User-Profile-Image"> <sec:authorize
+							access="isAuthenticated()">
+							<span><sec:authentication property="principal.flnm" /> 님</span>
+						</sec:authorize> <i class="ti-angle-down"></i>
+				</a>
 					<ul class="show-notification profile-notification">
 						<li class="waves-effect waves-light"><a
 							href="${pageContext.request.contextPath}/myportal"><i
@@ -111,10 +167,16 @@
 							href="${pageContext.request.contextPath}/member/myinfo"><i
 								class="ti-user"></i> Profile</a></li>
 						<sec:authorize access="isAuthenticated()">
-							<li class="waves-effect waves-light">
-							<form:form action="/logout" method="POST">
-									<input type="submit" value="LOGOUT"/>
+							<li class="waves-effect waves-light"><form:form
+									action="/logout" method="POST">
+									<input type="submit" value="LOGOUT" />
 								</form:form></li>
+						</sec:authorize>
+						<sec:authorize access="isAnonymous()">
+							<li class="waves-effect waves-light"><a
+								href="${pageContext.request.contextPath}/loginForm"> <i
+									class="ti-layout-sidebar-left"></i> 로그인
+							</a></li>
 						</sec:authorize>
 						<li class="waves-effect waves-light"><a
 							href="${pageContext.request.contextPath}/example?role=1"> <i
@@ -128,8 +190,7 @@
 							href="${pageContext.request.contextPath}/example?role=3"> <i
 								class="ti-layout-sidebar-left"></i> 관리자 로그인
 						</a></li>
-					</ul>
-				</li>
+					</ul></li>
 			</ul>
 		</div>
 	</div>

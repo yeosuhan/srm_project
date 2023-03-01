@@ -26,5 +26,6 @@
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto" alias="srHistoryDetailDto" />
 		<typeAlias type="com.oti.team2.deliverable.dto.Deliverable" alias="deliverable" />
 		<typeAlias type="com.oti.team2.role.dto.Role" alias="role" />
+		<typeAlias type="com.oti.team2.alert.dto.Alert" alias="alert" />
 	</typeAliases> 
 </configuration>
