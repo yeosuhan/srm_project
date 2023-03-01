@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.institution.service.IInstitutionService;
+import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.dto.WriterDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.util.Auth;
+import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -35,6 +38,9 @@ public class SrDemandController {
 	@Autowired
 	private ISrDemandService srdemandService;
 
+	@Autowired
+	private IMemberService memberService;
+
 	/**
 	 * sr요청 작성 시 , 작성자의 아이디, 이름, 소속기관 이름을 세팅하기 위함
 	 * 
@@ -43,14 +49,14 @@ public class SrDemandController {
 	 */
 	@ResponseBody
 	@GetMapping("/add")
-	public WriterDto addSrDemand(HttpSession session) {
+	public WriterDto addSrDemand(Authentication auth) {
 		log.info("기본정보 세팅");
 		// 세션에서 사용자의 이름을 가져와야 됨.
-		String userId = "client1";
-		String user = "고객1";
+		String memberId = auth.getName();
+		String flnm = memberService.getFlnm(memberId);
 
-		String instName = institutionService.getInst(userId).getInstNm();
-		WriterDto writerDto = new WriterDto(userId, user, instName);
+		String instName = institutionService.getInst(memberId).getInstNm();
+		WriterDto writerDto = new WriterDto(memberId, flnm, instName);
 		log.info(writerDto);
 		return writerDto;
 	}
@@ -62,52 +68,47 @@ public class SrDemandController {
 	 */
 	@PostMapping("/add")
 	public String postSrDemand(SrRequestDto srRequest) {
-		srRequest.setDmndNo("SR-TEST-3");
 		log.info(srRequest);
 		srdemandService.addSrDemand(srRequest);
 		return "redirect:/srdemand/list";
 	}
 
 	/**
-	 * 고객/관리자별 요청 목록 조회 기능 ********************************수정필요
+	 * 고객요청 목록 조회 기능 ********************************수정필요
 	 * 
 	 * @author 신정은
 	 */
 	@GetMapping("/list")
-	public String getSrDemandList(HttpSession session, Model model, @RequestParam(required=false, name="dmndno")String dmndno) {
-		// 고객인 경우
-		String auth = Auth.ROLE_CLIENT.toString();
-//		String auth = Auth.ADMIN.toString();
-		System.out.println("Sdfkjnldfjsdfjlfjlksdjklsj");
+	public String getSrDemandList(Authentication auth, Model model,
+			@RequestParam(required = false, name = "dmndno") String dmndno,
+			@RequestParam(required = true, name = "page", defaultValue = "1") String page) {
+
+		String memberId = auth.getName();
+
 		// 목록
+		int totalRows = srdemandService.getCountClientSr(memberId);
+		Pager pager = new Pager(totalRows, Integer.parseInt(page));
+
 		List<SrDemand> list = null;
-		if (auth.equals(Auth.ROLE_CLIENT.toString())) {
-			String custId = "client1";
-			list = srdemandService.getSrDemandList(custId);
-			model.addAttribute("mySrDemandList", list);
-		}
+		list = srdemandService.getSrDemandList(memberId, pager);
+		model.addAttribute("mySrDemandList", list);
 
-		// 관리자인 경우
-
-		// 기본 첫번째 상세 or 선택된 상세 
+		// 기본 첫번째 상세 or 선택된 상세
 		SrdemandDetail sd = null;
-		if(dmndno != null) {
+		if (dmndno != null) {
 			sd = srdemandService.getSrDemandDetail(dmndno);
-			log.info("sd 존재" + sd);
-		}else {
+		} else {
 			sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 		}
-		log.info(sd);
+
 		model.addAttribute("sd", sd);
-		
-		if (auth.equals(Auth.ROLE_CLIENT.toString())) {
-			return "srDemand/userSrDemandList";
-		}
-		return "srDemand/adminSrDemandList";
+
+		return "srDemand/userSrDemandList";
 	}
-	
+
 	/**
 	 * SR요청 상세보기
+	 * 
 	 * @author 신정은
 	 */
 	@ResponseBody
@@ -125,5 +126,5 @@ public class SrDemandController {
 		srdemandService.updateSrDemand(srRequestDto);
 		return "redirect:/srdemand/list?dmndno=" + srRequestDto.getDmndNo();
 	}
-			 	
+
 }

@@ -12,6 +12,7 @@ import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
+import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -33,7 +34,7 @@ public class SrDemandService implements ISrDemandService{
 		srRequestDto.setDmndNo(dmndNo);
 		int row = srDemandDao.insertSrDemand(srRequestDto);
 		log.info(row);
-		return 0;
+		return row;
 	}
 	
 	/**
@@ -72,8 +73,8 @@ public class SrDemandService implements ISrDemandService{
 	 * 고객의 나의 sr요청 목록 조회
 	 * @author 신정은
 	 */
-	public List<SrDemand> getSrDemandList(String custId) {
-		return srDemandDao.selectByCustId(custId);
+	public List<SrDemand> getSrDemandList(String custId, Pager pager) {
+		return srDemandDao.selectByCustId(custId, pager);
 	}
 	
 	/** 
@@ -102,7 +103,36 @@ public class SrDemandService implements ISrDemandService{
 	 * @return sr요청 상세 조회
 	 */
 	public SrdemandDetail getSrDemandDetail(String dmndNo) {
-		return srDemandDao.selectDetailByDmndNo(dmndNo);
+		SrdemandDetail sd = srDemandDao.selectDetailByDmndNo(dmndNo);
+		log.info(dmndNo);
+		return sd;
+	}
+
+	/**
+	 * 고객용
+	 * 나의 요청 총 행의 수 구하기
+	 * @author 신정은
+	 */
+	public int getCountClientSr(String clientId) {
+		return srDemandDao.countByClientId(clientId);
+	}
+
+	/**
+	 * 관리자용
+	 * 모든요청 총 행의 수 구하기
+	 * @author 신정은
+	 */
+	public int getCountAllSr() {
+		return srDemandDao.countAllSrDemand();
+	}
+
+	/**
+	 * 관리자용
+	 * 모든요청 목록 가져오기
+	 * @author 신정은
+	 */
+	public List<SrDemand> getSrDemandListBy(Pager pager) {
+		return srDemandDao.selectAllSrDemand(pager);
 	}
 
 

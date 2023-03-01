@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
+import com.oti.team2.util.pager.Pager;
 
 public interface ISrDemandDao {
 
@@ -15,7 +16,7 @@ public interface ISrDemandDao {
 	 * 
 	 * @author 신정은
 	 */
-	public int insertSrDemand(SrRequestDto srRequestDto);
+	public int insertSrDemand(@Param("srRequestDto")SrRequestDto srRequestDto);
 
 	/**
 	 * SR230222(SR+현재날짜)~ 로 시작하는 요청의 개수 구하기
@@ -29,7 +30,7 @@ public interface ISrDemandDao {
 	 * 
 	 * @author 신정은
 	 */
-	public List<SrDemand> selectByCustId(String custId);
+	public List<SrDemand> selectByCustId(@Param("custId")String custId, @Param("pager") Pager pager);
 
 	/**
 	 * sr요청 이 결재 전 상태이면 수정하기 위해 기존 데이터 제공
@@ -60,4 +61,26 @@ public interface ISrDemandDao {
 	 * @author 최은종
 	 */
 	public String selectBySrDmndNo(@Param("dmndNo") String dmndNo);
+	
+	/**
+	 * 고객용
+	 * 나의 요청 총 행의 수 구하기
+	 * @author 신정은
+	 */
+	public int countByClientId(@Param("clientId") String clientId);
+	
+
+	/**
+	 * 관리자용
+	 * 모든요청 총 행의 수 구하기
+	 * @author 신정은
+	 */
+	public int countAllSrDemand();
+	
+	/**
+	 * 관리자용
+	 * 모든요청 목록 가져오기
+	 * @author 신정은
+	 */
+	public List<SrDemand> selectAllSrDemand(@Param("pager")Pager pager);
 }

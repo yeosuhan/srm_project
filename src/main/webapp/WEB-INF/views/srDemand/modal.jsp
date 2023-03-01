@@ -1,7 +1,8 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
-
+<%-- 상세, 등록, 수정 --%>
+<script src="/resources/js/srDemand.js"></script>
 <script>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("userSrDemandList  요청 등록")
@@ -12,55 +13,6 @@
 		$('#addmodal').addClass('show');
 		document.body.style = `overflow: hidden`;
 	});
-<%-- 작성자 : 신정은
-		내용 : sr 요청 작성시, 작성자의 기본 정보 세팅 --%>
-	function writerBase() {
-		$.ajax({
-			url : '/srdemand/add',
-			type : 'GET',
-			success : function(res) {
-				$("#writerName").text(res.memberName);
-				$("#instName").text(res.instName);
-				$("#custId").val(res.memberId);
-				console.log(res.memberId);
-			}
-		});
-	}
-<%-- 작성자 : 신정은
-	내용 : sr 요청 작성시, 모든 시스템 데이터 드롭다운에 표시하기 위함--%>
-	function setSystems() {
-		$.ajax({
-			url : '/srsystem/list',
-			type : 'GET',
-			success : function(res) {
-				console.log(res);
-				for (var idx = 0; idx < res.length; idx++) {
-					var option = $("<option value="+  res[idx].sysCd + ">"
-							+ res[idx].sysNm + "</option>")
-					$('.srSystems').append(option);
-				}
-			}
-		});
-	}
-<%-- 작성자 : 신정은
-	내용 : sr 요청 작성시 시스템 선택시 해당되는 업무구분 데이터 목록 가져오기 위함--%>
-	function changeSystem(sysCd) {
-		console.log("changeSystem ----------")		
-		$('.sysTask').empty();
-
-		$.ajax({
-			url : '/task/list/' + sysCd,
-			type : 'GET',
-			success : function(res) {
-				console.log(res);
-				for (var idx = 0; idx < res.length; idx++) {
-					var option = $("<option value="+  res[idx].taskSeCd + ">"
-							+ res[idx].taskSeNm + "</option>")
-					$('.sysTask').append(option);
-				}
-			}
-		});
-	}
 
 	/* 요청 모달 닫기 */
 	$(document).on('click', '#closebtn', function(e) {
@@ -69,14 +21,7 @@
 		document.body.style = `overflow: scroll`;
 	});
 
-	/* 요청 수정 */
-	$(document).on('click', '#modbtn', function(e) {
-		console.log("요청 수정");
-		setSystems();
-		$("#sddetail").css("display", "none");
-		$("#sdupdate").css("display", "block");
-
-	});
+	
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#modmodal').removeClass('show');

@@ -63,41 +63,7 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-<%-- 작성자 : 신정은  SR 요청을 가져오기--%>
-	function getSrDemandDetail(dmNo) {
-		$.ajax({
-			url : "${pageContext.request.contextPath}/srdemand/detail/" + dmNo,
-			type : "GET",
-			success : function(res) {
-				$(".dmndNo").text(res.dmndNo);
-				$(".ttl").text(res.ttl);
-				$(".ttl").val(res.ttl);
-				$(".relGrund").text(res.relGrund);
-				$(".relGrund").val(res.relGrund);
-				$(".dmndYmd").text(res.dmndYmd);
-				$(".cmptnDmndYmd").text(res.cmptnDmndYmd);
-				$(".rjctRsn").text(res.rjctRsn);
 
-				$(".cn").text(res.cn);
-				$(".cn").val(res.cn);
-				$(".endYmd").text(res.endYmd);
-				$(".picNm").text(res.picNm);
-				$(".deptNm").text(res.deptNm);
-				$(".sttsNm").text(res.sttsNm);
-				$(".sysNm").text(res.sysNm);
-
-				/* var sysCd = res.sysCd;
-				console.log("~~~~~~~~~ sys cd ~~~~~~~~  " + sysCd);
-				$(".srSystems").val(sysCd).prop("selected", true); */
-
-				$(".taskSeNm").text(res.taskSeNm);
-				$(".instNm").text(res.instNm);
-				$(".clientNm").text(res.clientNm);
-				$(".rvwrNm").text(res.rvwrNm);
-			}
-		});
-
-	}
 </script>
 
 <style>
@@ -290,6 +256,10 @@ th {
 																			</c:forEach>
 																		</tbody>
 																	</table>
+																	<!-- 페이징 처리 -->
+																	<div class="d-flex justify-content-center">
+																		<%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>
+																	</div>
 																</div>
 															</div>
 
@@ -609,7 +579,9 @@ th {
 
 	<!-- 검색 -->
 	<script src="/resources/assets/js/srDemandList.js"></script>
-
+	
+	<%-- 상세, 등록, 수정 --%>
+	<script src="/resources/js/srDemand.js"></script>
 	<!-- 모달 -->
 	<jsp:include page="/WEB-INF/views/history/approvalHistoryModal.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
