@@ -1,67 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:security="http://www.springframework.org/schema/security"
-   xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.8.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.8.xsd
       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-   <!-- 보안 필터 체인 설정 - 로그인/로그아웃 -->
-   <security:http pattern="/resources/**" security="none" />
+	<!-- 보안 필터 체인 설정 - 로그인/로그아웃 -->
+	<security:http pattern="/resources/**" security="none" />
 
-   <security:http use-expressions="true">
-      <security:csrf disabled="true" />
-      <!-- URL 권한 설정 -->
-      <security:intercept-url pattern="/loginForm"
-         access="permitAll" />
-      <security:intercept-url pattern="/**"
-         access="isAuthenticated()" />
-      <!-- 로그인/로그아웃 핸들러 -->
-      <security:form-login login-page="/loginForm"
-         username-parameter="memberId" password-parameter="pswd"
-         login-processing-url="/login"
-         authentication-success-handler-ref="authenticationSuccessHandler"
-         authentication-failure-handler-ref="authenticationFailureHandler" />
-      <security:logout logout-url="/logout"
-         success-handler-ref="logoutSuccessHandler" />
-   </security:http>
+	<security:http use-expressions="true">
+		<security:csrf disabled="true" />
+		<!-- URL 권한 설정 -->
+		<security:intercept-url pattern="/loginForm"
+			access="permitAll" />
+		<security:intercept-url pattern="/join-client"
+			access="permitAll" />
+		<security:intercept-url pattern="/join-employee"
+			access="permitAll" />
+		<security:intercept-url pattern="/**"
+			access="isAuthenticated()" />
+		<!-- 로그인/로그아웃 핸들러 -->
+		<security:form-login login-page="/loginForm"
+			username-parameter="memberId" password-parameter="pswd"
+			login-processing-url="/login"
+			authentication-success-handler-ref="authenticationSuccessHandler"
+			authentication-failure-handler-ref="authenticationFailureHandler" />
+		<security:logout logout-url="/logout"
+			success-handler-ref="logoutSuccessHandler" />
+	</security:http>
 
-   <bean id="authenticationSuccessHandler"
-      class="com.oti.team2.util.springsecurity.AuthenticationSuccessHandler">
-      <property name="alwaysUseDefaultTargetUrl" value="false" />
-      <property name="defaultTargetUrl" value="/myportal" />
-   </bean>
+	<bean id="authenticationSuccessHandler"
+		class="com.oti.team2.util.springsecurity.AuthenticationSuccessHandler">
+		<property name="alwaysUseDefaultTargetUrl" value="false" />
+		<property name="defaultTargetUrl" value="/myportal" />
+	</bean>
 
-   <bean id="authenticationFailureHandler"
-      class="com.oti.team2.util.springsecurity.AuthenticationFailureHandler">
-      <property name="defaultFailureUrl" value="/loginForm" />
-   </bean>
+	<bean id="authenticationFailureHandler"
+		class="com.oti.team2.util.springsecurity.AuthenticationFailureHandler">
+		<property name="defaultFailureUrl" value="/loginForm" />
+	</bean>
 
-   <bean id="logoutSuccessHandler"
-      class="com.oti.team2.util.springsecurity.LogoutSuccessHandler">
-      <property name="defaultTargetUrl" value="/loginForm"></property>
-   </bean>
+	<bean id="logoutSuccessHandler"
+		class="com.oti.team2.util.springsecurity.LogoutSuccessHandler">
+		<property name="defaultTargetUrl" value="/loginForm"></property>
+	</bean>
 
-   <!-- 로그인 중복 방지 설정 -->
-   <!-- <security:session-management> <security:concurrency-control max-session="1" 
-      error-if-maximum-exceeded="false" expired-url="/login"/> </security:session-management> -->
+	<!-- 로그인 중복 방지 설정 -->
+	<!-- <security:session-management> <security:concurrency-control max-session="1" 
+		error-if-maximum-exceeded="false" expired-url="/login"/> </security:session-management> -->
 
-   <!-- 인증 관리자 설정 -->
-   <security:authentication-manager>
-      <security:authentication-provider
-         ref="daoAuthenticationProvider" />
-   </security:authentication-manager>
+	<!-- 인증 관리자 설정 -->
+	<security:authentication-manager>
+		<security:authentication-provider
+			ref="daoAuthenticationProvider" />
+	</security:authentication-manager>
 
-   <!-- 인증 제공자 설정 -->
-   <bean id="daoAuthenticationProvider"
-      class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-      <property name="userDetailsService" ref="userService" />
-      <!--<property name="authoritiesMapper" ref="roleHierarchyAuthoritiesMapper"/> -->
-   </bean>
+	<!-- 인증 제공자 설정 -->
+	<bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userService" />
+		<!--<property name="authoritiesMapper" ref="roleHierarchyAuthoritiesMapper"/> -->
+	</bean>
 
-   <!-- 권한 계층 설정 -->
-   <!-- <bean id="roleHierarchyAuthoritiesMapper" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyAuthoritiesMapper"> 
-      <constructor-arg ref="roleHierarchyImpl"/> </bean> <bean id="roleHierarchyImpl" 
-      class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl"> 
-      <property name="hierarchy"> <value> </value> </property> </bean> -->
+	<!-- 권한 계층 설정 -->
+	<!-- <bean id="roleHierarchyAuthoritiesMapper" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyAuthoritiesMapper"> 
+		<constructor-arg ref="roleHierarchyImpl"/> </bean> <bean id="roleHierarchyImpl" 
+		class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl"> 
+		<property name="hierarchy"> <value> </value> </property> </bean> -->
 
 </beans>
