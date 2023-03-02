@@ -16,7 +16,7 @@
 	</select>
 	
 	<!-- 고객의 나의 요청 목록 조회  -->
-	<select id="selectByCustId" parameterType="string" resultType="srDemand">
+	<select id="selectByCustId" parameterType="map" resultType="srDemand">
 		 SELECT 
 	        DISTINCT DMND_NO as dmndNo ,
 	        TTL as ttl ,
@@ -49,7 +49,7 @@
 		    ) w , members c 
 		where w.rvwr_id = c.member_id(+) 
 		order by dmndNo DESC
-		OFFSET ${pager.startRowNo}-1 ROWS FETCH NEXT ${pager.endRowNo} ROWS ONLY
+		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
 	
 	<!-- SR요청 상세 정보 -->
@@ -213,7 +213,7 @@
 		    ) w , members c 
 		where w.rvwr_id = c.member_id(+) 
 		order by dmndNo DESC
-		OFFSET ${pager.startRowNo}-1 ROWS FETCH NEXT ${pager.endRowNo} ROWS ONLY
+		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
 	
 	<!-- 관리자의 sr결재 진행 -->

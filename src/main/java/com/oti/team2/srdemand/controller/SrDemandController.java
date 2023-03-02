@@ -92,7 +92,7 @@ public class SrDemandController {
 	}
 
 	/**
-	 * 고객요청 목록 조회 기능 ********************************수정필요
+	 * 고객요청 목록 조회 기능 **
 	 * 
 	 * @author 신정은
 	 */
@@ -106,7 +106,7 @@ public class SrDemandController {
 		// 목록
 		int totalRows = srdemandService.getCountClientSr(memberId);
 		Pager pager = new Pager(totalRows, Integer.parseInt(page));
-
+		log.info(pager);
 		List<SrDemand> list = null;
 		list = srdemandService.getSrDemandList(memberId, pager);
 		model.addAttribute("mySrDemandList", list);
@@ -120,7 +120,8 @@ public class SrDemandController {
 		}
 
 		model.addAttribute("sd", sd);
-
+		model.addAttribute("pager", pager);
+		
 		return "srDemand/userSrDemandList";
 	}
 

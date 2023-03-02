@@ -286,6 +286,7 @@ public class AdminController {
 		}
 
 		model.addAttribute("sd", sd);
+		model.addAttribute("pager", pager);
 
 		return "srDemand/adminSrDemandList";
 	}
