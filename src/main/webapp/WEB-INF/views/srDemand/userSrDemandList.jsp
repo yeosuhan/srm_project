@@ -396,8 +396,7 @@ th {
 																			class="col-sm-3 col-form-label px-0 font-weight-bold"
 																			style="line-height: 120px">반려 사유</label>
 																		<div class="col-sm-9 pl-0 ">
-																			<textarea rows="5" cols="5"
-																				class="form-control rjctRsn" value="${sd.rjctRsn}"></textarea>
+																			<input class="form-control rjctRsn" value="${sd.rjctRsn}" readonly></input>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -407,7 +406,7 @@ th {
 																			내용</label>
 																		<div class="col-sm-9">
 																			<textarea rows="5" cols="5" class="form-control cn"
-																				style="height: 100px;" value="${sd.cn}"></textarea>
+																				style="height: 100px;" value="${sd.cn}" readonly></textarea>
 																		</div>
 																	</div>
 																	<div class="form-group row">

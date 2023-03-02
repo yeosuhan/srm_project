@@ -17,5 +17,11 @@ public interface ISystemDao {
 	 * @author 신정은
 	 */
 	public String getDeptCdBySysCd(String sysCd);
+	
+	/**
+	 * 요청 등록 시, 초기 데이터 세팅을위해 하나의 시스템과 해당 업무구분 데이터를 제공을 위함
+	 * @author 신정은
+	 */
+	public SrSystem selectFirstSystem();
 
 }

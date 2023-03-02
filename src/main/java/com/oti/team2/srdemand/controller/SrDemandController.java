@@ -20,8 +20,13 @@ import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
+import com.oti.team2.srdemand.dto.WriteSdBaseDto;
 import com.oti.team2.srdemand.dto.WriterDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
+import com.oti.team2.system.dto.SrSystem;
+import com.oti.team2.system.service.ISystemService;
+import com.oti.team2.task.dto.SystemTask;
+import com.oti.team2.task.service.ITaskService;
 import com.oti.team2.util.Auth;
 import com.oti.team2.util.pager.Pager;
 
@@ -40,6 +45,12 @@ public class SrDemandController {
 
 	@Autowired
 	private IMemberService memberService;
+	
+	@Autowired
+	private ISystemService systemService;
+	
+	@Autowired
+	private ITaskService taskService;
 
 	/**
 	 * sr요청 작성 시 , 작성자의 아이디, 이름, 소속기관 이름을 세팅하기 위함
@@ -49,16 +60,23 @@ public class SrDemandController {
 	 */
 	@ResponseBody
 	@GetMapping("/add")
-	public WriterDto addSrDemand(Authentication auth) {
-		log.info("기본정보 세팅");
+	public WriteSdBaseDto addSrDemand(Authentication auth) {
+		log.info("기본정보 세팅" + auth.getName());
 		// 세션에서 사용자의 이름을 가져와야 됨.
 		String memberId = auth.getName();
 		String flnm = memberService.getFlnm(memberId);
-
+		
+		// 시스템 목록의 첫 시스템과, 해당 시스템의 업무구분 데이터를 기본적으로 세팅한다.
+		SrSystem system = systemService.getFirstSystem();
+		log.info("system" + system);
+		List<SystemTask> taskList = taskService.getTaskList(system.getSysCd());
+		log.info("taskList" + taskList);
+		
 		String instName = institutionService.getInst(memberId).getInstNm();
 		WriterDto writerDto = new WriterDto(memberId, flnm, instName);
-		log.info(writerDto);
-		return writerDto;
+		WriteSdBaseDto wbDto = new WriteSdBaseDto(writerDto, system, taskList);
+		log.info(wbDto);
+		return wbDto;
 	}
 
 	/**

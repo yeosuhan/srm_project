@@ -69,7 +69,7 @@
             DMND_YMD as dmndYmd,
             rvwrNm ,
             dept_nm as deptNm,
-            MNGR_ID as picNm,
+            mem.flnm as picNm,
             CMPTN_DMND_YMD as cmptnDmndYmd,
             end_ymd as endYmd,
             task_se_nm as taskSeNm ,

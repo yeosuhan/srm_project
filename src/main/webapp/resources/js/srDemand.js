@@ -44,10 +44,19 @@ function writerBase() {
 		url : '/srdemand/add',
 		type : 'GET',
 		success : function(res) {
-			$("#writerName").text(res.memberName);
-			$("#instName").text(res.instName);
-			$("#custId").val(res.memberId);
-			console.log(res.memberId);
+			console.log(res.taskList);
+			$("#writerName").text(res.writerDto.memberName);
+			$("#instName").text(res.writerDto.instName);
+			$("#custId").val(res.writerDto.memberId);
+			$(".srSystems").val(res.system.sysCd).prop("selected", true);
+			
+			for (var idx = 0; idx < res.taskList.length; idx++) {
+				var option = $("<option value=" + res.taskList[idx].taskSeCd + ">"
+						+ res.taskList[idx].taskSeNm + "</option>")
+				$('.sysTask').append(option);
+			}
+			 
+			
 		}
 	});
 }
@@ -61,7 +70,7 @@ function setSystems() {
 		success : function(res) {
 			console.log(res);
 			for (var idx = 0; idx < res.length; idx++) {
-				var option = $("<option value=" + res[idx].sysCd + ">"
+				var option = $("<option value=" + res[idx].sysCd +" id=" + res[idx].sysCd+ ">"
 						+ res[idx].sysNm + "</option>")
 				$('.srSystems').append(option);
 			}

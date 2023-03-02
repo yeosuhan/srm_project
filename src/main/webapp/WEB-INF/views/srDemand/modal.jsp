@@ -21,7 +21,6 @@
 		document.body.style = `overflow: scroll`;
 	});
 
-	
 	$(document).on('click', '#closebtn', function(e) {
 		console.log("click event");
 		$('#modmodal').removeClass('show');
@@ -92,14 +91,6 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-6">
-							<div class="col col-sm-4">등록일</div>
-							<div class="col col-sm-6">
-								<input type="date" name="dmndYmd" id="addDatepicker">
-							</div>
-
-						</div>
-
-						<div class="col-sm-6">
 							<div class="col col-sm-4">시스템구분</div>
 							<div class="col col-sm-6">
 								<div class="dropdown dropdown open">
@@ -109,13 +100,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group row d-flex justify-content-end mr-6">
-						<div class="col col-sm-4">업무구분</div>
-						<div class="col col-sm-6">
-							<div class="dropdown dropdown open">
-								<select name="taskSeCd" class="sysTask">
-								</select>
+						<div class="col-sm-6">
+							<div class="col col-sm-4">업무구분</div>
+							<div class="col col-sm-6">
+								<div class="dropdown dropdown open">
+									<select name="taskSeCd" class="sysTask">
+									</select>
+								</div>
 							</div>
 						</div>
 					</div>
