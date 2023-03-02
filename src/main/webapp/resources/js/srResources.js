@@ -29,7 +29,7 @@ function getResourceTableRow(){
 					$("#resourceTableRow").append(
 							"<tr onclick='openUpdateResourceModal(\""+value.srSrc+"\",\""+value.empId+"\",\""+value.ptcptnRoleCd+"\")'>" +
 							"	<th scope='row'>"+count+"</th>" +
-							"	<td>" +
+							"	<td onclick='event.cancelBubble=true'>" +
 							"		<input value='"+value.srSrc+"' name='resource' type='checkbox'>" +
 							"	</td>" +
 							"	<td id='empNm"+value.srSrc+"'>"+value.empNm+"</td>" +
