@@ -42,6 +42,7 @@ function getDetail(dmndNo, srNo) {
 			$("#resourceInst").val(detail.dd.instNm);
 			$("#resourceTableRow").empty();
 			$(".deliverableTable tbody").empty();
+			$("#addModal select").empty();
 		}
 	});
 }
