@@ -1,5 +1,7 @@
 package com.oti.team2.institution.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.institution.dto.Institution;
@@ -28,5 +30,11 @@ public interface IInstitutionDao {
 	 * @author YEOSUHAN
 	 */
 	public void updateByInst(@Param("inst") Institution institution);
+	/**
+	 * 내 기관 수정
+	 * @author 여수한
+	 * @return 회원가입 - 모든 기관 목록 조회
+	 */
+	public List<Institution> selectAllInst();
 
 }

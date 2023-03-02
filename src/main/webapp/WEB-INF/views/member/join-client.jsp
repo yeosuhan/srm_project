@@ -6,9 +6,30 @@
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <script src="/resources/js/kakaoAddress.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/check.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/check.js"></script>
 </head>
+<style>
+.box{
+    width: 200px;
+    border: 1px solid #77aaff;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.box:focus{
+    border: 1px solid #9B51E0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 3px solid #77aaff;
+    border-radius: 10px;
+}
+</style>
 <body>
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
@@ -46,8 +67,8 @@
 														name="fileType"> <input type="hidden"
 														name="fileData">
 													<div class="form-group form-default" style="display: flex;">
-														<input type="text" name="memberId" class="form-control" id="memberId"
-															required style="width: 50%"> <label
+														<input type="text" name="memberId" class="form-control"
+															id="memberId" required style="width: 50%"> <label
 															class="float-label">아이디</label>
 														<button type="button" onclick="getMemberId()"
 															class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2"
@@ -89,29 +110,12 @@
 													</div>
 
 													<div class="form-group form-default" style="display: flex;">
-														<input type="text" name="instCd" class="form-control"
-															required="" style="width: 50%"> <label
-															class="float-label">기관 소속</label>
-														<div class="btn-group dropright">
-															<button type="button"
-																class="dropdown-toggle btn waves-effect waves-light hor-grd btn-grd-inverse ml-2"
-																data-toggle="dropdown" aria-expanded="false">
-																찾기</button>
-															<div class="dropdown-menu"
-																style="padding: 10px; width: 300px; height: 300px; overflow-y: scroll">
-																<!-- Dropdown menu links -->
-																<div style="display: flex;">
-																	<input type="text" class="form-control"
-																		style="margin-left: 10px; width: 60%;">
-																	<button class="btn-sm ml-4" style="border: none;">검색</button>
-																</div>
-																<a class="dropdown-item" href="#">워크넷</a> <a
-																	class="dropdown-item" href="#">HRD-NET</a> <a
-																	class="dropdown-item" href="#">일모아시스템</a> <a
-																	class="dropdown-item" href="#">MDM(바로원시스템)</a> <a
-																	class="dropdown-item" href="#">EIS</a>
-															</div>
-														</div>
+														<select name="inst" id="inst" class="box">
+																<option disabled selected>내 기관</option>
+															<c:forEach var="instList" items="${instList}">
+																<option value="${instList.instCd}">${instList.instNm}</option>
+															</c:forEach>
+														</select>
 													</div>
 												</form>
 											</div>

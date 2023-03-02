@@ -1,10 +1,19 @@
 package com.oti.team2.member.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.oti.team2.department.dto.Department;
+import com.oti.team2.department.service.IDepartmentService;
+import com.oti.team2.institution.dto.Institution;
+import com.oti.team2.institution.service.IInstitutionService;
+import com.oti.team2.jobgrade.dto.JobGrade;
+import com.oti.team2.jobgrade.service.IJobGradeService;
 import com.oti.team2.member.dto.Join;
 import com.oti.team2.member.service.IJoinService;
 
@@ -15,6 +24,15 @@ public class JoinController {
 	
 	@Autowired
 	private IJoinService joinService;
+	
+	@Autowired
+	private IInstitutionService institutionService;
+	
+	@Autowired
+	private IDepartmentService departmentService;
+	
+	@Autowired
+	private IJobGradeService jobGradeService;
 	/**
 	 * 
 	 * @author 여수한
@@ -22,7 +40,9 @@ public class JoinController {
 	 * @return join-client로 이동
 	 */
 	@GetMapping("/join-client")
-	public String getJoinClient() {
+	public String getJoinClient(Model model) {
+		List<Institution> instList = institutionService.getAllInst();
+		model.addAttribute("instList", instList);
 		return "member/join-client";
 	}
 	/**
@@ -32,7 +52,11 @@ public class JoinController {
 	 * @return join-employee로 이동
 	 */
 	@GetMapping("/join-employee")
-	public String getJoinEmployee() {
+	public String getJoinEmployee(Model model) {
+		List<Department> dept = departmentService.getDepartmentList();
+		List<JobGrade> grade = jobGradeService.getJobGradeList();
+		model.addAttribute("dept", dept);
+		model.addAttribute("grade", grade);
 		return "member/join-employee";
 	}
 	/**
