@@ -1,5 +1,7 @@
 package com.oti.team2.institution.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +62,15 @@ public class InstitutionService implements IInstitutionService{
 	@Override
 	public void updateInst(Institution institution) {
 		institutionDao.updateByInst(institution);
+	}
+	/**
+	 * 내 기관 수정
+	 * @author 여수한
+	 * @return 회원가입 - 모든 기관 목록 조회
+	 */
+	@Override
+	public List<Institution> getAllInst() {
+		List<Institution> instList = institutionDao.selectAllInst();
+		return instList;
 	}
 }
