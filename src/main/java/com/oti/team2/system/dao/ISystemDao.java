@@ -11,5 +11,11 @@ public interface ISystemDao {
 	 * @author 신정은
 	 */
 	public List<SrSystem> selectAll();
+	
+	/**
+	 * sysCd로 deptCd 가져오기
+	 * @author 신정은
+	 */
+	public String getDeptCdBySysCd(String sysCd);
 
 }

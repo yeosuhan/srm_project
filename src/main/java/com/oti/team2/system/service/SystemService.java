@@ -22,4 +22,12 @@ public class SystemService implements ISystemService{
 		List<SrSystem> systems = systemDao.selectAll();
 		return systems;
 	}
+	
+	/**
+	 * sysCd로 deptCd 가져오기
+	 * @author 신정은
+	 */
+	public String getDeptCdBySysCd(String sysCd) {
+		return systemDao.getDeptCdBySysCd(sysCd);
+	}
 }

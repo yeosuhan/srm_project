@@ -98,59 +98,7 @@ $(document).on('click', '#modbtn', function(e) {
 
 });
 
-/******************************    관리자의 요청 승인    ********************************************/
-
-/* sr요청 승인*/
-function goAccept(dmndNo) {
-	
-	var jsonData = { 
-			"dmndNo" : dmndNo,
-			"val" : "1"
-		}; 
-	console.log(jsonData);
-	$.ajax({
-		url : '/admin/srdemand/approval',
-		type : 'POST',
-		data : JSON.stringify(jsonData) ,
-		contentType: 'application/json',
-		dataType : "json",
-		success : function(res) {
-		}
-	});
-}
-
-/* sr요청 반려*/
-function goDecline(dmndNo) {
-	// 반려사유 작성하지 않을 경우 g화면 다시 이동시키기
-	var rjctRsn = $('#srRjctRsn').val();
-	
-	if (!rjctRsn) {
-      alert('\n입력하여주세요.');
-      $('#srRjctRsn').focus();
-	} else {
-		var jsonData = { 
-				"dmndNo" : dmndNo,
-				"val" : "0" ,
-				"rjctRsn" : rjctRsn
-			}; 
-		
-		$.ajax({
-			url : '/admin/srdemand/approval',
-			type : 'POST',
-			data : JSON.stringify(jsonData) ,
-			contentType: 'application/json',
-			dataType : "json",
-			success : function(res) {
-				console.log(res);
-			}
-		
-		});
-	}
-	
-	
-}
-
-/*사용자의 srDemand 삭제*/
+/* 사용자의 srDemand 삭제 */
 function deleteSr(dmndNo) {
 	$.ajax({
 		url : '/srdemand/delete/' + dmndNo,
@@ -161,5 +109,71 @@ function deleteSr(dmndNo) {
 	
 	});
 }
+
+
+/******************************    관리자의 요청 승인    ********************************************/
+
+/* sr요청 승인*/
+function goAccept(dmndNo) {
+	var rnk = $('#rnk').val();	
+	var bgngYmd = $('.dmndYmd').text();
+	var endYmd = $('.cmptnDmndYmd').text();
+	var jsonData = { 
+			"dmndNo" : dmndNo,
+			"val" : 1,
+			"rnk" : rnk,
+			"bgngYmd" : bgngYmd,
+			"endYmd" : endYmd
+		}; 
+	console.log(jsonData);
+	
+	$.ajax({
+		url : '/admin/srdemand/approval',
+		type : 'POST',
+		data : JSON.stringify(jsonData) ,
+		contentType: 'application/json; charset=UTF-8',
+		dataType : "json",
+		success : function(res) {
+			alert(res.result);
+		},
+		error : function(error) {
+			 console.log(error);
+	    }
+	});
+}
+
+/* sr요청 반려*/
+function goDecline(dmndNo) {
+	// 반려사유 작성하지 않을 경우 g화면 다시 이동시키기
+	var rjctRsn = $('#srRjctRsn').val();
+	
+	if (!rjctRsn) {
+      alert('반려사유를 입력하여주세요.');
+      $('#srRjctRsn').focus();
+	} else {
+		var jsonData = { 
+				"dmndNo" : dmndNo,
+				"val" : 0 ,
+				"rjctRsn" : rjctRsn
+			}; 
+		
+		$.ajax({
+			url : '/admin/srdemand/approval',
+			type : 'POST',
+			data : JSON.stringify(jsonData) ,
+			contentType: "application/json; charset=UTF-8",
+			success : function(res) {
+				alert(res.result);
+			},
+			error : function(error) {
+		       console.log(error);
+		    }
+		
+		});
+	}
+	
+	
+}
+
 
 

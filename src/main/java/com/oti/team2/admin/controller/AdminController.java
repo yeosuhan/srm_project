@@ -1,5 +1,6 @@
 package com.oti.team2.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import com.oti.team2.member.dto.FilteringMember;
 //github.com/OTI-SRM/srm_project
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.service.IMemberService;
+import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.service.ISrDemandService;
@@ -293,24 +295,21 @@ public class AdminController {
 	 * 
 	 * @author 신정은
 	 */
+	@ResponseBody
 	@PostMapping("/srdemand/approval")
-	public String getSrDemandApproval(Authentication auth, @RequestBody Map<String, String> param) {
-		String adminId = auth.getName();
-		String dmndNo = param.get("dmndNo");
-		String val = param.get("val");
+	public Map<String,String> getSrDemandApproval(Authentication auth, @RequestBody SdApprovalDto sdApprovalDto) {
+		sdApprovalDto.setRvwrId(auth.getName());
+		log.info(sdApprovalDto);
+		srdemandService.getSrDemandApproval(sdApprovalDto);
 		
-		log.info(dmndNo);
-		log.info(val);
-		// 검토자 이름 반드시 넣어주기!!!
-		// 승인일 경우
-		if(val.equals(1)) {
-			
-		} else {// 반려일 경우
-			String rjctRsn = param.get("rjctRsn");
-			
+		Map<String, String> map = new HashMap<>();
+		String result= "";
+		if(sdApprovalDto.getVal() == 1) {
+			result =  sdApprovalDto.getDmndNo() + "번 요청이 승인처리 되었습니다.";
 		}
-				
-		return "redirect:/srdemand/detail/" + dmndNo; //해당sr상세 화면으로 이동하기
+		else result = sdApprovalDto.getDmndNo() + "번 요청이 반려처리 되었습니다.";
+		map.put("result", result);
+		return map;
 	}
 
 }

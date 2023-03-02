@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
@@ -88,8 +89,7 @@ public interface ISrDemandDao {
 	 * 
 	 * @author 신정은
 	 */
-	public int updateSttsCdAndRjctRsnByDmndNo(@Param("dmndNo") String dmndNo, @Param("val") int val,
-			@Param("rjctRsn") String rjctRsn);
+	public int updateSttsCdAndRjctRsnByDmndNo(@Param("sdApprovalDto")SdApprovalDto sdApprovalDto);
 	
 	/**
 	 * SR요청 삭제하기
@@ -97,5 +97,12 @@ public interface ISrDemandDao {
 	 * @author 신정은
 	 */
 	public int updateDelYnByDmndNo(@Param("dmndNo")String dmndNo);
+	
+	/**
+	 * SR요청 번호로 시스템cd 가져오기
+	 * 
+	 * @author 신정은
+	 */
+	public String selectSysCdByDmndNo(@Param("dmndNo") String dmndNo);
 
 }

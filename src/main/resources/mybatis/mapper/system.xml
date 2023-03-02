@@ -6,4 +6,11 @@
 			SYS_NM as sysNm
 		FROM SYSTEMS
 	</select>
+	
+	<!-- sysCd로 부서cd 가져오기 -->
+	<select id="getDeptCdBySysCd" parameterType="string" resultType="string">
+		SELECT DEPT_CD
+		FROM SYSTEMS
+		WHERE SYS_CD = #{sysCd}
+	</select>
 </mapper>

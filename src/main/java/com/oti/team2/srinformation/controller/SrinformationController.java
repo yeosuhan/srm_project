@@ -71,15 +71,6 @@ public class SrinformationController {
 		return pi;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-		
 	/**
 	 * 
 	 * @author 여수한

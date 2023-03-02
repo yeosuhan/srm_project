@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.srdemand.dao.ISrDemandDao;
+import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
+import com.oti.team2.srinformation.service.SrinformationService;
 import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +25,9 @@ public class SrDemandService implements ISrDemandService{
 	
 	@Autowired
 	private ISrDemandDao srDemandDao;
+	
+	@Autowired
+	private SrinformationService srinformationService;
 	
 	/**
 	 * sr요청 등록
@@ -54,7 +59,6 @@ public class SrDemandService implements ISrDemandService{
 		String formatedNow = formatter.format(now);
 		String srCode = "SR" + formatedNow;
 		
-		// 포맷팅 현재 날짜/시간 출력
 		int count = srDemandDao.countByDmndNo(srCode+"%");
 		
 		// ex) SR230222_0008 에서 _ 뒤의 숫자 4자리를 세팅하는 로직
@@ -146,24 +150,26 @@ public class SrDemandService implements ISrDemandService{
 	}
 
 	/**
-	 * 관리자의 sr요청  결재 기능 
+	 * 관리자의 sr요청  결재 기능  승인 / 반려 모두 진행
 	 * @author 신정은
 	 */
 	@Transactional
-	public void getSrDemandApproval(String dmndNo, int val, String rjctRsn) {
-		if(val == 1) { // 승인일 경우 
-			// 시스템코드 가져오기
-			// 해당 시스템코드로 시작하는 srInformation의 수 가져오기
-			// 현재의 년도 를 더한다.
-			// sr information에 insert
-			
-		} 
-		// 반려일 경우 1
-		srDemandDao.updateSttsCdAndRjctRsnByDmndNo(dmndNo, val, rjctRsn);
+	public void getSrDemandApproval(SdApprovalDto sdApprovalDto) {
+		if(sdApprovalDto.getVal() == 1) {
+			srinformationService.insertInformation(sdApprovalDto);
+		}			
+		srDemandDao.updateSttsCdAndRjctRsnByDmndNo(sdApprovalDto);
+		log.info(sdApprovalDto);
 		
 	}
 
-	
-
+	/**
+	 * SR요청 번호로 시스템cd 가져오기
+	 * 
+	 * @author 신정은
+	 */
+	public String getSysCdByDmndNo(String dmndNo) {
+		return srDemandDao.selectSysCdByDmndNo(dmndNo);
+	}
 
 }

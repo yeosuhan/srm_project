@@ -11,4 +11,10 @@ public interface ISystemService {
 	 * @author 신정은
 	 */
 	public List<SrSystem> getSystemList();
+	
+	/**
+	 * SR요청 등록시, 모든 시스템 조회
+	 * @author 신정은
+	 */
+	public String getDeptCdBySysCd(String sysCd);
 }

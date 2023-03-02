@@ -7,49 +7,51 @@
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 </head>
 <script>
+	
 <%-- JSON으로 받아온 HistoryList를 보여주기 위한 ajax --%>
-function getHistoryList() {
-	var srNo = $("#srNo").val();
-	console.log("srHistoryList 글번호: " + srNo);
-	$
-			.ajax({
-				url : "/history/list?srNo=" + srNo,
-				type : "GET",
+	function getHistoryList() {
+		var srNo = $("#srNo").val();
+		console.log("srHistoryList 글번호: " + srNo);
+		$
+				.ajax({
+					url : "/history/list?srNo=" + srNo,
+					type : "GET",
 
-				success : function(result) {
-					console.log(result);
-					console.log(result.srInformationHistory[0].hstryTtl);
+					success : function(result) {
+						console.log(result);
+						console.log(result.srInformationHistory[0].hstryTtl);
 
-					for (var i = 0; i < result.srInformationHistory.length; i++) {
-						var historyId =  result.srInformationHistory[i].hstryId;
-						var historyCount = [ i + 1 ];
-						var historyTtl = result.srInformationHistory[i].hstryTtl;
-						if(result.srInformationHistory[i].chgEndYmd === null){
-							var historyChgEndYmd = "-";
-						} else {
-							var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
-						}							
-						if (result.srInformationHistory[i].hstryStts == 'I') {
-							var historyStts = "요청 중";
-						} else if (result.srInformationHistory[i].hstryStts == 'N') {
-							var historyStts = "반려";
-						} else {
-							var historyStts = "승인";
+						for (var i = 0; i < result.srInformationHistory.length; i++) {
+							var historyId = result.srInformationHistory[i].hstryId;
+							var historyCount = [ i + 1 ];
+							var historyTtl = result.srInformationHistory[i].hstryTtl;
+							if (result.srInformationHistory[i].chgEndYmd === null) {
+								var historyChgEndYmd = "-";
+							} else {
+								var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
+							}
+							if (result.srInformationHistory[i].hstryStts == 'I') {
+								var historyStts = "요청 중";
+							} else if (result.srInformationHistory[i].hstryStts == 'N') {
+								var historyStts = "반려";
+							} else {
+								var historyStts = "승인";
+							}
+
+							var param = '<tr data-toggle="modal" data-target="#approvalHistoryModal" onclick="getHstryDetail('
+									+ historyId + ')">';
+							param += '<th scope="row">' + historyCount
+									+ '</th>';
+							param += '<td>' + historyTtl + '</td>';
+							param += '<td>' + historyChgEndYmd + '</td>';
+							param += '<td>' + historyStts + '</td>';
+							param += '</tr>';
+
+							$("#history").append(param);
 						}
-
-						var param = '<tr data-toggle="modal" data-target="#approvalHistoryModal" onclick="getHstryDetail(' + historyId + ')">';
-							param += 	'<th scope="row">' + historyCount + '</th>';
-							param += 	'<td>' + historyTtl + '</td>';
-							param += 	'<td>' + historyChgEndYmd + '</td>';
-							param += 	'<td>' + historyStts + '</td>';
-							param +=  '</tr>';
-
-						$("#history").append(param);
 					}
-				}
-			});
-}
-
+				});
+	}
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -189,9 +191,9 @@ th {
 																		<i class="ti-search"></i>
 																	</button>
 																</div>
-																<div class="col col-xl-1" style="padding-left:0px;">
-															<button class="btn btn-info">엑셀 다운로드</button>
-														</div>
+																<div class="col col-xl-1" style="padding-left: 0px;">
+																	<button class="btn btn-info">엑셀 다운로드</button>
+																</div>
 															</div>
 														</form>
 													</div>
@@ -232,7 +234,7 @@ th {
 																				<th>등록일</th>
 																				<th>완료예정일</th>
 																			</tr>
-									
+
 																		</thead>
 																		<tbody>
 																			<c:forEach var="srDemand" items="${srDemandList}"
@@ -255,9 +257,10 @@ th {
 																	</table>
 																	<!-- 페이징 처리 -->
 																	<div class="d-flex justify-content-center">
-																		<%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>
+																		<%@ include
+																			file="/WEB-INF/views/fragments/pagination.jsp"%>
 																	</div>
-			
+
 																</div>
 															</div>
 
@@ -387,6 +390,16 @@ th {
 																				<div type="text" class="form-control rvwrNm">${sd.rvwrNm}</div>
 																			</div>
 																		</div>
+																		<div class="col-6">
+																			<div class="col col-sm-4 font-weight-bold">우선순위</div>
+																			<div class="col col-sm-6">
+																				<select id="rnk">
+																					<option value="상" selected>상</option>
+																					<option value="중">중</option>
+																					<option value="하">하</option>
+																				</select>
+																			</div>
+																		</div>
 																	</div>
 
 																	<div class="row mt-3 ml-1">
@@ -395,8 +408,9 @@ th {
 																			style="line-height: 120px">반려 사유</label>
 																		<div class="col-sm-9 pl-0 ">
 																			<c:if test="${sd.sttsCd == 0}">
-																				<textarea rows="5" cols="5" class="form-control rjctRsn" id="srRjctRsn"></textarea>
-																			</c:if>	
+																				<textarea rows="5" cols="5"
+																					class="form-control rjctRsn" id="srRjctRsn"></textarea>
+																			</c:if>
 																			<c:if test="${sd.sttsCd != 0}">
 																				<div class="form-control rjctRsn">${sd.rjctRsn}</div>
 																			</c:if>
@@ -408,8 +422,7 @@ th {
 																			style="line-height: 100px; font-size: 12px;">SR
 																			내용</label>
 																		<div class="col-sm-9">
-																			<div class="form-control cn"
-																				style="height: 100px;">${sd.cn}</div>
+																			<div class="form-control cn" style="height: 100px;">${sd.cn}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -425,10 +438,12 @@ th {
 																		<c:if test="${sd.sttsCd == 0}">
 																			<div class="col-6" style="text-align: right">
 																				<div id="srAccept"
-																					class="btn btn-primary btn-round save center" onclick="goAccept('${sd.dmndNo}')">승인</div>
+																					class="btn btn-primary btn-round save center"
+																					onclick="goAccept('${sd.dmndNo}')">승인</div>
 
 																				<div id="srDecline"
-																					class="btn btn-primary btn-round danger cancle" onclick="goDecline('${sd.dmndNo}')">반려</div>
+																					class="btn btn-primary btn-round danger cancle"
+																					onclick="goDecline('${sd.dmndNo}')">반려</div>
 																			</div>
 																		</c:if>
 																	</div>
@@ -492,10 +507,7 @@ th {
 																			</div>
 																			<div class="col-sm-6">
 																				<div class="col col-sm-4 font-weight-bold">완료요청일</div>
-																				<div class="col col-sm-8 cmptnDmndYmd">
-																					<input type="date" name="cmptnDmndYmd"
-																						name="cmptnDmndYmd">
-																				</div>
+																				<div class="col col-sm-8 cmptnDmndYmd"></div>
 																			</div>
 																		</div>
 																		<div class="row mt-3">

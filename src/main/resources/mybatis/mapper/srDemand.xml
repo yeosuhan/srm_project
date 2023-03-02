@@ -217,17 +217,18 @@
 	</select>
 	
 	<!-- 관리자의 sr결재 진행 -->
-	<update id="updateSttsCdAndRjctRsnByDmndNo" parameterType="map">
-		UPDATE SR_DEMNAD
+	<update id="updateSttsCdAndRjctRsnByDmndNo" parameterType="sdApprovalDto">
+		UPDATE SR_DEMAND
 		SET 
-		<if test="val == 1">
-			STTS_CD = 2
+		<if test="sdApprovalDto.val == 1">
+			STTS_CD = 2 ,
 		</if>
-		<if test="val == 0">
+		<if test="sdApprovalDto.val == 0">
 			STTS_CD = 1 ,
-			RJCT_RSN = #{rjctRsn}
+			RJCT_RSN = #{sdApprovalDto.rjctRsn} ,
 		</if>
-		WHERE DMND_NO = #{dmndNo}
+		RVWR_ID = #{sdApprovalDto.rvwrId}
+		WHERE DMND_NO = #{sdApprovalDto.dmndNo}
 	</update>
 	
 	<!-- sr 요청 삭제 -->
@@ -237,5 +238,12 @@
 			DEL_YN = 1 
 		WHERE DMND_NO = #{dmndNo}
 	</update>
+	
+	<!-- SR번호로 시스템CD 가져오기-->
+	<select id="selectSysCdByDmndNo" parameterType="string" resultType="string">
+		SELECT SYS_CD
+		FROM SR_DEMAND
+		WHERE DMND_NO = #{dmndNo}
+	</select>
 	
 </mapper>
