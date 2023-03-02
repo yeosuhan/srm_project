@@ -3,8 +3,10 @@
 <mapper namespace="com.oti.team2.srresource.dao.ISrResourceDao">
 	<resultMap type="srResource" id="srResourceResultMap">
 		<id property="srSrc" column="SR_SRC"/>
+		<result property="empId" column="EMP_ID"/>
 		<result property="empNm" column="FLNM"/>
 		<result property="ptcptnRoleNm" column="ROLE_NM"/>
+		<result property="ptcptnRoleCd" column="PTCPTN_ROLE_CD"/>
 		<result property="schdlBgngYmd" column="SCHDL_BGNG_YMD"/>
 		<result property="schdlEndYmd" column="SCHDL_END_YMD"/>
 	</resultMap>
@@ -12,8 +14,10 @@
 	<select id="selectBySrNo" parameterType="String" resultMap="srResourceResultMap">
 		SELECT 
 			SR_SRC ,
+			EMP_ID,
 			FLNM ,
 			ROLE_NM ,
+			PTCPTN_ROLE_CD,
 			SCHDL_BGNG_YMD ,
 			SCHDL_END_YMD 
 		FROM
@@ -54,4 +58,21 @@
 			</foreach>
 		</where>
 	</delete>
+	
+	<!-- 자원정보 수정 -->
+	<update id="updateSrResource" parameterType="srResource" >
+		UPDATE SR_RESOURCES
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="ptcptnRoleCd != null">
+					PTCPTN_ROLE_CD = #{ptcptnRoleCd},
+				</if>
+				<if test="schdlBgngYmd != null">
+					SCHDL_BGNG_YMD = #{schdlBgngYmd},
+				</if>
+				<if test="schdlEndYmd != null">
+					SCHDL_END_YMD = #{schdlEndYmd},
+				</if>
+			</trim>
+		WHERE SR_SRC = #{srSrc}
+	</update>
 </mapper>

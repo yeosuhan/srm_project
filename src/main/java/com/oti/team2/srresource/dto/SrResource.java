@@ -14,8 +14,8 @@ public class SrResource {
 	private String empNm;
 	private int ptcptnRoleCd;
 	private String ptcptnRoleNm;
-	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date schdlBgngYmd;
-	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date schdlEndYmd;
 }

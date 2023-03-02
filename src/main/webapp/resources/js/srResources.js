@@ -27,15 +27,15 @@ function getResourceTableRow(){
 				result.forEach((value,index)=>{
 					var count = index+1;
 					$("#resourceTableRow").append(
-							"<tr>" +
+							"<tr onclick='openUpdateResourceModal(\""+value.srSrc+"\",\""+value.empId+"\",\""+value.ptcptnRoleCd+"\")'>" +
 							"	<th scope='row'>"+count+"</th>" +
 							"	<td>" +
 							"		<input value='"+value.srSrc+"' name='resource' type='checkbox'>" +
 							"	</td>" +
-							"	<td>"+value.empNm+"</td>" +
-							"	<td>"+value.ptcptnRoleNm+"</td>" +
-							"	<td>"+value.schdlBgngYmd+"</td>" +
-							"	<td>"+value.schdlEndYmd+"</td>" +
+							"	<td id='empNm"+value.srSrc+"'>"+value.empNm+"</td>" +
+							"	<td id='ptcptnRoleNm"+value.srSrc+"'>"+value.ptcptnRoleNm+"</td>" +
+							"	<td id='schdlBgngYmd"+value.srSrc+"'>"+value.schdlBgngYmd+"</td>" +
+							"	<td id='schdlEndYmd"+value.srSrc+"'>"+value.schdlEndYmd+"</td>" +
 							"</tr>"
 					);
 					

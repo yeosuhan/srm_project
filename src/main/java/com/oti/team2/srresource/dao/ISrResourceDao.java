@@ -36,4 +36,11 @@ public interface ISrResourceDao {
 	 * */
 	int deleteBySrSrc(@Param("srSrc") List<String> srSrc);
 
+	/** 입력한 자원 정보 수정
+	 * @author : 안한길
+	 * @param SrResource
+	 * @return int
+	 * */
+	int updateSrResource(SrResource srResource);
+
 }
