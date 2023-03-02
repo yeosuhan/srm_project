@@ -28,5 +28,6 @@
 		<typeAlias type="com.oti.team2.progress.dto.Progress" alias="progress" />
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto" alias="srHistoryDetailDto" />
 		<typeAlias type="com.oti.team2.deliverable.dto.Deliverable" alias="deliverable" />
+		<typeAlias type="com.oti.team2.role.dto.Role" alias="role" />
 	</typeAliases> 
 </configuration>
