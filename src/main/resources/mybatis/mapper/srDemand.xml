@@ -90,7 +90,7 @@
 	            DMND_YMD ,
 	            c.flnm as rvwrNm ,
 	            dept_nm ,
-	            MNGR_ID,
+	            PIC_ID,
 	            CMPTN_DMND_YMD ,
 	            end_ymd ,
 	            TASK_SE_NM ,
@@ -103,19 +103,19 @@
 		                sd.rel_grund ,
 		                sd. rjct_rsn ,
 		                sys.SYS_NM ,
-		                sys.SYS_CD ,
+		                sd.SYS_CD ,
 		                d.dept_nm ,
-		                d.MNGR_ID ,
+		                si.PIC_ID ,
 		                m.flnm as clientNm,
 		                i.INST_NM as INST_NM,
 		                sd.rvwr_id as rvwr_id, 
 		                s.STTS_NM  as STTS_NM,
-		                s.STTS_CD ,
+		                sd.STTS_CD ,
 		                sd.DMND_YMD as DMND_YMD ,
 		                sd.CMPTN_DMND_YMD ,
 		                tk.TASK_SE_NM ,
-		                tk.TASK_SE_CD ,
-		                end_ymd
+		                sd.TASK_SE_CD ,
+		                si.end_ymd
 		        FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sys, sr_information si, departments d, task tk
 		        WHERE sd.DMND_NO = #{dmndNo}
 		        and sd.dmnd_no = si.dmnd_no (+)
@@ -123,13 +123,13 @@
 		        and m.inst_cd = i.inst_cd
 		        and sd.stts_cd = s.stts_cd
 		        and sd.sys_cd = sys.sys_cd 
-		        and d.dept_cd = sys.dept_cd
+		        and si.dept_cd = d.dept_cd (+)
 		        and sd.TASK_SE_CD = tk.TASK_SE_CD
 		       
 		        ) w , members c 
 		    where w.rvwr_id = c.member_id(+)
 		    )t , members mem
-		    where t.MNGR_ID = mem.member_id
+		    where t.PIC_ID = mem.member_id (+)
 	</select>
 	
 	<!-- 사용자에게 받은 SR요청번호와 SR진척번호를 연결하기 위한 쿼리 -->
