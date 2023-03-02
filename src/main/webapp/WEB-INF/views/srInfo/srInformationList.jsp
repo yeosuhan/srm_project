@@ -15,6 +15,7 @@
 	src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/deliverables.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
 <script>
 	
 <%-- 모달 실행 --%>
@@ -28,205 +29,6 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-<%-- SR요청 상세보기 --%>
-	function getDetail(dmndNo, srNo) {
-		console.log("상세보기 : " + dmndNo + srNo);
-		$.ajax({
-			url : '/srinformation/detail/' + dmndNo,
-			type : 'GET',
-			data : {
-				dmndNo : dmndNo
-			},
-			success : function(detail) {
-				console.log(srNo);
-				console.log(detail);
-				$("#SRDSrNo").val(srNo);
-				$("#SRDDmndNo").val(detail.dd.dmndNo);
-				$("#SRDTitle").val(detail.dd.ttl);
-				$("#SRDRelgrund").val(detail.dd.relGrund);
-				$("#SRDSys").val(detail.dd.sysNm);
-				$("#SRDTask").val(detail.dd.taskSeNm);
-				$("#SRDInst").val(detail.dd.instNm);
-				$("#SRDFlnm").val(detail.dd.flnm);
-				$("#SRDDmndymd").val(detail.dd.dmndYmd);
-				$("#SRDCmptnDmndYmd").val(detail.dd.cmptnDmndYmd);
-				$("#SRDCn").val(detail.dd.cn);
-				$("#SRDFile").val(detail.dd.fileNm);
-				$("#SRPlDeptNm").val(detail.pi.deptNm);
-				$("#SRPlFlnm").val(detail.pi.flnm);
-				$("#SRPlBgngYmd").val(detail.pi.bgngYmd);
-				$("#SRPlEndYmd").val(detail.pi.endYmd);
-				$("#SRPlRvwCn").text(detail.pi.rvwCn);
-				/*자원 정보 모달*/
-				$("#srPlanTab").tab("show");
-				$("#srNo").val(srNo);
-				$("#ttl").val(detail.dd.ttl);
-				$("#deptCd").val(detail.pi.deptCd);
-				$("#deptNm").val(detail.pi.deptNm);
-				$("#resourceInst").val(detail.dd.instNm);
-				$("#resourceTableRow").empty();
-				$(".deliverableTable tbody").empty();
-			}
-		});
-	}
-<%-- SR요청 계획정보 --%>
-	function getPlan() {
-		$("#SRDDmndNo").val();
-		console.log("계획정보 : " + $("#SRDDmndNo").val());
-		$.ajax({
-			url : '/srinformation/plan/' + $("#SRDDmndNo").val(),
-			type : 'GET',
-			data : {
-				plan : $("#SRDDmndNo").val()
-			},
-			success : function(plan) {
-				$("#SRPlDeptNm").val(plan.deptNm);
-				$("#SRPlFlnm").val(plan.flnm);
-				$("#SRPlBgngYmd").val(plan.bgngYmd);
-				$("#SRPlEndYmd").val(plan.endYmd);
-				$("#SRPlRvwCn").val(plan.rvwCn);
-			}
-		});
-	}
-<%-- SR요청 진척률 조회 --%>
-	function getProgress() {
-		$("#SRDSrNo").val();
-		console.log("진척률: " + $("#SRDSrNo").val());
-		$.ajax({
-			url : '/srinformation/progress/list/' + $("#SRDSrNo").val(),
-			type : 'GET',
-			data : {
-				Progress : $("#SRDSrNo").val()
-			},
-			success : function(Progress) {
-				for (var i = 0; i < Progress.length; i++) {
-					$("#SRPgSrNo").val(Progress[i].srNo);
-					$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
-					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
-					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
-					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
-					document.getElementById('SRPgEndYmd' + i).setAttribute(
-							"min", $("#SRPgBgngYmd" + i).val());
-				}
-			}
-		});
-	}
-<%-- SR요청 진척률 수정 --%>
-	function updateProgress1() {
-		var bgngYmd = $("#SRPgBgngYmd0").val();
-		var prgrsId = $("#SRPgPrgrsId0").val();
-		var endYmd = $("#SRPgEndYmd0").val();
-		var prgrsRt = $("#SRPgPrgrsRt0").val();
-		$.ajax({
-			url : '/srinformation/progress/update',
-			type : 'POST',
-			data : {
-				prgrsRt : prgrsRt,
-				bgngYmd : bgngYmd,
-				endYmd : endYmd,
-				prgrsId : prgrsId,
-				srNo : $("#SRPgSrNo").val()
-			},
-			success : function(prgrs) {
-				console.log("예~");
-			}
-		});
-	}
-	function updateProgress2() {
-		var bgngYmd = $("#SRPgBgngYmd1").val();
-		var prgrsId = $("#SRPgPrgrsId1").val();
-		var endYmd = $("#SRPgEndYmd1").val();
-		var prgrsRt = $("#SRPgPrgrsRt1").val();
-		$.ajax({
-			url : '/srinformation/progress/update',
-			type : 'POST',
-			data : {
-				prgrsRt : prgrsRt,
-				bgngYmd : bgngYmd,
-				endYmd : endYmd,
-				prgrsId : prgrsId,
-				srNo : $("#SRPgSrNo").val()
-			},
-			success : function(prgrs) {
-			}
-		});
-	}
-	function updateProgress3() {
-		var bgngYmd = $("#SRPgBgngYmd2").val();
-		var prgrsId = $("#SRPgPrgrsId2").val();
-		var endYmd = $("#SRPgEndYmd2").val();
-		var prgrsRt = $("#SRPgPrgrsRt2").val();
-		$.ajax({
-			url : '/srinformation/progress/update',
-			type : 'POST',
-			data : {
-				prgrsRt : prgrsRt,
-				bgngYmd : bgngYmd,
-				endYmd : endYmd,
-				prgrsId : prgrsId,
-				srNo : $("#SRPgSrNo").val()
-			},
-			success : function(prgrs) {
-			}
-		});
-	}
-	function updateProgress4() {
-		var bgngYmd = $("#SRPgBgngYmd3").val();
-		var prgrsId = $("#SRPgPrgrsId3").val();
-		var endYmd = $("#SRPgEndYmd3").val();
-		var prgrsRt = $("#SRPgPrgrsRt3").val();
-		$.ajax({
-			url : '/srinformation/progress/update',
-			type : 'POST',
-			data : {
-				prgrsRt : prgrsRt,
-				bgngYmd : bgngYmd,
-				endYmd : endYmd,
-				prgrsId : prgrsId,
-				srNo : $("#SRPgSrNo").val()
-			},
-			success : function(prgrs) {
-			}
-		});
-	}
-	function updateProgress5() {
-		var bgngYmd = $("#SRPgBgngYmd4").val();
-		var prgrsId = $("#SRPgPrgrsId4").val();
-		var endYmd = $("#SRPgEndYmd4").val();
-		var prgrsRt = $("#SRPgPrgrsRt4").val();
-		$.ajax({
-			url : '/srinformation/progress/update',
-			type : 'POST',
-			data : {
-				prgrsRt : prgrsRt,
-				bgngYmd : bgngYmd,
-				endYmd : endYmd,
-				prgrsId : prgrsId,
-				srNo : $("#SRPgSrNo").val()
-			},
-			success : function(prgrs) {
-			}
-		});
-	}
-	function updateProgress6() {
-		var bgngYmd = $("#SRPgBgngYmd5").val();
-		var prgrsId = $("#SRPgPrgrsId5").val();
-		var endYmd = $("#SRPgEndYmd5").val();
-		var prgrsRt = $("#SRPgPrgrsRt5").val();
-		$.ajax({
-			url : '/srinformation/progress/update',
-			type : 'POST',
-			data : {
-				prgrsRt : prgrsRt,
-				bgngYmd : bgngYmd,
-				endYmd : endYmd,
-				prgrsId : prgrsId,
-				srNo : $("#SRPgSrNo").val()
-			},
-			success : function(prgrs) {
-			}
-		});
-	}
 </script>
 <style>
 .ui-datepicker-trigger {
@@ -662,19 +464,25 @@ th {
 														<%-- *********************************** [ 계획정보 ] ***********************************--%>
 														<div class="tab-content tabs card-block"
 															style="padding: 0px; padding-top: 20px;">
+															<input type="hidden" id="SRPlDmndNo">
 															<div class="tab-pane active" id="home1" role="tabpanel"
 																style="padding: 20px;">
 																<div class="form-group row">
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">처리팀</div>
 																		<div class="col col-sm-6">
-																			<input readonly class="form-control" id="SRPlDeptNm">
+																			<select id="dept" onchange="changeDept()">
+																				<c:forEach var="deptList" items="${deptList}">
+																					<option id="SRDept" value="${deptList.deptCd}">${deptList.deptNm}</option>
+																				</c:forEach>
+																			</select>
 																		</div>
 
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">담당자</div>
-																		<div class="col col-sm-6">
+																		<div class="col col-sm-6" id="SRPlFlnmBySelect">
+																			<input type="hidden" id="SRPlMemberId">
 																			<input readonly class="form-control" id="SRPlFlnm">
 																		</div>
 																	</div>
@@ -683,14 +491,14 @@ th {
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획시작일</div>
 																		<div class="col col-sm-6">
-																			<input readonly class="form-control" id="SRPlBgngYmd">
+																			<input type="text" class="form-control" id="SRPlBgngYmd">
 																		</div>
-
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획종료일</div>
 																		<div class="col col-sm-6">
-																			<input readonly class="form-control" id="SRPlEndYmd">
+																			<input type="text" class="form-control"
+																				id="SRPlEndYmd">
 																		</div>
 																	</div>
 																</div>
@@ -700,10 +508,9 @@ th {
 																	<div class="col col-sm-9">
 																		<textarea rows="5" cols="5" class="form-control"
 																			id="SRPlRvwCn"></textarea>
-
 																	</div>
 																</div>
-																<button class="btn btn-info"
+																<button class="btn btn-info" onclick="planUpdate()"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
 															</div>
 															<%-- *********************************** [ 자원정보 ] ***********************************--%>

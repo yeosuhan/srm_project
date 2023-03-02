@@ -34,4 +34,16 @@ public class JoinService implements IJoinService{
 		log.info(join);
 		joinDao.insertJoin(join);
 	}
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return ID 중복확인
+	 */
+	@Override
+	public Integer checkId(String memberId) {
+		int check = joinDao.checkId(memberId);
+		log.info("Service: " + check);
+		return 0;
+	}
 }

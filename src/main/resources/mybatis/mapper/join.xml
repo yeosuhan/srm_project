@@ -36,6 +36,13 @@
 				'1',
 				#{join.addrDetail}
 			)
-			
 	</insert>
+	<select id="checkId" parameterType="string" resultType="int">
+		SELECT
+			MEMBER_ID
+		FROM
+			MEMBERS
+		WHERE
+			MEMBER_ID = #{memberId}
+	</select>
 </mapper>

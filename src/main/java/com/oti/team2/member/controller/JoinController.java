@@ -47,4 +47,17 @@ public class JoinController {
 		joinService.getJoin(join);
 		return "member/login";
 	}
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return ID 중복확인
+	 */
+	@GetMapping("/join/check")
+	public Integer checkId(String memberId) {
+		log.info("입력한 memberId : " + memberId);
+		int check = joinService.checkId(memberId);
+		log.info("Controller : " + check);
+		return check;
+	}
 }

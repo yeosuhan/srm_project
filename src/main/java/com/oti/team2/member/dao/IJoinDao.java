@@ -8,4 +8,6 @@ public interface IJoinDao {
 
 	void insertJoin(@Param("join") Join join);
 
+	Integer checkId(@Param("memberId") String memberId);
+
 }

@@ -7,7 +7,9 @@
 		<typeAlias type="com.oti.team2.institution.dto.Institution" alias="institution" />
 		<typeAlias type="com.oti.team2.srinformation.dto.SrinformationList" alias="srinformationlist" />
 		<typeAlias type="com.oti.team2.srdemand.dto.SrdemandDetail" alias="srdemandDetail" />
-		<typeAlias type="com.oti.team2.srinformation.dto.SrplanInfomaion" alias="srplanInfomaion" />
+		<typeAlias type="com.oti.team2.srinformation.dto.SrplanInfomation" alias="srplanInfomation" />
+		<typeAlias type="com.oti.team2.srinformation.dto.Dept" alias="dept" />
+		<typeAlias type="com.oti.team2.srinformation.dto.Manager" alias="manager" />
 		<typeAlias type="com.oti.team2.member.dto.Member" alias="member"/>
 		<typeAlias type="com.oti.team2.member.dto.Join" alias="join"/>
 		<typeAlias type="com.oti.team2.jobgrade.dto.JobGrade" alias="jobGrade"/>
