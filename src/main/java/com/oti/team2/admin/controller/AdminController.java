@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.oti.team2.department.dto.Department;
 import com.oti.team2.department.service.IDepartmentService;
 import com.oti.team2.jobgrade.service.IJobGradeService;
-import com.oti.team2.member.dto.FilteringMember;
+import com.oti.team2.member.dto.FilterDto;
 //github.com/OTI-SRM/srm_project
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.service.IMemberService;
@@ -127,21 +127,21 @@ public class AdminController {
 	public String getMemberList(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "flnm", required = false) String flnm,
 			@RequestParam(value = "instNm", required = false) String instNm, Model model) {
-		FilteringMember filtering = new FilteringMember();
+		FilterDto filterDto = new FilterDto();
 		if (instNm != null) {
-			filtering.setDeptNm(instNm);
+			filterDto.setDeptNm(instNm);
 			model.addAttribute("instNm", instNm);
 		}
 		if (flnm != null) {
-			filtering.setFlnm(flnm);
+			filterDto.setFlnm(flnm);
 			model.addAttribute("flnm", flnm);
 		}
-		int totalRows = memberService.getTotalRows(Auth.ROLE_CLIENT.toString(), filtering);
+		int totalRows = memberService.getTotalRows(Auth.ROLE_CLIENT.toString(), filterDto);
 		Pager pager = new Pager(totalRows, 1);
 		// log.info(pager);
 
 		// 목록 가져오기
-		List<Member> clientList = memberService.getMemberList(Auth.ROLE_CLIENT.toString(), pager, filtering);
+		List<Member> clientList = memberService.getMemberList(Auth.ROLE_CLIENT.toString(), pager, filterDto);
 		model.addAttribute("clientList", clientList);
 		// log.info(clientList);
 		// 상세 가져오기
@@ -182,23 +182,23 @@ public class AdminController {
 			@RequestParam(value = "deptNm", required = false) String deptNm,
 			@RequestParam(value = "jbgdNm", required = false) String jbgdNm, Model model) {
 		log.info("getEmployeeList" + page + flnm);
-		FilteringMember filtering = new FilteringMember();
+		FilterDto filterDto = new FilterDto();
 		if (deptNm != null) {
-			filtering.setDeptNm(deptNm);
+			filterDto.setDeptNm(deptNm);
 			model.addAttribute("deptNm", deptNm);
 		}
 		if (flnm != null) {
-			filtering.setFlnm(flnm);
+			filterDto.setFlnm(flnm);
 			model.addAttribute("flnm", flnm);
 		}
 		if (jbgdNm != null) {
-			filtering.setJbgdNm(jbgdNm);
+			filterDto.setJbgdNm(jbgdNm);
 			model.addAttribute("jbgdNm", jbgdNm);
 		}
-		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(), filtering);
+		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(), filterDto);
 		Pager pager = new Pager(totalRows, page);
 
-		List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager, filtering);
+		List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager, filterDto);
 
 		// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
 		employeesList.set(0,
@@ -261,7 +261,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 관리자의 모든 요청 목록 조회 기능 ********************************
+	 * 관리자의 모든 요청 목록 조회 기능 **
 	 * 
 	 * @author 신정은
 	 */
@@ -290,25 +290,25 @@ public class AdminController {
 
 		return "srDemand/adminSrDemandList";
 	}
-	
+
 	/**
-	 * 관리자의 sr요청  결재 기능 ********************************
+	 * 관리자의 sr요청 결재 기능 **
 	 * 
 	 * @author 신정은
 	 */
 	@ResponseBody
 	@PostMapping("/srdemand/approval")
-	public Map<String,String> getSrDemandApproval(Authentication auth, @RequestBody SdApprovalDto sdApprovalDto) {
+	public Map<String, String> getSrDemandApproval(Authentication auth, @RequestBody SdApprovalDto sdApprovalDto) {
 		sdApprovalDto.setRvwrId(auth.getName());
 		log.info(sdApprovalDto);
 		srdemandService.getSrDemandApproval(sdApprovalDto);
-		
+
 		Map<String, String> map = new HashMap<>();
-		String result= "";
-		if(sdApprovalDto.getVal() == 1) {
-			result =  sdApprovalDto.getDmndNo() + "번 요청이 승인처리 되었습니다.";
-		}
-		else result = sdApprovalDto.getDmndNo() + "번 요청이 반려처리 되었습니다.";
+		String result = "";
+		if (sdApprovalDto.getVal() == 1) {
+			result = sdApprovalDto.getDmndNo() + "번 요청이 승인처리 되었습니다.";
+		} else
+			result = sdApprovalDto.getDmndNo() + "번 요청이 반려처리 되었습니다.";
 		map.put("result", result);
 		return map;
 	}

@@ -7,6 +7,28 @@
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <script src="/resources/js/kakaoAddress.js"></script>
 </head>
+<style>
+.box{
+    width: 200px;
+    border: 1px solid #77aaff;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.box:focus{
+    border: 1px solid #9B51E0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 3px solid #77aaff;
+    border-radius: 10px;
+}
+</style>
 <body>
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
@@ -39,9 +61,12 @@
 											</div>
 
 											<div class="col-7 card-block">
-												<form class="form-material">
+												<form class="form-material" id="joinForm" action="/join"
+													method="post">
+													<input type="hidden" name="memberType" value="ROLE_CLIENT">
+													<input type="hidden" name="instCd">
 													<div class="form-group form-default" style="display: flex;">
-														<input type="text" name="footer-email"
+														<input type="text" name="memberId"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">아이디</label>
 														<button
@@ -50,31 +75,31 @@
 													</div>
 
 													<div class="form-group form-default">
-														<input type="password" name="footer-email"
+														<input type="password" name="pswd"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">비밀번호</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="footer-email"
+														<input type="text" name="flnm"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">이름</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="footer-email"
+														<input type="text" name="telNo"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">전화번호</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="footer-email"
+														<input type="text" name="eml"
 															class="form-control" required="" style="width: 50%">
 														<label class="float-label">이메일 (exa@gmail.com)</label>
 													</div>
 
 													<div class="form-group form-default">
-														<input type="text" name="footer-email" id="address_kakao"
+														<input type="text" name="addr" id="address_kakao"
 															class="form-control" required="" style="width: 50%"
 															value="혜화역 4번출구"> <input class="form-control"
 															type="text" name="address_detail" placeholder="상세주소"
@@ -83,56 +108,21 @@
 													</div>
 
 													<div class="form-group form-default" style="display: flex;">
-														<input type="text" name="footer-email"
-															class="form-control" required="" style="width: 50%">
-														<label class="float-label">부서</label>
-														<div class="btn-group dropright">
-															<button type="button"
-																class="dropdown-toggle btn waves-effect waves-light hor-grd btn-grd-inverse ml-2"
-																data-toggle="dropdown" aria-expanded="false">
-																찾기</button>
-															<div class="dropdown-menu"
-																style="padding: 10px; width: 300px; height: 300px; overflow-y: scroll">
-																<!-- Dropdown menu links -->
-																<div style="display: flex;">
-																	<input type="text" name="footer-email"
-																		class="form-control" required=""
-																		style="margin-left: 10px; width: 60%;">
-																	<button class="btn-sm ml-4" style="border: none;">검색</button>
-																</div>
-																<a class="dropdown-item" href="#">워크넷(외부망)</a> <a
-																	class="dropdown-item" href="#">워크넷(내부망)</a> <a
-																	class="dropdown-item" href="#">외국인고용관리</a> <a
-																	class="dropdown-item" href="#">고용보험</a> <a
-																	class="dropdown-item" href="#">HRD-NET 시스템</a> <a
-																	class="dropdown-item" href="#">일모아템</a> <a
-																	class="dropdown-item" href="#">MDM(바로원시스템)</a> <a
-																	class="dropdown-item" href="#">EIS</a> <a
-																	class="dropdown-item" href="#">부정수급모니터링</a> <a
-																	class="dropdown-item" href="#">기타</a>
-															</div>
-														</div>
+														<select name="dept" id="dept" class="box">
+																<option disabled selected>부서</option>
+															<c:forEach var="dept" items="${dept}">
+																<option value="${dept.deptCd}">${dept.deptNm}</option>
+															</c:forEach>
+														</select>
 													</div>
 
 													<div class="form-group form-default" style="display: flex;">
-														<input type="text" name="footer-email"
-															class="form-control" required="" style="width: 50%">
-														<label class="float-label">직급</label>
-														<div class="btn-group dropright">
-															<button type="button"
-																class="dropdown-toggle btn waves-effect waves-light hor-grd btn-grd-inverse ml-2"
-																data-toggle="dropdown" aria-expanded="false">
-																찾기</button>
-															<div class="dropdown-menu"
-																style="padding: 10px; width: 300px;">
-																<!-- Dropdown menu links -->
-																<a class="dropdown-item" href="#">부장</a> <a
-																	class="dropdown-item" href="#">차장</a> <a
-																	class="dropdown-item" href="#">과장</a> <a
-																	class="dropdown-item" href="#">대리</a> <a
-																	class="dropdown-item" href="#">사원</a>
-															</div>
-														</div>
+														<select name="grade" id="grade" class="box">
+																<option disabled selected>직급</option>
+															<c:forEach var="grade" items="${grade}">
+																<option value="${grade.jbgdCd}">${grade.jbgdNm}</option>
+															</c:forEach>
+														</select>
 													</div>
 
 												</form>
@@ -142,7 +132,7 @@
 								</div>
 							</div>
 							<div style="justify-content: center; text-align: center;">
-								<button
+								<button form="joinForm"
 									class="btn waves-effect waves-light hor-grd btn-grd-primary ">Sign
 									Up</button>
 							</div>

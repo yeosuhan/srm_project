@@ -13,6 +13,10 @@
 		<!-- URL 권한 설정 -->
 		<security:intercept-url pattern="/loginForm"
 			access="permitAll" />
+		<security:intercept-url pattern="/join-client"
+			access="permitAll" />
+		<security:intercept-url pattern="/join-employee"
+			access="permitAll" />
 		<security:intercept-url pattern="/**"
 			access="isAuthenticated()" />
 		<!-- 로그인/로그아웃 핸들러 -->

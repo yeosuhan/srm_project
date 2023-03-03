@@ -12,13 +12,15 @@ import com.oti.team2.department.service.IDepartmentService;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.srinformation.dao.ISrinformationDao;
+import com.oti.team2.srinformation.dto.Dept;
+import com.oti.team2.srinformation.dto.Manager;
 import com.oti.team2.srinformation.dto.SrInformationRequestDto;
+//github.com/OTI-SRM/srm_project
 import com.oti.team2.srinformation.dto.SrinformationList;
-import com.oti.team2.srinformation.dto.SrplanInfomaion;
+import com.oti.team2.srinformation.dto.SrplanInformation;
 import com.oti.team2.system.service.ISystemService;
 
 import lombok.extern.log4j.Log4j2;
-
 @Service
 @Log4j2
 public class SrinformationService implements ISrinformationService{
@@ -47,7 +49,6 @@ public class SrinformationService implements ISrinformationService{
 		return srlist;
 	}
 	
-	
 	/**
 	 * 
 	 * @author 여수한
@@ -55,7 +56,7 @@ public class SrinformationService implements ISrinformationService{
 	 * @return sr진척 계획정보 조회
 	 */
 	@Override
-	public SrplanInfomaion getPlan(String dmndNo) {
+	public SrplanInformation getPlan(String dmndNo) {
 		return srinformationDao.selectPlanByDmndNo(dmndNo);
 	}
 	
@@ -105,6 +106,41 @@ public class SrinformationService implements ISrinformationService{
 		srNO += number;
 		log.info(srNO);
 		return srNO;
+	}
+
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return 개발부서 조회
+	 */
+	@Override
+	public List<Dept> getDeptList() {
+		List<Dept> deptList = srinformationDao.selectDept();
+		return deptList;
+	}
+
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return sr계획정보 부서의 담당자 조회
+	 */
+	@Override
+	public Manager getFlnmByDeptCd(String deptCd) {
+		return srinformationDao.selectFlnmByDeptCd(deptCd);
+		
+	}
+	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return sr계획정보 부서 변경
+	 */
+	@Override
+	public void updateSrInfo(SrplanInformation srplanInfomation) {
+		srinformationDao.updateSrInfo(srplanInfomation);
 	}
 
 }

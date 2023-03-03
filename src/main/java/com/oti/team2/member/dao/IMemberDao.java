@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.member.dto.Developer;
-import com.oti.team2.member.dto.FilteringMember;
+import com.oti.team2.member.dto.FilterDto;
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.member.dto.Users;
@@ -27,7 +27,7 @@ public interface IMemberDao {
 	 * @param memberType
 	 * @return
 	 */
-	public int countByMemberType(@Param("memberType")String memberType, @Param("filtering")FilteringMember filtering);
+	public int countByMemberType(@Param("memberType")String memberType, @Param("filtering")FilterDto filterDto);
 	
 	/**
 	 * 멤버 타입 별 목록 조회 (관리자가 수행)
@@ -38,7 +38,7 @@ public interface IMemberDao {
 	 * @param filtering 
 	 * @return
 	 */
-	public List<Member> selectByMemberType(@Param("memberType")String memberType, @Param("pager")Pager pager,@Param("filtering") FilteringMember filtering);
+	public List<Member> selectByMemberType(@Param("memberType")String memberType, @Param("pager")Pager pager,@Param("filtering") FilterDto filterDto);
 	
 
 	/**

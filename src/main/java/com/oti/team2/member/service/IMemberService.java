@@ -3,7 +3,7 @@ package com.oti.team2.member.service;
 import java.util.List;
 
 import com.oti.team2.member.dto.Developer;
-import com.oti.team2.member.dto.FilteringMember;
+import com.oti.team2.member.dto.FilterDto;
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.util.pager.Pager;
@@ -16,7 +16,7 @@ public interface IMemberService {
 	 * @param memberType
 	 * @return
 	 */
-	public int getTotalRows(String memberType, FilteringMember filtering);
+	public int getTotalRows(String memberType, FilterDto filterDto);
 	
 	/**
 	 * 멤버 타입 별 목록 조회 (관리자가 수행)
@@ -26,7 +26,7 @@ public interface IMemberService {
 	 * @param filtering 
 	 * @return
 	 */
-	public List<Member> getMemberList(String memberType, Pager pager, FilteringMember filtering);
+	public List<Member> getMemberList(String memberType, Pager pager, FilterDto filterDto);
 	
 	/**
 	 * 멤버 타입 별 내 정보 조회
