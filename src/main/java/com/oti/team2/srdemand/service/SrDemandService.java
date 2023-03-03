@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -170,6 +171,16 @@ public class SrDemandService implements ISrDemandService{
 	 */
 	public String getSysCdByDmndNo(String dmndNo) {
 		return srDemandDao.selectSysCdByDmndNo(dmndNo);
+	}
+	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-02-28
+	 * @return sr요청 진행사항 수정 : 진척률 수정 / 결제취소 처리 시에 사용 됨
+	 */
+	public void updateSrDemandStts(String srNo, int sttsCd) {
+		srDemandDao.updateSttsBySrNo(srNo, sttsCd);
 	}
 
 }

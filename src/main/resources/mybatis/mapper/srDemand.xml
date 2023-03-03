@@ -249,4 +249,21 @@
 		WHERE DMND_NO = #{dmndNo}
 	</select>
 	
+		<!-- sr요청 진행사항 수정 -->
+	<update id="updateSttsBySrNo" parameterType="map">
+		UPDATE
+			SR_DEMAND
+		SET
+			STTS_CD = #{sttsCd}
+		WHERE
+			DMND_NO = (
+						SELECT 
+							DMND_NO
+						FROM 
+							SR_INFORMATION
+						WHERE
+							SR_NO=#{srNo} 
+						)			
+	</update>
+	
 </mapper>
