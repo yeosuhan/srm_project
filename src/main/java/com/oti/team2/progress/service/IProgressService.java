@@ -15,9 +15,9 @@ public interface IProgressService {
 	/**
 	 * 
 	 * @author 여수한
-	 * 작성일자 : 2023-02-27
+	 * 작성일자 : 2023-02-28
 	 * @return sr요청 진척률 수정
 	 */
-	String addProgress(List<String> prgrs);
+	void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo);
 
 }

@@ -92,10 +92,9 @@ function addDeliverable(){
    var deliverableForm ={
          "prgrsId":$("#SRPgPrgrsId"+($("#prgrsIdSelect").val()-1)).val(),
          "delivUrl":$("#delivUrl").val(),
-         "delivNm":$("#delivNm").val(),
-         "regYmd":$("#regYmd").val()
+         "delivNm":$("#delivNm").val()
    }
-   //console.log(resourceForm);
+   console.log(deliverableForm);
    $.ajax({
       url:"/deliverable/add",
       type:"POST",

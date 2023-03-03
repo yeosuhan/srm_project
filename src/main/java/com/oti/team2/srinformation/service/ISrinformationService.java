@@ -2,9 +2,10 @@ package com.oti.team2.srinformation.service;
 
 import java.util.List;
 
-import com.oti.team2.srdemand.dto.SrdemandDetail;
+import com.oti.team2.srinformation.dto.Dept;
+import com.oti.team2.srinformation.dto.Manager;
 import com.oti.team2.srinformation.dto.SrinformationList;
-import com.oti.team2.srinformation.dto.SrplanInfomaion;
+import com.oti.team2.srinformation.dto.SrplanInfomation;
 
 public interface ISrinformationService {
 	/**
@@ -14,13 +15,34 @@ public interface ISrinformationService {
 	 * @return sr진척 목록 조회
 	 */
 	List<SrinformationList> getList();
-	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return 개발부서 조회
+	 */
+	List<Dept> getDeptList();
 	/**
 	 * 
 	 * @author 여수한
 	 * 작성일자 : 2023-02-23
 	 * @return sr진척 계획정보 조회
 	 */
-	SrplanInfomaion getPlan(String Plan);
+	SrplanInfomation getPlan(String Plan);
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return sr계획정보 부서의 담당자 조회
+	 */
+	Manager getFlnmByDeptCd(String deptCd);
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return sr계획정보 부서 변경
+	 */
+	void updateSrInfo(SrplanInfomation srplanInfomation);
+
 
 }

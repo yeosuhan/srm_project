@@ -36,7 +36,6 @@ public class ProgressController {
 		log.info("pg:" + pg);
 		return pg;
 	}
-	
 	/**
 	 * 
 	 * @author 여수한
@@ -44,10 +43,17 @@ public class ProgressController {
 	 * @return sr요청 진척률 수정
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/progress/add", method=RequestMethod.POST)
-	public String addProgress(@RequestParam(value="prgrs[]") List<String> prgrs) {
-		log.info("prgrs: " + prgrs);
-		return progressService.addProgress(prgrs);
+	@RequestMapping(value="/srinformation/progress/update", method=RequestMethod.POST)
+	public void updateProgress2(@RequestParam(value="prgrsRt") int prgrsRt, 
+			@RequestParam(value="bgngYmd") String bgngYmd, 
+			@RequestParam(value="endYmd") String endYmd,
+			@RequestParam(value="prgrsId") int prgrsId,
+			String srNo) {
+		log.info("prgrs: " + prgrsRt);
+		log.info("bgngYmd: " + bgngYmd);
+		log.info("endYmd: " + endYmd);
+		log.info("prgrsId: " + prgrsId);
+		log.info("srNo: " + srNo);
+		progressService.updateProgress(prgrsRt, bgngYmd, endYmd, prgrsId, srNo);
 	}
-	
 }

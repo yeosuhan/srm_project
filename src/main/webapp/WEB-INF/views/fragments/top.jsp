@@ -116,18 +116,6 @@
 									<input type="submit" value="LOGOUT"/>
 								</form:form></li>
 						</sec:authorize>
-						<li class="waves-effect waves-light"><a
-							href="${pageContext.request.contextPath}/example?role=1"> <i
-								class="ti-layout-sidebar-left"></i> 고객 로그인
-						</a></li>
-						<li class="waves-effect waves-light"><a
-							href="${pageContext.request.contextPath}/example?role=2"> <i
-								class="ti-layout-sidebar-left"></i> 개발자 로그인
-						</a></li>
-						<li class="waves-effect waves-light"><a
-							href="${pageContext.request.contextPath}/example?role=3"> <i
-								class="ti-layout-sidebar-left"></i> 관리자 로그인
-						</a></li>
 					</ul>
 				</li>
 			</ul>
