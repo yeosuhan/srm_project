@@ -11,6 +11,7 @@
 		<result property="rgtrNm" column="FLNM"/>
 		<result property="regYmd" column="REG_YMD"/>
 	</resultMap>
+	<!-- 산출물 목록 -->
 	<select id="selectByPrgrsId" parameterType="String" resultMap="deliverableResultMap">
 		SELECT 
 			DELIV_ID,
@@ -29,7 +30,7 @@
 			d.PRGRS_ID = #{prgrsId} AND
 			d.DEL_YN = 0
 	</select>
-	
+	<!-- 산출물 추가 -->
 	<insert id="insertDeliverable" parameterType="deliverable">
 		INSERT INTO DELIVERABLES
 			(
@@ -51,6 +52,7 @@
 			)
 			
 	</insert>
+	<!-- 산출물 삭제 처리 -->
 	<update id="updateDelYn" parameterType="deliverable">
 		UPDATE DELIVERABLES SET
 		DEL_YN = 1
@@ -60,4 +62,18 @@
 			</foreach>
 		</where>
 	</update>
+	<!-- 산출물 수정 -->
+	<update id="updateDeliverable" parameterType="deliverable">
+		UPDATE DELIVERABLES 
+		<set>
+			<if test='!delivNm.equals("") and delivNm != null'>
+				DELIV_NM = #{delivNm},
+			</if>
+			<if test='!delivUrl.equals("") and delivUrl != null'>
+				DELIV_URL = #{delivUrl},
+			</if>
+		</set>
+		WHERE DELIV_ID = #{delivId}
+	</update>
+	
 </mapper>

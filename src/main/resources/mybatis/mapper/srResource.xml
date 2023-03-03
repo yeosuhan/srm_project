@@ -3,8 +3,10 @@
 <mapper namespace="com.oti.team2.srresource.dao.ISrResourceDao">
 	<resultMap type="srResource" id="srResourceResultMap">
 		<id property="srSrc" column="SR_SRC"/>
+		<result property="empId" column="EMP_ID"/>
 		<result property="empNm" column="FLNM"/>
 		<result property="ptcptnRoleNm" column="ROLE_NM"/>
+		<result property="ptcptnRoleCd" column="PTCPTN_ROLE_CD"/>
 		<result property="schdlBgngYmd" column="SCHDL_BGNG_YMD"/>
 		<result property="schdlEndYmd" column="SCHDL_END_YMD"/>
 	</resultMap>
@@ -12,8 +14,10 @@
 	<select id="selectBySrNo" parameterType="String" resultMap="srResourceResultMap">
 		SELECT 
 			SR_SRC ,
+			EMP_ID,
 			FLNM ,
 			ROLE_NM ,
+			PTCPTN_ROLE_CD,
 			SCHDL_BGNG_YMD ,
 			SCHDL_END_YMD 
 		FROM
@@ -54,4 +58,38 @@
 			</foreach>
 		</where>
 	</delete>
+	
+	<!-- 자원정보 수정 -->
+	<update id="updateSrResource" parameterType="srResource" >
+		UPDATE SR_RESOURCES
+			<set>
+				<if test="ptcptnRoleCd != null">
+					PTCPTN_ROLE_CD = #{ptcptnRoleCd},
+				</if>
+				<if test="schdlBgngYmd != null">
+					SCHDL_BGNG_YMD = #{schdlBgngYmd},
+				</if>
+				<if test="schdlEndYmd != null">
+					<if test="schdlBgngYmd == null">
+						SCHDL_BGNG_YMD = 
+							CASE 
+								<![CDATA[WHEN SCHDL_BGNG_YMD > #{schdlEndYmd} then #{schdlEndYmd}]]>
+								ELSE SCHDL_BGNG_YMD
+							END,
+					</if>
+					SCHDL_END_YMD = #{schdlEndYmd},
+				</if>
+			</set>
+		<where>
+			<if test="srSrc != null"> <!-- 자원정보를 수정 하는 경우: 투입일 종료일을 둘다 수정하면 종료일이 더 빠른 경우가 있을수 있음 -->
+				SR_SRC = #{srSrc} 
+			</if>
+			<if test="srNo != null"> <!-- sr이 취소 되거나 예정일 보다 빨리 완료 되는 경우: srNO와 종료일을 srResource에 담아 파라미터로 전달 -->
+				AND SR_NO = #{srNo} AND
+				<![CDATA[SCHDL_END_YMD < #{schdlEndYmd}]]>
+			</if>
+		</where>
+	</update>
+	
+	
 </mapper>
