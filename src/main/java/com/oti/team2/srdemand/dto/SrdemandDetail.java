@@ -19,6 +19,7 @@ public class SrdemandDetail {
 	private Date cmptnDmndYmd;
 	private String rjctRsn;
 	private String cn;
+	private String rnk;
 	
 	//SR진척
 	private Date endYmd;
