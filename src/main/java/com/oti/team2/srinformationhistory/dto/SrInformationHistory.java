@@ -16,8 +16,9 @@ public class SrInformationHistory {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date wrtYmd;
 	private String hstryStts;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date chgEndYmd;
+/*	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	private Date chgEndYmd;*/
+	private String chgEndYmd;
 	private String hstryType;
 	private boolean delYn;
 	private String rqstrId;

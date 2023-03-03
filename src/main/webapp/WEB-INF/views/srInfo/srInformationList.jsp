@@ -17,63 +17,10 @@
 	src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/deliverables.js"></script>
-
-<script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/srInfoListHstry.js"></script>
 	
-<%-- JSON으로 받아온 HistoryList를 보여주기 위한 ajax --%>
-	function getSrHistoryList() {
-		var srNo = $("#srNo").val();
-		console.log("srHistoryList 글번호: " + srNo);
-		$
-				.ajax({
-					url : "/history/emp/list?srNo=" + srNo,
-					type : "GET",
-
-					success : function(result) {
-						console.log(result);
-						console.log(result.srInformationHistory[0].hstryId);
-						$("#srhistory1").empty();
-
-						for (var i = 0; i < result.srInformationHistory.length; i++) {
-							var historyId = result.srInformationHistory[i].hstryId;
-							var historyCount = [ i + 1 ];
-
-							var historyWriter = result.srInformationHistory[i].flnm;
-							if (result.srInformationHistory[i].hstryType == 'A'
-									|| result.srInformationHistory[i].hstryType == 'B') {
-								var historyType = "완료일 변경";
-							} else {
-								var historyType = "개발 취소";
-							}
-							if (result.srInformationHistory[i].hstryType == 'C') {
-								var historyChgEndYmd = "-";
-							} else {
-								var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
-							}
-							if (result.srInformationHistory[i].hstryStts == 'I') {
-								var historyStts = "미승인";
-							} else if (result.srInformationHistory[i].hstryStts == 'N') {
-								var historyStts = "반려";
-							} else {
-								var historyStts = "승인";
-							}
-
-							var param = '<tr data-toggle="modal" data-target="#approvalInfoHistoryModal" onclick="getInfoHstryDetail('
-									+ historyId + ')">';
-							param += '<th scope="row">' + historyCount
-									+ '</th>';
-							param += '<td>' + historyWriter + '</td>';
-							param += '<td>' + historyType + '</td>';
-							param += '<td>' + historyChgEndYmd + '</td>';
-							param += '<td>' + historyStts + '</td>';
-							param += '</tr>';
-
-							$("#srhistory1").append(param);
-						}
-					}
-				});
-	}
-	
+<script>	
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -85,7 +32,6 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-	
 <%-- SR요청 상세보기 --%>
 	function getDetail(dmndNo, srNo) {
 		console.log("상세보기 : " + dmndNo + srNo);
@@ -129,7 +75,6 @@
 			}
 		});
 	}
-	
 <%-- SR요청 계획정보 --%>
 	function getPlan() {
 		$("#SRDDmndNo").val();
@@ -149,7 +94,6 @@
 			}
 		});
 	}
-	
 <%-- SR요청 진척률 --%>
 	function getProgress() {
 		$("#SRDSrNo").val();

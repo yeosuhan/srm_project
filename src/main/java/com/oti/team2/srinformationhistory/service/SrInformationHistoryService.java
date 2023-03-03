@@ -1,6 +1,8 @@
 package com.oti.team2.srinformationhistory.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,7 +73,7 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	}
 
 	/**
-	 * SR처리 변경요청에 대한 수락 여부를 업데이트 하기 위한 메서드
+	 * 결재자의 결재 전 요청을 수정하는 메서드
 	 * 
 	 * @author 최은종
 	 */
@@ -82,14 +84,43 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	}
 
 	/**
-	 * SR 요청일 변경을 위한 insert 메서드
+	 * SR 히스토리 등록을 위한 insert 메서드
 	 * 
 	 * @author 최은종
+	 * @see 개발자, 관리자
 	 */
 	@Transactional
 	public void addSrInformationHistory(SrInformationHistory srInformationHistory) {
-		log.info("서비스----등록");
+		log.info("서비스----insert");
+		String hstryType = srInformationHistory.getHstryType();
+		log.info("서비스----hstryType: " + hstryType);
+		
+		if(hstryType=="A") {           
+			srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId());		
+		}
 		srInformationHistoryDao.insertSrHistory(srInformationHistory);
+	}
+
+	/**
+	 * SR 요청일 변경을 위한 update 메서드
+	 * 
+	 * @author 최은종
+	 * 여러 서비스들을 호출해서 관련 날짜 및 상태값 모두 업데이트
+	 * @see 관리자, 고객
+	 */
+	@Transactional
+	public void updateHstryStts(HashMap<String, String> map) {
+		log.info("서비스----update Status");
+		log.info(map);
+		
+		int hstryId = Integer.parseInt(map.get("hstryId"));
+		String srNo= (String) map.get("srNo");
+				
+		log.info("서비스 히스토리넘버: " + hstryId);
+		log.info("서비스 SR넘버: " + srNo);
+		//여러 서비스 연결
+		srInformationHistoryDao.updateHstryStts(hstryId);	
+		
 	}
 
 }

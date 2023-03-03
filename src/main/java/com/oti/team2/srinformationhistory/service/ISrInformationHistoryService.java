@@ -1,5 +1,6 @@
 package com.oti.team2.srinformationhistory.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
@@ -44,10 +45,18 @@ public interface ISrInformationHistoryService {
 	public String getSrNo(String dmndNo);
 	
 	/**
-	 * SR 요청일 변경을 위한 insert 메서드
+	 * SR 히스토리 등록을 위한 insert 메서드
 	 * 
 	 * @author 최은종
 	 */
 	public void addSrInformationHistory(SrInformationHistory srInformationHistory);
+	
+	/**
+	 * SR 히스토리 상태 변경을 위한 update 메서드
+	 * 
+	 * @author 최은종
+	 * @param map 
+	 */
+	public void updateHstryStts(HashMap<String, String> map);
 	
 }

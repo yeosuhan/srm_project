@@ -1,15 +1,18 @@
 package com.oti.team2.srinformationhistory.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryListDto;
@@ -19,7 +22,7 @@ import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
 
-@RestController
+@Controller
 @Log4j2
 @RequestMapping("/history")
 public class SrInformationHistoryController {
@@ -35,6 +38,7 @@ public class SrInformationHistoryController {
 	 *        매개변수로 설정함
 	 * @return srHistoryList 히스토리 리스트와 페이징 객체를 담은 Dto 리턴
 	 */
+	@ResponseBody
 	@GetMapping("/list")
 	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
 			@RequestParam String dmndNo, Authentication auth) {
@@ -58,7 +62,7 @@ public class SrInformationHistoryController {
 		log.info("srHistoryList 조회" + srHistoryList);
 		return srHistoryList;
 	}
-
+	@ResponseBody
 	@GetMapping("/emp/list")
 	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
 			@RequestParam String srNo) {
@@ -86,6 +90,7 @@ public class SrInformationHistoryController {
 	 * @param hstryId 히스토리 목록에서 하나의 히스토리를 상세 조회하기 위해 hstryId를 매개변수로 설정
 	 * @return srHistoryDetailDto 상세 내용을 담은 srHistoryDetailDto 리턴
 	 */
+	@ResponseBody
 	@GetMapping("/detail/{hstryId}")
 	public SrHistoryDetailDto getSrInformationHistory(@PathVariable("hstryId") int hstryId) {
 		log.info("srInformationHistory 상세조회");
@@ -103,7 +108,9 @@ public class SrInformationHistoryController {
 	 * @author 최은종
 	 * @param srNo srNo를 알아와 그에 대한 히스토리를 등록하기 위해 srNo 매개변수로 설정
 	 * @return srNo 리턴
+	 * @see 개발자, 관리자
 	 */
+	@ResponseBody
 	@GetMapping("/add")
 	public String getSrHistoryWriteForm(@RequestParam String srNo) {
 		log.info("getSrHistoryWriteForm 등록");
@@ -117,15 +124,42 @@ public class SrInformationHistoryController {
 	 * @author 최은종
 	 * @param SrInformationHistory 객체에 데이터를 입출력하기 위해 매개변수로 설정
 	 * @return 진척정보 페이지 리턴
+	 * @see 개발자(히스토리 등록), 관리자(히스토리 등록&등록 요청에 대한 수락상태 업데이트)
 	 */
 	@PostMapping("/add")
 	public String addSrInformationHistory(SrInformationHistory srInformationHistory) {
 		log.info("addSrInformationHistory POST");
-
+		log.info("DTO: "+ srInformationHistory);
+		log.info("srNo: "+ srInformationHistory.getSrNo());
+		
 		srInformationHistoryService.addSrInformationHistory(srInformationHistory);
 
 		log.info("컨트롤러" + srInformationHistory);
 
-		return "srInfo/srInformationList";
+		return "redirect:/srinformation/list";
+	}
+	
+	/**
+	 * SR처리 히스토리 상태 수정 메서드 (POST)
+	 *
+	 * @author 최은종
+	 * @param SrInformationHistory 객체에 데이터를 입출력하기 위해 매개변수로 설정
+	 * @return 진척정보 페이지 리턴
+	 * @see 고객(요청에 대한 수락상태 업데이트), 관리자
+	 */
+	@PostMapping("/approval")
+	public String updateHstryStts(SrInformationHistory srInformationHistory) {
+		log.info("Update");
+		log.info("srNo: " + srInformationHistory.getSrNo());
+		log.info("historyId: " + srInformationHistory.getHstryId());
+		
+		HashMap<String, String> map= new HashMap<>();
+		map.put("hstryId", String.valueOf(srInformationHistory.getHstryId()));
+		map.put("srNo", srInformationHistory.getSrNo());
+		log.info("map: " + map);
+		
+		srInformationHistoryService.updateHstryStts(map);
+		
+		return "redirect:/srinformation/list";
 	}
 }

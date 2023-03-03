@@ -33,7 +33,7 @@
 	<select id="selectByHstryId" parameterType="int"
 		resultType="srHistoryDetailDto">
 		<![CDATA[
-			select hstry_id as hstryId, srH.sr_no as srNo, dmndNo, instNm, sysNm, deptNm, wrt_ymd as wrtYmd, cmptnDmndYmd, chg_end_ymd as chgEndYmd, hstry_ttl as hstryTtl, hstry_cn as hstryCn, hstry_type as hstryType
+			select hstry_id as hstryId, srH.sr_no as srNo, dmndNo, instNm, sysNm, deptNm, wrt_ymd as wrtYmd, cmptnDmndYmd, chg_end_ymd as chgEndYmd, hstry_ttl as hstryTtl, hstry_cn as hstryCn, hstry_type as hstryType, hstry_stts as hstryStts, rqstr_id as rqstrId
 			from(
 			    select member_id as mid, m.inst_cd as instCd, i.inst_nm as instNm, srNo, dmndNo, bgngYmd, endYmd, cmptnDmndYmd, deptCd, d.dept_nm as deptNm, picId, rvwrId, prgrsYn, sysCd, s.sys_cd as ssysCd, sys_nm as sysNm
 			    from(
@@ -45,14 +45,29 @@
 		]]>
 	</select>
 
-	<!-- History 요청일변경 등록 -->
+	<!-- History 요청일변경/개발취소 등록 -->
 	<insert id="insertSrHistory" parameterType="srInformationHistory">
-		insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, chg_end_ymd, hstry_type, rqstr_id)
-		values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{chgEndYmd}, #{hstryType}, #{rqstrId})		
+		<if test='chgEndYmd!=null and hstryStts!="Y" and hstryStts!="N"'>
+			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, chg_end_ymd, hstry_type, rqstr_id)
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{chgEndYmd}, #{hstryType}, #{rqstrId})		
+		</if>
+		<if test='chgEndYmd!=null and hstryStts=="Y" or hstryStts=="N"'>
+			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, hstry_stts, chg_end_ymd, hstry_type, rqstr_id)
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{hstryStts}, #{chgEndYmd}, #{hstryType}, #{rqstrId})		
+		</if>
+		<if test="chgEndYmd==null">
+			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, hstry_type, rqstr_id)
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{hstryType}, #{rqstrId})		
+		</if>
 	</insert>
 
-
-	<!-- History 승인여부 상태 업데이트 -->
+	<!-- History 수락여부 상태 업데이트 -->
+	<update id="updateHstryStts" parameterType="int">	
+			update sr_information_history
+			set hstry_stts = #{hstryStts}
+			where hstry_id = #{hstryId} 
+	</update>
+	
 
 	<!-- History 승인 전 날짜 변경 업데이트 -->
 
