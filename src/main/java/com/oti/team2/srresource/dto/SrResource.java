@@ -12,7 +12,7 @@ public class SrResource {
 	private String srNo;
 	private String empId;
 	private String empNm;
-	private int ptcptnRoleCd;
+	private Integer ptcptnRoleCd;
 	private String ptcptnRoleNm;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date schdlBgngYmd;
