@@ -104,5 +104,13 @@ public interface ISrDemandDao {
 	 * @author 신정은
 	 */
 	public String selectSysCdByDmndNo(@Param("dmndNo") String dmndNo);
+	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-02-28
+	 * @return sr요청 진행사항 수정 : 진척률 수정 / 결제취소 처리 시에 사용 됨
+	 */
+	public int updateSttsBySrNo(@Param("srNo") String srNo, @Param("sttsCd") int sttsCd);
 
 }
