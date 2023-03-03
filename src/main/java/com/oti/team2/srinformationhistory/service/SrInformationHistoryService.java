@@ -2,17 +2,20 @@ package com.oti.team2.srinformationhistory.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.srdemand.dao.ISrDemandDao;
-import com.oti.team2.srinformation.dao.ISrinformationDao;
+import com.oti.team2.srdemand.service.SrDemandService;
+import com.oti.team2.srinformation.service.SrinformationService;
 import com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
+import com.oti.team2.srresource.dao.ISrResourceDao;
+import com.oti.team2.srresource.dto.SrResource;
+import com.oti.team2.srresource.service.SrResourceService;
 import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
@@ -25,6 +28,15 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 
 	@Autowired
 	private ISrDemandDao srDemandDao;
+	
+	@Autowired
+	private SrDemandService srDemandService;
+	
+	@Autowired
+	private ISrResourceDao srResourceDao;
+	
+	@Autowired
+	private SrinformationService srInformationService;
 
 	/**
 	 * SR처리 히스토리 내역 조회 메서드
@@ -120,6 +132,10 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		log.info("서비스 SR넘버: " + srNo);
 		//여러 서비스 연결
 		srInformationHistoryDao.updateHstryStts(hstryId);	
+		srDemandService.updateSrDemandStts(srNo, 6);
+		//srResourceDao.updateSrResource(srNo);
+		//srInformationService.updatePrgrsBySrNo(srNo);
+		
 		
 	}
 

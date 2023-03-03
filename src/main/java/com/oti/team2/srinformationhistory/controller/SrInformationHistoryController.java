@@ -62,6 +62,7 @@ public class SrInformationHistoryController {
 		log.info("srHistoryList 조회" + srHistoryList);
 		return srHistoryList;
 	}
+	
 	@ResponseBody
 	@GetMapping("/emp/list")
 	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,

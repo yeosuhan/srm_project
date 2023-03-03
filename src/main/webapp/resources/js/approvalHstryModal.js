@@ -85,18 +85,18 @@ function getHstryDetail(historyId) {
 					} else if (auth != 'ROLE_CLIENT'
 							&& (appvHstryType == 'B' || appvHstryType == 'C')) {
 						if (appvHstryStts == 'I') {
-							$('#HstrySttsDiv2')
+							$('#appvHstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="appvHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
 													+ '<label><input id="appvHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
 							$('#footDivUSer').text("결재 권한이 없습니다.");
 						} else if (appvHstryStts == 'Y') {
-							$('#HstrySttsDiv2')
+							$('#appvHstrySttsDiv2')
 									.html(
 											'<input id="bHstryStts" type="text" value="승인" readonly>');
 							$('#footDivUSer').text("결재 처리 된 요청입니다.");
 						} else if (appvHstryStts == 'N') {
-							$('#HstrySttsDiv2')
+							$('#appvHstrySttsDiv2')
 									.html(
 											'<input id="cHstryStts" type="text" value="반려" readonly>');
 							$('#footDivUSer').text("결재 처리 된 요청입니다.");

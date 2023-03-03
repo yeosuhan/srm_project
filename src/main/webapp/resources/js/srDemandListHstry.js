@@ -1,5 +1,5 @@
 function getHistoryList() {
-	var dmndNo = $("#dmndNo").val();
+	var dmndNo = $(".dmndNo").val();
 	console.log("srHistoryList 글번호: " + dmndNo);
 	$
 			.ajax({

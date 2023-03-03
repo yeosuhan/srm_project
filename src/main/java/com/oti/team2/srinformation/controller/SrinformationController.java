@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.service.ISrDemandService;
+import com.oti.team2.srinformation.dto.Dept;
+import com.oti.team2.srinformation.dto.Manager;
 import com.oti.team2.srinformation.dto.SrTotal;
 import com.oti.team2.srinformation.dto.SrinformationList;
-import com.oti.team2.srinformation.dto.SrplanInfomaion;
+import com.oti.team2.srinformation.dto.SrplanInformation;
 import com.oti.team2.srinformation.service.ISrinformationService;
 
 import lombok.extern.log4j.Log4j2;
@@ -38,8 +40,14 @@ public class SrinformationController {
 	@RequestMapping(value="/srinformation/list", method=RequestMethod.GET)
 	public String getList(Model model) {
 		List<SrinformationList> srlist = srinformationService.getList();
+		SrdemandDetail sd = srDemandService.getSrDemandDetail(srlist.get(0).getDmndNo());
+		List<Dept> deptList = srinformationService.getDeptList();
+		log.info("sd 상세 : " + sd);
 		log.info("진척목록: " + srlist);
+		log.info("개발부서 목록: " + deptList);
+		model.addAttribute("sd", sd);
 		model.addAttribute("srlist", srlist);
+		model.addAttribute("deptList", deptList);
 		return "srInfo/srInformationList";
 	}
 	
@@ -53,7 +61,7 @@ public class SrinformationController {
 	@RequestMapping(value="/srinformation/detail/{dmndNo}", method=RequestMethod.GET)
 	public SrTotal getDetail(@PathVariable("dmndNo")String dmndNo) {
 		SrdemandDetail dd = srDemandService.getSrDemandDetail(dmndNo);
-		SrplanInfomaion pi = srinformationService.getPlan(dmndNo);
+		SrplanInformation pi = srinformationService.getPlan(dmndNo);
 		SrTotal total = new SrTotal(dd,pi);
 		return total;
 	}
@@ -66,65 +74,35 @@ public class SrinformationController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/srinformation/plan/{dmndNo}", method=RequestMethod.GET)
-	public SrplanInfomaion getPlanInfo(@PathVariable("dmndNo")String dmndNo) {
-		SrplanInfomaion pi = srinformationService.getPlan(dmndNo);
+	public SrplanInformation getPlanInfo(@PathVariable("dmndNo")String dmndNo) {
+		SrplanInformation pi = srinformationService.getPlan(dmndNo);
+		log.info("pi : " + pi);
 		return pi;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-		
 	/**
 	 * 
 	 * @author 여수한
-	 * 작성일자 : 2023-02-23
-	 * @return sr요청 진척률 수정
-	 *//*
+	 * 작성일자 : 2023-03-02
+	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/{dmndNo}", method=RequestMethod.POST)
-	public SrdemandDetail updateProgress(@PathVariable("dmndNo")String dmndNo, Model model) {
-		return null;
+	@RequestMapping(value="/srinformation/plan/update", method=RequestMethod.POST)
+	public void updateSrInfo(SrplanInformation srplanInfomation) {
+		log.info("업데이트될 계획 정보 : " + srplanInfomation);
+		srinformationService.updateSrInfo(srplanInfomation);
 	}
 	
-	*//**
+	/**
 	 * 
 	 * @author 여수한
-	 * 작성일자 : 2023-02-23
-	 * @return sr요청 산출물 조회
-	 *//*
+	 * 작성일자 : 2023-03-02
+	 * @return sr계획정보 부서 변경
+	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/{dmndNo}", method=RequestMethod.GET)
-	public SrdemandDetail getDeliverbles(@PathVariable("dmndNo")String dmndNo, Model model) {
-		return null;
+	@RequestMapping(value="/srinformation/mngr/{deptCd}", method=RequestMethod.GET)
+	public Manager getFlnmByDeptCd(@PathVariable("deptCd")String deptCd) {
+		Manager flnm = srinformationService.getFlnmByDeptCd(deptCd);
+		log.info("바뀐 담당자: " + flnm);
+		return flnm;
 	}
-	
-	*//**
-	 * 
-	 * @author 여수한	
-	 * 작성일자 : 2023-02-23
-	 * @return sr요청 산출물 저장 및 삭제 및 추가
-	 *//*
-	@ResponseBody
-	@RequestMapping(value="/srinformation/{dmndNo}", method=RequestMethod.POST)
-	public SrdemandDetail updateDeliverbles(@PathVariable("dmndNo")String dmndNo, Model model) {
-		return null;
-	}
-	
-	*//**
-	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-02-23
-	 * @return sr요청 히스토리 조회
-	 *//*
-	@ResponseBody
-	@RequestMapping(value="/srinformation/{dmndNo}", method=RequestMethod.GET)
-	public SrdemandDetail getHistory(@PathVariable("dmndNo")String dmndNo, Model model) {
-		return null;
-	}*/
 }

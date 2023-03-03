@@ -107,6 +107,5 @@ public class InstitutionController {
 		log.info(institution);
 		institutionService.updateInst(institution);
 		return "redirect:/myinfo";
-	}
-
+	}	
 }

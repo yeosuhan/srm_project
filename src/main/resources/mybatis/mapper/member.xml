@@ -8,11 +8,13 @@
 		SELECT
 		MEMBER_ID as memberId ,
 		PSWD as pswd ,
-		ENABLED as enabled ,
+		ENABLED as
+		enabled ,
 		FLNM as flnm ,
 		MEMBER_TYPE as authority
 		FROM MEMBERS
-		WHERE MEMBER_ID=#{memberId}
+		WHERE
+		MEMBER_ID=#{memberId}
 	</select>
 
 	<!-- 고객/사원 총 행의 수 가져오기 -->
@@ -36,15 +38,18 @@
 		</if>
 		<if test="filtering.deptNm != null">
 			AND m.DEPT_CD = d.DEPT_CD
-			AND d.DEPT_NM LIKE '%'||#{filtering.deptNm}||'%'
+			AND d.DEPT_NM LIKE
+			'%'||#{filtering.deptNm}||'%'
 		</if>
 		<if test="filtering.jbgdNm != null">
 			AND m.JBGD_CD = j.JBGD_CD
-			AND j.JBGD_NM LIKE '%'||#{filtering.jbgdNm}||'%'
+			AND j.JBGD_NM LIKE
+			'%'||#{filtering.jbgdNm}||'%'
 		</if>
 		<if test="filtering.instNm != null">
 			AND m.INST_CD = i.INST_CD
-			AND i.INST_NM LIKE '%'||#{filtering.instNm}||'%'
+			AND i.INST_NM LIKE
+			'%'||#{filtering.instNm}||'%'
 		</if>
 	</select>
 
@@ -182,13 +187,13 @@
 		MEMBER_ID = #{memberId}
 		AND
 		MEMBER_TYPE = #{memberType}
-
 	</select>
 
 	<!-- 멤버의 내 정보 수정 -->
 	<update id="updateMember" parameterType="member">
 		UPDATE MEMBERS
-		SET PSWD=#{member.pswd}, ADDR=#{member.addr}, TELNO=#{member.telNo},
+		SET
+		PSWD=#{member.pswd}, ADDR=#{member.addr}, TELNO=#{member.telNo},
 		EML=#{member.eml}
 		WHERE MEMBER_ID=#{member.memberId}
 	</update>
@@ -198,13 +203,15 @@
 		resultType="profileImg">
 		SELECT FILE_TYPE as "fileType",
 		FILE_DATA as "fileData"
-		FROM MEMBERS
+		FROM
+		MEMBERS
 		WHERE MEMBER_ID = #{memberId}
 	</select>
 
 	<!-- 사원삭제 -->
 	<delete id="deleteMemberByMemberId" parameterType="String">
-		DELETE FROM MEMBERS
+		DELETE FROM
+		MEMBERS
 		WHERE MEMBER_ID=#{memberId}
 	</delete>
 
@@ -222,6 +229,7 @@
 		WHERE
 		MEMBER_ID = #{memberId}
 	</update>
+
 	<!-- 개발자 목록 조회 -->
 	<select id="selectByDeptCd" parameterType="String"
 		resultType="developer">
@@ -233,6 +241,14 @@
 		WHERE
 		DEPT_CD = #{deptCd}
 	</select>
+
+	<select id="selectFlnmByMemberId" parameterType="string"
+		resultType="string">
+		SELECT FLNM
+		FROM MEMBERS
+		WHERE MEMBER_ID=#{memberId}
+	</select>
+
 	<!-- Member 객체 안의 내부 객체와의 매핑을 위함 -->
 	<resultMap type="member" id="memberResultMap">
 		<id property="memberId" column="MEMBER_ID" />

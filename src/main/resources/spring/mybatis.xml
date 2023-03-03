@@ -27,4 +27,5 @@
 	<mybatis-spring:scan base-package="com.oti.team2.progress.dao"/>
 	<mybatis-spring:scan base-package="com.oti.team2.srinformation.dao"/>
 	<mybatis-spring:scan base-package="com.oti.team2.deliverable.dao"/>
+	<mybatis-spring:scan base-package="com.oti.team2.role.dao"/>
 </beans>
