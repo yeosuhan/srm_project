@@ -16,7 +16,12 @@ public class JoinService implements IJoinService{
 	@Autowired
 	IJoinDao joinDao;
 	
-	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return 회원가입시 비밀번호 암호화
+	 */
 	private String getEncodedPassword(String pswd) {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		return passwordEncoder.encode(pswd);

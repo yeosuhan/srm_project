@@ -44,5 +44,11 @@ public interface ISrinformationService {
 	 */
 	void updateSrInfo(SrplanInfomation srplanInfomation);
 
-
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-03
+	 * @return 개발취소시 sr정보 진행여부 false(0)으로 수정
+	 */
+	void updatePrgrsBySrNo(String srNo);
 }

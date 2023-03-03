@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 
 <html>
@@ -323,6 +323,7 @@ th {
 															<div class="col-6">
 																<h5>SR요청 상세정보</h5>
 															</div>
+															<!-- 개발 완료, 취소일 때 안보여야됨 -->
 															<div class="col-3">
 																<button type="button" class="btn btn-primary btn-sm"
 																	data-toggle="modal" data-target="#addHistoryModal">
@@ -470,33 +471,34 @@ th {
 																<div class="form-group row">
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">처리팀</div>
-																		<div class="col col-sm-6">
+																		<div class="col col-sm-6" id="deptDiv">
 																			<select id="dept" onchange="changeDept()">
 																				<c:forEach var="deptList" items="${deptList}">
 																					<option id="SRDept" value="${deptList.deptCd}">${deptList.deptNm}</option>
 																				</c:forEach>
-																			</select>
+																			</select> <input type="hidden" id="SRPldeptNm">
 																		</div>
 
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">담당자</div>
 																		<div class="col col-sm-6" id="SRPlFlnmBySelect">
-																			<input type="hidden" id="SRPlMemberId">
-																			<input readonly class="form-control" id="SRPlFlnm">
+																			<input type="hidden" id="SRPlMemberId"> <input
+																				readonly class="form-control" id="SRPlFlnm">
 																		</div>
 																	</div>
 																</div>
 																<div class="form-group row">
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획시작일</div>
-																		<div class="col col-sm-6">
-																			<input type="text" class="form-control" id="SRPlBgngYmd">
+																		<div class="col col-sm-6" id="bgngYmdDiv">
+																			<input type="text" class="form-control"
+																				id="SRPlBgngYmd">
 																		</div>
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획종료일</div>
-																		<div class="col col-sm-6">
+																		<div class="col col-sm-6" id="endYmdDiv">
 																			<input type="text" class="form-control"
 																				id="SRPlEndYmd">
 																		</div>
@@ -505,12 +507,12 @@ th {
 																<div class="form-group row">
 																	<div class="col col-sm-2" style="line-height: 90px;">검토
 																		내용</div>
-																	<div class="col col-sm-9">
+																	<div class="col col-sm-9" id="rvwCnDiv">
 																		<textarea rows="5" cols="5" class="form-control"
 																			id="SRPlRvwCn"></textarea>
 																	</div>
 																</div>
-																<button class="btn btn-info" onclick="planUpdate()"
+																<button class="btn btn-info" onclick="planUpdate()" id="planBtn"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
 															</div>
 															<%-- *********************************** [ 자원정보 ] ***********************************--%>
@@ -538,14 +540,14 @@ th {
 																		</table>
 																	</div>
 																</div>
-																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
-																<button onclick="deleteResource()" class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
-																	삭제</button>
-																<button class="btn btn-info"
-																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
-																	data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
+																	<button class="btn btn-info"
+																		style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
+																	<button onclick="deleteResource()" class="btn btn-info"
+																		style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
+																		삭제</button>
+																	<button class="btn btn-info"
+																		style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
+																		data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
 															</div>
 															<%-- *********************************** [ 진척률 ] ***********************************--%>
 															<div class="tab-pane" id="messages1" role="tabpanel"
@@ -570,13 +572,13 @@ th {
 																				<tbody>
 																					<tr>
 																						<th scope="row">1</th>
-																						<td>요구정의 <input type="hidden"
-																							id="SRPgPrgrsId0"> <input type="hidden"
-																							id="SRPgSrNo">
+																						<td>요구정의 
+																						<input type="hidden" id="SRPgPrgrsId0"> 
+																						<input type="hidden" id="SRPgSrNo">
 																						</td>
-																						<td><input type="date" id="SRPgBgngYmd0"></td>
-																						<td><input type="date" id="SRPgEndYmd0"></td>
-																						<td><input type="number" class="form-control"
+																						<td id="0bgngYmd"><input type="date" id="SRPgBgngYmd0"></td>
+																						<td id="0endYmd"><input type="date" id="SRPgEndYmd0"></td>
+																						<td id="0rt"><input type="number" class="form-control"
 																							id="SRPgPrgrsRt0" min="0" max="10"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
@@ -588,7 +590,7 @@ th {
 																							</div></td>
 																						<td style="padding: 0px; margin: 0px;">
 																							<button class="btn btn-info btn-lg"
-																								onclick="updateProgress1()"
+																								onclick="updateProgress0()" id="btn0"
 																								style="width: 100%; height: 100%">저장</button>
 																						</td>
 																					</tr>
@@ -625,9 +627,9 @@ th {
 																						<th scope="row">2</th>
 																						<td>분석/설계<input type="hidden"
 																							id="SRPgPrgrsId1"></td>
-																						<td><input type="date" id="SRPgBgngYmd1"></td>
-																						<td><input type="date" id="SRPgEndYmd1"></td>
-																						<td><input type="number" class="form-control"
+																						<td id="1bgngYmd"><input type="date" id="SRPgBgngYmd1"></td>
+																						<td id="1endYmd"><input type="date" id="SRPgEndYmd1"></td>
+																						<td id="1rt"><input type="number" class="form-control"
 																							id="SRPgPrgrsRt1" min="11" max="40"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
@@ -639,7 +641,7 @@ th {
 																							</div></td>
 																						<td style="padding: 0px; margin: 0px;">
 																							<button class="btn btn-info btn-lg"
-																								onclick="updateProgress2()"
+																								onclick="updateProgress1()" id="btn1"
 																								style="width: 100%; height: 100%">저장</button>
 																						</td>
 																					</tr>
@@ -675,9 +677,9 @@ th {
 																					<tr>
 																						<th scope="row">3</th>
 																						<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
-																						<td><input type="date" id="SRPgBgngYmd2"></td>
-																						<td><input type="date" id="SRPgEndYmd2"></td>
-																						<td><input type="number" class="form-control"
+																						<td id="2bgngYmd"><input type="date" id="SRPgBgngYmd2"></td>
+																						<td id="2endYmd"><input type="date" id="SRPgEndYmd2"></td>
+																						<td id="2rt"><input type="number" class="form-control"
 																							id="SRPgPrgrsRt2" min="41" max="70"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
@@ -689,7 +691,7 @@ th {
 																							</div></td>
 																						<td style="padding: 0px; margin: 0px;">
 																							<button class="btn btn-info btn-lg"
-																								onclick="updateProgress3()"
+																								onclick="updateProgress2()" id="btn2"
 																								style="width: 100%; height: 100%">저장</button>
 																						</td>
 																					</tr>
@@ -725,9 +727,9 @@ th {
 																					<tr>
 																						<th scope="row">4</th>
 																						<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
-																						<td><input type="date" id="SRPgBgngYmd3"></td>
-																						<td><input type="date" id="SRPgEndYmd3"></td>
-																						<td><input type="number" class="form-control"
+																						<td id="3bgngYmd"><input type="date" id="SRPgBgngYmd3"></td>
+																						<td id="3endYmd"><input type="date" id="SRPgEndYmd3"></td>
+																						<td id="3rt"><input type="number" class="form-control"
 																							id="SRPgPrgrsRt3" min="71" max="80"></td>
 																						<td>
 																							<div class="accordion" id="accordionExample">
@@ -741,7 +743,7 @@ th {
 																						</td>
 																						<td style="padding: 0px; margin: 0px;">
 																							<button class="btn btn-info btn-lg"
-																								onclick="updateProgress4()"
+																								onclick="updateProgress3()" id="btn3"
 																								style="width: 100%; height: 100%">저장</button>
 																						</td>
 																					</tr>
@@ -778,9 +780,9 @@ th {
 																						<th scope="row">5</th>
 																						<td>반영요청<input type="hidden"
 																							id="SRPgPrgrsId4"></td>
-																						<td><input type="date" id="SRPgBgngYmd4"></td>
-																						<td><input type="date" id="SRPgEndYmd4"></td>
-																						<td><input type="number" class="form-control"
+																						<td id="4bgngYmd"><input type="date" id="SRPgBgngYmd4"></td>
+																						<td id="4endYmd"><input type="date" id="SRPgEndYmd4"></td>
+																						<td id="4rt"><input type="number" class="form-control"
 																							id="SRPgPrgrsRt4" min="81" max="90"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
@@ -792,7 +794,7 @@ th {
 																							</div></td>
 																						<td style="padding: 0px; margin: 0px;">
 																							<button class="btn btn-info btn-lg"
-																								onclick="updateProgress5()"
+																								onclick="updateProgress4()" id="btn4"
 																								style="width: 100%; height: 100%">저장</button>
 																						</td>
 																					</tr>
@@ -829,9 +831,9 @@ th {
 																						<th scope="row">6</th>
 																						<td>운영반영<input type="hidden"
 																							id="SRPgPrgrsId5"></td>
-																						<td><input type="date" id="SRPgBgngYmd5"></td>
-																						<td><input type="date" id="SRPgEndYmd5"></td>
-																						<td><input type="number" class="form-control"
+																						<td id="5bgngYmd"><input type="date" id="SRPgBgngYmd5"></td>
+																						<td id="5endYmd"><input type="date" id="SRPgEndYmd5"></td>
+																						<td id="5rt"><input type="number" class="form-control"
 																							id="SRPgPrgrsRt5" min="91" max="100"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
@@ -843,7 +845,7 @@ th {
 																							</div></td>
 																						<td style="padding: 0px; margin: 0px;">
 																							<button class="btn btn-info btn-lg"
-																								onclick="updateProgress6()"
+																								onclick="updateProgress5()" id="btn5"
 																								style="width: 100%; height: 100%">저장</button>
 																						</td>
 																					</tr>
@@ -881,7 +883,7 @@ th {
 																		</div>
 																	</div>
 																</div>
-																<button class="btn btn-info"
+																<button class="btn btn-info" id="delbtn"
 																	onclick="deleteDeliverable()"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택된
 																	산출물 삭제</button>
@@ -955,7 +957,6 @@ th {
 									</div>
 								</div>
 							</div>
-
 						</div>
 						<!-- *********** -->
 					</div>

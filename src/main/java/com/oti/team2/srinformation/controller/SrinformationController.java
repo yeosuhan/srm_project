@@ -56,7 +56,7 @@ public class SrinformationController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/srinformation/detail/{dmndNo}", method=RequestMethod.GET)
-	public SrTotal getDetail(@PathVariable("dmndNo")String dmndNo) {
+	public SrTotal getDetail(@PathVariable("dmndNo")String dmndNo, Model model) {
 		SrdemandDetail dd = srDemandService.getSrDemandDetail(dmndNo);
 		SrplanInfomation pi = srinformationService.getPlan(dmndNo);
 		SrTotal total = new SrTotal(dd,pi);

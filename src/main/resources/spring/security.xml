@@ -17,6 +17,8 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/join-employee"
 			access="permitAll" />
+			<security:intercept-url pattern="/join"
+			access="permitAll" />
 		<security:intercept-url pattern="/**"
 			access="isAuthenticated()" />
 		<!-- 로그인/로그아웃 핸들러 -->

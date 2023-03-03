@@ -11,8 +11,12 @@ function getDetail(dmndNo, srNo) {
 			$('#SRPlFlnm').show();
 			$('#changeMemberId').remove();
 			$('#changeManager').remove();
-			console.log(srNo);
-			console.log(detail);
+			
+			if(dd.sttsNm=='개발완료' || dd.sttsNm=='개발취소') {
+				$(".col-3").hide();
+			} else {
+				$(".col-3").show();
+			}
 			$("#SRDSrNo").val(srNo);
 			$("#SRDDmndNo").val(detail.dd.dmndNo);
 			$("#SRDTitle").val(detail.dd.ttl);
@@ -54,7 +58,39 @@ function getPlan() {
 		url : '/srinformation/plan/' + $("#SRDDmndNo").val(),
 		type : 'GET',
 		success : function(plan) {
-			console.log("멤버 아이디:" + plan.memberId);
+			/*개발완료 or 개발취소*/
+			if(plan.sttsCd>=5) {
+				/*처리팀*/
+				$("#dept").remove();
+				$("#deptDiv").append($("<input type='text' readonly class='form-control' id='SRPldeptNm'>"));
+				/*계획 시작일*/
+				$("#SRPlBgngYmd").remove();
+				$("#bgngYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlBgngYmd'>"));
+				/*계획 종료일*/
+				$("#SRPlEndYmd").remove();
+				$("#endYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlBgngYmd'>"));
+				/*검토내용*/
+				$("#SRPlRvwCn").remove();
+				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
+				/*버튼*/
+				$("#planBtn").hide();
+			} /*개발중*/
+			else {
+				/*처리팀*/
+				$("#SRPldeptNm").remove();
+				$("#deptDiv").append($("<select id='dept' onchange='changeDept()'><c:forEach var='deptList' items='${deptList}'><option id='SRDept' value='${deptList.deptCd}'>${deptList.deptNm}</option></c:forEach></select>"));
+				/*계획 시작일*/
+				$("#SRPlBgngYmd").remove();
+				$("#bgngYmdDiv").append($("<input type='text' class='form-control' id='SRPlBgngYmd'>"));
+				/*계획 종료일*/
+				$("#SRPlEndYmd").remove();
+				$("#endYmdDiv").append($("<input type='text' class='form-control' id='SRPlEndYmd'>"));
+				/*검토내용*/
+				$("#SRPlRvwCn").remove();
+				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
+				/*버튼*/
+				$("#planBtn").show();
+			}
 			$('#SRPlFlnm').show();
 			$('#changeMemberId').remove();
 			$('#changeManager').remove();
@@ -103,19 +139,41 @@ function getProgress() {
 		},
 		success : function(Progress) {
 			for (var i = 0; i < Progress.length; i++) {
-				$("#SRPgSrNo").val(Progress[i].srNo);
-				$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
-				$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
-				$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
-				$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
-				document.getElementById('SRPgEndYmd' + i).setAttribute("min",
-						$("#SRPgBgngYmd" + i).val());
+				let today = new Date().format("YYYY-MM-DD");
+				if(Progress[i].endYmd==null || Progress[i].endYmd>=today) {
+					$("#btn"+i).show();
+					$("#SRPgSrNo").val(Progress[i].srNo);
+					$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
+					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
+					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
+					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
+					document.getElementById('SRPgEndYmd' + i).setAttribute("min",
+							$("#SRPgBgngYmd" + i).val());
+				} else if(Progress[i].endYmd<today) {
+					$("#btn"+i).hide();
+					$("#SRPgBgngYmd").remove();
+					$("#SRPgEndYmd").remove();
+					$("#SRPgPrgrsRt").remove();
+					$("#"+i+"bgngYmd").append($("<input type='text' readonly id='SRPgBgngYmd'+i>"));
+					$("#"+i+"endYmd").append($("<input type='text' readonly id='SRPgEndYmd'+i>"));
+					$("#"+i+"rt").append($("<input type='text' readonly id='SRPgPrgrsRt'+i>"));
+					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
+					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
+					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
+				}	
+			}
+			if(Progress[5].endYmd<today) {
+				$("#delbtn").hide();
+				$("#addbtn").hide();
+			} else {
+				$("#delbtn").show();
+				$("#addbtn").show();
 			}
 		}
 	});
 }
 /* SR요청 진척률 수정 */
-function updateProgress1() {
+function updateProgress0() {
 	var bgngYmd = $("#SRPgBgngYmd0").val();
 	var prgrsId = $("#SRPgPrgrsId0").val();
 	var endYmd = $("#SRPgEndYmd0").val();
@@ -131,11 +189,10 @@ function updateProgress1() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			console.log("예~");
 		}
 	});
 }
-function updateProgress2() {
+function updateProgress1() {
 	var bgngYmd = $("#SRPgBgngYmd1").val();
 	var prgrsId = $("#SRPgPrgrsId1").val();
 	var endYmd = $("#SRPgEndYmd1").val();
@@ -154,7 +211,7 @@ function updateProgress2() {
 		}
 	});
 }
-function updateProgress3() {
+function updateProgress2() {
 	var bgngYmd = $("#SRPgBgngYmd2").val();
 	var prgrsId = $("#SRPgPrgrsId2").val();
 	var endYmd = $("#SRPgEndYmd2").val();
@@ -173,7 +230,7 @@ function updateProgress3() {
 		}
 	});
 }
-function updateProgress4() {
+function updateProgress3() {
 	var bgngYmd = $("#SRPgBgngYmd3").val();
 	var prgrsId = $("#SRPgPrgrsId3").val();
 	var endYmd = $("#SRPgEndYmd3").val();
@@ -192,7 +249,7 @@ function updateProgress4() {
 		}
 	});
 }
-function updateProgress5() {
+function updateProgress4() {
 	var bgngYmd = $("#SRPgBgngYmd4").val();
 	var prgrsId = $("#SRPgPrgrsId4").val();
 	var endYmd = $("#SRPgEndYmd4").val();
@@ -211,7 +268,7 @@ function updateProgress5() {
 		}
 	});
 }
-function updateProgress6() {
+function updateProgress5() {
 	var bgngYmd = $("#SRPgBgngYmd5").val();
 	var prgrsId = $("#SRPgPrgrsId5").val();
 	var endYmd = $("#SRPgEndYmd5").val();

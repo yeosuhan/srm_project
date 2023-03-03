@@ -1,5 +1,7 @@
 package com.oti.team2.member.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -15,6 +17,7 @@ public class Join {
 	private String jbgdCd;  // 사원
 	private String deptCd;  // 사원
 	private String memberType;
+	private MultipartFile file;
 	private String fileType;
-	private String fileData;
+	private byte[] fileData;
 }

@@ -49,4 +49,11 @@ public interface ISrinformationDao {
 	 * @return sr계획정보 부서 변경
 	 */
 	public void updateSrInfo(@Param("srplanInfomation") SrplanInfomation srplanInfomation);
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-03
+	 * @return 개발취소시 sr정보 진행여부 false(0)으로 수정
+	 */
+	public void updatePrgrsBySrNo(@Param("srNo") String srNo);
 }

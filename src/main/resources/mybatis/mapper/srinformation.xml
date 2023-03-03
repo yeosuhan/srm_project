@@ -52,6 +52,7 @@
 	<!-- 계획정보 -->
 	<select id="selectPlanByDmndNo" parameterType="string" resultType="srplanInfomation">
 		SELECT
+			SD.STTS_CD AS sttsCd,
 			SI.DMND_NO AS dmndNo,
 			M.MEMBER_ID AS memberId,
 			D.DEPT_NM AS deptNm,
@@ -61,13 +62,15 @@
 			SI.RVW_CN AS rvwCn,
 			SI.DEPT_CD AS deptCd
 		FROM
-			SR_INFORMATION SI, MEMBERS M, DEPARTMENTS D
+			SR_INFORMATION SI, MEMBERS M, DEPARTMENTS D, SR_DEMAND SD
 		WHERE
 			SI.DMND_NO = #{dmndNo}
 		AND
 			SI.DEPT_CD = D.DEPT_CD
 		AND
 			SI.PIC_ID = M.MEMBER_ID
+		AND
+			SI.DMND_NO = SD.DMND_NO
 	</select>
 	<!-- 계획정보 변경 -->
 	<update id="updateSrInfo" parameterType="srplanInfomation">
@@ -83,7 +86,13 @@
 			DMND_NO = #{srplanInfomation.dmndNo}
 		
 	</update>
-	<!-- History 등록을 위해 연관된 SR정보를 가져오는 쿼리-->
-
-	
+	<!-- 개발취소시 sr정보 진행여부 false(0)으로 수정 -->
+	<update id="updatePrgrsBySrNo" parameterType="string">
+		UPDATE
+			SR_INFORMATION
+		SET
+			PRGRS_YN = '0'
+		WHERE
+			SR_NO = #{srNo}
+	</update>
 </mapper>

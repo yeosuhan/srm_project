@@ -1,5 +1,6 @@
 package com.oti.team2.member.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.oti.team2.department.dto.Department;
 import com.oti.team2.department.service.IDepartmentService;
@@ -64,10 +66,32 @@ public class JoinController {
 	 * @author 여수한
 	 * 작성일자 : 2023-03-01
 	 * @return join
+	 * @throws IOException 
 	 */
 	@PostMapping("/join")
-	public String getJoin(Join join) {
+	public String getJoin(Join join) throws IOException {
 		log.info("join 입력값 : " + join);
+		if(join.getJbgdCd().equals("CXFC") || join.getJbgdCd().equals("ASEC") ||
+				join.getJbgdCd().equals("DPHD") || join.getJbgdCd().equals("ASDR")) {
+			join.setMemberType("ROLE_ADMIN");
+		} else {
+			join.setMemberType("ROLE_DEVELOPER");
+		}
+
+		
+		/* 파일 추가
+		 * MultipartFile mfile = join.getFile();
+		log.info("join의 mfile : " + mfile);
+		if(mfile!=null && !mfile.isEmpty()) {
+			join.setFileType(mfile.getContentType());
+			join.setFileData(mfile.getBytes());
+			log.info("파일 넣고 join 입력값 : " + join);
+			joinService.getJoin(join);
+		}else {
+			log.info("파일 안넣은 join 입력값 : " + join);
+			joinService.getJoin(join);
+
+		}*/
 		joinService.getJoin(join);
 		return "member/login";
 	}

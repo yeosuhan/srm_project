@@ -11,9 +11,13 @@
 			to_char(END_YMD, 'YYYY-MM-DD') AS endYmd,
 			PRGRS_RT AS prgrsRt
 		FROM
-			PROGRESS P
+			PROGRESS P, SR_DEMAND SD, SR_INFORMATION SI
 		WHERE
 			P.SR_NO = #{srNo}
+		AND
+			P.SR_NO = SI.SR_NO
+		AND
+			SI.DMND_NO = SD.DMND_NO
 	</select>
 	<!-- sr요청 진척률 수정 -->
 	<update id="updateProgressByPrgrsId" parameterType="map">
