@@ -65,14 +65,14 @@
 	<!-- 산출물 수정 -->
 	<update id="updateDeliverable" parameterType="deliverable">
 		UPDATE DELIVERABLES 
-		<trim prefix="SET" suffixOverrides=",">
-			<if test="delivNm != null">
-				DELIV_NM = #{delivNm}
+		<set>
+			<if test='!delivNm.equals("") and delivNm != null'>
+				DELIV_NM = #{delivNm},
 			</if>
-			<if test="delivUrl != null">
-				DELIV_URL = #{delivUrl}
+			<if test='!delivUrl.equals("") and delivUrl != null'>
+				DELIV_URL = #{delivUrl},
 			</if>
-		</trim>
+		</set>
 		WHERE DELIV_ID = #{delivId}
 	</update>
 	

@@ -16,13 +16,7 @@ $(document).ready(function(){
 		$("#addmodal select option:selected").prop("selected",false);
 		$("#addmodal input").val("");
 	});
-	$(".modifyDelivNm").change(function(){
-		console.log("변경 감지");
-		$(this).addClass("changed");
-	});
-	$(".modifyDelivUrl").change(function(){
-		$(this).addClass("changed");
-	});
+	
 });
 
 function getDeliverablesTableRow(collapseId){
@@ -128,19 +122,25 @@ function modifyDeliverable(e){
 		delivNm=$(e).children(" .delivNmTd").text();
 		$(e).children(" .delivNmTd").text("");
 		$(e).children(" .delivNmTd").append(
-				"<div onclick='event.cancelBubble=true'><input class='modifyDelivNm' value='"+delivNm+"'></div>"
+				"<div onclick='event.cancelBubble=true'>" +
+				"	<input class='modifyDelivNm changed' value='"+delivNm+"'>" +
+				"	<input type='hidden' class='modifyDelivNm preValue' value='"+delivNm+"'>" +
+				"</div>"
 		);
 		delivUrl=$(e).children(" .delivUrlTd").text();	
 		$(e).children(" .delivUrlTd").text("");		
 		$(e).children(" .delivUrlTd").append(
-				"<div onclick='event.cancelBubble=true'><input class='modifyDelivUrl' value='"+delivUrl+"'></div>"
+				"<div onclick='event.cancelBubble=true'>" +
+				"	<input class='modifyDelivUrl changed' value='"+delivUrl+"'>" +
+				"	<input type='hidden' class='modifyDelivUrl preValue' value='"+delivUrl+"'>" +
+				"</div>"
 		);
 	}else{
 		$(e).children(" .delivIdTd").children( "input").css("display","");
 		$(e).children(".delivIdTd").children("button").css("display","none");
 		
-		delivNm = $(e).children(".delivNmTd").children("div").children(".modifyDelivNm.changed").val();
-		delivUrl = $(e).children(".delivUrlTd").children("div").children(".modifyDelivUrl.changed").val();
+		delivNm = $(e).children(".delivNmTd").children("div").children(".modifyDelivNm.preValue").val();
+		delivUrl = $(e).children(".delivUrlTd").children("div").children(".modifyDelivUrl.preValue").val();
 		$(e).children(".delivUrlTd").children("div").remove();
 		$(e).children(".delivNmTd").children("div").remove();
 		//수정된 파일명
@@ -155,11 +155,18 @@ function modifyDeliverable(e){
  * 
  */
 function modifyDeliverableSubmit(delivId){
-	
+	var delivUrl=null;
+	var delivNm=null;
+	if($("#tr"+delivId+" .modifyDelivNm.changed").val()!=$("#tr"+delivId+" .modifyDelivNm.preValue").val()){
+		delivNm=$("#tr"+delivId+" .modifyDelivNm.changed").val();
+	}
+	if($("#tr"+delivId+" .modifyDelivUrl.changed").val()!=$("#tr"+delivId+" .modifyDelivUrl.preValue").val()){
+		delivUrl=$("#tr"+delivId+" .modifyDelivUrl.changed").val();
+	}
 	var deliverableForm = {
 		  "delivId":delivId,
-	      "delivUrl":$("#tr"+delivId+" .modifyDelivNm.changed").val(),
-	      "delivNm":$("#tr"+delivId+" .modifyDelivUrl.changed").val()
+	      "delivUrl":delivUrl,
+	      "delivNm":delivNm
 	 }
 	 $.ajax({
 	      url:"/deliverable/modify",
