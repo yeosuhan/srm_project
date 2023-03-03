@@ -396,7 +396,7 @@ th {
 																			class="col-sm-3 col-form-label px-0 font-weight-bold"
 																			style="line-height: 120px">반려 사유</label>
 																		<div class="col-sm-9 pl-0 ">
-																			<input class="form-control rjctRsn" value="${sd.rjctRsn}" readonly></input>
+																			<input class="form-control rjctRsn" value="${sd.rjctRsn}"></input>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -405,8 +405,8 @@ th {
 																			style="line-height: 100px; font-size: 12px;">SR
 																			내용</label>
 																		<div class="col-sm-9">
-																			<textarea rows="5" cols="5" class="form-control cn"
-																				style="height: 100px;" value="${sd.cn}" readonly></textarea>
+																			<input class="form-control cn"
+																				style="height: 100px;" value="${sd.cn}" readonly></input>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -418,14 +418,14 @@ th {
 																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-6"></div>
+																		<input type="hidden" name="dmndNo" class="dmndNo" value="${sd.dmndNo}">
 																		<c:if test="${sd.sttsCd == 0}">
 																			<div class="col-6" style="text-align: right">
 																				<button id="modbtn"
 																					class="btn btn-primary btn-round save center">수정</button>
 
 																				<div
-																					class="btn btn-primary btn-round danger cancle" onclick="deleteSr('${sd.dmndNo}')">삭제</div>
+																					class="btn btn-primary btn-round danger cancle" onclick="deleteSr()">삭제</div>
 																			</div>
 																		</c:if>
 																	</div>
@@ -435,7 +435,7 @@ th {
 																	style="font-size: 12px; padding-top: 20px; display: none;">
 																	<form action="/srdemand/modify" method="post"
 																		id="sdUpdateForm">
-																		<input type="hidden" name="dmndNo"
+																		<input type="hidden" name="dmndNo" class="dmndNo"
 																			value="${sd.dmndNo}">
 																		<div class="form-group row">
 																			<div class="col-sm-6">

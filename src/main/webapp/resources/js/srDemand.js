@@ -6,6 +6,7 @@ function getSrDemandDetail(dmNo) {
 		type : "GET",
 		success : function(res) {
 			$(".dmndNo").text(res.dmndNo);
+			$(".dmndNo").val(res.dmndNo);
 			$(".ttl").text(res.ttl);
 			$(".ttl").val(res.ttl);
 			$(".relGrund").text(res.relGrund);
@@ -108,7 +109,9 @@ $(document).on('click', '#modbtn', function(e) {
 });
 
 /* 사용자의 srDemand 삭제 */
-function deleteSr(dmndNo) {
+function deleteSr() {
+	var dmndNo = $(".dmndNo").val();
+	console.log(dmndNo);
 	$.ajax({
 		url : '/srdemand/delete/' + dmndNo,
 		type : 'GET',

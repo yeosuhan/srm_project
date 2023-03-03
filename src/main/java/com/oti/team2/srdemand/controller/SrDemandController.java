@@ -158,6 +158,7 @@ public class SrDemandController {
 	 */
 	@GetMapping("/delete/{dmndNo}") 
 	public String deleteSrDemand(@PathVariable("dmndNo")String dmndNo) {
+		log.info(dmndNo);
 		srdemandService.deleteSrdemand(dmndNo);
 		return "";
 	}

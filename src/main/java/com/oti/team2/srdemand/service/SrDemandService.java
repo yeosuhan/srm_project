@@ -67,7 +67,7 @@ public class SrDemandService implements ISrDemandService{
 			number = "0"+number;
 		}
 		
-		srCode = srCode + "_" + number;
+		srCode = srCode + "-" + number;
 		log.info("sr요청코드 : " + formatedNow); 
 		log.info("오늘의 요청 수 : " + count);	
 		log.info("최종 sr요청코드 : " + srCode);

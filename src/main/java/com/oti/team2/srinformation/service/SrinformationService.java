@@ -68,7 +68,7 @@ public class SrinformationService implements ISrinformationService{
 		// 시스템 코드 가져오기
 		String sysCd = srDemandService.getSysCdByDmndNo(sdApprovalDto.getDmndNo());
 		
-		// 부서 가져오기
+		//시스템 코드로 담당 부서 지정
 		String deptCd = systemService.getDeptCdBySysCd(sysCd);
 	
 		// 개발담당자pic_id : 해당부서의 담당자 가져오기
