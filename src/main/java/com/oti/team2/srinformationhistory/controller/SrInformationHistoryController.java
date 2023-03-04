@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.oti.team2.srdemand.service.ISrDemandService;
+import com.oti.team2.srdemand.service.SrDemandService;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
@@ -24,6 +26,9 @@ public class SrInformationHistoryController {
 
 	@Autowired
 	private ISrInformationHistoryService srInformationHistoryService;
+	
+	@Autowired
+	private ISrDemandService srDemandService;
 
 	/**
 	 * SR처리 히스토리 내역 조회 메서드
@@ -59,7 +64,7 @@ public class SrInformationHistoryController {
 
 		int totalRows = srInformationHistoryService.getTotalRows();
 		Pager pager = new Pager(totalRows, pageNO);
-		String srNo = srInformationHistoryService.getSrNo(dmndNo);
+		String srNo = srDemandService.getSrNo(dmndNo);
 		log.info("dmndNo 1 조회" + dmndNo);
 		// ${srInformationHistory.srNo}
 		// srNo = "WOR-SR-0001";
