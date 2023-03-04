@@ -417,17 +417,7 @@ th {
 																			<input type="file" class="">
 																		</div>
 																	</div>
-																	<div class="row">
-																		<input type="hidden" name="dmndNo" class="dmndNo" value="${sd.dmndNo}">
-																		<c:if test="${sd.sttsCd == 0}">
-																			<div class="col-6" style="text-align: right">
-																				<button id="modbtn"
-																					class="btn btn-primary btn-round save center">수정</button>
-
-																				<div
-																					class="btn btn-primary btn-round danger cancle" onclick="deleteSr()">삭제</div>
-																			</div>
-																		</c:if>
+																	<div class="row" id="userButtonDiv">
 																	</div>
 																</div>
 																<%------------- 요청 수정 ----------------------------------- --%>
@@ -439,7 +429,7 @@ th {
 																			value="${sd.dmndNo}">
 																		<div class="form-group row">
 																			<div class="col-sm-6">
-																				<div class="col col-sm-4 font-weight-bold">SR번호ss</div>
+																				<div class="col col-sm-4 font-weight-bold">SR번호</div>
 																				<div class="col col-sm-6">
 																					<div type="text" class="dmndNo">${sd.dmndNo}</div>
 																				</div>

@@ -36,5 +36,4 @@ public interface ISrInformationHistoryService {
 	 */
 	public int updateSrInformationHistory();
 
-	public String getSrNo(String dmndNo);
 }

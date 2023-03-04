@@ -24,5 +24,5 @@ public class SrInformationRequestDto {
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
 	private Date bgngYmd;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
-	private String endYmd;
+	private Date endYmd;
 }

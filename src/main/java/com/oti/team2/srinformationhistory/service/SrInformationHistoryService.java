@@ -34,14 +34,6 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		return srInformationHistoryList;
 	}
 
-	@Override
-	public String getSrNo(String dmndNo) {
-		String srNo = srDemandDao.selectBySrDmndNo(dmndNo);
-
-		log.info(srNo);
-		return srNo;
-	}
-
 	/**
 	 * SR처리 히스토리 목록 페이징을 위한 메서드
 	 * 

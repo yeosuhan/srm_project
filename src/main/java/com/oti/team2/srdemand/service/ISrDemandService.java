@@ -93,4 +93,11 @@ public interface ISrDemandService {
 	 * @return sr요청 진행사항 수정 : 진척률 수정 / 결제취소 처리 시에 사용 됨
 	 */
 	public void updateSrDemandStts(String srNo, int sttsCd);
+
+	/**
+	 * DMNO 로 SRNO 조회
+	 * 
+	 * @author 최은종
+	 */
+	public String getSrNo(String dmndNo);
 }
