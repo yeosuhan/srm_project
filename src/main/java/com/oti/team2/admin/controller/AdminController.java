@@ -197,19 +197,24 @@ public class AdminController {
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(), filterDto);
 		Pager pager = new Pager(totalRows, page);
-
-		List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager, filterDto);
-
-		// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
-		employeesList.set(0,
-				memberService.getMember(employeesList.get(0).getMemberId(), Auth.ROLE_DEVELOPER.toString()));
-		// 사원 정보 카드 에서 직급, 부서 선택 목록
-		model.addAttribute("jobGradeList", jobGradeService.getJobGradeList());
-		model.addAttribute("departmentList", departmentService.getDepartmentNameList());
-
-		model.addAttribute("employeesList", employeesList);
-		model.addAttribute("pager", pager);
-		return "management/employeesList";
+		if(totalRows !=0 ) {
+			
+			List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager, filterDto);
+	
+			// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
+			employeesList.set(0,
+					memberService.getMember(employeesList.get(0).getMemberId(), Auth.ROLE_DEVELOPER.toString()));
+			// 사원 정보 카드 에서 직급, 부서 선택 목록
+			model.addAttribute("jobGradeList", jobGradeService.getJobGradeList());
+			model.addAttribute("departmentList", departmentService.getDepartmentNameList());
+	
+			model.addAttribute("employeesList", employeesList);
+			model.addAttribute("pager", pager);
+			return "management/employeesList";
+		}else {
+			model.addAttribute("pager", pager);
+			return "management/employeesList";
+		}
 	}
 
 	/*
