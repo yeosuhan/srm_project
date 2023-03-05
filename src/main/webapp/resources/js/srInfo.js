@@ -12,10 +12,44 @@ function getDetail(dmndNo, srNo) {
 			$('#changeMemberId').remove();
 			$('#changeManager').remove();
 			
-			if(dd.sttsNm=='개발완료' || dd.sttsNm=='개발취소') {
+			if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 				$(".col-3").hide();
 			} else {
 				$(".col-3").show();
+			}
+			/*개발완료 or 개발취소*/
+			if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+				/*처리팀*/
+				$("#dept").hide();
+				$("#SRPlDeptNm").remove();
+				$("#deptDiv").append($("<input type='text' readonly class='form-control' id='SRPlDeptNm'>"));
+				/*계획 시작일*/
+				$("#SRPlBgngYmd").remove();
+				$("#bgngYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlBgngYmd'>"));
+				/*계획 종료일*/
+				$("#SRPlEndYmd").remove();
+				$("#endYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlEndYmd'>"));
+				/*검토내용*/
+				$("#SRPlRvwCn").remove();
+				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
+				/*버튼*/
+				$("#planBtn").hide();
+			} /*개발중*/
+			else {
+				/*처리팀*/
+				$("#dept").show();
+				$("#SRPlDeptNm").remove();
+				/*계획 시작일*/
+				$("#SRPlBgngYmd").remove();
+				$("#bgngYmdDiv").append($("<input type='text' class='form-control' id='SRPlBgngYmd'>"));
+				/*계획 종료일*/
+				$("#SRPlEndYmd").remove();
+				$("#endYmdDiv").append($("<input type='text' class='form-control' id='SRPlEndYmd'>"));
+				/*검토내용*/
+				$("#SRPlRvwCn").remove();
+				$("#rvwCnDiv").append($("<textarea rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
+				/*버튼*/
+				$("#planBtn").show();
 			}
 			$("#SRDSrNo").val(srNo);
 			$("#SRDDmndNo").val(detail.dd.dmndNo);
@@ -31,6 +65,7 @@ function getDetail(dmndNo, srNo) {
 			$("#SRDFile").val(detail.dd.fileNm);
 			$("#dept").val(detail.pi.deptCd).prop("selected", true);
 			
+			$("#SRPlDeptNm").val(detail.dd.deptNm);
 			$("#SRPlDmndNo").val(detail.pi.dmndNo);
 			$("#SRPlMemberId").val(detail.pi.memberId);
 			$("#SRPlFlnm").val(detail.pi.flnm);
@@ -62,13 +97,14 @@ function getPlan() {
 			if(plan.sttsCd>=5) {
 				/*처리팀*/
 				$("#dept").remove();
-				$("#deptDiv").append($("<input type='text' readonly class='form-control' id='SRPldeptNm'>"));
+				$("#SRPlDeptNm").remove();
+				$("#deptDiv").append($("<input type='text' readonly class='form-control' id='SRPlDeptNm'>"));
 				/*계획 시작일*/
 				$("#SRPlBgngYmd").remove();
 				$("#bgngYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlBgngYmd'>"));
 				/*계획 종료일*/
 				$("#SRPlEndYmd").remove();
-				$("#endYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlBgngYmd'>"));
+				$("#endYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlEndYmd'>"));
 				/*검토내용*/
 				$("#SRPlRvwCn").remove();
 				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
@@ -77,8 +113,8 @@ function getPlan() {
 			} /*개발중*/
 			else {
 				/*처리팀*/
-				$("#SRPldeptNm").remove();
-				$("#deptDiv").append($("<select id='dept' onchange='changeDept()'><c:forEach var='deptList' items='${deptList}'><option id='SRDept' value='${deptList.deptCd}'>${deptList.deptNm}</option></c:forEach></select>"));
+				$("#dept").remove();
+				$("#SRPlDeptNm").remove();
 				/*계획 시작일*/
 				$("#SRPlBgngYmd").remove();
 				$("#bgngYmdDiv").append($("<input type='text' class='form-control' id='SRPlBgngYmd'>"));
@@ -87,7 +123,7 @@ function getPlan() {
 				$("#endYmdDiv").append($("<input type='text' class='form-control' id='SRPlEndYmd'>"));
 				/*검토내용*/
 				$("#SRPlRvwCn").remove();
-				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
+				$("#rvwCnDiv").append($("<textarea rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
 				/*버튼*/
 				$("#planBtn").show();
 			}
@@ -96,6 +132,7 @@ function getPlan() {
 			$('#changeManager').remove();
 			$("#dept").val(plan.deptCd).prop("selected", true);
 			$("#SRPlDmndNo").val(plan.dmndNo);
+			$("#SRPlDeptNm").val(plan.deptNm);
 			$("#SRPlMemberId").val(plan.memberId);
 			$("#SRPlFlnm").val(plan.flnm);
 			$("#SRPlBgngYmd").val(plan.bgngYmd);
@@ -138,8 +175,23 @@ function getProgress() {
 			Progress : $("#SRDSrNo").val()
 		},
 		success : function(Progress) {
+			let today = new Date();   
+			let year = today.getFullYear(); // 년도
+			let month = today.getMonth() + 1;  // 월
+			if(month<10) {
+				month = '0'+month;
+			}
+			let date = today.getDate();  // 날짜
+			if(date<10) {
+				date = '0'+date;
+			}
+			let day = today.getDay();  // 요일
+			today = (year + '-' + month + '-' + date);
+			console.log(today);
+			if(Progress[0].endYmd==null || Progress[0].endYmd>=today) {
+				console.log("개발완료");
+			}
 			for (var i = 0; i < Progress.length; i++) {
-				let today = new Date().format("YYYY-MM-DD");
 				if(Progress[i].endYmd==null || Progress[i].endYmd>=today) {
 					$("#btn"+i).show();
 					$("#SRPgSrNo").val(Progress[i].srNo);
@@ -147,16 +199,15 @@ function getProgress() {
 					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
 					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
 					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
-					document.getElementById('SRPgEndYmd' + i).setAttribute("min",
-							$("#SRPgBgngYmd" + i).val());
+					document.getElementById('SRPgEndYmd' + i).setAttribute("min", $("#SRPgBgngYmd" + i).val());
 				} else if(Progress[i].endYmd<today) {
 					$("#btn"+i).hide();
-					$("#SRPgBgngYmd").remove();
-					$("#SRPgEndYmd").remove();
-					$("#SRPgPrgrsRt").remove();
-					$("#"+i+"bgngYmd").append($("<input type='text' readonly id='SRPgBgngYmd'+i>"));
-					$("#"+i+"endYmd").append($("<input type='text' readonly id='SRPgEndYmd'+i>"));
-					$("#"+i+"rt").append($("<input type='text' readonly id='SRPgPrgrsRt'+i>"));
+					$("#SRPgBgngYmd"+i).remove();
+					$("#SRPgEndYmd"+i).remove();
+					$("#SRPgPrgrsRt"+i).remove();
+					$("#"+i+"bgngYmd").append($("<input type='text' readonly class='form-control' style='width:100px;margin:0 auto;' id='SRPgBgngYmd"+i+"'>"));
+					$("#"+i+"endYmd").append($("<input type='text' readonly class='form-control' style='width:100px; margin:0 auto;'id='SRPgEndYmd"+i+"'>"));
+					$("#"+i+"rt").append($("<input type='text' readonly class='form-control' id='SRPgPrgrsRt"+i+"'>"));
 					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
 					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
 					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);

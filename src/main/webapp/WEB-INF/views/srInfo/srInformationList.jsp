@@ -476,7 +476,7 @@ th {
 																				<c:forEach var="deptList" items="${deptList}">
 																					<option id="SRDept" value="${deptList.deptCd}">${deptList.deptNm}</option>
 																				</c:forEach>
-																			</select> <input type="hidden" id="SRPldeptNm">
+																			</select> <input type="hidden" id="SRPlDeptNm">
 																		</div>
 
 																	</div>

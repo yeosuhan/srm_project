@@ -7,17 +7,13 @@
 		SELECT
 			SR_NO AS srNo,
 			PRGRS_ID AS prgrsId,
-			to_char(BGNG_YMD, 'YYYY-MM-DD') AS bgngYmd,
-			to_char(END_YMD, 'YYYY-MM-DD') AS endYmd,
+			BGNG_YMD AS bgngYmd,
+			END_YMD AS endYmd,
 			PRGRS_RT AS prgrsRt
 		FROM
-			PROGRESS P, SR_DEMAND SD, SR_INFORMATION SI
+			PROGRESS P
 		WHERE
 			P.SR_NO = #{srNo}
-		AND
-			P.SR_NO = SI.SR_NO
-		AND
-			SI.DMND_NO = SD.DMND_NO
 	</select>
 	<!-- sr요청 진척률 수정 -->
 	<update id="updateProgressByPrgrsId" parameterType="map">
