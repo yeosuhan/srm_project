@@ -181,7 +181,7 @@ public class AdminController {
 			@RequestParam(value = "flnm", required = false) String flnm,
 			@RequestParam(value = "deptNm", required = false) String deptNm,
 			@RequestParam(value = "jbgdNm", required = false) String jbgdNm, Model model) {
-		log.info("getEmployeeList" + page + flnm);
+		log.info("getEmployeeList" + page + flnm+deptNm+jbgdNm);
 		FilterDto filterDto = new FilterDto();
 		if (deptNm != null) {
 			filterDto.setDeptNm(deptNm);
@@ -198,17 +198,19 @@ public class AdminController {
 		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(), filterDto);
 		Pager pager = new Pager(totalRows, page);
 		if(totalRows !=0 ) {
-			
+			log.info(totalRows);
 			List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager, filterDto);
-	
-			// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
-			employeesList.set(0,
-					memberService.getMember(employeesList.get(0).getMemberId(), Auth.ROLE_DEVELOPER.toString()));
-			// 사원 정보 카드 에서 직급, 부서 선택 목록
-			model.addAttribute("jobGradeList", jobGradeService.getJobGradeList());
-			model.addAttribute("departmentList", departmentService.getDepartmentNameList());
-	
-			model.addAttribute("employeesList", employeesList);
+			log.info(pager.getStartPageNo());
+			log.info(employeesList.get(0));
+			if(employeesList!=null) {
+				// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
+				employeesList.set(0,
+						memberService.getMember(employeesList.get(0).getMemberId(), Auth.ROLE_DEVELOPER.toString()));
+				// 사원 정보 카드 에서 직급, 부서 선택 목록
+				model.addAttribute("jobGradeList", jobGradeService.getJobGradeList());
+				model.addAttribute("departmentList", departmentService.getDepartmentNameList());
+				model.addAttribute("employeesList", employeesList);
+			}
 			model.addAttribute("pager", pager);
 			return "management/employeesList";
 		}else {
