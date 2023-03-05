@@ -50,25 +50,8 @@
    <!-- 고객/사원 목록 조회 -->
    <select id="selectByMemberType" parameterType="map"
       resultMap="memberResultMap">  
-         SELECT 
-            RNUM,
-            MEMBER_ID ,
-            FLNM , 
-            TELNO , 
-            EML ,
-            MEMBER_TYPE 
-            <if test="memberType == 'ROLE_CLIENT'">
-              ,INST_NM 
-            </if>
-            <if test="memberType=='ROLE_DEVELOPER'">
-               ,
-               JBGD_NM ,
-               DEPT_NM 
-            </if>
-         FROM
-            (
+         
                SELECT 
-                  ROWNUM as RNUM,
                   MEMBER_ID ,
                   FLNM ,
                   TELNO ,
@@ -131,10 +114,8 @@
                      MEMBER_TYPE = #{memberType}
                )
                 <![CDATA[
-               WHERE ROWNUM <=#{pager.endRowNo}             
-            )       
-         WHERE
-            RNUM >= #{pager.startRowNo} 
+               ORDERS LIMIT #{pager.rowsPerPage} OFFSET #{pager.startRowNo}             
+           
       ]]>
    </select>
    
