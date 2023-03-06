@@ -176,7 +176,7 @@ public class AdminController {
 	 * 
 	 * @return 사원 목록 페이지 url
 	 */
-	@RequestMapping(value = "/employee/list", method = RequestMethod.GET)
+	@GetMapping("/employee/list")
 	public String getEmployeeList(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "flnm", required = false) String flnm,
 			@RequestParam(value = "deptNm", required = false) String deptNm,
@@ -230,7 +230,7 @@ public class AdminController {
 	 * @return 사원 정보
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/employee", method = RequestMethod.GET)
+	@GetMapping("/employee")
 	public Member getEmployeeDetail(@RequestParam() String employeeId) {
 		log.info(employeeId);
 		return memberService.getMember(employeeId, Auth.ROLE_DEVELOPER.toString());
@@ -246,7 +246,7 @@ public class AdminController {
 	 * @return 반영 행수
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/employee/delete", method = RequestMethod.GET)
+	@GetMapping("/employee/delete")
 	public int deleteEmployee(@RequestParam() String employeeId) {
 		log.info(employeeId);
 		return memberService.deleteMember(employeeId);
@@ -262,7 +262,7 @@ public class AdminController {
 	 * @return 반영 행수
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/employee/modify", method = RequestMethod.POST)
+	@PostMapping("/employee/modify")
 	public int modifyEmployee(Member member) {
 		log.info(member);
 		return memberService.modifyMember(member);
