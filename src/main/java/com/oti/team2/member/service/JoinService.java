@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.oti.team2.member.dao.IJoinDao;
+import com.oti.team2.member.dto.File;
 import com.oti.team2.member.dto.Join;
 
 import lombok.extern.log4j.Log4j2;
@@ -50,5 +51,16 @@ public class JoinService implements IJoinService{
 		int check = joinDao.checkId(memberId);
 		log.info("Service: " + check);
 		return 0;
+	}
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-06
+	 * @return 프로필 사진 추가
+	 */
+	@Override
+	public void addFile(File file, String memberId) {
+		joinDao.updateFile(file, memberId);
+		
 	}
 }

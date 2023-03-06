@@ -5,8 +5,42 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
-<script src="${pageContext.request.contextPath}/resources/js/kakaoAddress.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/kakaoAddress.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/image.js"></script>
+
 </head>
+<style>
+.box {
+	width: 200px;
+	border: 1px solid #77aaff;
+	box-sizing: border-box;
+	border-radius: 10px;
+	padding: 12px 13px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+.box:focus {
+	border: 1px solid #9B51E0;
+	box-sizing: border-box;
+	border-radius: 10px;
+	outline: 3px solid #77aaff;
+	border-radius: 10px;
+}
+
+#chooseFile {
+	visibility: hidden;
+}
+
+label>img {
+	margin-top: 50px;
+	border-radius: 50%;
+}
+</style>
 <body>
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
@@ -28,15 +62,32 @@
 												<h5>내정보 관리</h5>
 											</div>
 											<div class="row">
-												<div class="col-4"
+												<div class="col-5"
 													style="justify-content: center; text-align: center;">
 													<div class="mb-2">
-														<img src="/resources/oti_images/user.png"
-															style="height: 200px; align-content: center; margin-top: 50px;">
+														<div class="container">
+															<div class="image-upload" id="image-upload">
+																<form method="post" enctype="multipart/form-data" id="profile">
+																	<div class="button">
+																		<label for="chooseFile" id="newImg">
+																		<img id="defaultImage"
+																			src="/resources/oti_images/user.png"
+																			style="height: 400px; align-content: center; margin-top: 50px;">
+																		</label>
+																	</div>
+																	<input type="file" id="chooseFile" name="chooseFile"
+																		accept="image/*" onchange="loadFile(this, '${member.memberId}')">
+																</form>
+															</div>
+															<span style="color: gray" id="addImg">프로필
+																사진을 등록해주세요.</span>
+														</div>
 													</div>
 												</div>
-												<div class="col-8 card-block">
-													<form class="form-material" enctype="multipart/form-data" id="myinfo" action="<c:url value='/member/myinfo'/>" method="post" >
+												<div class="col-7 card-block">
+													<form class="form-material" enctype="multipart/form-data"
+														id="myinfo" action="<c:url value='/member/myinfo'/>"
+														method="post">
 														<div class="form-group row">
 															<p class="col-sm-2 font-weight-bold">이름</p>
 															<div class="col-sm-10">${member.flnm}</div>
@@ -45,29 +96,28 @@
 															<p class="col-sm-2 font-weight-bold">아이디</p>
 															<div class="col-sm-10">${member.memberId}</div>
 														</div>
-														<input name="memberId" type="hidden" value="${member.memberId}"/>
+														<input name="memberId" type="hidden"
+															value="${member.memberId}" />
 
 														<div class="form-group form-default">
-															<input type="password" name="pswd"
-																class="form-control" required="" style="width: 50%"
-																value="${member.pswd}"> <span class="form-bar"></span>
-															<label class="float-label">비밀번호</label>
+															<input type="password" name="pswd" class="form-control"
+																required="" style="width: 50%" value="${member.pswd}">
+															<span class="form-bar"></span> <label class="float-label">비밀번호</label>
 														</div>
 
 
 
 														<div class="form-group form-default">
-															<input type="text" name="telNo"
-																class="form-control" required="" style="width: 50%"
-																value="${member.telNo }"> <span class="form-bar"></span>
-															<label class="float-label">전화번호</label>
+															<input type="text" name="telNo" class="form-control"
+																required="" style="width: 50%" value="${member.telNo }">
+															<span class="form-bar"></span> <label class="float-label">전화번호</label>
 														</div>
 
 														<div class="form-group form-default">
-															<input type="text" name="eml"
-																class="form-control" required="" style="width: 50%"
-																value="${member.eml}"> <span class="form-bar"></span>
-															<label class="float-label">이메일 (exa@gmail.com)</label>
+															<input type="text" name="eml" class="form-control"
+																required="" style="width: 50%" value="${member.eml}">
+															<span class="form-bar"></span> <label class="float-label">이메일
+																(exa@gmail.com)</label>
 														</div>
 
 														<div class="form-group form-default">
@@ -79,15 +129,17 @@
 
 														<div class="form-group form-default"
 															style="display: flex;">
-															<input type="text" name="instNm"
-																class="form-control" required="" style="width: 50%" value="${member.institution.instNm}">
-															<label class="float-label">기관 소속</label>
+															<input type="text" name="instNm" class="form-control"
+																required="" style="width: 50%"
+																value="${member.institution.instNm}"> <label
+																class="float-label">기관 소속</label>
 
 															<div class="btn-group dropright">
-																<a href="<c:url value='/institution/add'/>" type="button" class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
-																	기관 등록
-																</a>
-																
+																<a href="<c:url value='/institution/add'/>"
+																	type="button"
+																	class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
+																	기관 등록 </a>
+
 															</div>
 														</div>
 														<!-- <div class="form-group form-default"

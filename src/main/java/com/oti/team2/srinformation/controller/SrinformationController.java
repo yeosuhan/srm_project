@@ -41,11 +41,13 @@ public class SrinformationController {
 	public String getList(Model model) {
 		List<SrinformationList> srlist = srinformationService.getList();
 		SrdemandDetail sd = srDemandService.getSrDemandDetail(srlist.get(0).getDmndNo());
+		SrplanInformation sp = srinformationService.getPlan(srlist.get(0).getDmndNo());
 		List<Dept> deptList = srinformationService.getDeptList();
 		log.info("sd 상세 : " + sd);
 		log.info("진척목록: " + srlist);
 		log.info("개발부서 목록: " + deptList);
 		model.addAttribute("sd", sd);
+		model.addAttribute("sp", sp);
 		model.addAttribute("srlist", srlist);
 		model.addAttribute("deptList", deptList);
 		return "srInfo/srInformationList";

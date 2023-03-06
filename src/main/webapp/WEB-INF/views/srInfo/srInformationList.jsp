@@ -333,27 +333,32 @@ th {
 																<button type="button" class="btn btn-primary btn-sm"
 																	data-toggle="modal" data-target="#addHistoryModal">
 																	개발 취소</button>
-															</div>								
+															</div>
 														</div>
 													</div>
-													<div class="card-block" style="height: 600px;">
+													<div class="card-block" style="height: 700px;">
 														<div class="card_body "
 															style="font-size: 12px; padding-top: 20px;">
 															<div class="form-group row">
-
-																<div class="col col-sm-3">요청 번호</div>
-																<div class="col col-sm-9">
-																	<input type="hidden" id="SRDSrNo"> <input
-																		readonly class="form-control"
-																		id="SRDDmndNo" value="${sd.dmndNo}">
+																<div class="col-sm-6">
+																	<div class="col col-sm-4">요청 번호</div>
+																	<div class="col col-sm-6">
+																		<input type="hidden" id="SRDSrNo"> <input
+																			readonly class="form-control" id="SRDDmndNo"
+																			value="${sd.dmndNo}" style="width: 110px;">
+																	</div>
 																</div>
-																<div class="col col-sm-3">우선순위</div>
-																<div class="col col-sm-3" id="SiRnk">${sd.rnk}</div>
-
+																<div class="col-sm-6">
+																	<div class="col col-sm-4">우선순위</div>
+																	<div class="col col-sm-6" id="SiRnk">
+																		<input type="text" readonly class="form-control"
+																			id="SiRnk" value="${sd.rnk}">
+																	</div>
+																</div>
 															</div>
 															<hr />
 															<div class="form-group row">
-																<div class="col col-sm-3">SR 제목</div>
+																<div class="col col-sm-2">SR 제목</div>
 																<div class="col col-sm-9">
 																	<input readonly class="form-control"
 																		style="width: 150px;" id="SRDTitle" value="${sd.ttl}">
@@ -361,10 +366,11 @@ th {
 															</div>
 															<hr />
 															<div class="form-group row">
-																<div class="col col-sm-3">관련 근거</div>
+																<div class="col col-sm-2" style="padding-right:0px;">관련근거</div>
 																<div class="col col-sm-9">
 																	<input readonly class="form-control"
-																		style="width: 150px;" id="SRDRelgrund" value="${sd.relGrund}">
+																		style="width: 150px;" id="SRDRelgrund"
+																		value="${sd.relGrund}">
 																</div>
 															</div>
 															<hr />
@@ -380,7 +386,8 @@ th {
 																	<div class="col col-sm-4">업무구분</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 150%;" id="SRDTask" value="${sd.taskSeNm}">
+																			style="width: 150%;" id="SRDTask"
+																			value="${sd.taskSeNm}">
 																	</div>
 																</div>
 															</div>
@@ -390,14 +397,16 @@ th {
 																	<div class="col col-sm-4">요청기관</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 200%;" id="SRDInst" value="${sd.instNm}">
+																			style="width: 200%;" id="SRDInst"
+																			value="${sd.instNm}">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청자</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 150%;" id="SRDFlnm" value="${sd.clientNm}">
+																			style="width: 150%;" id="SRDFlnm"
+																			value="${sd.clientNm}">
 																	</div>
 																</div>
 															</div>
@@ -406,7 +415,8 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청일</div>
 																	<div class="col col-sm-8">
-																		<input readonly class="form-control" id="SRDDmndymd" value="${sd.dmndYmd}">
+																		<input readonly class="form-control" id="SRDDmndymd"
+																			value="${sd.dmndYmd}">
 																	</div>
 																</div>
 																<div class="col-sm-6">
@@ -424,7 +434,8 @@ th {
 																	내용</label>
 																<div class="col-sm-9">
 																	<input readonly class="form-control"
-																		style="width: 300px; height: 110px;" id="SRDCn" value="${sd.cn}">
+																		style="width: 300px; height: 110px;" id="SRDCn"
+																		value="${sd.cn}">
 																</div>
 															</div>
 															<hr />
@@ -432,7 +443,8 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">검토자</div>
 																	<div class="col col-sm-8">
-																		<input readonly class="form-control" id="SRDDmndymd" value="${sd.rvwrNm}">
+																		<input readonly class="form-control" id="SRDDmndymd"
+																			value="${sd.rvwrNm}">
 																	</div>
 																</div>
 																<div class="col-sm-6">
@@ -501,7 +513,7 @@ th {
 																		<div class="col col-sm-4">담당자</div>
 																		<div class="col col-sm-6" id="SRPlFlnmBySelect">
 																			<input type="hidden" id="SRPlMemberId"> <input
-																				readonly class="form-control" id="SRPlFlnm">
+																				readonly class="form-control" id="SRPlFlnm" value="${sp.flnm}">
 																		</div>
 																	</div>
 																</div>
@@ -509,15 +521,15 @@ th {
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획시작일</div>
 																		<div class="col col-sm-6" id="bgngYmdDiv">
-																			<input type="text" class="form-control"
-																				id="SRPlBgngYmd">
+																			<input type="date" class="form-control"
+																				id="SRPlBgngYmd" value="${sp.bgngYmd}">
 																		</div>
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">계획종료일</div>
 																		<div class="col col-sm-6" id="endYmdDiv">
-																			<input type="text" class="form-control"
-																				id="SRPlEndYmd">
+																			<input type="date" class="form-control"
+																				id="SRPlEndYmd" value="${sp.endYmd}">
 																		</div>
 																	</div>
 																</div>
@@ -526,10 +538,11 @@ th {
 																		내용</div>
 																	<div class="col col-sm-9" id="rvwCnDiv">
 																		<textarea rows="5" cols="5" class="form-control"
-																			id="SRPlRvwCn"></textarea>
+																			id="SRPlRvwCn">${sp.rvwCn}</textarea>
 																	</div>
 																</div>
-																<button class="btn btn-info" onclick="planUpdate()" id="planBtn"
+																<button class="btn btn-info" onclick="planUpdate()"
+																	id="planBtn"
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
 															</div>
 															<%-- *********************************** [ 자원정보 ] ***********************************--%>
@@ -556,14 +569,15 @@ th {
 																			</tbody>
 																		</table>
 																	</div>
-																</div>																	<button class="btn btn-info"
-																		style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
-																	<button onclick="deleteResource()" class="btn btn-info"
-																		style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
-																		삭제</button>
-																	<button class="btn btn-info"
-																		style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
-																		data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
+																</div>
+																<button class="btn btn-info"
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
+																<button onclick="deleteResource()" class="btn btn-info"
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
+																	삭제</button>
+																<button class="btn btn-info"
+																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
+																	data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
 															</div>
 															<%-- *********************************** [ 진척률 ] ***********************************--%>
 															<!-- 진행상태에 따라서 inpu readonly로 출력 및 버튼 안보여야됨 -->
@@ -589,14 +603,17 @@ th {
 																				<tbody>
 																					<tr>
 																						<th scope="row">1</th>
-																						<td>요구정의 
-																						<input type="hidden" id="SRPgPrgrsId0"> 
-																						<input type="hidden" id="SRPgSrNo">
+																						<td>요구정의 <input type="hidden"
+																							id="SRPgPrgrsId0"> <input type="hidden"
+																							id="SRPgSrNo">
 																						</td>
-																						<td id="0bgngYmd"><input type="date" id="SRPgBgngYmd0"></td>
-																						<td id="0endYmd"><input type="date" id="SRPgEndYmd0"></td>
-																						<td id="0rt"><input type="number" class="form-control"
-																							id="SRPgPrgrsRt0" min="0" max="10"></td>
+																						<td id="0bgngYmd"><input type="date"
+																							id="SRPgBgngYmd0"></td>
+																						<td id="0endYmd"><input type="date"
+																							id="SRPgEndYmd0"></td>
+																						<td id="0rt"><input type="number"
+																							class="form-control" id="SRPgPrgrsRt0" min="0"
+																							max="10"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -644,10 +661,13 @@ th {
 																						<th scope="row">2</th>
 																						<td>분석/설계<input type="hidden"
 																							id="SRPgPrgrsId1"></td>
-																						<td id="1bgngYmd"><input type="date" id="SRPgBgngYmd1"></td>
-																						<td id="1endYmd"><input type="date" id="SRPgEndYmd1"></td>
-																						<td id="1rt"><input type="number" class="form-control"
-																							id="SRPgPrgrsRt1" min="11" max="40"></td>
+																						<td id="1bgngYmd"><input type="date"
+																							id="SRPgBgngYmd1"></td>
+																						<td id="1endYmd"><input type="date"
+																							id="SRPgEndYmd1"></td>
+																						<td id="1rt"><input type="number"
+																							class="form-control" id="SRPgPrgrsRt1" min="11"
+																							max="40"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -694,10 +714,13 @@ th {
 																					<tr>
 																						<th scope="row">3</th>
 																						<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
-																						<td id="2bgngYmd"><input type="date" id="SRPgBgngYmd2"></td>
-																						<td id="2endYmd"><input type="date" id="SRPgEndYmd2"></td>
-																						<td id="2rt"><input type="number" class="form-control"
-																							id="SRPgPrgrsRt2" min="41" max="70"></td>
+																						<td id="2bgngYmd"><input type="date"
+																							id="SRPgBgngYmd2"></td>
+																						<td id="2endYmd"><input type="date"
+																							id="SRPgEndYmd2"></td>
+																						<td id="2rt"><input type="number"
+																							class="form-control" id="SRPgPrgrsRt2" min="41"
+																							max="70"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -744,10 +767,13 @@ th {
 																					<tr>
 																						<th scope="row">4</th>
 																						<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
-																						<td id="3bgngYmd"><input type="date" id="SRPgBgngYmd3"></td>
-																						<td id="3endYmd"><input type="date" id="SRPgEndYmd3"></td>
-																						<td id="3rt"><input type="number" class="form-control"
-																							id="SRPgPrgrsRt3" min="71" max="80"></td>
+																						<td id="3bgngYmd"><input type="date"
+																							id="SRPgBgngYmd3"></td>
+																						<td id="3endYmd"><input type="date"
+																							id="SRPgEndYmd3"></td>
+																						<td id="3rt"><input type="number"
+																							class="form-control" id="SRPgPrgrsRt3" min="71"
+																							max="80"></td>
 																						<td>
 																							<div class="accordion" id="accordionExample">
 																								<button
@@ -797,10 +823,13 @@ th {
 																						<th scope="row">5</th>
 																						<td>반영요청<input type="hidden"
 																							id="SRPgPrgrsId4"></td>
-																						<td id="4bgngYmd"><input type="date" id="SRPgBgngYmd4"></td>
-																						<td id="4endYmd"><input type="date" id="SRPgEndYmd4"></td>
-																						<td id="4rt"><input type="number" class="form-control"
-																							id="SRPgPrgrsRt4" min="81" max="90"></td>
+																						<td id="4bgngYmd"><input type="date"
+																							id="SRPgBgngYmd4"></td>
+																						<td id="4endYmd"><input type="date"
+																							id="SRPgEndYmd4"></td>
+																						<td id="4rt"><input type="number"
+																							class="form-control" id="SRPgPrgrsRt4" min="81"
+																							max="90"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button
@@ -848,10 +877,13 @@ th {
 																						<th scope="row">6</th>
 																						<td>운영반영<input type="hidden"
 																							id="SRPgPrgrsId5"></td>
-																						<td id="5bgngYmd"><input type="date" id="SRPgBgngYmd5"></td>
-																						<td id="5endYmd"><input type="date" id="SRPgEndYmd5"></td>
-																						<td id="5rt"><input type="number" class="form-control"
-																							id="SRPgPrgrsRt5" min="91" max="100"></td>
+																						<td id="5bgngYmd"><input type="date"
+																							id="SRPgBgngYmd5"></td>
+																						<td id="5endYmd"><input type="date"
+																							id="SRPgEndYmd5"></td>
+																						<td id="5rt"><input type="number"
+																							class="form-control" id="SRPgPrgrsRt5" min="91"
+																							max="100"></td>
 																						<td><div class="accordion"
 																								id="accordionExample">
 																								<button

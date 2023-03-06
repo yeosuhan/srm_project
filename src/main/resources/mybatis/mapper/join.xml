@@ -45,4 +45,13 @@
 		WHERE
 			MEMBER_ID = #{memberId}
 	</select>
+	<update id="updateFile" parameterType="file">
+		UPDATE 
+			MEMBERS
+		SET
+			FILE_TYPE = #{file.fileContentType},
+			FILE_DATA = #{file.fileData}
+		WHERE
+			MEMBER_ID = #{memberId}
+	</update>
 </mapper>
