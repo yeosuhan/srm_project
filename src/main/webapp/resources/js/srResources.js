@@ -12,10 +12,10 @@ $(document).ready(function(){
 });
 
 function getResourceTableRow(){
-	var srNo=$("#srNo").val();
-	console.log(srNo);
+	var srNo=$("#SRDSrNo").val();
+	//console.log(srNo);
 
-    console.log(getContextPath());
+    //console.log(getContextPath());
 	if($("#resourceTableRow tr").length==0){
 		
 		$.ajax({

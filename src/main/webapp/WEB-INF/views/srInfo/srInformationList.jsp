@@ -360,7 +360,7 @@ th {
 
 																<div class="col col-sm-3">요청 번호</div>
 																<div class="col col-sm-9">
-																	<input type="hidden" id="SRDSrNo"> <input
+																	<input type="hidden" id="SRDSrNo" value="${srlist[0].srNo}"> <input
 																		readonly class="form-control"
 																		id="SRDDmndNo" value="${sd.dmndNo}">
 																</div>
