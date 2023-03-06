@@ -197,11 +197,12 @@ public class AdminController {
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(), filterDto);
 		Pager pager = new Pager(totalRows, page);
+		log.info(pager);
 		if(totalRows !=0 ) {
-			log.info(totalRows);
+			//log.info(totalRows);
 			List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager, filterDto);
-			log.info(pager.getStartPageNo());
-			log.info(employeesList.get(0));
+			//log.info(pager.getStartPageNo());
+			//log.info(employeesList.get(0));
 			if(employeesList!=null) {
 				// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
 				employeesList.set(0,
