@@ -3,7 +3,7 @@ package com.oti.team2.srinformation.dto;
 import lombok.Data;
 
 @Data
-public class SrplanInfomation {
+public class SrplanInformation {
 	//srInformation 테이블
 	private String dmndNo;
 	private String memberId;
@@ -13,5 +13,4 @@ public class SrplanInfomation {
 	private String endYmd;
 	private String rvwCn;
 	private String deptCd;
-	private int sttsCd;
 }

@@ -333,7 +333,7 @@ th {
 																<button type="button" class="btn btn-primary btn-sm"
 																	data-toggle="modal" data-target="#addHistoryModal">
 																	개발 취소</button>
-															</div>
+															</div>								
 														</div>
 													</div>
 													<div class="card-block" style="height: 600px;">
@@ -344,9 +344,11 @@ th {
 																<div class="col col-sm-3">요청 번호</div>
 																<div class="col col-sm-9">
 																	<input type="hidden" id="SRDSrNo"> <input
-																		readonly class="form-control" style="width: 150px;"
-																		id="SRDDmndNo">
+																		readonly class="form-control"
+																		id="SRDDmndNo" value="${sd.dmndNo}">
 																</div>
+																<div class="col col-sm-3">우선순위</div>
+																<div class="col col-sm-3" id="SiRnk">${sd.rnk}</div>
 
 															</div>
 															<hr />
@@ -354,7 +356,7 @@ th {
 																<div class="col col-sm-3">SR 제목</div>
 																<div class="col col-sm-9">
 																	<input readonly class="form-control"
-																		style="width: 150px;" id="SRDTitle">
+																		style="width: 150px;" id="SRDTitle" value="${sd.ttl}">
 																</div>
 															</div>
 															<hr />
@@ -362,7 +364,7 @@ th {
 																<div class="col col-sm-3">관련 근거</div>
 																<div class="col col-sm-9">
 																	<input readonly class="form-control"
-																		style="width: 150px;" id="SRDRelgrund">
+																		style="width: 150px;" id="SRDRelgrund" value="${sd.relGrund}">
 																</div>
 															</div>
 															<hr />
@@ -371,14 +373,14 @@ th {
 																	<div class="col col-sm-4">시스템구분</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 200%;" id="SRDSys">
+																			style="width: 200%;" id="SRDSys" value="${sd.sysNm}">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">업무구분</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 150%;" id="SRDTask">
+																			style="width: 150%;" id="SRDTask" value="${sd.taskSeNm}">
 																	</div>
 																</div>
 															</div>
@@ -388,14 +390,14 @@ th {
 																	<div class="col col-sm-4">요청기관</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 200%;" id="SRDInst">
+																			style="width: 200%;" id="SRDInst" value="${sd.instNm}">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청자</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 150%;" id="SRDFlnm">
+																			style="width: 150%;" id="SRDFlnm" value="${sd.clientNm}">
 																	</div>
 																</div>
 															</div>
@@ -404,14 +406,14 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청일</div>
 																	<div class="col col-sm-8">
-																		<input readonly class="form-control" id="SRDDmndymd">
+																		<input readonly class="form-control" id="SRDDmndymd" value="${sd.dmndYmd}">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">완료요청일</div>
 																	<div class="col col-sm-8">
 																		<input readonly class="form-control"
-																			id="SRDCmptnDmndYmd">
+																			id="SRDCmptnDmndYmd" value="${sd.cmptnDmndYmd}">
 																	</div>
 																</div>
 															</div>
@@ -422,10 +424,25 @@ th {
 																	내용</label>
 																<div class="col-sm-9">
 																	<input readonly class="form-control"
-																		style="width: 300px; height: 110px;" id="SRDCn">
+																		style="width: 300px; height: 110px;" id="SRDCn" value="${sd.cn}">
 																</div>
 															</div>
 															<hr />
+															<div class="form-group row">
+																<div class="col-sm-6">
+																	<div class="col col-sm-4">검토자</div>
+																	<div class="col col-sm-8">
+																		<input readonly class="form-control" id="SRDDmndymd" value="${sd.rvwrNm}">
+																	</div>
+																</div>
+																<div class="col-sm-6">
+																	<div class="col col-sm-4">진행상태</div>
+																	<div class="col col-sm-8">
+																		<input readonly class="form-control"
+																			id="SRDCmptnDmndYmd" value="${sd.sttsNm}">
+																	</div>
+																</div>
+															</div>
 															<div class="form-group row">
 																<label class="col-sm-3 col-form-label"
 																	style="font-size: 12px;">첨부파일</label>
@@ -539,8 +556,7 @@ th {
 																			</tbody>
 																		</table>
 																	</div>
-																</div>
-																	<button class="btn btn-info"
+																</div>																	<button class="btn btn-info"
 																		style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
 																	<button onclick="deleteResource()" class="btn btn-info"
 																		style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
@@ -550,6 +566,7 @@ th {
 																		data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
 															</div>
 															<%-- *********************************** [ 진척률 ] ***********************************--%>
+															<!-- 진행상태에 따라서 inpu readonly로 출력 및 버튼 안보여야됨 -->
 															<div class="tab-pane" id="messages1" role="tabpanel"
 																style="padding-bottom: 20px;">
 																<div class="tab-pane" id="profile1" role="tabpanel">

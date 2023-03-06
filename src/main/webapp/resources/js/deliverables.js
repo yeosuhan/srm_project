@@ -12,33 +12,11 @@ $(document).ready(function(){
 		
 		$(".collapse").collapse("hide");
 	});
-	/* 산출물 추가 모달 (산출물 구분 목록 가져오는 기능)
-    * @author: 안한길
-    * */
-   $("#addModal").on('show.bs.modal',function() 
-   {
-      var srNo=$("#srNo").val();
-      console.log(srNo);
-
-      console.log(getContextPath());
-      if($("#addModal option").length==0){
-         //산출뭏 구분 목록
-         /*$.ajax({
-            url:"",
-            type:"GET",
-            data:srNo,
-            success:function(result){
-               result.forEach((value,index)=>{
-               	  $("#addModal select").empty();
-                  $("#addModal select").append(
-                        "<option value='"+value.prgrsId+"'>" +value.prgrsSeNm+"</option>"
-                  );
-               });
-            }
-         });*/
-      }
-      
-   });
+	$("#addmodal .modal_btn").on("click",function(){
+		$("#addmodal select option:selected").prop("selected",false);
+		$("#addmodal input").val("");
+	});
+	
 });
 
 function getDeliverablesTableRow(collapseId){
@@ -57,14 +35,15 @@ function getDeliverablesTableRow(collapseId){
 					result.forEach((value,index)=>{
 						var count = index+1;
 						$("#"+collapseId+" .deliverableTable tbody").append(
-								"<tr>" +
+								"<tr id='tr"+value.delivId+"' class='deliverableTr' onclick='modifyDeliverable(this)'>" +
 								"	<th scope='row'>"+count+"</th>" +
-								"	<td>" +
+								"	<td class='delivIdTd' onclick='event.cancelBubble=true'>" +
 								"		<input value='"+value.delivId+"' name='delivId' type='checkbox'>" +
+								"		<button style='display:none' class='btn btn-info' onclick='modifyDeliverableSubmit("+value.delivId+")'>수정</button>"+
 								"	</td>" +
 								"	<td>"+value.prgrsSeNm+"</td>" +
-								"	<td>"+value.delivNm+"</td>" +
-								"	<td>"+value.delivUrl+"</td>" +
+								"	<td class='delivNmTd'>"+value.delivNm+"</td>" +
+								"	<td class='delivUrlTd'>"+value.delivUrl+"</td>" +
 								"	<td>"+value.rgtrNm+"</td>" +
 								"	<td>"+value.regYmd+"</td>" +
 								"</tr>"
@@ -111,7 +90,7 @@ function deleteDeliverable(){
 function addDeliverable(){
    //var deliverableForm = $("#deliverableForm").serialize();//serialize()로 생성되는 데이터는 json형식과 맞지 않는다.
    var deliverableForm ={
-         "prgrsId":$("#prgrsIdSelect").val(),
+         "prgrsId":$("#SRPgPrgrsId"+($("#prgrsIdSelect").val()-1)).val(),
          "delivUrl":$("#delivUrl").val(),
          "delivNm":$("#delivNm").val()
    }
@@ -130,4 +109,74 @@ function addDeliverable(){
       }
    });
    
+}
+
+function modifyDeliverable(e){
+	var delivNm=null;
+	var delivUrl=null;
+	if(!$(e).children(".delivNmTd").children("div").children(".modifyDelivNm").length){
+		
+		$(e).children(" .delivIdTd").children( "input").css("display","none");
+		$(e).children(".delivIdTd").children("button").css("display","");
+		delivNm=$(e).children(" .delivNmTd").text();
+		$(e).children(" .delivNmTd").text("");
+		$(e).children(" .delivNmTd").append(
+				"<div onclick='event.cancelBubble=true'>" +
+				"	<input class='modifyDelivNm changed' value='"+delivNm+"'>" +
+				"	<input type='hidden' class='modifyDelivNm preValue' value='"+delivNm+"'>" +
+				"</div>"
+		);
+		delivUrl=$(e).children(" .delivUrlTd").text();	
+		$(e).children(" .delivUrlTd").text("");		
+		$(e).children(" .delivUrlTd").append(
+				"<div onclick='event.cancelBubble=true'>" +
+				"	<input class='modifyDelivUrl changed' value='"+delivUrl+"'>" +
+				"	<input type='hidden' class='modifyDelivUrl preValue' value='"+delivUrl+"'>" +
+				"</div>"
+		);
+	}else{
+		$(e).children(" .delivIdTd").children( "input").css("display","");
+		$(e).children(".delivIdTd").children("button").css("display","none");
+		
+		delivNm = $(e).children(".delivNmTd").children("div").children(".modifyDelivNm.preValue").val();
+		delivUrl = $(e).children(".delivUrlTd").children("div").children(".modifyDelivUrl.preValue").val();
+		$(e).children(".delivUrlTd").children("div").remove();
+		$(e).children(".delivNmTd").children("div").remove();
+		//수정된 파일명
+		$(e).children(" .delivNmTd").text(delivNm);
+		//수정된 경로
+		$(e).children(" .delivUrlTd").text(delivUrl);	
+	}
+	
+}
+/* 산출물 수정
+ * @author:안한길
+ * 
+ */
+function modifyDeliverableSubmit(delivId){
+	var delivUrl=null;
+	var delivNm=null;
+	if($("#tr"+delivId+" .modifyDelivNm.changed").val()!=$("#tr"+delivId+" .modifyDelivNm.preValue").val()){
+		delivNm=$("#tr"+delivId+" .modifyDelivNm.changed").val();
+	}
+	if($("#tr"+delivId+" .modifyDelivUrl.changed").val()!=$("#tr"+delivId+" .modifyDelivUrl.preValue").val()){
+		delivUrl=$("#tr"+delivId+" .modifyDelivUrl.changed").val();
+	}
+	var deliverableForm = {
+		  "delivId":delivId,
+	      "delivUrl":delivUrl,
+	      "delivNm":delivNm
+	 }
+	 $.ajax({
+	      url:"/deliverable/modify",
+	      type:"POST",
+	      data:deliverableForm,
+	      success:function(result){
+	         //console.log(result);
+	         if(result!=0){
+	            $(".deliverableTable tbody").empty();
+	            $(".collapse").collapse("hide");
+	         }
+	      }
+	   });
 }
