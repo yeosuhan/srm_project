@@ -94,7 +94,7 @@
 			     </if>                   
               </if>
               MEMBER_TYPE = #{memberType}
-          OFFSET #{pager.startRowNo} ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY     
+          OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY     
      
    </select>
    
