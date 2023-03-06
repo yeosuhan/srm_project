@@ -29,7 +29,11 @@ public class Pager {
 		groupNo = (pageNo - 1) / pagesPerGroup + 1;
 		
 		startPageNo = (groupNo-1) * pagesPerGroup + 1;
-		endPageNo = startPageNo + pagesPerGroup - 1;
+		if(totalRows!=0) {
+			endPageNo = startPageNo + pagesPerGroup - 1;
+		}else {
+			endPageNo = startPageNo;
+		}
 				
 		if(groupNo == totalGroupNo) endPageNo = totalPageNo;
 		startRowNo = (pageNo - 1) * rowsPerPage + 1;

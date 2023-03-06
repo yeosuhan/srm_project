@@ -61,7 +61,7 @@
 	
 	<!-- 자원정보 수정 -->
 	<update id="updateSrResource" parameterType="srResource" >
-		UPDATE SR_RESOURCES
+		UPDATE SR_RESOURCES r <if test="srNo != null">SR_INFORMATION i</if>
 			<set>
 				<if test="ptcptnRoleCd != null">
 					PTCPTN_ROLE_CD = #{ptcptnRoleCd},
@@ -79,17 +79,24 @@
 					</if>
 					SCHDL_END_YMD = #{schdlEndYmd},
 				</if>
+				<if test="srNo != null and schdlEndYmd == null">
+					SCHDL_BGNG_YMD = 
+						CASE 
+							<![CDATA[WHEN SCHDL_BGNG_YMD > END_YMD then END_YMD]]>
+							ELSE SCHDL_BGNG_YMD
+						END,
+					SCHDL_END_YMD = END_YMD,
+				</if>
 			</set>
 		<where>
 			<if test="srSrc != null"> <!-- 자원정보를 수정 하는 경우: 투입일 종료일을 둘다 수정하면 종료일이 더 빠른 경우가 있을수 있음 -->
 				SR_SRC = #{srSrc} 
 			</if>
 			<if test="srNo != null"> <!-- sr이 취소 되거나 예정일 보다 빨리 완료 되는 경우: srNO와 종료일을 srResource에 담아 파라미터로 전달 -->
-				AND SR_NO = #{srNo} AND
-				<![CDATA[SCHDL_END_YMD < #{schdlEndYmd}]]>
-			</if>
+				AND r.SR_NO = #{srNo} AND
+				AND r.SR_NO = i.SR_NO
+				<![CDATA[SCHDL_END_YMD > END_YMD]]>
+			</if> 
 		</where>
 	</update>
-	
-	
 </mapper>

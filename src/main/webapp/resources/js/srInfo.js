@@ -367,3 +367,62 @@ function planUpdate() {
 		}
 	});
 }
+
+/*시스템 목록*/
+function getSysCd(){
+	if($("#sysCdFilter option").length == 1){
+		$("#sysCdFilter option").remove();
+	}
+	if($("#sysCdFilter option").length == 0){
+		$.ajax({
+			url : '/srsystem/list',
+			type : 'GET',
+			success : function(result){
+				$("#sysCdFilter").append("<option></option>");
+				result.forEach((value)=>{
+					$("#sysCdFilter").append(
+							"<option value='"+value.sysCd+"'>"+value.sysNm+"</option>"
+					);
+				});
+			}
+		});
+	}
+}
+function removeTaskSeCd(){
+	$("#taskSeCdFilter option").remove();
+} 
+/*업무 목록*/
+function getTaskSeCd(){
+	if($("#taskSeCdFilter option").length == 1){
+		$("#taskSeCdFilter option").remove();
+	}
+	if($("#sysCdFilter option:selected").length != 0 && $("#taskSeCdFilter option").length == 0 ){
+		$.ajax({
+			url : '/task/list/'+$("#sysCdFilter option:selected").val(),
+			type : 'GET',
+			data : {'sysCd' : $("sysCdFilter option:selected").val()},
+			success : function(result){
+				$("#taskSeCdFilter").append("<option></option>");
+				result.forEach((value)=>{
+					$("#taskSeCdFilter").append(
+							"<option value='"+value.taskSeCd+"'>"+value.taskSeNm+"</option>"
+					);
+				});
+			}
+		});
+	}
+}
+/*빈 검색 조건 비활성화*/
+function srSearch(){
+	$("#srInfoFilterForm input").each((index,value)=>{
+		if(!$(value).val()){
+			$(value).prop("disabled",true);
+		}
+	});
+	$("#srInfoFilterForm select").each((index,value)=>{
+		if(!$(value).children("option:selected").val()||$(value).children(" option").length==0){
+			$(value).prop("disabled",true);
+		}
+	});
+	return true;
+}
