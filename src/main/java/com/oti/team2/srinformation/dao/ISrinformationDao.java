@@ -7,10 +7,12 @@ import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.srinformation.dto.Dept;
 import com.oti.team2.srinformation.dto.Manager;
+import com.oti.team2.srinformation.dto.SrInfoFilter;
 import com.oti.team2.srinformation.dto.SrInformationRequestDto;
 //github.com/OTI-SRM/srm_project
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInformation;
+import com.oti.team2.util.pager.Pager;
 
 @Mapper
 public interface ISrinformationDao {
@@ -18,9 +20,11 @@ public interface ISrinformationDao {
 	/**
 	 * 
 	 * @author 여수한 작성일자 : 2023-02-22
+	 * @param srInfoFilter 
+	 * @param pager 
 	 * @return sr진척 상세 조회
 	 */
-	public List<SrinformationList> selectInfoAll();
+	public List<SrinformationList> selectInfoAll(@Param("pager")Pager pager, @Param("srInfoFilter")SrInfoFilter srInfoFilter);
 
 	/**
 	 * 
@@ -63,4 +67,11 @@ public interface ISrinformationDao {
 	 * @return sr계획정보 부서 변경
 	 */
 	public void updateSrInfo(@Param("srplanInfomation") SrplanInformation srplanInfomation);
+
+	/* 페이징 처리를 위한 전체 행수 조회
+	 * @author 안한길
+	 * 작성일자 : 2023-03-06
+	 * @return 결과 행수
+	 * */
+	public int selectTotalRow(@Param("page")int page,@Param("srInfoFilter") SrInfoFilter srInfoFilter);
 }

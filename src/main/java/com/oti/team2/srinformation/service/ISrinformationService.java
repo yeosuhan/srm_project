@@ -5,17 +5,21 @@ import java.util.List;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srinformation.dto.Dept;
 import com.oti.team2.srinformation.dto.Manager;
+import com.oti.team2.srinformation.dto.SrInfoFilter;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInformation;
+import com.oti.team2.util.pager.Pager;
 
 public interface ISrinformationService {
 	/**
 	 * 
 	 * @author 여수한
 	 * 작성일자 : 2023-02-22
+	 * @param srInfoFilter 
+	 * @param pager 
 	 * @return sr진척 목록 조회
 	 */
-	List<SrinformationList> getList();
+	List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter);
 	
 	/**
 	 * @author 여수한
@@ -50,4 +54,10 @@ public interface ISrinformationService {
 	 * @return sr계획정보 부서 변경
 	 */
 	void updateSrInfo(SrplanInformation srplanInfomation);
+	/* 페이징 처리를 위한 전체 행수 조회
+	 * @author 안한길
+	 * 작성일자 : 2023-03-06
+	 * @return 결과 행수
+	 * */
+	int getTotalRow(int page, SrInfoFilter srInfoFilter);
 }
