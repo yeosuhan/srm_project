@@ -16,6 +16,8 @@ public interface ISrInformationHistoryDao {
 	 * @author 최은종
 	 */
 	public List<SrInformationHistory> selectBySrNo(@Param("pager") Pager pager, @Param("srNo") String srNo);
+	
+	public List<SrInformationHistory> selectForClientBySrNo(@Param("pager") Pager pager, @Param("srNo") String srNo);
 
 	/**
 	 * SR처리 히스토리 목록 페이징을 위한 메서드
@@ -31,4 +33,25 @@ public interface ISrInformationHistoryDao {
 	 */
 	public SrHistoryDetailDto selectByHstryId(@Param("hstryId") int hstryId);
 
+	/**
+	 * SR처리 히스토리 등록 메서드 
+	 * 
+	 * @author 최은종
+	 */
+	public void insertSrHistory(SrInformationHistory srInformationHistory);
+	
+	/**
+	 * SR처리 히스토리 상태 업데이트 메서드
+	 * 
+	 * @author 최은종
+	 */
+	public void updateHstryStts(@Param("hstryId") int hstryId);
+
+	/**
+	 * SR처리 히스토리 수정 메서드
+	 * 
+	 * @author 최은종
+	 */
+	public int updateHstry(SrInformationHistory srInformationHistory);
+	
 }

@@ -3,11 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
 	<typeAliases>
 		<typeAlias type="com.oti.team2.institution.dto.Institution" alias="institution" />
 		<typeAlias type="com.oti.team2.srinformation.dto.SrinformationList" alias="srinformationlist" />
 		<typeAlias type="com.oti.team2.srdemand.dto.SrdemandDetail" alias="srdemandDetail" />
-		<typeAlias type="com.oti.team2.srinformation.dto.SrplanInformation" alias="srplanInfomation" />
+		<typeAlias type="com.oti.team2.srinformation.dto.SrplanInformation" alias="srplanInformation" />
 		<typeAlias type="com.oti.team2.srinformation.dto.Dept" alias="dept" />
 		<typeAlias type="com.oti.team2.srinformation.dto.Manager" alias="manager" />
 		<typeAlias type="com.oti.team2.member.dto.Member" alias="member"/>

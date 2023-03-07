@@ -3,16 +3,36 @@
 <mapper
 	namespace="com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao">
 
-	<!-- History 전체 내역 조회 -->
-	<select id="selectBySrNo" parameterType="map" resultType="srInformationHistory">
+	<!-- History 전체 내역 조회 (관리자/개발자용)-->
+	<select id="selectBySrNo" parameterType="map"
+		resultType="srInformationHistory">
 		<![CDATA[
-			select hstryId, srNo, hstryTtl, hstryStts, chgEndYmd
+			select hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
 			from 
-			    (select rownum as rnum, hstryId, srNo, hstryTtl, hstryStts, chgEndYmd
+			    (select rownum as rnum, hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
 			    from(
-			        select hstry_id as hstryId, sr_no as srNo, hstry_ttl as hstryTtl, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd
-			        from sr_information_history
-			        where sr_no like #{srNo}
+			        select hstry_id as hstryId, sr_no as srNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
+			        from sr_information_history, members m
+			        where sr_no like #{srNo} and m.member_id=rqstr_id
+			        order by hstryId asc
+			    )
+			    where rownum <= #{pager.endRowNo}
+			    )
+			where rnum >= #{pager.startRowNo}	
+		]]>
+	</select>
+	
+		<!-- History 전체 내역 조회 (고객용)-->
+	<select id="selectForClientBySrNo" parameterType="map"
+		resultType="srInformationHistory">
+		<![CDATA[
+			select hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
+			from 
+			    (select rownum as rnum, hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
+			    from(
+			        select hstry_id as hstryId, sr_no as srNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
+			        from sr_information_history, members m
+			        where sr_no like #{srNo} and m.member_id=rqstr_id and hstry_type != 'A'
 			        order by hstryId asc
 			    )
 			    where rownum <= #{pager.endRowNo}
@@ -23,14 +43,16 @@
 
 	<!-- History 테이블 전체 행수 -->
 	<select id="countAll" resultType="int">
-		select count(*) 
-		from sr_information_history
+		select count(*)
+		from
+		sr_information_history
 	</select>
 
 	<!-- History Id에 따른 상세조회 -->
-	<select id="selectByHstryId" parameterType="int" resultType="srHistoryDetailDto">
+	<select id="selectByHstryId" parameterType="int"
+		resultType="srHistoryDetailDto">
 		<![CDATA[
-			select hstry_id as hstryId, srH.sr_no as srNo, dmndNo, instNm, sysNm, deptNm, wrt_ymd as wrtYmd, cmptnDmndYmd, chg_end_ymd as chgEndYmd, hstry_ttl as hstryTtl, hstry_cn as hstryCn
+			select hstry_id as hstryId, srH.sr_no as srNo, dmndNo, instNm, sysNm, deptNm, wrt_ymd as wrtYmd, cmptnDmndYmd, chg_end_ymd as chgEndYmd, hstry_ttl as hstryTtl, hstry_cn as hstryCn, hstry_type as hstryType, hstry_stts as hstryStts, rqstr_id as rqstrId
 			from(
 			    select member_id as mid, m.inst_cd as instCd, i.inst_nm as instNm, srNo, dmndNo, bgngYmd, endYmd, cmptnDmndYmd, deptCd, d.dept_nm as deptNm, picId, rvwrId, prgrsYn, sysCd, s.sys_cd as ssysCd, sys_nm as sysNm
 			    from(
@@ -41,6 +63,54 @@
 			where srH.sr_no=srNo and hstry_id = #{hstryId}
 		]]>
 	</select>
+
+	<!-- History 요청일변경/개발취소 등록 -->
+	<insert id="insertSrHistory" parameterType="srInformationHistory">
+		<if test='chgEndYmd!=null and hstryStts!="Y" and hstryStts!="N"'>
+			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, chg_end_ymd, hstry_type, rqstr_id)
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{chgEndYmd}, #{hstryType}, #{rqstrId})		
+		</if>
+		<if test='chgEndYmd!=null and hstryStts=="Y" or hstryStts=="N"'>
+			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, hstry_stts, chg_end_ymd, hstry_type, rqstr_id)
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{hstryStts}, #{chgEndYmd}, #{hstryType}, #{rqstrId})		
+		</if>
+		<if test="chgEndYmd==null">
+			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, hstry_type, rqstr_id)
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{hstryType}, #{rqstrId})		
+		</if>
+	</insert>
+
+	<!-- History 수락여부 상태 업데이트 (미완)-->
+	<update id="updateHstryStts" parameterType="int">	
+			update sr_information_history
+			set hstry_stts = #{hstryStts}
+			where hstry_id = #{hstryId} 
+	</update>
 	
+
+	<!-- History 승인 전 상세 변경 업데이트 -->
+	<update id="updateHstry" parameterType="srInformationHistory">
+		update sr_information_history
+		set
+		<trim suffixOverrides=",">
+		<if test='hstryType != "C"'>
+			hstry_type = #{hstryType},
+		</if>
+		<if test='hstryType == "C"'>
+			hstry_type = #{hstryType},
+			chg_end_ymd = #{chgEndYmd, jdbcType=NULL},
+		</if>
+		<if test="hstryTtl != null">
+			hstry_ttl = #{hstryTtl},
+		</if>
+		<if test="hstryCn != null">
+			hstry_cn = #{hstryCn},
+		</if>		
+		<if test='chgEndYmd != null and hstryType != "C"'>
+			chg_end_ymd = #{chgEndYmd}
+		</if>
+		</trim>
+		where hstry_id = #{hstryId}		
+	</update>
 	
 </mapper>
