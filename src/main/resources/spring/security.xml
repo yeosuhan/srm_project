@@ -19,6 +19,8 @@
 			pattern="/join-employee" access="permitAll" />
 		<security:intercept-url pattern="/join"
 			access="permitAll" />
+		<security:intercept-url pattern="/join/check/{memberId}"
+			access="permitAll" />
 		<security:intercept-url pattern="/**"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/admin/*"

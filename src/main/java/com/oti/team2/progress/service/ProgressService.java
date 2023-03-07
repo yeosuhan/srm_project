@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.progress.dao.IProgressDao;
 import com.oti.team2.progress.dto.Progress;
@@ -36,7 +37,7 @@ public class ProgressService implements IProgressService {
 	 * @author 여수한 작성일자 : 2023-02-27
 	 * @return sr요청 진척률 수정
 	 */
-	@Override
+	@Transactional
 	public void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo) {
 		if (prgrsRt < 9) {
 			// 진척률만 업데이트
@@ -44,21 +45,27 @@ public class ProgressService implements IProgressService {
 		} else if (prgrsRt == 10) {
 			int sttsCd = 3;
 			// 진척률 + 진행상태
+			log.info("sttsCd : " + sttsCd);
 			srDemandService.updateSrDemandStts(srNo, sttsCd);
+			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt >= 11 && prgrsRt < 40) {
 			// 진척률만 업데이트
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd , prgrsRt);
 		} else if (prgrsRt == 40) {
 			int sttsCd = 3;
 			// 진척률 + 진행상태
+			log.info("sttsCd : " + sttsCd);
 			srDemandService.updateSrDemandStts(srNo, sttsCd);
+			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt >= 41 && prgrsRt < 70) {
 			// 진척률만 업데이트
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt == 70) {
 			int sttsCd = 4;
 			// 진척률 + 진행상태
+			log.info("sttsCd : " + sttsCd);
 			srDemandService.updateSrDemandStts(srNo, sttsCd);
+			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt >= 71 && prgrsRt < 80) {
 			// 진척률만 업데이트
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
@@ -74,8 +81,10 @@ public class ProgressService implements IProgressService {
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt == 100) {
 			int sttsCd = 5;
+			log.info("sttsCd : " + sttsCd);
 			// 진척률 + 진행상태
 			srDemandService.updateSrDemandStts(srNo, sttsCd);
+			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		}
 	}
 

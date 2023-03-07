@@ -187,7 +187,10 @@ public class SrDemandService implements ISrDemandService {
 	 * @author 여수한 작성일자 : 2023-02-28
 	 * @return sr요청 진행사항 수정 : 진척률 수정 / 결제취소 처리 시에 사용 됨
 	 */
+	@Transactional
 	public void updateSrDemandStts(String srNo, int sttsCd) {
+		log.info("srdemand에서의 sttsCd : " + sttsCd);
+		log.info("srdemand에서의 srNo : " + srNo);
 		srDemandDao.updateSttsBySrNo(srNo, sttsCd);
 	}
 

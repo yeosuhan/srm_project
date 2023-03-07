@@ -42,18 +42,27 @@ public interface ISrinformationService {
 	public void insertInformation(SdApprovalDto sdApprovalDt);
 		
 	/**
+	 * 
 	 * @author 여수한
 	 * 작성일자 : 2023-03-02
 	 * @return sr계획정보 부서의 담당자 조회
 	 */
 	Manager getFlnmByDeptCd(String deptCd);
-	
 	/**
+	 * 
 	 * @author 여수한
 	 * 작성일자 : 2023-03-02
 	 * @return sr계획정보 부서 변경
 	 */
 	void updateSrInfo(SrplanInformation srplanInfomation);
+
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-03
+	 * @return 개발취소시 sr정보 진행여부 false(0)으로 수정
+	 */
+	void updatePrgrsBySrNo(String srNo);
 
 	/* 페이징 처리를 위한 전체 행수 조회
 	 * @author 안한길

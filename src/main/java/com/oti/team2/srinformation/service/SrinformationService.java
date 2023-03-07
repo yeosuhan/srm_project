@@ -146,7 +146,16 @@ public class SrinformationService implements ISrinformationService{
 	public void updateSrInfo(SrplanInformation srplanInfomation) {
 		srinformationDao.updateSrInfo(srplanInfomation);
 	}
-	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-03
+	 * @return 개발취소시 sr정보 진행여부 false(0)으로 수정
+	 */
+	@Override
+	public void updatePrgrsBySrNo(String srNo) {
+		srinformationDao.updatePrgrsBySrNo(srNo);
+	}
 	/* 페이징 처리를 위한 전체 행수 조회
 	 * @author 안한길
 	 * 작성일자 : 2023-03-06
