@@ -66,10 +66,6 @@ public class exampleController {
 		return "member/myinfo";
 	}
 
-	@RequestMapping(value = "/myportal", method = RequestMethod.GET)
-	public String myTodo(Locale locale, Model model) {
-		return "member/my-todo";
-	}
 
 	@RequestMapping(value = "/noticelist", method = RequestMethod.GET)
 	public String noticeList(Locale locale, Model model) {

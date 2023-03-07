@@ -1,7 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+<%-- 작성자 : 최은종 / 작성 날짜 : 2023-02-28 --%>
 
 <html>
 <head>
@@ -15,7 +17,10 @@
 	src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/deliverables.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/srInfoListHstry.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
+
 <script>
 	
 <%-- 모달 실행 --%>
@@ -30,6 +35,7 @@
 		document.body.style = `overflow: scroll`;
 	});
 </script>
+
 <style>
 .ui-datepicker-trigger {
 	width: 29px;
@@ -105,6 +111,7 @@ th {
 	font-size: inherit;
 }
 </style>
+
 <body>
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
@@ -152,9 +159,7 @@ th {
                                                 </div>
                                              </div> --%>
 														</div>
-
 													</div>
-
 													<div class="form-group row">
 														<div class="col-sm-6">
 															<div class="row">
@@ -282,7 +287,6 @@ th {
 												<div class="card">
 													<div class="card-header">
 														<h5>SR 처리 목록</h5>
-
 														<div class="card-header-right">
 															<ul class="list-unstyled card-option">
 																<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -338,7 +342,8 @@ th {
 																								<label class="badge badge-primary">${srlist.sttsNm}</label>
 																							</c:if> <c:if test="${(srlist.sttsNm) eq '개발취소'}">
 																								<label class="badge badge-danger">${srlist.sttsNm}</label>
-																							</c:if></td>
+																							</c:if>
+																							</td>
 																					</tr>
 																				</c:forEach>
 																			</c:if>
@@ -353,7 +358,6 @@ th {
 																		file="/WEB-INF/views/fragments/pagination.jsp"%>
 																</div>
 															</div>
-
 														</div>
 													</div>
 												</div>
@@ -363,19 +367,13 @@ th {
 												<div class="card">
 													<div class="card-header">
 														<div class="row">
-															<div class="col-6">
+															<div class="col-8">
 																<h5>SR요청 상세정보</h5>
 															</div>
-															<!-- 개발 완료, 취소일 때 안보여야됨 -->
-															<div class="col-3">
-																<button type="button" class="btn btn-primary btn-sm"
-																	data-toggle="modal" data-target="#addHistoryModal">
-																	예정일 변경</button>
-															</div>
-															<div class="col-3">
-																<button type="button" class="btn btn-primary btn-sm"
-																	data-toggle="modal" data-target="#addHistoryModal">
-																	개발 취소</button>
+															<div class="col-3 ml-4">
+																<button class="btn btn-primary btn-sm"
+																	onclick="addHistory('${srNo}')" data-toggle="modal"
+																	data-target="#addHistoryModal">SR 변경요청</button>
 															</div>
 														</div>
 													</div>
@@ -391,8 +389,6 @@ th {
 																			class="form-control" id="SRDDmndNo"
 																			value="${sd.dmndNo}" style="width: 110px;">
 																	</div>
-
-																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">우선순위</div>
 																	<div class="col col-sm-6">
@@ -531,9 +527,9 @@ th {
 																class="nav-link" data-toggle="tab" href="#messages1"
 																role="tab">SR 진척율</a>
 																<div class="slide"></div></li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#history1" role="tab">SR
-																	히스토리</a>
+															<li class="nav-item" onclick="getSrHistoryList()"><a
+																class="nav-link" data-toggle="tab" href="#srInfhistory"
+																role="tab">SR 히스토리</a>
 																<div class="slide"></div></li>
 														</ul>
 														<%-- *********************************** [ 계획정보 ] ***********************************--%>
@@ -986,63 +982,29 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
 																	추가</button>
 															</div>
-
 															<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
-															<div class="tab-pane" id="history1" role="tabpanel"
+															<div class="tab-pane" id="srInfhistory" role="tabpanel"
 																style="padding-bottom: 20px;">
-																<div class="tab-pane" id="profile1" role="tabpanel">
-																	<div class="card-block table-border-style"
-																		style="padding: 0px;">
-																		<div class="table-responsive">
-																			<table class="table table-hover text-center"
-																				style="font-size: 12px; padding: 0px;">
-																				<thead>
-																					<tr>
-																						<th style="width: 1px;">순번</th>
-																						<th>담당자명</th>
-																						<th>기존 완료예정일</th>
-																						<th>변경된 완료예정일</th>
-																						<th>수락여부</th>
-																						<th>상세조회</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-																					<tr>
-																						<th scope="row">1</th>
-																						<td>Otto</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">2</th>
-																						<td>Thornton</td>
-																						<td>@fat</td>
-																						<td>Jacob</td>
-																						<td>@fat</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">3</th>
-																						<td>the Bird</td>
-																						<td>@twitter</td>
-																						<td>Larry</td>
-																						<td>@twitter</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
+																<div class="card-block table-border-style"
+																	style="padding: 0px;">
+																	<div class="table-responsive">
+																		<table
+																			class="table table-hover text-center historyTable"
+																			style="font-size: 12px; padding: 0px;">
+																			<thead>
+																				<tr>
+																					<th style="width: 1px;">순번</th>
+																					<th>요청자명</th>
+																					<th>요청유형</th>
+																					<th>변경될 완료예정일</th>
+																					<th>승인여부</th>
+																				</tr>
+																			</thead>
+																			<tbody id="srhistory1">
+																			</tbody>
+																		</table>
 																	</div>
 																</div>
-
 															</div>
 														</div>
 													</div>
@@ -1061,8 +1023,9 @@ th {
 			</div>
 		</div>
 	</div>
+	<%@include file="/WEB-INF/views/history/approvalInfoHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
-	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
+	<%@include file="/WEB-INF/views/history/modifyHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>

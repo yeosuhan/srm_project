@@ -15,6 +15,7 @@ public interface IProgressDao {
 	 * @return sr요청 진척률 조회
 	 */
 	public List<Progress> selectProgressByDmndNo(@Param("srNo") String srNo);
+	
 	/**
 	 * 
 	 * @author 여수한
@@ -23,5 +24,10 @@ public interface IProgressDao {
 	 */
 	public void updateProgressByPrgrsId(@Param("prgrsId") int prgrsId, @Param("bgngYmd") String bgngYmd, @Param("endYmd") String endYmd, @Param("prgrsRt") int prgrsRt);
 	
+	/**
+	 * 진척률 insert
+	 * @author 신정은
+	 */
+	public int insertProgress(@Param("srNo") String srNo, @Param("pNames") List<String> pNames);
 	
 }

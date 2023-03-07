@@ -15,6 +15,7 @@
 		WHERE
 			P.SR_NO = #{srNo}
 	</select>
+	
 	<!-- sr요청 진척률 수정 -->
 	<update id="updateProgressByPrgrsId" parameterType="map">
 		UPDATE
@@ -25,7 +26,15 @@
 			PRGRS_RT = #{prgrsRt}
 		WHERE
 			PRGRS_ID = #{prgrsId}
-			
-	
 	</update>
+	
+	<insert id="insertProgress" parameterType="map">
+		INSERT ALL 
+		<foreach collection="pNames" item="pname" separator=" " close="SELECT * FROM DUAL" index="index">
+			INTO 
+				PROGRESS(PRGRS_ID, SR_NO, PRGRS_SE_NM)
+			VALUES
+				(PRGRS_ID_SEQ.nextval + #{index}, #{srNo}, #{pname})
+		</foreach>
+	</insert>
 </mapper>

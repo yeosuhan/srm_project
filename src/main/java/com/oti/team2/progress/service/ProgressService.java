@@ -87,4 +87,12 @@ public class ProgressService implements IProgressService {
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		}
 	}
+
+	/**
+	 * 진척데이터 삽입
+	 * @author 신정은
+	 */
+	public void addProgress(String srNo, List<String> pNames) {
+		progressDao.insertProgress(srNo, pNames);
+	}
 }

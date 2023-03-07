@@ -7,15 +7,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
-public class SdApprovalDto {
+public class MytodoSrListDto {
 	private String dmndNo;
-	private int val;
-	private String rnk;
-	private String rjctRsn;
-	private String rvwrId;
+	private String sysNm;
+	private String taskNm;
+	private String ttl;
+	private String picNm;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
-	private Date bgngYmd;
-	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
-	private Date endYmd;
+	private Date cmptnDmndYmd;
+	private String sttsNm;
+	private int sttsCd;
 	private String srNo;
+	private String rnk;
 }

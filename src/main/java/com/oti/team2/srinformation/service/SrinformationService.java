@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.department.service.IDepartmentService;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
@@ -66,6 +67,7 @@ public class SrinformationService implements ISrinformationService{
 	 * 관리자의 sr요청 승인 시 -> srInformation에 insert하기
 	 * @author 신정은
 	 */
+	@Transactional
 	public void insertInformation(SdApprovalDto sdApprovalDto) {
 		// dmndNo, rnk, deptCd, picID
 		// 시스템 코드 가져오기
@@ -79,7 +81,7 @@ public class SrinformationService implements ISrinformationService{
 				
 		// 코드 생성
 		String srNo = createSrNoCode(sysCd);
-	
+		sdApprovalDto.setSrNo(srNo);
 		//srInformation에 insert 실행
 		SrInformationRequestDto srInfoDto = new SrInformationRequestDto(srNo, sdApprovalDto.getDmndNo(), deptCd, picId, 
 				sdApprovalDto.getRnk(), sdApprovalDto.getBgngYmd(), sdApprovalDto.getEndYmd());
@@ -163,5 +165,4 @@ public class SrinformationService implements ISrinformationService{
 	public int getTotalRow(int page, SrInfoFilter srInfoFilter) {
 		return srinformationDao.selectTotalRow(page,srInfoFilter);
 	}
-
 }

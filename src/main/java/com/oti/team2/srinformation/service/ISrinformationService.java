@@ -63,6 +63,7 @@ public interface ISrinformationService {
 	 * @return 개발취소시 sr정보 진행여부 false(0)으로 수정
 	 */
 	void updatePrgrsBySrNo(String srNo);
+
 	/* 페이징 처리를 위한 전체 행수 조회
 	 * @author 안한길
 	 * 작성일자 : 2023-03-06

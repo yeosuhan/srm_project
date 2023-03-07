@@ -1,8 +1,11 @@
+<%--
+	작성자 : 신정은
+ --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
-<%--  inclue 시킨다. ㅡmodel.add(("pager",pager") foreach로 페이지 숫자 복사 , 링크 앞부분을 model.add("link") : /sr/list?page=1--%>
+
 <div class="pagination-container">
 	<div class="pagination">
 		<c:if test="${pager.startPageNo -1 > 0 }">
