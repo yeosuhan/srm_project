@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class SrResource {
-	private int srSrc;
+	private Integer srSrc;
 	private String srNo;
 	private String empId;
 	private String empNm;

@@ -73,7 +73,7 @@
 				WHERE
 					r.SR_NO = i.SR_NO
 					AND r.SR_NO = #{srNo}
-					<![CDATA[SCHDL_END_YMD > END_YMD]]>
+					AND<![CDATA[SCHDL_END_YMD > END_YMD]]>
 			)
 			</if>
 			<set>
