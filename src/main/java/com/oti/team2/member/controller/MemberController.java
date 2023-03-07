@@ -97,9 +97,8 @@ public class MemberController {
 		log.info(deptCd);
 		EmployeeList employeeList = new EmployeeList();
 		employeeList.setDevelopers(memberService.getEmployeeNameList(deptCd));
-		
 		employeeList.setSchedule(srResourceService.getSrResourceListByEmpId(employeeList.getDevelopers().get(0).getEmpId()));
-		
+		log.info(employeeList.getSchedule());
 		return employeeList;
 	}
 }

@@ -6,51 +6,36 @@ $(document).ready(function(){
     * */
    $("#addSrResourcesModal").on('show.bs.modal',function(){
       var calendarEl=null;
-      var deptCd=$("#deptCd").val();
-      console.log(deptCd);
-
-      console.log(getContextPath());
+      var deptCd=$("#dept").val();
+      //console.log(deptCd);
+      $("#addSrResourceModalDept option[value='"+deptCd+"']").prop("selected",true);
+      //console.log(getContextPath());
       if($("#empId option").length==0){
+    	  /*달력*/
+          calendarEl= $('#calendar')[0];
+       
+          calendar = new FullCalendar.Calendar(calendarEl,{
+             headerToolbar:{
+                left : 'prev, next',
+                center: 'title',
+                right:''
+             },
+             height:400,
+             initialView: 'dayGridMonth',
+             eventDataTransform: function(events) {                                                                                                                                
+           	  if(events.allDay) {                                                                                                                                               
+           		  events.end = moment(events.end,'YYYY-MM-DD').add(1, 'days').format('YYYY-MM-DD HH:mm:SS')                                                                                                                 
+           	  }
+           	  return event;  
+             }  ,
+          });
+          calendar.render();
+          //처음 모달을 열때 달력이 안보이는 문제
+          $(".fc-scroller td, th").css('width','50px');
+          $(".fc-event-time").empty();
+          
          /*개발자 목록*/
-         $.ajax({
-            url:"/member/department",
-            type:"GET",
-            async: false,
-            data:{deptCd:deptCd},
-            success:function(result){
-               result.developers.forEach((value,index)=>{
-                  $("#empId").append(
-                        "<option value='"+value.empId+"'>" +value.flnm+"</option>"
-                  );
-               });
-               /*달력*/
-               //console.log(result.schedule);
-               calendarEl= $('#calendar')[0];
-            
-               calendar = new FullCalendar.Calendar(calendarEl,{
-                  headerToolbar:{
-                     left : 'prev, next',
-                     center: 'title',
-                     right:''
-                  },
-                  height:400,
-                  initialView: 'dayGridMonth',
-                  eventDataTransform: function(events) {                                                                                                                                
-                	  if(events.allDay) {                                                                                                                                               
-                		  events.end = moment(events.end,'YYYY-MM-DD').add(1, 'days').format('YYYY-MM-DD HH:mm:SS')                                                                                                                 
-                	  }
-                	  return event;  
-                  }  ,
-                  events:
-                     result.schedule
-               });
-               calendar.render();
-               //처음 모달을 열때 달력이 안보이는 문제
-               $(".fc-scroller td, th").css('width','50px');
-               $(".fc-event-time").empty();
-               
-            }
-         });
+         getEmployeeList(deptCd);
       }else{
     	  showSchedule();
       }
@@ -84,7 +69,37 @@ $(document).ready(function(){
    $("#schdlEndYmd").change(function(){
 		  $(this).addClass("changed"); 
    });
+   //부서 변경시 개발자 목록 불러오기
+   $("#addSrResourceModalDept").change(function(){
+	  getEmployeeList($("#addSrResourceModalDept option:selected").val()); 
+   });
 });
+/* 개발자 목록 가져오는 함수
+ * @author : 안한길
+ * */
+function getEmployeeList(deptCd){
+	$("#empId").empty();
+	$("#empId").append(
+            "<option>선택</option>"
+    );
+	calendar.getEvents().forEach((value)=>{
+        //console.log(value);
+        value.remove();
+    });
+	$.ajax({
+        url:"/member/department",
+        type:"GET",
+        async: false,
+        data:{deptCd:deptCd},
+        success:function(result){
+           result.developers.forEach((value,index)=>{
+              $("#empId").append(
+                    "<option value='"+value.empId+"'>" +value.flnm+"</option>"
+              );
+           });
+        }
+     });
+}
 /* 선택된 개발자 일정 가져오는 함수
  * @author: 안한길
  * */
@@ -168,7 +183,7 @@ function openUpdateResourceModal(srSrc,empId,ptcptnRoleCd){
 	$("#addSrResourcesModal").modal("show");
 	
 	//개발자
-	
+	$("#addSrResourceModalDept").attr("disabled",true);
 	$("#empId option[value='"+empId+"']").prop("selected",true);
 	showSchedule();
 	$("#empId").attr("disabled",true);

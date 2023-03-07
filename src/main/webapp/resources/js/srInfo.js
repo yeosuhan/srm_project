@@ -1,3 +1,6 @@
+$(document).ready(function(){
+	getPlan();
+});
 /* SR요청 상세보기 */
 function getDetail(dmndNo, srNo) {
 	console.log("상세보기 : " + dmndNo + srNo);
@@ -35,13 +38,12 @@ function getDetail(dmndNo, srNo) {
 			$("#SRPlFlnm").val(detail.pi.flnm);
 			$("#SRPlBgngYmd").val(detail.pi.bgngYmd);
 			$("#SRPlEndYmd").val(detail.pi.endYmd);
-			$("#SRPlRvwCn").text(detail.pi.rvwCn);
+			$("#SRPlRvwCn").val(detail.pi.rvwCn);
 			/* 자원 정보 모달 */
 			$("#srPlanTab").tab("show");
 			$("#srNo").val(srNo);
 			$("#ttl").val(detail.dd.ttl);
-			$("#deptCd").val(detail.pi.deptCd);
-			$("#deptNm").val(detail.pi.deptNm);
+			$("#addSrResourceModalDept option[value='"+detail.pi.deptCd+"']").prop("selected",true);
 			$("#resourceInst").val(detail.dd.instNm);
 			$("#resourceTableRow").empty();
 			$(".deliverableTable tbody").empty();
