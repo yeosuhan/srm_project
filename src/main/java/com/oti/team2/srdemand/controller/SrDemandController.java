@@ -120,8 +120,7 @@ public class SrDemandController {
 		}
 
 		model.addAttribute("sd", sd);
-		model.addAttribute("pager", pager);
-		
+		model.addAttribute("pager", pager);		
 		return "srDemand/userSrDemandList";
 	}
 

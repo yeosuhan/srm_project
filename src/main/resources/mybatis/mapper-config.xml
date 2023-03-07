@@ -31,5 +31,6 @@
 		<typeAlias type="com.oti.team2.srdemand.dto.SdApprovalDto" alias="sdApprovalDto"/>
 		<typeAlias type="com.oti.team2.srinformation.dto.SrInformationRequestDto" alias="srInformationRequestDto"/>
 		<typeAlias type="com.oti.team2.role.dto.Role" alias="role" />
+		<typeAlias type="com.oti.team2.srdemand.dto.MytodoSrListDto" alias="mytodoSrListDto"/>
 	</typeAliases> 
 </configuration>

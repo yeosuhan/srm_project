@@ -24,18 +24,19 @@ public class LoginController {
 
 	@ResponseBody
 	@GetMapping("/auth")
-	public Authentication postLogin(Authentication auth) { //@AuthenticationPrincipal Users user
+	public Authentication auth(Authentication auth) { //@AuthenticationPrincipal Users user
 		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		//Id 알아오는 법
 		//Authentication auth 매개변수로 가져오고 getName();
-		String memberId=auth.getName();	
+		/*String memberId=auth.getName();	
 		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
 		
 		Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
 		GrantedAuthority authority;
 		while(iterator.hasNext()) authority = iterator.next();
-		log.info("getName: "+ memberId);
+		log.info("getName: "+ memberId);*/
+		log.info(auth.getAuthorities());
 
 		return auth;
 	}

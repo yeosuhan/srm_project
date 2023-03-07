@@ -143,4 +143,13 @@ public class SrinformationService implements ISrinformationService{
 		srinformationDao.updateSrInfo(srplanInfomation);
 	}
 
+	/**
+	 * 개발자의 자신이 담당하는 sr_informtaion 목록 가져오기
+	 * @author 신정은
+	 */
+	public void getDeveloperSrInformation(String developerId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

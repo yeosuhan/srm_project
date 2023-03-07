@@ -5,12 +5,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.srdemand.dao.ISrDemandDao;
+import com.oti.team2.srdemand.dto.MytodoSrListDto;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
@@ -194,5 +194,42 @@ public class SrDemandService implements ISrDemandService{
 		log.info(srNo);
 		return srNo;
 	}
+
+	/*
+	 * 나의 할일 페이징 처리 :  고객/ 관리자의 각 상태별 목록 조회시 페이징 객체 생성
+	 * @author 신정은
+	 */
+	public Pager getcountsByCustIdOrPicIdAndSttsCd(String custId, String picId, int sttsCd, int pageNo) {
+		int totalRows = srDemandDao.countByCustIdOrPicIdAndSttsCd(custId, picId, sttsCd);
+		Pager pager = new Pager(totalRows, pageNo);
+		return pager;
+	}
+	
+	/**
+	 * 나의 할일 페이지 - 상태별, 고객/관리별 요청+진척 조회 목록 불러오기
+	 * @author 신정은
+	 */
+	public List<MytodoSrListDto> getMytodoSrList(String custId, String picId, int sttsCd, Pager pager) {
+		return srDemandDao.selectByCustIdOrPicIdAndSttsCd(custId, picId, sttsCd, pager);
+	}
+
+	/*
+	 * 나의 할일 페이징 처리 :  [고객/ 관리자]의 각 상태별 목록 조회시 페이징 객체 생성
+	 * @author 신정은
+	 */
+	public Pager getcountsByEmpIdAndSttsCd(String empId, int sttsCd, int pageNo) {
+		int totalRows = srDemandDao.countByEmpIdAndSttsCd(empId, sttsCd);
+		Pager pager = new Pager(totalRows, pageNo);
+		return pager;
+	}
+
+	/*
+	 * 나의 할일 페이지 - 상태별, [개발자]별 자원정보 + 요청 + 진척 조회 목록 불러오기
+	 * @author 신정은
+	 */
+	public List<MytodoSrListDto> getMytodoSrListForDeveloper(String empId, int sttsCd, Pager pager) {
+		return srDemandDao.selectByEmpIdAndSttsCd(empId, sttsCd, pager);
+	}
+
 
 }

@@ -266,4 +266,97 @@
 						)			
 	</update>
 	
+	<!--  나의 할일 페이징 처리 :  고객/ 관리자의 각 상태별 목록 조회시 페이징 처리를 위한 count -->
+	<select id="countByCustIdOrPicIdAndSttsCd" parameterType="map" resultType="int">
+		SELECT 
+           COUNT(DISTINCT sd.DMND_NO)
+	    FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, sr_information si, task tk
+	   	<where>
+			<if test="custId != null">
+				sd.CUST_ID = #{custId} 
+			</if>
+			<if test="picId != null and sttsCd > 1">
+				PIC_ID = #{pi 	cId} 
+			</if>
+		    and sd.DEL_YN = 0
+		    and si.PIC_ID = m.member_id(+)
+		    and s.stts_cd = #{sttsCd} 
+		    and sd.stts_cd = s.stts_cd
+		    and sd.sys_cd = sy.sys_cd 
+		    and sd.dmnd_no = si.dmnd_no (+)
+		    and sd.TASK_SE_CD = tk.TASK_SE_CD
+		</where> 
+	</select>
+	
+	<!--  나의 할일 :  고객/ 관리자의 각 상태별 목록 조회  -->
+	<select id="selectByCustIdOrPicIdAndSttsCd" parameterType="map" resultType="mytodoSrListDto">
+		SELECT 
+            DISTINCT sd.DMND_NO as dmndNo ,
+            sy.SYS_NM as sysNm ,
+            tk.TASK_SE_NM as taskNm ,
+            sd.TTL as ttl ,
+            m.flnm as picNm , 
+            sd.CMPTN_DMND_YMD as cmptnDmndYmd ,
+            s.STTS_NM as sttsNm ,
+            sd.STTS_CD as sttsCd ,
+            si.SR_NO as srNo,
+            si.rnk as rnk
+	    FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, sr_information si, task tk
+	   	<where>
+			<if test="custId != null">
+				sd.CUST_ID = #{custId} 
+			</if>
+			<if test="picId != null and sttsCd > 1">
+				PIC_ID = #{picId} 
+			</if>
+		    and sd.DEL_YN = 0
+		    and si.PIC_ID = m.member_id(+)
+		    and s.stts_cd = #{sttsCd} 
+		    and sd.stts_cd = s.stts_cd
+		    and sd.sys_cd = sy.sys_cd 
+		    and sd.dmnd_no = si.dmnd_no (+)
+		    and sd.TASK_SE_CD = tk.TASK_SE_CD
+		</where> 
+		order by dmndNo DESC
+		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
+	</select>
+	
+	<!--  나의 할일 페이징 처리 :  개발자의 각 상태별 목록 조회시 페이징 처리를 위한 count -->
+	<select id="countByEmpIdAndSttsCd" parameterType="map" resultType="int">
+		SELECT 
+		   COUNT(DISTINCT sd.DMND_NO)
+		FROM sr_resources sr, sr_information si, sr_demand sd, STATUS s
+		WHERE  sr.EMP_ID = #{empId}
+		        and sr.sr_no = si.sr_no
+		        and sd.dmnd_no = si.dmnd_no
+		        and sd.stts_cd = #{sttsCd}
+	</select>
+	
+	<!--  나의 할일 :  개발자의 각 상태별 목록 조회  -->
+	<select id="selectByEmpIdAndSttsCd" parameterType="map" resultType="mytodoSrListDto">
+		select 
+		     DISTINCT sd.DMND_NO as dmndNo,
+		        sy.SYS_NM as sysNm,
+		        tk.TASK_SE_NM as taskNm,
+		        sd.TTL as ttl,
+		        m.flnm as picNm, 
+		        sd.CMPTN_DMND_YMD as cmptnDmndYmd,
+		        s.STTS_NM as sttsNm,
+		        sd.STTS_CD as sttsCd,
+		        sr.SR_NO as srNo,
+		        si.rnk as rnk
+		FROM sr_resources sr, sr_information si, sr_demand sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, task tk
+		WHERE  sr.EMP_ID = #{empId}
+				and sr.sr_no = si.sr_no
+				and sd.dmnd_no = si.dmnd_no
+				and si.PIC_ID = m.member_id
+				and sd.stts_cd =  #{sttsCd}
+				and sd.stts_cd = s.stts_cd
+				and sd.sys_cd = sy.sys_cd 
+				and sd.TASK_SE_CD = tk.TASK_SE_CD
+				   
+		order by sd.DMND_NO DESC
+		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
+	</select>
+	
 </mapper>

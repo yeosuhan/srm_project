@@ -50,4 +50,10 @@ public interface ISrinformationService {
 	 * @return sr계획정보 부서 변경
 	 */
 	void updateSrInfo(SrplanInformation srplanInfomation);
+	
+	/**
+	 * 개발자의 자신이 담당하는 sr_informtaion 목록 가져오기
+	 * @author 신정은
+	 */
+	public void getDeveloperSrInformation(String developerId);
 }

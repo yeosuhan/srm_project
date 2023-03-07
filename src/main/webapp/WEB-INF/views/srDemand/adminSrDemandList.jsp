@@ -472,10 +472,10 @@ th {
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 검색 -->
-	<script src="/resources/assets/js/srDemandList.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
 
 	<%-- 상세, 등록, 수정 --%>
-	<script src="/resources/js/srDemand.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 	<!-- 모달 -->
 	<jsp:include page="/WEB-INF/views/history/approvalHistoryModal.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
