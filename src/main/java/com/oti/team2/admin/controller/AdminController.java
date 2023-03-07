@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,7 +22,6 @@ import com.oti.team2.department.dto.Department;
 import com.oti.team2.department.service.IDepartmentService;
 import com.oti.team2.jobgrade.service.IJobGradeService;
 import com.oti.team2.member.dto.FilterDto;
-//github.com/OTI-SRM/srm_project
 import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
