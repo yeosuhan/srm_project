@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.oti.team2.srdemand.dto.MytodoSrListDto;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
@@ -89,28 +90,58 @@ public interface ISrDemandDao {
 	 * 
 	 * @author 신정은
 	 */
-	public int updateSttsCdAndRjctRsnByDmndNo(@Param("sdApprovalDto")SdApprovalDto sdApprovalDto);
-	
+	public int updateSttsCdAndRjctRsnByDmndNo(@Param("sdApprovalDto") SdApprovalDto sdApprovalDto);
+
 	/**
 	 * SR요청 삭제하기
 	 * 
 	 * @author 신정은
 	 */
-	public int updateDelYnByDmndNo(@Param("dmndNo")String dmndNo);
-	
+	public int updateDelYnByDmndNo(@Param("dmndNo") String dmndNo);
+
 	/**
 	 * SR요청 번호로 시스템cd 가져오기
 	 * 
 	 * @author 신정은
 	 */
 	public String selectSysCdByDmndNo(@Param("dmndNo") String dmndNo);
-	
+
 	/**
 	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-02-28
+	 * @author 여수한 작성일자 : 2023-02-28
 	 * @return sr요청 진행사항 수정 : 진척률 수정 / 결제취소 처리 시에 사용 됨
 	 */
 	public int updateSttsBySrNo(@Param("srNo") String srNo, @Param("sttsCd") int sttsCd);
 
+	/*
+	 * 나의 할일 페이징 처리 :  [고객/ 관리자]의 각 상태별 목록 조회시 페이징 처리를 위한 count
+	 * @author 신정은
+	 */
+	public int countByCustIdOrPicIdAndSttsCd(@Param("custId") String custId
+			, @Param("picId") String picId
+			, @Param("sttsCd") int sttsCd);
+	
+	/*
+	 * 나의 할일 페이지 - 상태별, [고객/관리자]별 요청+진척 조회 목록 불러오기
+	 * @author 신정은
+	 */
+	public List<MytodoSrListDto> selectByCustIdOrPicIdAndSttsCd(@Param("custId") String custId
+			, @Param("picId") String picId
+			, @Param("sttsCd") int sttsCd
+			, @Param("pager") Pager pager); 
+	
+	/*
+	 * 나의 할일 페이징 처리 : [개발자] 각 상태별 목록 조회시 페이징 처리를 위한 count
+	 * @author 신정은
+	 */
+	public int countByEmpIdAndSttsCd(@Param("empId") String empId
+			, @Param("sttsCd") int sttsCd);
+	
+	/*
+	 * 나의 할일 페이지 - 상태별, [개발자]별 자원정보 + 요청 + 진척 조회 목록 불러오기
+	 * @author 신정은
+	 */
+	public List<MytodoSrListDto> selectByEmpIdAndSttsCd(@Param("empId") String empId
+			, @Param("sttsCd") int sttsCd
+			, @Param("pager") Pager pager); 
 }

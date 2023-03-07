@@ -19,31 +19,31 @@
       resultType="int">
              SELECT COUNT(MEMBER_ID)
              FROM 
-             	MEMBERS m
-             	<if test = "filtering.deptNm != null">
-             		, DEPARTMENTS d
-             	</if>
-             	<if test = "filtering.jbgdNm != null">
-             		, JOB_GRADE j
-             	</if>
-             	<if test = "filtering.instNm != null">
-             		, INSTITUTION i
-             	</if>
+                MEMBERS m
+                <if test = "filtering.deptNm != null">
+                   , DEPARTMENTS d
+                </if>
+                <if test = "filtering.jbgdNm != null">
+                   , JOB_GRADE j
+                </if>
+                <if test = "filtering.instNm != null">
+                   , INSTITUTION i
+                </if>
              WHERE MEMBER_TYPE = #{memberType}
           <if test="filtering.flnm != null">
-          		AND FLNM LIKE '%'||#{filtering.flnm}||'%'
+                AND FLNM LIKE '%'||#{filtering.flnm}||'%'
           </if>
           <if test="filtering.deptNm != null">
-          		AND m.DEPT_CD = d.DEPT_CD
-          		AND d.DEPT_NM LIKE '%'||#{filtering.deptNm}||'%'
+                AND m.DEPT_CD = d.DEPT_CD
+                AND d.DEPT_NM LIKE '%'||#{filtering.deptNm}||'%'
           </if>
           <if test="filtering.jbgdNm != null">
-          		AND m.JBGD_CD = j.JBGD_CD
-          		AND j.JBGD_NM LIKE '%'||#{filtering.jbgdNm}||'%'
+                AND m.JBGD_CD = j.JBGD_CD
+                AND j.JBGD_NM LIKE '%'||#{filtering.jbgdNm}||'%'
           </if>
           <if test="filtering.instNm != null">
-          		AND m.INST_CD = i.INST_CD
-          		AND i.INST_NM LIKE '%'||#{filtering.instNm}||'%'
+                AND m.INST_CD = i.INST_CD
+                AND i.INST_NM LIKE '%'||#{filtering.instNm}||'%'
           </if>
    </select>
    
@@ -76,22 +76,22 @@
            
           WHERE
               <if test="filtering.flnm != null">
-      			 FLNM LIKE '%'||#{filtering.flnm}||'%' AND 
-			  </if>
+                FLNM LIKE '%'||#{filtering.flnm}||'%' AND 
+           </if>
               <if test="memberType=='ROLE_DEVELOPER'">
                  m.DEPT_CD = d.DEPT_CD and
                  m.JBGD_CD = j.JBGD_CD and
-			     <if test="filtering.deptNm != null">
-			      	d.DEPT_NM LIKE '%'||#{filtering.deptNm}||'%' AND
-			     </if>
-			     <if test="filtering.jbgdNm != null">
-			      	j.JBGD_NM LIKE '%'||#{filtering.jbgdNm}||'%' AND
-			     </if>
-			  </if>
-			  <if test="memberType == 'ROLE_CLIENT'">
-			     <if test="filtering.instNm != null">
-			      	i.INST_NM LIKE '%'||#{filtering.instNm}||'%' AND
-			     </if>                   
+              <if test="filtering.deptNm != null">
+                  d.DEPT_NM LIKE '%'||#{filtering.deptNm}||'%' AND
+              </if>
+              <if test="filtering.jbgdNm != null">
+                  j.JBGD_NM LIKE '%'||#{filtering.jbgdNm}||'%' AND
+              </if>
+           </if>
+           <if test="memberType == 'ROLE_CLIENT'">
+              <if test="filtering.instNm != null">
+                  i.INST_NM LIKE '%'||#{filtering.instNm}||'%' AND
+              </if>                   
               </if>
               MEMBER_TYPE = #{memberType}
           OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY     
@@ -190,9 +190,9 @@
    </select>
    
    <select id="selectFlnmByMemberId" parameterType="string" resultType="string">
-	   	SELECT FLNM 
-	   	FROM MEMBERS
-	   	WHERE MEMBER_ID=#{memberId}
+         SELECT FLNM 
+         FROM MEMBERS
+         WHERE MEMBER_ID=#{memberId}
    </select>
    <!-- Member 객체 안의 내부 객체와의 매핑을 위함 -->
    <resultMap type="member" id="memberResultMap">

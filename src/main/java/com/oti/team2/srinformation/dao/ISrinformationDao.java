@@ -32,16 +32,18 @@ public interface ISrinformationDao {
 	 * @return sr진척 계획정보 조회
 	 */
 	public SrplanInformation selectPlanByDmndNo(@Param("dmndNo") String dmndNo);
-	
+
 	/**
 	 * WOR-2023 으로 시작하는 데이터의 수를 가져온다.
-	 *  @author 신정은
+	 * 
+	 * @author 신정은
 	 */
 	public int countBySrNo(String srCode);
-	
+
 	/**
 	 * sr요청 승인 시 srInformation으로 insert한다.
-	 *  @author 신정은
+	 * 
+	 * @author 신정은
 	 */
 	public int insertSrInformatioin(SrInformationRequestDto srInfoDto);
 
@@ -55,15 +57,14 @@ public interface ISrinformationDao {
 	/**
 	 * 
 	 * @author 여수한 작성일자 : 2023-03-02
-	 * @param deptCd 
+	 * @param deptCd
 	 * @return sr계획정보 부서 변경시 해당 담당자 변경
 	 */
 	public Manager selectFlnmByDeptCd(@Param("deptCd") String deptCd);
-	
+
 	/**
 	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-03-02
+	 * @author 여수한 작성일자 : 2023-03-02
 	 * @return sr계획정보 부서 변경
 	 */
 	public void updateSrInfo(@Param("srplanInfomation") SrplanInformation srplanInfomation);

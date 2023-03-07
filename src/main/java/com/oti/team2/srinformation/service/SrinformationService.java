@@ -154,5 +154,4 @@ public class SrinformationService implements ISrinformationService{
 	public int getTotalRow(int page, SrInfoFilter srInfoFilter) {
 		return srinformationDao.selectTotalRow(page,srInfoFilter);
 	}
-
 }

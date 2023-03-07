@@ -68,3 +68,6 @@
 <%-- 페이지 css--%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/pagination.css">
+	
+<%-- paging 처리 함수 --%>
+<script src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
