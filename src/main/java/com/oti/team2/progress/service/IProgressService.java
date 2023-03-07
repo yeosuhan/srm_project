@@ -21,4 +21,9 @@ public interface IProgressService {
 	 */
 	void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo);
 
+	/**
+	 * 진척데이터 삽입
+	 * @author 신정은
+	 */
+	void addProgress(String srNo, List<String> pNames);
 }
