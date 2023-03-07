@@ -270,21 +270,18 @@
 	<select id="countByCustIdOrPicIdAndSttsCd" parameterType="map" resultType="int">
 		SELECT 
            COUNT(DISTINCT sd.DMND_NO)
-	    FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, sr_information si, task tk
+	    FROM SR_DEMAND sd, STATUS s, sr_information si
 	   	<where>
 			<if test="custId != null">
 				sd.CUST_ID = #{custId} 
 			</if>
 			<if test="picId != null and sttsCd > 1">
-				PIC_ID = #{pi 	cId} 
+				PIC_ID = #{picId} 
 			</if>
 		    and sd.DEL_YN = 0
-		    and si.PIC_ID = m.member_id(+)
 		    and s.stts_cd = #{sttsCd} 
 		    and sd.stts_cd = s.stts_cd
-		    and sd.sys_cd = sy.sys_cd 
 		    and sd.dmnd_no = si.dmnd_no (+)
-		    and sd.TASK_SE_CD = tk.TASK_SE_CD
 		</where> 
 	</select>
 	
