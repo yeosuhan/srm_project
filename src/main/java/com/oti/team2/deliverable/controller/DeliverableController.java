@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,10 +50,10 @@ public class DeliverableController {
 	 */
 	@ResponseBody
 	@PostMapping("/add")
-	public int addDeliverable(HttpSession session, Deliverable deliverable) {
+	public int addDeliverable(Authentication auth, Deliverable deliverable) {
 		log.info("deliverable 추가");
 		//session 에서 아이디 가져오기
-		String rgtrId = "emp11";
+		String rgtrId = auth.getName();
 		deliverable.setRgtrId(rgtrId);
 		return deliverableService.addDeliverable(deliverable);
 	}
@@ -69,5 +70,18 @@ public class DeliverableController {
 		
 		int result = deliverableService.deleteDeliverable(delivIdList);
 		return result;
+	}
+	
+	/**
+	 * 산출물 수정 메서드
+	 *
+	 * @author 안한길
+	 * @return 산출물 목록으로 리턴
+	 */
+	@ResponseBody
+	@PostMapping("/modify")
+	public int modifyDeliverable(Deliverable deliverable) {
+		log.info(deliverable);
+		return deliverableService.modifyDeliverable(deliverable);
 	}
 }

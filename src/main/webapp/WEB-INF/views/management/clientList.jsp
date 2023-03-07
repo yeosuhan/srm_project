@@ -6,6 +6,8 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<script src="${pageContext.request.contextPath}/resources/js/clientList.js"></script>
+
 <style>
 table, th, td {
 	text-align: center;
@@ -66,17 +68,17 @@ table, th, td {
 														<h5 style="font-weight: bold;">고객 관리</h5>
 														<%-- 검색 기능 --%>
 														<div class="mt-4 mr-5" style="height: 30px;">
-															<form>
+															<form id="clientFilterForm" onsubmit="return searchClient()">
 																<div class="form-group row">
 																	<label class="col-sm-1 col-form-label text-right"
 																		style="font-size: 14;">이름</label>
 																	<div class="col-sm-2">
-																		<input type="text" class="form-control">
+																		<input type="text" class="form-control" name="flnm" id="flnmFilter" value="${flnm}">
 																	</div>
 																	<label class="col-sm-2 col-form-label text-right"
 																		style="font-size: 14;">소속기관</label>
 																	<div class="col-sm-3">
-																		<input type="text" class="form-control">
+																		<input type="text" class="form-control" name="instNm" id="instNmFilter" value="${instNm}">
 																	</div>
 																	<div class="col-sm-4 d-flex justify-content-end">
 																		<button

@@ -129,7 +129,7 @@ public class AdminController {
 			@RequestParam(value = "instNm", required = false) String instNm, Model model) {
 		FilterDto filterDto = new FilterDto();
 		if (instNm != null) {
-			filterDto.setDeptNm(instNm);
+			filterDto.setInstNm(instNm);
 			model.addAttribute("instNm", instNm);
 		}
 		if (flnm != null) {
@@ -137,11 +137,12 @@ public class AdminController {
 			model.addAttribute("flnm", flnm);
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_CLIENT.toString(), filterDto);
-		Pager pager = new Pager(totalRows, 1);
-		// log.info(pager);
+		Pager pager = new Pager(totalRows, page);
+		//log.info(pager);
 
 		// 목록 가져오기
 		List<Member> clientList = memberService.getMemberList(Auth.ROLE_CLIENT.toString(), pager, filterDto);
+		//log.info(clientList);
 		model.addAttribute("clientList", clientList);
 		// log.info(clientList);
 		// 상세 가져오기
@@ -176,12 +177,12 @@ public class AdminController {
 	 * 
 	 * @return 사원 목록 페이지 url
 	 */
-	@RequestMapping(value = "/employee/list", method = RequestMethod.GET)
+	@GetMapping("/employee/list")
 	public String getEmployeeList(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "flnm", required = false) String flnm,
 			@RequestParam(value = "deptNm", required = false) String deptNm,
 			@RequestParam(value = "jbgdNm", required = false) String jbgdNm, Model model) {
-		log.info("getEmployeeList" + page + flnm);
+		log.info("getEmployeeList" + page + flnm+deptNm+jbgdNm);
 		FilterDto filterDto = new FilterDto();
 		if (deptNm != null) {
 			filterDto.setDeptNm(deptNm);
@@ -197,19 +198,27 @@ public class AdminController {
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(), filterDto);
 		Pager pager = new Pager(totalRows, page);
-
-		List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager, filterDto);
-
-		// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
-		employeesList.set(0,
-				memberService.getMember(employeesList.get(0).getMemberId(), Auth.ROLE_DEVELOPER.toString()));
-		// 사원 정보 카드 에서 직급, 부서 선택 목록
-		model.addAttribute("jobGradeList", jobGradeService.getJobGradeList());
-		model.addAttribute("departmentList", departmentService.getDepartmentNameList());
-
-		model.addAttribute("employeesList", employeesList);
-		model.addAttribute("pager", pager);
-		return "management/employeesList";
+		log.info(pager);
+		if(totalRows !=0 ) {
+			//log.info(totalRows);
+			List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager, filterDto);
+			//log.info(pager.getStartPageNo());
+			//log.info(employeesList.get(0));
+			if(employeesList!=null) {
+				// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
+				employeesList.set(0,
+						memberService.getMember(employeesList.get(0).getMemberId(), Auth.ROLE_DEVELOPER.toString()));
+				// 사원 정보 카드 에서 직급, 부서 선택 목록
+				model.addAttribute("jobGradeList", jobGradeService.getJobGradeList());
+				model.addAttribute("departmentList", departmentService.getDepartmentNameList());
+				model.addAttribute("employeesList", employeesList);
+			}
+			model.addAttribute("pager", pager);
+			return "management/employeesList";
+		}else {
+			model.addAttribute("pager", pager);
+			return "management/employeesList";
+		}
 	}
 
 	/*
@@ -222,7 +231,7 @@ public class AdminController {
 	 * @return 사원 정보
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/employee", method = RequestMethod.GET)
+	@GetMapping("/employee")
 	public Member getEmployeeDetail(@RequestParam() String employeeId) {
 		log.info(employeeId);
 		return memberService.getMember(employeeId, Auth.ROLE_DEVELOPER.toString());
@@ -238,7 +247,7 @@ public class AdminController {
 	 * @return 반영 행수
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/employee/delete", method = RequestMethod.GET)
+	@GetMapping("/employee/delete")
 	public int deleteEmployee(@RequestParam() String employeeId) {
 		log.info(employeeId);
 		return memberService.deleteMember(employeeId);
@@ -254,7 +263,7 @@ public class AdminController {
 	 * @return 반영 행수
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/employee/modify", method = RequestMethod.POST)
+	@PostMapping("/employee/modify")
 	public int modifyEmployee(Member member) {
 		log.info(member);
 		return memberService.modifyMember(member);

@@ -90,26 +90,25 @@ public interface ISrDemandDao {
 	 * 
 	 * @author 신정은
 	 */
-	public int updateSttsCdAndRjctRsnByDmndNo(@Param("sdApprovalDto")SdApprovalDto sdApprovalDto);
-	
+	public int updateSttsCdAndRjctRsnByDmndNo(@Param("sdApprovalDto") SdApprovalDto sdApprovalDto);
+
 	/**
 	 * SR요청 삭제하기
 	 * 
 	 * @author 신정은
 	 */
-	public int updateDelYnByDmndNo(@Param("dmndNo")String dmndNo);
-	
+	public int updateDelYnByDmndNo(@Param("dmndNo") String dmndNo);
+
 	/**
 	 * SR요청 번호로 시스템cd 가져오기
 	 * 
 	 * @author 신정은
 	 */
 	public String selectSysCdByDmndNo(@Param("dmndNo") String dmndNo);
-	
+
 	/**
 	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-02-28
+	 * @author 여수한 작성일자 : 2023-02-28
 	 * @return sr요청 진행사항 수정 : 진척률 수정 / 결제취소 처리 시에 사용 됨
 	 */
 	public int updateSttsBySrNo(@Param("srNo") String srNo, @Param("sttsCd") int sttsCd);

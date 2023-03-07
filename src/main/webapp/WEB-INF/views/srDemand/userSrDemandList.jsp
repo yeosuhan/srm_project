@@ -1,57 +1,18 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
-<%-- 작성자: 최은종 / 작성 날짜: 230223 --%>
+<%-- 작성자: 최은종 / 작성 날짜: 2023-02-23 --%>
 
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 </head>
+
+<script
+	src="${pageContext.request.contextPath}/resources/js/srDemandListHstry.js"></script>
 <script>
 	
-<%-- JSON으로 받아온 HistoryList를 보여주기 위한 ajax --%>
-	function getHistoryList() {
-		var dmndNo = $("#dmndNo").val();
-		console.log("srHistoryList 글번호: " + dmndNo);
-		$
-				.ajax({
-					url : "/history/list?dmndNo=" + dmndNo,
-					type : "GET",
-
-					success : function(result) {
-						console.log(result);
-						console.log(result.srInformationHistory[0].hstryTtl);
-
-						for (var i = 0; i < result.srInformationHistory.length; i++) {
-							var historyId = result.srInformationHistory[i].hstryId;
-							var historyCount = [ i + 1 ];
-							var historyTtl = result.srInformationHistory[i].hstryTtl;
-							if (result.srInformationHistory[i].chgEndYmd === null) {
-								var historyChgEndYmd = "-";
-							} else {
-								var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
-							}
-							if (result.srInformationHistory[i].hstryStts == 'I') {
-								var historyStts = "요청 중";
-							} else if (result.srInformationHistory[i].hstryStts == 'N') {
-								var historyStts = "반려";
-							} else {
-								var historyStts = "승인";
-							}
-
-							var param = '<tr data-toggle="modal" data-target="#approvalHistoryModal" onclick="getHstryDetail('
-									+ historyId + ')">';
-							param += '<th scope="row">' + historyCount
-									+ '</th>';
-							param += '<td>' + historyTtl + '</td>';
-							param += '<td>' + historyChgEndYmd + '</td>';
-							param += '<td>' + historyStts + '</td>';
-							param += '</tr>';
-
-							$("#history").append(param);
-						}
-					}
-				});
-	}
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -63,7 +24,6 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-
 </script>
 
 <style>
@@ -258,7 +218,8 @@ th {
 																	</table>
 																	<!-- 페이징 처리 -->
 																	<div class="d-flex justify-content-center">
-																		<%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>
+																		<%@ include
+																			file="/WEB-INF/views/fragments/pagination.jsp"%>
 																	</div>
 																</div>
 															</div>
@@ -267,6 +228,7 @@ th {
 													</div>
 												</div>
 											</div>
+
 
 											<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
 											<div class="col-xl-4 col-md-12">
@@ -396,7 +358,8 @@ th {
 																			class="col-sm-3 col-form-label px-0 font-weight-bold"
 																			style="line-height: 120px">반려 사유</label>
 																		<div class="col-sm-9 pl-0 ">
-																			<input class="form-control rjctRsn" value="${sd.rjctRsn}"></input>
+																			<input class="form-control rjctRsn"
+																				value="${sd.rjctRsn}"></input>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -405,8 +368,8 @@ th {
 																			style="line-height: 100px; font-size: 12px;">SR
 																			내용</label>
 																		<div class="col-sm-9">
-																			<input class="form-control cn"
-																				style="height: 100px;" value="${sd.cn}" readonly></input>
+																			<input class="form-control cn" style="height: 100px;"
+																				value="${sd.cn}" readonly></input>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -531,19 +494,20 @@ th {
 															<div class="card-block table-border-style"
 																style="padding: 0px;">
 																<div class="table-responsive">
-																	<table class="table table-hover text-center"
+																	<table
+																		class="table table-hover text-center historyTable"
 																		style="font-size: 12px; padding: 0px;">
 																		<thead>
 																			<tr>
 																				<th style="width: 1px;">순번</th>
-																				<th>제목</th>
+																				<th>요청 종류</th>
 																				<th>변경될 완료일</th>
-																				<th>수락여부</th>
+																				<th>승인여부</th>
 																			</tr>
 																		</thead>
 																		<tbody id="history">
 																		</tbody>
-																	</table>
+																	</table>																														
 																</div>
 															</div>
 														</div>
@@ -567,16 +531,17 @@ th {
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 검색 -->
-	<script src="/resources/assets/js/srDemandList.js"></script>
-	
+	<script
+		src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
+
 	<%-- 상세, 등록, 수정 --%>
-	<script src="/resources/js/srDemand.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 	<!-- 모달 -->
-	<jsp:include page="/WEB-INF/views/history/approvalHistoryModal.jsp" />
+	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
+	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
-	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
-	<jsp:include page="/WEB-INF/views/history/addHistoryModalDetail.jsp" />
 
 </body>
 </html>

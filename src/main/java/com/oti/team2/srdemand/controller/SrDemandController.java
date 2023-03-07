@@ -121,6 +121,7 @@ public class SrDemandController {
 
 		model.addAttribute("sd", sd);
 		model.addAttribute("pager", pager);		
+		model.addAttribute("role", auth.getAuthorities().stream().findFirst().get().toString());
 		return "srDemand/userSrDemandList";
 	}
 
@@ -133,7 +134,6 @@ public class SrDemandController {
 	@GetMapping("/detail/{dmNo}")
 	public SrdemandDetail getSrDemandDetail(@PathVariable String dmNo) {
 		SrdemandDetail sd = srdemandService.getSrDemandDetail(dmNo);
-		log.info(sd);
 		return sd;
 	}
 

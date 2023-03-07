@@ -15,6 +15,10 @@ public class SrHistoryDetailDto {
 	private String instNm;
 	private String sysNm;
 	//private String deptCd;
+	private String hstryType;
+	private boolean delYn;
+	private String rqstrId;
+	private String flnm;
 	private String deptNm;
 	private String hstryTtl;
 	private String hstryCn;
@@ -25,4 +29,5 @@ public class SrHistoryDetailDto {
 	private Date cmptnDmndYmd;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date chgEndYmd;
+	private String auth;
 }

@@ -1,7 +1,5 @@
 package com.oti.team2.institution.controller;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
@@ -9,8 +7,9 @@ import org.jsoup.safety.Whitelist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.oti.team2.institution.dto.Institution;
 import com.oti.team2.institution.service.IInstitutionService;
@@ -19,6 +18,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
+@RequestMapping("/institution")
 public class InstitutionController {
 
 	@Autowired
@@ -29,7 +29,7 @@ public class InstitutionController {
 	 * @author 여수한
 	 * @return 내 기관 관리(조회)
 	 */
-	@RequestMapping(value = "/institution/detail", method = RequestMethod.GET)
+	@GetMapping("/detail")
 	public String myInst(Model model, HttpSession session) {
 /*		String memberId = (String) session.getAttribute("memberid");
 */		
@@ -45,7 +45,7 @@ public class InstitutionController {
 	 * @author 여수한
 	 * @return 기관 등록(페이지 이동)
 	 */
-	@RequestMapping(value = "/institution/add", method = RequestMethod.GET)
+	@GetMapping("/add")
 	public String addInst1() {
 		return "member/addInst";
 	}
@@ -56,7 +56,7 @@ public class InstitutionController {
 	 * @param InstCd1 중복된 기관코드 저장
 	 * @return 기관 등록(기관 등록)
 	 */
-	@RequestMapping(value = "/institution/add", method = RequestMethod.POST)
+	@PostMapping("/add")
 	public String addInst(Institution institution, Model model) throws Exception {
 		institution.setInstCd(Jsoup.clean(institution.getInstCd(), Whitelist.basic()));
 		institution.setInstNm(Jsoup.clean(institution.getInstNm(), Whitelist.basic()));
@@ -97,7 +97,7 @@ public class InstitutionController {
 	 * @author 여수한
 	 * @return 내 기관 관리(수정)
 	 */
-	@RequestMapping(value = "/institution/update", method = RequestMethod.POST)
+	@PostMapping("/update")
 	public String myInstUpdate(Institution institution) {
 		institution.setInstCd(institution.getInstCd());
 		institution.setInstNm(Jsoup.clean(institution.getInstNm(), Whitelist.basic()));

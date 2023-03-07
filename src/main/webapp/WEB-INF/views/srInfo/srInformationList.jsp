@@ -1,7 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
+<%-- 작성자 : 최은종 / 작성 날짜 : 2023-02-28 --%>
 
 <html>
 <head>
@@ -15,7 +17,10 @@
 	src="${pageContext.request.contextPath}/resources/js/srResources.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/deliverables.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/srInfoListHstry.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
+
 <script>
 	
 <%-- 모달 실행 --%>
@@ -30,6 +35,7 @@
 		document.body.style = `overflow: scroll`;
 	});
 </script>
+
 <style>
 .ui-datepicker-trigger {
 	width: 29px;
@@ -105,6 +111,7 @@ th {
 	font-size: inherit;
 }
 </style>
+
 <body>
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
@@ -152,9 +159,7 @@ th {
                                                 </div>
                                              </div> --%>
 														</div>
-
 													</div>
-
 													<div class="form-group row">
 														<div class="col-sm-6">
 															<div class="row">
@@ -192,63 +197,85 @@ th {
 													<div class="card-header">
 														<h5>SR 진척 관리</h5>
 														<hr />
-														<div class="col col-xl-1" style="width: 90px;">시스템
-															구분</div>
-														<div class="col col-xl-1" style="">
-															<div class="dropdown dropdown open">
-																<form action="#">
-																	<select name="languages" id="lang">
-																		<option value="워크넷">시스템3</option>
-																		<option value="굴국밥">시스템2</option>
-																		<option value="고소미">시스템1</option>
-																	</select>
-																</form>
-															</div>
-														</div>
-														<div class="col col-xl-1" style="width: 80px;">업무 구분</div>
-														<div class="col col-xl-1" style="">
-															<div class="dropdown dropdown open">
-																<form action="#">
-																	<select name="languages" id="lang">
-																		<option value="워크넷">업무구분1</option>
-																		<option value="굴국밥">업무2</option>
-																		<option value="고소미">업무3</option>
-																	</select>
-																</form>
-															</div>
-														</div>
-														<div class="col col-xl-1" style="width: 80px;">진행 상태</div>
-														<div class="col col-xl-1" style="">
-															<div class="dropdown dropdown open">
-																<form action="#">
-																	<select name="languages" id="lang">
-																		<option value="워크넷">개발중</option>
-																		<option value="굴국밥">테스트</option>
-																		<option value="고소미">반영요청</option>
-																	</select>
-																</form>
-															</div>
-														</div>
-														<div class="col col-xl-1"
-															style="width: 80px; padding-left: 20px;">SR 제목</div>
-														<div class="col col-xl-1" style="">
-															<input type="text" class="form-control">
-														</div>
-														<div class="col col-xl-1"
-															style="width: 80px; padding-left: 30px">SR 번호</div>
-														<div class="col col-xl-1" style="">
+														<form id="srInfoFilterForm"
+															action="${pageContext.request.contextPath}/srinformation/list"
+															onsubmit="return srSearch()">
+															<div class="col col-xl-1" style="width: 90px;">시스템
+																구분</div>
+															<div class="col col-xl-1" style="">
+																<div class="dropdown dropdown open">
 
-															<input type="text" class="form-control">
-														</div>
-														<div class="col col-xl-1" style="padding-left: 30px">
-															내 처리건 <input type="checkbox">
-														</div>
-														<div class="col col-xl-1">
-															<button onclick="srSearch()" type="button"
-																class="btn btn-lg btn-info">
-																<i class="ti-search"></i>
-															</button>
-														</div>
+																	<select name="sysCd" id="sysCdFilter"
+																		onclick="getSysCd()" onchange="removeTaskSeCd()">
+																		<c:if test="${srInfoFilter.sysCd ne null}">
+																			<option value="${srInfoFilter.sysCd}">${sd.sysNm}<c:if
+																					test="${sd.sysNm eq null}">${srInfoFilter.sysCd}</c:if></option>
+																		</c:if>
+																	</select>
+
+																</div>
+															</div>
+															<div class="col col-xl-1" style="width: 80px;">업무
+																구분</div>
+															<div class="col col-xl-1" style="">
+																<div class="dropdown dropdown open">
+
+																	<select name="taskSeCd" id="taskSeCdFilter"
+																		onclick="getTaskSeCd()">
+																		<c:if test="${srInfoFilter.taskSeCd ne null}">
+																			<option value="${srInfoFilter.taskSeCd}">${sd.taskSeNm}<c:if
+																					test="${sd.taskSeNm}">${srInfoFilter.taskSeCd}</c:if></option>
+																		</c:if>
+																	</select>
+
+																</div>
+															</div>
+															<div class="col col-xl-1" style="width: 80px;">진행
+																상태</div>
+															<div class="col col-xl-1" style="">
+																<div class="dropdown dropdown open">
+
+																	<select name="sttsCd" id="sttsCdFilter">
+																		<option></option>
+																		<option value="3"
+																			<c:if test="${srInfoFilter.sttsCd eq 3}"> selected</c:if>>개발중</option>
+																		<option value="4"
+																			<c:if test="${srInfoFilter.sttsCd eq 4}"> selected</c:if>>테스트</option>
+																		<option value="5"
+																			<c:if test="${srInfoFilter.sttsCd eq 5}"> selected</c:if>>반영
+																			요청</option>
+																	</select>
+
+																</div>
+															</div>
+															<div class="col col-xl-1"
+																style="width: 80px; padding-left: 20px;">SR 제목</div>
+															<div class="col col-xl-1" style="">
+																<input type="text" class="form-control" name="ttl"
+																	value="${srInfoFilter.ttl}">
+															</div>
+															<div class="col col-xl-1"
+																style="width: 80px; padding-left: 30px">SR 번호</div>
+															<div class="col col-xl-1" style="">
+																<input type="text" class="form-control" name="dmndNo"
+																	value="${srInfoFilter.dmndNo}">
+															</div>
+															<div class="col col-xl-1" style="padding-left: 30px">
+																내 처리건
+																<c:if test="${srInfoFilter.mySrOnly eq true}">
+																	<input type="checkbox" name="mySrOnly" value="true"
+																		checked>
+																</c:if>
+																<c:if test="${srInfoFilter.mySrOnly ne true}">
+																	<input type="checkbox" name="mySrOnly" value="true">
+																</c:if>
+															</div>
+															<div class="col col-xl-1">
+																<button type="submit" class="btn btn-lg btn-info">
+																	<i class="ti-search"></i>
+																</button>
+															</div>
+														</form>
 														<div class="col col-xl-1">
 															<button class="btn btn-info">엑셀 다운로드</button>
 														</div>
@@ -260,7 +287,6 @@ th {
 												<div class="card">
 													<div class="card-header">
 														<h5>SR 처리 목록</h5>
-
 														<div class="card-header-right">
 															<ul class="list-unstyled card-option">
 																<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -291,26 +317,34 @@ th {
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<c:forEach var="srlist" items="${srlist}"
-																				varStatus="num">
-																				<tr
-																					onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
-																					<th scope="row">${num.count}</th>
-																					<td id="">${srlist.srNo}</td>
-																					<td>${srlist.sysNm}</td>
-																					<td>${srlist.taskSeNm}</td>
-																					<td>${srlist.ttl}</td>
-																					<td>${srlist.flnm}</td>
-																					<td>${srlist.bgngYmd}</td>
-																					<td>${srlist.endYmd}</td>
-																					<td>${srlist.sttsNm}</td>
+																			<c:if test="${srlist ne null}">
+																				<c:forEach var="srlist" items="${srlist}"
+																					varStatus="num">
+																					<tr
+																						onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
+																						<th scope="row">${num.count}</th>
+																						<td id="">${srlist.srNo}</td>
+																						<td>${srlist.sysNm}</td>
+																						<td>${srlist.taskSeNm}</td>
+																						<td>${srlist.ttl}</td>
+																						<td>${srlist.flnm}</td>
+																						<td>${srlist.bgngYmd}</td>
+																						<td>${srlist.endYmd}</td>
+																						<td>${srlist.sttsNm}</td>
+																					</tr>
+																				</c:forEach>
+																			</c:if>
+																			<c:if test="${srlist eq null}">
+																				<tr>
+																					<td colSpan="9">검색 결과가 없습니다.</td>
 																				</tr>
-																			</c:forEach>
+																			</c:if>
 																		</tbody>
 																	</table>
+																	<%@include
+																		file="/WEB-INF/views/fragments/pagination.jsp"%>
 																</div>
 															</div>
-
 														</div>
 													</div>
 												</div>
@@ -320,37 +354,29 @@ th {
 												<div class="card">
 													<div class="card-header">
 														<div class="row">
-															<div class="col-6">
+															<div class="col-8">
 																<h5>SR요청 상세정보</h5>
 															</div>
-															<c:if test="${stts ne '개발완료' || stts ne '개발취소'}">
-																<div class="col-3">
-																	<button type="button" class="btn btn-primary btn-sm"
-																		data-toggle="modal" data-target="#addHistoryModal">
-																		예정일 변경</button>
-																</div>
-																<div class="col-3">
-																	<button type="button" class="btn btn-primary btn-sm"
-																		data-toggle="modal" data-target="#addHistoryModal">
-																		개발 취소</button>
-																</div>
-															</c:if>
+															<div class="col-3 ml-4">
+																<button class="btn btn-primary btn-sm"
+																	onclick="addHistory('${srNo}')" data-toggle="modal"
+																	data-target="#addHistoryModal">SR 변경요청</button>
+															</div>
 														</div>
 													</div>
 													<div class="card-block" style="height: 600px;">
 														<div class="card_body "
 															style="font-size: 12px; padding-top: 20px;">
 															<div class="form-group row">
-
 																<div class="col col-sm-3">요청 번호</div>
 																<div class="col col-sm-9">
-																	<input type="hidden" id="SRDSrNo"> <input
-																		readonly class="form-control"
-																		id="SRDDmndNo" value="${sd.dmndNo}">
+																	<input type="hidden" id="SRDSrNo"
+																		value="${srlist[0].srNo}"> <input readonly
+																		class="form-control" id="SRDDmndNo"
+																		value="${sd.dmndNo}" style="width: 110px;">
 																</div>
 																<div class="col col-sm-3">우선순위</div>
 																<div class="col col-sm-3" id="SiRnk">${sd.rnk}</div>
-
 															</div>
 															<hr />
 															<div class="form-group row">
@@ -365,7 +391,8 @@ th {
 																<div class="col col-sm-3">관련 근거</div>
 																<div class="col col-sm-9">
 																	<input readonly class="form-control"
-																		style="width: 150px;" id="SRDRelgrund" value="${sd.relGrund}">
+																		style="width: 150px;" id="SRDRelgrund"
+																		value="${sd.relGrund}">
 																</div>
 															</div>
 															<hr />
@@ -381,7 +408,8 @@ th {
 																	<div class="col col-sm-4">업무구분</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 150%;" id="SRDTask" value="${sd.taskSeNm}">
+																			style="width: 150%;" id="SRDTask"
+																			value="${sd.taskSeNm}">
 																	</div>
 																</div>
 															</div>
@@ -391,14 +419,16 @@ th {
 																	<div class="col col-sm-4">요청기관</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 200%;" id="SRDInst" value="${sd.instNm}">
+																			style="width: 200%;" id="SRDInst"
+																			value="${sd.instNm}">
 																	</div>
 																</div>
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청자</div>
 																	<div class="col col-sm-6">
 																		<input readonly class="form-control"
-																			style="width: 150%;" id="SRDFlnm" value="${sd.clientNm}">
+																			style="width: 150%;" id="SRDFlnm"
+																			value="${sd.clientNm}">
 																	</div>
 																</div>
 															</div>
@@ -407,7 +437,8 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">요청일</div>
 																	<div class="col col-sm-8">
-																		<input readonly class="form-control" id="SRDDmndymd" value="${sd.dmndYmd}">
+																		<input readonly class="form-control" id="SRDDmndymd"
+																			value="${sd.dmndYmd}">
 																	</div>
 																</div>
 																<div class="col-sm-6">
@@ -425,7 +456,8 @@ th {
 																	내용</label>
 																<div class="col-sm-9">
 																	<input readonly class="form-control"
-																		style="width: 300px; height: 110px;" id="SRDCn" value="${sd.cn}">
+																		style="width: 300px; height: 110px;" id="SRDCn"
+																		value="${sd.cn}">
 																</div>
 															</div>
 															<hr />
@@ -433,7 +465,8 @@ th {
 																<div class="col-sm-6">
 																	<div class="col col-sm-4">검토자</div>
 																	<div class="col col-sm-8">
-																		<input readonly class="form-control" id="SRDDmndymd" value="${sd.rvwrNm}">
+																		<input readonly class="form-control" id="SRDDmndymd"
+																			value="${sd.rvwrNm}">
 																	</div>
 																</div>
 																<div class="col-sm-6">
@@ -475,9 +508,9 @@ th {
 																class="nav-link" data-toggle="tab" href="#messages1"
 																role="tab">SR 진척율</a>
 																<div class="slide"></div></li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#history1" role="tab">SR
-																	히스토리</a>
+															<li class="nav-item" onclick="getSrHistoryList()"><a
+																class="nav-link" data-toggle="tab" href="#srInfhistory"
+																role="tab">SR 히스토리</a>
 																<div class="slide"></div></li>
 														</ul>
 														<%-- *********************************** [ 계획정보 ] ***********************************--%>
@@ -490,21 +523,21 @@ th {
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">처리팀</div>
 																		<div class="col col-sm-6">
-																		<!-- 진행상태에 따라서 inpu readonly로 출력 -->
+																			<!-- 진행상태에 따라서 inpu readonly로 출력 -->
 																			<select id="dept" onchange="changeDept()">
 																				<c:forEach var="deptList" items="${deptList}">
 																					<option id="SRDept" value="${deptList.deptCd}">${deptList.deptNm}</option>
 																				</c:forEach>
 																			</select>
-																		<!--                                -->
+																			<!--                                -->
 																		</div>
 
 																	</div>
 																	<div class="col-sm-6">
 																		<div class="col col-sm-4">담당자</div>
 																		<div class="col col-sm-6" id="SRPlFlnmBySelect">
-																			<input type="hidden" id="SRPlMemberId">
-																			<input readonly class="form-control" id="SRPlFlnm">
+																			<input type="hidden" id="SRPlMemberId"> <input
+																				readonly class="form-control" id="SRPlFlnm">
 																		</div>
 																	</div>
 																</div>
@@ -513,7 +546,8 @@ th {
 																		<div class="col col-sm-4">계획시작일</div>
 																		<div class="col col-sm-6">
 																			<!-- 진행상태에 따라서 inpu readonly로 출력 -->
-																			<input type="text" class="form-control" id="SRPlBgngYmd">
+																			<input type="text" class="form-control"
+																				id="SRPlBgngYmd">
 																		</div>
 																	</div>
 																	<div class="col-sm-6">
@@ -916,63 +950,29 @@ th {
 																	style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
 																	추가</button>
 															</div>
-
 															<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
-															<div class="tab-pane" id="history1" role="tabpanel"
+															<div class="tab-pane" id="srInfhistory" role="tabpanel"
 																style="padding-bottom: 20px;">
-																<div class="tab-pane" id="profile1" role="tabpanel">
-																	<div class="card-block table-border-style"
-																		style="padding: 0px;">
-																		<div class="table-responsive">
-																			<table class="table table-hover text-center"
-																				style="font-size: 12px; padding: 0px;">
-																				<thead>
-																					<tr>
-																						<th style="width: 1px;">순번</th>
-																						<th>담당자명</th>
-																						<th>기존 완료예정일</th>
-																						<th>변경된 완료예정일</th>
-																						<th>수락여부</th>
-																						<th>상세조회</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-																					<tr>
-																						<th scope="row">1</th>
-																						<td>Otto</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td>@mdo</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">2</th>
-																						<td>Thornton</td>
-																						<td>@fat</td>
-																						<td>Jacob</td>
-																						<td>@fat</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																					<tr>
-																						<th scope="row">3</th>
-																						<td>the Bird</td>
-																						<td>@twitter</td>
-																						<td>Larry</td>
-																						<td>@twitter</td>
-																						<td><button class="btn btn-info btn-sm"
-																								data-toggle="modal"
-																								data-target="#addHistoryModalDetail">상세조회</button></td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
+																<div class="card-block table-border-style"
+																	style="padding: 0px;">
+																	<div class="table-responsive">
+																		<table
+																			class="table table-hover text-center historyTable"
+																			style="font-size: 12px; padding: 0px;">
+																			<thead>
+																				<tr>
+																					<th style="width: 1px;">순번</th>
+																					<th>요청자명</th>
+																					<th>요청유형</th>
+																					<th>변경될 완료예정일</th>
+																					<th>승인여부</th>
+																				</tr>
+																			</thead>
+																			<tbody id="srhistory1">
+																			</tbody>
+																		</table>
 																	</div>
 																</div>
-
 															</div>
 														</div>
 													</div>
@@ -982,7 +982,6 @@ th {
 									</div>
 								</div>
 							</div>
-
 						</div>
 						<!-- *********** -->
 					</div>
@@ -992,8 +991,9 @@ th {
 			</div>
 		</div>
 	</div>
+	<%@include file="/WEB-INF/views/history/approvalInfoHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
-	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
+	<%@include file="/WEB-INF/views/history/modifyHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>

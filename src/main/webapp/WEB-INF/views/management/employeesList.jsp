@@ -50,7 +50,7 @@ p {
 														<h5 style="font-weight: bold;">사원 관리</h5>
 														<%-- 검색 기능 --%>
 														<div class="mt-4 mr-5" style="height: 30px;">
-															<form action="${pageContext.request.contextPath}/admin/employee/list">
+															<form id="empFilter" action="${pageContext.request.contextPath}/admin/employee/list" onsubmit="return search()">
 																<div class="form-group row">
 																	<label class="col-sm-1 col-form-label text-right"
 																		style="font-size: 14;">이름</label>
@@ -94,146 +94,129 @@ p {
 																		수정일:23.02.20.
 																		내용:사원목록 jstl적용
 																	 --%>
-																	<c:forEach var="employee" items="${employeesList}"
-																		varStatus="empStatus">
-																		<tr id="${employee.memberId}Row" onclick="getEmployee('${employee.memberId}')">
-																			<th scope="row">${empStatus.count}</th>
-																			<td>${employee.memberId }</td>
-																			<td>${employee.flnm }</td>
-																			<td id="${employee.memberId}Dept">${employee.department.deptNm }</td>
-																			<td id="${employee.memberId}Jbgd">${employee.jobGrade.jbgdNm }</td>
-																			<td>${employee.eml }</td>
-																		</tr>
-																	</c:forEach>
+																	<c:if test="${pager.totalRows ne 0}">
+																		<c:forEach var="employee" items="${employeesList}"
+																			varStatus="empStatus">
+																			<tr id="${employee.memberId}Row" onclick="getEmployee('${employee.memberId}')">
+																				<th scope="row">${empStatus.count}</th>
+																				<td>${employee.memberId }</td>
+																				<td>${employee.flnm }</td>
+																				<td id="${employee.memberId}Dept">${employee.department.deptNm }</td>
+																				<td id="${employee.memberId}Jbgd">${employee.jobGrade.jbgdNm }</td>
+																				<td>${employee.eml }</td>
+																			</tr>
+																		</c:forEach>
 
+																	</c:if>
+																	<c:if test="${pager.totalRows eq 0}">
+																		<tr>
+																			<td colSpan="6">검색 결과가 없습니다.</td>
+																		</tr>
+																	</c:if>
 																</tbody>
 															</table>
-															<div class="pagination-container">
-																<div class="pagination" style="display:inline-block">
-																	<c:if test="${pager.groupNo ne 1}">
-																		<a class="pagination-newer" href="${pageContext.request.contextPath}/admin/employee/list?page=${pager.startPageNo-1}&flnm=${flnm}&deptNm=${deptNm}&jbgdNm=${jbgdNm}">PREV</a> 
-																	</c:if>
-																	<c:if test="${pager.groupNo eq 1}">
-																		<a style="visibility:hidden" class="pagination-newer" href="#">PREV</a> 
-																	</c:if>
-																		<span class="pagination-inner"> 
-																			<c:forEach begin="${pager.startPageNo}" end="${pager.endPageNo}" varStatus="status">
-																				<c:if test="${pager.pageNo ne (status.index)}">
-																					<a href="${pageContext.request.contextPath}/admin/employee/list?page=${status.index}&flnm=${flnm}&deptNm=${deptNm}&jbgdNm=${jbgdNm}">${status.index}</a> 
-																				</c:if>
-																				<c:if test="${pager.pageNo eq (status.index)}">
-																					<a class="pagination-active" href="${pageContext.request.contextPath}/admin/employee/list?page=${status.index}&flnm=${flnm}&deptNm=${deptNm}&jbgdNm=${jbgdNm}">${status.index}</a> 
-																				</c:if>
-																			</c:forEach>
-																			
-																		</span> 
-																	<c:if test="${pager.groupNo ne pager.totalGroupNo}">
-																		<a class="pagination-older" href="${pageContext.request.contextPath}/admin/employee/list?page=${pager.endPageNo+1}&flnm=${flnm}&deptNm=${deptNm}&jbgdNm=${jbgdNm}">NEXT</a>
-																	</c:if>
-																	<c:if test="${pager.groupNo eq pager.totalGroupNo}">
-																		<a style="visibility:hidden" class="pagination-older" href="#">NEXT</a>
-																	</c:if>
-																</div>
-															</div> 
+															<%@include file="/WEB-INF/views/fragments/pagination.jsp"%>
 														</div>
 													</div>
 												</div>
 											</div>
 											<%-- 사원 목록 끝--%>
-											<%-- 사원 상세조회 카드--%>
-											<div class="col-xl-4 col-md-12">
-												<div class="card">
-													<div class="card-header">
-														<h5 style="font-weight: bold;">사원 정보</h5>
-														<div class="card-header-right">
-															<ul class="list-unstyled card-option" align="right">
-																<li><i class="fa fa fa-wrench open-card-option"></i></li>
-																<li><i class="fa fa-window-maximize full-card"></i></li>
-																<li><i class="fa fa-refresh reload-card"></i></li>
-															</ul>
+											<c:if test="${pager.totalRows ne 0}">
+												<%-- 사원 상세조회 카드--%>
+												<div class="col-xl-4 col-md-12">
+													<div class="card">
+														<div class="card-header">
+															<h5 style="font-weight: bold;">사원 정보</h5>
+															<div class="card-header-right">
+																<ul class="list-unstyled card-option" align="right">
+																	<li><i class="fa fa fa-wrench open-card-option"></i></li>
+																	<li><i class="fa fa-window-maximize full-card"></i></li>
+																	<li><i class="fa fa-refresh reload-card"></i></li>
+																</ul>
+															</div>
 														</div>
-													</div>
-													<div class="card-block"
-														style="justify-content: center; text-align: center;">
-														<div class="my-2">
-															<img src="${pageContext.request.contextPath}/resources/assets/images/ejexample.png"
-																style="height: 200px; width: 200px; align-content: center;">
+														<div class="card-block"
+															style="justify-content: center; text-align: center;">
+															<div class="my-2">
+																<img src="${pageContext.request.contextPath}/resources/assets/images/ejexample.png"
+																	style="height: 200px; width: 200px; align-content: center;">
+															</div>
 														</div>
-													</div>
-													<div class="card-block">
-														<form class="form-material">
-															<div class="form-group row">
-																<p class="col-sm-2 font-weight-bold">아이디</p>
-																<div class="col-sm-10" id="MEmployeeId">${employeesList[0].memberId}</div>
-															</div>
-															<div class="form-group row">
-																<p class="col-sm-2 font-weight-bold pt-3">이름</p>
-																<div class="col-sm-10 pt-3" id="MEmployeeName">${employeesList[0].flnm }</div>
-															</div>
-															<div class="form-group form-default row">
-																<p class="col-sm-2 font-weight-bold pt-2">전화번호</p>
-																<div class="col-sm-10 pt-2" id="MEmployeeTel">
-																	${employeesList[0].telNo }
+														<div class="card-block">
+															<form class="form-material">
+																<div class="form-group row">
+																	<p class="col-sm-2 font-weight-bold">아이디</p>
+																	<div class="col-sm-10" id="MEmployeeId">${employeesList[0].memberId}</div>
 																</div>
-															</div>
-															<div class="form-group form-default row">
-																<p class="col-sm-2 font-weight-bold">이메일</p>
-																<div class="col-sm-10" id="MEmployeeEmail">
-																	${employeesList[0].eml }
+																<div class="form-group row">
+																	<p class="col-sm-2 font-weight-bold pt-3">이름</p>
+																	<div class="col-sm-10 pt-3" id="MEmployeeName">${employeesList[0].flnm }</div>
 																</div>
-															</div>
-															<div class="form-group form-default row">
-																<p class="col-sm-2 font-weight-bold">주소</p>
-																<div class="col-sm-10" id="MEmployeeAddr">
-																	${employeesList[0].addr }
+																<div class="form-group form-default row">
+																	<p class="col-sm-2 font-weight-bold pt-2">전화번호</p>
+																	<div class="col-sm-10 pt-2" id="MEmployeeTel">
+																		${employeesList[0].telNo }
+																	</div>
 																</div>
-															</div>
-															<div class="form-group form-default row">
-																<p class="col-sm-2 font-weight-bold">부서</p>
-																<div class="col-sm-10" id="MEmployeeDepartment">
-																	<select name="selectDepartment" class="form-control"
-																		style="width: 60%">
-																		<%-- 부서 목록 --%>
-																		<c:forEach var="department" items="${departmentList}" >
-																			<c:if test="${employeesList[0].department.deptNm eq department.deptNm}">
-																				<option value="${department.deptCd}" selected>${department.deptNm}</option>
-																			</c:if>
-																			<c:if test="${employeesList[0].department.deptNm ne department.deptNm}">
-																				<option value="${department.deptCd}" >${department.deptNm}</option>
-																			</c:if>
-																		</c:forEach>
-																	</select>
+																<div class="form-group form-default row">
+																	<p class="col-sm-2 font-weight-bold">이메일</p>
+																	<div class="col-sm-10" id="MEmployeeEmail">
+																		${employeesList[0].eml }
+																	</div>
 																</div>
-															</div>
-															<div class="form-group form-default row">
-																<p class="col-sm-2 font-weight-bold">직급</p>
-																<div class="col-sm-10" id="MEmployeeJobGrade">
-																	<select name="selectJobGrade" class="form-control"
-																		style="width: 60%">
-																		<c:forEach var="jobGrade" items="${jobGradeList}" >
-																			<%-- 직급 select 태그 --%>
-																			<c:if test="${employeesList[0].jobGrade.jbgdNm eq jobGrade.jbgdNm}">
-																				<option value="${jobGrade.jbgdCd}" selected>${jobGrade.jbgdNm}</option>
-																			</c:if>
-																			<c:if test="${employeesList[0].jobGrade.jbgdNm ne jobGrade.jbgdNm}">
-																				<option value="${jobGrade.jbgdCd}" >${jobGrade.jbgdNm}</option>
-																			</c:if>
-																		</c:forEach>
-																	</select>
+																<div class="form-group form-default row">
+																	<p class="col-sm-2 font-weight-bold">주소</p>
+																	<div class="col-sm-10" id="MEmployeeAddr">
+																		${employeesList[0].addr }
+																	</div>
 																</div>
+																<div class="form-group form-default row">
+																	<p class="col-sm-2 font-weight-bold">부서</p>
+																	<div class="col-sm-10" id="MEmployeeDepartment">
+																		<select name="selectDepartment" class="form-control"
+																			style="width: 60%">
+																			<%-- 부서 목록 --%>
+																			<c:forEach var="department" items="${departmentList}" >
+																				<c:if test="${employeesList[0].department.deptNm eq department.deptNm}">
+																					<option value="${department.deptCd}" selected>${department.deptNm}</option>
+																				</c:if>
+																				<c:if test="${employeesList[0].department.deptNm ne department.deptNm}">
+																					<option value="${department.deptCd}" >${department.deptNm}</option>
+																				</c:if>
+																			</c:forEach>
+																		</select>
+																	</div>
+																</div>
+																<div class="form-group form-default row">
+																	<p class="col-sm-2 font-weight-bold">직급</p>
+																	<div class="col-sm-10" id="MEmployeeJobGrade">
+																		<select name="selectJobGrade" class="form-control"
+																			style="width: 60%">
+																			<c:forEach var="jobGrade" items="${jobGradeList}" >
+																				<%-- 직급 select 태그 --%>
+																				<c:if test="${employeesList[0].jobGrade.jbgdNm eq jobGrade.jbgdNm}">
+																					<option value="${jobGrade.jbgdCd}" selected>${jobGrade.jbgdNm}</option>
+																				</c:if>
+																				<c:if test="${employeesList[0].jobGrade.jbgdNm ne jobGrade.jbgdNm}">
+																					<option value="${jobGrade.jbgdCd}" >${jobGrade.jbgdNm}</option>
+																				</c:if>
+																			</c:forEach>
+																		</select>
+																	</div>
+																</div>
+															</form>
+														</div>
+														<div class="card-footer">
+															<div align="center">
+																<button onclick="deleteInfo('${employeesList[0].memberId}')" type="button" id="deleteInfo"
+																	class="btn btn-primary btn-sm btn-round waves-effect waves-light">삭제</button>
+																<button onclick="updateInfo('${employeesList[0].memberId}')" type="button" id="modifyInfo"
+																	class="btn btn-primary btn-sm btn-out btn-round waves-effect waves-light">저장</button>
 															</div>
-														</form>
-													</div>
-													<div class="card-footer">
-														<div align="center">
-															<button onclick="deleteInfo('${employeesList[0].memberId}')" type="button" id="deleteInfo"
-																class="btn btn-primary btn-sm btn-round waves-effect waves-light">삭제</button>
-															<button onclick="updateInfo('${employeesList[0].memberId}')" type="button" id="modifyInfo"
-																class="btn btn-primary btn-sm btn-out btn-round waves-effect waves-light">저장</button>
 														</div>
 													</div>
 												</div>
-											</div>
+											</c:if>
 										</div>
 										<%-- *********** --%>
 									</div>

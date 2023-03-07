@@ -25,7 +25,9 @@ public class UserService implements UserDetailsService {
 	private IMemberDao memberDao;
 
 	/**
-	 * 로그인 인증 처리
+	 * 스프링 시큐리티 적용한 로그인 메소드
+	 * 
+	 * @author 최은종, 신정은
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {

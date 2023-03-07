@@ -14,11 +14,13 @@ import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.srinformation.dao.ISrinformationDao;
 import com.oti.team2.srinformation.dto.Dept;
 import com.oti.team2.srinformation.dto.Manager;
+import com.oti.team2.srinformation.dto.SrInfoFilter;
 import com.oti.team2.srinformation.dto.SrInformationRequestDto;
 //github.com/OTI-SRM/srm_project
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInformation;
 import com.oti.team2.system.service.ISystemService;
+import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
 @Service
@@ -44,8 +46,8 @@ public class SrinformationService implements ISrinformationService{
 	 * @return sr진척 목록 조회
 	 */
 	@Override
-	public List<SrinformationList> getList() {
-		List<SrinformationList> srlist = srinformationDao.selectInfoAll();
+	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter) {
+		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter);
 		return srlist;
 	}
 	
@@ -142,14 +144,14 @@ public class SrinformationService implements ISrinformationService{
 	public void updateSrInfo(SrplanInformation srplanInfomation) {
 		srinformationDao.updateSrInfo(srplanInfomation);
 	}
-
-	/**
-	 * 개발자의 자신이 담당하는 sr_informtaion 목록 가져오기
-	 * @author 신정은
-	 */
-	public void getDeveloperSrInformation(String developerId) {
-		// TODO Auto-generated method stub
-		
+	
+	/* 페이징 처리를 위한 전체 행수 조회
+	 * @author 안한길
+	 * 작성일자 : 2023-03-06
+	 * @return 결과 행수
+	 * */
+	@Override
+	public int getTotalRow(int page, SrInfoFilter srInfoFilter) {
+		return srinformationDao.selectTotalRow(page,srInfoFilter);
 	}
-
 }
