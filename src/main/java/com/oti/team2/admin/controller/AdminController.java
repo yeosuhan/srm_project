@@ -129,7 +129,7 @@ public class AdminController {
 			@RequestParam(value = "instNm", required = false) String instNm, Model model) {
 		FilterDto filterDto = new FilterDto();
 		if (instNm != null) {
-			filterDto.setDeptNm(instNm);
+			filterDto.setInstNm(instNm);
 			model.addAttribute("instNm", instNm);
 		}
 		if (flnm != null) {
@@ -137,11 +137,12 @@ public class AdminController {
 			model.addAttribute("flnm", flnm);
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_CLIENT.toString(), filterDto);
-		Pager pager = new Pager(totalRows, 1);
-		// log.info(pager);
+		Pager pager = new Pager(totalRows, page);
+		//log.info(pager);
 
 		// 목록 가져오기
 		List<Member> clientList = memberService.getMemberList(Auth.ROLE_CLIENT.toString(), pager, filterDto);
+		//log.info(clientList);
 		model.addAttribute("clientList", clientList);
 		// log.info(clientList);
 		// 상세 가져오기
