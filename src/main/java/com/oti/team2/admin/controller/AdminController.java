@@ -284,6 +284,7 @@ public class AdminController {
 
 		List<SrDemand> list = srdemandService.getSrDemandListBy(pager);
 		model.addAttribute("srDemandList", list);
+		log.info("srDemandList: " + list);
 
 		// 기본 첫번째 상세 or 선택된 상세
 		SrdemandDetail sd = null;

@@ -17,7 +17,8 @@ function getDetail(dmndNo, srNo) {
 			} else {
 				$(".col-3").show();
 			}
-			/*개발완료 or 개발취소*/
+			
+			/*개발완료 or 개발취소일 때 계획정보*/
 			if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 				/*처리팀*/
 				$("#dept").hide();
@@ -54,8 +55,10 @@ function getDetail(dmndNo, srNo) {
 			$("#SRDSrNo").val(srNo);
 			$("#SRDDmndNo").val(detail.dd.dmndNo);
 			// 우선순위 데이터 
-			$("#SiRnk").empty();
-			$("#SiRnk").text(detail.dd.rnk);
+/*			$("#SiRnk").empty();*/
+			$("#SiRnk").val(detail.dd.rnk);
+			$("#SRDRvwrNm").val(detail.dd.rvwrNm);
+			$("#SRDClientNm").val(detail.dd.clientNm);
 			$("#SRDTitle").val(detail.dd.ttl);
 			$("#SRDRelgrund").val(detail.dd.relGrund);
 			$("#SRDSys").val(detail.dd.sysNm);

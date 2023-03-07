@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 <%-- 작성자: 최은종 / 작성 날짜: 230223 --%>
 
@@ -63,7 +64,6 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-
 </script>
 
 <style>
@@ -249,7 +249,19 @@ th {
 																					<td>${srDemand.custNm}</td>
 																					<td>${srDemand.instNm}</td>
 																					<td>${srDemand.rvwrNm}</td>
-																					<td>${srDemand.sttsNm}</td>
+																					<td><c:if test="${(srDemand.sttsNm) eq '요청'}">
+																							<label class="badge badge-warning">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
+																							<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
+																							<label class="badge badge-inverse-success">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
+																							<label class="badge badge-success">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
+																							<label class="badge badge-primary">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
+																							<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																						</c:if></td>
 																					<td>${srDemand.dmndYmd}</td>
 																					<td>${srDemand.endYmd}</td>
 																				</tr>
@@ -258,7 +270,8 @@ th {
 																	</table>
 																	<!-- 페이징 처리 -->
 																	<div class="d-flex justify-content-center">
-																		<%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>
+																		<%@ include
+																			file="/WEB-INF/views/fragments/pagination.jsp"%>
 																	</div>
 																</div>
 															</div>
@@ -396,7 +409,8 @@ th {
 																			class="col-sm-3 col-form-label px-0 font-weight-bold"
 																			style="line-height: 120px">반려 사유</label>
 																		<div class="col-sm-9 pl-0 ">
-																			<input class="form-control rjctRsn" value="${sd.rjctRsn}"></input>
+																			<input class="form-control rjctRsn"
+																				value="${sd.rjctRsn}"></input>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -405,8 +419,8 @@ th {
 																			style="line-height: 100px; font-size: 12px;">SR
 																			내용</label>
 																		<div class="col-sm-9">
-																			<input class="form-control cn"
-																				style="height: 100px;" value="${sd.cn}" readonly></input>
+																			<input class="form-control cn" style="height: 100px;"
+																				value="${sd.cn}" readonly></input>
 																		</div>
 																	</div>
 																	<div class="form-group row">
@@ -417,8 +431,7 @@ th {
 																			<input type="file" class="">
 																		</div>
 																	</div>
-																	<div class="row" id="userButtonDiv">
-																	</div>
+																	<div class="row" id="userButtonDiv"></div>
 																</div>
 																<%------------- 요청 수정 ----------------------------------- --%>
 																<div class="card_body" id="sdupdate"
@@ -568,7 +581,7 @@ th {
 
 	<!-- 검색 -->
 	<script src="/resources/assets/js/srDemandList.js"></script>
-	
+
 	<%-- 상세, 등록, 수정 --%>
 	<script src="/resources/js/srDemand.js"></script>
 	<!-- 모달 -->
