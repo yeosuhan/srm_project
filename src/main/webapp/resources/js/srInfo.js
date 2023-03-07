@@ -102,7 +102,7 @@ function getPlan() {
 			/*개발완료 or 개발취소*/
 			if(plan.sttsCd>=5) {
 				/*처리팀*/
-				$("#dept").remove();
+				$("#dept").hide();
 				$("#SRPlDeptNm").remove();
 				$("#deptDiv").append($("<input type='text' readonly class='form-control' id='SRPlDeptNm'>"));
 				/*계획 시작일*/
@@ -119,7 +119,7 @@ function getPlan() {
 			} /*개발중*/
 			else {
 				/*처리팀*/
-				$("#dept").remove();
+				$("#dept").show();
 				$("#SRPlDeptNm").remove();
 				/*계획 시작일*/
 				$("#SRPlBgngYmd").remove();
@@ -193,13 +193,31 @@ function getProgress() {
 			}
 			let day = today.getDay();  // 요일
 			today = (year + '-' + month + '-' + date);
-			console.log(today);
+			console.log("오늘 : " + today);
 			if(Progress[0].endYmd==null || Progress[0].endYmd>=today) {
 				console.log("개발완료");
 			}
 			for (var i = 0; i < Progress.length; i++) {
 				if(Progress[i].endYmd==null || Progress[i].endYmd>=today) {
 					$("#btn"+i).show();
+					$("#SRPgBgngYmd"+i).remove();
+					$("#SRPgEndYmd"+i).remove();
+					$("#SRPgPrgrsRt"+i).remove();
+					$("#"+i+"bgngYmd").append($("<input type='date' id='SRPgBgngYmd"+i+"'>"));
+					$("#"+i+"endYmd").append($("<input type='date' id='SRPgEndYmd"+i+"'>"));
+					if(i==0) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='0' max='10'>"));
+					} else if(i==1) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='11' max='40'>"));
+					} else if(i==2) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='41' max='70'>"));
+					} else if(i==3) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='71' max='80'>"));
+					} else if(i==4) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='81' max='90'>"));
+					} else if(i==5) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='91' max='100'>"));
+					}
 					$("#SRPgSrNo").val(Progress[i].srNo);
 					$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
 					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);

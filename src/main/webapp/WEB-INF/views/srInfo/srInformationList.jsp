@@ -326,26 +326,19 @@ th {
 																						<td>${srlist.flnm}</td>
 																						<td>${srlist.bgngYmd}</td>
 																						<td>${srlist.endYmd}</td>
-																						<td>
-																							<c:if test="${(srlist.sttsNm) eq '요청'}">
+																						<td><c:if test="${(srlist.sttsNm) eq '요청'}">
 																								<label class="badge badge-warning">${srlist.sttsNm}</label>
-																							</c:if>
-																							<c:if test="${(srlist.sttsNm) eq '반려'}">
+																							</c:if> <c:if test="${(srlist.sttsNm) eq '반려'}">
 																								<label class="badge badge-danger">${srlist.sttsNm}</label>
-																							</c:if>
-																							<c:if test="${(srlist.sttsNm) eq '접수'}">
+																							</c:if> <c:if test="${(srlist.sttsNm) eq '접수'}">
 																								<label class="badge badge-inverse-success">${srlist.sttsNm}</label>
-																							</c:if>
-																							<c:if test="${(srlist.sttsNm) eq '개발중'}">
+																							</c:if> <c:if test="${(srlist.sttsNm) eq '개발중'}">
 																								<label class="badge badge-success">${srlist.sttsNm}</label>
-																							</c:if>
-																							<c:if test="${(srlist.sttsNm) eq '개발완료'}">
+																							</c:if> <c:if test="${(srlist.sttsNm) eq '개발완료'}">
 																								<label class="badge badge-primary">${srlist.sttsNm}</label>
-																							</c:if>
-																							<c:if test="${(srlist.sttsNm) eq '개발취소'}">
+																							</c:if> <c:if test="${(srlist.sttsNm) eq '개발취소'}">
 																								<label class="badge badge-danger">${srlist.sttsNm}</label>
-																							</c:if>
-																						</td>
+																							</c:if></td>
 																					</tr>
 																				</c:forEach>
 																			</c:if>
@@ -645,7 +638,7 @@ th {
 																				<thead>
 																					<tr>
 																						<th style="width: 1px;">#</th>
-																						<th style="width: 50px;">작업구분</th>
+																						<th style="width: 100px;">작업구분</th>
 																						<th style="width: 250px;">시작일</th>
 																						<th style="width: 250px;">종료일</th>
 																						<th style="width: 50px;">진척률(누적)</th>
