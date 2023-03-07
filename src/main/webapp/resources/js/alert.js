@@ -3,7 +3,19 @@ $(document).ready(function(){
 		$(this).tab("show");
 	});
 });
-/*see 방식으로 변경 고려 먼저 다른기능 구현 부터*/
+function getEventListener(){
+	const sse = new EventSource("/alert/connect");
+	
+	sse.addEventListener('connect',(result)=>{
+		console.log(result.data);
+	});
+	
+	sse.addEventListener('alert',(result)=>{
+		console.log(result.data);
+		console.log(result.id);
+	});
+}
+/*sse 방식으로 변경 고려 먼저 다른기능 구현 부터*/
 function refreshAlert(){
 	$("#rfltTab ul").empty();
 	$("#chgDmndTab ul").empty();

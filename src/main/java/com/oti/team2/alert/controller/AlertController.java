@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.oti.team2.alert.dto.Alert;
 import com.oti.team2.alert.service.IAlertService;
@@ -25,12 +26,21 @@ public class AlertController {
 	 * @param : auth
 	 * @return : List<Alert>
 	 * */
+	
 	@ResponseBody
 	@GetMapping("/list")
 	public List<Alert> getAlertList(Authentication auth){
 		List<Alert> alertList = alertService.getAlertList(auth.getName());
 		log.info(alertList);
 		return alertList;
+	}
+	
+	@ResponseBody
+	@GetMapping("/connect")
+	public SseEmitter connect() {
+		SseEmitter emitter = new SseEmitter();
+		
+		return emitter;
 	}
 	
 }
