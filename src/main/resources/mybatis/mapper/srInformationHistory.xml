@@ -93,22 +93,22 @@
 		update sr_information_history
 		set
 		<trim suffixOverrides=",">
-		<if test='hstryType != "C"'>
-			hstry_type = #{hstryType},
-		</if>
-		<if test='hstryType == "C"'>
-			hstry_type = #{hstryType},
-			chg_end_ymd = #{chgEndYmd, jdbcType=NULL},
-		</if>
-		<if test="hstryTtl != null">
-			hstry_ttl = #{hstryTtl},
-		</if>
-		<if test="hstryCn != null">
-			hstry_cn = #{hstryCn},
-		</if>		
-		<if test='chgEndYmd != null and hstryType != "C"'>
-			chg_end_ymd = #{chgEndYmd}
-		</if>
+			<if test='hstryType != "C"'>
+				hstry_type = #{hstryType},
+			</if>
+			<if test='hstryType == "C"'>
+				hstry_type = #{hstryType},
+				chg_end_ymd = #{chgEndYmd, jdbcType=NULL},
+			</if>
+			<if test="hstryTtl != null">
+				hstry_ttl = #{hstryTtl},
+			</if>
+			<if test="hstryCn != null">
+				hstry_cn = #{hstryCn},
+			</if>		
+			<if test='chgEndYmd != null and hstryType != "C"'>
+				chg_end_ymd = #{chgEndYmd}
+			</if>
 		</trim>
 		where hstry_id = #{hstryId}		
 	</update>

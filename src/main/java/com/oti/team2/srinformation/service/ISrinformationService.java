@@ -54,6 +54,7 @@ public interface ISrinformationService {
 	 * @return sr계획정보 부서 변경
 	 */
 	void updateSrInfo(SrplanInformation srplanInfomation);
+
 	/* 페이징 처리를 위한 전체 행수 조회
 	 * @author 안한길
 	 * 작성일자 : 2023-03-06

@@ -23,34 +23,34 @@
 	<select id="selectByCustId" parameterType="map"
 		resultType="srDemand">
 		SELECT
-		DISTINCT DMND_NO as dmndNo ,
-		TTL as ttl ,
-		SYS_NM as sysNm ,
-		clientNm as custNm ,
-		INST_NM as instNm ,
-		STTS_NM as sttsNm ,
-		DMND_YMD as dmndYmd ,
-		c.flnm as rvwrNm ,
-		END_YMD as endYmd
-		from ( SELECT
-		DISTINCT sd.DMND_NO ,
-		sd.TTL ,
-		sy.SYS_NM ,
-		m.flnm as clientNm ,
-		i.INST_NM ,
-		sd.rvwr_id ,
-		s.STTS_NM ,
-		sd.DMND_YMD ,
-		si.END_YMD
+			DISTINCT DMND_NO as dmndNo ,
+			TTL as ttl ,
+			SYS_NM as sysNm ,
+			clientNm as custNm ,
+			INST_NM as instNm ,
+			STTS_NM as sttsNm ,
+			DMND_YMD as dmndYmd ,
+			c.flnm as rvwrNm ,
+			END_YMD as endYmd
+			from ( SELECT
+			DISTINCT sd.DMND_NO ,
+			sd.TTL ,
+			sy.SYS_NM ,
+			m.flnm as clientNm ,
+			i.INST_NM ,
+			sd.rvwr_id ,
+			s.STTS_NM ,
+			sd.DMND_YMD ,
+			si.END_YMD
 		FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
-		sr_information si
+			sr_information si
 		WHERE sd.CUST_ID = #{custId}
-		and sd.DEL_YN = 0
-		and sd.cust_id = m.member_id
-		and m.inst_cd = i.inst_cd
-		and sd.stts_cd = s.stts_cd
-		and sd.sys_cd = sy.sys_cd
-		and sd.dmnd_no = si.dmnd_no (+)
+			and sd.DEL_YN = 0
+			and sd.cust_id = m.member_id
+			and m.inst_cd = i.inst_cd
+			and sd.stts_cd = s.stts_cd
+			and sd.sys_cd = sy.sys_cd
+			and sd.dmnd_no = si.dmnd_no (+)
 
 		) w , members c
 		where w.rvwr_id = c.member_id(+)
@@ -62,83 +62,83 @@
 	<select id="selectDetailByDmndNo" parameterType="string"
 		resultType="srdemandDetail">
 		select
-		DMND_NO as dmndNo,
-		rnk as rnk ,
-		TTL as ttl,
-		cn as cn,
-		rel_grund as relGrund,
-		rjct_rsn as rjctRsn,
-		SYS_NM as sysNm,
-		SYS_CD as sysCd ,
-		clientNm as clientNm,
-		INST_NM as instNm,
-		STTS_NM as sttsNm,
-		STTS_CD as sttsCd,
-		DMND_YMD as dmndYmd,
-		rvwrNm ,
-		dept_nm as deptNm,
-		mem.flnm as picNm,
-		CMPTN_DMND_YMD as cmptnDmndYmd,
-		end_ymd as endYmd,
-		task_se_nm as taskSeNm ,
-		TASK_SE_CD as taskCd
+			DMND_NO as dmndNo,
+			rnk as rnk ,
+			TTL as ttl,
+			cn as cn,
+			rel_grund as relGrund,
+			rjct_rsn as rjctRsn,
+			SYS_NM as sysNm,
+			SYS_CD as sysCd ,
+			clientNm as clientNm,
+			INST_NM as instNm,
+			STTS_NM as sttsNm,
+			STTS_CD as sttsCd,
+			DMND_YMD as dmndYmd,
+			rvwrNm ,
+			dept_nm as deptNm,
+			mem.flnm as picNm,
+			CMPTN_DMND_YMD as cmptnDmndYmd,
+			end_ymd as endYmd,
+			task_se_nm as taskSeNm ,
+			TASK_SE_CD as taskCd
 		from (
-		SELECT
-		distinct DMND_NO ,
-		rnk ,
-		TTL ,
-		cn ,
-		rel_grund ,
-		rjct_rsn ,
-		SYS_NM ,
-		SYS_CD ,
-		clientNm ,
-		INST_NM ,
-		STTS_NM ,
-		STTS_CD ,
-		DMND_YMD ,
-		c.flnm as rvwrNm ,
-		dept_nm ,
-		PIC_ID,
-		CMPTN_DMND_YMD ,
-		end_ymd ,
-		TASK_SE_NM ,
-		TASK_SE_CD
-
-		from ( SELECT
-		sd.DMND_NO as DMND_NO,
-		si.rnk as rnk ,
-		sd.TTL as TTL ,
-		sd.cn ,
-		sd.rel_grund ,
-		sd. rjct_rsn ,
-		sys.SYS_NM ,
-		sd.SYS_CD ,
-		d.dept_nm ,
-		si.PIC_ID ,
-		m.flnm as clientNm,
-		i.INST_NM as INST_NM,
-		sd.rvwr_id as rvwr_id,
-		s.STTS_NM as STTS_NM,
-		sd.STTS_CD ,
-		sd.DMND_YMD as DMND_YMD ,
-		sd.CMPTN_DMND_YMD ,
-		tk.TASK_SE_NM ,
-		sd.TASK_SE_CD ,
-		si.end_ymd
-		FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sys,
-		sr_information si, departments d, task tk
-		WHERE sd.DMND_NO = #{dmndNo}
-		and sd.dmnd_no = si.dmnd_no (+)
-		and sd.cust_id = m.member_id
-		and m.inst_cd = i.inst_cd
-		and sd.stts_cd = s.stts_cd
-		and sd.sys_cd = sys.sys_cd
-		and si.dept_cd = d.dept_cd (+)
-		and sd.TASK_SE_CD = tk.TASK_SE_CD
-
-		) w , members c
-		where w.rvwr_id = c.member_id(+)
+				SELECT
+					distinct DMND_NO ,
+					rnk ,
+					TTL ,
+					cn ,
+					rel_grund ,
+					rjct_rsn ,
+					SYS_NM ,
+					SYS_CD ,
+					clientNm ,
+					INST_NM ,
+					STTS_NM ,
+					STTS_CD ,
+					DMND_YMD ,
+					c.flnm as rvwrNm ,
+					dept_nm ,
+					PIC_ID,
+					CMPTN_DMND_YMD ,
+					end_ymd ,
+					TASK_SE_NM ,
+					TASK_SE_CD
+	
+				from ( SELECT
+							sd.DMND_NO as DMND_NO,
+							si.rnk as rnk ,
+							sd.TTL as TTL ,
+							sd.cn ,
+							sd.rel_grund ,
+							sd. rjct_rsn ,
+							sys.SYS_NM ,
+							sd.SYS_CD ,
+							d.dept_nm ,
+							si.PIC_ID ,
+							m.flnm as clientNm,
+							i.INST_NM as INST_NM,
+							sd.rvwr_id as rvwr_id,
+							s.STTS_NM as STTS_NM,
+							sd.STTS_CD ,
+							sd.DMND_YMD as DMND_YMD ,
+							sd.CMPTN_DMND_YMD ,
+							tk.TASK_SE_NM ,
+							sd.TASK_SE_CD ,
+							si.end_ymd
+						FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sys,
+							sr_information si, departments d, task tk
+						WHERE sd.DMND_NO = #{dmndNo}
+							and sd.dmnd_no = si.dmnd_no (+)
+							and sd.cust_id = m.member_id
+							and m.inst_cd = i.inst_cd
+							and sd.stts_cd = s.stts_cd
+							and sd.sys_cd = sys.sys_cd
+							and si.dept_cd = d.dept_cd (+)
+							and sd.TASK_SE_CD = tk.TASK_SE_CD
+		
+				) w , members c
+				where w.rvwr_id = c.member_id(+)
 		)t , members mem
 		where t.PIC_ID = mem.member_id (+)
 	</select>
@@ -146,7 +146,8 @@
 	<!-- 사용자에게 받은 SR요청번호와 SR진척번호를 연결하기 위한 쿼리 -->
 	<select id="selectBySrDmndNo" parameterType="string"
 		resultType="string">
-		select SI.sr_no as srNo
+		select 
+			SI.sr_no as srNo
 		from sr_information SI
 		where SI.dmnd_no=#{dmndNo}
 	</select>
@@ -155,24 +156,26 @@
 	<update id="updateByDmndNo" parameterType="srRequestDto">
 		UPDATE SR_DEMAND
 		set
-		<if test='srRequestDto.ttl != null and srRequestDto.ttl != "" '>
-			TTL = #{srRequestDto.ttl}
-		</if>
-		<if test="srRequestDto.cn != null">
-			, CN = #{srRequestDto.cn}
-		</if>
-		<if test="srRequestDto.relGrund != null">
-			, REL_GRUND = #{srRequestDto.relGrund}
-		</if>
-		<if test="srRequestDto.cmptnDmndYmd != null">
-			, CMPTN_DMND_YMD = #{srRequestDto.cmptnDmndYmd}
-		</if>
-		<if test="srRequestDto.sysCd != null">
-			, SYS_CD = #{srRequestDto.sysCd}
-		</if>
-		<if test="srRequestDto.taskSeCd != null">
-			, TASK_SE_CD = #{srRequestDto.taskSeCd}
-		</if>
+		<trim suffixOverrides=",">
+			<if test='srRequestDto.ttl != null and srRequestDto.ttl != "" '>
+				TTL = #{srRequestDto.ttl},
+			</if>
+			<if test="srRequestDto.cn != null">
+				CN = #{srRequestDto.cn},
+			</if>
+			<if test="srRequestDto.relGrund != null">
+				REL_GRUND = #{srRequestDto.relGrund},
+			</if>
+			<if test="srRequestDto.cmptnDmndYmd != null">
+				CMPTN_DMND_YMD = #{srRequestDto.cmptnDmndYmd},
+			</if>
+			<if test="srRequestDto.sysCd != null">
+				SYS_CD = #{srRequestDto.sysCd},
+			</if>
+			<if test="srRequestDto.taskSeCd != null">
+				TASK_SE_CD = #{srRequestDto.taskSeCd}
+			</if>
+		</trim>
 		where DMND_NO = #{srRequestDto.dmndNo}
 
 	</update>
@@ -181,9 +184,9 @@
 	<select id="countByClientId" parameterType="string"
 		resultType="int">
 		SELECT COUNT(DMND_NO)
-		FROM SR_DEMAND
+			FROM SR_DEMAND
 		WHERE CUST_ID=#{clientId}
-		and DEL_YN = 0
+			and DEL_YN = 0
 	</select>
 
 	<!-- 관리자의 모든 요청의 총 행의 수 구하기 -->
@@ -197,33 +200,33 @@
 	<select id="selectAllSrDemand" parameterType="pager"
 		resultType="srDemand">
 		SELECT
-		DISTINCT DMND_NO as dmndNo ,
-		TTL as ttl ,
-		SYS_NM as sysNm ,
-		clientNm as custNm ,
-		INST_NM as instNm ,
-		STTS_NM as sttsNm ,
-		DMND_YMD as dmndYmd ,
-		c.flnm as rvwrNm ,
-		END_YMD as endYmd
-		from ( SELECT
-		DISTINCT sd.DMND_NO ,
-		sd.TTL ,
-		sy.SYS_NM ,
-		m.flnm as clientNm ,
-		i.INST_NM ,
-		sd.rvwr_id ,
-		s.STTS_NM ,
-		sd.DMND_YMD ,
-		si.END_YMD
+			DISTINCT DMND_NO as dmndNo ,
+			TTL as ttl ,
+			SYS_NM as sysNm ,
+			clientNm as custNm ,
+			INST_NM as instNm ,
+			STTS_NM as sttsNm ,
+			DMND_YMD as dmndYmd ,
+			c.flnm as rvwrNm ,
+			END_YMD as endYmd
+			from ( SELECT
+			DISTINCT sd.DMND_NO ,
+			sd.TTL ,
+			sy.SYS_NM ,
+			m.flnm as clientNm ,
+			i.INST_NM ,
+			sd.rvwr_id ,
+			s.STTS_NM ,
+			sd.DMND_YMD ,
+			si.END_YMD
 		FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
-		sr_information si
+				sr_information si
 		where sd.cust_id = m.member_id
-		and sd.DEL_YN = 0
-		and m.inst_cd = i.inst_cd
-		and sd.stts_cd = s.stts_cd
-		and sd.sys_cd = sy.sys_cd
-		and sd.dmnd_no = si.dmnd_no(+)
+			and sd.DEL_YN = 0
+			and m.inst_cd = i.inst_cd
+			and sd.stts_cd = s.stts_cd
+			and sd.sys_cd = sy.sys_cd
+			and sd.dmnd_no = si.dmnd_no(+)
 
 		) w , members c
 		where w.rvwr_id = c.member_id(+)
@@ -251,7 +254,7 @@
 	<update id="updateDelYnByDmndNo" parameterType="string">
 		UPDATE SR_DEMAND
 		SET
-		DEL_YN = 1
+			DEL_YN = 1
 		WHERE DMND_NO = #{dmndNo}
 	</update>
 
@@ -266,18 +269,105 @@
 	<!-- sr요청 진행사항 수정 -->
 	<update id="updateSttsBySrNo" parameterType="map">
 		UPDATE
-		SR_DEMAND
+			SR_DEMAND
 		SET
-		STTS_CD = #{sttsCd}
+			STTS_CD = #{sttsCd}
 		WHERE
-		DMND_NO = (
-		SELECT
-		DMND_NO
-		FROM
-		SR_INFORMATION
-		WHERE
-		SR_NO=#{srNo}
-		)
+			DMND_NO = (
+						SELECT
+							DMND_NO
+						FROM SR_INFORMATION
+						WHERE SR_NO=#{srNo}
+						)
 	</update>
-
+	
+	<!--  나의 할일 페이징 처리 :  고객/ 관리자의 각 상태별 목록 조회시 페이징 처리를 위한 count -->
+	<select id="countByCustIdOrPicIdAndSttsCd" parameterType="map" resultType="int">
+		SELECT 
+           COUNT(DISTINCT sd.DMND_NO)
+	    FROM SR_DEMAND sd, STATUS s, sr_information si
+	   	<where>
+			<if test="custId != null">
+				sd.CUST_ID = #{custId} 
+			</if>
+			<if test="picId != null and sttsCd > 1">
+				PIC_ID = #{picId} 
+			</if>
+		    and sd.DEL_YN = 0
+		    and s.stts_cd = #{sttsCd} 
+		    and sd.stts_cd = s.stts_cd
+		    and sd.dmnd_no = si.dmnd_no (+)
+		</where> 
+	</select>
+	
+	<!--  나의 할일 :  고객/ 관리자의 각 상태별 목록 조회  -->
+	<select id="selectByCustIdOrPicIdAndSttsCd" parameterType="map" resultType="mytodoSrListDto">
+		SELECT 
+            DISTINCT sd.DMND_NO as dmndNo ,
+            sy.SYS_NM as sysNm ,
+            tk.TASK_SE_NM as taskNm ,
+            sd.TTL as ttl ,
+            m.flnm as picNm , 
+            sd.CMPTN_DMND_YMD as cmptnDmndYmd ,
+            s.STTS_NM as sttsNm ,
+            sd.STTS_CD as sttsCd ,
+            si.SR_NO as srNo,
+            si.rnk as rnk
+	    FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, sr_information si, task tk
+	   	<where>
+			<if test="custId != null">
+				sd.CUST_ID = #{custId} 
+			</if>
+			<if test="picId != null and sttsCd > 1">
+				PIC_ID = #{picId} 
+			</if>
+		    and sd.DEL_YN = 0
+		    and si.PIC_ID = m.member_id(+)
+		    and s.stts_cd = #{sttsCd} 
+		    and sd.stts_cd = s.stts_cd
+		    and sd.sys_cd = sy.sys_cd 
+		    and sd.dmnd_no = si.dmnd_no (+)
+		    and sd.TASK_SE_CD = tk.TASK_SE_CD
+		</where> 
+		order by dmndNo DESC
+		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
+	</select>
+	
+	<!--  나의 할일 페이징 처리 :  개발자의 각 상태별 목록 조회시 페이징 처리를 위한 count -->
+	<select id="countByEmpIdAndSttsCd" parameterType="map" resultType="int">
+		SELECT 
+		   COUNT(DISTINCT sd.DMND_NO)
+		FROM sr_resources sr, sr_information si, sr_demand sd, STATUS s
+		WHERE  sr.EMP_ID = #{empId}
+		        and sr.sr_no = si.sr_no
+		        and sd.dmnd_no = si.dmnd_no
+		        and sd.stts_cd = #{sttsCd}
+	</select>
+	
+	<!--  나의 할일 :  개발자의 각 상태별 목록 조회  -->
+	<select id="selectByEmpIdAndSttsCd" parameterType="map" resultType="mytodoSrListDto">
+		select 
+		     DISTINCT sd.DMND_NO as dmndNo,
+		        sy.SYS_NM as sysNm,
+		        tk.TASK_SE_NM as taskNm,
+		        sd.TTL as ttl,
+		        m.flnm as picNm, 
+		        sd.CMPTN_DMND_YMD as cmptnDmndYmd,
+		        s.STTS_NM as sttsNm,
+		        sd.STTS_CD as sttsCd,
+		        sr.SR_NO as srNo,
+		        si.rnk as rnk
+		FROM sr_resources sr, sr_information si, sr_demand sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, task tk
+		WHERE  sr.EMP_ID = #{empId}
+				and sr.sr_no = si.sr_no
+				and sd.dmnd_no = si.dmnd_no
+				and si.PIC_ID = m.member_id
+				and sd.stts_cd =  #{sttsCd}
+				and sd.stts_cd = s.stts_cd
+				and sd.sys_cd = sy.sys_cd 
+				and sd.TASK_SE_CD = tk.TASK_SE_CD
+				   
+		order by sd.DMND_NO DESC
+		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
+	</select>
 </mapper>

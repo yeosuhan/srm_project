@@ -42,7 +42,6 @@ public class UserService implements UserDetailsService {
 		authority.add(new SimpleGrantedAuthority(member.getAuthority()));
 
 		Users user = new Users(member.getMemberId(), member.getPswd(), member.isEnabled(), authority, member.getFlnm());
-
 		return user;
 	}
 }
