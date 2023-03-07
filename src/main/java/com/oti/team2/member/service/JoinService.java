@@ -48,9 +48,10 @@ public class JoinService implements IJoinService{
 	 */
 	@Override
 	public Integer checkId(String memberId) {
+		log.info("서비스 들어옴");
 		int check = joinDao.checkId(memberId);
 		log.info("Service: " + check);
-		return 0;
+		return check;
 	}
 	/**
 	 * 

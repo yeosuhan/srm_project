@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.department.dto.Department;
 import com.oti.team2.department.service.IDepartmentService;
@@ -101,8 +102,9 @@ public class JoinController {
 	 * 작성일자 : 2023-03-02
 	 * @return ID 중복확인
 	 */
-	@GetMapping("/join/check")
-	public Integer checkId(String memberId) {
+	@ResponseBody
+	@GetMapping("/join/check/{memberId}")
+	public Integer checkId(@PathVariable("memberId") String memberId) {
 		log.info("입력한 memberId : " + memberId);
 		int check = joinService.checkId(memberId);
 		log.info("Controller : " + check);

@@ -34,9 +34,10 @@
 #chooseFile {
 	visibility: hidden;
 }
-label > img {
+
+label>img {
 	margin-top: 50px;
-	border-radius:50%;
+	border-radius: 50%;
 }
 </style>
 <body>
@@ -59,13 +60,13 @@ label > img {
 											<h5>Sign Up For Client</h5>
 										</div>
 										<div class="row">
-										
+
 											<div class="col-4"
 												style="justify-content: center; text-align: center;">
 												<div class="mb-2">
 													<div class="container">
 														<div class="image-upload" id="image-upload">
-															<form method="post" enctype="multipart/form-data" >
+															<form method="post" enctype="multipart/form-data">
 																<div class="button">
 																	<label for="chooseFile" id="newImg"><img
 																		id="defaultImage" src="/resources/oti_images/user.png"
@@ -76,24 +77,27 @@ label > img {
 																	accept="image/*" onchange="loadFile(this)">
 															</form>
 														</div>
-												<span style="color: gray" id="addImg">회원가입후 프로필 사진을 등록해주세요.</span>
+														<span style="color: gray" id="addImg">회원가입후 프로필 사진을
+															등록해주세요.</span>
 													</div>
 												</div>
 											</div>
 											<div class="col-8 card-block">
-												<form class="form-material" id="joinForm" name="joinForm" action="<c:url value='/join'/>" method="post">
+												<form class="form-material" id="joinForm" name="joinForm"
+													action="<c:url value='/join'/>" method="post">
 													<input type="hidden" name="memberType" value="ROLE_CLIENT">
-													<input type="hidden" name="jbgdCd" value=""> 
-													<input type="hidden" name="deptCd" value=""> 
-													<input type="hidden" name="fileType" value=""> 
-													<input type="hidden" name="fileData" value="">
+													<input type="hidden" name="jbgdCd" value=""> <input
+														type="hidden" name="deptCd" value=""> <input
+														type="hidden" name="fileType" value=""> <input
+														type="hidden" name="fileData" value="">
 													<div class="form-group form-default" style="display: flex;">
 														<input type="text" name="memberId" class="form-control"
 															id="memberId" required style="width: 50%"> <label
 															class="float-label">아이디</label>
-														<button type="button" onclick="getMemberId()"
+														<button type="button" onclick="checkMemberId()"
 															class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2"
 															style="width: 100px;">중복확인</button>
+														<font id="checkId" size="2" style="padding-left: 10px;"></font>
 													</div>
 
 													<div class="form-group form-default">
@@ -131,7 +135,7 @@ label > img {
 													</div>
 
 													<div class="form-group form-default" style="display: flex;">
-														<select name="instCd" id="instCd" class="box"  required="">
+														<select name="instCd" id="instCd" class="box" required="">
 															<option disabled selected>내 기관</option>
 															<c:forEach var="instList" items="${instList}">
 																<option value="${instList.instCd}">${instList.instNm}</option>
@@ -140,11 +144,12 @@ label > img {
 													</div>
 												</form>
 											</div>
-											
+
 										</div>
 									</div>
 									<div style="justify-content: center; text-align: center;">
-										<button form="joinForm" type="submit" class="btn waves-effect waves-light hor-grd btn-grd-primary ">Sign
+										<button form="joinForm" type="submit"
+											class="btn waves-effect waves-light hor-grd btn-grd-primary ">Sign
 											Up</button>
 									</div>
 								</div>

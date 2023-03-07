@@ -39,7 +39,7 @@
 	</insert>
 	<select id="checkId" parameterType="string" resultType="int">
 		SELECT
-			MEMBER_ID
+			count(*)
 		FROM
 			MEMBERS
 		WHERE

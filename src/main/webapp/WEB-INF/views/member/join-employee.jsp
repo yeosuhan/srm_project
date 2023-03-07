@@ -34,9 +34,10 @@
 #chooseFile {
 	visibility: hidden;
 }
-label > img {
+
+label>img {
 	margin-top: 50px;
-	border-radius:50%;
+	border-radius: 50%;
 }
 </style>
 <body>
@@ -85,16 +86,17 @@ label > img {
 											<div class="col-8 card-block">
 												<form class="form-material" id="joinForm" action="/join"
 													method="post">
-													<input type="hidden" name="instCd" value="">
-													<input type="hidden" name="fileType" value=""> 
-													<input type="hidden" name="fileData" value="">
+													<input type="hidden" name="instCd" value=""> <input
+														type="hidden" name="fileType" value=""> <input
+														type="hidden" name="fileData" value="">
 													<div class="form-group form-default" style="display: flex;">
 														<input type="text" name="memberId" class="form-control"
 															required="" style="width: 50%"> <label
 															class="float-label">아이디</label>
-														<button
+														<button type="button" onclick="checkMemberId()"
 															class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2"
 															style="width: 100px;">중복확인</button>
+															<font id="checkId" size="2" style="padding-left: 10px;"></font>
 													</div>
 
 													<div class="form-group form-default">
