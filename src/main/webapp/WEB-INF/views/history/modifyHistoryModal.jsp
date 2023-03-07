@@ -15,7 +15,38 @@
 	var element = document.createElement('div');
 	element.innerHTML = '<sec:authentication property="principal.username"/>';
 	var user = element.innerHTML;
-	
+
+	/* 요청 유형(select box)에 따라 변경요청일 숨기기 */
+	$(document).ready(function() {
+		$('#modiHstryType').change(function() {
+			var value = $('#modiHstryType option:selected').val();
+			if (value == 'C') {
+				$('.AhstryType1').hide();
+				$('.AhstryType2').hide();
+			} else {
+				$('.AhstryType1').show();
+				$('.AhstryType2').show();
+			}
+		});
+	});
+	/* 완료일변경시 변경일자 지정 안하면 값이 넘어가는 것을 막기 위한 함수 */
+	function checkVal() {
+		if ($("#modiHstryType > option:selected").val() != 'C') {
+			console.log($("#modiHstryType > option:selected").val());
+
+			const cYmd2 = document.querySelector('#modiChgEndYmd');
+			console.log(cYmd2.value);
+			console.log(document.querySelector('#modiChgEndYmd').value);
+
+			if (cYmd2.value == null || cYmd2.value == "") {
+				console.log(cYmd2.value);
+				alert("경고창입니다.");
+				$('#modiChgEndYmd').focus();
+				return false;
+			}
+		}
+		return true;
+	}
 </script>
 
 <div class="modal fade" id="modifyHistoryModal">
@@ -24,14 +55,15 @@
 			<div class="modal_title" style="color: white">진척정보 변경요청 수정</div>
 		</div>
 		<div class="m_body bg-light modifyDiv">
-			<form id="historyModifyForm"
-				action="<c:url value='/history/modify'/>">
+			<form id="historyModifyForm" method="post"
+				action="<c:url value='/history/modify'/>"
+				onsubmit="return checkVal()">
 				<div class="row my-3">
 					<div class="col-2">SR 번호 :</div>
 					<div class="col-4">
 						<input id="modiSrNo" class="AsrNo" name="srNo" type="text"
-							value="" readonly>
-							<input type="hidden" id="modiHstryId" name="hstryId" class="AhstryId" value="">
+							value="" readonly> <input type="hidden" id="modiHstryId"
+							name="hstryId" class="AhstryId" value="">
 					</div>
 					<div class="col-2">요청 유형 :</div>
 					<div class="col-4">
@@ -45,7 +77,7 @@
 									<option value="C">개발 취소</option>
 								</sec:authorize>
 							</select>
-							
+
 						</div>
 					</div>
 				</div>
@@ -66,7 +98,7 @@
 						<input id="modiDeptNm" class="AdeptNm" type="text" value=""
 							readonly> <input id="modiRqstrId" class="ArqstrId"
 							name="rqstrId" type="hidden"
-							value='<sec:authentication property="principal.username"/>'>					
+							value='<sec:authentication property="principal.username"/>'>
 					</div>
 					<div class="col-2 pr-0">변경요청 발신일 :</div>
 					<div class="col-4">
@@ -104,11 +136,11 @@
 							style="width: 90%" rows="5"></textarea>
 					</div>
 				</div>
+				<div id="footModiDiv" class="pt-3" align="center">
+					<button type="submit" class="btn btn-info save center">확인</button>
+				</div>
 			</form>
-			<div id="footModiDiv" class="pt-3" align="center">
-				<button type="submit" form="historyModifyForm" formmethod="post"
-					class="btn btn-info save center">확인</button>
-			</div>
+
 		</div>
 	</div>
 </div>

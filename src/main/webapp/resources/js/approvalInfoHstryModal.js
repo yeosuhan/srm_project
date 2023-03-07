@@ -37,8 +37,8 @@ function getInfoHstryDetail(historyId) {
 					if (AhstryType != 'C') {
 						$('.AchgEndYmd').val(result.chgEndYmd);
 					} else {
-						$('.AhstryType1').remove();
-						$('.AhstryType2').remove();
+						$('.AhstryType1').hide();
+						$('.AhstryType2').hide();
 					}
 					$('.AhstryTtl').val(result.hstryTtl);
 					$('.AhstryCn').val(result.hstryCn);
@@ -155,3 +155,5 @@ $(document).ready(function() {
 	});
 
 });
+
+

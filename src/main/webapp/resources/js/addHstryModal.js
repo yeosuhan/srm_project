@@ -4,16 +4,9 @@ function addHistory(srNo) {
 	var cmptnDmndYmd = $("#SRDCmptnDmndYmd").val();
 	document.getElementById('HwrtYmd').valueAsDate = new Date();
 
-	/*$.ajax({
-		url : "/history/add?srNo=" + srNo,
-		type : "GET",
+	$("#HsrNo").val(srNo);
+	$("#HcmptnDmndYmd").val(cmptnDmndYmd);
 
-		success : function(result) {
-			console.log(result);*/
-			$("#HsrNo").val(srNo);
-			$("#HcmptnDmndYmd").val(cmptnDmndYmd);
-	/*	}
-	});*/
 }
 
 /* 개발취소 선택 시 색상 바꿔서 강조하기 */
@@ -45,12 +38,12 @@ $(document).ready(function() {
 function checkValue() {
 	if ($("#hstryType > option:selected").val() != 'C') {
 		console.log($("#hstryType > option:selected").val());
-		
-		const cYmd=document.querySelector('#HchgEndYmd');
+
+		const cYmd = document.querySelector('#HchgEndYmd');
 		console.log(cYmd.value);
 		console.log(document.querySelector('#HchgEndYmd').value);
-		
-		if (cYmd.value == null || cYmd.value =="") {
+
+		if (cYmd.value == null || cYmd.value == "") {
 			console.log(cYmd.value);
 			alert("경고창입니다.");
 			$('#HchgEndYmd').focus();

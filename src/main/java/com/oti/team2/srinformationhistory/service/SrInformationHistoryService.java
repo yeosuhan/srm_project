@@ -48,10 +48,11 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectBySrNo(pager, srNo);
 		return srInformationHistoryList;
 	}
-	
+
 	@Override
 	public List<SrInformationHistory> getSrInformationHistoryListForClient(Pager pager, String srNo, String role) {
-		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectForClientBySrNo(pager, srNo);
+		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectForClientBySrNo(pager,
+				srNo);
 		return srInformationHistoryList;
 	}
 
@@ -158,6 +159,5 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		log.info("서비스----요청 수정22 " + srInformationHistory);
 
 	}
-
 
 }

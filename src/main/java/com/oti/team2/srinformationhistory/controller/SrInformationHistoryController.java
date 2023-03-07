@@ -51,22 +51,23 @@ public class SrInformationHistoryController {
 
 		String srNo = srInformationHistoryService.getSrNo(dmndNo);
 		log.info("dmndNo 조회" + dmndNo);
-		
+
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		log.info("role 조회" + role);
-		
-		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryListForClient(pager, srNo, role);
-		
+
+		List<SrInformationHistory> srInformationHistory = srInformationHistoryService
+				.getSrInformationHistoryListForClient(pager, srNo, role);
+
 		log.info("srInformationHistoryList 조회" + srInformationHistory);
 		log.info("srNo 조회" + srNo);
 		SrHistoryListDto srHistoryList = new SrHistoryListDto();
 		srHistoryList.setSrInformationHistory(srInformationHistory);
 		srHistoryList.setPager(pager);
-			
+
 		log.info("srHistoryList 조회" + srHistoryList);
 		return srHistoryList;
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/emp/list")
 	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
@@ -109,16 +110,6 @@ public class SrInformationHistoryController {
 	}
 
 	/**
-	 * SR처리 히스토리 등록 메서드 (GET)
-	 *
-	 * @author 최은종
-	 * @param srNo srNo를 알아와 그에 대한 히스토리를 등록하기 위해 srNo 매개변수로 설정
-	 * @return srNo 리턴
-	 * @see 개발자, 관리자
-	 */
-
-
-	/**
 	 * SR처리 히스토리 등록 메서드 (POST)
 	 *
 	 * @author 최은종
@@ -129,32 +120,13 @@ public class SrInformationHistoryController {
 	@PostMapping("/add")
 	public String addSrInformationHistory(SrInformationHistory srInformationHistory, HttpServletResponse response) {
 		log.info("addSrInformationHistory POST");
-		/*log.info("DTO: "+ srInformationHistory);
-		log.info("srNo: "+ srInformationHistory.getSrNo());*/
-		log.info("HstryType: "+ srInformationHistory.getHstryType());
-		log.info("ChgEndYmd" + srInformationHistory.getChgEndYmd());
-		
-/*		if(srInformationHistory.getHstryType() != "C" && (srInformationHistory.getChgEndYmd()==null || srInformationHistory.getChgEndYmd().isEmpty())) {
-			PrintWriter out;
-			try {
-				out = response.getWriter();
-				out.println("<script>alert('날짜 미입력');</script>");
-				out.flush();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return "srInfo/srInformationList";
-		} else {
-			srInformationHistoryService.addSrInformationHistory(srInformationHistory);
-		}*/
 
 		srInformationHistoryService.addSrInformationHistory(srInformationHistory);
 		log.info("컨트롤러" + srInformationHistory);
 
 		return "redirect:/srinformation/list";
 	}
-	
+
 	/**
 	 * SR처리 히스토리 상태 수정 메서드 (POST)
 	 *
@@ -168,17 +140,17 @@ public class SrInformationHistoryController {
 		log.info("Update");
 		log.info("srNo: " + srInformationHistory.getSrNo());
 		log.info("historyId: " + srInformationHistory.getHstryId());
-		
-		HashMap<String, String> map= new HashMap<>();
+
+		HashMap<String, String> map = new HashMap<>();
 		map.put("hstryId", String.valueOf(srInformationHistory.getHstryId()));
 		map.put("srNo", srInformationHistory.getSrNo());
 		log.info("map: " + map);
-		
+
 		srInformationHistoryService.updateHstryStts(map);
-		
+
 		return "redirect:/srinformation/list";
 	}
-	
+
 	/**
 	 * SR처리 히스토리 수정 메서드 (POST)
 	 *
@@ -191,11 +163,10 @@ public class SrInformationHistoryController {
 	public String updateHstry(SrInformationHistory srInformationHistory) {
 		log.info("컨트롤러: 수정");
 		log.info(srInformationHistory.getHstryType());
-		
+
 		srInformationHistoryService.updateHstry(srInformationHistory);
 		log.info("컨트롤러22: 수정");
 		return "redirect:/srinformation/list";
 	}
-	
-	
+
 }

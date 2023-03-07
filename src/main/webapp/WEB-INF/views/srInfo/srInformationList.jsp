@@ -22,7 +22,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
 
 <script>
-
+	
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -197,63 +197,85 @@ th {
 													<div class="card-header">
 														<h5>SR 진척 관리</h5>
 														<hr />
-														<div class="col col-xl-1" style="width: 90px;">시스템
-															구분</div>
-														<div class="col col-xl-1" style="">
-															<div class="dropdown dropdown open">
-																<form action="#">
-																	<select name="languages" id="lang">
-																		<option value="워크넷">시스템3</option>
-																		<option value="굴국밥">시스템2</option>
-																		<option value="고소미">시스템1</option>
-																	</select>
-																</form>
-															</div>
-														</div>
-														<div class="col col-xl-1" style="width: 80px;">업무 구분</div>
-														<div class="col col-xl-1" style="">
-															<div class="dropdown dropdown open">
-																<form action="#">
-																	<select name="languages" id="lang">
-																		<option value="워크넷">업무구분1</option>
-																		<option value="굴국밥">업무2</option>
-																		<option value="고소미">업무3</option>
-																	</select>
-																</form>
-															</div>
-														</div>
-														<div class="col col-xl-1" style="width: 80px;">진행 상태</div>
-														<div class="col col-xl-1" style="">
-															<div class="dropdown dropdown open">
-																<form action="#">
-																	<select name="languages" id="lang">
-																		<option value="워크넷">개발중</option>
-																		<option value="굴국밥">테스트</option>
-																		<option value="고소미">반영요청</option>
-																	</select>
-																</form>
-															</div>
-														</div>
-														<div class="col col-xl-1"
-															style="width: 80px; padding-left: 20px;">SR 제목</div>
-														<div class="col col-xl-1" style="">
-															<input type="text" class="form-control">
-														</div>
-														<div class="col col-xl-1"
-															style="width: 80px; padding-left: 30px">SR 번호</div>
-														<div class="col col-xl-1" style="">
+														<form id="srInfoFilterForm"
+															action="${pageContext.request.contextPath}/srinformation/list"
+															onsubmit="return srSearch()">
+															<div class="col col-xl-1" style="width: 90px;">시스템
+																구분</div>
+															<div class="col col-xl-1" style="">
+																<div class="dropdown dropdown open">
 
-															<input type="text" class="form-control">
-														</div>
-														<div class="col col-xl-1" style="padding-left: 30px">
-															내 처리건 <input type="checkbox">
-														</div>
-														<div class="col col-xl-1">
-															<button onclick="srSearch()" type="button"
-																class="btn btn-lg btn-info">
-																<i class="ti-search"></i>
-															</button>
-														</div>
+																	<select name="sysCd" id="sysCdFilter"
+																		onclick="getSysCd()" onchange="removeTaskSeCd()">
+																		<c:if test="${srInfoFilter.sysCd ne null}">
+																			<option value="${srInfoFilter.sysCd}">${sd.sysNm}<c:if
+																					test="${sd.sysNm eq null}">${srInfoFilter.sysCd}</c:if></option>
+																		</c:if>
+																	</select>
+
+																</div>
+															</div>
+															<div class="col col-xl-1" style="width: 80px;">업무
+																구분</div>
+															<div class="col col-xl-1" style="">
+																<div class="dropdown dropdown open">
+
+																	<select name="taskSeCd" id="taskSeCdFilter"
+																		onclick="getTaskSeCd()">
+																		<c:if test="${srInfoFilter.taskSeCd ne null}">
+																			<option value="${srInfoFilter.taskSeCd}">${sd.taskSeNm}<c:if
+																					test="${sd.taskSeNm}">${srInfoFilter.taskSeCd}</c:if></option>
+																		</c:if>
+																	</select>
+
+																</div>
+															</div>
+															<div class="col col-xl-1" style="width: 80px;">진행
+																상태</div>
+															<div class="col col-xl-1" style="">
+																<div class="dropdown dropdown open">
+
+																	<select name="sttsCd" id="sttsCdFilter">
+																		<option></option>
+																		<option value="3"
+																			<c:if test="${srInfoFilter.sttsCd eq 3}"> selected</c:if>>개발중</option>
+																		<option value="4"
+																			<c:if test="${srInfoFilter.sttsCd eq 4}"> selected</c:if>>테스트</option>
+																		<option value="5"
+																			<c:if test="${srInfoFilter.sttsCd eq 5}"> selected</c:if>>반영
+																			요청</option>
+																	</select>
+
+																</div>
+															</div>
+															<div class="col col-xl-1"
+																style="width: 80px; padding-left: 20px;">SR 제목</div>
+															<div class="col col-xl-1" style="">
+																<input type="text" class="form-control" name="ttl"
+																	value="${srInfoFilter.ttl}">
+															</div>
+															<div class="col col-xl-1"
+																style="width: 80px; padding-left: 30px">SR 번호</div>
+															<div class="col col-xl-1" style="">
+																<input type="text" class="form-control" name="dmndNo"
+																	value="${srInfoFilter.dmndNo}">
+															</div>
+															<div class="col col-xl-1" style="padding-left: 30px">
+																내 처리건
+																<c:if test="${srInfoFilter.mySrOnly eq true}">
+																	<input type="checkbox" name="mySrOnly" value="true"
+																		checked>
+																</c:if>
+																<c:if test="${srInfoFilter.mySrOnly ne true}">
+																	<input type="checkbox" name="mySrOnly" value="true">
+																</c:if>
+															</div>
+															<div class="col col-xl-1">
+																<button type="submit" class="btn btn-lg btn-info">
+																	<i class="ti-search"></i>
+																</button>
+															</div>
+														</form>
 														<div class="col col-xl-1">
 															<button class="btn btn-info">엑셀 다운로드</button>
 														</div>
@@ -295,23 +317,32 @@ th {
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<c:forEach var="srlist" items="${srlist}"
-																				varStatus="num">
-																				<tr
-																					onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
-																					<th scope="row">${num.count}</th>
-																					<td id="">${srlist.srNo}</td>
-																					<td>${srlist.sysNm}</td>
-																					<td>${srlist.taskSeNm}</td>
-																					<td>${srlist.ttl}</td>
-																					<td>${srlist.flnm}</td>
-																					<td>${srlist.bgngYmd}</td>
-																					<td>${srlist.endYmd}</td>
-																					<td>${srlist.sttsNm}</td>
+																			<c:if test="${srlist ne null}">
+																				<c:forEach var="srlist" items="${srlist}"
+																					varStatus="num">
+																					<tr
+																						onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
+																						<th scope="row">${num.count}</th>
+																						<td id="">${srlist.srNo}</td>
+																						<td>${srlist.sysNm}</td>
+																						<td>${srlist.taskSeNm}</td>
+																						<td>${srlist.ttl}</td>
+																						<td>${srlist.flnm}</td>
+																						<td>${srlist.bgngYmd}</td>
+																						<td>${srlist.endYmd}</td>
+																						<td>${srlist.sttsNm}</td>
+																					</tr>
+																				</c:forEach>
+																			</c:if>
+																			<c:if test="${srlist eq null}">
+																				<tr>
+																					<td colSpan="9">검색 결과가 없습니다.</td>
 																				</tr>
-																			</c:forEach>
+																			</c:if>
 																		</tbody>
 																	</table>
+																	<%@include
+																		file="/WEB-INF/views/fragments/pagination.jsp"%>
 																</div>
 															</div>
 														</div>
@@ -339,9 +370,10 @@ th {
 															<div class="form-group row">
 																<div class="col col-sm-3">요청 번호</div>
 																<div class="col col-sm-9">
-																	<input type="hidden" id="SRDSrNo"> <input
-																		readonly class="form-control" id="SRDDmndNo"
-																		value="${sd.dmndNo}">
+																	<input type="hidden" id="SRDSrNo"
+																		value="${srlist[0].srNo}"> <input readonly
+																		class="form-control" id="SRDDmndNo"
+																		value="${sd.dmndNo}" style="width: 110px;">
 																</div>
 																<div class="col col-sm-3">우선순위</div>
 																<div class="col col-sm-3" id="SiRnk">${sd.rnk}</div>

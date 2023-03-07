@@ -21,6 +21,8 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/**"
 			access="isAuthenticated()" />
+		<security:intercept-url pattern="/admin/*"
+			access="hasRole('ROLE_ADMIN')"/>
 		<!-- 로그인/로그아웃 핸들러 -->
 		<security:form-login login-page="/loginForm"
 			username-parameter="memberId" password-parameter="pswd"

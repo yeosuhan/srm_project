@@ -184,4 +184,16 @@ public class SrDemandService implements ISrDemandService {
 		srDemandDao.updateSttsBySrNo(srNo, sttsCd);
 	}
 
+	/**
+	 * DMNO 로 SRNO 조회
+	 * 
+	 * @author 최은종
+	 */
+	public String getSrNo(String dmndNo) {
+		String srNo = srDemandDao.selectBySrDmndNo(dmndNo);
+
+		log.info(srNo);
+		return srNo;
+	}
+
 }

@@ -1,12 +1,18 @@
 /** ****************SR 상세 조회*************************** */
 /* 작성자 : 신정은 SR 요청을 가져오기 */
 function getSrDemandDetail(dmNo) {
+	$("#userButtonDiv").empty();
+	$("#adminButtonDiv").empty();
+	
 	$.ajax({
 		url : "/srdemand/detail/" + dmNo,
 		type : "GET",
 		success : function(res) {
-			$(".dmndNo").text(res.dmndNo);
-			$(".dmndNo").val(res.dmndNo);
+			var dmndNo = res.dmndNo;
+			console.log(dmndNo);
+			
+			$(".dmndNo").text(dmndNo);
+			$(".dmndNo").val(dmndNo);
 			$(".ttl").text(res.ttl);
 			$(".ttl").val(res.ttl);
 			$(".relGrund").text(res.relGrund);
@@ -21,17 +27,37 @@ function getSrDemandDetail(dmNo) {
 			$(".picNm").text(res.picNm);
 			$(".deptNm").text(res.deptNm);
 			$(".sttsNm").text(res.sttsNm);
+			
+			var sttsCd = res.sttsCd;
+			$(".sttsCd").val(sttsCd);
 			$(".sysNm").text(res.sysNm);
 
-			/*
-			 * var sysCd = res.sysCd; console.log("~~~~~~~~~ sys cd ~~~~~~~~ " +
-			 * sysCd); $(".srSystems").val(sysCd).prop("selected", true);
-			 */
 
 			$(".taskSeNm").text(res.taskSeNm);
 			$(".instNm").text(res.instNm);
 			$(".clientNm").text(res.clientNm);
 			$(".rvwrNm").text(res.rvwrNm);
+			
+			// 버튼 보이게 하기 
+			console.log(sttsCd);
+			if(sttsCd == 0) {
+				var userdivs = "<div class='col-6' style='text-align: right'>" +
+					"<button id='modbtn' class='btn btn-primary btn-round save center'>수정</button>" +
+					"<div class='btn btn-primary btn-round danger cancle' onclick='deleteSr()'>삭제</div> </div>";
+				$("#userButtonDiv").html(userdivs);
+				
+				var admindivs = "<div class='col-6' style='text-align: right'>" +
+					"<div id='srAccept' class='btn btn-primary btn-round save center' onclick=goAccept('" + dmndNo +"')>승인</div>" +
+					"<div id='srDecline'class='btn btn-primary btn-round danger cancle' onclick=goDecline('" + dmndNo + "')>반려</div> </div>";
+				$("#adminButtonDiv").html(admindivs);
+				
+				var srRjctRsn = "<textarea rows='5' cols='5' class='form-control rjctRsn' id='srRjctRsn'></textarea>";
+				$("#rjctRsnDiv").html(srRjctRsn);
+				
+			} else {
+				var srRjctRsn = "<div class='form-control rjctRsn'>${sd.rjctRsn}</div>";
+				$("#rjctRsnDiv").html(srRjctRsn);
+			}
 		}
 	});
 }
@@ -158,7 +184,7 @@ function goAccept(dmndNo) {
 function goDecline(dmndNo) {
 	// 반려사유 작성하지 않을 경우 g화면 다시 이동시키기
 	var rjctRsn = $('#srRjctRsn').val();
-	
+	console.log("~~~~~~~~~~~~~~~~~~!");
 	if (!rjctRsn) {
       alert('반려사유를 입력하여주세요.');
       $('#srRjctRsn').focus();
