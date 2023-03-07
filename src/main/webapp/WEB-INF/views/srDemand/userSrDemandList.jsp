@@ -266,7 +266,7 @@ th {
 																					<td>${srDemand.endYmd}</td>
 																				</tr>
 																			</c:forEach>
-																		</tbody>
+																		</tbody> 
 																	</table>
 																	<!-- 페이징 처리 -->
 																	<div class="d-flex justify-content-center">
