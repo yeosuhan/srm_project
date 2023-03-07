@@ -75,12 +75,12 @@
               </if>
            
           WHERE
+              <if test="filtering.flnm != null">
+      			 FLNM LIKE '%'||#{filtering.flnm}||'%' AND 
+			  </if>
               <if test="memberType=='ROLE_DEVELOPER'">
                  m.DEPT_CD = d.DEPT_CD and
                  m.JBGD_CD = j.JBGD_CD and
-                 <if test="filtering.flnm != null">
-      				FLNM LIKE '%'||#{filtering.flnm}||'%' AND 
-			     </if>
 			     <if test="filtering.deptNm != null">
 			      	d.DEPT_NM LIKE '%'||#{filtering.deptNm}||'%' AND
 			     </if>

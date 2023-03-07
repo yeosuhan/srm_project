@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,7 +31,7 @@ public class SrResourceController {
 	 * @return List<SrResource>
 	 */
 	@ResponseBody
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@GetMapping("/list")
 	public List<SrResource> getSrResourceList(@RequestParam("srNo") String srNo){
 		log.info(srNo);
 		return srResourceService.getSrResourceListBySrNo(srNo);
@@ -44,7 +44,7 @@ public class SrResourceController {
 	 * @return List<SrResourceOfDeveloper
 	 * */
 	@ResponseBody
-	@RequestMapping(value="/resource/schedule", method=RequestMethod.GET)
+	@GetMapping("/resource/schedule")
 	public List<SrResourceOfDeveloper> getSrResourceOfDeveloperList(@RequestParam() String empId){
 		log.info(empId);
 		return srResourceService.getSrResourceListByEmpId(empId);
@@ -56,7 +56,7 @@ public class SrResourceController {
 	 * @return int
 	 * */
 	@ResponseBody
-	@RequestMapping(value="/resource/add" , method=RequestMethod.POST)
+	@PostMapping("/resource/add" )
 	public int addSrResource(SrResource srResource) {
 		log.info(srResource);
 		
@@ -70,7 +70,7 @@ public class SrResourceController {
 	 * @return int
 	 * */
 	@ResponseBody
-	@RequestMapping(value="/resource/delete" , method=RequestMethod.GET)
+	@GetMapping("/resource/delete")
 	public int deleteSrResource(@RequestParam(value="srSrc[]" , required=false) List<String> srSrcList) {
 		log.info(srSrcList);
 		

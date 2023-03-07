@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,6 +29,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
+@RequestMapping("/srinformation")
 public class SrinformationController {
 	
 	@Autowired
@@ -42,7 +44,7 @@ public class SrinformationController {
 	 * 작성일자 : 2023-02-22
 	 * @return sr진척 목록 조회 - 완료
 	 */
-	@RequestMapping(value="/srinformation/list", method=RequestMethod.GET)
+	@GetMapping(value="/list")
 	public String getList(Model model,@RequestParam(value="page", defaultValue="1")int page,@ModelAttribute SrInfoFilter srInfoFilter,Authentication auth ) {
 		if(srInfoFilter.isMySrOnly()) {
 			srInfoFilter.setEmpId(auth.getName());
@@ -77,7 +79,7 @@ public class SrinformationController {
 	 * @return sr요청 상세 조회 - 완료  => 계획정보도 같이 가져와야될듯
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/detail/{dmndNo}", method=RequestMethod.GET)
+	@GetMapping(value="/detail/{dmndNo}")
 	public SrTotal getDetail(@PathVariable("dmndNo")String dmndNo) {
 		SrdemandDetail dd = srDemandService.getSrDemandDetail(dmndNo);
 		SrplanInformation pi = srinformationService.getPlan(dmndNo);
@@ -92,7 +94,7 @@ public class SrinformationController {
 	 * @return sr요청 계획정보 조회 - 탭 누를 때
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/plan/{dmndNo}", method=RequestMethod.GET)
+	@GetMapping(value="/plan/{dmndNo}")
 	public SrplanInformation getPlanInfo(@PathVariable("dmndNo")String dmndNo) {
 		SrplanInformation pi = srinformationService.getPlan(dmndNo);
 		log.info("pi : " + pi);
@@ -105,7 +107,7 @@ public class SrinformationController {
 	 * 작성일자 : 2023-03-02
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/plan/update", method=RequestMethod.POST)
+	@PostMapping(value="/plan/update")
 	public void updateSrInfo(SrplanInformation srplanInfomation) {
 		log.info("업데이트될 계획 정보 : " + srplanInfomation);
 		srinformationService.updateSrInfo(srplanInfomation);
@@ -118,7 +120,7 @@ public class SrinformationController {
 	 * @return sr계획정보 부서 변경
 	 */
 	@ResponseBody
-	@RequestMapping(value="/srinformation/mngr/{deptCd}", method=RequestMethod.GET)
+	@GetMapping(value="/mngr/{deptCd}")
 	public Manager getFlnmByDeptCd(@PathVariable("deptCd")String deptCd) {
 		Manager flnm = srinformationService.getFlnmByDeptCd(deptCd);
 		log.info("바뀐 담당자: " + flnm);
