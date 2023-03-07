@@ -97,7 +97,11 @@
 																				<td id="dmndNo">${sr.dmndNo}</td>
 																				<td id="sysNm">${sr.sysNm}</td>
 																				<td id="taskNm">${sr.taskNm}</td>
-																				<td id="ttl">${sr.ttl}</td>
+																				
+																				<c:choose>
+																					<c:when test=""></c:when>
+																					<td id="ttl">${sr.ttl}</td>
+																				</c:choose>
 																				<td id="picNm">${sr.picNm}</td>
 																				<td id="cmptnDmndYmd">${sr.cmptnDmndYmd}</td>
 																				<td id="sttsNm">${sr.sttsNm}</td>
