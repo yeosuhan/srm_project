@@ -20,6 +20,7 @@ h1 {
 
 .pagination {
 	position: relative;
+	display : block;
 }
 
 .pagination a {

@@ -1,3 +1,4 @@
+
 /*
  * @author:안한길
  * 작성일:2023.02.20.
@@ -74,4 +75,13 @@ function modifyEmployee(employeeId){
 			alert("성공적으로 수정되었습니다.");
 		}
 	});
+}
+
+function search(){
+	$("#empFilter input").each((index,value)=>{
+		if(!$(value).val()){
+			$(value).prop("disabled",true);
+		}
+	});
+	return true;
 }

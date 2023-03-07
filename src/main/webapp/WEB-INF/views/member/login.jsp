@@ -79,7 +79,7 @@
 					<!-- Authentication card start -->
 
 					<form:form class="md-float-material form-material" id="loginForm"
-						action="/login" methoid="post">
+						action="/login" method="post">
 						<div class="text-center">
 							<img
 								src="${pageContext.request.contextPath}/resources/assets/images/otilogo.png"
@@ -170,12 +170,12 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<button type="button"
+					<button type="button" onclick="location.href='/join-client' "
 						class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign
 						Up for Client</button>
 				</div>
 				<div class="col-md-6">
-					<button type="button"
+					<button type="button" onclick="location.href='/join-employee' "
 						class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign
 						Up for Employee</button>
 				</div>
@@ -186,7 +186,7 @@
 					<p class="text-inverse text-left m-b-0">Thank you.</p>
 				</div>
 				<div class="col-md-2">
-					<img src="assets/images/auth/Logo-small-bottom.png"
+					<img src="${pageContext.request.contextPath}/resources/assets/images/auth/Logo-small-bottom.png"
 						alt="small-logo.png">
 				</div>
 			</div>

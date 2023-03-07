@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,6 +75,20 @@ public class SrResourceController {
 		log.info(srSrcList);
 		
 		int result = srResourceService.deleteSrResource(srSrcList);
+		return result;
+	}
+	
+	/** 입력한 자원 정보 수정
+	 * @author : 안한길
+	 * @param SrResource
+	 * @return int
+	 * */
+	@ResponseBody
+	@PostMapping(value="/resource/modify")
+	public int modifySrResource(SrResource srResource) {
+		log.info(srResource);
+		
+		int result = srResourceService.modifySrResource(srResource);
 		return result;
 	}
 }

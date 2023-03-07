@@ -7,8 +7,11 @@
 		<typeAlias type="com.oti.team2.institution.dto.Institution" alias="institution" />
 		<typeAlias type="com.oti.team2.srinformation.dto.SrinformationList" alias="srinformationlist" />
 		<typeAlias type="com.oti.team2.srdemand.dto.SrdemandDetail" alias="srdemandDetail" />
-		<typeAlias type="com.oti.team2.srinformation.dto.SrplanInfomaion" alias="srplanInfomaion" />
+		<typeAlias type="com.oti.team2.srinformation.dto.SrplanInformation" alias="srplanInfomation" />
+		<typeAlias type="com.oti.team2.srinformation.dto.Dept" alias="dept" />
+		<typeAlias type="com.oti.team2.srinformation.dto.Manager" alias="manager" />
 		<typeAlias type="com.oti.team2.member.dto.Member" alias="member"/>
+		<typeAlias type="com.oti.team2.member.dto.Join" alias="join"/>
 		<typeAlias type="com.oti.team2.jobgrade.dto.JobGrade" alias="jobGrade"/>
 		<typeAlias type="com.oti.team2.department.dto.Department" alias="department"/>
 		<typeAlias type="com.oti.team2.member.dto.ProfileImg" alias="profileImg" />
@@ -25,6 +28,8 @@
 		<typeAlias type="com.oti.team2.progress.dto.Progress" alias="progress" />
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto" alias="srHistoryDetailDto" />
 		<typeAlias type="com.oti.team2.deliverable.dto.Deliverable" alias="deliverable" />
+		<typeAlias type="com.oti.team2.srdemand.dto.SdApprovalDto" alias="sdApprovalDto"/>
+		<typeAlias type="com.oti.team2.srinformation.dto.SrInformationRequestDto" alias="srInformationRequestDto"/>
 		<typeAlias type="com.oti.team2.role.dto.Role" alias="role" />
 		<typeAlias type="com.oti.team2.alert.dto.Alert" alias="alert" />
 	</typeAliases> 
