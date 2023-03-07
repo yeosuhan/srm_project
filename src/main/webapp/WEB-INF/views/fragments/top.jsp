@@ -172,26 +172,9 @@
 									<input type="submit" value="LOGOUT" />
 								</form:form></li>
 						</sec:authorize>
-						<sec:authorize access="isAnonymous()">
-							<li class="waves-effect waves-light"><a
-								href="${pageContext.request.contextPath}/loginForm"> <i
-									class="ti-layout-sidebar-left"></i> 로그인
-							</a></li>
-						</sec:authorize>
-						<li class="waves-effect waves-light"><a
-							href="${pageContext.request.contextPath}/example?role=1"> <i
-								class="ti-layout-sidebar-left"></i> 고객 로그인
-						</a></li>
-						<li class="waves-effect waves-light"><a
-							href="${pageContext.request.contextPath}/example?role=2"> <i
-								class="ti-layout-sidebar-left"></i> 개발자 로그인
-						</a></li>
-						<li class="waves-effect waves-light"><a
-							href="${pageContext.request.contextPath}/example?role=3"> <i
-								class="ti-layout-sidebar-left"></i> 관리자 로그인
-						</a></li>
-					</ul></li>
 
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
