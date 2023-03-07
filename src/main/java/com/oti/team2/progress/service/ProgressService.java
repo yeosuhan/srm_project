@@ -78,4 +78,12 @@ public class ProgressService implements IProgressService {
 			srDemandService.updateSrDemandStts(srNo, sttsCd);
 		}
 	}
+
+	/**
+	 * 진척데이터 삽입
+	 * @author 신정은
+	 */
+	public void addProgress(String srNo, List<String> pNames) {
+		progressDao.insertProgress(srNo, pNames);
+	}
 }
