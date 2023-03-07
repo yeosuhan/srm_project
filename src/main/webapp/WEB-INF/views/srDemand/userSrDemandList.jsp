@@ -1,4 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 <%-- 작성자: 최은종 / 작성 날짜: 2023-02-23 --%>
 
@@ -516,7 +518,7 @@ th {
 																		</thead>
 																		<tbody id="history">
 																		</tbody>
-																	</table>
+																	</table>																														
 																</div>
 															</div>
 														</div>
@@ -540,13 +542,15 @@ th {
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 검색 -->
-	<script src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
 
 	<%-- 상세, 등록, 수정 --%>
-	<script src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 	<!-- 모달 -->
 	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
-	<jsp:include page="/WEB-INF/views/history/approvalHistoryModal.jsp" />
+	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
 

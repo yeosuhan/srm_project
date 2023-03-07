@@ -22,14 +22,20 @@ function getSrHistoryList() {
 						} else {
 							var historyType = "개발 취소";
 						}
+
 						if (result.srInformationHistory[i].hstryType == 'C') {
 							var historyChgEndYmd3 = "-";
 						} else {
 							var historyChgEndYmd1 = result.srInformationHistory[i].chgEndYmd;
 							var historyChgEndYmd2 = new Date(historyChgEndYmd1);
-							var historyChgEndYmd3 = historyChgEndYmd2
+							var historyChgEndYmd3 = new Date(
+									historyChgEndYmd2.getTime()
+											- (historyChgEndYmd2
+													.getTimezoneOffset() * 60000))
 									.toISOString().split('T')[0];
+
 						}
+
 						if (result.srInformationHistory[i].hstryStts == 'I') {
 							var historyStts = "미승인";
 						} else if (result.srInformationHistory[i].hstryStts == 'N') {

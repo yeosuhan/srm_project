@@ -1,3 +1,7 @@
+var element = document.createElement('div');
+element.innerHTML = '<sec:authentication property="principal.username"/>';
+var user = element.innerHTML;
+
 function getHistoryList() {
 	var dmndNo = $(".dmndNo").val();
 	console.log("srHistoryList 글번호: " + dmndNo);
@@ -7,22 +11,29 @@ function getHistoryList() {
 				type : "GET",
 
 				success : function(result) {
-					console.log(result);
-					console.log(result.srInformationHistory[0].hstryTtl);
-					$("#srhistory1").empty();
-
+				
+					
 					for (var i = 0; i < result.srInformationHistory.length; i++) {
+
 						var historyId = result.srInformationHistory[i].hstryId;
-						var historyCount = [ i + 1 ];
+
+						var historyCount = [ i +1];
+
 						if (result.srInformationHistory[i].hstryType == 'B') {
 							var historyType = "완료일 변경";
 						} else if (result.srInformationHistory[i].hstryType == 'C') {
 							var historyType = "개발 취소";
 						}
-						if (result.srInformationHistory[i].chgEndYmd == null) {
-							var historyChgEndYmd = "-";
+						if (result.srInformationHistory[i].chgEndYmd == 'C') {
+							var historyChgEndYmd3 = "-";
 						} else {
-							var historyChgEndYmd = result.srInformationHistory[i].chgEndYmd;
+							var historyChgEndYmd1 = result.srInformationHistory[i].chgEndYmd;
+							var historyChgEndYmd2 = new Date(historyChgEndYmd1);
+							var historyChgEndYmd3 = new Date(
+									historyChgEndYmd2.getTime()
+											- (historyChgEndYmd2
+													.getTimezoneOffset() * 60000))
+									.toISOString().split('T')[0];
 						}
 						if (result.srInformationHistory[i].hstryStts == 'I') {
 							var historyStts = "미승인";
@@ -36,12 +47,14 @@ function getHistoryList() {
 								+ historyId + ')">';
 						param += '<th scope="row">' + historyCount + '</th>';
 						param += '<td>' + historyType + '</td>';
-						param += '<td>' + historyChgEndYmd + '</td>';
+						param += '<td>' + historyChgEndYmd3 + '</td>';
 						param += '<td>' + historyStts + '</td>';
 						param += '</tr>';
 
 						$("#history").append(param);
+
 					}
+
 				}
 			});
 }

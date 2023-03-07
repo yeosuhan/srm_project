@@ -5,9 +5,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 작성자: 최은종 / 작성 날짜: 2023-03-01 --%>
-
-<script src="${pageContext.request.contextPath}/resources/js/addHstryModal.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/addHstryModal.js"></script>
 <script type="text/javascript">
+	
 </script>
 
 <div class="modal" id="addHistoryModal">
@@ -17,8 +19,8 @@
 			<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 		</div>
 		<div class="m_body bg-light">
-			<form id="addHistoryForm" action="<c:url value='/history/add'/>"
-				class="form-material">
+			<form id="addHistoryForm" method="post" action="<c:url value='/history/add'/>"
+				class="form-material" onsubmit="return checkValue()">
 				<div class="row my-3">
 					<div class="col-2">SR 번호 :</div>
 					<div class="col-4">
@@ -83,12 +85,10 @@
 							rows="10"></textarea>
 					</div>
 				</div>
-				
+				<div align="center">
+					<button id="mBt" type="submit" class="btn btn-info save center">등록</button>
+				</div>
 			</form>
-			<div align="center">
-				<button id="mBt" type="submit" form="addHistoryForm"
-					formmethod="post" class="btn btn-info save center">등록</button>
-			</div>
 		</div>
 	</div>
 </div>

@@ -3,7 +3,7 @@
 <mapper
 	namespace="com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao">
 
-	<!-- History 전체 내역 조회 -->
+	<!-- History 전체 내역 조회 (관리자/개발자용)-->
 	<select id="selectBySrNo" parameterType="map"
 		resultType="srInformationHistory">
 		<![CDATA[
@@ -14,6 +14,25 @@
 			        select hstry_id as hstryId, sr_no as srNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
 			        from sr_information_history, members m
 			        where sr_no like #{srNo} and m.member_id=rqstr_id
+			        order by hstryId asc
+			    )
+			    where rownum <= #{pager.endRowNo}
+			    )
+			where rnum >= #{pager.startRowNo}	
+		]]>
+	</select>
+	
+		<!-- History 전체 내역 조회 (고객용)-->
+	<select id="selectForClientBySrNo" parameterType="map"
+		resultType="srInformationHistory">
+		<![CDATA[
+			select hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
+			from 
+			    (select rownum as rnum, hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
+			    from(
+			        select hstry_id as hstryId, sr_no as srNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
+			        from sr_information_history, members m
+			        where sr_no like #{srNo} and m.member_id=rqstr_id and hstry_type != 'A'
 			        order by hstryId asc
 			    )
 			    where rownum <= #{pager.endRowNo}
@@ -70,5 +89,25 @@
 	
 
 	<!-- History 승인 전 날짜 변경 업데이트 -->
-
+	<!-- SR 요청 수정 -->
+	<update id="updateHstry" parameterType="srInformationHistory">
+		update sr_information_history
+		set
+		<trim suffixOverrides=",">
+		<if test="hstryType != null">
+			hstry_type = #{hstryType},
+		</if>
+		<if test="hstryTtl != null">
+			hstry_ttl = #{hstryTtl},
+		</if>
+		<if test="hstryCn != null">
+			hstry_cn = #{hstryCn},
+		</if>		
+		<if test="chgEndYmd != null">
+			chg_end_ymd = #{chgEndYmd}
+		</if>
+		</trim>
+		where hstry_id = #{hstryId}		
+	</update>
+	
 </mapper>

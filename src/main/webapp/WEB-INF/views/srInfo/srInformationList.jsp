@@ -22,7 +22,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
 
 <script>
-	
+
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -326,19 +326,11 @@ th {
 															<div class="col-8">
 																<h5>SR요청 상세정보</h5>
 															</div>
-															<c:if test="${stts ne '개발완료' || stts ne '개발취소'}">
-																<div class="col-3">
-																	<button type="button" class="btn btn-primary btn-sm"
-																		data-toggle="modal" data-target="#addHistoryModal">
-																		예정일 변경</button>
-																</div>
-																<div class="col-3">
-																	<button type="button" class="btn btn-primary btn-sm"
-																		data-toggle="modal" data-target="#addHistoryModal">
-																		개발 취소</button>
-																</div>
-															</c:if>
-
+															<div class="col-3 ml-4">
+																<button class="btn btn-primary btn-sm"
+																	onclick="addHistory('${srNo}')" data-toggle="modal"
+																	data-target="#addHistoryModal">SR 변경요청</button>
+															</div>
 														</div>
 													</div>
 													<div class="card-block" style="height: 600px;">
@@ -969,6 +961,7 @@ th {
 	</div>
 	<%@include file="/WEB-INF/views/history/approvalInfoHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
+	<%@include file="/WEB-INF/views/history/modifyHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>

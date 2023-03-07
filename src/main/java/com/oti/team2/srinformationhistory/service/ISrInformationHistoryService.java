@@ -16,6 +16,7 @@ public interface ISrInformationHistoryService {
 	 */
 	public List<SrInformationHistory> getSrInformationHistoryList(Pager pager, String srNo);
 
+	public List<SrInformationHistory> getSrInformationHistoryListForClient(Pager pager, String srNo, String role);
 	/**
 	 * SR처리 히스토리 목록 페이징을 위한 메서드
 	 * 
@@ -43,20 +44,28 @@ public interface ISrInformationHistoryService {
 	 * @author 최은종
 	 */
 	public String getSrNo(String dmndNo);
-	
+
 	/**
 	 * SR 히스토리 등록을 위한 insert 메서드
 	 * 
 	 * @author 최은종
 	 */
 	public void addSrInformationHistory(SrInformationHistory srInformationHistory);
-	
+
 	/**
 	 * SR 히스토리 상태 변경을 위한 update 메서드
 	 * 
 	 * @author 최은종
-	 * @param map 
+	 * @param map
 	 */
 	public void updateHstryStts(HashMap<String, String> map);
-	
+
+	/**
+	 * SR 히스토리 수정을 위한 update 메서드
+	 * 
+	 * @author 최은종
+	 * 
+	 */
+	public void updateHstry(SrInformationHistory srInformationHistory);
+
 }

@@ -3,6 +3,10 @@ element.innerHTML = '<sec:authentication property="principal.authorities[0]"/>';
 var auth = element.innerHTML;
 console.log(auth);
 
+var element = document.createElement('div');
+element.innerHTML = '<sec:authentication property="principal.username"/>';
+var user = element.innerHTML;
+
 function getInfoHstryDetail(historyId) {
 	console.log("historyId: " + historyId);
 
@@ -16,29 +20,31 @@ function getInfoHstryDetail(historyId) {
 					var AhstryType = result.hstryType;
 					var AhstryStts = result.hstryStts;
 					var ArqstrId = result.rqstrId;
+					var AhstryId = result.hstryId;
 					console.log(AhstryType);
 					console.log(AhstryStts);
 					console.log(ArqstrId);
+					console.log(AhstryId);
 
-					$('#AsrNo').val(result.srNo);
-					$('#AinstNm').val(result.instNm);
-					$('#AsysNm').val(result.sysNm);
-					$('#AdeptNm').val(result.deptNm);
-					$('#AwrtYmd').val(result.wrtYmd);
-					$('#AcmptnDmndYmd').val(result.cmptnDmndYmd);
+					$('.AhstryId').val(AhstryId);
+					$('.AsrNo').val(result.srNo);
+					$('.AinstNm').val(result.instNm);
+					$('.AsysNm').val(result.sysNm);
+					$('.AdeptNm').val(result.deptNm);
+					$('.AwrtYmd').val(result.wrtYmd);
+					$('.AcmptnDmndYmd').val(result.cmptnDmndYmd);
 					// 이거 + empty 왜 안먹히는지 모르겠음
 					if (AhstryType != 'C') {
-						$('#AchgEndYmd').val(result.chgEndYmd);
+						$('.AchgEndYmd').val(result.chgEndYmd);
 					} else {
-						$('#AhstryType1').remove();
-						$('#AhstryType2').remove();
+						$('.AhstryType1').remove();
+						$('.AhstryType2').remove();
 					}
-					$('#AhstryTtl').val(result.hstryTtl);
-					$('#AhstryCn').val(result.hstryCn);
+					$('.AhstryTtl').val(result.hstryTtl);
+					$('.AhstryCn').val(result.hstryCn);
 
 					if (auth == 'ROLE_ADMIN' && AhstryType == 'A') {
-						if (ArqstrId != '<sec:authentication property="principal.username"/>'
-								&& AhstryStts == 'I') {
+						if (ArqstrId != user && AhstryStts == 'I') {
 							$('#HstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y">승인</label>'
@@ -60,32 +66,30 @@ function getInfoHstryDetail(historyId) {
 																			.log("~~~~~~~~~~~~~");
 																	if (hstatus == 'Y') {
 																		$(
-																				'#bHstryType')
+																				'.bHstryType')
 																				.val(
 																						'B');
 																	} else if (hstatus == 'N') {
 																		$(
-																				'#bHstryType')
+																				'.bHstryType')
 																				.val(
 																						'A');
 																	}
 																});
 											});
-						} else if (ArqstrId == '<sec:authentication property="principal.username"/>'
-								&& AhstryStts == 'I') {
+						} else if (ArqstrId == user && AhstryStts == 'I') {
+
 							$('#HstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
 													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
 							$('#footDiv').text("결재 권한이 없습니다.");
-						} else if (ArqstrId != '<sec:authentication property="principal.username"/>'
-								&& AhstryStts == 'Y') {
+						} else if (ArqstrId != user && AhstryStts == 'Y') {
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="BHstryStts" type="text" value="승인" readonly>');
 							$('#footDiv').text("결재 처리 된 요청입니다.");
-						} else if (ArqstrId != '<sec:authentication property="principal.username"/>'
-								&& AhstryStts == 'N') {
+						} else if (ArqstrId != user && AhstryStts == 'N') {
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="CHstryStts" type="text" value="반려" readonly>');
@@ -128,6 +132,26 @@ function getInfoHstryDetail(historyId) {
 							$('#footDiv').text("결재 처리 된 요청입니다.");
 						}
 					}
+
+					if (ArqstrId == user && AhstryStts == 'I') {
+						if (auth != 'ROLE_ADMIN' && AhstryType == 'A') {
+							console.log(AhstryType);
+							$('#mheadDiv')
+									.html(
+											'<input type="button" class="btn btn-primary pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">' + '<input type="hidden" class="AhstryId" value="">' );
+						} else if (auth == 'ROLE_ADMIN' && AhstryType != 'A') {
+							$('#mheadDiv')
+									.html(
+											'<input type="button" class="btn btn-primary pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">' +'<input type="hidden" class="AhstryId" value="">' );
+						}
+					}
 				}
 			});
 }
+
+$(document).ready(function() {
+	$('#modifyHistoryModal').on('show.bs.modal', function() {
+		$('#approvalInfoHistoryModal').modal('hide')
+	});
+
+});

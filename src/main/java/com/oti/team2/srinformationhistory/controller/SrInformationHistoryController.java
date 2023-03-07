@@ -1,8 +1,10 @@
 package com.oti.team2.srinformationhistory.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -48,17 +50,19 @@ public class SrInformationHistoryController {
 		Pager pager = new Pager(totalRows, pageNO);
 
 		String srNo = srInformationHistoryService.getSrNo(dmndNo);
-
 		log.info("dmndNo 조회" + dmndNo);
-
-		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryList(pager,
-				srNo);
+		
+		String role = auth.getAuthorities().stream().findFirst().get().toString();
+		log.info("role 조회" + role);
+		
+		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryListForClient(pager, srNo, role);
+		
 		log.info("srInformationHistoryList 조회" + srInformationHistory);
 		log.info("srNo 조회" + srNo);
 		SrHistoryListDto srHistoryList = new SrHistoryListDto();
 		srHistoryList.setSrInformationHistory(srInformationHistory);
 		srHistoryList.setPager(pager);
-
+			
 		log.info("srHistoryList 조회" + srHistoryList);
 		return srHistoryList;
 	}
@@ -93,10 +97,11 @@ public class SrInformationHistoryController {
 	 */
 	@ResponseBody
 	@GetMapping("/detail/{hstryId}")
-	public SrHistoryDetailDto getSrInformationHistory(@PathVariable("hstryId") int hstryId) {
+	public SrHistoryDetailDto getSrInformationHistory(@PathVariable("hstryId") int hstryId, Authentication auth) {
 		log.info("srInformationHistory 상세조회");
 
 		SrHistoryDetailDto srHistoryDetailDto = srInformationHistoryService.getSrInformationHistory(hstryId);
+		srHistoryDetailDto.setAuth(auth.getAuthorities().stream().findFirst().get().toString());
 		log.info(hstryId);
 		log.info("srHistoryDetailDto 조회 : " + srHistoryDetailDto + "/" + "hstryId : " + hstryId);
 
@@ -111,13 +116,7 @@ public class SrInformationHistoryController {
 	 * @return srNo 리턴
 	 * @see 개발자, 관리자
 	 */
-	@ResponseBody
-	@GetMapping("/add")
-	public String getSrHistoryWriteForm(@RequestParam String srNo) {
-		log.info("getSrHistoryWriteForm 등록");
 
-		return srNo;
-	}
 
 	/**
 	 * SR처리 히스토리 등록 메서드 (POST)
@@ -128,13 +127,29 @@ public class SrInformationHistoryController {
 	 * @see 개발자(히스토리 등록), 관리자(히스토리 등록&등록 요청에 대한 수락상태 업데이트)
 	 */
 	@PostMapping("/add")
-	public String addSrInformationHistory(SrInformationHistory srInformationHistory) {
+	public String addSrInformationHistory(SrInformationHistory srInformationHistory, HttpServletResponse response) {
 		log.info("addSrInformationHistory POST");
-		log.info("DTO: "+ srInformationHistory);
-		log.info("srNo: "+ srInformationHistory.getSrNo());
+		/*log.info("DTO: "+ srInformationHistory);
+		log.info("srNo: "+ srInformationHistory.getSrNo());*/
+		log.info("HstryType: "+ srInformationHistory.getHstryType());
+		log.info("ChgEndYmd" + srInformationHistory.getChgEndYmd());
 		
-		srInformationHistoryService.addSrInformationHistory(srInformationHistory);
+/*		if(srInformationHistory.getHstryType() != "C" && (srInformationHistory.getChgEndYmd()==null || srInformationHistory.getChgEndYmd().isEmpty())) {
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>alert('날짜 미입력');</script>");
+				out.flush();
 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "srInfo/srInformationList";
+		} else {
+			srInformationHistoryService.addSrInformationHistory(srInformationHistory);
+		}*/
+
+		srInformationHistoryService.addSrInformationHistory(srInformationHistory);
 		log.info("컨트롤러" + srInformationHistory);
 
 		return "redirect:/srinformation/list";
@@ -163,4 +178,24 @@ public class SrInformationHistoryController {
 		
 		return "redirect:/srinformation/list";
 	}
+	
+	/**
+	 * SR처리 히스토리 수정 메서드 (POST)
+	 *
+	 * @author 최은종
+	 * @param SrInformationHistory 객체에 데이터를 입출력하기 위해 매개변수로 설정
+	 * @return 진척정보 페이지 리턴
+	 * @see 개발자, 관리자 (자신의 글에 한해 수정 가능, 결재처리 전에만 수정 가능)
+	 */
+	@PostMapping("/modify")
+	public String updateHstry(SrInformationHistory srInformationHistory) {
+		log.info("컨트롤러: 수정");
+		log.info(srInformationHistory.getHstryType());
+		
+		srInformationHistoryService.updateHstry(srInformationHistory);
+		log.info("컨트롤러22: 수정");
+		return "redirect:/srinformation/list";
+	}
+	
+	
 }

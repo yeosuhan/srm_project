@@ -28,13 +28,13 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 
 	@Autowired
 	private ISrDemandDao srDemandDao;
-	
+
 	@Autowired
 	private SrDemandService srDemandService;
-	
+
 	@Autowired
 	private ISrResourceDao srResourceDao;
-	
+
 	@Autowired
 	private SrinformationService srInformationService;
 
@@ -46,6 +46,12 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	@Override
 	public List<SrInformationHistory> getSrInformationHistoryList(Pager pager, String srNo) {
 		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectBySrNo(pager, srNo);
+		return srInformationHistoryList;
+	}
+	
+	@Override
+	public List<SrInformationHistory> getSrInformationHistoryListForClient(Pager pager, String srNo, String role) {
+		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectForClientBySrNo(pager, srNo);
 		return srInformationHistoryList;
 	}
 
@@ -106,37 +112,52 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		log.info("서비스----insert");
 		String hstryType = srInformationHistory.getHstryType();
 		log.info("서비스----hstryType: " + hstryType);
-		
-		if(hstryType=="A") {           
-			srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId());		
+
+		// 요청일 변경
+		if (hstryType == "A") {
+			srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId());
 		}
 		srInformationHistoryDao.insertSrHistory(srInformationHistory);
 	}
 
 	/**
-	 * SR 요청일 변경을 위한 update 메서드
+	 * SR 개발취소시 상태값 변경을 위한 update 메서드
 	 * 
-	 * @author 최은종
-	 * 여러 서비스들을 호출해서 관련 날짜 및 상태값 모두 업데이트
+	 * @author 최은종 여러 서비스들을 호출해서 관련 날짜 및 상태값 모두 업데이트
 	 * @see 관리자, 고객
 	 */
 	@Transactional
 	public void updateHstryStts(HashMap<String, String> map) {
 		log.info("서비스----update Status");
 		log.info(map);
-		
+
 		int hstryId = Integer.parseInt(map.get("hstryId"));
-		String srNo= (String) map.get("srNo");
-				
+		String srNo = (String) map.get("srNo");
+
 		log.info("서비스 히스토리넘버: " + hstryId);
 		log.info("서비스 SR넘버: " + srNo);
-		//여러 서비스 연결
-		srInformationHistoryDao.updateHstryStts(hstryId);	
+		// 여러 서비스 연결
+		srInformationHistoryDao.updateHstryStts(hstryId);
 		srDemandService.updateSrDemandStts(srNo, 6);
-		//srResourceDao.updateSrResource(srNo);
-		//srInformationService.updatePrgrsBySrNo(srNo);
-		
-		
+		// srResourceDao.updateSrResource(srNo);
+		// srInformationService.updatePrgrsBySrNo(srNo);
+
 	}
+
+	/**
+	 * SR 승인 전 요청 변경을 위한 update 메서드
+	 * 
+	 * @author 최은종
+	 */
+	@Transactional
+	public void updateHstry(SrInformationHistory srInformationHistory) {
+		log.info("서비스----요청 수정");
+
+		int row = srInformationHistoryDao.updateHstry(srInformationHistory);
+		log.info("서비스----요청 수정row " + row);
+		log.info("서비스----요청 수정22 " + srInformationHistory);
+
+	}
+
 
 }

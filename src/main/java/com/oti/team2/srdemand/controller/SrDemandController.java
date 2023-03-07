@@ -121,7 +121,7 @@ public class SrDemandController {
 
 		model.addAttribute("sd", sd);
 		model.addAttribute("pager", pager);
-		
+		model.addAttribute("role", auth.getAuthorities().stream().findFirst().get().toString());
 		return "srDemand/userSrDemandList";
 	}
 

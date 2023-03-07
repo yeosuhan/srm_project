@@ -1,7 +1,6 @@
 var element = document.createElement('div');
-element.innerHTML = '<sec:authentication property="principal.authorities[0]"/>';
-var auth = element.innerHTML;
-console.log(auth);
+element.innerHTML = '<sec:authentication property="principal.username"/>';
+var user = element.innerHTML;
 
 function getHstryDetail(historyId) {
 	console.log("historyId: " + historyId);
@@ -12,32 +11,33 @@ function getHstryDetail(historyId) {
 				type : 'GET',
 				success : function(result) {
 					console.log(result);
+					console.log(result.auth);
 
+					var auth = result.auth;
 					var appvHstryType = result.hstryType;
 					var appvHstryStts = result.hstryStts;
 					var appvRqstrId = result.rqstrId;
-					console.log(appvHstryType);
+					var appvHstryId = result.hstryId;
 					console.log(appvHstryStts);
-					console.log(appvRqstrId);
-
-					$('#appvSrNo').val(result.srNo);
-					$('#appvInstNm').val(result.instNm);
-					$('#appvSysNm').val(result.sysNm);
-					$('#appvDeptNm').val(result.deptNm);
-					$('#appvWrtYmd').val(result.wrtYmd);
-					$('#appvCmptnDmndYmd').val(result.cmptnDmndYmd);
+					$('.AsrNo').val(result.srNo);
+					$('.AinstNm').val(result.instNm);
+					$('.AsysNm').val(result.sysNm);
+					$('.AdeptNm').val(result.deptNm);
+					$('.AwrtYmd').val(result.wrtYmd);
+					$('.AcmptnDmndYmd').val(result.cmptnDmndYmd);
 					// 이거 + empty 왜 안먹히는지 모르겠음
 					if (appvHstryType != 'C') {
-						$('#appvChgEndYmd').val(result.chgEndYmd);
+						$('.AchgEndYmd').val(result.chgEndYmd);
 					} else {
-						$('#appvHstryType1').remove();
-						$('#appvHstryType2').remove();
+						$('.AhstryType1').remove();
+						$('.AhstryType2').remove();
 					}
-					$('#appvHstryTtl').val(result.hstryTtl);
-					$('#appvHstryCn').val(result.hstryCn);
-
+					$('.AhstryTtl').val(result.hstryTtl);
+					$('.AhstryCn').val(result.hstryCn);
+					console.log(appvHstryType);
 					if (auth == 'ROLE_CLIENT'
 							&& (appvHstryType == 'B' || appvHstryType == 'C')) {
+						console.log("!!!@@!!");
 						if (appvHstryStts == 'I') {
 							$('#appvHstrySttsDiv2')
 									.html(
@@ -60,12 +60,12 @@ function getHstryDetail(historyId) {
 																			.log("~~~~~~~~~~~~~");
 																	if (hStatus == 'Y') {
 																		$(
-																				'#appvHstryType')
+																				'.bHstryType')
 																				.val(
 																						'B');
 																	} else if (hStatus == 'N') {
 																		$(
-																				'#appvHstryType')
+																				'.bHstryType')
 																				.val(
 																						'A');
 																	}
@@ -74,12 +74,13 @@ function getHstryDetail(historyId) {
 						} else if (appvHstryStts == 'Y') {
 							$('#appvHstrySttsDiv2')
 									.html(
-											'<input id="bHstryStts" type="text" value="승인" readonly>');
+											'<input id="ubHstryStts" type="text" value="승인" readonly>');
 							$('#footDivUSer').text("결재 처리 된 요청입니다.");
 						} else if (appvHstryStts == 'N') {
+							console.log("!!!!!!!!!");
 							$('#appvHstrySttsDiv2')
 									.html(
-											'<input id="cHstryStts" type="text" value="반려" readonly>');
+											'<input id="ucHstryStts" type="text" value="반려" readonly>');
 							$('#footDivUSer').text("결재 처리 된 요청입니다.");
 						}
 					} else if (auth != 'ROLE_CLIENT'
@@ -93,12 +94,12 @@ function getHstryDetail(historyId) {
 						} else if (appvHstryStts == 'Y') {
 							$('#appvHstrySttsDiv2')
 									.html(
-											'<input id="bHstryStts" type="text" value="승인" readonly>');
+											'<input id="ubHstryStts" type="text" value="승인" readonly>');
 							$('#footDivUSer').text("결재 처리 된 요청입니다.");
 						} else if (appvHstryStts == 'N') {
 							$('#appvHstrySttsDiv2')
 									.html(
-											'<input id="cHstryStts" type="text" value="반려" readonly>');
+											'<input id="ucHstryStts" type="text" value="반려" readonly>');
 							$('#footDivUSer').text("결재 처리 된 요청입니다.");
 						}
 					}
