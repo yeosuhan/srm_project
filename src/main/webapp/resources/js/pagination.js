@@ -2,6 +2,7 @@
  * pager : ajax 통신 후 pager를 가진 응답객체
  * url : 이동시킬 url을 전달해준다.
  * onclickMethod : 각자 onclick시 사용되는 메소드 이름을 전달해준다.
+ * 
  * @author : 신정은
  * */
 function reloadPager(pager, url, onclickMethod) {
