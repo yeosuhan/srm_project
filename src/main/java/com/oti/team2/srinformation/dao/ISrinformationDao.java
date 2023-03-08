@@ -75,4 +75,6 @@ public interface ISrinformationDao {
 	 * @return 결과 행수
 	 * */
 	public int selectTotalRow(@Param("page")int page,@Param("srInfoFilter") SrInfoFilter srInfoFilter);
+
+	public void updatePrgrsBySrNo(String srNo);
 }

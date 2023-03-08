@@ -50,8 +50,9 @@ public interface ISrInformationHistoryService {
 	 * SR 히스토리 등록을 위한 insert 메서드
 	 * 
 	 * @author 최은종
+	 * @param role 
 	 */
-	public void addSrInformationHistory(SrInformationHistory srInformationHistory);
+	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role);
 
 	/**
 	 * SR 히스토리 상태 변경을 위한 update 메서드

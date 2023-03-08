@@ -61,4 +61,6 @@ public interface ISrinformationService {
 	 * @return 결과 행수
 	 * */
 	int getTotalRow(int page, SrInfoFilter srInfoFilter);
+
+	void updatePrgrsBySrNo(String srNo);
 }

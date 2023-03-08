@@ -117,15 +117,28 @@ public class SrInformationHistoryController {
 	 * @return 진척정보 페이지 리턴
 	 * @see 개발자(히스토리 등록), 관리자(히스토리 등록&등록 요청에 대한 수락상태 업데이트)
 	 */
-	@PostMapping("/add")
-	public String addSrInformationHistory(SrInformationHistory srInformationHistory, HttpServletResponse response) {
-		log.info("addSrInformationHistory POST");
+	   @PostMapping("/add")
+	   public String addSrInformationHistory(SrInformationHistory srInformationHistory, Authentication auth) {
+	      log.info("addSrInformationHistory 등록");
 
-		srInformationHistoryService.addSrInformationHistory(srInformationHistory);
-		log.info("컨트롤러" + srInformationHistory);
+	      String role = auth.getAuthorities().stream().findFirst().get().toString();
+	      log.info("role 조회" + role);
+	      
+	      if(role.equals("ROLE_CLIENT")) {
+	         String srNo = srInformationHistoryService.getSrNo(srInformationHistory.getSrNo());      
+	         srInformationHistory.setSrNo(srNo);
+	      } 
+	            
+	      srInformationHistoryService.addSrInformationHistory(srInformationHistory, role);
+	      log.info("컨트롤러" + srInformationHistory);
 
-		return "redirect:/srinformation/list";
-	}
+	      if(!role.equals("ROLE_CLIENT")) {
+	         return "redirect:/srinformation/list";
+	      } else {
+	         return "redirect:/srdemand/list";
+	      }
+
+	   }
 
 	/**
 	 * SR처리 히스토리 상태 수정 메서드 (POST)

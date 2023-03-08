@@ -37,6 +37,8 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 
 	@Autowired
 	private SrinformationService srInformationService;
+	@Autowired
+	private SrResourceService srResourceService;
 
 	/**
 	 * SR처리 히스토리 내역 조회 메서드
@@ -108,18 +110,71 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	 * @author 최은종
 	 * @see 개발자, 관리자
 	 */
-	@Transactional
-	public void addSrInformationHistory(SrInformationHistory srInformationHistory) {
-		log.info("서비스----insert");
-		String hstryType = srInformationHistory.getHstryType();
-		log.info("서비스----hstryType: " + hstryType);
+	   @Transactional
+	   public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role) {
+	      log.info("서비스----insert");
+	      String hstryType = srInformationHistory.getHstryType();
+	      String hstryStts = srInformationHistory.getHstryStts();
+	      int hstryId = srInformationHistory.getHstryId();
+	      String srNo = srInformationHistory.getSrNo();
 
-		// 요청일 변경
-		if (hstryType == "A") {
-			srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId());
-		}
-		srInformationHistoryDao.insertSrHistory(srInformationHistory);
-	}
+	      log.info("서비스----hstryType: " + hstryType);
+	      log.info("서비스----role: " + role);
+
+	      if (role.equals("ROLE_DEVELOPER")) {
+	         log.info("나는 개발자");
+	         // 개발자가 신규등록 할 때
+	         srInformationHistoryDao.insertSrHistory(srInformationHistory);
+	      } else if (role.equals("ROLE_ADMIN")) {
+	         log.info("나는 관리자");
+	         if (hstryId == 0) {
+	            log.info("나는 관리자:신규등록");
+	            // 관리자가 신규등록 할 때
+	            srInformationHistoryDao.insertSrHistory(srInformationHistory);
+	         } else if (hstryId != 0) {
+	            log.info("나는 관리자:업데이트");
+	            // 개발자가 신청한 등록이 있으면
+	            // 그 요청에 대한 상태값 업데이트
+	            log.info(srInformationHistory.getHstryStts());
+	            srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
+	                  srInformationHistory.getHstryStts());
+	            if (hstryStts.equals("Y")) {
+	               // 고객한테 새로 요청 보내기 (이 때 상태값 I로 바꿔서 insert)
+	               srInformationHistoryDao.insertSrHistory(srInformationHistory);
+	            }
+
+	         }
+
+	      } else if (role.equals("ROLE_CLIENT")) {
+	         
+	         log.info("나는 고객");
+	         log.info(hstryType);
+	         // 관리자가 요청한 유형이 요청일변경일 경우 상태만 업데이트
+	         if (hstryType.equals("B")) {
+	            log.info(srInformationHistory.getHstryStts());
+	            srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
+	                  srInformationHistory.getHstryStts());
+	         } else if (hstryType.equals("C")) {
+	            // 관리자가 요청한 유형이 개발취소인 경우 일단 상태값 업데이트
+
+	            srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
+	                  srInformationHistory.getHstryStts());
+	            if (hstryStts.equals("Y")) {
+	               // 개발취소 승인이면
+	               // 그 요청으로 영향을 받는 다른 서비스들 호출해서 값 변경해주기
+	               log.info(srInformationHistory.getHstryStts());
+	               
+	               srDemandService.updateSrDemandStts(srNo, 6);
+	               
+	               SrResource srResourceDto=new SrResource();
+	               srResourceDto.setSrNo(srNo);
+	               srResourceService.modifySrResource(srResourceDto);
+	               
+	               srInformationService.updatePrgrsBySrNo(srNo);
+	            }
+	         }
+	      }
+	   }
 
 	/**
 	 * SR 개발취소시 상태값 변경을 위한 update 메서드

@@ -154,4 +154,14 @@ public class SrinformationService implements ISrinformationService{
 	public int getTotalRow(int page, SrInfoFilter srInfoFilter) {
 		return srinformationDao.selectTotalRow(page,srInfoFilter);
 	}
+	
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-03
+	 * @return 개발취소시 sr정보 진행여부 false(0)으로 수정
+	 */
+	@Override
+	public void updatePrgrsBySrNo(String srNo) {
+		srinformationDao.updatePrgrsBySrNo(srNo);
+	}
 }
