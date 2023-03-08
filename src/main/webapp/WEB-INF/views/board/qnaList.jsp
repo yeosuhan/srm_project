@@ -11,6 +11,7 @@
 	href="/resources/js/pagination.js">
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/srButton.css">
+<script src="/resources/js/board.js"></script>
 <script type="text/javascript">
 	function toUpdate() {
 		console.log("눌림 ~~");
@@ -197,7 +198,7 @@
 											</div>
 											<!-- Bootstrap modal end -->
 										</div>
-										<div class="d-flex justify-content-end" data-toggle="modal" data-target="#writeQna">
+										<div class="d-flex justify-content-end" onclick="writeQna()">
 											<img class="rounded newPost"
 												src="/resources/oti_images/newPost.png">
 										</div>

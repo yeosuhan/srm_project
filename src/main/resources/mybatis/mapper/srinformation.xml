@@ -206,5 +206,14 @@
 		    R.EMP_ID = #{srInfoFilter.empId}
 		</if>
 	</select>
+	
+	<!-- 고객이 문의글 작성 시 : 자신의 모든 진척-요청번호를 보여주기 위함 -->
+	<select id="selectSrNoAndDmndNoByCustId" parameterType="string" resultType="srkeyDto">
+		SELECT si.dmnd_no as dmndNo,
+				si.sr_no as srNo
+		FROM sr_demand sd INNER JOIN sr_information si
+		ON sd.dmnd_no = si.dmnd_no
+		WHERE sd.CUST_ID = #{custId}
+	</select>
 
 </mapper>

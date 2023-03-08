@@ -188,9 +188,6 @@
 							<div class="dropdown dropdown open">
 								<form action="#">
 									<select name="languages" id="lang">
-										<option value="워크넷">시스템1</option>
-										<option value="굴국밥">시스템2</option>
-										<option value="고소미">시스템3</option>
 									</select>
 								</form>
 							</div>

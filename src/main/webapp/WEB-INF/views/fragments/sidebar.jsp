@@ -89,13 +89,13 @@
 		<div class="pcoded-navigation-label" style="font-weight: bold;"
 			data-i18n="nav.category.forms">게시판</div>
 		<ul class="pcoded-item pcoded-left-item">
-			<li><a href="${pageContext.request.contextPath}/board/list"
+			<li><a href="${pageContext.request.contextPath}/board/list?type=notice"
 				class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 						class="fas fa-bullhorn pt-1"></i><b>FC</b></span> <span
 					class="pcoded-mtext" data-i18n="nav.form-components.main">공지사항</span>
 					<span class="pcoded-mcaret"></span>
 			</a></li>
-			<li><a href="${pageContext.request.contextPath}/board/list"
+			<li><a href="${pageContext.request.contextPath}/board/list?type=qna"
 				class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 						class="far fa-comments pt-1"></i><b>FC</b></span> <span
 					class="pcoded-mtext" data-i18n="nav.form-components.main">QnA</span>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.oti.team2.board.dto.SRKeyDto;
 import com.oti.team2.srinformation.dto.Dept;
 import com.oti.team2.srinformation.dto.Manager;
 import com.oti.team2.srinformation.dto.SrInfoFilter;
@@ -93,4 +94,10 @@ public interface ISrinformationDao {
 	 * @return 개발취소시 계획종료일 SYSDATE
 	 */
 	public void updateEndYmdBySrNo(@Param("srNo") String srNo);
+	
+	/**
+	 * 고객이 문의글 작성 시 : 자신의 모든 진척-요청번호를 보여주기 위함
+	 * @author 신정은
+	 */
+	public List<SRKeyDto> selectSrNoAndDmndNoByCustId(@Param("custId")String custId);
 }
