@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.alert.dao.IAlertDao">
+	<select id="selectByRcvrId" parameterType="String" resultType="alert">
+		SELECT 
+			ALT_NO as altNo,
+			ALT_CN as altCn,
+			TRSM_YMD as trsmYmd,
+			DMND_NO as dmndNo,
+			HSTRY_ID as hstryId,
+			ALT_TYPE as altType
+		FROM ALERT
+		WHERE 
+			RCVR_ID = #{rcvrId} AND
+			IDNTY_YN = 0
+	</select>
+</mapper>

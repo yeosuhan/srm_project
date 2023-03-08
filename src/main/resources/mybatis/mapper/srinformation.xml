@@ -125,7 +125,8 @@
 		UPDATE
 			SR_INFORMATION
 		SET
-			PRGRS_YN = '0'
+			PRGRS_YN = '0',
+			END_YMD = sysdate
 		WHERE
 			SR_NO = #{srNo}
 	</update>	

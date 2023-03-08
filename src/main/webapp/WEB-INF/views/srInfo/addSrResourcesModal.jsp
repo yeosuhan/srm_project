@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <div class="modal" id="addSrResourcesModal" >
 	
 	<div class = "modal-body modal-dialog modal-lg" style="height:700px">
@@ -18,21 +20,24 @@
 						<div class="row my-3">
 							<div class="col-6">SR제목 : </div>
 							<div class="col-6">
-								<input type="hidden" id="srNo" name="srNo" value="">
-								<input type="text" id="ttl"  value="" disabled>
+								<input type="hidden" id="srNo" name="srNo" value="${srlist[0].srNo}">
+								<input type="text" id="ttl"  value="${sd.ttl}" disabled>
 							</div>
 						</div>
 						<div class="row my-3">
 							<div class="col-6">요청기관 : </div>
 							<div class="col-6">
-								<input id="resourceInst" type="text" value="" disabled>
+								<input id="resourceInst" type="text" value="${sd.instNm}" disabled>
 							</div>
 						</div>
 						<div class="row my-3">
 							<div class="col-6">부서 : </div>
 							<div class="col-6">
-								<input id="deptCd" type="hidden" value="" disabled>
-								<input id="deptNm" type="text" value="" disabled>
+								<select id="addSrResourceModalDept" >
+									<c:forEach var="deptList" items="${deptList}">
+										<option id="SRDept" value="${deptList.deptCd}">${deptList.deptNm}</option>
+									</c:forEach>
+								</select>
 							</div>
 						</div>
 						<div class="row my-3">

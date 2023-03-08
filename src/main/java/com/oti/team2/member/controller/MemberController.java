@@ -1,7 +1,7 @@
 package com.oti.team2.member.controller;
 
-import java.io.IOException;
 
+import java.io.IOException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,9 +101,8 @@ public class MemberController {
 		log.info(deptCd);
 		EmployeeList employeeList = new EmployeeList();
 		employeeList.setDevelopers(memberService.getEmployeeNameList(deptCd));
-		
 		employeeList.setSchedule(srResourceService.getSrResourceListByEmpId(employeeList.getDevelopers().get(0).getEmpId()));
-		
+		log.info(employeeList.getSchedule());
 		return employeeList;
 	}
 	

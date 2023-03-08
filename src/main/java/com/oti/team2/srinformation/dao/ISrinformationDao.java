@@ -76,7 +76,7 @@ public interface ISrinformationDao {
 	 * @author 안한길 작성일자 : 2023-03-06
 	 * 
 	 * @return 결과 행수
-	 */
+	 * */
 	public int selectTotalRow(@Param("page") int page, @Param("srInfoFilter") SrInfoFilter srInfoFilter);
 
 	/**
