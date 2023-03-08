@@ -38,5 +38,10 @@
 		<typeAlias type="com.oti.team2.alert.dto.Alert" alias="alert" />
 		<typeAlias type="com.oti.team2.srdemand.dto.MytodoSrListDto" alias="mytodoSrListDto"/>
 		<typeAlias type="com.oti.team2.board.dto.SRKeyDto" alias="srkeyDto"/>
+		<typeAlias type="com.oti.team2.board.dto.BoardRequestDto" alias="boardRequestDto"/>
+		<typeAlias type="com.oti.team2.attachment.dto.Attachment" alias="attachment"/>
+		<typeAlias type="com.oti.team2.board.dto.Board" alias="board"/>
+		<typeAlias type="com.oti.team2.board.dto.BoardListDto" alias="boardListDto"/>
+		
 	</typeAliases> 
 </configuration>

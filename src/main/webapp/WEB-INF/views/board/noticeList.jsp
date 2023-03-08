@@ -11,7 +11,8 @@
 		href="/resources/js/pagination.js">
 	<link rel="stylesheet" type="text/css"
 		href="/resources/css/srButton.css">
-	<script type="text/javascript">
+	<script src="/resources/js/board.js"></script>
+<script type="text/javascript">
 	function toUpdate() {
 		console.log("눌림 ~~");
 		$("#update").css("display", "block");
@@ -47,54 +48,22 @@
 															<tr>
 																<th class="col-1" style="text-align: center;">글 번호</th>
 																<th class="col-7">제목</th>
-																<th class="col-1">파일첨부</th>
-																<th class="col-3">작성자</th>
+																<th class="col-1">작성자</th>
+																<th class="col-3">작성날짜</th>
+																<th class="col-3">조회수</th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr>
-																<th scope="row" style="text-align: center;">7</th>
-																<td>오티아이 휴가 사용 공지</td>
-																<td>-</td>
-																<td>최은종(관리자)</td>
-															</tr>
-															<tr>
-																<th scope="row" style="text-align: center;">6</th>
-																<td>오티아이 휴가 사용 공지</td>
-																<td>-</td>
-																<td>최은종(관리자)</td>
-															</tr>
-															<tr>
-																<th scope="row" style="text-align: center;">5</th>
-																<td>오티아이 휴가 사용 공지</td>
-																<td>-</td>
-																<td>최은종(관리자)</td>
-															</tr>
-															<tr>
-																<th scope="row" style="text-align: center;">4</th>
-																<td>오티아이 휴가 사용 공지</td>
-																<td>-</td>
-																<td>최은종(관리자)</td>
-															</tr>
-															<tr>
-																<th scope="row" style="text-align: center;">3</th>
-																<td>오티아이 휴가 사용 공지</td>
-																<td>-</td>
-																<td>최은종(관리자)</td>
-															</tr>
-															<tr>
-																<th scope="row" style="text-align: center;">2</th>
-																<td>오티아이 워크샵 공지</td>
-																<td><img src="/resources/oti_images/attachFile.png"
-																	style="width: 20px;"></td>
-																<td>신정은(관리자)</td>
-															</tr>
-															<tr>
-																<th scope="row" style="text-align: center;">1</th>
-																<td>오티아이 회식 공지</td>
-																<td>-</td>
-																<td>한송민(관리자)</td>
-															</tr>
+															<c:forEach items="${list}" var="board" varStatus="status">
+																<tr><input type="hidden" value="${board.bbsNo}"/>
+																	<th style="text-align: center;">${status.count}</th>
+																	<td>${board.bbsTtl}</td>
+																	<td>${board.wrtNm}</td>
+																	<td>${board.wrtYmd}</td>
+																		<td>미답변</td>
+																	
+																</tr>
+															</c:forEach>
 														</tbody>
 													</table>
 													<!-- 페이징 처리 -->
@@ -103,7 +72,7 @@
 												<!-- Notification card end -->
 											</div>
 											<!-- 상세 보기 ------------------------------------------------------ -->
-											<div class="col-sm-7" id="postDetail">
+											<div class="col-sm-7" id="noticeDetail">
 												<div class="card">
 													<div class="card-header">
 														<h5>공지사항</h5>
@@ -219,9 +188,10 @@
 												<!-- Input Alignment card end -->
 											</div>
 										</div>
-										<div class="d-flex justify-content-end" data-toggle="modal" data-target="#writeNotice">
+										<div class="d-flex justify-content-end" onclick="writeNotice()">
 											<img class="rounded newPost" src="/resources/oti_images/newPost.png">
 										</div>
+										<div class="modal" tabindex="-1" id="writeNotice"></div>
 									</div>
 									<!-- Page body end -->
 								</div>
@@ -233,7 +203,6 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="/WEB-INF/views/board/notice-write.jsp"/> 
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
-</html>
+</html>	

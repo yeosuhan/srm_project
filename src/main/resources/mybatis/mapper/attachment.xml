@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.attachment.dao.IAttachmentDao">
+
+	<insert id="insertAttachment" parameterType="attachment">
+		<selectKey keyProperty="fileSn" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(TO_NUMBER(TRIM(FILE_SN))), 0) + 1 from ATTACHMENTS
+		</selectKey>
+		INSERT ALL 
+		<foreach collection="attachList" item="attach" separator=" " close="SELECT * FROM DUAL" index="index">
+			INTO 
+				ATTACHMENTS( FILE_SN, 
+					<if test="attach.bbsNo != null">
+							BBS_NO, 					
+					</if>
+					<if test="attach.dmndNo != null">
+						DMND_NO, 
+					</if>
+							ORGNL_FILE_NM, 
+							FILE_NM, 
+							FILE_SZ, 
+							FILE_TYPE
+						)
+			VALUES
+				(	#{fileSn} + #{index},
+					<if test="attach.bbsNo != null">
+						#{attach.bbsNo}, 
+					</if>
+					<if test="attach.dmndNo != null">
+						#{attach.dmndNo},
+					</if>
+					#{attach.orgnlFileNm},
+					#{attach.fileNm}, 
+					#{attach.fileSz}, 
+					#{attach.fileType}
+			  )
+		</foreach>
+	</insert>
+</mapper>

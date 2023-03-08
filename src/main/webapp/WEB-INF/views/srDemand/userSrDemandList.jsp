@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 <%-- 작성자: 최은종 / 작성 날짜: 2023-02-23 --%>
 
@@ -206,14 +207,13 @@ th {
 																					<td>${srDemand.dmndNo}</td>
 																					<c:choose>
 																						<c:when test="${fn:length(srDemand.ttl) > 10}">
-																							<td id="ttl" class="text-center">
-																								<c:out value="${fn:substring(srDemand.ttl,0,9)}"/>...
+																							<td id="ttl" class="text-center"><c:out
+																									value="${fn:substring(srDemand.ttl,0,9)}" />...
 																							</td>
 																						</c:when>
 																						<c:otherwise>
-																							<td id="ttl" class="text-center">
-																								<c:out value="${srDemand.ttl}"/>
-																							</td>
+																							<td id="ttl" class="text-center"><c:out
+																									value="${srDemand.ttl}" /></td>
 																						</c:otherwise>
 																					</c:choose>
 																					<td>${srDemand.sysNm}</td>
@@ -236,7 +236,7 @@ th {
 																					<td>${srDemand.endYmd}</td>
 																				</tr>
 																			</c:forEach>
-																		</tbody> 
+																		</tbody>
 																	</table>
 																	<!-- 페이징 처리 -->
 																	<div class="d-flex justify-content-center">
@@ -529,7 +529,7 @@ th {
 																		</thead>
 																		<tbody id="history">
 																		</tbody>
-																	</table>																														
+																	</table>
 																</div>
 															</div>
 														</div>
