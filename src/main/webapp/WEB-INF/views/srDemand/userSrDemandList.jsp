@@ -374,16 +374,17 @@ th {
 																			</div>
 																		</div>
 																	</div>
-
-																	<div class="row mt-3 ml-1">
-																		<label
-																			class="col-sm-3 col-form-label px-0 font-weight-bold"
-																			style="line-height: 120px">반려 사유</label>
-																		<div class="col-sm-9 pl-0 ">
-																			<input class="form-control rjctRsn"
-																				value="${sd.rjctRsn}"></input>
+																	<c:if test="${sd.sttsCd == 1}">
+																		<div class="row mt-3 ml-1">
+																			<label
+																				class="col-sm-3 col-form-label px-0 font-weight-bold"
+																				style="line-height: 120px">반려 사유</label>
+																			<div class="col-sm-9 pl-0 ">
+																				<input class="form-control rjctRsn"
+																					value="${sd.rjctRsn}"></input>
+																			</div>
 																		</div>
-																	</div>
+																	</c:if>
 																	<div class="form-group row">
 																		<label
 																			class="col-sm-2 col-form-label font-weight-bold"
