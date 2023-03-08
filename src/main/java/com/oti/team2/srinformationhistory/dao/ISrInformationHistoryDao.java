@@ -45,7 +45,7 @@ public interface ISrInformationHistoryDao {
 	 * 
 	 * @author 최은종
 	 */
-	public void updateHstryStts(@Param("hstryId") int hstryId);
+	public void updateHstryStts(@Param("hstryId") int hstryId, @Param("hstryStts") String hstryStts);
 
 	/**
 	 * SR처리 히스토리 수정 메서드

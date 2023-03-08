@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 
 <html>
@@ -248,7 +248,19 @@ th {
 																					<td>${srDemand.custNm}</td>
 																					<td>${srDemand.instNm}</td>
 																					<td>${srDemand.rvwrNm}</td>
-																					<td>${srDemand.sttsNm}</td>
+																					<td><c:if test="${(srDemand.sttsNm) eq '요청'}">
+																							<label class="badge badge-warning">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
+																							<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
+																							<label class="badge badge-inverse-success">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
+																							<label class="badge badge-success">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
+																							<label class="badge badge-primary">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
+																							<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																						</c:if></td>
 																					<td>${srDemand.dmndYmd}</td>
 																					<td>${srDemand.endYmd}</td>
 																				</tr>
@@ -406,8 +418,7 @@ th {
 																		<label
 																			class="col-sm-3 col-form-label px-0 font-weight-bold"
 																			style="line-height: 120px">반려 사유</label>
-																		<div class="col-sm-9 pl-0" id="rjctRsnDiv">
-																		</div>
+																		<div class="col-sm-9 pl-0" id="rjctRsnDiv"></div>
 																	</div>
 																	<div class="form-group row">
 																		<label
@@ -426,8 +437,7 @@ th {
 																			<input type="file" class="">
 																		</div>
 																	</div>
-																	<div class="row" id="adminButtonDiv">
-																	</div>
+																	<div class="row" id="adminButtonDiv"></div>
 																</div>
 															</div>
 														</div>
@@ -481,6 +491,5 @@ th {
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
 	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
-	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
 </body>
 </html>

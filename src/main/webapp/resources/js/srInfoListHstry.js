@@ -1,3 +1,5 @@
+/*작성자: 최은종*/
+
 function getSrHistoryList() {
 	var srNo = $("#srNo").val();
 	console.log("srHistoryList 글번호: " + srNo);

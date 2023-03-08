@@ -278,7 +278,7 @@
 							DMND_NO
 						FROM SR_INFORMATION
 						WHERE SR_NO=#{srNo}
-						)
+					)
 	</update>
 	
 	<!--  나의 할일 페이징 처리 :  고객/ 관리자의 각 상태별 목록 조회시 페이징 처리를 위한 count -->
