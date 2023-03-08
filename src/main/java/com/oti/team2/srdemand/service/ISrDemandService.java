@@ -28,13 +28,6 @@ public interface ISrDemandService {
 	public List<SrDemand> getSrDemandList(String custId, Pager pager);
 
 	/**
-	 * sr요청 이 결재 전 상태이면 수정하기 위해 기존 데이터 제공
-	 * 
-	 * @author 신정은
-	 */
-	public SrRequestDto getSrReuestDto(String dmndNo);
-
-	/**
 	 * sr요청 수정 진행
 	 * 
 	 * @author 신정은

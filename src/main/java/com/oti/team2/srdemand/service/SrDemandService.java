@@ -84,16 +84,6 @@ public class SrDemandService implements ISrDemandService {
 	}
 
 	/**
-	 * sr요청 이 결재 전 상태이면 수정하기 위해 기존 데이터 제공
-	 * 
-	 * @author 신정은
-	 */
-	public SrRequestDto getSrReuestDto(String dmndNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
 	 * sr요청 수정 진행
 	 * 
 	 * @author 신정은
@@ -181,7 +171,9 @@ public class SrDemandService implements ISrDemandService {
 	 * @return sr요청 진행사항 수정 : 진척률 수정 / 결제취소 처리 시에 사용 됨
 	 */
 	public void updateSrDemandStts(String srNo, int sttsCd) {
-		srDemandDao.updateSttsBySrNo(srNo, sttsCd);
+		log.info("결과 ~~~~~~~~~~~~  " + srNo + "       " + sttsCd);
+		int row = srDemandDao.updateSttsBySrNo(srNo, sttsCd);
+		log.info("updateSrDemandStts 결과 ~~~~~~~~~~~~  " + row);
 	}
 
 	/**

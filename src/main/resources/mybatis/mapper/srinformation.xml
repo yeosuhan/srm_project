@@ -185,4 +185,14 @@
           R.EMP_ID = #{srInfoFilter.empId}
       </if>
    </select>
+  
+   <!-- 개발취소시 sr정보 진행여부 false(0)으로 수정 -->
+   <update id="updatePrgrsBySrNo" parameterType="string">
+      UPDATE
+         SR_INFORMATION
+      SET
+         PRGRS_YN = '0'
+      WHERE
+         SR_NO = #{srNo}
+   </update>
 </mapper>
