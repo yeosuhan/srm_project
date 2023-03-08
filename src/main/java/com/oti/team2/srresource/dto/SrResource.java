@@ -18,4 +18,5 @@ public class SrResource {
 	private Date schdlBgngYmd;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date schdlEndYmd;
+	private Boolean firstResource;
 }

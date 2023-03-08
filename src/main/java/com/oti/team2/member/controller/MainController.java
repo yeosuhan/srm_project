@@ -37,16 +37,16 @@ public class MainController {
 		int atotal = 0;
 		if(role.equals(Auth.ROLE_CLIENT.toString())) {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName() , null, 0, 1);
-			rtotal = pager.getTotalRows();
+			rtotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName() , null, 2, 1).getTotalRows();
 			srList = srdemandService.getMytodoSrList(auth.getName(), null, 0, pager);
-			log.info("rtotal  : " + rtotal);
+			log.info("pager  : " + pager);
 		}else if(role.equals(Auth.ROLE_DEVELOPER.toString())) {
 			pager = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 3, 1);
 			dtotal = pager.getTotalRows();
 			srList = srdemandService.getMytodoSrListForDeveloper(auth.getName(), 3, pager);
 		} else {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(null, auth.getName(), 0, 1);
-			atotal = pager.getTotalRows();
+			atotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(null, auth.getName(), 0, 1).getTotalRows();
 			srList = srdemandService.getMytodoSrList(null, auth.getName(), 0, pager);
 		}
 		model.addAttribute("srList", srList);
