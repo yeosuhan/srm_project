@@ -22,6 +22,7 @@ public class SrdemandDetail {
 	private String rnk;
 	
 	//SR진척
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
 	private Date endYmd;
 	
 	// 부서

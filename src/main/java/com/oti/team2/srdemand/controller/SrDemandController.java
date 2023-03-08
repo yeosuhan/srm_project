@@ -118,7 +118,7 @@ public class SrDemandController {
 		} else {
 			sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 		}
-
+		log.info(sd);
 		model.addAttribute("sd", sd);
 		model.addAttribute("pager", pager);		
 		model.addAttribute("role", auth.getAuthorities().stream().findFirst().get().toString());

@@ -41,6 +41,8 @@ function getSrDemandDetail(dmNo) {
 			// 버튼 보이게 하기 
 			console.log(sttsCd);
 			if(sttsCd == 0) {
+				$("#companion").show();
+				$(".rjctRsn").show();
 				var userdivs = "<div class='col-6' style='text-align: right'>" +
 					"<button id='modbtn' class='btn btn-primary btn-round save center'>수정</button>" +
 					"<div class='btn btn-primary btn-round danger cancle' onclick='deleteSr()'>삭제</div> </div>";
@@ -54,7 +56,12 @@ function getSrDemandDetail(dmNo) {
 				var srRjctRsn = "<textarea rows='5' cols='5' class='form-control rjctRsn' id='srRjctRsn'></textarea>";
 				$("#rjctRsnDiv").html(srRjctRsn);
 				
-			} else {
+			} else if(sttsCd == 1) {
+				$("#companion").show();
+				$(".rjctRsn").show();
+			} else if(sttsCd > 1) {
+				$("#companion").hide();
+				$(".rjctRsn").hide();
 				var srRjctRsn = "<div class='form-control rjctRsn'>${sd.rjctRsn}</div>";
 				$("#rjctRsnDiv").html(srRjctRsn);
 			}

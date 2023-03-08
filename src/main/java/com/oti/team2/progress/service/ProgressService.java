@@ -65,18 +65,20 @@ public class ProgressService implements IProgressService {
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt == 80) {
 			// 진척률 + 진행상태
+			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt >= 81 && prgrsRt < 90) {
 			// 진척률만 업데이트
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt == 90) {
-			// 진척률 + 진행상태
+			// 진척률만 업데이트
+			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt >= 91 && prgrsRt < 100) {
 			// 진척률만 업데이트
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt == 100) {
+			// 진척률 + 진행상태
 			int sttsCd = 5;
 			log.info("sttsCd : " + sttsCd);
-			// 진척률 + 진행상태
 			srDemandService.updateSrDemandStts(srNo, sttsCd);
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		}

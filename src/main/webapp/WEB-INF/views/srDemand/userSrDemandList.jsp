@@ -89,6 +89,15 @@ th {
 	height: 50vh;
 	overflow-y: auto;
 }
+
+#srDemandDetail {
+	font-size: 12px;
+	padding-left: 0px;
+}
+
+#card_body, .form-control {
+	font-size: 12px;
+}
 </style>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -222,12 +231,14 @@ th {
 																							<label class="badge badge-primary">${srDemand.sttsNm}</label>
 																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
 																							<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
+																							<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
 																						</c:if></td>
 																					<td>${srDemand.dmndYmd}</td>
 																					<td>${srDemand.endYmd}</td>
 																				</tr>
 																			</c:forEach>
-																		</tbody> 
+																		</tbody>
 																	</table>
 																	<!-- 페이징 처리 -->
 																	<div class="d-flex justify-content-center">
@@ -277,87 +288,89 @@ th {
 																<div class="card_body" id="sddetail"
 																	style="font-size: 12px; padding-top: 20px;">
 																	<div class="form-group row">
-																		<div class="col-sm-6">
-																			<div class="col col-sm-4 font-weight-bold">SR번호</div>
-																			<div class="col col-sm-6">
-																				<div type="text" class="form-control dmndNo">${sd.dmndNo}</div>
-																			</div>
+																		<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
+																		<div class="col col-sm-9">
+																			<div type="text" class="form-control dmndNo"
+																				style="font-size: 12px;">${sd.dmndNo}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
-																		<div class="col col-sm-2 font-weight-bold">SR 제목</div>
+																		<div class="col col-sm-2 font-weight-bold px-0">SR
+																			제목</div>
 																		<div class="col col-sm-9">
 																			<div type="text" class="form-control ttl">${sd.ttl}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
-																		<div class="col col-sm-2 font-weight-bold">관련 근거</div>
-																		<div class="col col-sm-9">
+																		<div class="col-sm-2 font-weight-bold px-0">관련
+																			근거</div>
+																		<div class="col-sm-9">
 																			<div type="text" class="form-control relGrund">${sd.relGrund}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
-																		<div class="col-sm-6">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">시스템구분</div>
 																			<div class="col col-sm-6 sysNm">${sd.sysNm}</div>
 																		</div>
-																		<div class="col-sm-6">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">업무구분</div>
-																			<div class="col col-sm-4 taskSeNm">${sd.taskSeNm}</div>
+																			<div class="col col-sm-8 taskSeNm">${sd.taskSeNm}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
-																		<div class="col-sm-6">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">요청기관</div>
 																			<div class="col col-sm-6 instNm">${sd.instNm}</div>
 
 																		</div>
-																		<div class="col-sm-6">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">요청자</div>
-																			<div class="dropdown dropdown open clientNm">${sd.clientNm}</div>
+																			<div
+																				class="col col-sm-6 dropdown dropdown open clientNm">${sd.clientNm}</div>
 																		</div>
 																	</div>
 																	<div class="form-group row">
-																		<div class="col-sm-6">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">요청일</div>
 																			<div class="col col-sm-8 dmndYmd">${sd.dmndYmd}</div>
 																		</div>
-																		<div class="col-sm-6">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">완료요청일</div>
 																			<div class="col col-sm-8 cmptnDmndYmd">${sd.cmptnDmndYmd}</div>
 																		</div>
 																	</div>
-																	<div class="row mt-3">
-																		<div class="col-6">
+																	<div class="form-group row">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">개발
 																				담당자</div>
 																			<div class="col col-sm-6">
 																				<div type="text" class="form-control picNm">${sd.picNm}</div>
 																			</div>
 																		</div>
-																		<div class="col-6">
-																			<div class="col col-sm-4 font-weight-bold">개발
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 font-weight-bold px-0">개발
 																				부서</div>
-																			<div class="col col-sm-6">
+																			<div class="col col-sm-8">
 																				<div type="text" class="form-control deptNm">${sd.deptNm}</div>
 																			</div>
 																		</div>
 																	</div>
-																	<div class="row mt-3">
-																		<div class="col-6">
+																	<div class="form-group row">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">진행
 																				상태</div>
 																			<div class="col col-sm-6">
 																				<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
 																			</div>
 																		</div>
-																		<div class="col-6">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
 																			<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
 																		</div>
 																	</div>
-																	<div class="row mt-3">
-																		<div class="col-6">
+																	<div class="form-group row">
+																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">검토자
 																				이름</div>
 																			<div class="col col-sm-6">
@@ -365,19 +378,18 @@ th {
 																			</div>
 																		</div>
 																	</div>
-
-																	<div class="row mt-3 ml-1">
-																		<label
-																			class="col-sm-3 col-form-label px-0 font-weight-bold"
-																			style="line-height: 120px">반려 사유</label>
-																		<div class="col-sm-9 pl-0 ">
+																	<div class="form-group row">
+																		<label id="companion"
+																			class="col-sm-2 col-form-label px-0 font-weight-bold"
+																			style="line-height: 100px; font-size: 12px;">반려사유</label>
+																		<div class="col-sm-9">
 																			<input class="form-control rjctRsn"
-																				value="${sd.rjctRsn}"></input>
+																				style="height: 100px;" value="${sd.rjctRsn}"></input>
 																		</div>
 																	</div>
 																	<div class="form-group row">
 																		<label
-																			class="col-sm-2 col-form-label font-weight-bold"
+																			class="col-sm-2 col-form-label px-0 font-weight-bold"
 																			style="line-height: 100px; font-size: 12px;">SR
 																			내용</label>
 																		<div class="col-sm-9">
@@ -387,7 +399,7 @@ th {
 																	</div>
 																	<div class="form-group row">
 																		<label
-																			class="col-sm-3 col-form-label font-weight-bold"
+																			class="col-sm-2 col-form-label px-0 font-weight-bold"
 																			style="font-size: 12px;">첨부파일</label>
 																		<div class="col-sm-9">
 																			<input type="file" class="">
@@ -519,7 +531,7 @@ th {
 																		</thead>
 																		<tbody id="history">
 																		</tbody>
-																	</table>																														
+																	</table>
 																</div>
 															</div>
 														</div>
