@@ -110,6 +110,9 @@ th {
 .form-control {
 	font-size: inherit;
 }
+.col-xl-1 {
+	padding-top:0px;
+}
 </style>
 
 <body>
@@ -121,7 +124,6 @@ th {
 				<div class="pcoded-wrapper">
 					<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
 					<div class="pcoded-content">
-						<%@include file="/WEB-INF/views/fragments/pageHeader.jsp"%>
 						<div class="pcoded-inner-content pt-4">
 							<div class="main-body">
 								<div id="pageWrapper" class="page-wrapper">
@@ -196,13 +198,17 @@ th {
 												<div class="card">
 													<div class="card-header">
 														<h5>SR 진척 관리</h5>
+															<button class="btn btn-info" style="float: right; display: flex; align-items: center;">엑셀
+															다운로드</button>
+
 														<hr />
 														<form id="srInfoFilterForm"
 															action="${pageContext.request.contextPath}/srinformation/list"
 															onsubmit="return srSearch()">
 															<div class="col col-xl-1" style="width: 90px;">시스템
-																구분</div>
-															<div class="col col-xl-1" style="">
+																구분<br/><br/>업무 구분</div>
+																
+															<div class="col col-xl-2" style="padding:0px; width:200px;">
 																<div class="dropdown dropdown open">
 
 																	<select name="sysCd" id="sysCdFilter"
@@ -214,11 +220,9 @@ th {
 																	</select>
 
 																</div>
-															</div>
-															<div class="col col-xl-1" style="width: 80px;">업무
-																구분</div>
-															<div class="col col-xl-1" style="">
-																<div class="dropdown dropdown open">
+																<br/>
+																<div class="dropdown dropdown open" style="float:left;">
+																
 
 																	<select name="taskSeCd" id="taskSeCdFilter"
 																		onclick="getTaskSeCd()">
@@ -230,6 +234,7 @@ th {
 
 																</div>
 															</div>
+															
 															<div class="col col-xl-1" style="width: 80px;">진행
 																상태</div>
 															<div class="col col-xl-1" style="">
@@ -271,14 +276,12 @@ th {
 																</c:if>
 															</div>
 															<div class="col col-xl-1">
-																<button type="submit" class="btn btn-lg btn-info">
+																<button type="submit" class="btn btn-lg btn-info" style="float:right;">
 																	<i class="ti-search"></i>
 																</button>
 															</div>
 														</form>
-														<div class="col col-xl-1">
-															<button class="btn btn-info">엑셀 다운로드</button>
-														</div>
+														
 													</div>
 												</div>
 											</div>
