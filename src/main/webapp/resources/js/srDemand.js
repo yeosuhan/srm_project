@@ -20,6 +20,7 @@ function getSrDemandDetail(dmNo) {
 			$(".dmndYmd").text(res.dmndYmd);
 			$(".cmptnDmndYmd").text(res.cmptnDmndYmd);
 			$(".rjctRsn").text(res.rjctRsn);
+			$(".rjctRsn").val(res.rjctRsn);
 
 			$(".cn").text(res.cn);
 			$(".cn").val(res.cn);
@@ -39,7 +40,7 @@ function getSrDemandDetail(dmNo) {
 			$(".rvwrNm").text(res.rvwrNm);
 			
 			// 버튼 보이게 하기 
-			console.log(sttsCd);
+			console.log(sttsCd + " @");
 			if(sttsCd == 0) {
 				$("#companion").show();
 				$(".rjctRsn").show();
@@ -55,7 +56,6 @@ function getSrDemandDetail(dmNo) {
 				
 				var srRjctRsn = "<textarea rows='5' cols='5' class='form-control rjctRsn' id='srRjctRsn'></textarea>";
 				$("#rjctRsnDiv").html(srRjctRsn);
-				
 			} else if(sttsCd == 1) {
 				$("#companion").show();
 				$(".rjctRsn").show();

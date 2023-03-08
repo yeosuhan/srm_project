@@ -134,6 +134,7 @@ public class SrDemandController {
 	@GetMapping("/detail/{dmNo}")
 	public SrdemandDetail getSrDemandDetail(@PathVariable String dmNo) {
 		SrdemandDetail sd = srdemandService.getSrDemandDetail(dmNo);
+		log.info(sd);
 		return sd;
 	}
 

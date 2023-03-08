@@ -37,10 +37,8 @@ public class AlertController {
 	
 	@ResponseBody
 	@GetMapping("/connect")
-	public SseEmitter connect() {
-		SseEmitter emitter = new SseEmitter();
-		
-		return emitter;
+	public SseEmitter connect(Authentication auth) {
+		return alertService.connectSseEmitter(auth.getName());
 	}
 	
 }

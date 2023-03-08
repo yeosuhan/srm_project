@@ -312,7 +312,7 @@ th {
 																		style="font-size: 12;">
 																		<thead>
 																			<tr>
-																				<th style="width: 1px;">#</th>
+																				<th style="width: 1px;"></th>
 																				<th>SR번호</th>
 																				<th>시스템구분</th>
 																				<th>업무구분</th>
@@ -333,7 +333,18 @@ th {
 																						<td id="">${srlist.srNo}</td>
 																						<td>${srlist.sysNm}</td>
 																						<td>${srlist.taskSeNm}</td>
-																						<td>${srlist.ttl}</td>
+																						<c:choose>
+																							<c:when test="${fn:length(srlist.ttl) > 10}">
+																								<td class="text-center">
+																									<c:out value="${fn:substring(srlist.ttl,0,9)}"/>...
+																								</td>
+																							</c:when>
+																							<c:otherwise>
+																								<td class="text-center">
+																									<c:out value="${srlist.ttl}"/>
+																								</td>
+																							</c:otherwise>
+																						</c:choose>
 																						<td>${srlist.flnm}</td>
 																						<td>${srlist.bgngYmd}</td>
 																						<td>${srlist.endYmd}</td>
