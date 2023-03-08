@@ -110,8 +110,9 @@ th {
 .form-control {
 	font-size: inherit;
 }
+
 .col-xl-1 {
-	padding-top:0px;
+	padding-top: 0px;
 }
 </style>
 
@@ -198,21 +199,21 @@ th {
 												<div class="card">
 													<div class="card-header">
 														<h5>SR 진척 관리</h5>
-															<button class="btn btn-info" style="float: right; display: flex; align-items: center;">엑셀
-															다운로드</button>
-
 														<hr />
 														<form id="srInfoFilterForm"
 															action="${pageContext.request.contextPath}/srinformation/list"
 															onsubmit="return srSearch()">
-															<div class="col col-xl-1" style="width: 90px;">시스템
-																구분<br/><br/>업무 구분</div>
-																
-															<div class="col col-xl-2" style="padding:0px; width:200px;">
+															<div class="col col-xl-1" style="width: 90px;">
+																시스템 구분<br /> <br /> <br />업무 구분
+															</div>
+
+															<div class="col col-xl-2"
+																style="padding: 0px; width: 200px;">
 																<div class="dropdown dropdown open">
 
 																	<select name="sysCd" id="sysCdFilter"
-																		onclick="getSysCd()" onchange="removeTaskSeCd()">
+																		onclick="getSysCd()" onchange="removeTaskSeCd()"
+																		style="width: 200px;">
 																		<c:if test="${srInfoFilter.sysCd ne null}">
 																			<option value="${srInfoFilter.sysCd}">${sd.sysNm}<c:if
 																					test="${sd.sysNm eq null}">${srInfoFilter.sysCd}</c:if></option>
@@ -220,9 +221,9 @@ th {
 																	</select>
 
 																</div>
-																<br/>
-																<div class="dropdown dropdown open" style="float:left;">
-																
+																<br /> <br />
+																<div class="dropdown dropdown open" style="float: left;">
+
 
 																	<select name="taskSeCd" id="taskSeCdFilter"
 																		onclick="getTaskSeCd()">
@@ -234,7 +235,7 @@ th {
 
 																</div>
 															</div>
-															
+
 															<div class="col col-xl-1" style="width: 80px;">진행
 																상태</div>
 															<div class="col col-xl-1" style="">
@@ -254,18 +255,17 @@ th {
 																</div>
 															</div>
 															<div class="col col-xl-1"
-																style="width: 80px; padding-left: 20px;">SR 제목</div>
-															<div class="col col-xl-1" style="">
-																<input type="text" class="form-control" name="ttl"
-																	value="${srInfoFilter.ttl}">
+																style="width: 80px; padding-left: 20px;">
+																SR 제목 <br /> <br /> <br />SR 번호
 															</div>
-															<div class="col col-xl-1"
-																style="width: 80px; padding-left: 30px">SR 번호</div>
-															<div class="col col-xl-1" style="">
-																<input type="text" class="form-control" name="dmndNo"
+															<div class="col col-xl-2" style="">
+																<input type="text" class="form-control" name="ttl"
+																	value="${srInfoFilter.ttl}"> <br /> <input
+																	type="text" class="form-control" name="dmndNo"
 																	value="${srInfoFilter.dmndNo}">
 															</div>
-															<div class="col col-xl-1" style="padding-left: 30px">
+
+															<div class="col col-xl-2" style="padding-left: 30px">
 																내 처리건
 																<c:if test="${srInfoFilter.mySrOnly eq true}">
 																	<input type="checkbox" name="mySrOnly" value="true"
@@ -276,12 +276,18 @@ th {
 																</c:if>
 															</div>
 															<div class="col col-xl-1">
-																<button type="submit" class="btn btn-lg btn-info" style="float:right;">
+																<button type="submit" class="btn btn-lg btn-info"
+																	style="float: center;">
 																	<i class="ti-search"></i>
 																</button>
 															</div>
+															<div class="col col-xl-1">
+																<button class="btn btn-info"
+																	style="float: right; margin-left: 50px;">엑셀
+																	다운로드</button>
+															</div>
 														</form>
-														
+
 													</div>
 												</div>
 											</div>
