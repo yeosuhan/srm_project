@@ -13,6 +13,8 @@
 			<param-value>classpath:spring/*.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- SseEmitters 비동기 처리 -->
+		<async-supported>true</async-supported>
 	</servlet>
 
 	<servlet-mapping>
@@ -29,6 +31,8 @@
 			<param-name>encoding</param-name>
 			<param-value>utf-8</param-value>
 		</init-param>
+		<!-- SseEmitters 비동기 처리 -->
+		<async-supported>true</async-supported>
 	</filter>
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
@@ -40,6 +44,8 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
 		</filter-class>
+		<!-- SseEmitters 비동기 처리 -->
+		<async-supported>true</async-supported>
 	</filter>
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>

@@ -10,10 +10,12 @@ public interface IAlertService {
 
 	List<Alert> getAlertList(String rcvrId);
 
-	int sendToClient(String rcvrId, String srNo, String altType);
+	int sendToClient(String rcvrId, String dmndNo);
 
 	int sendToClient(String rcvrId, int hstryId, String altType);
 
 	SseEmitter connectSseEmitter(String memberId);
+
+	String checkAlert(Alert alert, String string);
 
 }

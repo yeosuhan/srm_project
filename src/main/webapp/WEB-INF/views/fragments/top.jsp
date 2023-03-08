@@ -45,12 +45,14 @@
 				</a></li>
 			</ul>
 			<ul class="nav-right">
+				<li ><button class="btn btn-sm btn-primary" onclick="getEventListener()">서버와 연결</button></li>
+				<li ><button class="btn btn-sm btn-primary" onclick="sendTestMessage()">메시지 전송 테스트</button></li>
 				<%-- 알림 --%>
 				<li class="header-notification" style="margin-top: 20px">
-					<a href="#!" class="waves-effect waves-light" onclick="refreshAlert()"> 
+					<a href="#!" class="waves-effect waves-light"> 
 						<i class="ti-bell"></i>
 						<h4>
-							<span class="badge bg-c-red"></span>
+							<span id="alertBadge" ></span>
 						</h4>
 					</a>
 					<div class="show-notification">

@@ -28,14 +28,28 @@ public class SseEmitters {
 			log.info("time out");
 			emitter.complete();
 		});
+		log.info(memberId+" 연결");
+		log.info(emitters.get(memberId));
 		return emitter;
 	}
-	/* 클라이언트와 연결된 emitter를 가져옴
+	
+	/* 클라이언트에게 알람을 전송
 	 * @author : 안한길
-	 * @param : memberId
-	 * @return : SseEmitter
+	 * @param : alert
+	 * 
 	 * */
-	SseEmitter getSseEmitter(String memberId) {
-		return this.emitters.get(memberId);
+	public void sendAlert(String memberId) {
+		SseEmitter emitter = this.emitters.get(memberId);
+		log.info(emitter);
+		String data = "new message";
+		try {
+			emitter.send(SseEmitter.event()
+					.name("alert")
+					.data(data)
+					);
+			log.info(memberId+" 에게 메시지 전송 완료");
+		}catch(Exception ex) {
+			emitter.completeWithError(ex);
+		}
 	}
 }
