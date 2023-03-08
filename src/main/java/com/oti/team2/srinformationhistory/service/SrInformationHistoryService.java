@@ -155,9 +155,9 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 
 					SrResource srResourceDto = new SrResource();
 					srResourceDto.setSrNo(srNo);
+					srInformationService.updatePrgrsBySrNo(srNo);
 					srResourceService.modifySrResource(srResourceDto);
 
-					srInformationService.updatePrgrsBySrNo(srNo);
 				}
 			}
 		}

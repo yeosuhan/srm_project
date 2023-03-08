@@ -37,4 +37,14 @@
 				(PRGRS_ID_SEQ.nextval + #{index}, #{srNo}, #{pname})
 		</foreach>
 	</insert>
+	<update id="startProgress" parameterType="string">
+		UPDATE
+			PROGRESS
+		SET
+			BGNG_YMD = SYSDATE
+		WHERE
+			SR_NO = #{srNo}
+		AND
+			PRGRS_SE_NM = '요구정의'
+	</update>
 </mapper>

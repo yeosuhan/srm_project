@@ -166,4 +166,14 @@ public class SrinformationService implements ISrinformationService {
 	public void updatePrgrsBySrNo(String srNo) {
 		srinformationDao.updatePrgrsBySrNo(srNo);
 	}
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-08
+	 * @return 개발취소시 계획종료일 SYSDATE
+	 */
+	public void updateEndYmdBySrNo(String srNo) {
+		srinformationDao.updateEndYmdBySrNo(srNo);
+	}
 }
+

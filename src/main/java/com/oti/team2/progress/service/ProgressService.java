@@ -39,14 +39,8 @@ public class ProgressService implements IProgressService {
 	 */
 	@Transactional
 	public void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo) {
-		if (prgrsRt < 9) {
+		if (prgrsRt <= 10) {
 			// 진척률만 업데이트
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt == 10) {
-			int sttsCd = 3;
-			// 진척률 + 진행상태
-			log.info("sttsCd : " + sttsCd);
-			srDemandService.updateSrDemandStts(srNo, sttsCd);
 			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 		} else if (prgrsRt >= 11 && prgrsRt < 40) {
 			// 진척률만 업데이트
@@ -94,5 +88,13 @@ public class ProgressService implements IProgressService {
 	 */
 	public void addProgress(String srNo, List<String> pNames) {
 		progressDao.insertProgress(srNo, pNames);
+	}
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-08
+	 * @return 자원 넣으면 요구사항(개발중)시작
+	 */
+	public void startProgress(String srNo) {
+		progressDao.startProgress(srNo);
 	}
 }

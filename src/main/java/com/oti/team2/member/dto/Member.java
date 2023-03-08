@@ -1,15 +1,14 @@
 package com.oti.team2.member.dto;
 
-import java.util.List;
-
 import com.oti.team2.department.dto.Department;
 import com.oti.team2.institution.dto.Institution;
 import com.oti.team2.jobgrade.dto.JobGrade;
-import com.oti.team2.srresource.dto.SrResourceOfDeveloper;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString(exclude="fileData")
 public class Member {
 	private String memberId;
 	private String pswd;

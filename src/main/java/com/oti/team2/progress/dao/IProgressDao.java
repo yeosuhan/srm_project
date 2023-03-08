@@ -29,5 +29,11 @@ public interface IProgressDao {
 	 * @author 신정은
 	 */
 	public int insertProgress(@Param("srNo") String srNo, @Param("pNames") List<String> pNames);
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-08
+	 * @return 자원 넣으면 요구사항(개발중)시작
+	 */
+	public void startProgress(@Param("srNo") String srNo);
 	
 }
