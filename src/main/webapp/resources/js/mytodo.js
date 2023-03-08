@@ -38,23 +38,33 @@ function moveTab(sttsCd) {
  * @author : 신정은
  */
 function makeSrRows(srList) {
+	var element = document.createElement('div');
+	element.innerHTML = '<sec:authentication property="principal.authorities[0]"/>';
+	var auth = element.innerHTML;
+	console.log("권한 : " + auth);
 	// 목록
 	var trs;
 	$('tbody').empty();
 	for (var idx = 0; idx < srList.length; idx++) {
 		var tr = "<tr> " 
-				+	"<td>" + srList[idx].dmndNo + "</td>"
-				+	"<td>" + srList[idx].sysNm + "</td>"
-				+	"<td>" + srList[idx].taskNm + "</td>"
-				+	"<td>" + srList[idx].ttl + "</td>"
-				+	"<td>" + srList[idx].picNm + "</td>"
-				+	"<td>" + srList[idx].cmptnDmndYmd + "</td>"
-				+	"<td>" + srList[idx].sttsNm + "</td>";
-		if(srList[idx].sttsCd > 1) {
+				+	"<td class='text-left'>" + srList[idx].dmndNo + "</td>"
+				+	"<td class='text-left'>" + srList[idx].sysNm + "</td>"
+				+	"<td class='text-left'>" + srList[idx].taskNm + "</td>"
+				+	"<td class='text-center'>" + srList[idx].ttl + "</td>"
+				+	"<td class='text-center'>" + srList[idx].picNm + "</td>"
+				+	"<td class='text-center'>" + srList[idx].cmptnDmndYmd + "</td>"
+				+	"<td class='text-center'>" + srList[idx].sttsNm + "</td>";
+		if((srList[idx].sttsCd > 1) && (srList[idx].rn != "null")) {
+			console.log("111111");
+			console.log("11  " + srList[idx].rnk);
+			console.log("11  " +srList[idx].sttsCd);
 			tr = tr 
-				+	"<td>" + srList[idx].rnk + "</td>"
+				+	"<td class='text-center'>" + srList[idx].rnk + "</td>"
 				+ 	"</tr>";
 		} else {
+			console.log("222222");
+			console.log("22  " + srList[idx].rnk);
+			console.log("22  " +srList[idx].sttsCd);
 			tr = tr 
 			+ 	"</tr>";
 		}
@@ -68,10 +78,7 @@ function makeSrRows(srList) {
 		$("#picNm" + idx).text(srList[idx].picNm);
 		$("#cmptnDmndYmd" + idx).text(srList[idx].cmptnDmndYmd);
 		$("#sttsNm" + idx).text(srList[idx].sttsNm);
-		$("#sttsNm" + idx).text(srList[idx].rnk);
-		
-		var test = $("#dmndNo" + idx).text();
-		console.log("test :  " + test);
+		$("#rnk" + idx).text(srList[idx].rnk);		
 	}
 	$('tbody').html(trs);
 }

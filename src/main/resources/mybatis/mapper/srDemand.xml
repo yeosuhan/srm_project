@@ -311,8 +311,10 @@
             sd.CMPTN_DMND_YMD as cmptnDmndYmd ,
             s.STTS_NM as sttsNm ,
             sd.STTS_CD as sttsCd ,
-            si.SR_NO as srNo,
-            si.rnk as rnk
+            si.SR_NO as srNo
+            <if test="picId != null">
+            	, si.rnk as rnk
+            </if>
 	    FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy, sr_information si, task tk
 	   	<where>
 			<if test="custId != null">

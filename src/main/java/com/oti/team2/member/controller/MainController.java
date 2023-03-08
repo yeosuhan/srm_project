@@ -32,9 +32,12 @@ public class MainController {
 		
 		List<MytodoSrListDto> srList = null;
 		Pager pager = null;
+		int rtotal = 0;
 		if(role.equals(Auth.ROLE_CLIENT.toString())) {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName() , null, 0, 1);
+			rtotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName() , null, 2, 1).getTotalRows();
 			srList = srdemandService.getMytodoSrList(auth.getName(), null, 0, pager);
+			log.info("rtotal  : " + rtotal);
 		}else if(role.equals(Auth.ROLE_DEVELOPER.toString())) {
 			pager = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 3, 1);
 			srList = srdemandService.getMytodoSrListForDeveloper(auth.getName(), 3, pager);
@@ -44,6 +47,8 @@ public class MainController {
 		}
 		model.addAttribute("srList", srList);
 		model.addAttribute("pager", pager);
+		model.addAttribute("atotal", pager.getTotalRows()); // 관리자, 개발자는 [요청]건의 총 수를 보여준다.
+		model.addAttribute("rtotal", rtotal); // 사용자는 [접수]건의 총 수를 보여준다.
 		log.info(srList);
 		return "member/my-todo";
 	}
