@@ -38,4 +38,5 @@ public interface ISrResourceService {
 	 * @return int
 	 * */
 	int modifySrResource(SrResource srResource);
+	int addFirstSrResource(SrResource srResource);
 }
