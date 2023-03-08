@@ -49,7 +49,7 @@
 				<li class="header-notification" style="margin-top: 20px">
 					<a href="#!" class="waves-effect waves-light" onclick="refreshAlert()"> 
 						<i class="ti-bell"></i>
-						<h4 class="d-flex">
+						<h4>
 							<span class="badge bg-c-red"></span>
 						</h4>
 					</a>

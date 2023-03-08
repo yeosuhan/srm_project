@@ -130,12 +130,17 @@ function showSchedule(){
  * */
 function addResource(){
    //var resourceForm = $("#addResourceForm").serialize();//serialize()로 생성되는 데이터는 json형식과 맞지 않는다.
+   var firstResource=false;
+   if($("#resourceTableRow tr").length==0){
+	   firstResource=true;
+   }
    var resourceForm ={
          "srNo":$("#addResourceForm #srNo").val(),
          "empId":$("#addResourceForm #empId").val(),
          "ptcptnRoleCd":$("#addResourceForm #ptcptnRoleCd").val(),
          "schdlBgngYmd":$("#addResourceForm #schdlBgngYmd").val(),
-         "schdlEndYmd":$("#addResourceForm #schdlEndYmd").val()
+         "schdlEndYmd":$("#addResourceForm #schdlEndYmd").val(),
+         "firstResource":firstResource
    }
    //console.log(resourceForm);
    $.ajax({

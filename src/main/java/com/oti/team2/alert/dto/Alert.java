@@ -8,12 +8,12 @@ import lombok.Data;
 
 @Data
 public class Alert {
-	private int altNo;
+	private Integer altNo;
 	private String altCn;
 	private String rcvrId;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
 	private Timestamp trsmYmd;
 	private String dmndNo;
-	private int hstryId;
+	private Integer hstryId;
 	private String altType;
 }
