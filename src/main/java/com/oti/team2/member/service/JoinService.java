@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.oti.team2.member.dao.IJoinDao;
+import com.oti.team2.member.dto.File;
 import com.oti.team2.member.dto.Join;
 
 import lombok.extern.log4j.Log4j2;
@@ -16,7 +17,12 @@ public class JoinService implements IJoinService{
 	@Autowired
 	IJoinDao joinDao;
 	
-	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-02
+	 * @return 회원가입시 비밀번호 암호화
+	 */
 	private String getEncodedPassword(String pswd) {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		return passwordEncoder.encode(pswd);
@@ -42,8 +48,20 @@ public class JoinService implements IJoinService{
 	 */
 	@Override
 	public Integer checkId(String memberId) {
+		log.info("서비스 들어옴");
 		int check = joinDao.checkId(memberId);
 		log.info("Service: " + check);
-		return 0;
+		return check;
+	}
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-06
+	 * @return 프로필 사진 추가
+	 */
+	@Override
+	public void addFile(File file, String memberId) {
+		joinDao.updateFile(file, memberId);
+		
 	}
 }

@@ -13,4 +13,5 @@ public class SrplanInformation {
 	private String endYmd;
 	private String rvwCn;
 	private String deptCd;
+	private String sttsCd;
 }

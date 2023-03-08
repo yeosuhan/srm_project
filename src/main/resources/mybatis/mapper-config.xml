@@ -15,6 +15,7 @@
 		<typeAlias type="com.oti.team2.srinformation.dto.Manager" alias="manager" />
 		<typeAlias type="com.oti.team2.member.dto.Member" alias="member"/>
 		<typeAlias type="com.oti.team2.member.dto.Join" alias="join"/>
+		<typeAlias type="com.oti.team2.member.dto.File" alias="file"/>
 		<typeAlias type="com.oti.team2.jobgrade.dto.JobGrade" alias="jobGrade"/>
 		<typeAlias type="com.oti.team2.department.dto.Department" alias="department"/>
 		<typeAlias type="com.oti.team2.member.dto.ProfileImg" alias="profileImg" />

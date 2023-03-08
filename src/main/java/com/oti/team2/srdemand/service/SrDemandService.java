@@ -1,6 +1,7 @@
 package com.oti.team2.srdemand.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -9,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oti.team2.progress.service.IProgressService;
 import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srdemand.dto.MytodoSrListDto;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
-import com.oti.team2.srinformation.service.SrinformationService;
+import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
@@ -28,7 +30,10 @@ public class SrDemandService implements ISrDemandService {
 	private ISrDemandDao srDemandDao;
 
 	@Autowired
-	private SrinformationService srinformationService;
+	private ISrinformationService srinformationService;
+
+	@Autowired
+	private IProgressService progressService;
 
 	/**
 	 * sr요청 등록
@@ -149,10 +154,22 @@ public class SrDemandService implements ISrDemandService {
 	@Transactional
 	public void getSrDemandApproval(SdApprovalDto sdApprovalDto) {
 		if (sdApprovalDto.getVal() == 1) {
+			// sr_information 데이터 삽입
 			srinformationService.insertInformation(sdApprovalDto);
+			log.info("sr no 가져와라 ~~~   " + sdApprovalDto.getSrNo());
+			// progress 데이터 삽입
+			List<String> pNames = new ArrayList<>();
+			pNames.add("요구정의");
+			pNames.add("분석/설계");
+			pNames.add("구현");
+			pNames.add("테스트");
+			pNames.add("반영요청");
+			pNames.add("운영반영");
+			progressService.addProgress(sdApprovalDto.getSrNo(), pNames);
+
 		}
-		srDemandDao.updateSttsCdAndRjctRsnByDmndNo(sdApprovalDto);
-		log.info(sdApprovalDto);
+		int row = srDemandDao.updateSttsCdAndRjctRsnByDmndNo(sdApprovalDto);
+		log.info(row);
 
 	}
 
@@ -170,6 +187,7 @@ public class SrDemandService implements ISrDemandService {
 	 * @author 여수한 작성일자 : 2023-02-28
 	 * @return sr요청 진행사항 수정 : 진척률 수정 / 결제취소 처리 시에 사용 됨
 	 */
+	@Transactional
 	public void updateSrDemandStts(String srNo, int sttsCd) {
 		log.info("결과 ~~~~~~~~~~~~  " + srNo + "       " + sttsCd);
 		int row = srDemandDao.updateSttsBySrNo(srNo, sttsCd);
@@ -189,7 +207,8 @@ public class SrDemandService implements ISrDemandService {
 	}
 
 	/*
-	 * 나의 할일 페이징 처리 :  고객/ 관리자의 각 상태별 목록 조회시 페이징 객체 생성
+	 * 나의 할일 페이징 처리 : 고객/ 관리자의 각 상태별 목록 조회시 페이징 객체 생성
+	 * 
 	 * @author 신정은
 	 */
 	public Pager getcountsByCustIdOrPicIdAndSttsCd(String custId, String picId, int sttsCd, int pageNo) {
@@ -197,9 +216,10 @@ public class SrDemandService implements ISrDemandService {
 		Pager pager = new Pager(totalRows, pageNo);
 		return pager;
 	}
-	
+
 	/**
 	 * 나의 할일 페이지 - 상태별, 고객/관리별 요청+진척 조회 목록 불러오기
+	 * 
 	 * @author 신정은
 	 */
 	public List<MytodoSrListDto> getMytodoSrList(String custId, String picId, int sttsCd, Pager pager) {
@@ -207,7 +227,8 @@ public class SrDemandService implements ISrDemandService {
 	}
 
 	/*
-	 * 나의 할일 페이징 처리 :  [고객/ 관리자]의 각 상태별 목록 조회시 페이징 객체 생성
+	 * 나의 할일 페이징 처리 : [고객/ 관리자]의 각 상태별 목록 조회시 페이징 객체 생성
+	 * 
 	 * @author 신정은
 	 */
 	public Pager getcountsByEmpIdAndSttsCd(String empId, int sttsCd, int pageNo) {
@@ -218,11 +239,11 @@ public class SrDemandService implements ISrDemandService {
 
 	/*
 	 * 나의 할일 페이지 - 상태별, [개발자]별 자원정보 + 요청 + 진척 조회 목록 불러오기
+	 * 
 	 * @author 신정은
 	 */
 	public List<MytodoSrListDto> getMytodoSrListForDeveloper(String empId, int sttsCd, Pager pager) {
 		return srDemandDao.selectByEmpIdAndSttsCd(empId, sttsCd, pager);
 	}
-
 
 }

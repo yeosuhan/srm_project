@@ -40,13 +40,18 @@ public interface ISrinformationService {
 	public void insertInformation(SdApprovalDto sdApprovalDt);
 
 	/**
+	 * 
 	 * @author 여수한 작성일자 : 2023-03-02
+	 * 
 	 * @return sr계획정보 부서의 담당자 조회
 	 */
 	Manager getFlnmByDeptCd(String deptCd);
 
 	/**
+	 * 
+	 * 
 	 * @author 여수한 작성일자 : 2023-03-02
+	 * 
 	 * @return sr계획정보 부서 변경
 	 */
 	void updateSrInfo(SrplanInformation srplanInfomation);
