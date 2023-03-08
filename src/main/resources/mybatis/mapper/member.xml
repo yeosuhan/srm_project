@@ -119,7 +119,7 @@
             , i.INST_ADDR
             , i.INST_DETAILADDR
             </if>
-            <if test="memberType=='ROLE_DEVELOPER'">
+            <if test="memberType=='ROLE_DEVELOPER' || memberType=='ROLE_ADMIN'">
                   ,
                   JBGD_NM ,
                   DEPT_NM 
@@ -129,11 +129,11 @@
             <if test="memberType == 'ROLE_CLIENT'">
                 INNER JOIN INSTITUTION i on m.INST_CD = i.INST_CD 
              </if>
-             <if test="memberType=='ROLE_DEVELOPER'">
+             <if test="memberType=='ROLE_DEVELOPER' || memberType=='ROLE_ADMIN'">
                , DEPARTMENTS d, JOB_GRADE j
              </if>
          WHERE 
-             <if test="memberType=='ROLE_DEVELOPER'">
+             <if test="memberType=='ROLE_DEVELOPER' || memberType=='ROLE_ADMIN'">
                 m.DEPT_CD = d.DEPT_CD and
                 m.JBGD_CD = j.JBGD_CD and
              </if> 

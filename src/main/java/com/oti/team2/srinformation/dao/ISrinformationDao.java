@@ -85,4 +85,12 @@ public interface ISrinformationDao {
 	 * @return 개발취소시 sr정보 진행여부 false(0)으로 수정
 	 */
 	public void updatePrgrsBySrNo(@Param("srNo") String srNo);
+	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-08
+	 * @return 개발취소시 계획종료일 SYSDATE
+	 */
+	public void updateEndYmdBySrNo(@Param("srNo") String srNo);
 }

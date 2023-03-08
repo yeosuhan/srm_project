@@ -49,9 +49,10 @@ public class MemberController {
 	 * @return
 	 */
 	@GetMapping("/myinfo")
-	public String getMember(HttpSession session, Model model) {
+	public String getMember(HttpSession session, Model model, Authentication auth) {
 		//session 에서 사용자 정보 가져오기
-		Member member = memberService.getMember("client1", Auth.ROLE_CLIENT.toString());
+		String role = auth.getAuthorities().stream().findFirst().get().toString();
+		Member member = memberService.getMember(auth.getName(), role);
 		log.info(member);
 		model.addAttribute("member", member);
 		return"member/myinfo";

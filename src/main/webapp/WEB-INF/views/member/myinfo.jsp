@@ -2,6 +2,7 @@
 	작성날짜 : 2023-02-20 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
@@ -67,20 +68,27 @@ label>img {
 													<div class="mb-2">
 														<div class="container">
 															<div class="image-upload" id="image-upload">
-																<form method="post" enctype="multipart/form-data" id="profile">
+																<form method="post" enctype="multipart/form-data"
+																	id="profile">
 																	<div class="button">
-																		<label for="chooseFile" id="newImg">
-																		<img id="defaultImage"
-																			src="/resources/oti_images/user.png"
-																			style="height: 400px; align-content: center; margin-top: 50px;">
+																		<label for="chooseFile" id="newImg"> <c:if
+																				test="${member.fileData eq null}">
+																				<img id="defaultImage"
+																					src="/resources/oti_images/user.png"
+																					style="height: 400px; align-content: center; margin-top: 50px;">
+																			</c:if> <c:if test="${member.fileData ne null}">
+																				<img id="defaultImage" src="${member.fileData}"
+																					style="height: 400px; align-content: center; margin-top: 50px;">
+																			</c:if>
 																		</label>
 																	</div>
 																	<input type="file" id="chooseFile" name="chooseFile"
-																		accept="image/*" onchange="loadFile(this, '${member.memberId}')">
+																		accept="image/*"
+																		onchange="loadFile(this, '${member.memberId}')">
 																</form>
 															</div>
-															<span style="color: gray" id="addImg">프로필
-																사진을 등록해주세요.</span>
+															<span style="color: gray" id="addImg">프로필 사진을
+																등록해주세요.</span>
 														</div>
 													</div>
 												</div>
@@ -127,33 +135,35 @@ label>img {
 															<label class="float-label">주소</label>
 														</div>
 
-														<div class="form-group form-default"
-															style="display: flex;">
-															<input type="text" name="instNm" class="form-control"
-																required="" style="width: 50%"
-																value="${member.institution.instNm}"> <label
-																class="float-label">기관 소속</label>
+														<c:if test="${member.memberType eq 'ROLE_CLIENT'}">
+															<div class="form-group form-default"
+																style="display: flex;">
+																<input type="text" name="instNm" class="form-control"
+																	required="" style="width: 50%"
+																	value="${member.institution.instNm}"> <label
+																	class="float-label">기관 소속</label>
 
-															<div class="btn-group dropright">
-																<a href="<c:url value='/institution/add'/>"
-																	type="button"
-																	class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
-																	기관 등록 </a>
-
+																<div class="btn-group dropright">
+																	<a href="<c:url value='/institution/add'/>"
+																		type="button"
+																		class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
+																		기관 등록 </a>
+																</div>
 															</div>
-														</div>
-														<!-- <div class="form-group form-default"
-															style="display: flex;">
-															<p class="col-sm-2 font-weight-bold">부서</p>
-															<div class="col-sm-10">신정은</div>
-														</div>
+														</c:if>
+														<c:if test="${member.memberType ne 'ROLE_CLIENT'}">
+															<div class="form-group form-default"
+																style="display: flex;">
+																<p class="col-sm-2 font-weight-bold">부서</p>
+																<div class="col-sm-10">${member.department.deptNm}</div>
+															</div>
 
-														<div class="form-group form-default"
-															style="display: flex;">
-															<p class="col-sm-2 font-weight-bold">직급</p>
-															<div class="col-sm-10">사원</div>
-														</div> -->
-
+															<div class="form-group form-default"
+																style="display: flex;">
+																<p class="col-sm-2 font-weight-bold">직급</p>
+																<div class="col-sm-10">${member.jobGrade.jbgdNm}</div>
+															</div>
+														</c:if>
 													</form>
 													<div class="d-flex">
 														<button type="submit" form="myinfo"
