@@ -20,6 +20,7 @@ function getSrDemandDetail(dmNo) {
 			$(".dmndYmd").text(res.dmndYmd);
 			$(".cmptnDmndYmd").text(res.cmptnDmndYmd);
 			$(".rjctRsn").text(res.rjctRsn);
+			$(".rjctRsn").val(res.rjctRsn);
 
 			$(".cn").text(res.cn);
 			$(".cn").val(res.cn);
@@ -55,7 +56,7 @@ function getSrDemandDetail(dmNo) {
 				$("#rjctRsnDiv").html(srRjctRsn);
 				
 			} else {
-				var srRjctRsn = "<div class='form-control rjctRsn'>${sd.rjctRsn}</div>";
+				var srRjctRsn = "<div class='form-control rjctRsn'>'" + ${sd.rjctRsn} + "'</div>";
 				$("#rjctRsnDiv").html(srRjctRsn);
 			}
 		}

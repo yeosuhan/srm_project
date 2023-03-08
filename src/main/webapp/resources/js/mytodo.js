@@ -9,7 +9,6 @@ function moveTab(sttsCd) {
 	
 	sttsCode = sttsCd;
 	var className = ".sttsCd" + sttsCd;
-	console.log(sttsCd);
 	$(className).addClass('active');
 	
 	$.ajax({
@@ -18,10 +17,7 @@ function moveTab(sttsCd) {
 		data : {
 			"sttsCd" : sttsCd 
 		},
-		success : function(res) {
-			console.log(res.srList);
-			console.log(res.pager);
-			
+		success : function(res) {		
 			// 목록
 			makeSrRows(res.srList);
 			
@@ -40,8 +36,6 @@ function moveTab(sttsCd) {
 function makeSrRows(srList) {
 	var element = document.createElement('div');
 	element.innerHTML = '<sec:authentication property="principal.authorities[0]"/>';
-	var auth = element.innerHTML;
-	console.log("권한 : " + auth);
 	// 목록
 	var trs;
 	$('tbody').empty();
@@ -49,22 +43,37 @@ function makeSrRows(srList) {
 		var tr = "<tr> " 
 				+	"<td class='text-left'>" + srList[idx].dmndNo + "</td>"
 				+	"<td class='text-left'>" + srList[idx].sysNm + "</td>"
-				+	"<td class='text-left'>" + srList[idx].taskNm + "</td>"
-				+	"<td class='text-center'>" + srList[idx].ttl + "</td>"
-				+	"<td class='text-center'>" + srList[idx].picNm + "</td>"
-				+	"<td class='text-center'>" + srList[idx].cmptnDmndYmd + "</td>"
-				+	"<td class='text-center'>" + srList[idx].sttsNm + "</td>";
+				+	"<td class='text-left'>" + srList[idx].taskNm + "</td>";
+		
+		var ttl = srList[idx].ttl;
+		if(ttl.length > 10) {
+			ttl = ttl.substr(0,10) + "...";
+		}
+			tr = tr +	"<td class='text-center'>" + ttl + "</td>";
+			
+		var picNm = srList[idx].picNm;
+		if(picNm !== "null") {
+			console.log("들어옴~~~~~~~~~~~~~~   " + picNm);
+			tr = tr +"<td class='text-center'>" + srList[idx].picNm + "</td>"
+			
+		}else if(picNm === "null") {
+			console.log("pic 널 들어옴~~~~~~~~~~~~~~   " + picNm);
+			tr = tr +"<td class='text-center'></td>";
+		}
+			tr = tr + "<td class='text-center'>" + srList[idx].cmptnDmndYmd + "</td>"					
+					+	"<td class='text-center'>" + srList[idx].sttsNm + "</td>";
+
 		if((srList[idx].sttsCd > 1) && (srList[idx].rn != "null")) {
-			console.log("111111");
+		/*	console.log("111111");
 			console.log("11  " + srList[idx].rnk);
-			console.log("11  " +srList[idx].sttsCd);
+			console.log("11  " +srList[idx].sttsCd);*/
 			tr = tr 
 				+	"<td class='text-center'>" + srList[idx].rnk + "</td>"
 				+ 	"</tr>";
 		} else {
-			console.log("222222");
+			/*console.log("222222");
 			console.log("22  " + srList[idx].rnk);
-			console.log("22  " +srList[idx].sttsCd);
+			console.log("22  " +srList[idx].sttsCd);*/
 			tr = tr 
 			+ 	"</tr>";
 		}
@@ -95,10 +104,7 @@ function mytodoPaging(url) {
 	$.ajax({
 		url : url,
 		type : "GET",
-		success : function(res) {
-			console.log(res.srList);
-			console.log(res.pager);
-			
+		success : function(res) {			
 			//목록
 			makeSrRows(res.srList);
 			

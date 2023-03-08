@@ -229,7 +229,6 @@ th {
 																				<th>관련시스템</th>
 																				<th style="width: 200px;">등록자</th>
 																				<th>소속</th>
-																				<th>검토자</th>
 																				<th>진행상태</th>
 																				<th>등록일</th>
 																				<th>완료예정일</th>
@@ -243,11 +242,21 @@ th {
 																					onclick="getSrDemandDetail('${srDemand.dmndNo}')">
 																					<th scope="row">${status.count}</th>
 																					<td>${srDemand.dmndNo}</td>
-																					<td>${srDemand.ttl}</td>
+																					<c:choose>
+																						<c:when test="${fn:length(srDemand.ttl) > 10}">
+																							<td id="ttl" class="text-center">
+																								<c:out value="${fn:substring(srDemand.ttl,0,9)}"/>...
+																							</td>
+																						</c:when>
+																						<c:otherwise>
+																							<td id="ttl" class="text-center">
+																								<c:out value="${srDemand.ttl}"/>
+																							</td>
+																						</c:otherwise>
+																					</c:choose>
 																					<td>${srDemand.sysNm}</td>
 																					<td>${srDemand.custNm}</td>
 																					<td>${srDemand.instNm}</td>
-																					<td>${srDemand.rvwrNm}</td>
 																					<td><c:if test="${(srDemand.sttsNm) eq '요청'}">
 																							<label class="badge badge-warning">${srDemand.sttsNm}</label>
 																						</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">

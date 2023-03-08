@@ -63,7 +63,7 @@
 															</sec:authorize>
 															<sec:authorize access="hasRole('ROLE_DEVELOPER')">
 																<li class="nav-item btn"><div class="nav-link sttsCd3 active" 
-																	onclick="moveTab(3)">개발중</div>
+																	onclick="moveTab(3)">개발중 <span class="badge badge-danger">${rtotal}</span></div>
 																	<div class="slide"></div></li>
 															</sec:authorize>
 															<sec:authorize access="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')">
