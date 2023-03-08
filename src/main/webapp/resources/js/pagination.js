@@ -10,7 +10,7 @@ function reloadPager(pager, url, onclickMethod) {
 	$('.pagination').empty();
 	var tags;
 	if(pager.startPageNo -1 > 0) {
-		tags = "<a class='pagination-newer' href='#' onclick='" + onclickMethod + "(\"" + url + (pager.startPageNo - 1) +"\")'>PREV</a>";
+		tags = "<a class='pagination-newer' href='#' onclick='" + onclickMethod + "(\"" + url + (pager.startPageNo - 1) +"\")'>\'" + PREV + "\'</a>";
 	}
 	for (var pageNo = pager.startPageNo; pageNo <= pager.endPageNo; pageNo++) {
 		if(pager.pageNo == pageNo){
