@@ -50,7 +50,7 @@
 					<a href="#!" class="waves-effect waves-light" onclick="refreshAlert()"> 
 						<i class="ti-bell"></i>
 						<h4 class="d-flex">
-							<span class="badge bg-c-red">1</span>
+							<span class="badge bg-c-red"></span>
 						</h4>
 					</a>
 					<div class="show-notification">
