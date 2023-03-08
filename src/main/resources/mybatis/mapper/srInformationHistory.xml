@@ -72,7 +72,7 @@
 		</if>
 		<if test='chgEndYmd!=null and hstryStts=="Y" or hstryStts=="N"'>
 			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, hstry_stts, chg_end_ymd, hstry_type, rqstr_id)
-			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{hstryStts}, #{chgEndYmd}, #{hstryType}, #{rqstrId})		
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, 'I', #{chgEndYmd}, #{hstryType}, #{rqstrId})		
 		</if>
 		<if test="chgEndYmd==null">
 			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, hstry_type, rqstr_id)
@@ -80,8 +80,8 @@
 		</if>
 	</insert>
 
-	<!-- History 수락여부 상태 업데이트 (미완)-->
-	<update id="updateHstryStts" parameterType="int">	
+	<!-- History 수락여부 상태 업데이트 -->
+	<update id="updateHstryStts" parameterType="map">	
 			update sr_information_history
 			set hstry_stts = #{hstryStts}
 			where hstry_id = #{hstryId} 

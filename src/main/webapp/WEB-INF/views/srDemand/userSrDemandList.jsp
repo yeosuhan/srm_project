@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
@@ -209,12 +210,24 @@ th {
 																					<td>${srDemand.custNm}</td>
 																					<td>${srDemand.instNm}</td>
 																					<td>${srDemand.rvwrNm}</td>
-																					<td>${srDemand.sttsNm}</td>
+																					<td><c:if test="${(srDemand.sttsNm) eq '요청'}">
+																							<label class="badge badge-warning">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
+																							<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
+																							<label class="badge badge-inverse-success">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
+																							<label class="badge badge-success">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
+																							<label class="badge badge-primary">${srDemand.sttsNm}</label>
+																						</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
+																							<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																						</c:if></td>
 																					<td>${srDemand.dmndYmd}</td>
 																					<td>${srDemand.endYmd}</td>
 																				</tr>
 																			</c:forEach>
-																		</tbody>
+																		</tbody> 
 																	</table>
 																	<!-- 페이징 처리 -->
 																	<div class="d-flex justify-content-center">
@@ -380,8 +393,7 @@ th {
 																			<input type="file" class="">
 																		</div>
 																	</div>
-																	<div class="row" id="userButtonDiv">
-																	</div>
+																	<div class="row" id="userButtonDiv"></div>
 																</div>
 																<%------------- 요청 수정 ----------------------------------- --%>
 																<div class="card_body" id="sdupdate"
@@ -531,9 +543,9 @@ th {
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 검색 -->
+	<script src="/resources/assets/js/srDemandList.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
-
 	<%-- 상세, 등록, 수정 --%>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>

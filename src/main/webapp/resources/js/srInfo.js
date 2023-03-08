@@ -14,13 +14,54 @@ function getDetail(dmndNo, srNo) {
 			$('#SRPlFlnm').show();
 			$('#changeMemberId').remove();
 			$('#changeManager').remove();
-			console.log(srNo);
-			console.log(detail);
+			
+			if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+				$(".col-3").hide();
+			} else {
+				$(".col-3").show();
+			}
+			
+			/*개발완료 or 개발취소일 때 계획정보*/
+			if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+				/*처리팀*/
+				$("#dept").hide();
+				$("#SRPlDeptNm").remove();
+				$("#deptDiv").append($("<input type='text' readonly class='form-control' id='SRPlDeptNm'>"));
+				/*계획 시작일*/
+				$("#SRPlBgngYmd").remove();
+				$("#bgngYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlBgngYmd'>"));
+				/*계획 종료일*/
+				$("#SRPlEndYmd").remove();
+				$("#endYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlEndYmd'>"));
+				/*검토내용*/
+				$("#SRPlRvwCn").remove();
+				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
+				/*버튼*/
+				$("#planBtn").hide();
+			} /*개발중*/
+			else {
+				/*처리팀*/
+				$("#dept").show();
+				$("#SRPlDeptNm").remove();
+				/*계획 시작일*/
+				$("#SRPlBgngYmd").remove();
+				$("#bgngYmdDiv").append($("<input type='text' class='form-control' id='SRPlBgngYmd'>"));
+				/*계획 종료일*/
+				$("#SRPlEndYmd").remove();
+				$("#endYmdDiv").append($("<input type='text' class='form-control' id='SRPlEndYmd'>"));
+				/*검토내용*/
+				$("#SRPlRvwCn").remove();
+				$("#rvwCnDiv").append($("<textarea rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
+				/*버튼*/
+				$("#planBtn").show();
+			}
 			$("#SRDSrNo").val(srNo);
 			$("#SRDDmndNo").val(detail.dd.dmndNo);
 			// 우선순위 데이터 
-			$("#SiRnk").empty();
-			$("#SiRnk").text(detail.dd.rnk);
+/*			$("#SiRnk").empty();*/
+			$("#SiRnk").val(detail.dd.rnk);
+			$("#SRDRvwrNm").val(detail.dd.rvwrNm);
+			$("#SRDClientNm").val(detail.dd.clientNm);
 			$("#SRDTitle").val(detail.dd.ttl);
 			$("#SRDRelgrund").val(detail.dd.relGrund);
 			$("#SRDSys").val(detail.dd.sysNm);
@@ -33,6 +74,7 @@ function getDetail(dmndNo, srNo) {
 			$("#SRDFile").val(detail.dd.fileNm);
 			$("#dept").val(detail.pi.deptCd).prop("selected", true);
 			
+			$("#SRPlDeptNm").val(detail.dd.deptNm);
 			$("#SRPlDmndNo").val(detail.pi.dmndNo);
 			$("#SRPlMemberId").val(detail.pi.memberId);
 			$("#SRPlFlnm").val(detail.pi.flnm);
@@ -59,12 +101,46 @@ function getPlan() {
 		url : '/srinformation/plan/' + $("#SRDDmndNo").val(),
 		type : 'GET',
 		success : function(plan) {
-			console.log("멤버 아이디:" + plan.memberId);
+			/*개발완료 or 개발취소*/
+			if(plan.sttsCd>=5) {
+				/*처리팀*/
+				$("#dept").hide();
+				$("#SRPlDeptNm").remove();
+				$("#deptDiv").append($("<input type='text' readonly class='form-control' id='SRPlDeptNm'>"));
+				/*계획 시작일*/
+				$("#SRPlBgngYmd").remove();
+				$("#bgngYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlBgngYmd'>"));
+				/*계획 종료일*/
+				$("#SRPlEndYmd").remove();
+				$("#endYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlEndYmd'>"));
+				/*검토내용*/
+				$("#SRPlRvwCn").remove();
+				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
+				/*버튼*/
+				$("#planBtn").hide();
+			} /*개발중*/
+			else {
+				/*처리팀*/
+				$("#dept").show();
+				$("#SRPlDeptNm").remove();
+				/*계획 시작일*/
+				$("#SRPlBgngYmd").remove();
+				$("#bgngYmdDiv").append($("<input type='text' class='form-control' id='SRPlBgngYmd'>"));
+				/*계획 종료일*/
+				$("#SRPlEndYmd").remove();
+				$("#endYmdDiv").append($("<input type='text' class='form-control' id='SRPlEndYmd'>"));
+				/*검토내용*/
+				$("#SRPlRvwCn").remove();
+				$("#rvwCnDiv").append($("<textarea rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
+				/*버튼*/
+				$("#planBtn").show();
+			}
 			$('#SRPlFlnm').show();
 			$('#changeMemberId').remove();
 			$('#changeManager').remove();
 			$("#dept").val(plan.deptCd).prop("selected", true);
 			$("#SRPlDmndNo").val(plan.dmndNo);
+			$("#SRPlDeptNm").val(plan.deptNm);
 			$("#SRPlMemberId").val(plan.memberId);
 			$("#SRPlFlnm").val(plan.flnm);
 			$("#SRPlBgngYmd").val(plan.bgngYmd);
@@ -107,20 +183,74 @@ function getProgress() {
 			Progress : $("#SRDSrNo").val()
 		},
 		success : function(Progress) {
+			let today = new Date();   
+			let year = today.getFullYear(); // 년도
+			let month = today.getMonth() + 1;  // 월
+			if(month<10) {
+				month = '0'+month;
+			}
+			let date = today.getDate();  // 날짜
+			if(date<10) {
+				date = '0'+date;
+			}
+			let day = today.getDay();  // 요일
+			today = (year + '-' + month + '-' + date);
+			console.log("오늘 : " + today);
+			if(Progress[0].endYmd==null || Progress[0].endYmd>=today) {
+				console.log("개발완료");
+			}
 			for (var i = 0; i < Progress.length; i++) {
-				$("#SRPgSrNo").val(Progress[i].srNo);
-				$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
-				$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
-				$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
-				$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
-				document.getElementById('SRPgEndYmd' + i).setAttribute("min",
-						$("#SRPgBgngYmd" + i).val());
+				if(Progress[i].endYmd==null || Progress[i].endYmd>=today) {
+					$("#btn"+i).show();
+					$("#SRPgBgngYmd"+i).remove();
+					$("#SRPgEndYmd"+i).remove();
+					$("#SRPgPrgrsRt"+i).remove();
+					$("#"+i+"bgngYmd").append($("<input type='date' id='SRPgBgngYmd"+i+"'>"));
+					$("#"+i+"endYmd").append($("<input type='date' id='SRPgEndYmd"+i+"'>"));
+					if(i==0) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='0' max='10'>"));
+					} else if(i==1) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='11' max='40'>"));
+					} else if(i==2) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='41' max='70'>"));
+					} else if(i==3) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='71' max='80'>"));
+					} else if(i==4) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='81' max='90'>"));
+					} else if(i==5) {
+						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='91' max='100'>"));
+					}
+					$("#SRPgSrNo").val(Progress[i].srNo);
+					$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
+					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
+					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
+					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
+					document.getElementById('SRPgEndYmd' + i).setAttribute("min", $("#SRPgBgngYmd" + i).val());
+				} else if(Progress[i].endYmd<today) {
+					$("#btn"+i).hide();
+					$("#SRPgBgngYmd"+i).remove();
+					$("#SRPgEndYmd"+i).remove();
+					$("#SRPgPrgrsRt"+i).remove();
+					$("#"+i+"bgngYmd").append($("<input type='text' readonly class='form-control' style='width:100px;margin:0 auto;' id='SRPgBgngYmd"+i+"'>"));
+					$("#"+i+"endYmd").append($("<input type='text' readonly class='form-control' style='width:100px; margin:0 auto;'id='SRPgEndYmd"+i+"'>"));
+					$("#"+i+"rt").append($("<input type='text' readonly class='form-control' id='SRPgPrgrsRt"+i+"'>"));
+					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
+					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
+					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
+				}	
+			}
+			if(Progress[5].endYmd<today) {
+				$("#delbtn").hide();
+				$("#addbtn").hide();
+			} else {
+				$("#delbtn").show();
+				$("#addbtn").show();
 			}
 		}
 	});
 }
 /* SR요청 진척률 수정 */
-function updateProgress1() {
+function updateProgress0() {
 	var bgngYmd = $("#SRPgBgngYmd0").val();
 	var prgrsId = $("#SRPgPrgrsId0").val();
 	var endYmd = $("#SRPgEndYmd0").val();
@@ -136,11 +266,10 @@ function updateProgress1() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			console.log("예~");
 		}
 	});
 }
-function updateProgress2() {
+function updateProgress1() {
 	var bgngYmd = $("#SRPgBgngYmd1").val();
 	var prgrsId = $("#SRPgPrgrsId1").val();
 	var endYmd = $("#SRPgEndYmd1").val();
@@ -159,7 +288,7 @@ function updateProgress2() {
 		}
 	});
 }
-function updateProgress3() {
+function updateProgress2() {
 	var bgngYmd = $("#SRPgBgngYmd2").val();
 	var prgrsId = $("#SRPgPrgrsId2").val();
 	var endYmd = $("#SRPgEndYmd2").val();
@@ -178,7 +307,7 @@ function updateProgress3() {
 		}
 	});
 }
-function updateProgress4() {
+function updateProgress3() {
 	var bgngYmd = $("#SRPgBgngYmd3").val();
 	var prgrsId = $("#SRPgPrgrsId3").val();
 	var endYmd = $("#SRPgEndYmd3").val();
@@ -197,7 +326,7 @@ function updateProgress4() {
 		}
 	});
 }
-function updateProgress5() {
+function updateProgress4() {
 	var bgngYmd = $("#SRPgBgngYmd4").val();
 	var prgrsId = $("#SRPgPrgrsId4").val();
 	var endYmd = $("#SRPgEndYmd4").val();
@@ -216,7 +345,7 @@ function updateProgress5() {
 		}
 	});
 }
-function updateProgress6() {
+function updateProgress5() {
 	var bgngYmd = $("#SRPgBgngYmd5").val();
 	var prgrsId = $("#SRPgPrgrsId5").val();
 	var endYmd = $("#SRPgEndYmd5").val();

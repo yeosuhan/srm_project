@@ -1,3 +1,5 @@
+/*작성자: 최은종*/
+
 var element = document.createElement('div');
 element.innerHTML = '<sec:authentication property="principal.authorities[0]"/>';
 var auth = element.innerHTML;
@@ -26,7 +28,6 @@ function getInfoHstryDetail(historyId) {
 					console.log(ArqstrId);
 					console.log(AhstryId);
 
-					$('.AhstryId').val(AhstryId);
 					$('.AsrNo').val(result.srNo);
 					$('.AinstNm').val(result.instNm);
 					$('.AsysNm').val(result.sysNm);
@@ -48,7 +49,8 @@ function getInfoHstryDetail(historyId) {
 							$('#HstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y">승인</label>'
-													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N">반려</label>');
+													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N">반려</label>' + '<input type="hidden" class="AhstryId" name="hstryId" value="">');
+							$('.AhstryId').val(AhstryId);
 							$('#footDiv')
 									.html(
 											'<button type="submit" form="historyDetailForm" formmethod="post" class="btn btn-info save center">등록</button>');
@@ -138,11 +140,13 @@ function getInfoHstryDetail(historyId) {
 							console.log(AhstryType);
 							$('#mheadDiv')
 									.html(
-											'<input type="button" class="btn btn-primary pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">' + '<input type="hidden" class="AhstryId" value="">' );
+											'<input type="button" class="btn btn-primary pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
+													+ '<input type="hidden" class="AhstryId" value="">');
 						} else if (auth == 'ROLE_ADMIN' && AhstryType != 'A') {
 							$('#mheadDiv')
 									.html(
-											'<input type="button" class="btn btn-primary pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">' +'<input type="hidden" class="AhstryId" value="">' );
+											'<input type="button" class="btn btn-primary pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
+													+ '<input type="hidden" class="AhstryId" value="">');
 						}
 					}
 				}
@@ -155,5 +159,3 @@ $(document).ready(function() {
 	});
 
 });
-
-

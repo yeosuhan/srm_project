@@ -40,18 +40,18 @@ public interface ISrInformationHistoryDao {
 	 */
 	public void insertSrHistory(SrInformationHistory srInformationHistory);
 	
-	 /**
-	    * SR처리 히스토리 상태 업데이트 메서드
-	    * 
-	    * @author 최은종
-	    */
-	   public void updateHstryStts(@Param("hstryId") int hstryId, @Param("hstryStts") String hstryStts);
+	/**
+	 * SR처리 히스토리 상태 업데이트 메서드
+	 * 
+	 * @author 최은종
+	 */
+	public void updateHstryStts(@Param("hstryId") int hstryId, @Param("hstryStts") String hstryStts);
 
-	   /**
-	    * SR처리 히스토리 수정 메서드
-	    * 
-	    * @author 최은종
-	    */
-	   public int updateHstry(SrInformationHistory srInformationHistory);
+	/**
+	 * SR처리 히스토리 수정 메서드
+	 * 
+	 * @author 최은종
+	 */
+	public int updateHstry(SrInformationHistory srInformationHistory);
 	
 }

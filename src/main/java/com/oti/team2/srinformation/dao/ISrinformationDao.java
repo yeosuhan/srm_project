@@ -20,11 +20,12 @@ public interface ISrinformationDao {
 	/**
 	 * 
 	 * @author 여수한 작성일자 : 2023-02-22
-	 * @param srInfoFilter 
-	 * @param pager 
+	 * @param srInfoFilter
+	 * @param pager
 	 * @return sr진척 상세 조회
 	 */
-	public List<SrinformationList> selectInfoAll(@Param("pager")Pager pager, @Param("srInfoFilter")SrInfoFilter srInfoFilter);
+	public List<SrinformationList> selectInfoAll(@Param("pager") Pager pager,
+			@Param("srInfoFilter") SrInfoFilter srInfoFilter);
 
 	/**
 	 * 
@@ -69,12 +70,19 @@ public interface ISrinformationDao {
 	 */
 	public void updateSrInfo(@Param("srplanInfomation") SrplanInformation srplanInfomation);
 
-	/* 페이징 처리를 위한 전체 행수 조회
-	 * @author 안한길
-	 * 작성일자 : 2023-03-06
+	/*
+	 * 페이징 처리를 위한 전체 행수 조회
+	 * 
+	 * @author 안한길 작성일자 : 2023-03-06
+	 * 
 	 * @return 결과 행수
 	 * */
-	public int selectTotalRow(@Param("page")int page,@Param("srInfoFilter") SrInfoFilter srInfoFilter);
+	public int selectTotalRow(@Param("page") int page, @Param("srInfoFilter") SrInfoFilter srInfoFilter);
 
-	public void updatePrgrsBySrNo(String srNo);
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-03
+	 * @return 개발취소시 sr정보 진행여부 false(0)으로 수정
+	 */
+	public void updatePrgrsBySrNo(@Param("srNo") String srNo);
 }

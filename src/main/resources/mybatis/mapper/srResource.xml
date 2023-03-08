@@ -62,50 +62,50 @@
 	<!-- 자원정보 수정 -->
 	<update id="updateSrResource" parameterType="srResource" >
 		UPDATE <if test="srSrc != null">SR_RESOURCES</if><!-- 자원정보를 수정 하는 경우: 투입일 종료일을 둘다 수정하면 종료일이 더 빠른 경우가 있을수 있음 -->
-			<if test="srNo != null"><!-- sr이 취소 되거나 예정일 보다 빨리 완료 되는 경우: srNO와 종료일을 srResource에 담아 파라미터로 전달 -->
-			(
-				SELECT 		
-					r.SCHDL_BGNG_YMD as SCHDL_BGNG_YMD,
-					r.SCHDL_END_YMD as SCHDL_END_YMD,
-					i.END_YMD as END_YMD
-				FROM
-					SR_RESOURCES r, SR_INFORMATION i
-				WHERE
-					r.SR_NO = i.SR_NO
-					AND r.SR_NO = #{srNo}
-					AND<![CDATA[SCHDL_END_YMD > END_YMD]]>
-			)
-			</if>
-			<set>
-				<if test="ptcptnRoleCd != null">
-					PTCPTN_ROLE_CD = #{ptcptnRoleCd},
-				</if>
-				<if test="schdlBgngYmd != null">
-					SCHDL_BGNG_YMD = #{schdlBgngYmd},
-				</if>
-				<if test="schdlEndYmd != null">
-					<if test="schdlBgngYmd == null">
-						SCHDL_BGNG_YMD = 
-							CASE 
-								<![CDATA[WHEN SCHDL_BGNG_YMD > #{schdlEndYmd} then #{schdlEndYmd}]]>
-								ELSE SCHDL_BGNG_YMD
-							END,
-					</if>
-					SCHDL_END_YMD = #{schdlEndYmd},
-				</if>
-				<if test="srNo != null and schdlEndYmd == null">
-					SCHDL_BGNG_YMD = 
-						CASE 
-							<![CDATA[WHEN SCHDL_BGNG_YMD > END_YMD then END_YMD]]>
-							ELSE SCHDL_BGNG_YMD
-						END,
-					SCHDL_END_YMD = END_YMD,
-				</if>
-			</set>
-		<where>
-			<if test="srSrc != null"> 
-				SR_SRC = #{srSrc} 
-			</if>
-		</where>
+         <if test="srNo != null"><!-- sr이 취소 되거나 예정일 보다 빨리 완료 되는 경우: srNO와 종료일을 srResource에 담아 파라미터로 전달 -->
+         (
+            SELECT       
+               r.SCHDL_BGNG_YMD as SCHDL_BGNG_YMD,
+               r.SCHDL_END_YMD as SCHDL_END_YMD,
+               i.END_YMD as END_YMD
+            FROM
+               SR_RESOURCES r, SR_INFORMATION i
+            WHERE
+               r.SR_NO = i.SR_NO
+               AND r.SR_NO = #{srNo}
+               AND<![CDATA[SCHDL_END_YMD > END_YMD]]>
+         )
+         </if>
+         <set>
+            <if test="ptcptnRoleCd != null">
+               PTCPTN_ROLE_CD = #{ptcptnRoleCd},
+            </if>
+            <if test="schdlBgngYmd != null">
+               SCHDL_BGNG_YMD = #{schdlBgngYmd},
+            </if>
+            <if test="schdlEndYmd != null">
+               <if test="schdlBgngYmd == null">
+                  SCHDL_BGNG_YMD = 
+                     CASE 
+                        <![CDATA[WHEN SCHDL_BGNG_YMD > #{schdlEndYmd} then #{schdlEndYmd}]]>
+                        ELSE SCHDL_BGNG_YMD
+                     END,
+               </if>
+               SCHDL_END_YMD = #{schdlEndYmd},
+            </if>
+            <if test="srNo != null and schdlEndYmd == null">
+               SCHDL_BGNG_YMD = 
+                  CASE 
+                     <![CDATA[WHEN SCHDL_BGNG_YMD > END_YMD then END_YMD]]>
+                     ELSE SCHDL_BGNG_YMD
+                  END,
+               SCHDL_END_YMD = END_YMD,
+            </if>
+         </set>
+      <where>
+         <if test="srSrc != null"> 
+            SR_SRC = #{srSrc} 
+         </if>
+      </where>
 	</update>
 </mapper>

@@ -1,3 +1,5 @@
+/*작성자: 최은종*/
+
 var element = document.createElement('div');
 element.innerHTML = '<sec:authentication property="principal.username"/>';
 var user = element.innerHTML;
@@ -19,7 +21,7 @@ function getHstryDetail(historyId) {
 					var appvRqstrId = result.rqstrId;
 					var appvHstryId = result.hstryId;
 					console.log(appvHstryStts);
-					$('.AsrNo').val(result.srNo);
+					$('.AsrNo').val(result.dmndNo);
 					$('.AinstNm').val(result.instNm);
 					$('.AsysNm').val(result.sysNm);
 					$('.AdeptNm').val(result.deptNm);
@@ -42,7 +44,8 @@ function getHstryDetail(historyId) {
 							$('#appvHstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="appvHstryStts1" type="radio" name="hstryStts" value="Y">승인</label>'
-													+ '<label><input id="appvHstryStts2" type="radio" name="hstryStts" value="N">반려</label>');
+													+ '<label><input id="appvHstryStts2" type="radio" name="hstryStts" value="N">반려</label>'+'<input type="hidden" class="AhstryId" name="hstryId" value="">');
+							$('.AhstryId').val(appvHstryId);
 							$('#footDivUSer')
 									.html(
 											'<button type="submit" form="approvalHistoryForm" formmethod="post" class="btn btn-info save center">등록</button>');
@@ -53,21 +56,19 @@ function getHstryDetail(historyId) {
 												$("input[name='hstryStts']")
 														.change(
 																function() {
-																	var hStatus = $(
+																	var cStatus = $(
 																			"input[name='hstryStts']:checked")
 																			.val();
 																	console
 																			.log("~~~~~~~~~~~~~");
-																	if (hStatus == 'Y') {
+																	if (cStatus == 'Y') {
 																		$(
 																				'.bHstryType')
-																				.val(
-																						'B');
-																	} else if (hStatus == 'N') {
+																				.val(appvHstryType);
+																	} else if (cStatus == 'N') {
 																		$(
 																				'.bHstryType')
-																				.val(
-																						'A');
+																				.val(appvHstryType);
 																	}
 																});
 											});

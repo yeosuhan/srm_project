@@ -1,10 +1,6 @@
 package com.oti.team2.srinformationhistory.controller;
 
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -110,58 +106,33 @@ public class SrInformationHistoryController {
 	}
 
 	/**
-	 * SR처리 히스토리 등록 메서드 (POST)
+	 * SR처리 히스토리 등록 & 요청결재 메서드 (POST)
 	 *
 	 * @author 최은종
 	 * @param SrInformationHistory 객체에 데이터를 입출력하기 위해 매개변수로 설정
 	 * @return 진척정보 페이지 리턴
 	 * @see 개발자(히스토리 등록), 관리자(히스토리 등록&등록 요청에 대한 수락상태 업데이트)
 	 */
-	   @PostMapping("/add")
-	   public String addSrInformationHistory(SrInformationHistory srInformationHistory, Authentication auth) {
-	      log.info("addSrInformationHistory 등록");
+	@PostMapping("/add")
+	public String addSrInformationHistory(SrInformationHistory srInformationHistory, Authentication auth) {
+		log.info("addSrInformationHistory 등록");
 
-	      String role = auth.getAuthorities().stream().findFirst().get().toString();
-	      log.info("role 조회" + role);
-	      
-	      if(role.equals("ROLE_CLIENT")) {
-	         String srNo = srInformationHistoryService.getSrNo(srInformationHistory.getSrNo());      
-	         srInformationHistory.setSrNo(srNo);
-	      } 
-	            
-	      srInformationHistoryService.addSrInformationHistory(srInformationHistory, role);
-	      log.info("컨트롤러" + srInformationHistory);
+		String role = auth.getAuthorities().stream().findFirst().get().toString();
+		log.info("role 조회" + role);
 
-	      if(!role.equals("ROLE_CLIENT")) {
-	         return "redirect:/srinformation/list";
-	      } else {
-	         return "redirect:/srdemand/list";
-	      }
+		if (role.equals("ROLE_CLIENT")) {
+			String srNo = srInformationHistoryService.getSrNo(srInformationHistory.getSrNo());
+			srInformationHistory.setSrNo(srNo);
+		}
 
-	   }
+		srInformationHistoryService.addSrInformationHistory(srInformationHistory, role);
+		log.info("컨트롤러" + srInformationHistory);
 
-	/**
-	 * SR처리 히스토리 상태 수정 메서드 (POST)
-	 *
-	 * @author 최은종
-	 * @param SrInformationHistory 객체에 데이터를 입출력하기 위해 매개변수로 설정
-	 * @return 진척정보 페이지 리턴
-	 * @see 고객(요청에 대한 수락상태 업데이트), 관리자
-	 */
-	@PostMapping("/approval")
-	public String updateHstryStts(SrInformationHistory srInformationHistory) {
-		log.info("Update");
-		log.info("srNo: " + srInformationHistory.getSrNo());
-		log.info("historyId: " + srInformationHistory.getHstryId());
-
-		HashMap<String, String> map = new HashMap<>();
-		map.put("hstryId", String.valueOf(srInformationHistory.getHstryId()));
-		map.put("srNo", srInformationHistory.getSrNo());
-		log.info("map: " + map);
-
-		srInformationHistoryService.updateHstryStts(map);
-
-		return "redirect:/srinformation/list";
+		if (!role.equals("ROLE_CLIENT")) {
+			return "redirect:/srinformation/list";
+		} else {
+			return "redirect:/srdemand/list";
+		}
 	}
 
 	/**
@@ -181,5 +152,4 @@ public class SrInformationHistoryController {
 		log.info("컨트롤러22: 수정");
 		return "redirect:/srinformation/list";
 	}
-
 }

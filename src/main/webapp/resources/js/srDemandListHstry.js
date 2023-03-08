@@ -1,3 +1,5 @@
+/*작성자: 최은종*/
+
 var element = document.createElement('div');
 element.innerHTML = '<sec:authentication property="principal.username"/>';
 var user = element.innerHTML;
@@ -24,7 +26,7 @@ function getHistoryList() {
 						} else if (result.srInformationHistory[i].hstryType == 'C') {
 							var historyType = "개발 취소";
 						}
-						if (result.srInformationHistory[i].chgEndYmd == 'C') {
+						if (result.srInformationHistory[i].hstryType == 'C') {
 							var historyChgEndYmd3 = "-";
 						} else {
 							var historyChgEndYmd1 = result.srInformationHistory[i].chgEndYmd;
