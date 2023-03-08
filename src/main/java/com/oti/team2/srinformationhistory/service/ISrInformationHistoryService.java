@@ -3,6 +3,8 @@ package com.oti.team2.srinformationhistory.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.util.pager.Pager;
@@ -33,13 +35,6 @@ public interface ISrInformationHistoryService {
 	public SrHistoryDetailDto getSrInformationHistory(int hstryId);
 
 	/**
-	 * SR처리 변경요청에 대한 수락 여부를 업데이트 하기 위한 메서드
-	 * 
-	 * @author 최은종
-	 */
-	public int updateSrInformationHistory();
-
-	/**
 	 * 히스토리 조회시 권한에 따라 sr요청번호를 다르게 보여 주기 위한 메서드
 	 * 
 	 * @author 최은종
@@ -47,19 +42,11 @@ public interface ISrInformationHistoryService {
 	public String getSrNo(String dmndNo);
 
 	/**
-	 * SR 히스토리 등록을 위한 insert 메서드
+	 * SR 히스토리 등록& 요청 결재를 위한 insert 메서드
 	 * 
 	 * @author 최은종
 	 */
-	public void addSrInformationHistory(SrInformationHistory srInformationHistory);
-
-	/**
-	 * SR 히스토리 상태 변경을 위한 update 메서드
-	 * 
-	 * @author 최은종
-	 * @param map
-	 */
-	public void updateHstryStts(HashMap<String, String> map);
+	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role);
 
 	/**
 	 * SR 히스토리 수정을 위한 update 메서드

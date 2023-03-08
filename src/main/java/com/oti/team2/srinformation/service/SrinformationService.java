@@ -24,26 +24,26 @@ import com.oti.team2.system.service.ISystemService;
 import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
+
 @Service
 @Log4j2
-public class SrinformationService implements ISrinformationService{
-	
+public class SrinformationService implements ISrinformationService {
+
 	@Autowired
 	ISrinformationDao srinformationDao;
-	
+
 	@Autowired
 	ISrDemandService srDemandService;
-	
+
 	@Autowired
 	ISystemService systemService;
-	
+
 	@Autowired
 	IDepartmentService departmentService;
-	
+
 	/**
 	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-02-22
+	 * @author 여수한 작성일자 : 2023-02-22
 	 * @return sr진척 목록 조회
 	 */
 	@Override
@@ -51,20 +51,20 @@ public class SrinformationService implements ISrinformationService{
 		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter);
 		return srlist;
 	}
-	
+
 	/**
 	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-02-23
+	 * @author 여수한 작성일자 : 2023-02-23
 	 * @return sr진척 계획정보 조회
 	 */
 	@Override
 	public SrplanInformation getPlan(String dmndNo) {
 		return srinformationDao.selectPlanByDmndNo(dmndNo);
 	}
-	
+
 	/**
 	 * 관리자의 sr요청 승인 시 -> srInformation에 insert하기
+	 * 
 	 * @author 신정은
 	 */
 	@Transactional
@@ -72,41 +72,42 @@ public class SrinformationService implements ISrinformationService{
 		// dmndNo, rnk, deptCd, picID
 		// 시스템 코드 가져오기
 		String sysCd = srDemandService.getSysCdByDmndNo(sdApprovalDto.getDmndNo());
-		
-		//시스템 코드로 담당 부서 지정
+
+		// 시스템 코드로 담당 부서 지정
 		String deptCd = systemService.getDeptCdBySysCd(sysCd);
-	
+
 		// 개발담당자pic_id : 해당부서의 담당자 가져오기
 		String picId = departmentService.getMngrNameByDeptCd(deptCd);
-				
+
 		// 코드 생성
 		String srNo = createSrNoCode(sysCd);
 		sdApprovalDto.setSrNo(srNo);
-		//srInformation에 insert 실행
-		SrInformationRequestDto srInfoDto = new SrInformationRequestDto(srNo, sdApprovalDto.getDmndNo(), deptCd, picId, 
+		// srInformation에 insert 실행
+		SrInformationRequestDto srInfoDto = new SrInformationRequestDto(srNo, sdApprovalDto.getDmndNo(), deptCd, picId,
 				sdApprovalDto.getRnk(), sdApprovalDto.getBgngYmd(), sdApprovalDto.getEndYmd());
 		log.info(srInfoDto);
 		int row = srinformationDao.insertSrInformatioin(srInfoDto);
 		log.info("결과 : " + row);
 	}
-	
+
 	/**
 	 * sr_no 코드 생성하기
+	 * 
 	 * @author 신정은
 	 */
 	private String createSrNoCode(String sysCd) {
-		Date now = Calendar.getInstance().getTime();       
+		Date now = Calendar.getInstance().getTime();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
 		String formatedNow = formatter.format(now);
 		String srNO = sysCd + "-" + formatedNow;
-		
+
 		// ex) WOR-2023 으로 시작하는 데이터의 수를 가져온다.
-		int count = srinformationDao.countBySrNo(srNO+"%");
+		int count = srinformationDao.countBySrNo(srNO + "%");
 		String number = (count + 1) + "";
-		while(number.length() < 4) {
-			number = "0"+number;
+		while (number.length() < 4) {
+			number = "0" + number;
 		}
-		
+
 		srNO += number;
 		log.info(srNO);
 		return srNO;
@@ -114,8 +115,7 @@ public class SrinformationService implements ISrinformationService{
 
 	/**
 	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-03-02
+	 * @author 여수한 작성일자 : 2023-03-02
 	 * @return 개발부서 조회
 	 */
 	@Override
@@ -126,30 +126,40 @@ public class SrinformationService implements ISrinformationService{
 
 	/**
 	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-03-02
+	 * @author 여수한 작성일자 : 2023-03-02
 	 * @return sr계획정보 부서의 담당자 조회
 	 */
 	@Override
 	public Manager getFlnmByDeptCd(String deptCd) {
 		return srinformationDao.selectFlnmByDeptCd(deptCd);
-		
+
 	}
-	
+
 	/**
 	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-03-02
+	 * @author 여수한 작성일자 : 2023-03-02
 	 * @return sr계획정보 부서 변경
 	 */
 	@Override
 	public void updateSrInfo(SrplanInformation srplanInfomation) {
 		srinformationDao.updateSrInfo(srplanInfomation);
 	}
+
+	/*
+	 * 페이징 처리를 위한 전체 행수 조회
+	 * 
+	 * @author 안한길 작성일자 : 2023-03-06
+	 * 
+	 * @return 결과 행수
+	 */
+	@Override
+	public int getTotalRow(int page, SrInfoFilter srInfoFilter) {
+		return srinformationDao.selectTotalRow(page, srInfoFilter);
+	}
+
 	/**
 	 * 
-	 * @author 여수한
-	 * 작성일자 : 2023-03-03
+	 * @author 여수한 작성일자 : 2023-03-03
 	 * @return 개발취소시 sr정보 진행여부 false(0)으로 수정
 	 */
 	@Override
@@ -165,13 +175,5 @@ public class SrinformationService implements ISrinformationService{
 	public void updateEndYmdBySrNo(String srNo) {
 		srinformationDao.updateEndYmdBySrNo(srNo);
 	}
-	/* 페이징 처리를 위한 전체 행수 조회
-	 * @author 안한길
-	 * 작성일자 : 2023-03-06
-	 * @return 결과 행수
-	 * */
-	@Override
-	public int getTotalRow(int page, SrInfoFilter srInfoFilter) {
-		return srinformationDao.selectTotalRow(page,srInfoFilter);
-	}
 }
+

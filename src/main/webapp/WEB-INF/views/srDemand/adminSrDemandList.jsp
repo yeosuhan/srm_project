@@ -491,6 +491,5 @@ th {
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
 	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
-	<%@include file="/WEB-INF/views/history/addHistoryModalDetail.jsp"%>
 </body>
 </html>

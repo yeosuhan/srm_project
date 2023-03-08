@@ -31,7 +31,7 @@ public class SrDemandService implements ISrDemandService {
 
 	@Autowired
 	private ISrinformationService srinformationService;
-	
+
 	@Autowired
 	private IProgressService progressService;
 
@@ -164,9 +164,9 @@ public class SrDemandService implements ISrDemandService {
 			pNames.add("구현");
 			pNames.add("테스트");
 			pNames.add("반영요청");
-			pNames.add("운영반영");		
+			pNames.add("운영반영");
 			progressService.addProgress(sdApprovalDto.getSrNo(), pNames);
-			
+
 		}
 		int row = srDemandDao.updateSttsCdAndRjctRsnByDmndNo(sdApprovalDto);
 		log.info(row);
@@ -189,9 +189,9 @@ public class SrDemandService implements ISrDemandService {
 	 */
 	@Transactional
 	public void updateSrDemandStts(String srNo, int sttsCd) {
-		log.info("srdemand에서의 sttsCd : " + sttsCd);
-		log.info("srdemand에서의 srNo : " + srNo);
-		srDemandDao.updateSttsBySrNo(srNo, sttsCd);
+		log.info("결과 ~~~~~~~~~~~~  " + srNo + "       " + sttsCd);
+		int row = srDemandDao.updateSttsBySrNo(srNo, sttsCd);
+		log.info("updateSrDemandStts 결과 ~~~~~~~~~~~~  " + row);
 	}
 
 	/**
@@ -207,7 +207,8 @@ public class SrDemandService implements ISrDemandService {
 	}
 
 	/*
-	 * 나의 할일 페이징 처리 :  고객/ 관리자의 각 상태별 목록 조회시 페이징 객체 생성
+	 * 나의 할일 페이징 처리 : 고객/ 관리자의 각 상태별 목록 조회시 페이징 객체 생성
+	 * 
 	 * @author 신정은
 	 */
 	public Pager getcountsByCustIdOrPicIdAndSttsCd(String custId, String picId, int sttsCd, int pageNo) {
@@ -215,9 +216,10 @@ public class SrDemandService implements ISrDemandService {
 		Pager pager = new Pager(totalRows, pageNo);
 		return pager;
 	}
-	
+
 	/**
 	 * 나의 할일 페이지 - 상태별, 고객/관리별 요청+진척 조회 목록 불러오기
+	 * 
 	 * @author 신정은
 	 */
 	public List<MytodoSrListDto> getMytodoSrList(String custId, String picId, int sttsCd, Pager pager) {
@@ -225,7 +227,8 @@ public class SrDemandService implements ISrDemandService {
 	}
 
 	/*
-	 * 나의 할일 페이징 처리 :  [고객/ 관리자]의 각 상태별 목록 조회시 페이징 객체 생성
+	 * 나의 할일 페이징 처리 : [고객/ 관리자]의 각 상태별 목록 조회시 페이징 객체 생성
+	 * 
 	 * @author 신정은
 	 */
 	public Pager getcountsByEmpIdAndSttsCd(String empId, int sttsCd, int pageNo) {
@@ -236,11 +239,11 @@ public class SrDemandService implements ISrDemandService {
 
 	/*
 	 * 나의 할일 페이지 - 상태별, [개발자]별 자원정보 + 요청 + 진척 조회 목록 불러오기
+	 * 
 	 * @author 신정은
 	 */
 	public List<MytodoSrListDto> getMytodoSrListForDeveloper(String empId, int sttsCd, Pager pager) {
 		return srDemandDao.selectByEmpIdAndSttsCd(empId, sttsCd, pager);
 	}
-
 
 }

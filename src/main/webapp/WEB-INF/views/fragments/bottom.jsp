@@ -22,3 +22,4 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/script.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/getContextPath.js"></script>
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp"/> 
+<script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
