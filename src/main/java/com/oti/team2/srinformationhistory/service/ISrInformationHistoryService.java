@@ -18,7 +18,7 @@ public interface ISrInformationHistoryService {
 	 */
 	public List<SrInformationHistory> getSrInformationHistoryList(Pager pager, String srNo);
 
-	public List<SrInformationHistory> getSrInformationHistoryListForClient(Pager pager, String srNo, String role);
+	public List<SrInformationHistory> getSrInformationHistoryListForClient(String srNo, Pager pager, String role);
 
 	/**
 	 * SR처리 히스토리 목록 페이징을 위한 메서드

@@ -17,7 +17,7 @@ public interface ISrInformationHistoryDao {
 	 */
 	public List<SrInformationHistory> selectBySrNo(@Param("pager") Pager pager, @Param("srNo") String srNo);
 	
-	public List<SrInformationHistory> selectForClientBySrNo(@Param("pager") Pager pager, @Param("srNo") String srNo);
+	public List<SrInformationHistory> selectForClientBySrNo(@Param("srNo") String srNo, @Param("pager") Pager pager);
 
 	/**
 	 * SR처리 히스토리 목록 페이징을 위한 메서드

@@ -20,6 +20,8 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/srInfoListHstry.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 
 <script>
 	
@@ -528,7 +530,7 @@ th {
 															class="nav-link" data-toggle="tab" href="#messages1"
 															role="tab">SR 진척율</a>
 															<div class="slide"></div></li>
-														<li class="nav-item" onclick="getSrHistoryList()"><a
+														<li class="nav-item" onclick="empHstry()"><a
 															class="nav-link" data-toggle="tab" href="#srInfhistory"
 															role="tab">SR 히스토리</a>
 															<div class="slide"></div></li>
@@ -1003,6 +1005,11 @@ th {
 																		<tbody id="srhistory1">
 																		</tbody>
 																	</table>
+																	<%-- 페이징 --%>
+																	<%-- 페이징 --%>
+																	<div class="hstryPager-container">
+																		<div class="hstryPager"></div>
+																	</div>
 																</div>
 															</div>
 														</div>

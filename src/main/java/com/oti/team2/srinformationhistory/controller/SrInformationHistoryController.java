@@ -38,12 +38,12 @@ public class SrInformationHistoryController {
 	 */
 	@ResponseBody
 	@GetMapping("/list")
-	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
-			@RequestParam String dmndNo, Authentication auth) {
+	public SrHistoryListDto getSrInformationHistoryList(@RequestParam String dmndNo, @RequestParam(defaultValue = "1") int pageNo, Authentication auth) {
 		log.info("srInformationHistoryList 조회");
 
 		int totalRows = srInformationHistoryService.getTotalRows();
-		Pager pager = new Pager(totalRows, pageNO);
+		Pager pager = new Pager(totalRows, pageNo);
+		log.info("pageNo 조회" + pageNo);
 
 		String srNo = srInformationHistoryService.getSrNo(dmndNo);
 		log.info("dmndNo 조회" + dmndNo);
@@ -52,7 +52,7 @@ public class SrInformationHistoryController {
 		log.info("role 조회" + role);
 
 		List<SrInformationHistory> srInformationHistory = srInformationHistoryService
-				.getSrInformationHistoryListForClient(pager, srNo, role);
+				.getSrInformationHistoryListForClient(srNo, pager, role);
 
 		log.info("srInformationHistoryList 조회" + srInformationHistory);
 		log.info("srNo 조회" + srNo);
@@ -66,12 +66,12 @@ public class SrInformationHistoryController {
 
 	@ResponseBody
 	@GetMapping("/emp/list")
-	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNO,
+	public SrHistoryListDto getSrInformationHistoryList(@RequestParam(defaultValue = "1") int pageNo,
 			@RequestParam String srNo) {
 		log.info("srInformationHistoryList 조회");
 
 		int totalRows = srInformationHistoryService.getTotalRows();
-		Pager pager = new Pager(totalRows, pageNO);
+		Pager pager = new Pager(totalRows, pageNo);
 
 		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryList(pager,
 				srNo);

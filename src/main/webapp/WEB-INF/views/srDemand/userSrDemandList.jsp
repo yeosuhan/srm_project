@@ -8,6 +8,8 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 </head>
 
 <script
@@ -227,7 +229,7 @@ th {
 																					<td>${srDemand.endYmd}</td>
 																				</tr>
 																			</c:forEach>
-																		</tbody> 
+																		</tbody>
 																	</table>
 																	<!-- 페이징 처리 -->
 																	<div class="d-flex justify-content-center">
@@ -260,12 +262,12 @@ th {
 													</div>
 													<ul class="nav nav-tabs  md-tabs" role="tablist">
 														<li class="nav-item"><a class="nav-link active"
-															data-toggle="tab" href="#srDemandDetail" role="tab">SR요청
-																상세정보</a>
+															data-toggle="tab" href="#srDemandDetail" role="tab"
+															id="srDmndDetailTab">SR요청 상세정보</a>
 															<div class="slide"></div></li>
 														<li class="nav-item"><a class="nav-link"
-															data-toggle="tab" href="#srHistory"
-															onclick="getHistoryList()" role="tab">SR 히스토리</a>
+															data-toggle="tab" href="#srHistory" onclick="userHstry()"
+															role="tab">SR 히스토리</a>
 															<div class="slide"></div></li>
 													</ul>
 
@@ -512,14 +514,18 @@ th {
 																		<thead>
 																			<tr>
 																				<th style="width: 1px;">순번</th>
-																				<th>요청 종류</th>
+																				<th>요청유형</th>
 																				<th>변경될 완료일</th>
 																				<th>승인여부</th>
 																			</tr>
 																		</thead>
 																		<tbody id="history">
 																		</tbody>
-																	</table>																														
+																	</table>
+																	<%-- 페이징 --%>
+																	<div class="hstryPager-container">
+																		<div class="hstryPager"></div>
+																	</div>
 																</div>
 															</div>
 														</div>

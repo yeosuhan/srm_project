@@ -53,9 +53,8 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	 * @author 최은종
 	 */
 	@Override
-	public List<SrInformationHistory> getSrInformationHistoryListForClient(Pager pager, String srNo, String role) {
-		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectForClientBySrNo(pager,
-				srNo);
+	public List<SrInformationHistory> getSrInformationHistoryListForClient(String srNo, Pager pager, String role) {
+		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectForClientBySrNo(srNo, pager);
 		return srInformationHistoryList;
 	}
 

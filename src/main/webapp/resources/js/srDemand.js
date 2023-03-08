@@ -38,6 +38,7 @@ function getSrDemandDetail(dmNo) {
 			$(".clientNm").text(res.clientNm);
 			$(".rvwrNm").text(res.rvwrNm);
 			
+			$("#srDmndDetailTab").tab("show");
 			// 버튼 보이게 하기 
 			console.log(sttsCd);
 			if(sttsCd == 0) {
