@@ -9,7 +9,6 @@ function moveTab(sttsCd) {
 	
 	sttsCode = sttsCd;
 	var className = ".sttsCd" + sttsCd;
-	console.log(sttsCd);
 	$(className).addClass('active');
 	
 	$.ajax({
@@ -18,10 +17,7 @@ function moveTab(sttsCd) {
 		data : {
 			"sttsCd" : sttsCd 
 		},
-		success : function(res) {
-			console.log(res.srList);
-			console.log(res.pager);
-			
+		success : function(res) {		
 			// 목록
 			makeSrRows(res.srList);
 			
@@ -38,23 +34,46 @@ function moveTab(sttsCd) {
  * @author : 신정은
  */
 function makeSrRows(srList) {
+	var element = document.createElement('div');
+	element.innerHTML = '<sec:authentication property="principal.authorities[0]"/>';
 	// 목록
 	var trs;
 	$('tbody').empty();
 	for (var idx = 0; idx < srList.length; idx++) {
 		var tr = "<tr> " 
-				+	"<td>" + srList[idx].dmndNo + "</td>"
-				+	"<td>" + srList[idx].sysNm + "</td>"
-				+	"<td>" + srList[idx].taskNm + "</td>"
-				+	"<td>" + srList[idx].ttl + "</td>"
-				+	"<td>" + srList[idx].picNm + "</td>"
-				+	"<td>" + srList[idx].cmptnDmndYmd + "</td>"
-				+	"<td>" + srList[idx].sttsNm + "</td>";
-		if(srList[idx].sttsCd > 1) {
+				+	"<td class='text-left'>" + srList[idx].dmndNo + "</td>"
+				+	"<td class='text-left'>" + srList[idx].sysNm + "</td>"
+				+	"<td class='text-left'>" + srList[idx].taskNm + "</td>";
+		
+		var ttl = srList[idx].ttl;
+		if(ttl.length > 10) {
+			ttl = ttl.substr(0,10) + "...";
+		}
+			tr = tr +	"<td class='text-center'>" + ttl + "</td>";
+			
+		var picNm = srList[idx].picNm;
+		if(picNm !== "null") {
+			console.log("들어옴~~~~~~~~~~~~~~   " + picNm);
+			tr = tr +"<td class='text-center'>" + srList[idx].picNm + "</td>"
+			
+		}else if(picNm === "null") {
+			console.log("pic 널 들어옴~~~~~~~~~~~~~~   " + picNm);
+			tr = tr +"<td class='text-center'></td>";
+		}
+			tr = tr + "<td class='text-center'>" + srList[idx].cmptnDmndYmd + "</td>"					
+					+	"<td class='text-center'>" + srList[idx].sttsNm + "</td>";
+
+		if((srList[idx].sttsCd > 1) && (srList[idx].rn != "null")) {
+		/*	console.log("111111");
+			console.log("11  " + srList[idx].rnk);
+			console.log("11  " +srList[idx].sttsCd);*/
 			tr = tr 
-				+	"<td>" + srList[idx].rnk + "</td>"
+				+	"<td class='text-center'>" + srList[idx].rnk + "</td>"
 				+ 	"</tr>";
 		} else {
+			/*console.log("222222");
+			console.log("22  " + srList[idx].rnk);
+			console.log("22  " +srList[idx].sttsCd);*/
 			tr = tr 
 			+ 	"</tr>";
 		}
@@ -68,10 +87,7 @@ function makeSrRows(srList) {
 		$("#picNm" + idx).text(srList[idx].picNm);
 		$("#cmptnDmndYmd" + idx).text(srList[idx].cmptnDmndYmd);
 		$("#sttsNm" + idx).text(srList[idx].sttsNm);
-		$("#sttsNm" + idx).text(srList[idx].rnk);
-		
-		var test = $("#dmndNo" + idx).text();
-		console.log("test :  " + test);
+		$("#rnk" + idx).text(srList[idx].rnk);		
 	}
 	$('tbody').html(trs);
 }
@@ -88,10 +104,7 @@ function mytodoPaging(url) {
 	$.ajax({
 		url : url,
 		type : "GET",
-		success : function(res) {
-			console.log(res.srList);
-			console.log(res.pager);
-			
+		success : function(res) {			
 			//목록
 			makeSrRows(res.srList);
 			
