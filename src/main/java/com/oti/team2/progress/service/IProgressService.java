@@ -26,4 +26,14 @@ public interface IProgressService {
 	 * @author 신정은
 	 */
 	void addProgress(String srNo, List<String> pNames);
+	/**
+	 * 반영요청 진척률 조회
+	 * @author 여수한
+	 */
+	String getPrgrsRt(String dmNo);
+	/**
+	 * 고객이 반영요청 수락하면 운영반영 넣기
+	 * @author 여수한
+	 */
+	void endProgress(String dmNo);
 }

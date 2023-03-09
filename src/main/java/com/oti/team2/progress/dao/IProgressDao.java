@@ -35,5 +35,21 @@ public interface IProgressDao {
 	 * @return 자원 넣으면 요구사항(개발중)시작
 	 */
 	public void startProgress(@Param("srNo") String srNo);
+	/**
+	 * 반영요청 진척률 조회
+	 * @author 여수한
+	 */
+	public String selectPrgrsRt(@Param("dmNo") String dmNo);
+	/**
+	 * 반영요청 보내기
+	 * 
+	 * @author 여수한
+	 */
+	public void updateProgressYmd(@Param("srNo") String srNo);
+	/**
+	 * 고객이 반영요청 수락하면 운영반영 넣기
+	 * @author 여수한
+	 */
+	public void updateEndYmd(@Param("dmNo")String dmNo);
 	
 }

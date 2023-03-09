@@ -114,8 +114,10 @@ th {
 .col-xl-1 {
 	padding-top: 0px;
 }
+ li:before {
+        content : none;
+      }
 </style>
-
 <body>
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
@@ -210,10 +212,10 @@ th {
 															<div class="col col-xl-2"
 																style="padding: 0px; width: 200px;">
 																<div class="dropdown dropdown open">
-
 																	<select name="sysCd" id="sysCdFilter"
 																		onclick="getSysCd()" onchange="removeTaskSeCd()"
 																		style="width: 200px;">
+																		<option>전체</option>
 																		<c:if test="${srInfoFilter.sysCd ne null}">
 																			<option value="${srInfoFilter.sysCd}">${sd.sysNm}<c:if
 																					test="${sd.sysNm eq null}">${srInfoFilter.sysCd}</c:if></option>
@@ -223,8 +225,6 @@ th {
 																</div>
 																<br /> <br />
 																<div class="dropdown dropdown open" style="float: left;">
-
-
 																	<select name="taskSeCd" id="taskSeCdFilter"
 																		onclick="getTaskSeCd()">
 																		<c:if test="${srInfoFilter.taskSeCd ne null}">
@@ -242,7 +242,7 @@ th {
 																<div class="dropdown dropdown open">
 
 																	<select name="sttsCd" id="sttsCdFilter">
-																		<option></option>
+																		<option>전체</option>
 																		<option value="3"
 																			<c:if test="${srInfoFilter.sttsCd eq 3}"> selected</c:if>>개발중</option>
 																		<option value="4"
@@ -396,131 +396,136 @@ th {
 															</div>
 														</div>
 													</div>
-													<div class="card-block" style="height: 700px;">
-														<div class="card_body "
-															style="font-size: 12px; padding-top: 20px;">
-															<div class="form-group row">
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">요청 번호</div>
-																	<div class="col col-sm-6">
-																		<input type="hidden" id="SRDSrNo"
-																			value="${srlist[0].srNo}"> <input readonly
-																			class="form-control" id="SRDDmndNo"
-																			value="${sd.dmndNo}" style="width: 110px;">
+													<div class="tab-content tabs card-block"
+														style="padding: 0px; padding-top: 20px;">
+														<div class="tab-pane active" id="srDemandDetail"
+															role="tabpanel">
+															<div class="card-block" style="height: 700px;">
+																<div class="card_body "
+																	style="font-size: 12px; padding-top: 20px;">
+																	<div class="form-group row">
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 px-0 font-weight-bold">요청
+																				번호</div>
+																			<div class="col col-sm-6 px-0">
+																				<input type="hidden" id="SRDSrNo"
+																					value="${srlist[0].srNo}"> <input readonly
+																					class="form-control" id="SRDDmndNo"
+																					value="${sd.dmndNo}" style="width: 110px;">
+																			</div>
+																		</div>
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 px-0 font-weight-bold">우선순위</div>
+																			<div class="col col-sm-6 px-0">
+																				<input type="text" readonly class="form-control"
+																					id="SiRnk" value="${sd.rnk}">
+																			</div>
+																		</div>
 																	</div>
-																</div>
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">우선순위</div>
-																	<div class="col col-sm-6">
-																		<input type="text" readonly class="form-control"
-																			id="SiRnk" value="${sd.rnk}">
+																	<hr />
+																	<div class="form-group row">
+																		<div class="col col-sm-2 px-0 font-weight-bold">SR
+																			제목</div>
+																		<div class="col col-sm-9 px-0">
+																			<input readonly class="form-control" id="SRDTitle"
+																				value="${sd.ttl}">
+																		</div>
 																	</div>
-																</div>
-															</div>
-															<hr />
-															<div class="form-group row">
-																<div class="col col-sm-2">SR 제목</div>
-																<div class="col col-sm-9">
-																	<input readonly class="form-control"
-																		style="width: 150px;" id="SRDTitle" value="${sd.ttl}">
-																</div>
-															</div>
-															<hr />
-															<div class="form-group row">
-																<div class="col col-sm-2" style="padding-right: 0px;">관련근거</div>
-																<div class="col col-sm-9">
-																	<input readonly class="form-control"
-																		style="width: 150px;" id="SRDRelgrund"
-																		value="${sd.relGrund}">
-																</div>
-															</div>
-															<hr />
-															<div class="form-group row">
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">시스템구분</div>
-																	<div class="col col-sm-6">
-																		<input readonly class="form-control"
-																			style="width: 200%;" id="SRDSys" value="${sd.sysNm}">
+																	<hr />
+																	<div class="form-group row">
+																		<div class="col col-sm-2 px-0 font-weight-bold">관련근거</div>
+																		<div class="col col-sm-9 px-0">
+																			<input readonly class="form-control" id="SRDRelgrund"
+																				value="${sd.relGrund}">
+																		</div>
 																	</div>
-																</div>
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">업무구분</div>
-																	<div class="col col-sm-6">
-																		<input readonly class="form-control"
-																			style="width: 150%;" id="SRDTask"
-																			value="${sd.taskSeNm}">
+																	<hr />
+																	<div class="form-group row">
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 px-0 font-weight-bold">시스템구분</div>
+																			<div class="col col-sm-8 pl-0">
+																				<input readonly class="form-control" id="SRDSys"
+																					value="${sd.sysNm}">
+																			</div>
+																		</div>
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 px-0 font-weight-bold">업무구분</div>
+																			<div class="col col-sm-7 pl-0">
+																				<input readonly class="form-control" id="SRDTask"
+																					value="${sd.taskSeNm}">
+																			</div>
+																		</div>
 																	</div>
-																</div>
-															</div>
-															<hr />
-															<div class="form-group row">
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">요청기관</div>
-																	<div class="col col-sm-6">
-																		<input readonly class="form-control"
-																			style="width: 200%;" id="SRDInst"
-																			value="${sd.instNm}">
+																	<hr />
+																	<div class="form-group row">
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 px-0 font-weight-bold">요청기관</div>
+																			<div class="col col-sm-8 pl-0">
+																				<input readonly class="form-control" id="SRDInst"
+																					value="${sd.instNm}">
+																			</div>
+																		</div>
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 px-0 font-weight-bold">요청자</div>
+																			<div class="col col-sm-7 pl-0">
+																				<input readonly class="form-control"
+																					id="SRDClientNm" value="${sd.clientNm}">
+																			</div>
+																		</div>
 																	</div>
-																</div>
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">요청자</div>
-																	<div class="col col-sm-6">
-																		<input readonly class="form-control"
-																			style="width: 150%;" id="SRDClientNm"
-																			value="${sd.clientNm}">
+																	<hr />
+																	<div class="form-group row">
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 px-0 font-weight-bold">요청일</div>
+																			<div class="col col-sm-8 pl-0">
+																				<input readonly class="form-control" id="SRDDmndymd"
+																					value="${sd.dmndYmd}">
+																			</div>
+																		</div>
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 px-0 font-weight-bold">완료요청일</div>
+																			<div class="col col-sm-7 pl-0">
+																				<input readonly class="form-control"
+																					id="SRDCmptnDmndYmd" value="${sd.cmptnDmndYmd}">
+																			</div>
+																		</div>
 																	</div>
-																</div>
-															</div>
-															<hr />
-															<div class="form-group row">
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">요청일</div>
-																	<div class="col col-sm-8">
-																		<input readonly class="form-control" id="SRDDmndymd"
-																			value="${sd.dmndYmd}">
+																	<hr />
+																	<div class="form-group row">
+																		<label
+																			class="col-sm-2 px-0 col-form-label font-weight-bold"
+																			style="line-height: 100px; font-size: 12px">SR
+																			내용</label>
+																		<div class="col-sm-9 px-0">
+																			<input readonly class="form-control"
+																				style="height: 100px;" id="SRDCn" value="${sd.cn}">
+																		</div>
 																	</div>
-																</div>
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">완료요청일</div>
-																	<div class="col col-sm-8">
-																		<input readonly class="form-control"
-																			id="SRDCmptnDmndYmd" value="${sd.cmptnDmndYmd}">
+																	<hr />
+																	<div class="form-group row">
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 px-0 font-weight-bold">검토자</div>
+																			<div class="col col-sm-8 pl-0">
+																				<input readonly class="form-control" id="SRDRvwrNm"
+																					value="${sd.rvwrNm}">
+																			</div>
+																		</div>
+																		<div class="col-sm-6 px-0">
+																			<div class="col col-sm-4 font-weight-bold">진행상태</div>
+																			<div class="col col-sm-7 pl-0">
+																				<input readonly class="form-control"
+																					id="SRDCmptnDmndYmd" value="${sd.sttsNm}">
+																			</div>
+																		</div>
 																	</div>
-																</div>
-															</div>
-															<hr />
-															<div class="form-group row">
-																<label class="col-sm-2 col-form-label"
-																	style="line-height: 100px; font-size: 12px;">SR
-																	내용</label>
-																<div class="col-sm-9">
-																	<input readonly class="form-control"
-																		style="width: 300px; height: 110px;" id="SRDCn"
-																		value="${sd.cn}">
-																</div>
-															</div>
-															<hr />
-															<div class="form-group row">
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">검토자</div>
-																	<div class="col col-sm-8">
-																		<input readonly class="form-control" id="SRDRvwrNm"
-																			value="${sd.rvwrNm}">
+																	<div class="form-group row">
+																		<label
+																			class="col-sm-2 px-0 col-form-label font-weight-bold"
+																			style="font-size: 12px;">첨부파일</label>
+																		<div class="col-sm-9 px-0">
+																			<input type="file" class="" id="SRDFile">
+																		</div>
 																	</div>
-																</div>
-																<div class="col-sm-6">
-																	<div class="col col-sm-4">진행상태</div>
-																	<div class="col col-sm-8">
-																		<input readonly class="form-control"
-																			id="SRDCmptnDmndYmd" value="${sd.sttsNm}">
-																	</div>
-																</div>
-															</div>
-															<div class="form-group row">
-																<label class="col-sm-3 col-form-label"
-																	style="font-size: 12px;">첨부파일</label>
-																<div class="col-sm-9">
-																	<input type="file" class="" id="SRDFile">
 																</div>
 															</div>
 														</div>

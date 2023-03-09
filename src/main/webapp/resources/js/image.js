@@ -7,8 +7,8 @@ function loadFile(input, memberId) {
     console.log(" 아이디 : " + memberId);
     newImage.src = URL.createObjectURL(file);   
 
-    newImage.style.width = "400px";
-    newImage.style.height = "400px";
+    newImage.style.width = "200px";
+    newImage.style.height = "200px";
     $("#defaultImage").remove();
     $("#addImg").hide();
     newImage.style.objectFit = "contain";
