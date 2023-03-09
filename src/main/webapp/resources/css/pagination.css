@@ -47,7 +47,7 @@ h1 {
 }
 
 .pagination a:hover, .pagination a .pagination-active {
-	color: cornflowerblue;
+	color: #F05F57;
 }
 
 .pagination a:hover:before, .pagination a .pagination-active:before {
@@ -55,7 +55,7 @@ h1 {
 }
 
 .pagination .pagination-active {
-	color: cornflowerblue;
+	color: #F05F57;
 }
 
 .pagination .pagination-active:before {

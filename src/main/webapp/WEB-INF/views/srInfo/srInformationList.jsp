@@ -114,9 +114,10 @@ th {
 .col-xl-1 {
 	padding-top: 0px;
 }
- li:before {
-        content : none;
-      }
+
+li:before {
+	content: none;
+}
 </style>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -300,9 +301,7 @@ th {
 															<ul class="list-unstyled card-option">
 																<li><i class="fa fa fa-wrench open-card-option"></i></li>
 																<li><i class="fa fa-window-maximize full-card"></i></li>
-																<li><i class="fa fa-minus minimize-card"></i></li>
 																<li><i class="fa fa-refresh reload-card"></i></li>
-																<li><i class="fa fa-trash close-card"></i></li>
 															</ul>
 														</div>
 													</div>
@@ -332,19 +331,18 @@ th {
 																					<tr
 																						onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
 																						<th scope="row">${num.count}</th>
-																						<td id="">${srlist.srNo}</td>
+																						<td id=""><strong>${srlist.srNo}</strong></td>
 																						<td>${srlist.sysNm}</td>
 																						<td>${srlist.taskSeNm}</td>
 																						<c:choose>
 																							<c:when test="${fn:length(srlist.ttl) > 10}">
-																								<td class="text-center">
-																									<c:out value="${fn:substring(srlist.ttl,0,9)}"/>...
+																								<td class="text-center"><c:out
+																										value="${fn:substring(srlist.ttl,0,9)}" />...
 																								</td>
 																							</c:when>
 																							<c:otherwise>
-																								<td class="text-center">
-																									<c:out value="${srlist.ttl}"/>
-																								</td>
+																								<td class="text-center"><c:out
+																										value="${srlist.ttl}" /></td>
 																							</c:otherwise>
 																						</c:choose>
 																						<td>${srlist.flnm}</td>
