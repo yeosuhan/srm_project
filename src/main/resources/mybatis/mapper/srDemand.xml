@@ -290,7 +290,10 @@
 			<if test="custId != null">
 				sd.CUST_ID = #{custId} 
 			</if>
-			<if test="picId != null and sttsCd > 1">
+			<if test="picId != null and sttsCd gt 0 and sttsCd lt  3">
+				RVWR_ID = #{picId} 
+			</if>
+			<if test="picId != null and sttsCd gt 2">
 				PIC_ID = #{picId} 
 			</if>
 		    and sd.DEL_YN = 0
@@ -320,7 +323,10 @@
 			<if test="custId != null">
 				sd.CUST_ID = #{custId} 
 			</if>
-			<if test="picId != null and sttsCd > 1">
+			<if test="picId != null and sttsCd gt 0 and sttsCd lt  3">
+				RVWR_ID = #{picId} 
+			</if>
+			<if test="picId != null and sttsCd gt 2">
 				PIC_ID = #{picId} 
 			</if>
 		    and sd.DEL_YN = 0
