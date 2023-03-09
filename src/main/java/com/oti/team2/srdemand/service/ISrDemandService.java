@@ -119,5 +119,11 @@ public interface ISrDemandService {
 	 * 나의 할일 페이지 - 상태별, [개발자]별 자원정보 + 요청 + 진척 조회 목록 불러오기
 	 * @author 신정은
 	 */
-	public List<MytodoSrListDto> getMytodoSrListForDeveloper(String empId, int sttsCd, Pager pager); 
+	public List<MytodoSrListDto> getMytodoSrListForDeveloper(String empId, int sttsCd, Pager pager);
+	/**
+	 * 반영요청 수락하기
+	 * 
+	 * @author 여수한
+	 */
+	public void endSr(String dmndNo); 
 }

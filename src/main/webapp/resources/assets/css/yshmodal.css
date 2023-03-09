@@ -49,7 +49,7 @@ style>
 	padding: 20px;
 	display: flex;
 	justify-content: space-between;
-	background-color: #448aff;
+	background: linear-gradient( 135deg, #92344B 10%, #F05F57 100%); 
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
@@ -62,7 +62,7 @@ style>
 	padding: 20px;
 	display: flex;
 	justify-content: space-between;
-	background-color: #448aff;
+	background-color: #92344B;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
@@ -117,12 +117,12 @@ style>
 }
 
 .cancle {
-	background-color: #448aff;
+	background-color: #92344B;
 	color: white;
 }
 
 .save {
-	background-color: #448aff;
+	background-color: #92344B;
 	color: white;
 }
 div .col {

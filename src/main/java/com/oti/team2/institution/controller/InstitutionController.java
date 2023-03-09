@@ -106,6 +106,6 @@ public class InstitutionController {
 		institution.setInstDetailAddr(Jsoup.clean(institution.getInstDetailAddr(), Whitelist.basic()));
 		log.info(institution);
 		institutionService.updateInst(institution);
-		return "redirect:/myinfo";
+		return "redirect:/member/myinfo";
 	}	
 }

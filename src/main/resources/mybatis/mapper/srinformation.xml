@@ -215,5 +215,14 @@
 		ON sd.dmnd_no = si.dmnd_no
 		WHERE sd.CUST_ID = #{custId}
 	</select>
-
+	
+	<!-- 반영요청 수락시 SR진척에서 계획종료일 update  -->
+	<update id="updateEndYmdByDmndNo" parameterType="string">
+		UPDATE
+			SR_INFORMATION
+		SET
+			END_YMD = SYSDATE
+		WHERE
+			DMND_NO = #{dmndNo}
+	</update>
 </mapper>

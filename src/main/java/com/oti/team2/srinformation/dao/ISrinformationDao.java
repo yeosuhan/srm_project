@@ -100,4 +100,12 @@ public interface ISrinformationDao {
 	 * @author 신정은
 	 */
 	public List<SRKeyDto> selectSrNoAndDmndNoByCustId(@Param("custId")String custId);
+	
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-09
+	 * @return 반영요청 수락시 SR진척에서 계획종료일 update
+	 */
+	public void updateEndYmdByDmndNo(@Param("dmndNo") String dmndNo);
 }

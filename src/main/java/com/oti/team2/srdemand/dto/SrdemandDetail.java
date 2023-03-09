@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 public class SrdemandDetail {
-	
 	//srDemand 테이블
 	private String dmndNo;
 	private String ttl;
@@ -22,6 +21,7 @@ public class SrdemandDetail {
 	private String rnk;
 	
 	//SR진척
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
 	private Date endYmd;
 	
 	// 부서
@@ -46,5 +46,4 @@ public class SrdemandDetail {
 	//member 테이블
 	private String clientNm; // 요청자(고객)
 	private String rvwrNm; //검토자 이름
-	
 }

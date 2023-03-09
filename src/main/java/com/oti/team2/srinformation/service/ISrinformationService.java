@@ -78,4 +78,11 @@ public interface ISrinformationService {
 	 * @author 신정은
 	 */
 	List<SRKeyDto> getSrNoAndDmndNo(String clientID);
+
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-09
+	 * @return SR진척 계획 종료일 update
+	 */
+	void endYmd(String dmndNo);
 }

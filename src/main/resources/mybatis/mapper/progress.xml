@@ -16,6 +16,19 @@
 			P.SR_NO = #{srNo}
 	</select>
 	
+	<!-- 반영요청 진척률 조회 -->
+	<select id="selectPrgrsRt" parameterType="string" resultType="string">
+		SELECT
+			PRGRS_RT AS prgrsRt
+		FROM
+			PROGRESS P, SR_INFORMATION SI
+		WHERE
+			SI.DMND_NO = #{dmNo}
+		AND
+			P.SR_NO = SI.SR_NO
+		AND
+			P.PRGRS_SE_NM = '반영요청'
+	</select>
 	<!-- sr요청 진척률 수정 -->
 	<update id="updateProgressByPrgrsId" parameterType="map">
 		UPDATE
@@ -27,7 +40,6 @@
 		WHERE
 			PRGRS_ID = #{prgrsId}
 	</update>
-	
 	<insert id="insertProgress" parameterType="map">
 		INSERT ALL 
 		<foreach collection="pNames" item="pname" separator=" " close="SELECT * FROM DUAL" index="index">
@@ -37,6 +49,7 @@
 				(PRGRS_ID_SEQ.nextval + #{index}, #{srNo}, #{pname})
 		</foreach>
 	</insert>
+	<!-- 자원정보 넣으면 개발(요구정의) -->
 	<update id="startProgress" parameterType="string">
 		UPDATE
 			PROGRESS
@@ -46,5 +59,28 @@
 			SR_NO = #{srNo}
 		AND
 			PRGRS_SE_NM = '요구정의'
+	</update>
+	<!-- 반영요청 끝나면 바로 운영반영 시작 -->
+	<update id="updateProgressYmd" parameterType="string">
+		UPDATE
+			PROGRESS
+		SET
+			BGNG_YMD = SYSDATE
+		WHERE
+			SR_NO = #{srNo]
+		AND
+			PRGRS_SE_NM = '운영반영'
+	</update>
+	<!-- 고객이 반영요청 수락하면 운영반영 넣기 -->
+	<update id="updateEndYmd" parameterType="string">
+		UPDATE 
+		    PROGRESS
+		SET
+			PROGRESS.END_YMD = SYSDATE,
+			PROGRESS.PRGRS_RT = 100
+		WHERE
+		    PROGRESS.SR_NO = (SELECT SR_NO FROM SR_INFORMATION SI WHERE SI.DMND_NO = #{dmNo})
+		AND
+			PROGRESS.PRGRS_SE_NM = '운영반영'
 	</update>
 </mapper>
