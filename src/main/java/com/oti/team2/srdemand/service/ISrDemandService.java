@@ -25,7 +25,7 @@ public interface ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public List<SrDemand> getSrDemandList(String custId, Pager pager);
+	public List<SrDemand> getSrDemandList(String custId, Pager pager, String sort);
 
 	/**
 	 * sr요청 수정 진행
@@ -125,5 +125,5 @@ public interface ISrDemandService {
 	 * 
 	 * @author 여수한
 	 */
-	public void endSr(String dmndNo); 
+	public void endSr(String dmndNo);
 }
