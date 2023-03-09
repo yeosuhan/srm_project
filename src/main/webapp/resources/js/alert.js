@@ -1,12 +1,15 @@
-$(document).ready(function(){
-	$(".show-notification .nav-link").mouseover(function(){
+$(function(){
+	$(".show-notification .nav-link").click(function(event){
 		$(this).tab("show");
+		event.preventDefault(); //a태그 동작 비활성화
 	});
+	
 	
 	getEventListener();
 	getAlertList();
+	
+	
 });
-
 /* 알림이 여부 확인후 뱃지 추가
  * 
  * */

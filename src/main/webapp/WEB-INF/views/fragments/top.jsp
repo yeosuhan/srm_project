@@ -48,7 +48,7 @@
 				<li ><button class="btn btn-sm btn-primary" onclick="sendTestMessage()">메시지 전송 테스트</button></li>
 				<%-- 알림 --%>
 				<li class="header-notification" style="margin-top: 20px">
-					<a href="#!" class="waves-effect waves-light" onclick="getAlertList()"> 
+					<a href="#!" id="alertBtn" class="waves-effect waves-light" onclick="getAlertList();event.preventDefault();"> 
 						<i class="ti-bell"></i>
 						<h4>
 							<span id="alertBadge" ></span>
@@ -58,7 +58,6 @@
 						<ul>
 							<li>
 								<h6>Notifications</h6>
-								<i class="close fa fa-refresh" onclick="refreshAlert()"></i>
 							</li>
 						</ul>
 						<!-- Nav tabs -->

@@ -25,7 +25,7 @@ public class SseEmitters {
 			this.emitters.remove(memberId); //만료시 리스트에서 삭제
 		});
 		emitter.onTimeout(()->{
-			log.info("time out");
+			log.info("time out"+this.toString());
 			emitter.complete();
 		});
 		log.info(memberId+" 연결");
@@ -51,5 +51,17 @@ public class SseEmitters {
 		}catch(Exception ex) {
 			emitter.completeWithError(ex);
 		}
+	}
+	/* 기존의 연결을 가져오는 메소드
+	 * @author : 안한길
+	 * @param : name
+	 * @return : SseEmitter
+	 * */
+	public SseEmitter getEmitter(String memberId) {
+		SseEmitter emitter = this.emitters.get(memberId);
+		if(emitter != null) {
+			return emitter;
+		}
+		return null;
 	}
 }

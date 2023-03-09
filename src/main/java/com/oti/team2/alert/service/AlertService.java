@@ -80,22 +80,28 @@ public class AlertService implements IAlertService {
 	
 	
 	/* Emitter를 생성하여 클라이언트와 연결후 아이디를 키로 하여 맵에 저장
+	 * 이미 생성된 Emitter가 있다면 찾아서 리턴
 	 * @author : 안한길
 	 * @param : memberId
 	 * @return : SseEmitter
 	 * */
 	@Override
 	public SseEmitter connectSseEmitter(String memberId) {
-		SseEmitter emitter = new SseEmitter(1000L*60L*20L);//1000ms*60*20: 20분
-		try {
-			emitter.send(SseEmitter.event()
-					.name("connect")
-					.data("connected")
-					);//더미 데이터 전송
-		}catch(IOException e) {
-			log.info(e.getStackTrace());
+		
+		SseEmitter emitter =sseEmitters.getEmitter(memberId);
+		if(emitter==null) { //이미 생성된 연결이 없을경우
+			emitter=new SseEmitter(1000L*60L*20L);//1000ms*60*20: 20분
+			try {
+				emitter.send(SseEmitter.event()
+						.name("connect")
+						.data("connected")
+						);//더미 데이터 전송
+			}catch(IOException e) {
+				log.info(e.getStackTrace());
+			}
+			return sseEmitters.add(memberId,emitter);
 		}
-		return sseEmitters.add(memberId,emitter);
+		return emitter;
 	}
 	/* 알람 확인 처리후 해당 페이지의 url을 리턴하는 서비스
 	 * @author : 안한길
@@ -149,4 +155,6 @@ public class AlertService implements IAlertService {
 	public int closeAlert(int altNo) {
 		return alertDao.updateIdntyYn(altNo);
 	}
+	
+	
 }

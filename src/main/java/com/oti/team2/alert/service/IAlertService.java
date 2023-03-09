@@ -20,4 +20,5 @@ public interface IAlertService {
 
 	int closeAlert(int altNo);
 
+
 }
