@@ -6228,7 +6228,7 @@ table tbody .border-bottom-info td {
       z-index: 9; }
   .header-navbar .navbar-wrapper .navbar-container .badge {
     border-radius: 100px;
-    right: 10px;
+    right: 14px;
     position: absolute;
     top: 0px;
     padding: 3.5px; }

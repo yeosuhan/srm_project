@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div id="pcoded" class="pcoded iscollapsed" theme-layout="vertical"
 	vertical-placement="left" vertical-layout="wide"
@@ -48,7 +48,7 @@
 							style="margin-top: 20px; margin-bottom: 13px;"><span
 							class="badge bg-c-yellow" style=""></span> <a href="#!"
 							class="waves-effect waves-light" onclick="refreshAlert()"
-							style="display: block; padding-right: 3px"> <i
+							style="display: block; padding-right: 4px"> <i
 								class="far fa-bell" style="font-size: 19px;"></i>
 						</a>
 							<div class="show-notification" style="display: none;">

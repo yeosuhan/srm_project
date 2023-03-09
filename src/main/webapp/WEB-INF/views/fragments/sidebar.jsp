@@ -212,5 +212,3 @@
 				<!-- Main-body start -->
 				<div class="main-body">
 					<div class="page-wrapper">
-
-						<!-- Page body start -->
