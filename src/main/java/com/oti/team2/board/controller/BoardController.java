@@ -1,6 +1,7 @@
 package com.oti.team2.board.controller;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.oti.team2.board.dto.BoardRequestDto;
 import com.oti.team2.board.dto.SRKeyDto;
 import com.oti.team2.board.service.IBoardService;
 import com.oti.team2.srinformation.service.ISrinformationService;
+import com.oti.team2.util.Auth;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -34,11 +36,16 @@ public class BoardController {
 
 	
 	@GetMapping("/list")
-	public String getBoardList(@RequestParam("type") String type, Model model) {
+	public String getBoardList(@RequestParam("type") String type, Model model) throws MalformedURLException {
 		List<BoardListDto> list = boardService.getBoardList(type);
-		Board board = boardService.getBoard(list.get(0).getBbsNo());
 		model.addAttribute("list", list);
-		model.addAttribute("board", board);
+		//log.info(list);
+		
+		Board board = null;
+		if(list.size()>0) {
+			board = boardService.getBoard(list.get(0).getBbsNo());
+			model.addAttribute("board", board);
+		}
 		
 		if(type.equals("notice")) {
 			return "board/noticeList";
@@ -47,25 +54,35 @@ public class BoardController {
 	}
 	
 	@GetMapping("/detail")
-	public String getBoardList(@RequestParam("bbsNo") int bbsNo, Model model) {
+	public String getBoardList(@RequestParam("bbsNo") int bbsNo, Model model) throws MalformedURLException {
 		Board board = boardService.getBoard(bbsNo);
+		//log.info(board);
 		model.addAttribute("board", board);
 		
-		if(board.equals("NOTICE")) {
-			return "board/noticeList";
+		if(board.getBbsType().equals("NOTICE")) {
+			// 조회수 +1 증가
+			//log.info("조회수 증가 ~~~ ");
+			boardService.updateInqCnt(bbsNo);
+			return "board/notice-detail";
 		}
+		
 		return "board/qna-detail";
 	}
 	
 	// 문의사항 작성을 위해 현재 사용자의 요청번호 모두 가져오기
 	@GetMapping("/write")
-	public String getSrNoList(Authentication auth, Model model) {
+	public String getSrNoList(@RequestParam("type") String type, Authentication auth, Model model) {
 		String clientId = auth.getName();
-		 List<SRKeyDto> list = srinformationService.getSrNoAndDmndNo(clientId);
-		 model.addAttribute("srList", list);
-		 model.addAttribute("clientId", clientId);
-		 log.info(list);
-		 return "board/qna-write";
+		String role = auth.getAuthorities().stream().findFirst().get().toString();
+		model.addAttribute("clientId", clientId);
+//		log.info(role);
+		if(type.equals("qna") && role.equals(Auth.ROLE_CLIENT.toString())) {
+			List<SRKeyDto> list = srinformationService.getSrNoAndDmndNo(clientId);
+			model.addAttribute("srList", list);
+//			log.info(list);
+			return "board/qna-write";		
+		}
+		return "board/notice-write";
 	}
 	
 	@PostMapping("/write")
@@ -73,6 +90,7 @@ public class BoardController {
 		log.info(boardRequestDto);
 		
 		boardService.addBoard(boardRequestDto);
+		if(boardRequestDto.getBbsType().equals("NOTICE")) return "redirect:/board/list?type=notice";
 		return "redirect:/board/list?type=qna";
 	}
 }

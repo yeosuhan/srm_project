@@ -1,6 +1,9 @@
 package com.oti.team2.board.dto;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.oti.team2.attachment.dto.AttachResponseDto;
 
 import lombok.Data;
 
@@ -17,4 +20,6 @@ public class Board {
 	private int inqCnt; // 조회수
 	private boolean ansYn; //답변상태
 	private String srNo; 
+	
+	private List<AttachResponseDto> srcList;
 }

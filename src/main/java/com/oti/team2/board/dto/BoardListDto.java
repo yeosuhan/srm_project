@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 public class BoardListDto {
-	/// 리스트용 dto 만들어~~~~~~~~~~~~~
 	private int bbsNo;
 	private String bbsTtl;
 	private boolean ansYn;

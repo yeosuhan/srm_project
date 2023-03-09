@@ -42,6 +42,6 @@
 		<typeAlias type="com.oti.team2.attachment.dto.Attachment" alias="attachment"/>
 		<typeAlias type="com.oti.team2.board.dto.Board" alias="board"/>
 		<typeAlias type="com.oti.team2.board.dto.BoardListDto" alias="boardListDto"/>
-		
+		<typeAlias type="com.oti.team2.attachment.dto.AttachResponseDto" alias="attachResponseDto"/>
 	</typeAliases> 
 </configuration>

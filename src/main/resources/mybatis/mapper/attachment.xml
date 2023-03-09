@@ -36,4 +36,30 @@
 			  )
 		</foreach>
 	</insert>
+	
+	<select id="selectAttachByBbsNoOrDmndNo" parameterType="map" resultType="attachResponseDto">
+		SELECT 
+			   FILE_SN as fileSn,
+			   ORGNL_FILE_NM as orgnlFileNm,
+			   FILE_SZ as fileSz,
+			   FILE_NM as fileNm
+		FROM ATTACHMENTS
+		<if test="bbsNo != 0">
+			WHERE BBS_NO = #{bbsNo}
+		</if>
+		<if test="dmndNo != 0">
+			WHERE DMND_NO = #{dmndNo}
+		</if>
+		
+	</select>
+	
+	<select id="selectAttachByFileSn" parameterType="int" resultType="attachResponseDto">
+		SELECT 
+			   ORGNL_FILE_NM as orgnlFileNm,
+			   FILE_SZ as fileSz,
+			   FILE_NM as fileNm,
+			   FILE_TYPE as fileType
+		FROM ATTACHMENTS
+		WHERE FILE_SN = #{fileSn}
+	</select>
 </mapper>

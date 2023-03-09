@@ -10,10 +10,10 @@
 			<h5>문의사항 작성 </h5>
 		</div>
 		<div class="modal-body">
-			<form enctype="multipart/form-data" method="POST" action="/board/write"  id="qnaForm">
+			<form enctype="multipart/form-data" method="POST" action="/board/write"  id="qnaForm" onSubmit="return false;">
 				<div class="form-group row">
 					<input type="hidden" name="wrtrId" value="${clientId}">
-					<input type="hidden" name="bbsType" value="NOTICE">
+					<input type="hidden" name="bbsType" value="QNA">
 					<label class="col-sm-2 col-form-label">요청번호</label>
 					<div class="col-sm-10">
 						<select name="srNo" id="lang">
@@ -26,14 +26,14 @@
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">제목</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="bbsTtl">
+						<input type="text" class="form-control" name="bbsTtl" id="bbsTtl">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">내용</label>
 					<div class="col-sm-10">
 						<textarea rows="20" cols="5" class="form-control"
-							placeholder="내용을 입력해주세요" name="bbsCn"></textarea>
+							placeholder="내용을 입력해주세요" name="bbsCn" id="bbsCn"></textarea>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -44,9 +44,11 @@
 				</div>
 			</form>
 			<div class="modal-footer d-flex justify-content-center">
-				<button type="submit" form="qnaForm"
+				<button type="button" onclick="goPost()"
 					class="btn btn-inverse btn-round waves-effect waves-light mr-4  btn-primary">저장</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script src="/resources/js/board.js"></script>
