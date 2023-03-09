@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300");
+
+body {
+	color: #2c3e50;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 200;
+}
+
+h1 {
+	text-align: center;
+	font-size: 2.5rem;
+	font-weight: 300;
+}
+
+.hstryPager-container {
+	margin: 10px auto;
+	text-align: center;
+	justify-content: center;
+}
+
+.hstryPager {
+	position: relative;
+	display : block;
+}
+
+.hstryPager a {
+	position: relative;
+	display: inline-block;
+	color: #2c3e50;
+	text-decoration: none;
+	font-size: 0.8rem;
+	padding: 8px 16px 10px;
+}
+
+.hstryPager a:before {
+	z-index: -1;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	content: "";
+	top: 0;
+	left: 0;
+	background-color: #2c3e50;
+	border-radius: 24px;
+	transform: scale(0);
+	transition: all 0.2s;
+}
+
+.hstryPager a:hover, .hstryPager a .hstryPager-active {
+	color: cornflowerblue;
+}
+
+.hstryPager a:hover:before, .hstryPager a .hstryPager-active:before {
+	transform: scale(1);
+}
+
+.hstryPager .hstryPager-active {
+	color: cornflowerblue;
+}
+
+.hstryPager .hstryPager-active:before {
+	transform: scale(1);
+}
+
+.hstryPager-newer {
+	margin-right: 50px;
+}
+
+.hstryPager-older {
+	margin-left: 50px;
+}

@@ -86,7 +86,7 @@
 					</div>
 				</div>
 				<div align="center">
-					<button id="mBt" type="submit" class="btn btn-info save center">등록</button>
+					<button id="mBt" type="submit" class="btn btn-oti save center">등록</button>
 				</div>
 			</form>
 		</div>
