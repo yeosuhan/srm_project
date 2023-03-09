@@ -245,5 +245,14 @@ public class SrDemandService implements ISrDemandService {
 	public List<MytodoSrListDto> getMytodoSrListForDeveloper(String empId, int sttsCd, Pager pager) {
 		return srDemandDao.selectByEmpIdAndSttsCd(empId, sttsCd, pager);
 	}
-
+	/**
+	 * 반영요청 수락하기
+	 * 
+	 * @author 여수한
+	 */
+	@Override
+	public void endSr(String dmndNo) {
+		srDemandDao.updateSrdemandStts(dmndNo);
+		
+	}
 }

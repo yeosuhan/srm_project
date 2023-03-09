@@ -2,6 +2,7 @@ package com.oti.team2.member.controller;
 
 
 import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.oti.team2.institution.dto.Institution;
+import com.oti.team2.institution.service.IInstitutionService;
 import com.oti.team2.member.dto.EmployeeList;
 import com.oti.team2.member.dto.File;
 import com.oti.team2.member.dto.Member;
@@ -27,7 +30,6 @@ import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.member.service.IJoinService;
 import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.srresource.service.ISrResourceService;
-import com.oti.team2.util.Auth;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -41,6 +43,8 @@ public class MemberController {
 	private IJoinService joinService;
 	@Autowired
 	private ISrResourceService srResourceService;
+	@Autowired
+	private IInstitutionService institutionService;
 	/**
 	 * 멤버의 내 정보 조회
 	 *@author : 신정은
@@ -53,7 +57,10 @@ public class MemberController {
 		//session 에서 사용자 정보 가져오기
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		Member member = memberService.getMember(auth.getName(), role);
+		Institution inst = institutionService.getInst(auth.getName());
+		log.info(inst);
 		log.info(member);
+		model.addAttribute("inst", inst);
 		model.addAttribute("member", member);
 		return"member/myinfo";
 	}
