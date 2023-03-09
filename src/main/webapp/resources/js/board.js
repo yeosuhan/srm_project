@@ -1,0 +1,122 @@
+/*
+ * 작성자 : 신정은  
+ * 
+ */
+/*******************  공통 ****************/
+// 폼 유효성 검사
+function goPost(type) {
+	var bbsTtl = $('#bbsTtl').val();
+	var bbsCn = $('#bbsCn').val();
+	
+	if(!bbsTtl) {
+		alert('제목 입력하여주세요.');
+	      $('#bbsTtl').focus();
+	}
+	else if(!bbsCn){
+		alert('내용을 입력하여주세요.');
+	      $('#bbsCn').focus();
+	}
+	else {
+		var formData = new FormData();
+		
+		var bbsType =  $('input[name=bbsType]').val();
+		var wrtrId =  $('input[name=wrtrId]').val();
+		
+		if(type == "QNA") {
+			var srNo =  $('select[name=srNo]').val();
+			formData.append("srNo", srNo);
+		}
+		
+		var bbsTtl = $('input[name=bbsTtl]').val();
+		var bbsCn = $('#bbsCn').val();
+		var flist = $('input[name=attachFile]')[0].files;
+		
+		formData.append("bbsType", bbsType);
+		formData.append("wrtrId", wrtrId);
+		formData.append("bbsTtl", bbsTtl);
+		formData.append("bbsCn", bbsCn);
+		//formData.append("attachFile", attachFile);
+					 		
+		console.log(bbsCn);
+		
+		
+		// fileInput 개수를 구한다.
+		for (var i = 0; i < flist.length; i++) {
+			console.log(flist[i]);
+			
+			formData.append('attachFile', flist[i]);					
+		}
+		
+		$.ajax({
+			url : '/board/write',
+			type : 'POST',
+			data : formData ,
+			enctype: "multipart/form-data",
+			processData: false, //프로세스 데이터 설정 : false 값을 해야 form data로 인식함
+	        contentType: false,
+			success : function(res) {
+				alert("성공");
+			},
+			error : function(error) {
+		       console.log("사류");
+		    }
+		
+		});
+	}
+	
+	
+}
+/*******************   Qna board ****************/
+function writeQna() {
+	$.ajax({
+		url : '/board/write?type=qna',
+		type : 'GET',
+		success : function(data) {			
+			$("#writeQna").html(data);
+			$("#writeQna").css('display', 'block');
+		}
+	});
+}
+
+function qnaDetail(bbsNo) {
+	$.ajax({
+		url : '/board/detail?bbsNo='+ bbsNo,
+		type : 'GET',
+		success : function(data) {			
+			$("#qnaDetail").html(data);
+		}
+	});
+}
+
+/*********  notice board   ********* */
+function writeNotice() {
+	$.ajax({
+		url : '/board/write?type=notice',
+		type : 'GET',
+		success : function(data) {	
+			$("#writeNotice").html(data);
+			$("#writeNotice").css('display', 'block');
+		}
+	});
+}
+
+function noticeDetail(bbsNo) {
+	$.ajax({
+		url : '/board/detail?bbsNo='+ bbsNo,
+		type : 'GET',
+		success : function(data) {			
+			$("#noticeDetail").html(data);
+		}
+	});
+}
+
+function updateNotice(bbsNo) {
+	console.log("수정하러 옴~~");
+	$.ajax({
+		url : '/board/update/' + bbsNo,
+		type : 'GET',
+		success : function(data) {
+			$("#qnaDetail").html(data);
+		}
+	});
+}

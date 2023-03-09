@@ -2,6 +2,7 @@
 	작성날짜 : 2023-02-20 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
 	<%@include file="/WEB-INF/views/fragments/header.jsp"%>

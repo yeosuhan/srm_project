@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 
 <html>
@@ -16,11 +17,9 @@
 				.ajax({
 					url : "/history/list?srNo=" + srNo,
 					type : "GET",
-
 					success : function(result) {
 						console.log(result);
 						console.log(result.srInformationHistory[0].hstryTtl);
-
 						for (var i = 0; i < result.srInformationHistory.length; i++) {
 							var historyId = result.srInformationHistory[i].hstryId;
 							var historyCount = [ i + 1 ];
@@ -37,7 +36,6 @@
 							} else {
 								var historyStts = "승인";
 							}
-
 							var param = '<tr data-toggle="modal" data-target="#approvalHistoryModal" onclick="getHstryDetail('
 									+ historyId + ')">';
 							param += '<th scope="row">' + historyCount
@@ -46,7 +44,6 @@
 							param += '<td>' + historyChgEndYmd + '</td>';
 							param += '<td>' + historyStts + '</td>';
 							param += '</tr>';
-
 							$("#history").append(param);
 						}
 					}
@@ -68,7 +65,6 @@
 #startDatepicker, #endDatepicker, #addDatepicker {
 	width: 90px;
 }
-
 #requestDatepicker, #endRequestDatepicker, #firStartDatepicker,
 	#firEndDatepicker, #secStartDatepicker, #secEndDatepicker,
 	#thrStartDatepicker, #thrEndDatepicker, #fiveStartDatepicker,
@@ -78,28 +74,23 @@
 	width: 70px;
 	padding-right: 0px;
 }
-
 div.left {
 	width: 65%;
 	float: left;
 	box-sizing: border-box;
 }
-
 div.right {
 	width: 35%;
 	float: right;
 	box-sizing: border-box;
 	border-left: 1px solid black;
 }
-
 div .right .form-control {
 	height: 20px;
 }
-
 th {
 	text-align: center;
 }
-
 .col-sm-4 {
 	padding: 0px;
 }
@@ -110,13 +101,11 @@ th {
 .card .card-block {
 	padding: 0px 5px !important;
 }
-
 .col-xl-1 {
 	padding-top: 8px;
 	padding-right: 0px;
 	padding-left: 10px;
 }
-
 .modal {
 	position: fixed;
 	top: 0;
@@ -125,17 +114,14 @@ th {
 	right: 0;
 	background: rgba(0, 0, 0, 0.4);
 }
-
 .m.body {
 	height: 50vh;
 	overflow-y: auto;
 }
-
 #srDemandDetail {
 	font-size: 12px;
 	padding-left: 0px;
 }
-
 #card_body, .form-control {
 	font-size: 12px;
 }
@@ -433,7 +419,7 @@ th {
 																			class="col-sm-2 col-form-label px-0 font-weight-bold"
 																			style="line-height: 100px; font-size: 12px;">반려사유</label>
 																		<div class="col-sm-9">
-																			<input class="form-control rjctRsn"
+																			<input class="form-control rjctRsn" id="srRjctRsn"
 																				style="height: 100px;" value="${sd.rjctRsn}"></input>
 																		</div>
 																	</div>
@@ -455,7 +441,14 @@ th {
 																			<input type="file" class="">
 																		</div>
 																	</div>
-																	<div class="row" id="adminButtonDiv"></div>
+																	<div class="row" id="adminButtonDiv">
+																		<c:if test="${sd.sttsCd == 0}">
+																			<div class="col" style="text-align: right">
+																				<div id="srAccept" style="float:right;" class="btn btn-primary btn-round save center" onclick="goAccept('${sd.dmndNo}')">승인</div>
+																				<div id="srDecline" style="float:right;margin-right:5px;" class="btn btn-primary btn-round danger cancle" onclick="goDecline('${sd.dmndNo}')">반려</div> 
+																			</div>
+																		</c:if>
+																	</div>
 																</div>
 															</div>
 														</div>

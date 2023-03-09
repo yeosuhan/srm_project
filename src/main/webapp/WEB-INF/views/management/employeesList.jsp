@@ -69,7 +69,7 @@ p {
 																	</div>
 																	<div class="col-sm-3 d-flex justify-content-end">
 																		<button type="submit"
-																			class="btn btn-primary btn-round btn-sm waves-effect waves-light">검색</button>
+																			class="btn btn-oti btn-sm waves-effect waves-light">검색</button>
 																	</div>
 																</div>
 															</form>
@@ -209,9 +209,9 @@ p {
 														<div class="card-footer">
 															<div align="center">
 																<button onclick="deleteInfo('${employeesList[0].memberId}')" type="button" id="deleteInfo"
-																	class="btn btn-primary btn-sm btn-round waves-effect waves-light">삭제</button>
+																	class="btn btn-oti btn-sm waves-effect waves-light">삭제</button>
 																<button onclick="updateInfo('${employeesList[0].memberId}')" type="button" id="modifyInfo"
-																	class="btn btn-primary btn-sm btn-out btn-round waves-effect waves-light">저장</button>
+																	class="btn btn-oti btn-sm btn-out waves-effect waves-light">저장</button>
 															</div>
 														</div>
 													</div>
