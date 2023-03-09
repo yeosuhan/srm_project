@@ -59,6 +59,7 @@ public class SseEmitters {
 	 * */
 	public SseEmitter getEmitter(String memberId) {
 		SseEmitter emitter = this.emitters.get(memberId);
+		log.info("연결 불러옴"+emitter);
 		if(emitter != null) {
 			return emitter;
 		}
