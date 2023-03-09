@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.board.dao.IBoardDao">
+	
+	<!-- 공지사항/문의게시판 + 첨부파일 글 저장 -->
+	<insert id="insertBoard" parameterType="boardRequestDto">
+	<selectKey keyProperty="bbsNo" resultType="int" order="AFTER">
+			SELECT BBS_NO_SEQ.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO BOARD(  BBS_NO ,
+							BBS_TYPE, 
+							BBS_TTL ,
+							BBS_CN ,
+							WRTR_ID ,
+							INQ_CNT ,
+							ANS_YN ,
+							SR_NO ,
+							ATCH_YN )
+		<choose>
+			<when test="bbsType == 'QNA'">
+				VALUES(BBS_NO_SEQ.nextval, #{bbsType}, #{bbsTtl}, #{bbsCn}, #{wrtrId}, #{inqCnt, jdbcType=NULL}, #{ansYn}, #{srNo}, #{atchYn})
+			</when>
+			<otherwise>
+				VALUES(BBS_NO_SEQ.nextval, #{bbsType}, #{bbsTtl}, #{bbsCn}, #{wrtrId}, 0, 0, #{srNo, jdbcType=NULL}, #{atchYn})
+			</otherwise>
+		</choose> 
+	</insert>
+	
+	<!--  공지사항/문의게시판 목록 조회 -->
+	<select id="selectBoardListByBbsType" parameterType="string" resultType="boardListDto">
+		SELECT
+			BBS_NO as bbsNo,
+			BBS_TTL as bbsTtl,
+			ANS_YN as ansYn,
+			WRT_YMD as wrtYmd,
+			m.FLNM as wrtNm
+		FROM BOARD b, MEMBERS m
+		where b.WRTR_ID = m.member_id
+			and BBS_TYPE = upper(#{type})
+		ORDER BY WRT_YMD DESC
+	</select>
+	
+	<!-- 공지사항/문의게시판  상세 조회  -->
+	<select id="selectBoardByBbsNo" parameterType="int" resultType="board">
+		SELECT
+			BBS_NO as bbsNo,
+			BBS_TYPE as bbsType,
+			BBS_TTL as bbsTtl,
+			BBS_CN as bbsCn,
+			WRT_YMD as wrtYmd,
+			m.flnm as wrtrNm,
+			INQ_CNT as inqCnt,
+			ANS_YN as ansYn,
+			SR_NO as srNo,
+			ATCH_YN as atchYn
+		FROM BOARD b, MEMBERS m
+		where b.WRTR_ID = m.member_id	
+		AND BBS_NO = #{bbsNo}
+	</select>
+	
+	<!-- 공지사항 조회 시 : 조회수 ++ -->
+	<update id="updateInqCnt" parameterType="int">
+		UPDATE BOARD
+		SET INQ_CNT = INQ_CNT + 1
+        where BBS_NO = #{bbsNo}
+	</update>
+	
+	<!-- 게시글 수정 -->
+	
+</mapper>
