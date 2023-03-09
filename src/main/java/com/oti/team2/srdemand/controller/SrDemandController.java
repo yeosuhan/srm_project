@@ -105,16 +105,17 @@ public class SrDemandController {
 	@GetMapping("/list")
 	public String getSrDemandList(Authentication auth, Model model,
 			@RequestParam(required = false, name = "dmndno") String dmndno,
-			@RequestParam(required = true, name = "page", defaultValue = "1") String page) {
-
+			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort) {
+		log.info("sort : " + sort);
 		String memberId = auth.getName();
-
+		
 		// 목록
 		int totalRows = srdemandService.getCountClientSr(memberId);
 		Pager pager = new Pager(totalRows, Integer.parseInt(page));
 		log.info(pager);
 		List<SrDemand> list = null;
-		list = srdemandService.getSrDemandList(memberId, pager);
+		list = srdemandService.getSrDemandList(memberId, pager,sort);
 		model.addAttribute("mySrDemandList", list);
 
 		// 기본 첫번째 상세 or 선택된 상세
@@ -178,10 +179,14 @@ public class SrDemandController {
 	 */
 	@PostMapping("/end")
 	public String endSr(String dmndNo) {
-		log.info(dmndNo);
+		log.info("반영요청 - controller: "+dmndNo);
+		
 		srdemandService.endSr(dmndNo); // SR요청 진행상황 개발완료
+		log.info("SR요청 진행상황 개발완료 완료");
 		progressService.endProgress(dmndNo); // 진척률 운영반영 종료일, 진척률 넣기
+		log.info("진척률 운영반영 종료일, 진척률 넣기 완료");
 		srinformationService.endYmd(dmndNo); // SR진척 계획 종료일
+		log.info("SR진척 계획 종료일 완료");
 		return "redirect:/srdemand/list";
 	}
 }

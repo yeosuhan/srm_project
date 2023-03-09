@@ -22,10 +22,10 @@ public interface ISrinformationDao {
 	 * @author 여수한 작성일자 : 2023-02-22
 	 * @param srInfoFilter
 	 * @param pager
-	 * @return sr진척 상세 조회
+	 * @return sr진척 목록 조회
 	 */
 	public List<SrinformationList> selectInfoAll(@Param("pager") Pager pager,
-			@Param("srInfoFilter") SrInfoFilter srInfoFilter);
+			@Param("srInfoFilter") SrInfoFilter srInfoFilter, @Param("sort") String sort);
 
 	/**
 	 * 

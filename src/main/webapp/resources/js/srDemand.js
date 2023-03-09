@@ -1,83 +1,75 @@
 /** ****************SR 상세 조회*************************** */
 /* 작성자 : 신정은 SR 요청을 가져오기 */
 function getSrDemandDetail(dmNo) {
+	console.log("sfsffd");
 	$("#userButtonDiv").empty();
 	$("#adminButtonDiv").empty();
-
-	$
-			.ajax({
-				url : "/srdemand/detail/" + dmNo,
-				type : "GET",
-				success : function(res) {
-					var dmndNo = res.sd.dmndNo;
-					console.log(dmndNo);
-
-					$(".dmndNo").text(dmndNo);
-					$(".dmndNo").val(dmndNo);
-					$(".ttl").text(res.sd.ttl);
-					$(".ttl").val(res.sd.ttl);
-					$(".relGrund").text(res.sd.relGrund);
-					$(".relGrund").val(res.sd.relGrund);
-					$(".dmndYmd").text(res.sd.dmndYmd);
-					$(".cmptnDmndYmd").text(res.sd.cmptnDmndYmd);
-					$(".rjctRsn").text(res.sd.rjctRsn);
-					$(".rjctRsn").val(res.sd.rjctRsn);
-
-					$(".cn").text(res.sd.cn);
-					$(".cn").val(res.sd.cn);
-					$(".endYmd").text(res.sd.endYmd);
-					$(".picNm").text(res.sd.picNm);
-					$(".deptNm").text(res.sd.deptNm);
-					$(".sttsNm").text(res.sd.sttsNm);
-
-					var sttsCd = res.sd.sttsCd;
-					$(".sttsCd").val(sttsCd);
-					$(".sysNm").text(res.sd.ysNm);
-
-					$(".taskSeNm").text(res.sd.taskSeNm);
-					$(".instNm").text(res.sd.instNm);
-					$(".clientNm").text(res.sd.clientNm);
-					$(".rvwrNm").text(res.sd.rvwrNm);
-
-					var prgrsRt = res.prgrsRt;
-					// 버튼 보이게 하기
-					console.log(prgrsRt + "  : prgrsRt");
-					console.log(sttsCd + " @");
-					if (sttsCd == 0) {
-						$("#companion").show();
-						$(".rjctRsn").show();
-						var userdivs = "<div class='col' style='text-align: right'>"
-								+ "<button id='modbtn' style='float:right;' class='btn btn-primary btn-round save center'>수정</button>"
-								+ "<div class='btn btn-primary btn-round danger cancle'style='float:right;margin-right:5px;'  onclick='deleteSr()'>삭제</div> </div>";
-						$("#userButtonDiv").html(userdivs);
-
-						var admindivs = "<div class='col' style='text-align: right'>"
-								+ "<div id='srAccept' style='float:right;' class='btn btn-primary btn-round save center' onclick=goAccept('"
-								+ dmndNo
-								+ "')>승인</div>"
-								+ "<div id='srDecline'style='float:right;margin-right:5px;' class='btn btn-primary btn-round danger cancle' onclick=goDecline('"
-								+ dmndNo + "')>반려</div> </div>";
-						$("#adminButtonDiv").html(admindivs);
-
-						var srRjctRsn = "<textarea rows='5' cols='5' class='form-control rjctRsn' id='srRjctRsn'></textarea>";
-						$("#rjctRsnDiv").html(srRjctRsn);
-					} else if (sttsCd == 1) {
-						$("#companion").show();
-						$(".rjctRsn").show();
-					} else if (sttsCd > 1) {
-						if (prgrsRt == "90") {
-							var userdivs = "<div class='col' style='text-align: right'>"
-									+ "<div class='btn btn-primary btn-round danger cancle' onclick='endSr()' style='float:right;'>반영요청</div> </div>";
-							$("#userButtonDiv").html(userdivs);
-						} else {
-							$("#companion").hide();
-							$(".rjctRsn").hide();
-							var srRjctRsn = "<div class='form-control rjctRsn'>${sd.rjctRsn}</div>";
-							$("#rjctRsnDiv").html(srRjctRsn);
-						}
-					}
+	$.ajax({
+		url : "/srdemand/detail/" + dmNo,
+		type : "GET",
+		success : function(res) {
+			var dmndNo = res.sd.dmndNo;
+			console.log(dmndNo);
+			$(".dmndNo").text(dmndNo);
+			$(".dmndNo").val(dmndNo);
+			$(".ttl").text(res.sd.ttl);
+			$(".ttl").val(res.sd.ttl);
+			$(".relGrund").text(res.sd.relGrund);
+			$(".relGrund").val(res.sd.relGrund);
+			$(".dmndYmd").text(res.sd.dmndYmd);
+			$(".cmptnDmndYmd").text(res.sd.cmptnDmndYmd);
+			$(".rjctRsn").text(res.sd.rjctRsn);
+			$(".rjctRsn").val(res.sd.rjctRsn);
+			$(".cn").text(res.sd.cn);
+			$(".cn").val(res.sd.cn);
+			$(".endYmd").text(res.sd.endYmd);
+			$(".picNm").text(res.sd.picNm);
+			$(".deptNm").text(res.sd.deptNm);
+			$(".sttsNm").text(res.sd.sttsNm);
+			var sttsCd = res.sd.sttsCd;
+			$(".sttsCd").val(sttsCd);
+			$(".sysNm").text(res.sd.ysNm);
+			$(".taskSeNm").text(res.sd.taskSeNm);
+			$(".instNm").text(res.sd.instNm);
+			$(".clientNm").text(res.sd.clientNm);
+			$(".rvwrNm").text(res.sd.rvwrNm);
+				var prgrsRt = res.prgrsRt;
+			// 버튼 보이게 하기
+			console.log(prgrsRt + "  : prgrsRt");
+			console.log(sttsCd + " @");
+			if (sttsCd == 0) {
+				$("#companion").show();
+				$(".rjctRsn").show();
+				var userdivs = "<div class='col' style='text-align: right'>"
+						+ "<button id='modbtn' style='float:right;' class='btn btn-primary btn-round save center'>수정</button>"
+						+ "<div class='btn btn-primary btn-round danger cancle'style='float:right;margin-right:5px;'  onclick='deleteSr()'>삭제</div> </div>";
+				$("#userButtonDiv").html(userdivs);
+					var admindivs = "<div class='col' style='text-align: right'>"
+						+ "<div id='srAccept' style='float:right;' class='btn btn-primary btn-round save center' onclick=goAccept('"
+						+ dmndNo
+						+ "')>승인</div>"
+						+ "<div id='srDecline'style='float:right;margin-right:5px;' class='btn btn-primary btn-round danger cancle' onclick=goDecline('"
+						+ dmndNo + "')>반려</div> </div>";
+				$("#adminButtonDiv").html(admindivs);
+					var srRjctRsn = "<textarea rows='5' cols='5' class='form-control rjctRsn' id='srRjctRsn'></textarea>";
+				$("#rjctRsnDiv").html(srRjctRsn);
+			} else if (sttsCd == 1) {
+				$("#companion").show();
+				$(".rjctRsn").show();
+			} else if ((sttsCd > 1) && (sttsCd <5)) {
+				if (prgrsRt == "90") {
+					var userdivs = "<div class='col' style='text-align: right'>"
+							+ "<div class='btn btn-primary btn-round danger cancle' onclick='endSr()' style='float:right;'>반영요청</div> </div>";
+					$("#userButtonDiv").html(userdivs);
+				} else {
+					$("#companion").hide();
+					$(".rjctRsn").hide();
+					var srRjctRsn = "<div class='form-control rjctRsn'>${sd.rjctRsn}</div>";
+					$("#rjctRsnDiv").html(srRjctRsn);
 				}
-			});
+			}
+		}
+	});
 }
 
 /** *************SR 등록 , 수정********************************** */
@@ -231,12 +223,38 @@ function goDecline(dmndNo) {
 }
 function endSr() {
 	var dmndNo = $(".dmndNo").val();
-	console.log(dmndNo+"반영요청 버튼 누름~");
+	console.log(dmndNo+" 반영요청 버튼 누름~");
 	$.ajax({
 		url : '/srdemand/end',
 		type : 'POST',
-		data : dmndNo,
+		data : {
+			dmndNo : dmndNo
+		},
 		success : function(res) {
+			location.href="/srdemand/list";
+		}
+	});
+}
+
+function srAsc() {
+	console.log("SR요청번호 오름차순~");
+	$.ajax({
+		url : '/srdemand/asc',
+		type : 'GET',
+		data : s,
+		success : function(res) {
+			
+		}
+	});
+}
+function srDesc() {
+	console.log("SR요청번호 내림차순~");
+	$.ajax({
+		url : '/srdemand/desc',
+		type : 'GET',
+		data : s,
+		success : function(res) {
+			
 		}
 	});
 }

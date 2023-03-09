@@ -45,7 +45,9 @@ public class SrinformationController {
 	 * @return sr진척 목록 조회 - 완료
 	 */
 	@GetMapping(value="/list")
-	public String getList(Model model,@RequestParam(value="page", defaultValue="1")int page,@ModelAttribute SrInfoFilter srInfoFilter,Authentication auth ) {
+	public String getList(Model model,@RequestParam(value="page", defaultValue="1")int page,
+			@ModelAttribute SrInfoFilter srInfoFilter,Authentication auth,
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort) {
 		if(srInfoFilter.isMySrOnly()) {
 			srInfoFilter.setEmpId(auth.getName());
 		}
@@ -56,7 +58,7 @@ public class SrinformationController {
 		//log.info(totalRows);
 		if(totalRows!=0) {
 			
-			List<SrinformationList> srlist = srinformationService.getList(pager,srInfoFilter);
+			List<SrinformationList> srlist = srinformationService.getList(pager,srInfoFilter,sort);
 			SrdemandDetail sd = srDemandService.getSrDemandDetail(srlist.get(0).getDmndNo());
 			SrplanInformation sp = srinformationService.getPlan(srlist.get(0).getDmndNo());
 			List<Dept> deptList = srinformationService.getDeptList();

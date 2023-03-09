@@ -18,7 +18,7 @@ public interface ISrinformationService {
 	 * @param pager
 	 * @return sr진척 목록 조회
 	 */
-	List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter);
+	List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort);
 
 	/**
 	 * @author 여수한 작성일자 : 2023-03-02

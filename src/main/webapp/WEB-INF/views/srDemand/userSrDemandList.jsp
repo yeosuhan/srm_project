@@ -209,8 +209,7 @@ th {
 																		<tbody>
 																			<c:forEach var="srDemand" items="${mySrDemandList}"
 																				varStatus="status">
-																				<tr
-																					onclick="getSrDemandDetail('${srDemand.dmndNo}')">
+																				<tr	onclick="getSrDemandDetail('${srDemand.dmndNo}')">
 																					<th scope="row">${status.count}</th>
 																					<td>${srDemand.dmndNo}</td>
 																					<c:choose>
@@ -255,13 +254,10 @@ th {
 																	</div>
 																</div>
 															</div>
-
 														</div>
 													</div>
 												</div>
 											</div>
-
-
 											<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
 											<div class="col-xl-4 col-md-12">
 												<div class="card">
@@ -359,7 +355,7 @@ th {
 																			<div class="col-sm-6 px-0">
 																				<div class="col col-sm-4 font-weight-bold px-0">개발
 																					부서</div>
-																				<div class="col col-sm-8">
+																				<div class="col col-sm-6">
 																					<div type="text" class="form-control deptNm">${sd.deptNm}</div>
 																				</div>
 																			</div>

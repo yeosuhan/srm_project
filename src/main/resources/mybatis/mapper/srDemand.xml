@@ -51,10 +51,14 @@
 			and sd.stts_cd = s.stts_cd
 			and sd.sys_cd = sy.sys_cd
 			and sd.dmnd_no = si.dmnd_no (+)
-
 		) w , members c
 		where w.rvwr_id = c.member_id(+)
+		<if test="sort=='DESC'">
 		order by dmndNo DESC
+		</if>
+		<if test="sort=='ASC'">
+		order by dmndNo ASC
+		</if>
 		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
 
