@@ -84,8 +84,8 @@ public class SrDemandService implements ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public List<SrDemand> getSrDemandList(String custId, Pager pager) {
-		return srDemandDao.selectByCustId(custId, pager);
+	public List<SrDemand> getSrDemandList(String custId, Pager pager, String sort) {
+		return srDemandDao.selectByCustId(custId, pager, sort);
 	}
 
 	/**

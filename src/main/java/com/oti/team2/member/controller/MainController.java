@@ -67,6 +67,7 @@ public class MainController {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();		
 		List<MytodoSrListDto> srList = null;
 		Pager pager = null;
+		log.info("stts   : " + stts);
 		
 		if(role.equals(Auth.ROLE_CLIENT.toString())) {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName() , null, stts, pageNo);

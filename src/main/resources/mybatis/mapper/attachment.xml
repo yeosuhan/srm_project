@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.attachment.dao.IAttachmentDao">
+
+	<insert id="insertAttachment" parameterType="attachment">
+		<selectKey keyProperty="fileSn" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(TO_NUMBER(TRIM(FILE_SN))), 0) + 1 from ATTACHMENTS
+		</selectKey>
+		INSERT ALL 
+		<foreach collection="attachList" item="attach" separator=" " close="SELECT * FROM DUAL" index="index">
+			INTO 
+				ATTACHMENTS( FILE_SN, 
+					<if test="attach.bbsNo != null">
+							BBS_NO, 					
+					</if>
+					<if test="attach.dmndNo != null">
+						DMND_NO, 
+					</if>
+							ORGNL_FILE_NM, 
+							FILE_NM, 
+							FILE_SZ, 
+							FILE_TYPE
+						)
+			VALUES
+				(	#{fileSn} + #{index},
+					<if test="attach.bbsNo != null">
+						#{attach.bbsNo}, 
+					</if>
+					<if test="attach.dmndNo != null">
+						#{attach.dmndNo},
+					</if>
+					#{attach.orgnlFileNm},
+					#{attach.fileNm}, 
+					#{attach.fileSz}, 
+					#{attach.fileType}
+			  )
+		</foreach>
+	</insert>
+	
+	<select id="selectAttachByBbsNoOrDmndNo" parameterType="map" resultType="attachResponseDto">
+		SELECT 
+			   FILE_SN as fileSn,
+			   ORGNL_FILE_NM as orgnlFileNm,
+			   FILE_SZ as fileSz,
+			   FILE_NM as fileNm
+		FROM ATTACHMENTS
+		<if test="bbsNo != 0">
+			WHERE BBS_NO = #{bbsNo}
+		</if>
+		<if test="dmndNo != 0">
+			WHERE DMND_NO = #{dmndNo}
+		</if>
+		
+	</select>
+	
+	<select id="selectAttachByFileSn" parameterType="int" resultType="attachResponseDto">
+		SELECT 
+			   ORGNL_FILE_NM as orgnlFileNm,
+			   FILE_SZ as fileSz,
+			   FILE_NM as fileNm,
+			   FILE_TYPE as fileType
+		FROM ATTACHMENTS
+		WHERE FILE_SN = #{fileSn}
+	</select>
+</mapper>

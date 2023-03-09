@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oti.team2.board.dto.SRKeyDto;
 import com.oti.team2.department.service.IDepartmentService;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
@@ -47,8 +48,8 @@ public class SrinformationService implements ISrinformationService {
 	 * @return sr진척 목록 조회
 	 */
 	@Override
-	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter) {
-		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter);
+	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort) {
+		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter, sort);
 		return srlist;
 	}
 
@@ -175,6 +176,15 @@ public class SrinformationService implements ISrinformationService {
 	public void updateEndYmdBySrNo(String srNo) {
 		srinformationDao.updateEndYmdBySrNo(srNo);
 	}
+
+	/**
+	 * 고객이 문의글 작성 시 : 자신의 모든 진척-요청번호를 보여주기 위함
+	 * @author 신정은
+	 */
+	public List<SRKeyDto> getSrNoAndDmndNo(String custId) {
+		return srinformationDao.selectSrNoAndDmndNoByCustId(custId);
+	}
+	
 	/**
 	 * 
 	 * @author 여수한
