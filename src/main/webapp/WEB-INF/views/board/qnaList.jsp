@@ -136,72 +136,12 @@
 															</div>
 														</form>
 														<div class="d-flex justify-content-center">
-															<button onclick="toUpdate()"
+															<button onclick="updateNotice(${board.bbsNo})"
 																class="btn btn-inverse btn-round waves-effect waves-light mr-4">수정</button>
 															<form action="#">
 																<button
 																	class="btn btn-inverse btn-round waves-effect waves-light">삭제</button>
 															</form>
-														</div>
-													</div>
-												</div>
-												<!-- Input Alignment card end -->
-											</div>
-											<!------------------- 수정 버튼 누르면 바뀌는 화면 ----------------------------->
-											<div class="col-sm-7" id="update" style="display: none;">
-												<div class="card">
-													<div class="card-header">
-														<h5>문의사항</h5>
-													</div>
-													<div class="card-block">
-														<form enctype="multipart/form-data">
-															<div class="form-group row">
-																<div class="col-sm-2 font-weight-bold">글번호</div>
-																<div class="col-sm-1">37</div>
-																<div class="col-sm-2 font-weight-bold text-right">작성자</div>
-																<div class="col-sm-3">신정은(관리자)</div>
-																<div class="col-sm-2 font-weight-bold text-right">답변상태</div>
-																<div class="col-sm-2">답변완료</div>
-															</div>
-															<div class="form-group row">
-																<div class="col-sm-2 font-weight-bold">제목</div>
-																<div class="col-sm-6">
-																	<input type="text" class="form-control"
-																		value="수정중이에여~~">
-																</div>
-																<div class="col-sm-2 font-weight-bold text-right">작성일자</div>
-																<div class="col-sm-2">2023-02-14</div>
-															</div>
-															<div class="form-group row">
-																<p class="col-sm-2 font-weight-bold">내용</p>
-																<div class="col-sm-10">
-																	<textarea rows="20" cols="5" class="form-control"
-																		style="border: none; background-color: #e9ecef"></textarea>
-																</div>
-															</div>
-															<div class="form-group row">
-																<p class="col-sm-2 font-weight-bold">첨부파일</p>
-																<div class="col-sm-5">
-																	<img class="mr-2" src="/resources/oti_images/user.png"
-																		style="height: 100px; align-content: center;"> <img
-																		class="mr-2" src="/resources/oti_images/user.png"
-																		style="height: 100px; align-content: center;"> <img
-																		class="mr-2" src="/resources/oti_images/user.png"
-																		style="height: 100px; align-content: center;"> <img
-																		class="mr-2" src="/resources/oti_images/user.png"
-																		style="height: 100px; align-content: center;"> <img
-																		class="mr-2" src="/resources/oti_images/user.png"
-																		style="height: 100px; align-content: center;">
-																</div>
-																<div class="col-sm-5">
-																	<a href="#" class="mr-3">2023-02-07_공지내용.pdf</a> <a
-																		href="#" class="mr-3">2023-02-07_공지내용.pdf</a>
-																</div>
-															</div>
-														</form>
-														<div class="d-flex justify-content-center">
-															<button
-																class="btn btn-inverse btn-round waves-effect waves-light mr-4">저장</button>
 														</div>
 													</div>
 												</div>

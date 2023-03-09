@@ -4,7 +4,7 @@
  */
 /*******************  공통 ****************/
 // 폼 유효성 검사
-function goPost() {
+function goPost(type) {
 	var bbsTtl = $('#bbsTtl').val();
 	var bbsCn = $('#bbsCn').val();
 	
@@ -21,26 +21,30 @@ function goPost() {
 		
 		var bbsType =  $('input[name=bbsType]').val();
 		var wrtrId =  $('input[name=wrtrId]').val();
-		var srNo =  $('select[name=srNo]').val();
+		
+		if(type == "QNA") {
+			var srNo =  $('select[name=srNo]').val();
+			formData.append("srNo", srNo);
+		}
+		
 		var bbsTtl = $('input[name=bbsTtl]').val();
-		var bbsCn = $('input[name=bbsCn]').val();
-		var attachFile = $('input[name=attachFile]')[0].files[0];
+		var bbsCn = $('#bbsCn').val();
+		var flist = $('input[name=attachFile]')[0].files;
 		
 		formData.append("bbsType", bbsType);
 		formData.append("wrtrId", wrtrId);
-		formData.append("srNo", srNo);
 		formData.append("bbsTtl", bbsTtl);
 		formData.append("bbsCn", bbsCn);
-		formData.append("attachFile", attachFile);
+		//formData.append("attachFile", attachFile);
 					 		
-		console.log($('input[name=attachFile]')[0].files.length);
+		console.log(bbsCn);
 		
-		var fileInput = $('input[name=attachFile]')[0].files;
+		
 		// fileInput 개수를 구한다.
-		for (var i = 0; i < fileInput.length; i++) {
-			console.log(" fileInput[i].files[j] :::"+ fileInput[i]);
+		for (var i = 0; i < flist.length; i++) {
+			console.log(flist[i]);
 			
-			formData.append('file', fileInput[i]);					
+			formData.append('attachFile', flist[i]);					
 		}
 		
 		$.ajax({
@@ -89,7 +93,7 @@ function writeNotice() {
 	$.ajax({
 		url : '/board/write?type=notice',
 		type : 'GET',
-		success : function(data) {			
+		success : function(data) {	
 			$("#writeNotice").html(data);
 			$("#writeNotice").css('display', 'block');
 		}
@@ -102,6 +106,17 @@ function noticeDetail(bbsNo) {
 		type : 'GET',
 		success : function(data) {			
 			$("#noticeDetail").html(data);
+		}
+	});
+}
+
+function updateNotice(bbsNo) {
+	console.log("수정하러 옴~~");
+	$.ajax({
+		url : '/board/update/' + bbsNo,
+		type : 'GET',
+		success : function(data) {
+			$("#qnaDetail").html(data);
 		}
 	});
 }

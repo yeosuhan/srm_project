@@ -44,7 +44,7 @@
 				</div>
 			</form>
 			<div class="modal-footer d-flex justify-content-center">
-				<button type="button" onclick="goPost()"
+				<button type="button" onclick="goPost('QNA')"
 					class="btn btn-inverse btn-round waves-effect waves-light mr-4  btn-primary">저장</button>
 			</div>
 		</div>

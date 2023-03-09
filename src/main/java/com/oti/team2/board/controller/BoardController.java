@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import com.oti.team2.board.dto.Board;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
 import com.oti.team2.board.dto.SRKeyDto;
+import com.oti.team2.board.dto.boardUpdateDto;
 import com.oti.team2.board.service.IBoardService;
 import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.util.Auth;
@@ -91,6 +93,23 @@ public class BoardController {
 		
 		boardService.addBoard(boardRequestDto);
 		if(boardRequestDto.getBbsType().equals("NOTICE")) return "redirect:/board/list?type=notice";
+		return "redirect:/board/list?type=qna";
+	}
+	
+	@GetMapping("/update/{bbsNo}")
+	public String getUpdateForm(@PathVariable("bbsNo") int bbsNo, Authentication auth, Model model) throws MalformedURLException {
+		Board board = boardService.getBoard(bbsNo);
+		model.addAttribute("board", board);
+		log.info(board);
+		if(board.getBbsType().equals("QNA")) return "board/qna-update";
+		
+		return "board/notice-update";
+	}
+	
+	@PostMapping("/update")
+	public String getUpdateForm(boardUpdateDto updateDto){
+		log.info(updateDto);	
+		if(updateDto.getBbsType().equals("NOTICE")) return "redirect:/board/list?type=notice";
 		return "redirect:/board/list?type=qna";
 	}
 }

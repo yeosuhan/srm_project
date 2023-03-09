@@ -41,7 +41,7 @@ public class BoardService implements IBoardService {
 		// attachment 저장
 		// board 저장
 		boolean atchYn = true;
-		if(boardRequestDto.getAttachFile().size() == 1 && boardRequestDto.getAttachFile().get(0).getSize() == 0) {
+		if(boardRequestDto.getAttachFile() == null) {
 			boardRequestDto.setAtchYn(false);
 			atchYn = false;
 		} else boardRequestDto.setAtchYn(atchYn);
