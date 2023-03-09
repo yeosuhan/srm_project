@@ -35,7 +35,7 @@ public class AlertController {
 	@GetMapping("/list")
 	public List<Alert> getAlertList(Authentication auth){
 		List<Alert> alertList = alertService.getAlertList(auth.getName());
-		log.info(alertList);
+		//log.info(alertList);
 		return alertList;
 	}
 	/* Emitter를 생성하여 클라이언트와 연결후 아이디를 키로 하여 맵에 저장
@@ -46,8 +46,16 @@ public class AlertController {
 	@ResponseBody
 	@GetMapping("/connect")
 	public ResponseEntity<SseEmitter> connect(Authentication auth) {
-		return ResponseEntity.ok(alertService.connectSseEmitter(auth.getName()));
+		if(auth.isAuthenticated()) {
+			return ResponseEntity.ok(alertService.connectSseEmitter(auth.getName()));
+		}
+		return null;
 	}
+	/* 알림 전송 예시
+	 * @author : 안한길
+	 * @param : auth dmndNo
+	 * @return : int
+	 * */
 	@ResponseBody
 	@GetMapping("/testsend")
 	public int testSend(Authentication auth, @RequestParam("dmndNo")String dmndNo) {
@@ -55,10 +63,28 @@ public class AlertController {
 		return alertService.sendToClient(auth.getName(), dmndNo);
 		
 	}
-	
+	/* 알림 확인 처리후 링크 이동
+	 * @author : 안한길
+	 * @param : auth
+	 * @param : alert
+	 * @return : String
+	 * */
 	@GetMapping("/checkalert")
 	public String checkAlert(@ModelAttribute Alert alert,Authentication auth) {
+		log.info(alert);
 		String url = alertService.checkAlert(alert,auth.getAuthorities().stream().findFirst().get().toString());
 		return "redirect:"+url;
+	}
+	/* 알림 확인 처리
+	 * @author : 안한길
+	 * @param : altNo
+	 * @return : int
+	 * */
+	@ResponseBody
+	@GetMapping("/close")
+	public int closeAlert(@RequestParam("altNo")int altNo) {
+		int result=alertService.closeAlert(altNo);
+		log.info(result);
+		return result;
 	}
 }

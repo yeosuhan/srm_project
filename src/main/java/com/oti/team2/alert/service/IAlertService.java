@@ -18,4 +18,6 @@ public interface IAlertService {
 
 	String checkAlert(Alert alert, String string);
 
+	int closeAlert(int altNo);
+
 }

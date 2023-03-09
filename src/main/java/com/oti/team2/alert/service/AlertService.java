@@ -120,7 +120,7 @@ public class AlertService implements IAlertService {
 			}else if(role.equals(Auth.ROLE_ADMIN.toString())) {
 				url="/srinformation/list";
 			}
-			
+			url=url+"?hstryId="+alert.getHstryId();
 			alertDao.updateIdntyYn(alert.getAltNo());
 		}else if(alert.getAltType().equals("CHG_YMD_DVL")){
 			
@@ -139,5 +139,14 @@ public class AlertService implements IAlertService {
 			alertDao.updateIdntyYn(alert.getAltNo());
 		}
 		return url;
+	}
+	/* 알림 확인 처리
+	 * @author : 안한길
+	 * @param : altNo
+	 * @return : int
+	 * */
+	@Override
+	public int closeAlert(int altNo) {
+		return alertDao.updateIdntyYn(altNo);
 	}
 }

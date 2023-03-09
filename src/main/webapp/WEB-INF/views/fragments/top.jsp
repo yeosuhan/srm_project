@@ -45,20 +45,20 @@
 				</a></li>
 			</ul>
 			<ul class="nav-right">
-				<li ><button class="btn btn-sm btn-primary" onclick="getEventListener()">서버와 연결</button></li>
 				<li ><button class="btn btn-sm btn-primary" onclick="sendTestMessage()">메시지 전송 테스트</button></li>
 				<%-- 알림 --%>
 				<li class="header-notification" style="margin-top: 20px">
-					<a href="#!" class="waves-effect waves-light"> 
+					<a href="#!" class="waves-effect waves-light" onclick="getAlertList()"> 
 						<i class="ti-bell"></i>
 						<h4>
 							<span id="alertBadge" ></span>
 						</h4>
 					</a>
-					<div class="show-notification">
+					<div class="show-notification" onclick='event.stopPropagation()'>
 						<ul>
 							<li>
-								<h6>Notifications</h6> <label onclick="refreshAlert()" class="label label-danger">New</label>
+								<h6>Notifications</h6>
+								<i class="close fa fa-refresh" onclick="refreshAlert()"></i>
 							</li>
 						</ul>
 						<!-- Nav tabs -->
@@ -77,10 +77,11 @@
 								<div class="slide"></div></li>
 							
 						</ul>
-						<div class="tab-content card-block ">
+						<div id="alertTab" class="tab-content card-block ">
 							<!-- 반영 요청 알림 -->
 							<div class="tab-pane active" id="rfltTab" role="tabpanel">
 								<ul>
+									<%-- 디자인 참고용
 									<li class="waves-effect waves-light">
 										<div class="media">
 											<img class="d-flex align-self-center img-radius"
@@ -92,61 +93,25 @@
 												<span class="notification-time">30 minutes ago</span>
 											</div>
 										</div>
-									</li>
+									</li> --%>
 								</ul>
 							</div>
 							<%-- 요청일 변경 알림 --%>
 							<div class="tab-pane" id="chgDmndTab" role="tabpanel">
 								<ul>
-									<li class="waves-effect waves-light">
-										<div class="media">
-											<img class="d-flex align-self-center img-radius"
-												src="${pageContext.request.contextPath}/resources/assets/images/avatar-3.jpg"
-												alt="Generic placeholder image">
-											<div class="media-body">
-												<h5 class="notification-user">Sara Soudein</h5>
-												<p class="notification-msg">Lorem ipsum dolor sit amet,
-													consectetuer elit.</p>
-												<span class="notification-time">30 minutes ago</span>
-											</div>
-										</div>
-									</li>
+									
 								</ul>
 							</div>
 							<%-- 요청일 변경 알림 --%>
 							<div class="tab-pane" id="developerTab" role="tabpanel">
 								<ul>
-									<li class="waves-effect waves-light">
-										<div class="media">
-											<img class="d-flex align-self-center img-radius"
-												src="${pageContext.request.contextPath}/resources/assets/images/avatar-3.jpg"
-												alt="Generic placeholder image">
-											<div class="media-body">
-												<h5 class="notification-user">Sara Soudein</h5>
-												<p class="notification-msg">Lorem ipsum dolor sit amet,
-													consectetuer elit.</p>
-												<span class="notification-time">30 minutes ago</span>
-											</div>
-										</div>
-									</li>
+									
 								</ul>
 							</div>
 							<%-- 개발취소알림 --%>
 							<div class="tab-pane" id="cancleTab" role="tabpanel">
 								<ul>
-									<li class="waves-effect waves-light">
-										<div class="media">
-											<img class="d-flex align-self-center img-radius"
-												src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg"
-												alt="Generic placeholder image">
-											<div class="media-body">
-												<h5 class="notification-user">Joseph William</h5>
-												<p class="notification-msg">Lorem ipsum dolor sit
-													amet,consectetuer elit.</p>
-												<span class="notification-time">30 minutes ago</span>
-											</div>
-										</div>
-									</li>
+									
 								</ul>
 							</div>
 						</div>
