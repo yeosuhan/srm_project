@@ -25,17 +25,43 @@ public class SseEmitters {
 			this.emitters.remove(memberId); //만료시 리스트에서 삭제
 		});
 		emitter.onTimeout(()->{
-			log.info("time out");
+			log.info("time out"+this.toString());
 			emitter.complete();
 		});
+		log.info(memberId+" 연결");
+		log.info(emitters.get(memberId));
 		return emitter;
 	}
-	/* 클라이언트와 연결된 emitter를 가져옴
+	
+	/* 클라이언트에게 알람을 전송
 	 * @author : 안한길
-	 * @param : memberId
+	 * @param : alert
+	 * 
+	 * */
+	public void sendAlert(String memberId) {
+		SseEmitter emitter = this.emitters.get(memberId);
+		log.info(emitter);
+		String data = "new message";
+		try {
+			emitter.send(SseEmitter.event()
+					.name("alert")
+					.data(data)
+					);
+			log.info(memberId+" 에게 메시지 전송 완료");
+		}catch(Exception ex) {
+			emitter.completeWithError(ex);
+		}
+	}
+	/* 기존의 연결을 가져오는 메소드
+	 * @author : 안한길
+	 * @param : name
 	 * @return : SseEmitter
 	 * */
-	SseEmitter getSseEmitter(String memberId) {
-		return this.emitters.get(memberId);
+	public SseEmitter getEmitter(String memberId) {
+		SseEmitter emitter = this.emitters.get(memberId);
+		if(emitter != null) {
+			return emitter;
+		}
+		return null;
 	}
 }

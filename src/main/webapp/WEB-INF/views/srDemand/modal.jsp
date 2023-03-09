@@ -148,8 +148,8 @@
 				</form>
 			</div>
 			<div class="m_footer">
-				<button type="submit" class="modal_btn save center" form="srRequest">등록</button>
-				<div class="modal_btn danger cancle" id="closebtn">닫기</div>
+				<button type="submit" class="modal_btn btn-oti save center" form="srRequest">등록</button>
+				<div class="modal_btn btn-oti cancle" id="closebtn">닫기</div>
 			</div>
 		</div>
 
@@ -300,8 +300,8 @@
 				</div>
 			</div>
 			<div class="m_footer">
-				<div class="modal_btn save center" id="savebtn">저장</div>
-				<div class="modal_btn danger cancle" id="closebtn">닫기</div>
+				<div class="modal_btn btn-oti save center" id="savebtn">저장</div>
+				<div class="modal_btn btn-oti cancle" id="closebtn">닫기</div>
 			</div>
 		</div>
 	</div>

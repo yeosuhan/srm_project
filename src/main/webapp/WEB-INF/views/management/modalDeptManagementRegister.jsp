@@ -75,7 +75,7 @@
 			</div>
 			<div align="center">
 				<button type="submit" form="registerDeptInfo"
-					class="btn btn-primary btn-sm btn-round waves-effect waves-light mb-2">등록</button>
+					class="btn btn-oti btn-sm waves-effect waves-light mb-2">등록</button>
 			</div>
 		</div>
 	</div>

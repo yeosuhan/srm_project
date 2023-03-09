@@ -100,7 +100,7 @@
 					</div>
 				</div>
 				<div id="footModiDiv" class="pt-3" align="center">
-					<button type="submit" class="btn btn-info save center">확인</button>
+					<button type="submit" class="btn btn-oti save center">확인</button>
 				</div>
 			</form>
 

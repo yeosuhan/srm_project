@@ -139,7 +139,7 @@ label>img {
 																		<div class="btn-group dropright">
 																			<a href="<c:url value='/institution/add'/>"
 																				type="button"
-																				class="btn btn-inverse btn-round ml-2">
+																				class="btn btn-oti ml-2">
 																				기관 등록 </a>
 																		</div>
 																	</div>
@@ -160,7 +160,7 @@ label>img {
 															</form>
 															<div class="d-flex">
 																<button type="submit" form="myinfo"
-																	class="btn btn-inverse btn-round"
+																	class="btn btn-oti"
 																	style="margin-left: 160px;">저장</button>
 															</div>
 														</div>
@@ -200,7 +200,7 @@ label>img {
 														</form>
 														<div class="d-flex" style="padding-top:100px;">
 															<button type="submit" form="myInstForm"
-																class="btn btn-inverse btn-round">수정</button>
+																class="btn btn-oti">수정</button>
 														</div>
 													</div>
 												</div>

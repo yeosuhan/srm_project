@@ -43,11 +43,11 @@
 															</div>
 															<div class="col-sm-2 ">
 																<button
-																	class="btn btn-primary btn-round waves-effect waves-light">검색</button>
+																	class="btn btn-oti waves-effect waves-light">검색</button>
 															</div>
 															<div class="col-sm-3 d-flex justify-content-end pr-4">
 																<div
-																	class="btn btn-primary btn-round waves-effect waves-light"
+																	class="btn btn-oti waves-effect waves-light"
 																	onclick="show()" data-toggle="modal"
 																	data-target="ModalRegister">부서 등록</div>
 															</div>
@@ -78,7 +78,7 @@
 																				${department.flnm}</p>
 																			<p class="card-text">부서 인원:
 																				${department.deptNope}명</p>
-																			<div class="btn btn-primary btn-sm">
+																			<div class="btn btn-oti btn-sm">
 																				<i class="fa fa-search-plus"></i>
 																			</div>
 																		</div>
@@ -97,7 +97,7 @@
 																						action="<c:url value='/admin/department/delete'/>">
 																						<input type="hidden" name="deptCd"
 																							value="${department.deptCd}">
-																						<button type="submit" class="btn btn-sm btn-light">
+																						<button type="submit" class="btn btn-sm btn-oti">
 																							<i class="fa fa-trash" data-html="true"
 																								data-toggle="tooltip" data-placement="top"
 																								title=""
@@ -139,7 +139,7 @@
 																			<div align="center">
 																				<button type="submit"
 																					form="modifyInfo${status.count}"
-																					class="btn btn-primary btn-sm btn-round waves-effect waves-light mt-2">수정</button>
+																					class="btn btn-oti btn-sm waves-effect waves-light mt-2">수정</button>
 																			</div>
 																		</div>
 																	</div>
