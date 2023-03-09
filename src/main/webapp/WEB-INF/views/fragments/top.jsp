@@ -43,7 +43,7 @@
 						</a></li>
 					</ul>
 					<ul class="nav-right">
-						<li ><button class="btn btn-sm btn-primary" onclick="sendTestMessage()">메시지 전송 테스트</button></li>
+						<li ><button class="btn btn-sm btn-oti" onclick="sendTestMessage()">메시지 전송 테스트</button></li>
 						<%-- 알림 --%>
 						<li class="header-notification" style="margin-top: 20px">
 							<span id="alertBadge" class="badge bg-c-yellow" style=""></span> 
