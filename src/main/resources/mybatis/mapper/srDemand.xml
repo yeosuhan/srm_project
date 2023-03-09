@@ -104,7 +104,6 @@
 					end_ymd ,
 					TASK_SE_NM ,
 					TASK_SE_CD
-	
 				from ( SELECT
 							sd.DMND_NO as DMND_NO,
 							si.rnk as rnk ,
@@ -127,7 +126,7 @@
 							sd.TASK_SE_CD ,
 							si.end_ymd
 						FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sys,
-							sr_information si, departments d, task tk
+							sr_information si, departments d, task tk, progress p
 						WHERE sd.DMND_NO = #{dmndNo}
 							and sd.dmnd_no = si.dmnd_no (+)
 							and sd.cust_id = m.member_id
@@ -136,7 +135,6 @@
 							and sd.sys_cd = sys.sys_cd
 							and si.dept_cd = d.dept_cd (+)
 							and sd.TASK_SE_CD = tk.TASK_SE_CD
-		
 				) w , members c
 				where w.rvwr_id = c.member_id(+)
 		)t , members mem
@@ -372,4 +370,13 @@
 		order by sd.DMND_NO DESC
 		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
+	<!-- 반영요청 수락하기 -->
+	<update id="updateSrdemandStts" parameterType="string">
+		UPDATE
+			SR_DEMAND
+		SET
+			STTS_CD = 5
+		WHERE
+			DMND_NO = #{dmndNo}
+	</update>
 </mapper>

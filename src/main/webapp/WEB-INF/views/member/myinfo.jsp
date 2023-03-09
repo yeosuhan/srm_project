@@ -139,7 +139,7 @@ label>img {
 																		<div class="btn-group dropright">
 																			<a href="<c:url value='/institution/add'/>"
 																				type="button"
-																				class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2">
+																				class="btn btn-inverse btn-round ml-2">
 																				기관 등록 </a>
 																		</div>
 																	</div>
@@ -160,7 +160,7 @@ label>img {
 															</form>
 															<div class="d-flex">
 																<button type="submit" form="myinfo"
-																	class="btn btn-inverse btn-round waves-effect waves-light"
+																	class="btn btn-inverse btn-round"
 																	style="margin-left: 160px;">저장</button>
 															</div>
 														</div>
@@ -172,7 +172,7 @@ label>img {
 													<div class="card-header">
 														<h5>나의 기관</h5>
 													</div>
-													<div class="col-8 card-block" style="margin-top: 10px;">
+													<div class="col-8 card-block" style="margin-top: 10px;padding:50px;">
 														<form method="post"
 															action="<c:url value='/institution/update'/>"
 															id="myInstForm" class="form-material">
@@ -183,24 +183,24 @@ label>img {
 																	style="width: 50%"> <span class="form-bar"></span>
 																<label class="float-label">기업명</label>
 															</div>
-															<div class="form-group form-default">
+															<div class="form-group form-default" style="padding-top:20px;">
 																<input value="${inst.instTelno}" type="text"
 																	name="InstTelno" class="form-control" required=""
 																	style="width: 50%"> <span class="form-bar"></span>
-																<label class="float-label">대표 번호</label>
+																<label class="float-label"style="padding-top:20px;">대표 번호</label>
 															</div>
-															<div class="form-group form-default">
+															<div class="form-group form-default" style="padding-top:20px;">
 																<input type="text" name="InstAddr" id="address_kakao"
 																	class="form-control" required value="${inst.instAddr}">
 																<input value="${inst.instDetailAddr}"
 																	class="form-control" type="text" name="InstDetailAddr"
 																	placeholder="상세주소"> <span class="form-bar"></span>
-																<label class="float-label">주소</label>
+																<label class="float-label" style="padding-top:20px;">주소</label>
 															</div>
 														</form>
-														<div class="d-flex justify-content-center">
+														<div class="d-flex" style="padding-top:100px;">
 															<button type="submit" form="myInstForm"
-																class="btn waves-effect waves-light hor-grd btn-grd-primary ">수정</button>
+																class="btn btn-inverse btn-round">수정</button>
 														</div>
 													</div>
 												</div>

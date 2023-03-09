@@ -182,7 +182,7 @@ th {
 																		<option value="1">반려</option>
 																	</select>
 																</div>
-																<div class="col col-3 pr-0">
+																<div class="col col-3 px-0">
 																	<label for="sysCd" style="margin-right: 10px;">관련
 																		시스템</label> <select id="sysCd" name="sysCd">
 																		<option value="0">워크넷</option>
@@ -192,17 +192,16 @@ th {
 																		<option value="1">외부망</option>
 																	</select>
 																</div>
-																<div class="col col-xl-3">
+																<div class="col col-4 px-0">
 																	<label for="keyWord" style="margin-right: 10px;">키워드</label>
 																	<input type="text" name="keyWord" id="keyWord">
 																	<button onclick="srSearch()" type="button"
-																		class="btn btn-lg btn-info">
+																		class="btn btn-sm btn-info"style="margin-right:10px;height:30px;">
 																		<i class="ti-search"></i>
 																	</button>
+																	<button class="btn btn-sm btn-info"style="height:30px;">엑셀 다운로드</button>
 																</div>
-																<div class="col col-xl-1" style="padding-left: 0px;">
-																	<button class="btn btn-info">엑셀 다운로드</button>
-																</div>
+																
 															</div>
 														</form>
 													</div>
@@ -443,7 +442,7 @@ th {
 																			class="col-sm-2 px-0 col-form-label font-weight-bold"
 																			style="line-height: 100px; font-size: 12px;">SR
 																			내용</label>
-																		<div class="col-sm-9 pl-0">
+																		<div class="col-sm-9">
 																			<input class="form-control cn" style="height: 100px;"
 																				value="${sd.cn}"></input>
 																		</div>

@@ -175,5 +175,15 @@ public class SrinformationService implements ISrinformationService {
 	public void updateEndYmdBySrNo(String srNo) {
 		srinformationDao.updateEndYmdBySrNo(srNo);
 	}
+	/**
+	 * 
+	 * @author 여수한
+	 * 작성일자 : 2023-03-09
+	 * @return 반영요청 수락시 SR진척에서 계획종료일 update
+	 */
+	@Override
+	public void endYmd(String dmndNo) {
+		srinformationDao.updateEndYmdByDmndNo(dmndNo);
+	}
 }
 

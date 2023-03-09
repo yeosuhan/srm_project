@@ -2,8 +2,6 @@ package com.oti.team2.srdemand.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -17,17 +15,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.institution.service.IInstitutionService;
 import com.oti.team2.member.service.IMemberService;
+import com.oti.team2.progress.service.IProgressService;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
+import com.oti.team2.srdemand.dto.SrdemandPrgrsrt;
 import com.oti.team2.srdemand.dto.WriteSdBaseDto;
 import com.oti.team2.srdemand.dto.WriterDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
+import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.system.dto.SrSystem;
 import com.oti.team2.system.service.ISystemService;
 import com.oti.team2.task.dto.SystemTask;
 import com.oti.team2.task.service.ITaskService;
-import com.oti.team2.util.Auth;
 import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
@@ -51,6 +51,12 @@ public class SrDemandController {
 	
 	@Autowired
 	private ITaskService taskService;
+	
+	@Autowired
+	private IProgressService progressService;
+	
+	@Autowired
+	private ISrinformationService srinformationService;
 
 	/**
 	 * sr요청 작성 시 , 작성자의 아이디, 이름, 소속기관 이름을 세팅하기 위함
@@ -132,10 +138,13 @@ public class SrDemandController {
 	 */
 	@ResponseBody
 	@GetMapping("/detail/{dmNo}")
-	public SrdemandDetail getSrDemandDetail(@PathVariable String dmNo) {
+	public SrdemandPrgrsrt getSrDemandDetail(@PathVariable String dmNo) {
+		String prgrsRt = progressService.getPrgrsRt(dmNo);
 		SrdemandDetail sd = srdemandService.getSrDemandDetail(dmNo);
 		log.info(sd);
-		return sd;
+		SrdemandPrgrsrt sdpr = new SrdemandPrgrsrt(sd,prgrsRt);
+		log.info(sdpr);
+		return sdpr;
 	}
 
 	/**
@@ -162,5 +171,17 @@ public class SrDemandController {
 		srdemandService.deleteSrdemand(dmndNo);
 		return "";
 	}
-
+	/**
+	 * 반영요청 수락하기
+	 * 
+	 * @author 여수한
+	 */
+	@PostMapping("/end")
+	public String endSr(String dmndNo) {
+		log.info(dmndNo);
+		srdemandService.endSr(dmndNo); // SR요청 진행상황 개발완료
+		progressService.endProgress(dmndNo); // 진척률 운영반영 종료일, 진척률 넣기
+		srinformationService.endYmd(dmndNo); // SR진척 계획 종료일
+		return "redirect:/srdemand/list";
+	}
 }

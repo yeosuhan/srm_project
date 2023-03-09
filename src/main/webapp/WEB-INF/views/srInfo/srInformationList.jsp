@@ -114,8 +114,10 @@ th {
 .col-xl-1 {
 	padding-top: 0px;
 }
+ li:before {
+        content : none;
+      }
 </style>
-
 <body>
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
@@ -405,7 +407,7 @@ th {
 																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 px-0 font-weight-bold">요청
 																				번호</div>
-																			<div class="col col-sm-6">
+																			<div class="col col-sm-6 px-0">
 																				<input type="hidden" id="SRDSrNo"
 																					value="${srlist[0].srNo}"> <input readonly
 																					class="form-control" id="SRDDmndNo"
@@ -414,7 +416,7 @@ th {
 																		</div>
 																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 px-0 font-weight-bold">우선순위</div>
-																			<div class="col col-sm-6">
+																			<div class="col col-sm-6 px-0">
 																				<input type="text" readonly class="form-control"
 																					id="SiRnk" value="${sd.rnk}">
 																			</div>
@@ -424,7 +426,7 @@ th {
 																	<div class="form-group row">
 																		<div class="col col-sm-2 px-0 font-weight-bold">SR
 																			제목</div>
-																		<div class="col col-sm-9">
+																		<div class="col col-sm-9 px-0">
 																			<input readonly class="form-control" id="SRDTitle"
 																				value="${sd.ttl}">
 																		</div>
@@ -432,7 +434,7 @@ th {
 																	<hr />
 																	<div class="form-group row">
 																		<div class="col col-sm-2 px-0 font-weight-bold">관련근거</div>
-																		<div class="col col-sm-9">
+																		<div class="col col-sm-9 px-0">
 																			<input readonly class="form-control" id="SRDRelgrund"
 																				value="${sd.relGrund}">
 																		</div>
@@ -441,14 +443,14 @@ th {
 																	<div class="form-group row">
 																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 px-0 font-weight-bold">시스템구분</div>
-																			<div class="col col-sm-8">
+																			<div class="col col-sm-8 pl-0">
 																				<input readonly class="form-control" id="SRDSys"
 																					value="${sd.sysNm}">
 																			</div>
 																		</div>
 																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 px-0 font-weight-bold">업무구분</div>
-																			<div class="col col-sm-7">
+																			<div class="col col-sm-7 pl-0">
 																				<input readonly class="form-control" id="SRDTask"
 																					value="${sd.taskSeNm}">
 																			</div>
@@ -458,14 +460,14 @@ th {
 																	<div class="form-group row">
 																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 px-0 font-weight-bold">요청기관</div>
-																			<div class="col col-sm-8">
+																			<div class="col col-sm-8 pl-0">
 																				<input readonly class="form-control" id="SRDInst"
 																					value="${sd.instNm}">
 																			</div>
 																		</div>
 																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 px-0 font-weight-bold">요청자</div>
-																			<div class="col col-sm-7">
+																			<div class="col col-sm-7 pl-0">
 																				<input readonly class="form-control"
 																					id="SRDClientNm" value="${sd.clientNm}">
 																			</div>
@@ -475,14 +477,14 @@ th {
 																	<div class="form-group row">
 																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 px-0 font-weight-bold">요청일</div>
-																			<div class="col col-sm-8">
+																			<div class="col col-sm-8 pl-0">
 																				<input readonly class="form-control" id="SRDDmndymd"
 																					value="${sd.dmndYmd}">
 																			</div>
 																		</div>
 																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 px-0 font-weight-bold">완료요청일</div>
-																			<div class="col col-sm-7">
+																			<div class="col col-sm-7 pl-0">
 																				<input readonly class="form-control"
 																					id="SRDCmptnDmndYmd" value="${sd.cmptnDmndYmd}">
 																			</div>
@@ -494,7 +496,7 @@ th {
 																			class="col-sm-2 px-0 col-form-label font-weight-bold"
 																			style="line-height: 100px; font-size: 12px">SR
 																			내용</label>
-																		<div class="col-sm-9">
+																		<div class="col-sm-9 px-0">
 																			<input readonly class="form-control"
 																				style="height: 100px;" id="SRDCn" value="${sd.cn}">
 																		</div>
@@ -502,15 +504,15 @@ th {
 																	<hr />
 																	<div class="form-group row">
 																		<div class="col-sm-6 px-0">
-																			<div class="col col-sm-4 font-weight-bold">검토자</div>
-																			<div class="col col-sm-8">
+																			<div class="col col-sm-4 px-0 font-weight-bold">검토자</div>
+																			<div class="col col-sm-8 pl-0">
 																				<input readonly class="form-control" id="SRDRvwrNm"
 																					value="${sd.rvwrNm}">
 																			</div>
 																		</div>
 																		<div class="col-sm-6 px-0">
 																			<div class="col col-sm-4 font-weight-bold">진행상태</div>
-																			<div class="col col-sm-7">
+																			<div class="col col-sm-7 pl-0">
 																				<input readonly class="form-control"
 																					id="SRDCmptnDmndYmd" value="${sd.sttsNm}">
 																			</div>
@@ -520,7 +522,7 @@ th {
 																		<label
 																			class="col-sm-2 px-0 col-form-label font-weight-bold"
 																			style="font-size: 12px;">첨부파일</label>
-																		<div class="col-sm-9">
+																		<div class="col-sm-9 px-0">
 																			<input type="file" class="" id="SRDFile">
 																		</div>
 																	</div>

@@ -143,5 +143,11 @@ public interface ISrDemandDao {
 	 */
 	public List<MytodoSrListDto> selectByEmpIdAndSttsCd(@Param("empId") String empId
 			, @Param("sttsCd") int sttsCd
-			, @Param("pager") Pager pager); 
+			, @Param("pager") Pager pager);
+	/**
+	 * 반영요청 수락하기
+	 * 
+	 * @author 여수한
+	 */
+	public void updateSrdemandStts(@Param("dmndNo") String dmndNo); 
 }
