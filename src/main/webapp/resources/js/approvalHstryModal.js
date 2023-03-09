@@ -44,11 +44,12 @@ function getHstryDetail(historyId) {
 							$('#appvHstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="appvHstryStts1" type="radio" name="hstryStts" value="Y">승인</label>'
-													+ '<label><input id="appvHstryStts2" type="radio" name="hstryStts" value="N">반려</label>'+'<input type="hidden" class="AhstryId" name="hstryId" value="">');
+													+ '<label><input id="appvHstryStts2" type="radio" name="hstryStts" value="N">반려</label>'
+													+ '<input type="hidden" class="AhstryId" name="hstryId" value="">');
 							$('.AhstryId').val(appvHstryId);
 							$('#footDivUSer')
 									.html(
-											'<button type="submit" form="approvalHistoryForm" formmethod="post" class="btn btn-info save center">등록</button>');
+											'<button type="submit" form="approvalHistoryForm" formmethod="post" class="btn btn-oti center">등록</button>');
 
 							$(document)
 									.ready(
@@ -64,11 +65,13 @@ function getHstryDetail(historyId) {
 																	if (cStatus == 'Y') {
 																		$(
 																				'.bHstryType')
-																				.val(appvHstryType);
+																				.val(
+																						appvHstryType);
 																	} else if (cStatus == 'N') {
 																		$(
 																				'.bHstryType')
-																				.val(appvHstryType);
+																				.val(
+																						appvHstryType);
 																	}
 																});
 											});

@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
 
 <div id="pcoded" class="pcoded iscollapsed" theme-layout="vertical"
 	vertical-placement="left" vertical-layout="wide"
@@ -43,76 +45,85 @@
 						</a></li>
 					</ul>
 					<ul class="nav-right">
-						<li ><button class="btn btn-sm btn-oti" onclick="sendTestMessage()">메시지 전송 테스트</button></li>
+						<li><button class="btn btn-sm btn-oti"
+								style="background-color: #4C1342; margin-top: 10px;"
+								onclick="sendTestMessage()">메시지 전송 테스트</button></li>
 						<%-- 알림 --%>
-						<li class="header-notification" style="margin-top: 20px">
-							<span id="alertBadge" class="badge bg-c-yellow" style=""></span> 
-							<a href="#!" id="alertBtn" class="waves-effect waves-light" onclick="getAlertList();event.preventDefault();" style="display: block; padding-right: 4px"> 
-								<i class="far fa-bell" style="font-size: 19px;"></i>
-                  			</a>
-							
-							<div class="show-notification" onclick='event.stopPropagation()' style="display: none;">
+						<li class="header-notification" style="margin-top: 20px"><span
+							id="alertBadge" class="badge bg-c-yellow" style=""></span> <a
+							href="#!" id="alertBtn" class="waves-effect waves-light"
+							onclick="getAlertList();event.preventDefault();"
+							style="display: block; padding-right: 4px"> <i
+								class="far fa-bell" style="font-size: 19px;"></i>
+						</a>
+
+							<div class="show-notification" onclick='event.stopPropagation()'
+								style="display: none;">
 								<ul>
 									<li>
 										<h6>Notifications</h6>
 									</li>
 								</ul>
 								<!-- Nav tabs -->
-								<ul class="nav nav-tabs md-tabs " role="tablist" style="width:100%; margin:0px">
-									<li class="nav-item" style="padding:0px"><a class="nav-link active" style="font-size:10px;"
+								<ul class="nav nav-tabs md-tabs " role="tablist"
+									style="width: 100%; margin: 0px">
+									<li class="nav-item" style="padding: 0px"><a
+										class="nav-link active" style="font-size: 10px;"
 										data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
 										<div class="slide"></div></li>
-									<li class="nav-item" style="padding:0px"><a class="nav-link" style="font-size:10px;"
-										data-toggle="tab" href="#chgDmndTab" role="tab">예정일 변경</a>
+									<li class="nav-item" style="padding: 0px"><a
+										class="nav-link" style="font-size: 10px;" data-toggle="tab"
+										href="#chgDmndTab" role="tab">예정일 변경</a>
 										<div class="slide"></div></li>
-									<li class="nav-item" style="padding:0px"><a class="nav-link" style="font-size:10px;"
-										data-toggle="tab" href="#developerTab" role="tab">예정일 변경(개발자)</a>
+									<li class="nav-item" style="padding: 0px"><a
+										class="nav-link" style="font-size: 10px;" data-toggle="tab"
+										href="#developerTab" role="tab">예정일 변경(개발자)</a>
 										<div class="slide"></div></li>
-									<li class="nav-item" style="padding:0px"><a class="nav-link" style="font-size:10px;"
-										data-toggle="tab" href="#cancleTab" role="tab">개발 취소</a>
+									<li class="nav-item" style="padding: 0px"><a
+										class="nav-link" style="font-size: 10px;" data-toggle="tab"
+										href="#cancleTab" role="tab">개발 취소</a>
 										<div class="slide"></div></li>
-									
+
 								</ul>
 								<div id="alertTab" class="tab-content card-block ">
 									<!-- 반영 요청 알림 -->
 									<div class="tab-pane active" id="rfltTab" role="tabpanel">
 										<ul>
 											<%-- 디자인 참고용
-											<li class="waves-effect waves-light">
-												<div class="media">
-													<img class="d-flex align-self-center img-radius"
-														src="${pageContext.request.contextPath}/resources/assets/images/avatar-2.jpg"
-														alt="Generic placeholder image">
-													<div class="media-body">
-														<h5 class="notification-user">John Doe</h5>
-														<p class="notification-msg"></p>
-														<span class="notification-time">30 minutes ago</span>
-													</div>
-												</div>
-											</li> --%>
+                                 <li class="waves-effect waves-light">
+                                    <div class="media">
+                                       <img class="d-flex align-self-center img-radius"
+                                          src="${pageContext.request.contextPath}/resources/assets/images/avatar-2.jpg"
+                                          alt="Generic placeholder image">
+                                       <div class="media-body">
+                                          <h5 class="notification-user">John Doe</h5>
+                                          <p class="notification-msg"></p>
+                                          <span class="notification-time">30 minutes ago</span>
+                                       </div>
+                                    </div>
+                                 </li> --%>
 										</ul>
 									</div>
 									<%-- 요청일 변경 알림 --%>
 									<div class="tab-pane" id="chgDmndTab" role="tabpanel">
 										<ul>
-											
+
 										</ul>
 									</div>
 									<%-- 요청일 변경 알림 --%>
 									<div class="tab-pane" id="developerTab" role="tabpanel">
 										<ul>
-											
+
 										</ul>
 									</div>
 									<%-- 개발취소알림 --%>
 									<div class="tab-pane" id="cancleTab" role="tabpanel">
 										<ul>
-											
+
 										</ul>
 									</div>
 								</div>
-							</div>
-						</li>
+							</div></li>
 
 						<%-- 로그아웃 --%>
 						<li class="user-profile header-notification"><sec:authorize

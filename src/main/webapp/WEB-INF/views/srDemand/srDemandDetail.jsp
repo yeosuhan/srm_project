@@ -6,7 +6,6 @@
 	내용  : sr 요청 상세 모달
  --%>
 <div class="modal" id="srDemandModal">
-
 	<div class="modal-body modal-dialog modal-lg">
 		<div class="m_head ">
 			<div class="modal_title" style="color: white">SR 요청 상세</div>
@@ -134,16 +133,11 @@
 				<div class="row mt-3 ml-1">
 					<div class="col-12">첨부 파일</div>
 				</div>
-
 			</form>
 		</div>
 		<div class="m_footer bg-light">
-
 			<button class="btn btn-oti save center" data-dismiss="modal">승인</button>
-
 			<button class="btn btn-oti danger cancle" data-dismiss="modal">반려</button>
-
 		</div>
 	</div>
-
 </div>

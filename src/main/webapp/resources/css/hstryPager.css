@@ -47,7 +47,7 @@ h1 {
 }
 
 .hstryPager a:hover, .hstryPager a .hstryPager-active {
-	color: cornflowerblue;
+	color: #F05F57;
 }
 
 .hstryPager a:hover:before, .hstryPager a .hstryPager-active:before {
@@ -55,7 +55,7 @@ h1 {
 }
 
 .hstryPager .hstryPager-active {
-	color: cornflowerblue;
+	color: #F05F57;
 }
 
 .hstryPager .hstryPager-active:before {

@@ -49,11 +49,12 @@ function getInfoHstryDetail(historyId) {
 							$('#HstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y">승인</label>'
-													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N">반려</label>' + '<input type="hidden" class="AhstryId" name="hstryId" value="">');
+													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N">반려</label>'
+													+ '<input type="hidden" class="AhstryId" name="hstryId" value="">');
 							$('.AhstryId').val(AhstryId);
 							$('#footDiv')
 									.html(
-											'<button type="submit" form="historyDetailForm" formmethod="post" class="btn btn-info save center">등록</button>');
+											'<button type="submit" form="historyDetailForm" formmethod="post" class="btn btn-oti center">등록</button>');
 
 							$(document)
 									.ready(
@@ -140,12 +141,12 @@ function getInfoHstryDetail(historyId) {
 							console.log(AhstryType);
 							$('#mheadDiv')
 									.html(
-											'<input type="button" class="btn btn-primary pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
+											'<input type="button" class="btn btn-oti pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
 													+ '<input type="hidden" class="AhstryId" value="">');
 						} else if (auth == 'ROLE_ADMIN' && AhstryType != 'A') {
 							$('#mheadDiv')
 									.html(
-											'<input type="button" class="btn btn-primary pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
+											'<input type="button" class="btn btn-oti pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
 													+ '<input type="hidden" class="AhstryId" value="">');
 						}
 					}
