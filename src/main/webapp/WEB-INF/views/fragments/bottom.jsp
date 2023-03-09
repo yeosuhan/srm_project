@@ -47,4 +47,3 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/getContextPath.js"></script>
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
-<script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
