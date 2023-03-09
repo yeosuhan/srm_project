@@ -43,46 +43,41 @@
 						</a></li>
 					</ul>
 					<ul class="nav-right">
+						<li ><button class="btn btn-sm btn-oti" onclick="sendTestMessage()">메시지 전송 테스트</button></li>
 						<%-- 알림 --%>
-						<li class="header-notification"
-							style="margin-top: 20px; margin-bottom: 13px;"><span
-							class="badge bg-c-yellow" style=""></span> <a href="#!"
-							class="waves-effect waves-light" onclick="refreshAlert()"
-							style="display: block; padding-right: 4px"> <i
-								class="far fa-bell" style="font-size: 19px;"></i>
-						</a>
-							<div class="show-notification" style="display: none;">
+						<li class="header-notification" style="margin-top: 20px">
+							<span id="alertBadge" class="badge bg-c-yellow" style=""></span> 
+							<a href="#!" id="alertBtn" class="waves-effect waves-light" onclick="getAlertList();event.preventDefault();" style="display: block; padding-right: 4px"> 
+								<i class="far fa-bell" style="font-size: 19px;"></i>
+                  			</a>
+							
+							<div class="show-notification" onclick='event.stopPropagation()' style="display: none;">
 								<ul>
 									<li>
-										<h6>Notifications</h6> <label onclick="refreshAlert()"
-										class="label label-danger">New</label>
+										<h6>Notifications</h6>
 									</li>
 								</ul>
 								<!-- Nav tabs -->
-								<ul class="nav nav-tabs md-tabs " role="tablist"
-									style="width: 100%; margin: 0px">
-									<li class="nav-item" style="padding: 0px"><a
-										class="nav-link active" style="font-size: 10px;"
+								<ul class="nav nav-tabs md-tabs " role="tablist" style="width:100%; margin:0px">
+									<li class="nav-item" style="padding:0px"><a class="nav-link active" style="font-size:10px;"
 										data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
 										<div class="slide"></div></li>
-									<li class="nav-item" style="padding: 0px"><a
-										class="nav-link" style="font-size: 10px;" data-toggle="tab"
-										href="#chgDmndTab" role="tab">예정일 변경</a>
+									<li class="nav-item" style="padding:0px"><a class="nav-link" style="font-size:10px;"
+										data-toggle="tab" href="#chgDmndTab" role="tab">예정일 변경</a>
 										<div class="slide"></div></li>
-									<li class="nav-item" style="padding: 0px"><a
-										class="nav-link" style="font-size: 10px;" data-toggle="tab"
-										href="#developerTab" role="tab">예정일 변경(개발자)</a>
+									<li class="nav-item" style="padding:0px"><a class="nav-link" style="font-size:10px;"
+										data-toggle="tab" href="#developerTab" role="tab">예정일 변경(개발자)</a>
 										<div class="slide"></div></li>
-									<li class="nav-item" style="padding: 0px"><a
-										class="nav-link" style="font-size: 10px;" data-toggle="tab"
-										href="#cancleTab" role="tab">개발 취소</a>
+									<li class="nav-item" style="padding:0px"><a class="nav-link" style="font-size:10px;"
+										data-toggle="tab" href="#cancleTab" role="tab">개발 취소</a>
 										<div class="slide"></div></li>
+									
 								</ul>
-
-								<div class="tab-content card-block ">
+								<div id="alertTab" class="tab-content card-block ">
 									<!-- 반영 요청 알림 -->
 									<div class="tab-pane active" id="rfltTab" role="tabpanel">
 										<ul>
+											<%-- 디자인 참고용
 											<li class="waves-effect waves-light">
 												<div class="media">
 													<img class="d-flex align-self-center img-radius"
@@ -94,65 +89,30 @@
 														<span class="notification-time">30 minutes ago</span>
 													</div>
 												</div>
-											</li>
+											</li> --%>
 										</ul>
 									</div>
 									<%-- 요청일 변경 알림 --%>
 									<div class="tab-pane" id="chgDmndTab" role="tabpanel">
 										<ul>
-											<li class="waves-effect waves-light">
-												<div class="media">
-													<img class="d-flex align-self-center img-radius"
-														src="${pageContext.request.contextPath}/resources/assets/images/avatar-3.jpg"
-														alt="Generic placeholder image">
-													<div class="media-body">
-														<h5 class="notification-user">Sara Soudein</h5>
-														<p class="notification-msg">Lorem ipsum dolor sit
-															amet, consectetuer elit.</p>
-														<span class="notification-time">30 minutes ago</span>
-													</div>
-												</div>
-											</li>
+											
 										</ul>
 									</div>
 									<%-- 요청일 변경 알림 --%>
 									<div class="tab-pane" id="developerTab" role="tabpanel">
 										<ul>
-											<li class="waves-effect waves-light">
-												<div class="media">
-													<img class="d-flex align-self-center img-radius"
-														src="${pageContext.request.contextPath}/resources/assets/images/avatar-3.jpg"
-														alt="Generic placeholder image">
-													<div class="media-body">
-														<h5 class="notification-user">Sara Soudein</h5>
-														<p class="notification-msg">Lorem ipsum dolor sit
-															amet, consectetuer elit.</p>
-														<span class="notification-time">30 minutes ago</span>
-													</div>
-												</div>
-											</li>
+											
 										</ul>
 									</div>
 									<%-- 개발취소알림 --%>
 									<div class="tab-pane" id="cancleTab" role="tabpanel">
 										<ul>
-											<li class="waves-effect waves-light">
-												<div class="media">
-													<img class="d-flex align-self-center img-radius"
-														src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg"
-														alt="Generic placeholder image">
-													<div class="media-body">
-														<h5 class="notification-user">Joseph William</h5>
-														<p class="notification-msg">Lorem ipsum dolor sit
-															amet,consectetuer elit.</p>
-														<span class="notification-time">30 minutes ago</span>
-													</div>
-												</div>
-											</li>
+											
 										</ul>
 									</div>
 								</div>
-							</div></li>
+							</div>
+						</li>
 
 						<%-- 로그아웃 --%>
 						<li class="user-profile header-notification"><sec:authorize
