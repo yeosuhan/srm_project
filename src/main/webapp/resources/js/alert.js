@@ -15,9 +15,9 @@ $(function(){
  * */
 function checkAlert(){
 	if($(".alertLi").length==0){
-		$("#alertBadge").removeClass("badge bg-c-red");
+		$("#alertBadge").removeClass("badge bg-c-yellow");
 	}else{
-		$("#alertBadge").addClass("badge bg-c-red");
+		$("#alertBadge").addClass("badge bg-c-yellow");
 	}
 }
 /* 알림 카운트
@@ -48,7 +48,7 @@ function getEventListener(){
 		sse.addEventListener('alert',(result)=>{
 			console.log(result.data);
 			refreshAlert();
-			$("#alertBadge").addClass("badge bg-c-red");
+			$("#alertBadge").addClass("badge bg-c-yellow");
 		});
 	}
 }

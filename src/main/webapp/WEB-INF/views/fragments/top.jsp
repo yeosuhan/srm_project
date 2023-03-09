@@ -46,13 +46,12 @@
 						<li ><button class="btn btn-sm btn-primary" onclick="sendTestMessage()">메시지 전송 테스트</button></li>
 						<%-- 알림 --%>
 						<li class="header-notification" style="margin-top: 20px">
-							<a href="#!" id="alertBtn" class="waves-effect waves-light" onclick="getAlertList();event.preventDefault();"> 
-								<i class="ti-bell"></i>
-								<h4>
-									<span id="alertBadge" ></span>
-								</h4>
-							</a>
-							<div class="show-notification" onclick='event.stopPropagation()'>
+							<span id="alertBadge" class="badge bg-c-yellow" style=""></span> 
+							<a href="#!" id="alertBtn" class="waves-effect waves-light" onclick="getAlertList();event.preventDefault();" style="display: block; padding-right: 4px"> 
+								<i class="far fa-bell" style="font-size: 19px;"></i>
+                  			</a>
+							
+							<div class="show-notification" onclick='event.stopPropagation()' style="display: none;">
 								<ul>
 									<li>
 										<h6>Notifications</h6>
