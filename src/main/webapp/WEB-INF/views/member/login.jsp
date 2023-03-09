@@ -150,9 +150,9 @@
 										설정되었습니다.</span></br> <span>로그인 후 비밀번호를 변경해주세요.</span>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
+									<button type="button" class="btn btn-oti"
 										data-dismiss="modal">취소</button>
-									<button type="button" class="btn btn-primary">확인</button>
+									<button type="button" class="btn btn-oti">확인</button>
 								</div>
 							</div>
 						</div>
@@ -164,19 +164,19 @@
 			<div class="row">
 				<div class="col-md-12">
 					<button type="submit" form="loginForm"
-						class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign
+						class="btn btn-oti btn-md btn-block waves-effect waves-light text-center m-b-20">Sign
 						in</button>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
 					<button type="button" onclick="location.href='/join-client' "
-						class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign
+						class="btn btn-oti btn-md btn-block waves-effect waves-light text-center m-b-20">Sign
 						Up for Client</button>
 				</div>
 				<div class="col-md-6">
 					<button type="button" onclick="location.href='/join-employee' "
-						class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign
+						class="btn btn-oti btn-md btn-block waves-effect waves-light text-center m-b-20">Sign
 						Up for Employee</button>
 				</div>
 			</div>

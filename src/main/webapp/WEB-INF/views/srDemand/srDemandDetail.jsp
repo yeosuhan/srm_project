@@ -104,7 +104,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="row mt-3 ml-1">
 					<label class="col-sm-2 col-form-label" style="line-height: 120px">반려
 						사유</label>
@@ -140,9 +139,9 @@
 		</div>
 		<div class="m_footer bg-light">
 
-			<button class="btn btn-info save center" data-dismiss="modal">승인</button>
+			<button class="btn btn-oti save center" data-dismiss="modal">승인</button>
 
-			<button class="btn btn-danger danger cancle" data-dismiss="modal">반려</button>
+			<button class="btn btn-oti danger cancle" data-dismiss="modal">반려</button>
 
 		</div>
 	</div>

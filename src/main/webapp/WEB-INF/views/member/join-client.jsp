@@ -95,7 +95,7 @@ label>img {
 															id="memberId" required style="width: 50%"> <label
 															class="float-label">아이디</label>
 														<button type="button" onclick="checkMemberId()"
-															class="btn waves-effect waves-light hor-grd btn-grd-inverse ml-2"
+															class="btn waves-effect waves-light hor-grd btn-oti ml-2"
 															style="width: 100px;">중복확인</button>
 														<font id="checkId" size="2" style="padding-left: 10px;"></font>
 													</div>
@@ -149,7 +149,7 @@ label>img {
 									</div>
 									<div style="justify-content: center; text-align: center;">
 										<button form="joinForm" type="submit"
-											class="btn waves-effect waves-light hor-grd btn-grd-primary ">Sign
+											class="btn waves-effect waves-light hor-grd btn-oti">Sign
 											Up</button>
 									</div>
 								</div>

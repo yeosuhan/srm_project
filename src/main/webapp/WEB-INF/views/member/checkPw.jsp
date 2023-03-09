@@ -21,8 +21,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">확인</button>
+				<button type="button" class="btn btn-oti" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-oti">확인</button>
 			</div>
 		</div>
 	</div>
