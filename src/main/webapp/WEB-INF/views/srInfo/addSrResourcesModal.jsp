@@ -73,10 +73,10 @@
 		</div>
 		<div class="m_footer bg-light">
 		
-			<button id="addResourceBtn" onclick="addResource()" class="btn btn-info save center" data-dismiss="modal" >확인</button>
-			<button id="modifyResourceBtn" style="display:none;" onclick="modifyResource()" class="btn btn-info save center" data-dismiss="modal" >수정</button>
+			<button id="addResourceBtn" onclick="addResource()" class="btn btn-oti save center" data-dismiss="modal" >확인</button>
+			<button id="modifyResourceBtn" style="display:none;" onclick="modifyResource()" class="btn btn-oti save center" data-dismiss="modal" >수정</button>
 		
-			<button class="btn btn-danger danger cancle" data-dismiss="modal">닫기</button>
+			<button class="btn btn-oti danger cancle" data-dismiss="modal">닫기</button>
 				
 		</div>
 	</div>

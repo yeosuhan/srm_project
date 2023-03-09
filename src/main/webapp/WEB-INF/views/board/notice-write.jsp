@@ -34,7 +34,7 @@
 				</form>
 				<div class="modal-footer d-flex justify-content-center">
 					<button
-						class="btn btn-inverse btn-round waves-effect waves-light mr-4">저장</button>
+						class="btn btn-oti waves-effect waves-light mr-4">저장</button>
 				</div>
 			</div>
 		</div>

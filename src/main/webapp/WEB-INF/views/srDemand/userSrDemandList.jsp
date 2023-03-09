@@ -8,6 +8,8 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 <script
 	src="${pageContext.request.contextPath}/resources/js/srDemandListHstry.js"></script>
 <script>
@@ -161,6 +163,7 @@ th {
 				</div>
 			</div>
 
+
 			<%-- *********************************** [SR 요청 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
@@ -169,8 +172,8 @@ th {
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
-								<li><i class="fa fa-window-maximize full-card"></i></li>								
-								<li><i class="fa fa-refresh reload-card"></i></li>						
+								<li><i class="fa fa-window-maximize full-card"></i></li>
+								<li><i class="fa fa-refresh reload-card"></i></li>
 							</ul>
 						</div>
 					</div>
@@ -252,18 +255,18 @@ th {
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option pl-3">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
-								<li><i class="fa fa-window-maximize full-card"></i></li>					
-								<li><i class="fa fa-refresh reload-card"></i></li>						
+								<li><i class="fa fa-window-maximize full-card"></i></li>
+								<li><i class="fa fa-refresh reload-card"></i></li>
 							</ul>
 						</div>
 					</div>
 					<ul class="nav nav-tabs  md-tabs" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
-							data-toggle="tab" href="#srDemandDetail" role="tab">SR요청 상세정보</a>
+							data-toggle="tab" href="#srDemandDetail" role="tab"
+							id="srDmndDetailTab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#srHistory" onclick="getHistoryList()" role="tab">SR
-								히스토리</a>
+							href="#srHistory" onclick="userHstry()" role="tab">SR 히스토리</a>
 							<div class="slide"></div></li>
 					</ul>
 
@@ -474,7 +477,7 @@ th {
 											<button type="submit" class="modal_btn save center"
 												form="sdUpdateForm">저장</button>
 
-											<button class="btn btn-primary btn-round danger cancle">삭제</button>
+											<button class="btn btn-oti danger cancle">삭제</button>
 										</div>
 									</div>
 								</div>
@@ -490,7 +493,7 @@ th {
 										<thead>
 											<tr>
 												<th style="width: 1px;">순번</th>
-												<th>요청 종류</th>
+												<th>요청유형</th>
 												<th>변경될 완료일</th>
 												<th>승인여부</th>
 											</tr>
@@ -498,22 +501,24 @@ th {
 										<tbody id="history">
 										</tbody>
 									</table>
+									<%-- 페이징 --%>
+									<div class="hstryPager-container">
+										<div class="hstryPager"></div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-
-			<!-- *********** -->
 		</div>
+		<!-- *********** -->
+	</div>
 	</div>
 	<!-- Page body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 검색 -->
-	<script src="/resources/assets/js/srDemandList.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
 	<%-- 상세, 등록, 수정 --%>

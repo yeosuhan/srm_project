@@ -57,7 +57,7 @@
 									</div>
 									<div class="d-flex justify-content-center">
 										<button type="submit" form="myInstForm"
-											class="btn waves-effect waves-light hor-grd btn-grd-primary ">수정</button>
+											class="btn waves-effect waves-light hor-grd btn-oti">수정</button>
 									</div>
 									<!-- Page body end -->
 								</div>

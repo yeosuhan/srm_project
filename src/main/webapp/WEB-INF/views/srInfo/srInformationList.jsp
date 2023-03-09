@@ -20,6 +20,8 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/srInfoListHstry.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 
 <script>
 	
@@ -191,8 +193,8 @@ li:before {
 												</div>
 												<div class="m_footer" style="height: 50px">
 													<div onclick="addDeliverable()"
-														class="modal_btn save center" id="closebtn">등록</div>
-													<div class="modal_btn danger cancle" id="closebtn">닫기</div>
+														class="modal_btn btn-oti center" id="closebtn">등록</div>
+													<div class="modal_btn btn-oti cancle" id="closebtn">닫기</div>
 												</div>
 											</div>
 										</div>
@@ -277,13 +279,13 @@ li:before {
 																</c:if>
 															</div>
 															<div class="col col-xl-1">
-																<button type="submit" class="btn btn-lg btn-info"
+																<button type="submit" class="btn btn-lg btn-oti"
 																	style="float: center;">
 																	<i class="ti-search"></i>
 																</button>
 															</div>
 															<div class="col col-xl-1">
-																<button class="btn btn-info"
+																<button class="btn btn-oti"
 																	style="float: right; margin-left: 50px;">엑셀
 																	다운로드</button>
 															</div>
@@ -388,7 +390,7 @@ li:before {
 																<h5>SR요청 상세정보</h5>
 															</div>
 															<div class="col-3 ml-4">
-																<button class="btn btn-primary btn-sm"
+																<button class="btn btn-oti btn-sm"
 																	onclick="addHistory('${srNo}')" data-toggle="modal"
 																	data-target="#addHistoryModal">SR 변경요청</button>
 															</div>
@@ -551,7 +553,7 @@ li:before {
 															class="nav-link" data-toggle="tab" href="#messages1"
 															role="tab">SR 진척율</a>
 															<div class="slide"></div></li>
-														<li class="nav-item" onclick="getSrHistoryList()"><a
+														<li class="nav-item" onclick="empHstry()"><a
 															class="nav-link" data-toggle="tab" href="#srInfhistory"
 															role="tab">SR 히스토리</a>
 															<div class="slide"></div></li>
@@ -607,7 +609,7 @@ li:before {
 																		id="SRPlRvwCn">${sp.rvwCn}</textarea>
 																</div>
 															</div>
-															<button class="btn btn-info" onclick="planUpdate()"
+															<button class="btn btn-oti" onclick="planUpdate()"
 																id="planBtn"
 																style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
 														</div>
@@ -622,7 +624,7 @@ li:before {
 																		style="font-size: 12px; padding: 0px;">
 																		<thead>
 																			<tr>
-																				<th style="width: 1px;">#</th>
+																				<th style="width: 1px;">순번</th>
 																				<th style="width: 1px;"><input type="checkbox"
 																					name="resource" value="selectResourceAll"
 																					onclick="selectResourceAll(this)"></th>
@@ -637,12 +639,12 @@ li:before {
 																	</table>
 																</div>
 															</div>
-															<button class="btn btn-info"
+															<button class="btn btn-oti"
 																style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
-															<button onclick="deleteResource()" class="btn btn-info"
+															<button onclick="deleteResource()" class="btn btn-oti"
 																style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 																삭제</button>
-															<button class="btn btn-info"
+															<button class="btn btn-oti"
 																style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
 																data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
 														</div>
@@ -658,7 +660,7 @@ li:before {
 																			style="font-size: 12px; padding: 0px;">
 																			<thead>
 																				<tr>
-																					<th style="width: 1px;">#</th>
+																					<th style="width: 1px;">순번</th>
 																					<th style="width: 100px;">작업구분</th>
 																					<th style="width: 250px;">시작일</th>
 																					<th style="width: 250px;">종료일</th>
@@ -690,7 +692,7 @@ li:before {
 																								aria-controls="collapse0">첨부파일</button>
 																						</div></td>
 																					<td style="padding: 0px; margin: 0px;">
-																						<button class="btn btn-info btn-lg"
+																						<button class="btn btn-oti btn-lg"
 																							onclick="updateProgress0()" id="btn0"
 																							style="width: 100%; height: 100%">저장</button>
 																					</td>
@@ -744,7 +746,7 @@ li:before {
 																								aria-controls="collapse1">첨부파일</button>
 																						</div></td>
 																					<td style="padding: 0px; margin: 0px;">
-																						<button class="btn btn-info btn-lg"
+																						<button class="btn btn-oti btn-lg"
 																							onclick="updateProgress1()" id="btn1"
 																							style="width: 100%; height: 100%">저장</button>
 																					</td>
@@ -797,7 +799,7 @@ li:before {
 																								aria-controls="collapse2">첨부파일</button>
 																						</div></td>
 																					<td style="padding: 0px; margin: 0px;">
-																						<button class="btn btn-info btn-lg"
+																						<button class="btn btn-oti btn-lg"
 																							onclick="updateProgress2()" id="btn2"
 																							style="width: 100%; height: 100%">저장</button>
 																					</td>
@@ -852,7 +854,7 @@ li:before {
 
 																					</td>
 																					<td style="padding: 0px; margin: 0px;">
-																						<button class="btn btn-info btn-lg"
+																						<button class="btn btn-oti btn-lg"
 																							onclick="updateProgress3()" id="btn3"
 																							style="width: 100%; height: 100%">저장</button>
 																					</td>
@@ -905,7 +907,7 @@ li:before {
 																								aria-controls="collapse4">첨부파일</button>
 																						</div></td>
 																					<td style="padding: 0px; margin: 0px;">
-																						<button class="btn btn-info btn-lg"
+																						<button class="btn btn-oti btn-lg"
 																							onclick="updateProgress4()" id="btn4"
 																							style="width: 100%; height: 100%">저장</button>
 																					</td>
@@ -958,7 +960,7 @@ li:before {
 																								aria-controls="collapse5">첨부파일</button>
 																						</div></td>
 																					<td style="padding: 0px; margin: 0px;">
-																						<button class="btn btn-info btn-lg"
+																						<button class="btn btn-oti btn-lg"
 																							onclick="updateProgress5()" id="btn5"
 																							style="width: 100%; height: 100%">저장</button>
 																					</td>
@@ -997,11 +999,11 @@ li:before {
 																	</div>
 																</div>
 															</div>
-															<button class="btn btn-info" id="delbtn"
+															<button class="btn btn-oti" id="delbtn"
 																onclick="deleteDeliverable()"
 																style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택된
 																산출물 삭제</button>
-															<button class="btn btn-info" id="addbtn"
+															<button class="btn btn-oti" id="addbtn"
 																style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
 																추가</button>
 														</div>
@@ -1026,6 +1028,11 @@ li:before {
 																		<tbody id="srhistory1">
 																		</tbody>
 																	</table>
+																	<%-- 페이징 --%>
+																	<%-- 페이징 --%>
+																	<div class="hstryPager-container">
+																		<div class="hstryPager"></div>
+																	</div>
 																</div>
 															</div>
 														</div>

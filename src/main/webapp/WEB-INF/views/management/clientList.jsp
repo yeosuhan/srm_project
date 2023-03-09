@@ -82,7 +82,7 @@ table, th, td {
 																	</div>
 																	<div class="col-sm-4 d-flex justify-content-end">
 																		<button
-																			class="btn btn-primary btn-sm btn-round waves-effect waves-light ">검색</button>
+																			class="btn btn-oti btn-sm waves-effect waves-light ">검색</button>
 																	</div>
 																</div>
 															</form>
