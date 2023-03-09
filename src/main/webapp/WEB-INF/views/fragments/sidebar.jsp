@@ -159,14 +159,14 @@
                <ul class="pcoded-item pcoded-left-item" item-border="true"
                   item-border-style="none" subitem-border="true">
                   <li class=""><a
-                     href="${pageContext.request.contextPath}/board/list"
+                     href="${pageContext.request.contextPath}/board/list?type=notice"
                      class="waves-effect waves-dark"> <span class="pcoded-micon"><i
                            class="fas fa-bullhorn pt-1"></i><b>FC</b></span> <span
                         class="pcoded-mtext" data-i18n="nav.form-components.main">공지사항</span>
                         <span class="pcoded-mcaret"></span>
                   </a></li>
                   <li class=""><a
-                     href="${pageContext.request.contextPath}/board/list"
+                     href="${pageContext.request.contextPath}/board/list?type=qna"
                      class="waves-effect waves-dark"> <span class="pcoded-micon"><i
                            class="far fa-comments pt-1"></i><b>FC</b></span> <span
                         class="pcoded-mtext" data-i18n="nav.form-components.main">QnA</span>

@@ -1,64 +1,72 @@
 /** ****************SR 상세 조회*************************** */
 /* 작성자 : 신정은 SR 요청을 가져오기 */
 function getSrDemandDetail(dmNo) {
+   console.log("sfsffd");
    $("#userButtonDiv").empty();
    $("#adminButtonDiv").empty();
-   
    $.ajax({
       url : "/srdemand/detail/" + dmNo,
       type : "GET",
       success : function(res) {
-         var dmndNo = res.dmndNo;
+         var dmndNo = res.sd.dmndNo;
          console.log(dmndNo);
-         
          $(".dmndNo").text(dmndNo);
          $(".dmndNo").val(dmndNo);
-         $(".ttl").text(res.ttl);
-         $(".ttl").val(res.ttl);
-         $(".relGrund").text(res.relGrund);
-         $(".relGrund").val(res.relGrund);
-         $(".dmndYmd").text(res.dmndYmd);
-         $(".cmptnDmndYmd").text(res.cmptnDmndYmd);
-         $(".rjctRsn").text(res.rjctRsn);
-         $(".rjctRsn").val(res.rjctRsn);
-
-         $(".cn").text(res.cn);
-         $(".cn").val(res.cn);
-         $(".endYmd").text(res.endYmd);
-         $(".picNm").text(res.picNm);
-         $(".deptNm").text(res.deptNm);
-         $(".sttsNm").text(res.sttsNm);
-         
-         var sttsCd = res.sttsCd;
+         $(".ttl").text(res.sd.ttl);
+         $(".ttl").val(res.sd.ttl);
+         $(".relGrund").text(res.sd.relGrund);
+         $(".relGrund").val(res.sd.relGrund);
+         $(".dmndYmd").text(res.sd.dmndYmd);
+         $(".cmptnDmndYmd").text(res.sd.cmptnDmndYmd);
+         $(".rjctRsn").text(res.sd.rjctRsn);
+         $(".rjctRsn").val(res.sd.rjctRsn);
+         $(".cn").text(res.sd.cn);
+         $(".cn").val(res.sd.cn);
+         $(".endYmd").text(res.sd.endYmd);
+         $(".picNm").text(res.sd.picNm);
+         $(".deptNm").text(res.sd.deptNm);
+         $(".sttsNm").text(res.sd.sttsNm);
+         var sttsCd = res.sd.sttsCd;
          $(".sttsCd").val(sttsCd);
-         $(".sysNm").text(res.sysNm);
-
-
-         $(".taskSeNm").text(res.taskSeNm);
-         $(".instNm").text(res.instNm);
-         $(".clientNm").text(res.clientNm);
-         $(".rvwrNm").text(res.rvwrNm);
-         
-         // 버튼 보이게 하기 
+         $(".sysNm").text(res.sd.ysNm);
+         $(".taskSeNm").text(res.sd.taskSeNm);
+         $(".instNm").text(res.sd.instNm);
+         $(".clientNm").text(res.sd.clientNm);
+         $(".rvwrNm").text(res.sd.rvwrNm);
+            var prgrsRt = res.prgrsRt;
+         // 버튼 보이게 하기
+         console.log(prgrsRt + "  : prgrsRt");
          console.log(sttsCd + " @");
-         if(sttsCd == 0) {
-            var userdivs = "<div class='col-6' style='text-align: right'>" +
-               "<button id='modbtn' class='btn btn-primary btn-round save center'>수정</button>" +
-               "<div class='btn btn-primary btn-round danger cancle' onclick='deleteSr()'>삭제</div> </div>";
+         if (sttsCd == 0) {
+            $("#companion").show();
+            $(".rjctRsn").show();
+            var userdivs = "<div class='col' style='text-align: right'>"
+                  + "<button id='modbtn' style='float:right;' class='btn btn-primary btn-round save center'>수정</button>"
+                  + "<div class='btn btn-primary btn-round danger cancle'style='float:right;margin-right:5px;'  onclick='deleteSr()'>삭제</div> </div>";
             $("#userButtonDiv").html(userdivs);
-            
-            var admindivs = "<div class='col-6' style='text-align: right'>" +
-               "<div id='srAccept' class='btn btn-primary btn-round save center' onclick=goAccept('" + dmndNo +"')>승인</div>" +
-               "<div id='srDecline'class='btn btn-primary btn-round danger cancle' onclick=goDecline('" + dmndNo + "')>반려</div> </div>";
+               var admindivs = "<div class='col' style='text-align: right'>"
+                  + "<div id='srAccept' style='float:right;' class='btn btn-primary btn-round save center' onclick=goAccept('"
+                  + dmndNo
+                  + "')>승인</div>"
+                  + "<div id='srDecline'style='float:right;margin-right:5px;' class='btn btn-primary btn-round danger cancle' onclick=goDecline('"
+                  + dmndNo + "')>반려</div> </div>";
             $("#adminButtonDiv").html(admindivs);
-            
-            var srRjctRsn = "<textarea rows='5' cols='5' class='form-control rjctRsn' id='srRjctRsn'></textarea>";
+               var srRjctRsn = "<textarea rows='5' cols='5' class='form-control rjctRsn' id='srRjctRsn'></textarea>";
             $("#rjctRsnDiv").html(srRjctRsn);
-            
-         } else if(sttsCd == 1){
-            console.log("반려다~~~~~~~  " + res.rjctRsn);
-            var srRjctRsn = "<div class='form-control rjctRsn'>" + res.rjctRsn + "</div>";
-            $("#rjctRsnDiv").html(srRjctRsn);
+         } else if (sttsCd == 1) {
+            $("#companion").show();
+            $(".rjctRsn").show();
+         } else if ((sttsCd > 1) && (sttsCd <5)) {
+            if (prgrsRt == "90") {
+               var userdivs = "<div class='col' style='text-align: right'>"
+                     + "<div class='btn btn-primary btn-round danger cancle' onclick='endSr()' style='float:right;'>반영요청</div> </div>";
+               $("#userButtonDiv").html(userdivs);
+            } else {
+               $("#companion").hide();
+               $(".rjctRsn").hide();
+               var srRjctRsn = "<div class='form-control rjctRsn'>${sd.rjctRsn}</div>";
+               $("#rjctRsnDiv").html(srRjctRsn);
+            }
          }
       }
    });
@@ -214,5 +222,17 @@ function goDecline(dmndNo) {
    
    
 }
-
-
+function endSr() {
+   var dmndNo = $(".dmndNo").val();
+   console.log(dmndNo+" 반영요청 버튼 누름~");
+   $.ajax({
+      url : '/srdemand/end',
+      type : 'POST',
+      data : {
+         dmndNo : dmndNo
+      },
+      success : function(res) {
+         location.href="/srdemand/list";
+      }
+   });
+}

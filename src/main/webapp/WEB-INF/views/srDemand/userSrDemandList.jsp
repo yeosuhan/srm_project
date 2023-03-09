@@ -384,7 +384,14 @@ th {
                                  <input type="file" class="">
                               </div>
                            </div>
-                           <div class="row" id="userButtonDiv"></div>
+                           <div class="row" id="userButtonDiv">
+                           		<c:if test="${sd.sttsCd == 0}">
+	                           		<div class="col" style="text-align: right">
+	                  						<button id="modbtn" style="float:right;" class="btn btn-primary btn-round save center">수정</button>
+	                						<div class="btn btn-primary btn-round danger cancle" style="float:right;margin-right:5px;"  onclick="deleteSr()">삭제</div> 
+	               					</div>
+               					</c:if>
+                           </div>
                         </div>
 
                         <%------------- 요청 수정 ----------------------------------- --%>
