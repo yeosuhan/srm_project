@@ -62,10 +62,10 @@ public class SrResourceController {
 		
 		int result =0;
 		if(srResource.getFirstResource()) {
-			srResourceService.addFirstSrResource(srResource);
+			result=srResourceService.addFirstSrResource(srResource);
 		}else {
 			log.info("첫번째 자원정보 추가");
-			srResourceService.addSrResource(srResource);
+			result=srResourceService.addSrResource(srResource);
 		}
 		return result;
 	}
