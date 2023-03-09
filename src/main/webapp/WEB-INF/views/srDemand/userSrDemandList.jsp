@@ -524,7 +524,7 @@ th {
 		</div>
 		<!-- *********** -->
 	</div>
-	</div>
+
 	<!-- Page body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 

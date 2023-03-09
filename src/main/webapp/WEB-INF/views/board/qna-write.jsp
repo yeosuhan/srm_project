@@ -7,14 +7,15 @@
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
-			<h5>문의사항 작성 </h5>
+			<h5>문의사항 작성</h5>
 		</div>
 		<div class="modal-body">
-			<form enctype="multipart/form-data" method="POST" action="/board/write"  id="qnaForm" onSubmit="return false;">
+			<form enctype="multipart/form-data" method="POST"
+				action="/board/write" id="qnaForm" onSubmit="return false;">
 				<div class="form-group row">
-					<input type="hidden" name="wrtrId" value="${clientId}">
-					<input type="hidden" name="bbsType" value="QNA">
-					<label class="col-sm-2 col-form-label">요청번호</label>
+					<input type="hidden" name="wrtrId" value="${clientId}"> <input
+						type="hidden" name="bbsType" value="QNA"> <label
+						class="col-sm-2 col-form-label">요청번호</label>
 					<div class="col-sm-10">
 						<select name="srNo" id="lang">
 							<c:forEach var="sr" items="${srList}">
@@ -45,7 +46,7 @@
 			</form>
 			<div class="modal-footer d-flex justify-content-center">
 				<button type="button" onclick="goPost('QNA')"
-					class="btn btn-inverse btn-round waves-effect waves-light mr-4  btn-primary">저장</button>
+					class="btn btn-oti waves-effect waves-light mr-4">저장</button>
 			</div>
 		</div>
 	</div>

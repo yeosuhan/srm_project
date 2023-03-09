@@ -10,7 +10,7 @@
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <style>
 .modal-header {
-	background-color: #4778FF;
+	background-color: linear-gradient( 135deg, #92344B 10%, #F05F57 100%);
 	color: white;
 }
 </style>
@@ -81,9 +81,7 @@
 					<form:form class="md-float-material form-material" id="loginForm"
 						action="/login" method="post">
 						<div class="text-center">
-							<img
-								src="${pageContext.request.contextPath}/resources/assets/images/otilogo.png"
-								alt="logo.png">
+						
 						</div>
 						<div class="auth-box card">
 							<div class="card-block">
@@ -95,7 +93,7 @@
 								<div class="form-group form-primary">
 									<input type="text" name="memberId" class="form-control"
 										required=""> <span class="form-bar"></span> <label
-										class="float-label">Your Email Address</label>
+										class="float-label">ID</label>
 								</div>
 								<div class="form-group form-primary">
 									<input type="password" name="pswd" class="form-control"
@@ -114,7 +112,7 @@
 					</form:form>
 
 					<!-- 비밀번호 찾기 -->
-					<div class="forgot-phone text-right f-right">
+					<div class="forgot-phone text-right f-right mb-4">
 						<a href="#" class="text-right f-w-600" data-toggle="modal"
 							data-target="#findPwModal"> Forgot Password?</a>
 					</div>
@@ -183,23 +181,15 @@
 			<hr />
 			<div class="row">
 				<div class="col-md-10">
-					<p class="text-inverse text-left m-b-0">Thank you.</p>
+					<p class="text-inverse text-left m-b-0"></p>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-12" align="center">
 					<img src="${pageContext.request.contextPath}/resources/assets/images/auth/Logo-small-bottom.png"
 						alt="small-logo.png">
 				</div>
 			</div>
 		</div>
-		</div>
 
-		<!-- end of form -->
-		</div>
-		<!-- end of col-sm-12 -->
-		</div>
-		<!-- end of row -->
-		</div>
-		<!-- end of container-fluid -->
 	</section>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>

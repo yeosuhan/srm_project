@@ -45,10 +45,10 @@
 		</form>
 		<div class="d-flex justify-content-center">
 			<button
-				class="btn btn-inverse btn-round waves-effect waves-light mr-4"
+				class="btn btn-oti waves-effect waves-light mr-4"
 				onclick="toUpdate()">수정</button>
 			<form action="#">
-				<button class="btn btn-inverse btn-round waves-effect waves-light">삭제</button>
+				<button class="btn btn-oti waves-effect waves-light">삭제</button>
 			</form>
 		</div>
 	</div>

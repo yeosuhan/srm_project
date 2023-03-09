@@ -46,6 +46,7 @@
 					</ul>
 					<ul class="nav-right">
 						<li><button class="btn btn-sm btn-oti"
+								style="background-color: #4C1342; margin-top: 10px;"
 								onclick="sendTestMessage()">메시지 전송 테스트</button></li>
 						<%-- 알림 --%>
 						<li class="header-notification" style="margin-top: 20px"><span
