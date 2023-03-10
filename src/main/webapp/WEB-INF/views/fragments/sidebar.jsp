@@ -84,7 +84,6 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="pcoded-navigation-label"
 						data-i18n="nav.category.navigation" menu-title-theme="theme1">MY
 						PORTAL</div>
@@ -196,7 +195,6 @@
 				</div>
 			</div>
 		</nav>
-
 		<div class="pcoded-content">
 
 			<div class="pcoded-inner-content">

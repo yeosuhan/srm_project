@@ -62,4 +62,9 @@
 		FROM ATTACHMENTS
 		WHERE FILE_SN = #{fileSn}
 	</select>
+	
+	<delete id="deleteAttachByFileSn" parameterType="int">
+		DELETE FROM ATTACHMENTS
+		WHERE FILE_SN = #{fileSn}
+	</delete>
 </mapper>

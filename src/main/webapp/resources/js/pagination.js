@@ -8,9 +8,9 @@
 function reloadPager(pager, url, onclickMethod) {
 	console.log("공용 pager 들어옴 ~~~~~");
 	$('.pagination').empty();
-	var tags;
+	var tags = "";
 	if(pager.startPageNo -1 > 0) {
-		tags = "<a class='pagination-newer' href='#' onclick='" + onclickMethod + "(\"" + url + (pager.startPageNo - 1) +"\")'>\'" + PREV + "\'</a>";
+		tags = "<a class='pagination-newer' href='#' onclick='" + onclickMethod + "(\"" + url + (pager.startPageNo - 1) +"\")'>PREV</a>";
 	}
 	for (var pageNo = pager.startPageNo; pageNo <= pager.endPageNo; pageNo++) {
 		if(pager.pageNo == pageNo){
@@ -30,8 +30,7 @@ $('.pagination-inner a').on('click', function() {
 		$(this).addClass('pagination-active');
 })
 
-$(document).ready(function(){
-	
+$(document).ready(function(){	
 	var currentUrl=window.location.href;
 	//파라미터 여부
 	if(currentUrl.indexOf('?')!=-1 && currentUrl.indexOf('?')!=currentUrl.length-1){

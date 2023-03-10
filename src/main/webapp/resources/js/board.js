@@ -62,10 +62,16 @@ function goPost(type) {
 		    }
 		
 		});
-	}
-	
-	
+	}	
 }
+
+// 선택한 파일 삭제
+function deleteFile(fileSn) {
+	console.log("삭제 ~~~ ");
+		console.log(fileSn);
+}
+
+
 /*******************   Qna board ****************/
 function writeQna() {
 	$.ajax({
@@ -83,6 +89,17 @@ function qnaDetail(bbsNo) {
 		url : '/board/detail?bbsNo='+ bbsNo,
 		type : 'GET',
 		success : function(data) {			
+			$("#qnaDetail").html(data);
+		}
+	});
+}
+
+function updateQna(bbsNo) {
+	console.log("수정하러 옴~~ qna");
+	$.ajax({
+		url : '/board/update/' + bbsNo,
+		type : 'GET',
+		success : function(data) {
 			$("#qnaDetail").html(data);
 		}
 	});
@@ -111,12 +128,12 @@ function noticeDetail(bbsNo) {
 }
 
 function updateNotice(bbsNo) {
-	console.log("수정하러 옴~~");
+	console.log("수정하러 옴~~ notice");
 	$.ajax({
 		url : '/board/update/' + bbsNo,
 		type : 'GET',
 		success : function(data) {
-			$("#qnaDetail").html(data);
+			$("#noticeDetail").html(data);
 		}
 	});
 }

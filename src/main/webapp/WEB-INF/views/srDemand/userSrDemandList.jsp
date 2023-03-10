@@ -316,7 +316,6 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청기관</div>
 											<div class="col col-sm-6 instNm">${sd.instNm}</div>
-
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청자</div>
@@ -405,7 +404,6 @@ th {
 										</c:if>
 									</div>
 								</div>
-
 								<%------------- 요청 수정 ----------------------------------- --%>
 								<div class="card_body" id="sdupdate"
 									style="font-size: 12px; padding-top: 20px; display: none;">
