@@ -31,6 +31,10 @@ public class AttachmentController {
 	@Autowired
 	private IAttachmentService attachService;
 
+	/**
+	 * 파일 다운로드
+	 * @author 신정은
+	 */
 	@GetMapping("/download/{fileSn}")
 	public void downloadFile(@PathVariable("fileSn")int fileSn, @RequestHeader("User-Agent") String userAgent, HttpServletResponse response) throws IOException {
 		log.info("실행");
@@ -64,6 +68,15 @@ public class AttachmentController {
 			os.close();
 			is.close();
 		}
+	}
+	
+	/**
+	 * 파일 삭제
+	 * @author 신정은
+	 */
+	@GetMapping("/delete/{fileSn}")
+	public void deleteFile(@PathVariable("fileSn")int fileSn) {
+		
 	}
 
 }

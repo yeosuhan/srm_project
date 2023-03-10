@@ -20,5 +20,7 @@ public interface IAlertService {
 
 	int closeAlert(int altNo);
 
+	SseEmitter getSseEmitter(String memberId);
+
 
 }

@@ -207,9 +207,9 @@ li:before {
 								<div class="dropdown dropdown open">
 									<select name="sysCd" id="sysCdFilter" onclick="getSysCd()"
 										onchange="removeTaskSeCd()" style="width: 200px;">
-										<option>전체</option>
+										<option value="">전체</option>
 										<c:if test="${srInfoFilter.sysCd ne null}">
-											<option value="${srInfoFilter.sysCd}">${sd.sysNm}<c:if
+											<option value="${srInfoFilter.sysCd}" selected>${sd.sysNm}<c:if
 													test="${sd.sysNm eq null}">${srInfoFilter.sysCd}</c:if></option>
 										</c:if>
 									</select>
@@ -233,7 +233,7 @@ li:before {
 								<div class="dropdown dropdown open">
 
 									<select name="sttsCd" id="sttsCdFilter">
-										<option>전체</option>
+										<option value="">전체</option>
 										<option value="3"
 											<c:if test="${srInfoFilter.sttsCd eq 3}"> selected</c:if>>개발중</option>
 										<option value="4"
@@ -302,7 +302,12 @@ li:before {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>SR번호</th>
+												<th>SR번호 <a
+													href="${pageContext.request.contextPath}/srinformation/list?sort=ASC"><i
+														class="ti-arrow-up" style="color: black;"></i></a> <a
+													href="${pageContext.request.contextPath}/srinformation/list?sort=DESC"><i
+														class="ti-arrow-down" style="color: black;"></i></a>
+												</th>
 												<th>시스템구분</th>
 												<th>업무구분</th>
 												<th style="width: 200px;">SR명</th>
@@ -346,6 +351,8 @@ li:before {
 																<label class="badge badge-primary">${srlist.sttsNm}</label>
 															</c:if> <c:if test="${(srlist.sttsNm) eq '개발취소'}">
 																<label class="badge badge-danger">${srlist.sttsNm}</label>
+															</c:if> <c:if test="${(srlist.sttsNm) eq '테스트'}">
+																<label class="badge badge-inverse-primary">${srlist.sttsNm}</label>
 															</c:if></td>
 													</tr>
 												</c:forEach>
@@ -391,7 +398,7 @@ li:before {
 											<div class="col col-sm-6 px-0">
 												<input type="hidden" id="SRDSrNo" value="${srlist[0].srNo}">
 												<input readonly class="form-control" id="SRDDmndNo"
-													value="${sd.dmndNo}" style="width: 110px;">
+													value="${sd.dmndNo}" style="width: 125px;">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
@@ -594,10 +601,10 @@ li:before {
 										style="font-size: 12px; padding: 0px;">
 										<thead>
 											<tr>
-												<th style="width: 1px;">순번</th>
 												<th style="width: 1px;"><input type="checkbox"
 													name="resource" value="selectResourceAll"
 													onclick="selectResourceAll(this)"></th>
+												<th style="width: 1px;">순번</th>
 												<th>개발자명</th>
 												<th>역할</th>
 												<th>투입시작일</th>

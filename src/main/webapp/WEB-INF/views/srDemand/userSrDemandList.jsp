@@ -186,7 +186,12 @@ th {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>요청 번호</th>
+												<th>요청 번호 <a
+													href="${pageContext.request.contextPath}/srdemand/list?sort=ASC"><i
+														class="ti-arrow-up" style="color: black;"></i></a> <a
+													href="${pageContext.request.contextPath}/srdemand/list?sort=DESC"><i
+														class="ti-arrow-down" style="color: black;"></i></a>
+												</th>
 												<th>제목</th>
 												<th>관련시스템</th>
 												<th style="width: 200px;">등록자</th>
@@ -280,19 +285,21 @@ th {
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 										<div class="col col-sm-9">
 											<div type="text" class="form-control dmndNo"
-												style="font-size: 12px;">${sd.dmndNo}</div>
+												style="font-size: 12px; width: 325px;">${sd.dmndNo}</div>
 										</div>
 									</div>
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold px-0">SR 제목</div>
 										<div class="col col-sm-9">
-											<div type="text" class="form-control ttl">${sd.ttl}</div>
+											<div type="text" class="form-control ttl"
+												style="width: 325px;">${sd.ttl}</div>
 										</div>
 									</div>
 									<div class="form-group row">
 										<div class="col-sm-2 font-weight-bold px-0">관련 근거</div>
 										<div class="col-sm-9">
-											<div type="text" class="form-control relGrund">${sd.relGrund}</div>
+											<div type="text" class="form-control relGrund"
+												style="width: 325px;">${sd.relGrund}</div>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -309,7 +316,6 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청기관</div>
 											<div class="col col-sm-6 instNm">${sd.instNm}</div>
-
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청자</div>
@@ -336,7 +342,8 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
 											<div class="col col-sm-8">
-												<div type="text" class="form-control deptNm">${sd.deptNm}</div>
+												<div type="text" class="form-control deptNm"
+													style="width: 90%;">${sd.deptNm}</div>
 											</div>
 										</div>
 									</div>
@@ -365,16 +372,17 @@ th {
 											class="col-sm-2 col-form-label px-0 font-weight-bold"
 											style="line-height: 100px; font-size: 12px;">반려사유</label>
 										<div class="col-sm-9">
-											<input class="form-control rjctRsn" style="height: 100px;"
-												value="${sd.rjctRsn}"></input>
+											<input class="form-control rjctRsn"
+												style="height: 100px; width: 325px;" value="${sd.rjctRsn}"></input>
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label px-0 font-weight-bold"
 											style="line-height: 100px; font-size: 12px;">SR 내용</label>
 										<div class="col-sm-9">
-											<input class="form-control cn" style="height: 100px;"
-												value="${sd.cn}" readonly></input>
+											<input class="form-control cn"
+												style="height: 100px; width: 325px;" value="${sd.cn}"
+												readonly></input>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -396,7 +404,6 @@ th {
 										</c:if>
 									</div>
 								</div>
-
 								<%------------- 요청 수정 ----------------------------------- --%>
 								<div class="card_body" id="sdupdate"
 									style="font-size: 12px; padding-top: 20px; display: none;">

@@ -15,6 +15,7 @@ public class Board {
 	private String bbsCn;
 	private Date wrtYmd;
 	private String wrtrNm; // 작성자 이름 
+	private String wrtrId;
 	private boolean atchYn; // 첨부파일 유무
 	
 	private int inqCnt; // 조회수

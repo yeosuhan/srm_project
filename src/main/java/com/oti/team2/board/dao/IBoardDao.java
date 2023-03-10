@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.oti.team2.board.dto.Board;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
+import com.oti.team2.board.dto.BoardUpdateDto;
 
 public interface IBoardDao {
 	/**
@@ -32,4 +33,10 @@ public interface IBoardDao {
 	 * @author 신정은
 	 */
 	int updateInqCnt(@Param("bbsNo")int bbsNo);
+	
+	/**
+	 * 게시글 수정
+	 * @author 신정은
+	 */
+	int updateTtlAndCn(BoardUpdateDto boardUpdateDto);
 }

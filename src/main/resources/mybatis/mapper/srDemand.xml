@@ -234,7 +234,12 @@
 
       ) w , members c
       where w.rvwr_id = c.member_id(+)
-      order by dmndNo DESC
+     <if test="sort=='DESC'">
+		order by dmndNo DESC
+		</if>
+		<if test="sort=='ASC'">
+		order by dmndNo ASC
+		</if>
       OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
    </select>
 

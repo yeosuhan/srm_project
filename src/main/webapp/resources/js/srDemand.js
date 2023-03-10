@@ -4,8 +4,8 @@ function getSrDemandDetail(dmNo) {
 	console.log("sfsffd");
 	$("#userButtonDiv").empty();
 	$("#adminButtonDiv").empty();
-	$
-			.ajax({
+	
+			$.ajax({
 				url : "/srdemand/detail/" + dmNo,
 				type : "GET",
 				success : function(res) {
@@ -223,6 +223,7 @@ function goDecline(dmndNo) {
 	}
 
 }
+
 function endSr() {
 	var dmndNo = $(".dmndNo").val();
 	console.log(dmndNo + " 반영요청 버튼 누름~");

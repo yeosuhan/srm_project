@@ -53,7 +53,7 @@ label>img {
 						<h5>내정보 관리</h5>
 					</div>
 					<div class="row">
-						<div class="col-3"
+						<div class="col-4"
 							style="justify-content: center; text-align: center;">
 							<div class="mb-2">
 								<div class="container">
@@ -147,7 +147,7 @@ label>img {
 				</div>
 			</div>
 			<div class="col-5">
-				<div class="card" style="height: 548px;">
+				<div class="card" style="height: 590px;">
 					<div class="card-header">
 						<h5>나의 기관</h5>
 					</div>
@@ -170,13 +170,15 @@ label>img {
 							<div class="form-group form-default" style="padding-top: 20px;">
 								<input type="text" name="InstAddr" id="address_kakao"
 									class="form-control" required value="${inst.instAddr}">
+								<label class="float-label" style="padding-top: 20px;">주소</label>
+							</div>
+							<div class="form-group form-default" style="padding-top: 20px;">
 								<input value="${inst.instDetailAddr}" class="form-control"
 									type="text" name="InstDetailAddr" placeholder="상세주소"> <span
-									class="form-bar"></span> <label class="float-label"
-									style="padding-top: 20px;">주소</label>
+									class="form-bar"></span>
 							</div>
 						</form>
-						<div class="d-flex" style="padding-top: 100px;">
+						<div class="d-flex" style="padding-top: 108px;">
 							<button type="submit" form="myInstForm" class="btn btn-oti">수정</button>
 						</div>
 					</div>
