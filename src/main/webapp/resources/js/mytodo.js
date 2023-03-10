@@ -30,16 +30,17 @@ function moveTab(sttsCd) {
  * @returns
  */
 function mytodoPaging(sttsCd,pageNo) {
-   console.log(url);
+   console.log("~~~~~~~~~~~~~~~");
    var url = "/myportal/mytodo?sttsCd=" + sttsCode + "&page=" + pageNo;
    
-  /* $.ajax({
+   $.ajax({
       url : url,
       type : "GET",
       success : function(res) {         
          //목록
-    	  $('#requesttable').html(res);            
+    	  $('#requesttable').html(res);    
+    	  alert("ghkrdls");
       }
    
-   });*/
+   });
 }

@@ -140,7 +140,7 @@
                            </tbody>
                         </table>
                <!--    페이징 처리 -->
-               <%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>
+               <%@ include file="/WEB-INF/views/fragments/mytodoPager.jsp"%>
                      </div>
                      <!-- ---------------------------나의 할일 요청------------------------------------- -->
                   </div>
