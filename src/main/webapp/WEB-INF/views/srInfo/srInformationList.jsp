@@ -207,9 +207,9 @@ li:before {
 								<div class="dropdown dropdown open">
 									<select name="sysCd" id="sysCdFilter" onclick="getSysCd()"
 										onchange="removeTaskSeCd()" style="width: 200px;">
-										<option>전체</option>
+										<option value="">전체</option>
 										<c:if test="${srInfoFilter.sysCd ne null}">
-											<option value="${srInfoFilter.sysCd}">${sd.sysNm}<c:if
+											<option value="${srInfoFilter.sysCd}" selected>${sd.sysNm}<c:if
 													test="${sd.sysNm eq null}">${srInfoFilter.sysCd}</c:if></option>
 										</c:if>
 									</select>
@@ -233,7 +233,7 @@ li:before {
 								<div class="dropdown dropdown open">
 
 									<select name="sttsCd" id="sttsCdFilter">
-										<option>전체</option>
+										<option value="">전체</option>
 										<option value="3"
 											<c:if test="${srInfoFilter.sttsCd eq 3}"> selected</c:if>>개발중</option>
 										<option value="4"

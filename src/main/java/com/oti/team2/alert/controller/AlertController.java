@@ -39,7 +39,7 @@ public class AlertController {
 		//log.info(alertList);
 		return alertList;
 	}
-	/* Emitter를 생성하여 클라이언트와 연결후 아이디를 키로 하여 맵에 저장
+	/* Emitter 아이디를 키로 하여 가져오는 메소드
 	 * @author : 안한길
 	 * @param : auth
 	 * @return : SseEmitter
@@ -48,8 +48,9 @@ public class AlertController {
 	@GetMapping("/connect")
 	public ResponseEntity<SseEmitter> connect(Authentication auth) {
 		if(auth.isAuthenticated()) {
-			return ResponseEntity.ok(alertService.connectSseEmitter(auth.getName()));
+			return ResponseEntity.ok(alertService.getSseEmitter(auth.getName()));
 		}
+		log.info("연결 불러오기 실패");
 		return null;
 	}
 	/* 알림 전송 예시
