@@ -183,7 +183,12 @@ th {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>요청 번호</th>
+												<th>요청 번호 <a
+													href="${pageContext.request.contextPath}/admin/srdemand/list?sort=ASC"><i
+														class="ti-arrow-up" style="color: black;"></i></a> <a
+													href="${pageContext.request.contextPath}/admin/srdemand/list?sort=DESC"><i
+														class="ti-arrow-down" style="color: black;"></i></a>
+												</th>
 												<th>제목</th>
 												<th>관련시스템</th>
 												<th style="width: 200px;">등록자</th>

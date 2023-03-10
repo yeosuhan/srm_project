@@ -302,7 +302,12 @@ li:before {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>SR번호</th>
+												<th>SR번호 <a
+													href="${pageContext.request.contextPath}/srinformation/list?sort=ASC"><i
+														class="ti-arrow-up" style="color: black;"></i></a> <a
+													href="${pageContext.request.contextPath}/srinformation/list?sort=DESC"><i
+														class="ti-arrow-down" style="color: black;"></i></a>
+												</th>
 												<th>시스템구분</th>
 												<th>업무구분</th>
 												<th style="width: 200px;">SR명</th>
