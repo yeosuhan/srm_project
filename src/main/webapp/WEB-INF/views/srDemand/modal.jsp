@@ -148,7 +148,8 @@
 				</form>
 			</div>
 			<div class="m_footer">
-				<button type="submit" class="modal_btn btn-oti save center" form="srRequest">등록</button>
+				<button type="submit" class="modal_btn btn-oti save center"
+					form="srRequest">등록</button>
 				<div class="modal_btn btn-oti cancle" id="closebtn">닫기</div>
 			</div>
 		</div>
