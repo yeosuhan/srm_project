@@ -19,7 +19,8 @@ public class LoginController {
 	 * @return 로그인 페이지로 리턴
 	 */
 	@GetMapping("/loginForm")
-	public String getLogin() {
+	public String getLogin() {		
+		
 		return "member/login";
 	}
 
@@ -34,5 +35,6 @@ public class LoginController {
 	@GetMapping("/auth")
 	public Authentication auth(Authentication auth) { //@AuthenticationPrincipal Users user
 		return auth;
-	}
+	}	
+	
 }

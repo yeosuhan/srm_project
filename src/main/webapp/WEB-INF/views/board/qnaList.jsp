@@ -125,8 +125,10 @@
 						</form>
 						<c:if test="${board.wrtrId eq memberId}">
 							<div class="d-flex justify-content-center">
+							<div>
 								<button onclick="updateQna(${board.bbsNo})"
 									class="btn btn-oti waves-effect waves-light">수정</button>
+									</div>
 								<form action="#">
 									<button class="btn btn-oti waves-effect waves-light">삭제</button>
 								</form>

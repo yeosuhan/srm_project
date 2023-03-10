@@ -59,7 +59,7 @@ a {
       font-size: 14px; } }
   a:focus, a:hover {
     text-decoration: none;
-    color: #448aff; }
+    color: #F05F57; }
 
 h4 {
   font-size: 1.375rem; }
@@ -10103,7 +10103,7 @@ body.menu-bottom #collapse-menu {
 .checkbox-fade.fade-in-primary .cr, .checkbox-fade.zoom-primary .cr,
 .checkbox-zoom.fade-in-primary .cr,
 .checkbox-zoom.zoom-primary .cr {
-  border: 2px solid #448aff; }
+  border: 2px solid #92344B; }
   .checkbox-fade.fade-in-primary .cr .cr-icon, .checkbox-fade.zoom-primary .cr .cr-icon,
   .checkbox-zoom.fade-in-primary .cr .cr-icon,
   .checkbox-zoom.zoom-primary .cr .cr-icon {
@@ -10494,15 +10494,15 @@ body.menu-bottom #collapse-menu {
   .form-material .material-group.material-group-sm .float-label {
     font-size: .775rem; }
 .form-material .form-primary .form-control:focus ~ label {
-  color: #448aff; }
+  color: #F05F57; }
 .form-material .form-primary .form-control:focus ~ .form-bar:after, .form-material .form-primary .form-control:focus ~ .form-bar:before {
-  background: #448aff; }
+  background: #F05F57; }
 .form-material .form-primary.form-static-label .float-label {
-  color: #448aff; }
+  color: #F05F57; }
 .form-material .form-primary.form-static-label .form-control {
-  border-bottom-color: #448aff; }
+  border-bottom-color: #F05F57; }
 .form-material .material-group-primary .material-addone i, .form-material .material-group-primary .material-addone span {
-  color: #448aff; }
+  color: #F05F57; }
 .form-material .form-warning .form-control:focus ~ label {
   color: #ffe100; }
 .form-material .form-warning .form-control:focus ~ .form-bar:after, .form-material .form-warning .form-control:focus ~ .form-bar:before {
