@@ -393,7 +393,7 @@ function planUpdate() {
 
 /*시스템 목록*/
 function getSysCd(){
-	if($("#sysCdFilter option").length == 2){
+	if($("#sysCdFilter option").length <= 2){
 		$("#sysCdFilter option").remove();
 	}
 	if($("#sysCdFilter option").length == 0){
@@ -401,7 +401,7 @@ function getSysCd(){
 			url : '/srsystem/list',
 			type : 'GET',
 			success : function(result){
-				$("#sysCdFilter").append("<option></option>");
+				$("#sysCdFilter").append("<option value=''>전체</option>");
 				result.forEach((value)=>{
 					$("#sysCdFilter").append(
 							"<option value='"+value.sysCd+"'>"+value.sysNm+"</option>"
@@ -425,7 +425,7 @@ function getTaskSeCd(){
 			type : 'GET',
 			data : {'sysCd' : $("sysCdFilter option:selected").val()},
 			success : function(result){
-				$("#taskSeCdFilter").append("<option></option>");
+				$("#taskSeCdFilter").append("<option value=''>전체</option>");
 				result.forEach((value)=>{
 					$("#taskSeCdFilter").append(
 							"<option value='"+value.taskSeCd+"'>"+value.taskSeNm+"</option>"
