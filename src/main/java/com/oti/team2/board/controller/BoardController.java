@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.oti.team2.board.dto.Board;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
+import com.oti.team2.board.dto.BoardUpdateDto;
 import com.oti.team2.board.dto.SRKeyDto;
-import com.oti.team2.board.dto.boardUpdateDto;
 import com.oti.team2.board.service.IBoardService;
 import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.util.Auth;
@@ -38,7 +38,10 @@ public class BoardController {
 
 	
 	@GetMapping("/list")
-	public String getBoardList(@RequestParam("type") String type, Model model) throws MalformedURLException {
+	public String getBoardList(@RequestParam("type") String type, Model model, Authentication auth) throws MalformedURLException {
+		String memberId = auth.getName();
+		model.addAttribute("memberId", memberId);
+		
 		List<BoardListDto> list = boardService.getBoardList(type);
 		model.addAttribute("list", list);
 		//log.info(list);
@@ -56,9 +59,12 @@ public class BoardController {
 	}
 	
 	@GetMapping("/detail")
-	public String getBoardList(@RequestParam("bbsNo") int bbsNo, Model model) throws MalformedURLException {
+	public String getBoardList(@RequestParam("bbsNo") int bbsNo, Model model, Authentication auth) throws MalformedURLException {
+		String memberId = auth.getName();
+		model.addAttribute("memberId", memberId);
+		
 		Board board = boardService.getBoard(bbsNo);
-		//log.info(board);
+		log.info(board);
 		model.addAttribute("board", board);
 		
 		if(board.getBbsType().equals("NOTICE")) {
@@ -107,8 +113,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("/update")
-	public String getUpdateForm(boardUpdateDto updateDto){
-		log.info(updateDto);	
+	public String updateBoard(BoardUpdateDto updateDto){
+		log.info(updateDto);
+		boardService.updateBoard(updateDto);
 		if(updateDto.getBbsType().equals("NOTICE")) return "redirect:/board/list?type=notice";
 		return "redirect:/board/list?type=qna";
 	}

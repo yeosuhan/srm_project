@@ -20,6 +20,7 @@ import com.oti.team2.board.dao.IBoardDao;
 import com.oti.team2.board.dto.Board;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
+import com.oti.team2.board.dto.BoardUpdateDto;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -105,6 +106,14 @@ public class BoardService implements IBoardService {
 	 */
 	public void updateInqCnt(int bbsNo) {
 		boardDao.updateInqCnt(bbsNo);
+	}
+
+	/**
+	 * 게시글 수정
+	 * @author 신정은
+	 */
+	public void updateBoard(BoardUpdateDto boardUpdateDto) {
+		int row = boardDao.updateTtlAndCn(boardUpdateDto);
 	}
 
 }

@@ -3,7 +3,7 @@ package com.oti.team2.board.dto;
 import lombok.Data;
 
 @Data
-public class boardUpdateDto {
+public class BoardUpdateDto {
 	private int bbsNo;
 	private String bbsType;
 	private String bbsTtl;

@@ -58,9 +58,9 @@ public class MainController {
 		return "member/my-todo";
 	}
 	
-	@ResponseBody
 	@GetMapping("/myportal/mytodo")
-	public Map<String, Object> mytodo(Authentication auth
+	public String mytodo(Authentication auth
+			, Model model
 			, @RequestParam(required = true, name = "sttsCd", defaultValue = "0")int stts
 			, @RequestParam(required = true, name = "page", defaultValue = "1")int pageNo) {
 
@@ -83,10 +83,10 @@ public class MainController {
 		}
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("srList", srList);
-		map.put("pager", pager);
-		log.info(srList);
-		return map;
+		model.addAttribute("srList", srList);
+		model.addAttribute("pager", pager);
+		model.addAttribute("sttsCd", stts);
+		return "mytodo/srTable";
 	}
 
 }
