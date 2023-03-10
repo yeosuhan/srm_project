@@ -4,7 +4,7 @@
 function hstryPager(pager, url, onclickMethod) {
 	console.log("userHstry pager 들어옴 ~~~~~");
 	$('.hstryPager').empty();
-	var tags;
+	var tags = "";
 	if (pager.startPageNo - 1 > 0) {
 		tags = "<a class='hstryPager-newer' href='#' onclick='" + onclickMethod
 				+ "(\"" + url + (pager.startPageNo - 1) + "\")'>PREV</a>";

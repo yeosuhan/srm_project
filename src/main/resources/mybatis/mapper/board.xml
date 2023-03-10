@@ -49,6 +49,7 @@
 			BBS_CN as bbsCn,
 			WRT_YMD as wrtYmd,
 			m.flnm as wrtrNm,
+			b.WRTR_ID as wrtrId,
 			INQ_CNT as inqCnt,
 			ANS_YN as ansYn,
 			SR_NO as srNo,
@@ -66,5 +67,11 @@
 	</update>
 	
 	<!-- 게시글 수정 -->
+	<update id="updateTtlAndCn" parameterType="boardUpdateDto">
+		UPDATE BOARD
+		SET BBS_TTL = #{bbsTtl},
+			BBS_CN = #{bbsCn}
+        where BBS_NO = #{bbsNo}
+	</update>
 	
 </mapper>

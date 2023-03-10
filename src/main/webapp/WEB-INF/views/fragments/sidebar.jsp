@@ -3,6 +3,7 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
 <style>
 .pcoded-mtext, i {
 	color: white;
@@ -84,7 +85,6 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="pcoded-navigation-label"
 						data-i18n="nav.category.navigation" menu-title-theme="theme1">MY
 						PORTAL</div>
@@ -205,7 +205,6 @@
 				</div>
 			</div>
 		</nav>
-
 		<div class="pcoded-content">
 
 			<div class="pcoded-inner-content">
