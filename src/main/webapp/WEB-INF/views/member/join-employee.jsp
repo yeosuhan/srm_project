@@ -2,6 +2,7 @@
 	작성날짜 : 2023-02-20 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
@@ -12,7 +13,7 @@
 <style>
 .box {
 	width: 200px;
-	border: 1px solid #77aaff;
+	border: 1px solid #F05F57;
 	box-sizing: border-box;
 	border-radius: 10px;
 	padding: 12px 13px;
@@ -24,10 +25,10 @@
 }
 
 .box:focus {
-	border: 1px solid #9B51E0;
+	border: 1px solid #F05F57;
 	box-sizing: border-box;
 	border-radius: 10px;
-	outline: 3px solid #77aaff;
+	outline: 3px solid #F05F57;
 	border-radius: 10px;
 }
 
@@ -40,113 +41,145 @@ label>img {
 	border-radius: 50%;
 }
 </style>
-<body>
-	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
-	<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
-	<!-- Page-body start -->
-	<div class="page-body">
-		<div class="card">
-			<div class="card-header">
-				<h5>Sign Up for Employee</h5>
-			</div>
-			<div class="row">
-				<div class="col-4"
-					style="justify-content: center; text-align: center;">
-					<div class="mb-2">
-						<div class="container">
-							<div class="image-upload" id="image-upload">
-								<form method="post" enctype="multipart/form-data">
-									<div class="button">
-										<label for="chooseFile" id="newImg"><img
-											id="defaultImage" src="/resources/oti_images/user.png"
-											style="height: 400px; align-content: center; margin-top: 50px;">
-										</label>
-									</div>
-									<input type="file" id="chooseFile" name="chooseFile"
-										accept="image/*" onchange="loadFile(this)">
-								</form>
-							</div>
-							<span style="color: gray" id="addImg">회원가입후 프로필 사진을
-								등록해주세요.</span>
-						</div>
+<body themebg-pattern="theme1">
+	<!-- Pre-loader start -->
+	<div class="theme-loader">
+		<div class="loader-track">
+			<div class="preloader-wrapper">
+				<div class="spinner-layer spinner-blue">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+				<div class="spinner-layer spinner-red">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
 					</div>
 				</div>
 
-				<div class="col-8 card-block">
-					<form class="form-material" id="joinForm" action="/join"
-						method="post">
-						<input type="hidden" name="instCd" value=""> <input
-							type="hidden" name="fileType" value=""> <input
-							type="hidden" name="fileData" value="">
-						<div class="form-group form-default" style="display: flex;">
-							<input type="text" name="memberId" class="form-control"
-								required="" style="width: 50%"> <label
-								class="float-label">아이디</label>
-							<button type="button" onclick="checkMemberId()"
-								class="btn waves-effect waves-light hor-grd btn-oti ml-2"
-								style="width: 100px;">중복확인</button>
-							<font id="checkId" size="2" style="padding-left: 10px;"></font>
-						</div>
+				<div class="spinner-layer spinner-yellow">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
 
-						<div class="form-group form-default">
-							<input type="password" name="pswd" class="form-control"
-								required="" style="width: 50%"> <label
-								class="float-label">비밀번호</label>
-						</div>
-
-						<div class="form-group form-default">
-							<input type="text" name="flnm" class="form-control" required=""
-								style="width: 50%"> <label class="float-label">이름</label>
-						</div>
-
-						<div class="form-group form-default">
-							<input type="text" name="telNo" class="form-control" required=""
-								style="width: 50%"> <label class="float-label">전화번호</label>
-						</div>
-
-						<div class="form-group form-default">
-							<input type="text" name="eml" class="form-control" required=""
-								style="width: 50%"> <label class="float-label">이메일
-								(exa@gmail.com)</label>
-						</div>
-
-						<div class="form-group form-default">
-							<input type="text" name="addr" id="address_kakao"
-								class="form-control" required="" style="width: 50%"
-								value="혜화역 4번출구"> <input class="form-control"
-								type="text" name="address_detail" placeholder="상세주소"
-								style="width: 70%"> <span class="form-bar"></span> <label
-								class="float-label">주소</label>
-						</div>
-
-						<div class="form-group form-default" style="display: flex;">
-							<select name="deptCd" id="dept" class="box">
-								<option disabled selected>부서</option>
-								<c:forEach var="dept" items="${dept}">
-									<option value="${dept.deptCd}">${dept.deptNm}</option>
-								</c:forEach>
-							</select>
-						</div>
-
-						<div class="form-group form-default" style="display: flex;">
-							<select name="jbgdCd" id="grade" class="box">
-								<option disabled selected>직급</option>
-								<c:forEach var="grade" items="${grade}">
-									<option value="${grade.jbgdCd}">${grade.jbgdNm}</option>
-								</c:forEach>
-							</select>
-						</div>
-					</form>
+				<div class="spinner-layer spinner-green">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-	<div style="justify-content: center; text-align: center;">
-		<button form="joinForm" type="submit"
-			class="btn waves-effect waves-light hor-grd btn-oti">Sign Up</button>
-	</div>
-	</div>
+	<!--  -->
+	<section class="login-block">
+		<!-- Container-fluid starts -->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<!-- Authentication card start -->
+					<form class="md-float-material form-material" name="joinForm"
+						action="<c:url value='/join'/>" method="post">
+						<input type="hidden" name="instCd" value=""> <input
+							type="hidden" name="fileType" value=""> <input
+							type="hidden" name="fileData" value="">
+						<div class="text-center"></div>
+						<div class="auth-box card">
+							<div class="card-block">
+								<div class="row m-b-20">
+									<div class="col-md-12">
+										<h3 class="text-center">Sign Up (Employee)</h3>
+									</div>
+								</div>
+								<hr />
+								<div class="form-group form-primary">
+									<input type="text" name="memberId" class="form-control"
+										id="memberId" required style="width: 74%"> <label
+										class="float-label">ID</label>
+									<button type="button" onclick="checkMemberId()"
+										class="btn btn-sm waves-effect waves-light hor-grd btn-oti ml-2"
+										style="width: 80px;">중복확인</button>
+									<font id="checkId" size="2" style="padding-left: 10px;"></font>
+								</div>
+								<div class="form-group form-primary">
+									<input type="password" name="pswd" class="form-control"
+										required="" style="width: 97%"> <span class="form-bar"></span>
+									<label class="float-label">Password</label>
+								</div>
+								<div class="form-group form-primary">
+									<input type="password" name="flnm" class="form-control"
+										required="" style="width: 97%"> <span class="form-bar"></span>
+									<label class="float-label">이름</label>
+								</div>
+								<div class="form-group form-primary">
+									<input type="password" name="telNo" class="form-control"
+										required="" style="width: 97%"> <span class="form-bar"></span>
+									<label class="float-label">전화번호</label>
+								</div>
+								<div class="form-group form-primary">
+									<input type="password" name="eml" class="form-control"
+										required="" style="width: 97%"> <span class="form-bar"></span>
+									<label class="float-label">이메일</label>
+								</div>
+								<div class="form-group form-primary">
+									<input type="text" name="addr" id="address_kakao"
+										class="form-control" required="" style="width: 97%"> <label
+										class="float-label">주소</label>
+								</div>
+								<div class="form-group form-primary">
+									<input class="form-control" type="text" name="addrDetail"
+										placeholder="상세주소" style="width: 97%"> <span
+										class="form-bar"></span>
+								</div>
+								<div class="form-group form-primary">
+									<select name="deptCd" id="dept" class="box">
+										<option disabled selected>부서</option>
+										<c:forEach var="dept" items="${dept}">
+											<option value="${dept.deptCd}">${dept.deptNm}</option>
+										</c:forEach>
+									</select> <select name="jbgdCd" id="grade" class="box">
+										<option disabled selected>직급</option>
+										<c:forEach var="grade" items="${grade}">
+											<option value="${grade.jbgdCd}">${grade.jbgdNm}</option>
+										</c:forEach>
+									</select>
+								</div>
+
+								<hr />
+								<div class="row">
+									<div class="col-md-12">
+										<button form="joinForm" type="submit"
+											class="btn btn-oti btn-md btn-block waves-effect waves-light text-center">Sign
+											Up</button>
+									</div>
+								</div>
+					</form>
+				</div>
+	</section>
 	<!-- Page body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>

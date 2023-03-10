@@ -142,8 +142,8 @@ public class SrDemandService implements ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public List<SrDemand> getSrDemandListBy(Pager pager) {
-		return srDemandDao.selectAllSrDemand(pager);
+	public List<SrDemand> getSrDemandListBy(Pager pager, String sort) {
+		return srDemandDao.selectAllSrDemand(pager,sort);
 	}
 
 	/**
