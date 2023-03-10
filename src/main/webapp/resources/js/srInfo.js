@@ -62,6 +62,7 @@ function getDetail(dmndNo, srNo) {
 			$("#SiRnk").val(detail.dd.rnk);
 			$("#SRDRvwrNm").val(detail.dd.rvwrNm);
 			$("#SRDClientNm").val(detail.dd.clientNm);
+			$("#SRDClientId").val(detail.dd.clientId);
 			$("#SRDTitle").val(detail.dd.ttl);
 			$("#SRDRelgrund").val(detail.dd.relGrund);
 			$("#SRDSys").val(detail.dd.sysNm);
