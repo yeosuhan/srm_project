@@ -30,7 +30,6 @@ function moveTab(sttsCd) {
  * @returns
  */
 function mytodoPaging(sttsCd,pageNo) {
-   console.log("~~~~~~~~~~~~~~~");
    var url = "/myportal/mytodo?sttsCd=" + sttsCode + "&page=" + pageNo;
    
    $.ajax({
@@ -39,7 +38,6 @@ function mytodoPaging(sttsCd,pageNo) {
       success : function(res) {         
          //목록
     	  $('#requesttable').html(res);    
-    	  alert("ghkrdls");
       }
    
    });
