@@ -601,10 +601,10 @@ li:before {
 										style="font-size: 12px; padding: 0px;">
 										<thead>
 											<tr>
-												<th style="width: 1px;">순번</th>
 												<th style="width: 1px;"><input type="checkbox"
 													name="resource" value="selectResourceAll"
 													onclick="selectResourceAll(this)"></th>
+												<th style="width: 1px;">순번</th>
 												<th>개발자명</th>
 												<th>역할</th>
 												<th>투입시작일</th>

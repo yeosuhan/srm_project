@@ -3,6 +3,7 @@ package com.oti.team2.util.springsecurity;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,7 +30,9 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
 	public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res, Authentication auth)
 			throws IOException, ServletException {
 		log.info("로그인 성공");
+
 		alertService.connectSseEmitter(auth.getName());
+
 		super.onAuthenticationSuccess(req, res, auth);
 	}
 }

@@ -3,6 +3,7 @@ package com.oti.team2.util.springsecurity;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,6 +24,7 @@ public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailure
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			org.springframework.security.core.AuthenticationException exception) throws IOException, ServletException {
 		log.info("로그인 실패");
+
 		super.onAuthenticationFailure(request, response, exception);
 	}
 }

@@ -5,6 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
+<jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
 
 <div id="pcoded" class="pcoded iscollapsed" theme-layout="vertical"
 	vertical-placement="left" vertical-layout="wide"

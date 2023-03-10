@@ -169,7 +169,7 @@
                   </thead>
                   <tbody>
                      <tr>
-                        <th scope="row">3</th>
+                        <th scope="row">1</th>
                         <td>오티아이 휴가 사용 공지</td>
                         <td>-</td>
                         <td>최은종(관리자)</td>
@@ -182,7 +182,7 @@
                         <td>신정은(관리자)</td>
                      </tr>
                      <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">3</th>
                         <td>오티아이 회식 공지</td>
                         <td>-</td>
                         <td>한송민(관리자)</td>
@@ -223,7 +223,7 @@
                         <td>답변완료</td>
                      </tr>
                      <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">3</th>
                         <td>오티아이 회식 공지</td>
                         <td>강감찬</td>
                         <td>미답변</td>
