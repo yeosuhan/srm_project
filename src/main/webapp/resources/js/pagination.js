@@ -30,8 +30,7 @@ $('.pagination-inner a').on('click', function() {
 		$(this).addClass('pagination-active');
 })
 
-$(document).ready(function(){
-	
+$(document).ready(function(){	
 	var currentUrl=window.location.href;
 	//파라미터 여부
 	if(currentUrl.indexOf('?')!=-1 && currentUrl.indexOf('?')!=currentUrl.length-1){

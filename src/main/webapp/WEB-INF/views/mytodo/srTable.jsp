@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
 <table class="table table-hover" style="table-layout: fixed;">
 	<thead>
 		<tr>
@@ -59,4 +61,6 @@
 		</c:forEach>
 	</tbody>
 </table>
- <%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>
+<div class="d-flex justify-content-center">
+	<%@ include file="/WEB-INF/views/fragments/mytodoPager.jsp"%>
+</div>
