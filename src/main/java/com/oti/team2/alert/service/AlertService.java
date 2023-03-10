@@ -87,7 +87,11 @@ public class AlertService implements IAlertService {
 	 * */
 	@Override
 	public SseEmitter getSseEmitter(String memberId) {
-		return sseEmitters.getEmitter(memberId);
+		SseEmitter emitter = sseEmitters.getEmitter(memberId);
+		if(emitter == null) {
+			emitter = connectSseEmitter(memberId);
+		}
+		return emitter;
 	}
 	/* Emitter를 생성하여 클라이언트와 연결후 아이디를 키로 하여 맵에 저장
 	 * @author : 안한길

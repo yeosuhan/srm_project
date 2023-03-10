@@ -393,7 +393,7 @@ function planUpdate() {
 
 /*시스템 목록*/
 function getSysCd(){
-	if($("#sysCdFilter option").length == 1){
+	if($("#sysCdFilter option").length == 2){
 		$("#sysCdFilter option").remove();
 	}
 	if($("#sysCdFilter option").length == 0){
