@@ -140,7 +140,9 @@
                            </tbody>
                         </table>
                <!--    페이징 처리 -->
-               <%@ include file="/WEB-INF/views/fragments/pagination.jsp"%>
+	               <div class="d-flex justify-content-center">
+	               		<%@ include file="/WEB-INF/views/fragments/mytodoPager.jsp"%>
+	               </div>
                      </div>
                      <!-- ---------------------------나의 할일 요청------------------------------------- -->
                   </div>
