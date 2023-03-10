@@ -24,13 +24,13 @@
 				<div class="row my-3">
 					<div class="col-2">SR 번호 :</div>
 					<div class="col-4">
-						<input id="HsrNo" name="srNo" style="width: 91%" type="text"
+						<input id="HsrNo" name="srNo" style="width: 100%" type="text"
 							value="" readonly>
 					</div>
 					<div class="col-2">요청 유형 :</div>
 					<div class="col-4">
 						<div class="dropdown dropdown open">
-							<select name="hstryType" id="hstryType">
+							<select name="hstryType" id="hstryType" style="width: 73%">
 								<sec:authorize access="hasRole('ROLE_DEVELOPER')">
 									<option value="A">완료일 변경</option>
 								</sec:authorize>
@@ -45,13 +45,13 @@
 				<div class="row my-3">
 					<div class="col-2">발신일 :</div>
 					<div class="col-4">
-						<input type="date" id="HwrtYmd" type="text" value="" readonly>
+						<input type="date" id="HwrtYmd" type="text" value="" readonly style="width: 100%">
 					</div>
 					<div class="col-2">발신자 :</div>
 					<div class="col-4">
 						<input type="hidden" id="rqstrId" name="rqstrId"
 							value='<sec:authentication property="principal.username"/>' /> <input
-							id="HrqstrId" type="text"
+							id="HrqstrId" type="text" style="width: 73%"
 							value="<sec:authentication property="principal.flnm"/>" readonly>
 					</div>
 				</div>
@@ -60,7 +60,7 @@
 						<label for="">기존 완료예정일 : </label>
 					</div>
 					<div class="col-4">
-						<input id="HcmptnDmndYmd" type="text" value="" readonly>
+						<input id="HcmptnDmndYmd" type="text" value="" readonly style="width: 100%">
 					</div>
 
 
@@ -68,7 +68,7 @@
 						<label for="chgEndYmd">요청 예정일 : </label>
 					</div>
 					<div class="col-4" id="chg2">
-						<input type="date" id="HchgEndYmd" name="chgEndYmd">
+						<input type="date" id="HchgEndYmd" name="chgEndYmd" style="width:73%">
 					</div>
 				</div>
 				<div class="row my-3">

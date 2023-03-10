@@ -346,6 +346,8 @@ li:before {
 																<label class="badge badge-primary">${srlist.sttsNm}</label>
 															</c:if> <c:if test="${(srlist.sttsNm) eq '개발취소'}">
 																<label class="badge badge-danger">${srlist.sttsNm}</label>
+															</c:if> <c:if test="${(srlist.sttsNm) eq '테스트'}">
+																<label class="badge badge-inverse-primary">${srlist.sttsNm}</label>
 															</c:if></td>
 													</tr>
 												</c:forEach>
@@ -391,7 +393,7 @@ li:before {
 											<div class="col col-sm-6 px-0">
 												<input type="hidden" id="SRDSrNo" value="${srlist[0].srNo}">
 												<input readonly class="form-control" id="SRDDmndNo"
-													value="${sd.dmndNo}" style="width: 110px;">
+													value="${sd.dmndNo}" style="width: 125px;">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
