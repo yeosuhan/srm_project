@@ -48,7 +48,8 @@ public class ProgressController {
 			@RequestParam(value="bgngYmd") String bgngYmd, 
 			@RequestParam(value="endYmd") String endYmd,
 			@RequestParam(value="prgrsId") int prgrsId,
-			String srNo) {
+			String srNo,
+			@RequestParam(value="rcvrId" )String rcvrId) {
 		log.info("prgrs: " + prgrsRt);
 		log.info("bgngYmd: " + bgngYmd);
 		log.info("endYmd: " + endYmd);
