@@ -1,16 +1,22 @@
-<%-- 작성자 : 신정은
-	작성날짜 : 2023-02-20 --%>
+<%-- 작성자 : 신정은 작성날짜 : 2023-02-20 --%>
+<%-- 작성자 : 최은종 작성날짜 : 2023-03-10 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<script
+	src="${pageContext.request.contextPath}/resources/js/rememberId.js"></script>
+<script>
+	
+</script>
 <style>
 .modal-header {
-	background-color: linear-gradient( 135deg, #92344B 10%, #F05F57 100%);
+	background-color: linear-gradient(135deg, #92344B 10%, #F05F57 100%);
 	color: white;
 }
 </style>
@@ -76,13 +82,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<!-- Authentication card start -->
-
+					<!-- 로그인 및 아이디 저장 기능 구현 (최은종) -->
 					<form:form class="md-float-material form-material" id="loginForm"
 						action="/login" method="post">
-						<div class="text-center">
-						
-						</div>
+						<div class="text-center"></div>
 						<div class="auth-box card">
 							<div class="card-block">
 								<div class="row m-b-20">
@@ -91,9 +94,9 @@
 									</div>
 								</div>
 								<div class="form-group form-primary">
-									<input type="text" name="memberId" class="form-control"
-										required=""> <span class="form-bar"></span> <label
-										class="float-label">ID</label>
+									<input type="text" id="memberId" name="memberId"
+										class="form-control" required=""> <span
+										class="form-bar"></span> <label class="float-label">ID</label>
 								</div>
 								<div class="form-group form-primary">
 									<input type="password" name="pswd" class="form-control"
@@ -103,8 +106,8 @@
 								<div class="row m-t-25 text-left">
 									<div class="col-12">
 										<div class="checkbox-fade fade-in-primary d-">
-											<label> <input type="checkbox" value=""> <span
-												class="cr"><i
+											<label> <input type="checkbox" id="checkId"
+												value="true"> <span class="cr"><i
 													class="cr-icon icofont icofont-ui-check txt-primary"></i></span> <span
 												class="text-inverse">Remember me</span>
 											</label>
@@ -148,15 +151,12 @@
 										설정되었습니다.</span></br> <span>로그인 후 비밀번호를 변경해주세요.</span>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-oti"
-										data-dismiss="modal">취소</button>
+									<button type="button" class="btn btn-oti" data-dismiss="modal">취소</button>
 									<button type="button" class="btn btn-oti">확인</button>
 								</div>
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 			<div class="row">
@@ -184,12 +184,12 @@
 					<p class="text-inverse text-left m-b-0"></p>
 				</div>
 				<div class="col-md-12" align="center">
-					<img src="${pageContext.request.contextPath}/resources/assets/images/auth/Logo-small-bottom.png"
+					<img
+						src="${pageContext.request.contextPath}/resources/assets/images/auth/Logo-small-bottom.png"
 						alt="small-logo.png">
 				</div>
 			</div>
 		</div>
-
 	</section>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>

@@ -110,6 +110,7 @@
 								data-i18n="nav.form-components.main">내 정보 관리</span> <span
 								class="pcoded-mcaret"></span>
 						</a></li>
+						<%-- 
 						<sec:authorize access="hasRole('ROLE_CLIENT')">
 							<li class=""><a
 								href="${pageContext.request.contextPath}/institution/detail"
@@ -119,6 +120,7 @@
 										기관 관리</span> <span class="pcoded-mcaret"></span>
 							</a></li>
 						</sec:authorize>
+						--%>
 					</ul>
 					<div class="pcoded-navigation-label" style="font-weight: bold;"
 						data-i18n="nav.category.navigation" menu-title-theme="theme1">SR
