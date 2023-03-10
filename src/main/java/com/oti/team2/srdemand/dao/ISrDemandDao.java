@@ -82,8 +82,9 @@ public interface ISrDemandDao {
 	 * 관리자용 모든요청 목록 가져오기
 	 * 
 	 * @author 신정은
+	 * @param sort 
 	 */
-	public List<SrDemand> selectAllSrDemand(@Param("pager") Pager pager);
+	public List<SrDemand> selectAllSrDemand(@Param("pager") Pager pager, @Param("sort") String sort);
 
 	/**
 	 * 관리자의 sr요청 결재 기능 승인 ,반려 둘 다 처리한다.
