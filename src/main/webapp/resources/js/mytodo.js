@@ -52,18 +52,18 @@ function makeSrRows(srList) {
 			tr = tr +	"<td class='text-center'>" + ttl + "</td>";
 			
 		var picNm = srList[idx].picNm;
-		if(picNm !== "null") {
+		if(picNm != null) {
 			console.log("들어옴~~~~~~~~~~~~~~   " + picNm);
 			tr = tr +"<td class='text-center'>" + srList[idx].picNm + "</td>"
 			
-		}else if(picNm === "null") {
+		}else if(picNm == null) {
 			console.log("pic 널 들어옴~~~~~~~~~~~~~~   " + picNm);
 			tr = tr +"<td class='text-center'></td>";
 		}
 			tr = tr + "<td class='text-center'>" + srList[idx].cmptnDmndYmd + "</td>"					
 					+	"<td class='text-center'>" + srList[idx].sttsNm + "</td>";
 
-		if((srList[idx].sttsCd > 1) && (srList[idx].rn != "null")) {
+		if((srList[idx].sttsCd > 1) && (srList[idx].rnk != null)) {
 		/*	console.log("111111");
 			console.log("11  " + srList[idx].rnk);
 			console.log("11  " +srList[idx].sttsCd);*/

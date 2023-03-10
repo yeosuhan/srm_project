@@ -62,8 +62,7 @@
 																	<c:choose>
 																		<c:when test="${fn:length(board.bbsTtl) > 20}">
 																			<td id="ttl" class="text-center"><c:out
-																					value="${fn:substring(board.bbsTtl,0,19)}" />...
-																			</td>
+																					value="${fn:substring(board.bbsTtl,0,19)}" />...</td>
 																		</c:when>
 																		<c:otherwise>
 																			<td id="ttl" class="text-center"><c:out
@@ -124,25 +123,28 @@
 																<p class="col-sm-2 font-weight-bold">첨부파일</p>
 																<div class="col-sm-5">
 																	<c:forEach var="f" items="${board.srcList}">
-																			<div>
-																				<a href="<c:url value='/file/download/${f.fileSn}' />"> 
-																				<span class="glyphicon glyphicon-save" aria-hidden="true"></span> 
-																				<span> ${f.orgnlFileNm} </span>
-																				</a> 
-																				<span>  Size : ${f.fileSz} Bytes</span>
-																			</div>
+																		<div>
+																			<a
+																				href="<c:url value='/file/download/${f.fileSn}' />">
+																				<span class="glyphicon glyphicon-save"
+																				aria-hidden="true"></span> <span>
+																					${f.orgnlFileNm} </span>
+																			</a> <span> Size : ${f.fileSz} Bytes</span>
+																		</div>
 																	</c:forEach>
 																</div>
 															</div>
 														</form>
-														<div class="d-flex justify-content-center">
-															<button onclick="updateNotice(${board.bbsNo})"
-																class="btn btn-inverse btn-round waves-effect waves-light mr-4">수정</button>
-															<form action="#">
-																<button
-																	class="btn btn-inverse btn-round waves-effect waves-light">삭제</button>
-															</form>
-														</div>
+														<c:if test="${board.wrtrId eq memberId}">
+															<div class="d-flex justify-content-center">
+																<button onclick="updateQna(${board.bbsNo})"
+																	class="btn btn-inverse btn-round waves-effect waves-light mr-4">수정</button>
+																<form action="#">
+																	<button
+																		class="btn btn-inverse btn-round waves-effect waves-light">삭제</button>
+																</form>
+															</div>
+														</c:if>
 													</div>
 												</div>
 												<!-- Input Alignment card end -->

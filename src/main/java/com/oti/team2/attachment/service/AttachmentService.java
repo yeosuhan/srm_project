@@ -12,9 +12,20 @@ public class AttachmentService implements IAttachmentService{
 	@Autowired
 	private IAttachmentDao attachmentDao;
 
-	@Override
+	/**
+	 * 파일 다운로드
+	 * @author 신정은
+	 */
 	public AttachResponseDto downloadAttach(int fileSn) {
 		return attachmentDao.selectAttachByFileSn(fileSn);
+	}
+
+	/**
+	 * 파일 삭제
+	 * @author 신정은
+	 */
+	public void deleteAttach(int fileSn) {
+		attachmentDao.deleteAttachByFileSn(fileSn);
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import com.oti.team2.board.dto.Board;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
+import com.oti.team2.board.dto.BoardUpdateDto;
 
 public interface IBoardService {
 	/**
@@ -32,4 +33,10 @@ public interface IBoardService {
 	 * @author 신정은
 	 */
 	void updateInqCnt(int bbsNo);
+	
+	/**
+	 * 게시글 수정
+	 * @author 신정은
+	 */
+	void updateBoard(BoardUpdateDto boardUpdateDto);
 }

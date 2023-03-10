@@ -43,13 +43,14 @@
 				</div>
 			</div>
 		</form>
-		<div class="d-flex justify-content-center">
-			<button
-				class="btn btn-inverse btn-round waves-effect waves-light mr-4"
-				onclick="toUpdate()">수정</button>
-			<form action="#">
-				<button class="btn btn-inverse btn-round waves-effect waves-light">삭제</button>
-			</form>
-		</div>
+		<c:if test="${board.wrtrId eq memberId}" >
+			<div class="d-flex justify-content-center">
+				<button onclick="updateNotice(${board.bbsNo})"
+					class="btn btn-inverse btn-round waves-effect waves-light mr-4">수정</button>
+				<form action="#">
+					<button class="btn btn-inverse btn-round waves-effect waves-light">삭제</button>
+				</form>
+			</div>
+		</c:if>
 	</div>
 </div>

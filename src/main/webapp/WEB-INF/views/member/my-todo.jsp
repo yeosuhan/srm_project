@@ -5,15 +5,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-	<%@include file="/WEB-INF/views/fragments/header.jsp"%>
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/srButton.css">
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/pagination.css">
-	<script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
-	<!-- 모달 -->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/srModal.css">
+<%@include file="/WEB-INF/views/fragments/header.jsp"%>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/srButton.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/pagination.css">
+<script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
+<!-- 모달 -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/srModal.css">
+<style type="text/css">
+ label {text-align: center;}
+</style>
 </head>
 <body>
 	<div id="pcoded" class="pcoded">
@@ -41,51 +44,58 @@
 													<div class="col-12">
 														<!-- Nav tabs -->
 														<ul class="nav nav-tabs md-tabs" role="tablist">
-															<sec:authorize access="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')">
-																<li class="nav-item btn"><div class="nav-link sttsCd0 active" 
-																	onclick="moveTab(0)">요청 
+															<sec:authorize
+																access="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')">
+																<li class="nav-item btn"><div
+																		class="nav-link sttsCd0 active" onclick="moveTab(0)">
+																		요청
 																		<sec:authorize access="hasRole('ROLE_ADMIN')">
 																			<span class="badge badge-danger">${atotal}</span>
 																		</sec:authorize>
 																	</div>
-																	<div class="slide"></div>
-																</li>
-																<li class="nav-item btn"><div class="nav-link sttsCd1"
-																	onclick="moveTab(1)">반려</div>
 																	<div class="slide"></div></li>
-																<li class="nav-item btn"><div class="nav-link sttsCd2" 
-																	onclick="moveTab(2)">접수
+																<li class="nav-item btn"><div
+																		class="nav-link sttsCd1" onclick="moveTab(1)">반려</div>
+																	<div class="slide"></div></li>
+																<li class="nav-item btn"><div
+																		class="nav-link sttsCd2" onclick="moveTab(2)">
+																		접수
 																		<sec:authorize access="hasRole('ROLE_CLIENT')">
 																			<span class="badge badge-danger">${rtotal}</span>
 																		</sec:authorize>
 																	</div>
-																	<div class="slide"></div>
-																</li>
+																	<div class="slide"></div></li>
 															</sec:authorize>
 															<sec:authorize access="hasRole('ROLE_DEVELOPER')">
-																<li class="nav-item btn"><div class="nav-link sttsCd3 active" 
-																	onclick="moveTab(3)">개발중 <span class="badge badge-danger">${rtotal}</span></div>
+																<li class="nav-item btn"><div
+																		class="nav-link sttsCd3 active" onclick="moveTab(3)">
+																		개발중 <span class="badge badge-danger">${rtotal}</span>
+																	</div>
 																	<div class="slide"></div></li>
 															</sec:authorize>
-															<sec:authorize access="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')">
-																<li class="nav-item btn"><div class="nav-link sttsCd3" 
-																	onclick="moveTab(3)">개발중</div>
+															<sec:authorize
+																access="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')">
+																<li class="nav-item btn"><div
+																		class="nav-link sttsCd3" onclick="moveTab(3)">개발중</div>
 																	<div class="slide"></div></li>
 															</sec:authorize>
-															<li class="nav-item btn"><div class="nav-link sttsCd4" 
-																onclick="moveTab(4)">테스트</div>
+															<li class="nav-item btn"><div
+																	class="nav-link sttsCd4" onclick="moveTab(4)">테스트</div>
 																<div class="slide"></div></li>
-															<li class="nav-item btn"><div class="nav-link sttsCd5" 
-																onclick="moveTab(5)">개발완료</div>
+															<li class="nav-item btn"><div
+																	class="nav-link sttsCd5" onclick="moveTab(5)">개발완료</div>
 																<div class="slide"></div></li>
-															<li class="nav-item btn"><div class="nav-link sttsCd6" 
-																onclick="moveTab(6)">개발 취소</div>
+															<li class="nav-item btn"><div
+																	class="nav-link sttsCd6" onclick="moveTab(6)">개발
+																	취소</div>
 																<div class="slide"></div></li>
 														</ul>
 														<!-- Tab panes -->
-														<div class="tab-content card-block" style=" padding:0px 20px 20px 20px;">
+														<div class="tab-content card-block"
+															style="padding: 0px 20px 20px 20px;">
 															<div class="tab-pane active" id="request" role="tabpanel">
-																<table class="table table-hover" style="table-layout: fixed;">
+																<table class="table table-hover"
+																	style="table-layout: fixed;">
 																	<thead>
 																		<tr>
 																			<th width="15%" class="text-left">SR번호</th>
@@ -95,7 +105,8 @@
 																			<th width="7%" class="text-center">담당자</th>
 																			<th width="10%" class="text-center">완료요청일</th>
 																			<th width="10%" class="text-center">진행상태</th>
-																			<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
+																			<sec:authorize
+																				access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
 																				<th width="5%">우선순위</th>
 																			</sec:authorize>
 																		</tr>
@@ -108,21 +119,34 @@
 																				<td id="taskNm" class="text-left">${sr.taskNm}</td>
 																				<c:choose>
 																					<c:when test="${fn:length(sr.ttl) > 10}">
-																						<td id="ttl" class="text-center">
-																							<c:out value="${fn:substring(sr.ttl,0,9)}"/>...
-																						</td>
+																						<td id="ttl" class="text-center"><c:out
+																								value="${fn:substring(sr.ttl,0,9)}" />...</td>
 																					</c:when>
 																					<c:otherwise>
-																						<td id="ttl" class="text-center">
-																							<c:out value="${sr.ttl}"/>
-																						</td>
+																						<td id="ttl" class="text-center"><c:out
+																								value="${sr.ttl}" /></td>
 																					</c:otherwise>
 																				</c:choose>
 																				<td id="picNm" class="text-center">${sr.picNm}</td>
 																				<td id="cmptnDmndYmd" class="text-center">${sr.cmptnDmndYmd}</td>
-																				<td id="sttsNm" class="text-center">${sr.sttsNm}</td>
+																				<td><c:if test="${(sr.sttsCd) eq 0}">
+																						<label class="badge badge-warning">${sr.sttsNm}</label>
+																					</c:if> <c:if test="${(sr.sttsCd) eq 1}">
+																						<label class="badge badge-danger">${sr.sttsNm}</label>
+																					</c:if> <c:if test="${(sr.sttsCd) eq 2}">
+																						<label class="badge badge-inverse-success">${sr.sttsNm}</label>
+																					</c:if> <c:if test="${(sr.sttsCd) eq 3}">
+																						<label class="badge badge-success">${sr.sttsNm}</label>
+																					</c:if> <c:if test="${(sr.sttsCd) eq 4}">
+																						<label class="badge badge-primary">${sr.sttsNm}</label>
+																					</c:if> <c:if test="${(sr.sttsCd) eq 5}">
+																						<label class="badge badge-danger">${sr.sttsNm}</label>
+																					</c:if> <c:if test="${(sr.sttsCd) eq 6}">
+																						<label class="badge badge-inverse-primary">${sr.sttsNm}</label>
+																					</c:if></td>
 																				<c:if test="${sr.sttsCd} > 1">
-																					<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
+																					<sec:authorize
+																						access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
 																						<td id="rnk" class="text-center">${sr.rnk}</td>
 																					</sec:authorize>
 																				</c:if>
