@@ -32,7 +32,7 @@ public interface ISrDemandDao {
 	 * 
 	 * @author 신정은
 	 */
-	public List<SrDemand> selectByCustId(@Param("custId") String custId, @Param("pager") Pager pager);
+	public List<SrDemand> selectByCustId(@Param("custId") String custId, @Param("pager") Pager pager, @Param("sort")String sort);
 
 	/**
 	 * sr요청 이 결재 전 상태이면 수정하기 위해 기존 데이터 제공
@@ -149,5 +149,5 @@ public interface ISrDemandDao {
 	 * 
 	 * @author 여수한
 	 */
-	public void updateSrdemandStts(@Param("dmndNo") String dmndNo); 
+	public void updateSrdemandStts(@Param("dmndNo") String dmndNo);
 }

@@ -8,9 +8,10 @@
 		<h5>글 수정</h5>
 	</div>
 	<div class="card-block">
-		<form enctype="multipart/form-data" method="POST" action="/board/update" id="updateForm">
-			<input type="hidden" value="${board.bbsNo}" name="bbsNo">
-			<input type="hidden" value="${board.bbsType}" name="bbsType">
+		<form enctype="multipart/form-data" method="POST"
+			action="/board/update" id="updateForm">
+			<input type="hidden" value="${board.bbsNo}" name="bbsNo"> <input
+				type="hidden" value="${board.bbsType}" name="bbsType">
 			<div class="form-group row">
 				<div class="col-sm-2 font-weight-bold">작성일자</div>
 				<div class="col-sm-6">${board.wrtYmd}</div>
@@ -26,7 +27,8 @@
 			<div class="form-group row">
 				<div class="col-sm-2 font-weight-bold">제목</div>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="bbsTtl" id="bbsTtl" value="${board.bbsTtl}">
+					<input type="text" class="form-control" name="bbsTtl" id="bbsTtl"
+						value="${board.bbsTtl}">
 				</div>
 				<div class="col-sm-2 font-weight-bold text-right">작성자</div>
 				<div class="col-sm-2">${board.wrtrNm}</div>
@@ -39,7 +41,7 @@
 				<label class="col-sm-2 col-form-label">내용</label>
 				<div class="col-sm-10">
 					<input class="form-control"
-						style="border: none; background-color: #DFDEDE"  name="bbsCn"
+						style="border: none; background-color: #DFDEDE" name="bbsCn"
 						value="${board.bbsCn}"></input>
 				</div>
 			</div>
@@ -61,7 +63,7 @@
 		</form>
 		<div class="d-flex justify-content-center">
 			<button type="submit" form="updateForm"
-				class="btn btn-inverse btn-round waves-effect waves-light mr-4">저장</button>
+				class="btn btn-oti waves-effect waves-light mr-4">저장</button>
 		</div>
 	</div>
 </div>

@@ -46,9 +46,9 @@
 		<c:if test="${board.wrtrId eq memberId}" >
 			<div class="d-flex justify-content-center">
 				<button onclick="updateNotice(${board.bbsNo})"
-					class="btn btn-inverse btn-round waves-effect waves-light mr-4">수정</button>
+					class="btn btn-oti btn-round waves-effect waves-light mr-4">수정</button>
 				<form action="#">
-					<button class="btn btn-inverse btn-round waves-effect waves-light">삭제</button>
+					<button class="btn btn-oti btn-round waves-effect waves-light">삭제</button>
 				</form>
 			</div>
 		</c:if>
