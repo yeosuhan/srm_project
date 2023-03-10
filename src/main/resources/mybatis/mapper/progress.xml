@@ -67,7 +67,7 @@
 		SET
 			BGNG_YMD = SYSDATE
 		WHERE
-			SR_NO = #{srNo]
+			SR_NO = #{srNo}
 		AND
 			PRGRS_SE_NM = '운영반영'
 	</update>
