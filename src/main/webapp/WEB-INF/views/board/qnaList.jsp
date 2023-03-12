@@ -8,19 +8,13 @@
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <link rel="stylesheet" type="text/css"
-	href="/resources/css/pagination.css">
+	href="${pageContext.request.contextPath}/resources/css/pagination.css">
 <link rel="stylesheet" type="text/css"
-	href="/resources/js/pagination.js">
+	href="/${pageContext.request.contextPath}resources/js/pagination.js">
 <link rel="stylesheet" type="text/css"
-	href="/resources/css/srButton.css">
-<script src="/resources/js/board.js"></script>
-<script type="text/javascript">
-	function toUpdate() {
-		console.log("눌림 ~~");
-		$("#update").css("display", "block");
-		$("#postDetail").css("display", "none");
-	}
-</script>
+	href="${pageContext.request.contextPath}/resources/css/srButton.css">
+<script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+
 </head>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -48,7 +42,7 @@
 						<tbody>
 							<c:forEach items="${list}" var="board" varStatus="status">
 								<tr onclick="qnaDetail(${board.bbsNo})">
-									<th style="text-align: center;">${status.count}</th>
+									<th style="text-align: center;">${pager.startRowNo + status.index}</th>
 									<c:choose>
 										<c:when test="${fn:length(board.bbsTtl) > 20}">
 											<td id="ttl" class="text-center"><c:out
@@ -125,10 +119,10 @@
 						</form>
 						<c:if test="${board.wrtrId eq memberId}">
 							<div class="d-flex justify-content-center">
-							<div>
-								<button onclick="updateQna(${board.bbsNo})"
-									class="btn btn-oti waves-effect waves-light">수정</button>
-									</div>
+								<div>
+									<button onclick="updateQna(${board.bbsNo})"
+										class="btn btn-oti waves-effect waves-light">수정</button>
+								</div>
 								<form action="#">
 									<button class="btn btn-oti waves-effect waves-light">삭제</button>
 								</form>

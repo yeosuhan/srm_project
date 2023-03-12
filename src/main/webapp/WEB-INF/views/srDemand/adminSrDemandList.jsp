@@ -203,7 +203,7 @@ th {
 											<c:forEach var="srDemand" items="${srDemandList}"
 												varStatus="status">
 												<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
-													<th scope="row">${status.count}</th>
+													<th scope="row">${pager.startRowNo + status.index}</th>
 													<td>${srDemand.dmndNo}</td>
 													<c:choose>
 														<c:when test="${fn:length(srDemand.ttl) > 10}">

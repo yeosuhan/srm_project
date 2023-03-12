@@ -21,6 +21,7 @@ import com.oti.team2.board.dto.Board;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
 import com.oti.team2.board.dto.BoardUpdateDto;
+import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -79,11 +80,19 @@ public class BoardService implements IBoardService {
 	}
 
 	/**
+	 * 공지사항/문의게시판 목록 페이징 처리
+	 * @author 신정은
+	 */
+	public int getTotalRow(String type, String clientId) {
+		return boardDao.countTotalByBbsType(type, clientId);
+	}
+	
+	/**
 	 * 공지사항/문의게시판 목록 조회
 	 * @author 신정은
 	 */
-	public List<BoardListDto> getBoardList(String type) {
-		return boardDao.selectBoardListByBbsType(type);
+	public List<BoardListDto> getBoardList(String type, String clientId, Pager pager) {
+		return boardDao.selectBoardListByBbsType(type, clientId, pager);
 	}
 	
 	/**

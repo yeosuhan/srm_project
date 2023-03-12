@@ -26,8 +26,27 @@
 		</choose> 
 	</insert>
 	
+	<!--  공지사항/문의게시판 페이징 처리 -->
+	<select id="countTotalByBbsType" parameterType="map" resultType="int">
+		SELECT
+			COUNT(BBS_NO)
+			
+		FROM BOARD b
+			<if test="clientId != null">
+				, MEMBERS m
+			</if>
+		where 
+			<if test="clientId != null">
+				b.WRTR_ID = m.member_id
+				and 
+				b.WRTR_ID = #{clientId}
+				and
+			</if>
+			BBS_TYPE = upper(#{type})
+	</select>
+	
 	<!--  공지사항/문의게시판 목록 조회 -->
-	<select id="selectBoardListByBbsType" parameterType="string" resultType="boardListDto">
+	<select id="selectBoardListByBbsType" parameterType="map" resultType="boardListDto">
 		SELECT
 			BBS_NO as bbsNo,
 			BBS_TTL as bbsTtl,
@@ -36,8 +55,12 @@
 			m.FLNM as wrtNm
 		FROM BOARD b, MEMBERS m
 		where b.WRTR_ID = m.member_id
+			<if test="clientId != null">
+				and b.WRTR_ID = #{clientId}
+			</if>
 			and BBS_TYPE = upper(#{type})
 		ORDER BY WRT_YMD DESC
+		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
 	
 	<!-- 공지사항/문의게시판  상세 조회  -->

@@ -48,7 +48,7 @@
 						<tbody>
 							<c:forEach items="${list}" var="board" varStatus="status">
 								<tr onclick="noticeDetail(${board.bbsNo})">
-									<th style="text-align: center;">${status.count}</th>
+									<th style="text-align: center;">${pager.startRowNo + status.index}</th>
 									<c:choose>
 										<c:when test="${fn:length(board.bbsTtl) > 20}">
 											<td id="ttl" class="text-center"><c:out
@@ -116,8 +116,10 @@
 						</form>
 						<c:if test="${board.wrtrId eq memberId}">
 							<div class="d-flex justify-content-center">
-								<button onclick="updateNotice(${board.bbsNo})"
-									class="btn btn-oti waves-effect waves-light mr-4">수정</button>
+								<div>
+									<button onclick="updateNotice(${board.bbsNo})"
+										class="btn btn-oti waves-effect waves-light mr-4">수정</button>
+								</div>
 								<form action="#">
 									<button class="btn btn-oti waves-effect waves-light">삭제</button>
 								</form>

@@ -22,6 +22,7 @@ import com.oti.team2.board.dto.SRKeyDto;
 import com.oti.team2.board.service.IBoardService;
 import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.util.Auth;
+import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -38,13 +39,28 @@ public class BoardController {
 
 	
 	@GetMapping("/list")
-	public String getBoardList(@RequestParam("type") String type, Model model, Authentication auth) throws MalformedURLException {
+	public String getBoardList(@RequestParam("type") String type,
+			Model model, 
+			Authentication auth,
+			@RequestParam(required = true, name = "page", defaultValue = "1") int page) throws MalformedURLException {
 		String memberId = auth.getName();
 		model.addAttribute("memberId", memberId);
 		
-		List<BoardListDto> list = boardService.getBoardList(type);
+		String role = auth.getAuthorities().stream().findFirst().get().toString();
+		List<BoardListDto> list = null;
+		Pager pager = null;
+		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
+			pager = new Pager(boardService.getTotalRow(type, memberId), page);
+			list = boardService.getBoardList(type, memberId, pager);
+		}
+		else {
+			pager = new Pager(boardService.getTotalRow(type, null), page);
+			list = boardService.getBoardList(type, null, pager);
+		}
+		
+		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
-		//log.info(list);
+		log.info(pager);
 		
 		Board board = null;
 		if(list.size()>0) {
