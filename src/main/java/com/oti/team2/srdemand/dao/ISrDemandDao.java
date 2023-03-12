@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.oti.team2.srdemand.dto.MytodoSrListDto;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
+import com.oti.team2.srdemand.dto.SrFilterDto;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.util.pager.Pager;
@@ -31,8 +32,9 @@ public interface ISrDemandDao {
 	 * 고객의 나의 요청 목록 조회 기능
 	 * 
 	 * @author 신정은
+	 * @param srFilterDto 
 	 */
-	public List<SrDemand> selectByCustId(@Param("custId") String custId, @Param("pager") Pager pager, @Param("sort")String sort);
+	public List<SrDemand> selectByCustId(@Param("custId") String custId, @Param("pager") Pager pager, @Param("sort")String sort,@Param("srFilterDto") SrFilterDto srFilterDto);
 
 	/**
 	 * sr요청 이 결재 전 상태이면 수정하기 위해 기존 데이터 제공
@@ -68,8 +70,9 @@ public interface ISrDemandDao {
 	 * 고객용 나의 요청 총 행의 수 구하기
 	 * 
 	 * @author 신정은
+	 * @param srFilterDto 
 	 */
-	public int countByClientId(@Param("clientId") String clientId);
+	public int countByClientId(@Param("clientId") String clientId, @Param("srFilterDto")SrFilterDto srFilterDto);
 
 	/**
 	 * 관리자용 모든요청 총 행의 수 구하기

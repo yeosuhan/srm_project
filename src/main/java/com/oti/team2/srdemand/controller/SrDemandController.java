@@ -1,5 +1,8 @@
 package com.oti.team2.srdemand.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import com.oti.team2.institution.service.IInstitutionService;
 import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.progress.service.IProgressService;
 import com.oti.team2.srdemand.dto.SrDemand;
+import com.oti.team2.srdemand.dto.SrFilterDto;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.dto.SrdemandPrgrsrt;
@@ -106,26 +110,54 @@ public class SrDemandController {
 	public String getSrDemandList(Authentication auth, Model model,
 			@RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
-			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort) {
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
+			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
+			@RequestParam(required = false, name = "sysCd")String sysCd,
+			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
+			@RequestParam(required = false, name = "keyWord")String keyWord) {
 		log.info("sort : " + sort);
 		String memberId = auth.getName();
-		
+		SrFilterDto srFilterDto = new SrFilterDto();
+		if(dmndYmdStart==null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, -1);
+			String stringDate = sdf.format(calendar.getTime());
+			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+		}
+		srFilterDto.setDmndYmdStart(dmndYmdStart);
+		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
+		srFilterDto.setSttsCd(sttsCd);
+		srFilterDto.setKeyWord(keyWord);
+		srFilterDto.setSysCd(sysCd);
+		srFilterDto.setTaskSeCd(taskSeCd);
+		model.addAttribute("srFilterDto",srFilterDto);
+		log.info(srFilterDto);
 		// 목록
-		int totalRows = srdemandService.getCountClientSr(memberId);
+		int totalRows = srdemandService.getCountClientSr(memberId, srFilterDto);
 		Pager pager = new Pager(totalRows, Integer.parseInt(page));
 		log.info(pager);
 		List<SrDemand> list = null;
-		list = srdemandService.getSrDemandList(memberId, pager,sort);
+		list = srdemandService.getSrDemandList(memberId, pager,sort,srFilterDto);
 		model.addAttribute("mySrDemandList", list);
 
 		// 기본 첫번째 상세 or 선택된 상세
 		SrdemandDetail sd = null;
-		if (dmndno != null) {
+		if (dmndno != null||totalRows==0) {
 			sd = srdemandService.getSrDemandDetail(dmndno);
 		} else {
 			sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 		}
 		log.info(sd);
+		
+		//시스템 목록
+		model.addAttribute("systemList",systemService.getSystemList());
+		//작업 구분
+		if(sysCd!=null) {
+			model.addAttribute("taskList",taskService.getTaskList(sysCd));
+		}
 		model.addAttribute("sd", sd);
 		model.addAttribute("pager", pager);		
 		model.addAttribute("role", auth.getAuthorities().stream().findFirst().get().toString());
