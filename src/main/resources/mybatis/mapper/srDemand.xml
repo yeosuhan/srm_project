@@ -174,7 +174,7 @@
             REL_GRUND = #{srRequestDto.relGrund},
          </if>
          <if test="srRequestDto.cmptnDmndYmd != null">
-            CMPTN_DMND_YMD = #{srRequestDto.cmptnDmndYmd},
+            CMPTN_DMND_YMD = TO_DATE(#{srRequestDto.cmptnDmndYmd},'YYYY-MM-DD'),
          </if>
          <if test="srRequestDto.sysCd != null">
             SYS_CD = #{srRequestDto.sysCd},
@@ -185,7 +185,7 @@
       </trim>
       where DMND_NO = #{srRequestDto.dmndNo}
 
-   </update>
+   </update> 
 
    <!-- 고객의 요청 총 행의 수 구하기 -->
    <select id="countByClientId" parameterType="string"

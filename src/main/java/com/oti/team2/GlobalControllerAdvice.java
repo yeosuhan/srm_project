@@ -1,5 +1,6 @@
 package com.oti.team2;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,10 +21,18 @@ public class GlobalControllerAdvice {
 	 * @return 에러 페이지로 리턴
 	 */
 	@ExceptionHandler(Exception.class)
-	public String exceptionAll(Exception exception, Model model) {
+	public String exceptionAll(Exception exception, Model model, Authentication auth) {
 		log.error(exception.getMessage());
 
 		model.addAttribute("exception", exception);
-		return "error/runtime";
+		if((auth.getAuthorities().stream().findFirst().get().toString()).equals("ROLE_CLIENT")) {
+			log.info("고객용 에러페이지");
+			return "error/runtimeClient";
+		} else {
+			log.error(exception.getMessage());
+			log.info("관리자/개발자용 에러페이지");
+			return "error/runtime";
+		}
 	}
+
 }

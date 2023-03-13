@@ -17,9 +17,8 @@
 <div class="modal fade" id="approvalInfoHistoryModal">
 	<div class="modal-body modal-dialog modal-lg" style="height: 600px;">
 		<div class="m_head">
-			<div class="modal_title" style="color: white">Sr진척정보 변경요청 상세</div>
-			<div id="mheadDiv">
-			</div>
+			<div class="modal_title" style="color: white">Sr진척정보 변경요청 상세</div>	
+				<div class="mheadDiv"></div>
 		</div>
 		<div class="m_body bg-light detailDiv">
 			<form id="historyDetailForm" action="<c:url value='/history/add'/>">
@@ -77,9 +76,9 @@
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">내용 :</div>
+					<div class="col-2">사유 :</div>
 					<div class="col-10">
-						<textarea id="AhstryCn" class="AhstryCn" name="hstryCn" style="width: 90%" rows="5"></textarea>
+						<textarea id="AhstryCn" class="AhstryCn" name="hstryCn" style="width: 90%; resize:none;" maxlength="500" rows="5"></textarea>
 					</div>
 				</div>
 			</form>

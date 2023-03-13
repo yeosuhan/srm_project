@@ -1,9 +1,4 @@
 /*작성자: 최은종*/
-
-var element = document.createElement('div');
-element.innerHTML = '<sec:authentication property="principal.username"/>';
-var user = element.innerHTML;
-
 function getHstryDetail(historyId) {
 	console.log("historyId: " + historyId);
 
@@ -16,6 +11,7 @@ function getHstryDetail(historyId) {
 					console.log(result.auth);
 
 					var auth = result.auth;
+					var autuId = result.authId;
 					var appvHstryType = result.hstryType;
 					var appvHstryStts = result.hstryStts;
 					var appvRqstrId = result.rqstrId;

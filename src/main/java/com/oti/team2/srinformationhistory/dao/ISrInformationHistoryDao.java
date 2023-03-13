@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.util.pager.Pager;
@@ -53,5 +54,14 @@ public interface ISrInformationHistoryDao {
 	 * @author 최은종
 	 */
 	public int updateHstry(SrInformationHistory srInformationHistory);
+	
+	/**
+	 * 나의 할 일에서 히스토리 목록 조회 메서드
+	 * 
+	 * @author 최은종
+	 */
+	public List<MyTodoHistoryListDto> selectHstryTodoByPicId(@Param("pager") Pager pager, @Param("picId") String picId);
+	public List<MyTodoHistoryListDto> selectHstryTodoByEmpId(@Param("pager") Pager pager, @Param("rqstrId") String rqstrId, @Param("empId") String empId);
+	public List<MyTodoHistoryListDto> selectHstryTodoByCustId(@Param("pager") Pager pager, @Param("custId") String custId);
 	
 }

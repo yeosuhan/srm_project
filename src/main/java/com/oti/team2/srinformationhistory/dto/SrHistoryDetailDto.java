@@ -30,4 +30,5 @@ public class SrHistoryDetailDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date chgEndYmd;
 	private String auth;
+	private String authId;
 }

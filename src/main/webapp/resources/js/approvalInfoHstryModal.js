@@ -1,14 +1,4 @@
 /*작성자: 최은종*/
-
-var element = document.createElement('div');
-element.innerHTML = '<sec:authentication property="principal.authorities[0]"/>';
-var auth = element.innerHTML;
-console.log(auth);
-
-var element = document.createElement('div');
-element.innerHTML = '<sec:authentication property="principal.username"/>';
-var user = element.innerHTML;
-
 function getInfoHstryDetail(historyId) {
 	console.log("historyId: " + historyId);
 
@@ -23,6 +13,10 @@ function getInfoHstryDetail(historyId) {
 					var AhstryStts = result.hstryStts;
 					var ArqstrId = result.rqstrId;
 					var AhstryId = result.hstryId;
+					var auth = result.auth;
+					var autuId = result.authId;
+					console.log(auth);
+					console.log("autuId: "+autuId);
 					console.log(AhstryType);
 					console.log(AhstryStts);
 					console.log(ArqstrId);
@@ -45,7 +39,8 @@ function getInfoHstryDetail(historyId) {
 					$('.AhstryCn').val(result.hstryCn);
 
 					if (auth == 'ROLE_ADMIN' && AhstryType == 'A') {
-						if (ArqstrId != user && AhstryStts == 'I') {
+						if (ArqstrId != autuId && AhstryStts == 'I') {
+							console.log("1");
 							$('#HstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y">승인</label>'
@@ -80,55 +75,76 @@ function getInfoHstryDetail(historyId) {
 																	}
 																});
 											});
-						} else if (ArqstrId == user && AhstryStts == 'I') {
-
+						} else if (ArqstrId == autuId && AhstryStts == 'I') {
+							console.log("2");
 							$('#HstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
 													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
 							$('#footDiv').text("결재 권한이 없습니다.");
-						} else if (ArqstrId != user && AhstryStts == 'Y') {
+						} else if (ArqstrId != autuId && AhstryStts == 'Y') {
+							console.log("3");
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="BHstryStts" type="text" value="승인" readonly>');
 							$('#footDiv').text("결재 처리 된 요청입니다.");
-						} else if (ArqstrId != user && AhstryStts == 'N') {
+						} else if (ArqstrId != autuId && AhstryStts == 'N') {
+							console.log("4");
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="CHstryStts" type="text" value="반려" readonly>');
 							$('#footDiv').text("결재 처리 된 요청입니다.");
 						}
 					} else if (auth == 'ROLE_ADMIN' && AhstryType != 'A') {
-						if (AhstryStts == 'I') {
+						console.log(ArqstrId);
+						console.log(autuId);
+						console.log(auth);
+						if (ArqstrId == autuId && AhstryStts == 'I') {
+							console.log("5");
+							$('.AhstryId').val(AhstryId);
+							$('.mheadDiv')
+									.html(
+											'<input type="button" class="btn btn-oti btn-sm" style="line-height: 8px" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
+													+ '<input type="hidden" class="AhstryId" name="hstryId" value="">');
 							$('#HstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
 													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
 							$('#footDiv').text("결재 권한이 없습니다.");
 						} else if (AhstryStts == 'Y') {
+							console.log("6");
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="BHstryStts" type="text" value="승인" readonly>');
 							$('#footDiv').text("결재 권한이 없습니다.");
 						} else if (AhstryStts == 'N') {
+							console.log("7");
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="CHstryStts" type="text" value="반려" readonly>');
 							$('#footDiv').text("결재 권한이 없습니다.");
 						}
 					} else if (auth != 'ROLE_ADMIN') {
-						if (AhstryStts == 'I') {
+						if (ArqstrId == autuId && AhstryStts == 'I') {
+							console.log("8");
+							$('.AhstryId').val(AhstryId);
+							$('.mheadDiv')
+									.html(
+											'<input type="button" class="btn btn-oti btn-sm" style="line-height: 8px" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
+													+ '<input type="hidden" class="AhstryId" name="hstryId" value="">');
 							$('#HstrySttsDiv2')
 									.html(
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
 													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
 							$('#footDiv').text("결재 권한이 없습니다.");
 						} else if (AhstryStts == 'Y') {
+							console.log("9");
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="BHstryStts" type="text" value="승인" readonly>');
 							$('#footDiv').text("결재 처리 된 요청입니다.");
 						} else if (AhstryStts == 'N') {
+							console.log("10");
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="CHstryStts" type="text" value="반려" readonly>');
@@ -136,24 +152,12 @@ function getInfoHstryDetail(historyId) {
 						}
 					}
 
-					if (ArqstrId == user && AhstryStts == 'I') {
-						if (auth != 'ROLE_ADMIN' && AhstryType == 'A') {
-							console.log(AhstryType);
-							$('#mheadDiv')
-									.html(
-											'<input type="button" class="btn btn-oti pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
-													+ '<input type="hidden" class="AhstryId" value="">');
-						} else if (auth == 'ROLE_ADMIN' && AhstryType != 'A') {
-							$('#mheadDiv')
-									.html(
-											'<input type="button" class="btn btn-oti pb-0" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
-													+ '<input type="hidden" class="AhstryId" value="">');
-						}
-					}
+
 				}
 			});
 }
 
+// 수정 모달 오픈 시 부모 모달 닫히게 설정
 $(document).ready(function() {
 	$('#modifyHistoryModal').on('show.bs.modal', function() {
 		$('#approvalInfoHistoryModal').modal('hide')
