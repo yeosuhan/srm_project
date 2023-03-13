@@ -292,7 +292,7 @@ th {
 							data-toggle="tab" href="#srDemandDetail" role="tab"
 							id="srDmndDetailTab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
-						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" id="srHistoryTab"
 							href="#srHistory" onclick="userHstry()" role="tab">SR 히스토리</a>
 							<div class="slide"></div></li>
 					</ul>

@@ -5,25 +5,28 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
 
-<%!HttpServletRequest req;
+<%-- <%!HttpServletRequest req;
 	int test = 30;
-	
 
-	Cookie getCookie(String s) {
+	Cookie getCookie(String cname) {
 	    Cookie[] cookies = req.getCookies();
-	    Cookie res = null;
+	    Cookie resCookie = null;
 	    if (cookies != null) {
 	        for (Cookie c : cookies) {
-	            if (s.equals(c.getName())) {
-	                res = c;
+	            if (cname.equals(c.getName())) {
+	            	resCookie = c;
 	                break;
 	            }
 	        }
 	    }
-	    return res;
+	    return resCookie;
 	}
 %>
-<script>
+<% 
+	Cookie expiryTimeCookie = getCookie("expiryTime");
+	String expiryTime = expiryTimeCookie.getValue();
+%> --%>
+<%-- <script>
 	$(document).ready(function(){
 		var test = <%=test%>
 		console.log(test);
@@ -34,7 +37,6 @@
 	var objClickInfo;
 	var latestTime;
 	var expireTime;
-	var timeInterval = 1000; // 1초 간격 호출
 	var firstLocalTime = 0;
 	var elapsedLocalTime = 0;
 	var stateExpiredTime = false;
@@ -42,14 +44,6 @@
 	var timer;
  
 	function init() {
-		/* objLeftTime = document.getElementById("leftTimeInfo");
- 
-		if (objLeftTime == null) {
-			console.log("'leftTimeInfo' ID is not exist!");
-			return;
-		}
-		objClickInfo = document.getElementById("clickInfo"); */
-		//console.log(objLeftTime.textContent);
  
 		latestTime = getCookie("serverTime");
 		expireTime = getCookie("sessionExpiry");
@@ -62,12 +56,10 @@
  
 		elapsedTime = 0;
 		firstLocalTime = (new Date()).getTime();
-		//showRemaining();
  
-		//timer = setInterval(showRemaining, timeInterval); // 1초 간격 호출 
-		setInterval(() => console.log(++count), 2000);
+		setInterval(() => console.log("남은 세션시간 조회하자"), 1000);
 	}
-</script>
+</script> --%>
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 

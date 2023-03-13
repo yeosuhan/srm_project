@@ -11,6 +11,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 public class SessionTimeoutCookieFilter implements Filter{
 
 	@Override
@@ -32,8 +35,8 @@ public class SessionTimeoutCookieFilter implements Filter{
  
         cookie2.setPath("/");
         httpRes.addCookie(cookie2);
-        httpRes.sendRedirect("/resources/fragments.top.jsp");
-        
+        chain.doFilter(request, response);
+        log.info("쿠키 필터 ~~~ ");
         
 	}
 
