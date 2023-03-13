@@ -1,5 +1,6 @@
 package com.oti.team2.srdemand.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -19,7 +20,7 @@ public interface ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public int addSrDemand(SrRequestDto srRequestDto);
+	public int addSrDemand(SrRequestDto srRequestDto) throws IllegalStateException, IOException;
 
 	/**
 	 * 고객의 나의 sr요청 목록 조회

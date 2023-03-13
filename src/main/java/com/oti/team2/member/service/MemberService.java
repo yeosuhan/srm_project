@@ -68,8 +68,7 @@ public class MemberService implements IMemberService {
 	 */
 	@Override
 	public ProfileImg getProfileImg(String memberId) {
-
-		return null;
+		return memberDao.selectFile(memberId);
 	}
 
 	/*

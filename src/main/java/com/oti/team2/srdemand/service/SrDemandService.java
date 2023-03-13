@@ -1,5 +1,6 @@
 package com.oti.team2.srdemand.service;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oti.team2.attachment.dto.AttachResponseDto;
+import com.oti.team2.attachment.service.IAttachmentService;
 import com.oti.team2.progress.service.IProgressService;
 import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srdemand.dto.MytodoSrListDto;
@@ -35,18 +38,25 @@ public class SrDemandService implements ISrDemandService {
 
 	@Autowired
 	private IProgressService progressService;
+	
+	@Autowired
+	private IAttachmentService attachmentService;
 
 	/**
 	 * sr요청 등록
 	 * 
 	 * @author 신정은
 	 */
-	public int addSrDemand(SrRequestDto srRequestDto) {
+	public int addSrDemand(SrRequestDto srRequestDto) throws IllegalStateException, IOException {
 
 		// 요청번호 생성
 		String dmndNo = createSrDemandCode();
 		srRequestDto.setDmndNo(dmndNo);
 		int row = srDemandDao.insertSrDemand(srRequestDto);
+		
+		if(srRequestDto.getAttachFile() != null) {
+			attachmentService.uploadFiles(srRequestDto.getAttachFile(), 0 , srRequestDto.getDmndNo());
+		}
 		log.info(row);
 		return row;
 	}
@@ -107,7 +117,9 @@ public class SrDemandService implements ISrDemandService {
 	 */
 	public SrdemandDetail getSrDemandDetail(String dmndNo) {
 		SrdemandDetail sd = srDemandDao.selectDetailByDmndNo(dmndNo);
-		log.info(dmndNo);
+		List<AttachResponseDto> alist = attachmentService.getAttachFiles(null, dmndNo);
+		sd.setAttachFile(alist);
+		log.info(sd);
 		return sd;
 	}
 
