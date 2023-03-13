@@ -52,4 +52,10 @@ public interface IBoardDao {
 	 * @author 신정은
 	 */
 	int updateAtchYn(@Param("bbsNo")int bbsNo, @Param("status")int status);
+
+	/**
+	 * 게시글 삭제
+	 * @author 신정은
+	 */
+	void deleteBoardByBbsNo(int bbsNo);
 }

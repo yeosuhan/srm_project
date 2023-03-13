@@ -1,9 +1,7 @@
 package com.oti.team2.comment.service;
 
-import java.util.List;
-
+import com.oti.team2.comment.dto.CommentDto;
 import com.oti.team2.comment.dto.CommentReqDto;
-import com.oti.team2.comment.dto.CommentResDto;
 
 public interface ICommentService {
 	/**
@@ -16,7 +14,7 @@ public interface ICommentService {
 	 * 댓글 조회
 	 * @author 신정은
 	 */
-	List<CommentResDto> getComments(int bbsNo);
+	CommentDto getComments(int bbsNo, int pageNo);
 	
 	/**
 	 * 댓글 삭제

@@ -6,60 +6,26 @@
 <script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
 
 <%-- <%!HttpServletRequest req;
-	int test = 30;
 
-	Cookie getCookie(String cname) {
+	String getCookieValue(String cname) {
 	    Cookie[] cookies = req.getCookies();
-	    Cookie resCookie = null;
+	    String cookieValue = null;
 	    if (cookies != null) {
 	        for (Cookie c : cookies) {
 	            if (cname.equals(c.getName())) {
-	            	resCookie = c;
+	            	cookieValue = c.getValue();
 	                break;
 	            }
 	        }
 	    }
-	    return resCookie;
+	    System.out.println("top.jsp의 getCookie 실행 됨~~~~");
+	    return cookieValue;
 	}
 %>
 <% 
-	Cookie expiryTimeCookie = getCookie("expiryTime");
-	String expiryTime = expiryTimeCookie.getValue();
+	String expiryTime = getCookieValue("expiryTime");
 %> --%>
-<%-- <script>
-	$(document).ready(function(){
-		var test = <%=test%>
-		console.log(test);
-		init();
-	});
-	
-	var objLeftTime;
-	var objClickInfo;
-	var latestTime;
-	var expireTime;
-	var firstLocalTime = 0;
-	var elapsedLocalTime = 0;
-	var stateExpiredTime = false;
-	var logoutUrl = "<c:url value='/uat/uia/actionLogout.do'/>";
-	var timer;
- 
-	function init() {
- 
-		latestTime = getCookie("serverTime");
-		expireTime = getCookie("sessionExpiry");
-		
-		$("#serverTime").html = latestTime;
-		$("#expireTime").html = expireTime;
-		
-		console.log("latestServerTime = "+latestTime);
-		console.log("expireSessionTime = "+expireTime);
- 
-		elapsedTime = 0;
-		firstLocalTime = (new Date()).getTime();
- 
-		setInterval(() => console.log("남은 세션시간 조회하자"), 1000);
-	}
-</script> --%>
+
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -107,6 +73,7 @@
 						</li>
 					</ul>
 					<ul class="nav-right">
+						<%-- <li>시간 :  <%= expiryTime %></li> --%>
 						<li><button class="btn btn-sm btn-oti"
 								style="background-color: #4C1342; margin-top: 10px;"
 								onclick="sendTestMessage()">메시지 전송 테스트</button></li>

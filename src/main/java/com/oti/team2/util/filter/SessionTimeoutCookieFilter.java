@@ -35,9 +35,11 @@ public class SessionTimeoutCookieFilter implements Filter{
  
         cookie2.setPath("/");
         httpRes.addCookie(cookie2);
-        chain.doFilter(request, response);
         log.info("쿠키 필터 ~~~ ");
-        
+        log.info("serverTime ~~~ " + currTime);
+        log.info("sessionExpiry ~~~ " + expiryTime);
+       
+        chain.doFilter(request, response);
 	}
 
 }

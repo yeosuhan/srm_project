@@ -1,8 +1,12 @@
 package com.oti.team2.util.pager;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pager {
 	private int totalRows;		//전체 행수
 	private int totalPageNo;	//전체 페이지 수
@@ -38,6 +42,33 @@ public class Pager {
 		if(groupNo == totalGroupNo) endPageNo = totalPageNo;
 		startRowNo = (pageNo - 1) * rowsPerPage + 1;
 		endRowNo = pageNo * rowsPerPage;
+	}
+	
+	public Pager commentPager(int totalRows, int pageNo) {
+		rowsPerPage = 3;
+		totalPageNo = totalRows / rowsPerPage;
+		pagesPerGroup = 4;
+		if(totalRows % rowsPerPage != 0) totalPageNo++;
+		
+		totalGroupNo = totalPageNo / pagesPerGroup;
+		if(totalPageNo % pagesPerGroup != 0) totalGroupNo++;
+		
+		groupNo = (pageNo - 1) / pagesPerGroup + 1;
+		
+		startPageNo = (groupNo-1) * pagesPerGroup + 1;
+		if(totalRows!=0) {
+			endPageNo = startPageNo + pagesPerGroup - 1;
+		}else {
+			endPageNo = startPageNo;
+		}
+				
+		if(groupNo == totalGroupNo) endPageNo = totalPageNo;
+		startRowNo = (pageNo - 1) * rowsPerPage + 1;
+		endRowNo = pageNo * rowsPerPage;
+		
+		Pager pager = new Pager(totalRows, totalPageNo, totalGroupNo, startPageNo, endPageNo, pageNo, pagesPerGroup , groupNo, rowsPerPage, startRowNo, endRowNo);
+		
+		return pager;
 	}
 }
 

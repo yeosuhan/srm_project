@@ -79,6 +79,7 @@ function deleteFile(fileSn) {
 }
 
 
+
 /*******************   Qna board ****************/
 function writeQna() {
 	$.ajax({
@@ -119,6 +120,22 @@ function getNextList(url) {
 		type : 'GET',
 		success : function(data) {
 			$("#qnaList").html(data);
+		}
+	});
+}
+
+
+//댓글 더 보기
+function getComments(bbsNo, page) {
+	console.log("댓글 더 보기");
+	console.log(bbsNo);
+	console.log(page);
+	var url = "/comment/list/" + bbsNo + "?page=" + page;
+	$.ajax({
+		url : url,
+		type : 'GET',
+		success : function(data) {
+			$(".commentList:last").html(data);
 		}
 	});
 }
