@@ -2,6 +2,9 @@ package com.oti.team2.srinformation.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.oti.team2.board.dto.SRKeyDto;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srinformation.dto.Dept;
@@ -85,4 +88,17 @@ public interface ISrinformationService {
 	 * @return SR진척 계획 종료일 update
 	 */
 	void endYmd(String dmndNo);
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-13
+	 * @return sr진척 목록 엑셀 다운로드 목록 조회
+	 */
+	List<SrinformationList> getExcelList(SrInfoFilter srInfoFilter, String sort);
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-13
+	 * @return sr진척 목록 엑셀 다운로드
+	 * @throws Exception 
+	 */
+	void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

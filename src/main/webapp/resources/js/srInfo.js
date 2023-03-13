@@ -146,6 +146,7 @@ function getPlan() {
 			$("#SRPlBgngYmd").val(plan.bgngYmd);
 			$("#SRPlEndYmd").val(plan.endYmd);
 			$("#SRPlRvwCn").val(plan.rvwCn);
+			
 		}
 	});
 }
@@ -226,6 +227,10 @@ function getProgress() {
 					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
 					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
 					document.getElementById('SRPgEndYmd' + i).setAttribute("min", $("#SRPgBgngYmd" + i).val());
+					if(i>0) {
+						var min=i-1;
+						document.getElementById('SRPgBgngYmd' + i).setAttribute("min", $("#SRPgEndYmd" + min).val());
+					}
 				} else if(Progress[i].endYmd<today) {
 					$("#btn"+i).hide();
 					$("#SRPgBgngYmd"+i).remove();
@@ -237,7 +242,12 @@ function getProgress() {
 					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
 					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
 					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
-				}	
+				}
+				if(Progress[i].bgngYmd<today) {
+					$("#SRPgBgngYmd"+i).remove();
+					$("#"+i+"bgngYmd").append($("<input type='text' readonly class='form-control' style='width:100px;margin:0 auto;' id='SRPgBgngYmd"+i+"'>"));
+					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
+				}
 			}
 			if(Progress[5].endYmd<today) {
 				$("#delbtn").hide();
@@ -255,10 +265,13 @@ function updateProgress0() {
 	var prgrsId = $("#SRPgPrgrsId0").val();
 	var endYmd = $("#SRPgEndYmd0").val();
 	var prgrsRt = $("#SRPgPrgrsRt0").val();
+	var prgrsSeNm = "요구정의";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -266,6 +279,7 @@ function updateProgress0() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -274,10 +288,13 @@ function updateProgress1() {
 	var prgrsId = $("#SRPgPrgrsId1").val();
 	var endYmd = $("#SRPgEndYmd1").val();
 	var prgrsRt = $("#SRPgPrgrsRt1").val();
+	var prgrsSeNm = "분석/설계";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -285,6 +302,7 @@ function updateProgress1() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -293,10 +311,13 @@ function updateProgress2() {
 	var prgrsId = $("#SRPgPrgrsId2").val();
 	var endYmd = $("#SRPgEndYmd2").val();
 	var prgrsRt = $("#SRPgPrgrsRt2").val();
+	var prgrsSeNm = "구현";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -304,6 +325,7 @@ function updateProgress2() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -312,10 +334,13 @@ function updateProgress3() {
 	var prgrsId = $("#SRPgPrgrsId3").val();
 	var endYmd = $("#SRPgEndYmd3").val();
 	var prgrsRt = $("#SRPgPrgrsRt3").val();
+	var prgrsSeNm = "테스트";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -323,6 +348,7 @@ function updateProgress3() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -331,10 +357,13 @@ function updateProgress4() {
 	var prgrsId = $("#SRPgPrgrsId4").val();
 	var endYmd = $("#SRPgEndYmd4").val();
 	var prgrsRt = $("#SRPgPrgrsRt4").val();
+	var prgrsSeNm = "반영요청";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -342,6 +371,7 @@ function updateProgress4() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -350,10 +380,13 @@ function updateProgress5() {
 	var prgrsId = $("#SRPgPrgrsId5").val();
 	var endYmd = $("#SRPgEndYmd5").val();
 	var prgrsRt = $("#SRPgPrgrsRt5").val();
+	var prgrsSeNm = "운영반영";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -361,6 +394,7 @@ function updateProgress5() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -387,6 +421,7 @@ function planUpdate() {
 			rvwCn : $("#SRPlRvwCn").val()
 		},
 		success : function(res) {
+			location.href = "/srinformation/list";
 		}
 	});
 }

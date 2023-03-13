@@ -2,6 +2,7 @@ package com.oti.team2.progress.service;
 
 import java.util.List;
 
+import com.oti.team2.progress.dto.Prgrs;
 import com.oti.team2.progress.dto.Progress;
 
 public interface IProgressService {
@@ -19,7 +20,7 @@ public interface IProgressService {
 	 * 작성일자 : 2023-02-28
 	 * @return sr요청 진척률 수정
 	 */
-	void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo);
+	String updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo, String prgrsSeNm);
 
 	/**
 	 * 진척데이터 삽입
@@ -36,4 +37,9 @@ public interface IProgressService {
 	 * @author 여수한
 	 */
 	void endProgress(String dmNo);
+	/**
+	 * 진척목록의 진척률 조회
+	 * @author 여수한
+	 */
+	List<Prgrs> getRrgrs();
 }

@@ -108,6 +108,7 @@ public class SrDemandController {
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
 			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort) {
 		log.info("sort : " + sort);
+		model.addAttribute("sort", sort);
 		String memberId = auth.getName();
 		
 		// 목록

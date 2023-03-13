@@ -120,7 +120,8 @@ label>img {
 								<hr />
 								<div class="form-group form-primary">
 									<input type="text" name="memberId" class="form-control"
-										id="memberId" required style="width: 74%"> <label
+										id="memberId" required style="width: 74%;" placeholder="                    ex)영어,숫자 포함 8~15자리">
+								 <label
 										class="float-label">ID</label>
 									<button type="button" onclick="checkMemberId()"
 										class="btn btn-sm waves-effect waves-light hor-grd btn-oti ml-2"
@@ -128,28 +129,32 @@ label>img {
 									<font id="checkId" size="2" style="padding-left: 10px;"></font>
 								</div>
 								<div class="form-group form-primary">
-									<input type="password" name="pswd" class="form-control"
+									<input type="password" name="pswd" class="form-control" placeholder="                    ex)영어,숫자 포함 15자리 이상"
 										required="" style="width: 97%"> <span class="form-bar"></span> <label
 										class="float-label">Password</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="password" name="flnm" class="form-control"
-										required="" style="width: 97%"> <span class="form-bar"></span> <label
+									<input type="text" name="flnm" class="form-control" id="flnm"placeholder="                    ex)홍길동
+										required="" style="width: 97%;"> <span class="form-bar"></span> <label
 										class="float-label">이름</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="password" name="telNo" class="form-control"
+									<input type="number" name="telNo" class="form-control" placeholder="                    ex)010-1234-5678"
 										required="" style="width: 97%"> <span class="form-bar"></span> <label
 										class="float-label">전화번호</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="password" name="eml" class="form-control"
-										required="" style="width: 97%"> <span class="form-bar"></span> <label
+									<input type="text" name="eml" id="eml" class="form-control" placeholder="                    ex)example@naver.com"
+										required="" style="width: 97%;"> <span class="form-bar"></span> <label
 										class="float-label">이메일</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="text" name="addr" id="address_kakao"
-										class="form-control" required="" style="width: 97%"> <label
+									<input type="text" name="addr"
+										class="form-control" required="" style="width: 70%">
+										<button type="button"   id="address_kakao"
+										class="btn btn-sm waves-effect waves-light hor-grd btn-oti ml-2"
+										style="width: 100px;">우편번호 찾기</button>
+										 <label
 										class="float-label">주소</label>
 								</div>
 								<div class="form-group form-primary">
@@ -167,7 +172,7 @@ label>img {
 								<hr />
 								<div class="row">
 									<div class="col-md-12">
-										<button form="joinForm" type="submit"
+										<button type="submit"
 											class="btn btn-oti btn-md btn-block waves-effect waves-light text-center">Sign
 											Up</button>
 									</div>

@@ -5,6 +5,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -195,5 +206,165 @@ public class SrinformationService implements ISrinformationService {
 	public void endYmd(String dmndNo) {
 		srinformationDao.updateEndYmdByDmndNo(dmndNo);
 	}
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-13
+	 * @return sr진척 엑셀 다운로드 목록 조회
+	 */
+	@Override
+	public List<SrinformationList> getExcelList(SrInfoFilter srInfoFilter, String sort) {
+		List<SrinformationList> srlist = srinformationDao.selectInfoAllToExcel(srInfoFilter, sort);
+		return srlist;
+	}
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-13
+	 * @return sr진척 엑셀 다운로드
+	 */
+	private void setHeaderCS(CellStyle cs, Font font, Cell cell) {
+		  cs.setAlignment(CellStyle.ALIGN_CENTER);
+		  cs.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		  cs.setBorderTop(CellStyle.BORDER_THIN);
+		  cs.setBorderBottom(CellStyle.BORDER_THIN);
+		  cs.setBorderLeft(CellStyle.BORDER_THIN);
+		  cs.setBorderRight(CellStyle.BORDER_THIN);
+		  cs.setFillForegroundColor(HSSFColor.GREY_80_PERCENT.index);
+		  cs.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		  setHeaderFont(font, cell);
+		  cs.setFont(font);
+		  cell.setCellStyle(cs);
+		}
+		 
+		private void setHeaderFont(Font font, Cell cell) {
+		  font.setBoldweight((short) 700);
+		  font.setColor(HSSFColor.WHITE.index);
+		}
+		 
+		private void setCmmnCS2(CellStyle cs, Cell cell) {
+		  cs.setAlignment(CellStyle.ALIGN_LEFT);
+		  cs.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		  cs.setBorderTop(CellStyle.BORDER_THIN);
+		  cs.setBorderBottom(CellStyle.BORDER_THIN);
+		  cs.setBorderLeft(CellStyle.BORDER_THIN);
+		  cs.setBorderRight(CellStyle.BORDER_THIN);
+		  cell.setCellStyle(cs);
+		}
+	@Override
+	public void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request,
+			HttpServletResponse response)throws Exception {
+		SXSSFWorkbook wb = new SXSSFWorkbook();
+		  Sheet sheet = wb.createSheet();
+		  sheet.setColumnWidth((short) 0, (short) 1000);
+		  sheet.setColumnWidth((short) 1, (short) 4500);
+		  sheet.setColumnWidth((short) 2, (short) 7000);
+		  sheet.setColumnWidth((short) 3, (short) 8000);
+		  sheet.setColumnWidth((short) 4, (short) 15000);
+		  sheet.setColumnWidth((short) 5, (short) 2000);
+		  sheet.setColumnWidth((short) 6, (short) 3000);
+		  sheet.setColumnWidth((short) 7, (short) 3000);
+		  Row row = sheet.createRow(0);
+		  Cell cell = null;
+		  CellStyle cs = wb.createCellStyle();
+		  Font font = wb.createFont();
+		  cell = row.createCell(0);
+		  cell.setCellValue("SR진척목록 리스트");
+		  setHeaderCS(cs, font, cell);
+		  sheet.addMergedRegion(new CellRangeAddress(row.getRowNum(), row.getRowNum(), 0, 8));
+		  
+		  row = sheet.createRow(1);
+		  cell = null;
+		  cs = wb.createCellStyle();
+		  font = wb.createFont();
+		  
+		  cell = row.createCell(0);
+		  cell.setCellValue("번호");
+		  setCmmnCS2(cs, cell);
+		  
+		  cell = row.createCell(1);
+		  cell.setCellValue("SR번호");
+		  setHeaderCS(cs, font, cell);
+		 
+		  cell = row.createCell(2);
+		  cell.setCellValue("시스템구분");
+		  setHeaderCS(cs, font, cell);
+		  
+		  cell = row.createCell(3);
+		  cell.setCellValue("업무구분");
+		  setHeaderCS(cs, font, cell);
+		  
+		  cell = row.createCell(4);
+		  cell.setCellValue("SR명");
+		  setHeaderCS(cs, font, cell);
+		  
+		  cell = row.createCell(5);
+		  cell.setCellValue("요청자");
+		  setHeaderCS(cs, font, cell);
+		  
+		  cell = row.createCell(6);
+		  cell.setCellValue("완료요청일");
+		  setHeaderCS(cs, font, cell);
+		  
+		  cell = row.createCell(7);
+		  cell.setCellValue("완료예정일");
+		  setHeaderCS(cs, font, cell);
+		  
+		  cell = row.createCell(8);
+		  cell.setCellValue("진행상태");
+		  setHeaderCS(cs, font, cell);
+		  
+		  int i = 2;
+		  int ii = srlist.size();
+		  for (SrinformationList srinformationList : srlist) {
+		      
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String bgngYmd = sdf.format(srinformationList.getBgngYmd());
+		String endYmd = sdf.format(srinformationList.getEndYmd());
+		  row = sheet.createRow(i);
+		  cell = null;
+		  cs = wb.createCellStyle();
+		  font = wb.createFont();
+		  
+		  cell = row.createCell(0);
+		  cell.setCellValue(ii);
+		  setCmmnCS2(cs, cell);
+		  
+		  cell = row.createCell(1);
+		  cell.setCellValue(srinformationList.getSrNo());
+		  setCmmnCS2(cs, cell);
+		  
+		  cell = row.createCell(2);
+		  cell.setCellValue(srinformationList.getSysNm());
+		  setCmmnCS2(cs, cell);
+		  
+		  cell = row.createCell(3);
+		  cell.setCellValue(srinformationList.getTaskSeNm());
+		  setCmmnCS2(cs, cell);
+		  
+		  cell = row.createCell(4);
+		  cell.setCellValue(srinformationList.getTtl());
+		  setCmmnCS2(cs, cell);
+		  
+		  cell = row.createCell(5);
+		  cell.setCellValue(srinformationList.getFlnm());
+		  setCmmnCS2(cs, cell);
+		  
+		  cell = row.createCell(6);
+		  cell.setCellValue(bgngYmd);
+		  setCmmnCS2(cs, cell);
+		  
+		  cell = row.createCell(7);
+		  cell.setCellValue(endYmd);
+		  setCmmnCS2(cs, cell);
+		  
+		  cell = row.createCell(8);
+		  cell.setCellValue(srinformationList.getSttsNm());
+		  setCmmnCS2(cs, cell);
+		  
+		  i++;
+		  ii--;
+		}
+		  response.setHeader("Set-Cookie", "fileDownload=true; path=/");
+		  response.setHeader("Content-Disposition", String.format("attachment; filename=\"SrInformationList.xlsx\""));
+		  wb.write(response.getOutputStream());
+		}
 }
-
