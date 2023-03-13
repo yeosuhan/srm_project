@@ -292,7 +292,8 @@ public class AdminController {
 			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
 			@RequestParam(required = false, name = "sysCd")String sysCd,
 			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
-			@RequestParam(required = false, name = "keyWord")String keyWord) {
+			@RequestParam(required = false, name = "keyWord")String keyWord,
+			@RequestParam(required = false, name = "hstryId")Integer hstryId) {
 		log.info("sort : " + sort);
 		SrFilterDto srFilterDto = new SrFilterDto();
 		if(dmndYmdStart==null) {
@@ -308,6 +309,7 @@ public class AdminController {
 		srFilterDto.setKeyWord(keyWord);
 		srFilterDto.setSysCd(sysCd);
 		srFilterDto.setTaskSeCd(taskSeCd);
+		srFilterDto.setHstryId(hstryId);
 		model.addAttribute("srFilterDto",srFilterDto);
 		log.info(srFilterDto);
 		// 목록

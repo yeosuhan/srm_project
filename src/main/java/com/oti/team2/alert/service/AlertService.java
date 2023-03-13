@@ -139,16 +139,16 @@ public class AlertService implements IAlertService {
 			alertDao.updateIdntyYn(alert.getAltNo());
 		}else if(alert.getAltType().equals("CHG_YMD_DVL")){
 			
-			url="/srinformation/list";
+			url="/srinformation/list?hstryId="+alert.getHstryId();
 			
 			alertDao.updateIdntyYn(alert.getAltNo());
 			
 		}else if(alert.getAltType().equals("RTRCN")){
 			
 			if(role.equals(Auth.ROLE_CLIENT.toString())){
-				url="/srdemand/list";
+				url="/srdemand/list?hstryId="+alert.getHstryId();
 			}else if(role.equals(Auth.ROLE_ADMIN.toString())) {
-				url="/srinformation/list";
+				url="/srinformation/list?hstryId="+alert.getHstryId();
 			}
 			
 			alertDao.updateIdntyYn(alert.getAltNo());

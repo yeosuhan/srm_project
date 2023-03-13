@@ -25,6 +25,13 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+	
+	<%-- 히스토리id가 주어질경우 히스토리 탭 열기 --%>
+	<c:if test="${srFilterDto.hstryId ne null}">
+	$(function(){
+		$("#srHistoryTab").trigger("click");
+	});
+	</c:if>
 </script>
 
 <style>
@@ -218,7 +225,7 @@ th {
 												<th>완료예정일</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="dmndTbody">
 											<c:if test="${mySrDemandList ne null}">
 											<c:forEach var="srDemand" items="${mySrDemandList}"
 												varStatus="status">
@@ -294,7 +301,7 @@ th {
 							data-toggle="tab" href="#srDemandDetail" role="tab"
 							id="srDmndDetailTab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
-						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+						<li class="nav-item"><a class="nav-link" data-toggle="tab" id="srHistoryTab"
 							href="#srHistory" onclick="userHstry()" role="tab">SR 히스토리</a>
 							<div class="slide"></div></li>
 					</ul>

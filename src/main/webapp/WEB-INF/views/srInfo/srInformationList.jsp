@@ -36,6 +36,13 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+	<%-- 히스토리id가 있는경우 탭을 열고 해당위치로 이동 --%>
+	<c:if test="${srInfoFilter.hstryId ne null}">
+		$(function(){
+			$("#srInfoHistoryTab").trigger("click");
+			$("#srInfoHistoryTab").focus();
+		});
+	</c:if>
 </script>
 
 <style>
@@ -247,7 +254,7 @@ li:before {
 							</div>
 							<div class="col col-xl-1"
 								style="width: 80px; padding-left: 20px;">
-								SR 제목 <br /> <br /> <br />SR 번호
+								SR 제목 <br /> <br /> <br />요청 번호
 							</div>
 							<div class="col col-xl-2" style="">
 								<input type="text" class="form-control" name="ttl"
@@ -536,7 +543,7 @@ li:before {
 							class="nav-link" data-toggle="tab" href="#messages1" role="tab">SR
 								진척율</a>
 							<div class="slide"></div></li>
-						<li class="nav-item" onclick="empHstry()"><a class="nav-link"
+						<li class="nav-item" onclick="empHstry()"><a class="nav-link" id="srInfoHistoryTab"
 							data-toggle="tab" href="#srInfhistory" role="tab">SR 히스토리</a>
 							<div class="slide"></div></li>
 					</ul>

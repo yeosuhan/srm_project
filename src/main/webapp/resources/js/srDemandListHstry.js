@@ -29,6 +29,9 @@ function hstryPager(pager, url, onclickMethod) {
 /* 고객 히스토리 */
 function userHstry() {
 	var dmndNo = $(".dmndNo").val();
+	if(dmndNo==null||dmndNo==''){
+		dmndNo = $("#dmndTbody").children().first().children("td").first().children("strong").text();
+	}
 	console.log("srHistoryList 글번호: " + dmndNo);
 
 	$.ajax({
