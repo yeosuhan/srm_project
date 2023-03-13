@@ -2,12 +2,13 @@
 
 /* 히스토리 리스트 페이징 처리 (공통) */
 function hstryPager(pager, url, onclickMethod) {
-	console.log("userHstry pager 들어옴 ~~~~~");
+	console.log("InfoHstry pager 들어옴 ~~~~~");
 	$('.hstryPager').empty();
 	var tags = "";
 	if (pager.startPageNo - 1 > 0) {
 		tags = "<a class='hstryPager-newer' href='#' onclick='" + onclickMethod
-				+ "(\"" + url + (pager.startPageNo - 1) + "\")'>PREV</a>";
+				+ "(\"" + url + (pager.startPageNo - pager.pagesPerGroup)
+				+ "\")'>PREV</a>";
 	}
 	for (var pageNo = pager.startPageNo; pageNo <= pager.endPageNo; pageNo++) {
 		if (pager.pageNo == pageNo) {
@@ -19,6 +20,21 @@ function hstryPager(pager, url, onclickMethod) {
 					+ pageNo + "\")'>" + pageNo + "</a>";
 		}
 	}
+	if ((pager.pageNo + 1) <= pager.totalPageNo) {
+		tags = tags
+				+ "<a href='#' onclick='"
+				+ onclickMethod
+				+ "(\""
+				+ url
+				+ ((pager.pageNo + 1) < pager.totalPageNo ? (pager.pageNo + 1)
+						: pager.totalPageNo) + "\")'>" + 'NEXT' + "</a>";
+	}
+	if ((pager.pageNo < pager.totalPageNo)
+			&& ((pager.pageNo + 1) <= pager.totalPageNo)) {
+		tags = tags + "<a href='#' onclick='" + onclickMethod + "(\"" + url
+				+ pager.totalPageNo + "\")'></a>";
+	}
+
 	$('.hstryPager').html(tags);
 }
 
@@ -48,14 +64,13 @@ function getSrHistoryList(srInformationHistory) {
 	console.log("----getSrHistoryList()-----");
 	var params;
 	$('#srhistory1').empty();
-	
+
 	if (srInformationHistory.length == 0) {
 		$("#srhistory1").html('<td colspan="5">히스토리 내역이 없습니다.</td>');
 	}
 	for (var i = 0; i < srInformationHistory.length; i++) {
 		var historyId = srInformationHistory[i].hstryId;
 		var historyCount = [ i + 1 ];
-
 		var historyWriter = srInformationHistory[i].flnm;
 		if (srInformationHistory[i].hstryType == 'A'
 				|| srInformationHistory[i].hstryType == 'B') {
@@ -94,6 +109,7 @@ function getSrHistoryList(srInformationHistory) {
 
 		params += param;
 	}
+	
 	$("#srhistory1").html(params);
 }
 
@@ -116,3 +132,5 @@ function empHstryPager(url) {
 		}
 	});
 }
+
+//var trrow =$('#historyTable >tbody tr').length;

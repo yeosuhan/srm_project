@@ -19,7 +19,7 @@ public interface IAttachmentDao {
 	 * 게시판 or sr요청 관련된 첨부파일 가져오기
 	 * @author 신정은
 	 */
-	List<AttachResponseDto> selectAttachByBbsNoOrDmndNo(@Param("bbsNo")int bbsNo, @Param("dmndNo") int dmndNo);
+	List<AttachResponseDto> selectAttachByBbsNoOrDmndNo(@Param("bbsNo")Integer bbsNo, @Param("dmndNo") String dmndNo);
 
 	/**
 	 * 파일 다운로드
@@ -32,4 +32,17 @@ public interface IAttachmentDao {
 	 * @author 신정은
 	 */
 	int deleteAttachByFileSn(int fileSn);
+	
+	/**
+	 * 파일번호로 해당 게시글 번호 가져오기
+	 * @author 신정은
+	 */
+	int selectBbsNoByFilseSn(int fileSn);
+	
+	/**
+	 * 해당 게시글의 총 파일 수 가져오기
+	 * @author 신정은
+	 */
+	int countFilesByBbsNo(int bbsNo);
+	
 }

@@ -1,11 +1,68 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
+
+<%-- <%!HttpServletRequest req;
+	int test = 30;
+
+	Cookie getCookie(String cname) {
+	    Cookie[] cookies = req.getCookies();
+	    Cookie resCookie = null;
+	    if (cookies != null) {
+	        for (Cookie c : cookies) {
+	            if (cname.equals(c.getName())) {
+	            	resCookie = c;
+	                break;
+	            }
+	        }
+	    }
+	    return resCookie;
+	}
+%>
+<% 
+	Cookie expiryTimeCookie = getCookie("expiryTime");
+	String expiryTime = expiryTimeCookie.getValue();
+%> --%>
+<%-- <script>
+	$(document).ready(function(){
+		var test = <%=test%>
+		console.log(test);
+		init();
+	});
+	
+	var objLeftTime;
+	var objClickInfo;
+	var latestTime;
+	var expireTime;
+	var firstLocalTime = 0;
+	var elapsedLocalTime = 0;
+	var stateExpiredTime = false;
+	var logoutUrl = "<c:url value='/uat/uia/actionLogout.do'/>";
+	var timer;
+ 
+	function init() {
+ 
+		latestTime = getCookie("serverTime");
+		expireTime = getCookie("sessionExpiry");
+		
+		$("#serverTime").html = latestTime;
+		$("#expireTime").html = expireTime;
+		
+		console.log("latestServerTime = "+latestTime);
+		console.log("expireSessionTime = "+expireTime);
+ 
+		elapsedTime = 0;
+		firstLocalTime = (new Date()).getTime();
+ 
+		setInterval(() => console.log("남은 세션시간 조회하자"), 1000);
+	}
+</script> --%>
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 
 <div id="pcoded" class="pcoded iscollapsed" theme-layout="vertical"
 	vertical-placement="left" vertical-layout="wide"
@@ -44,6 +101,10 @@
 							href="#!" onclick="javascript:toggleFullScreen()"
 							class="waves-effect waves-light"> <i class="ti-fullscreen"></i>
 						</a></li>
+						<li style="color:white;">
+							<div id="serverTime"></div>
+							<div id="sessionExpiry"></div>
+						</li>
 					</ul>
 					<ul class="nav-right">
 						<li><button class="btn btn-sm btn-oti"
@@ -142,4 +203,4 @@
 			</div>
 		</nav>
 
-		<!-- ./top -->
+		<!-- ./top -->s

@@ -7,7 +7,8 @@
 		<h5>공지글 수정</h5>
 	</div>
 	<div class="card-block">
-		<form enctype="multipart/form-data">
+		<form enctype="multipart/form-data" method="POST"
+			action="/board/update" id="updateForm">
 			<input type="hidden" value="${board.bbsNo}" name="bbsNo">
 			<input type="hidden" value="${board.bbsType}" name="bbsType">
 			<div class="form-group row">
@@ -47,9 +48,15 @@
 					</c:forEach>
 				</div>
 			</div>
+			<div class="form-group row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<input type="file" name="nattachFile" multiple>
+				</div>
+			</div>
 		</form>
-		<div class="d-flex justify-content-center">
-			<button class="btn btn-oti waves-effect waves-light mr-4">저장</button>
+		<div class="d-flex justify-content-center" >
+			<button type="submit" form="updateForm" class="btn btn-oti waves-effect waves-light mr-4">저장</button>
 		</div>
 	</div>
 </div>

@@ -49,12 +49,13 @@ public class ProgressController {
 			@RequestParam(value="endYmd") String endYmd,
 			@RequestParam(value="prgrsId") int prgrsId,
 			String srNo,
-			@RequestParam(value="rcvrId" )String rcvrId) {
+			@RequestParam(value="rcvrId",required = false )String rcvrId,
+			@RequestParam(value="dmndNo",required = false )String dmndNo) {
 		log.info("prgrs: " + prgrsRt);
 		log.info("bgngYmd: " + bgngYmd);
 		log.info("endYmd: " + endYmd);
 		log.info("prgrsId: " + prgrsId);
 		log.info("srNo: " + srNo);
-		progressService.updateProgress(prgrsRt, bgngYmd, endYmd, prgrsId, srNo);
+		progressService.updateProgress(prgrsRt, bgngYmd, endYmd, prgrsId, srNo,rcvrId,dmndNo);
 	}
 }

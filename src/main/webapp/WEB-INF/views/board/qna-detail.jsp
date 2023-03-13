@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <div class="card">
 	<div class="card-header">
@@ -53,11 +54,13 @@
 					</c:forEach>
 				</div>
 			</div>
-		</form>		
-		<c:if test="${board.wrtrId eq memberId}" >
+		</form>
+		<c:if test="${board.wrtrId eq memberId}">
 			<div class="d-flex justify-content-center">
-				<button onclick="updateQna(${board.bbsNo})"
-					class="btn btn-oti waves-effect waves-light mr-4">수정</button>
+				<div>
+					<button onclick="updateQna(${board.bbsNo})"
+						class="btn btn-oti waves-effect waves-light">수정</button>
+				</div>
 				<form action="#">
 					<button class="btn btn-oti waves-effect waves-light">삭제</button>
 				</form>

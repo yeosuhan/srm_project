@@ -13,7 +13,7 @@
 			    from(
 			        select hstry_id as hstryId, sr_no as srNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
 			        from sr_information_history, members m
-			        where sr_no like #{srNo} and m.member_id=rqstr_id
+			        where sr_no=#{srNo} and m.member_id=rqstr_id
 			        order by hstryId asc
 			    )
 			    where rownum <= #{pager.endRowNo}
@@ -39,31 +39,30 @@
 	<select id="selectForClientBySrNo" parameterType="map"
 		resultType="srInformationHistory">
 		<![CDATA[
-			select hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
+			select hstryId, srNo, dmndNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
 			from 
-			    (select rownum as rnum, hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
-			    from(
-			        select hstry_id as hstryId, sr_no as srNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
-			        from sr_information_history, members m
-			        where sr_no like #{srNo} and m.member_id=rqstr_id and hstry_type != 'A'
-			        order by hstryId asc
-			    )
-			    where rownum <= #{pager.endRowNo}
-			    )
-			where rnum >= #{pager.startRowNo}	
+				(select rownum as rnum, hstryId, srNo, dmndNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
+				from(
+					select hstry_id as hstryId, srh.sr_no as srNo, si.dmnd_no as dmndNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
+					from sr_information_history srh, sr_information si, sr_demand sd, members m
+					where srh.sr_no=si.sr_no and si.dmnd_no=sd.dmnd_no and srh.sr_no=#{srNo} and m.member_id=rqstr_id and hstry_type != 'A'
+					order by hstryId asc
+				)
+				where rownum <= #{pager.endRowNo}
+			)
+			where rnum >= #{pager.startRowNo}
 		]]>
 	</select>
 	
 	<!-- History 전체 내역 조회 (고객용) : 페이징 -->
 	<select id="countAllForClient" parameterType="string" resultType="int">
 		<![CDATA[
-		select count(hstryId) 
-		from(
-			select hstry_id as hstryId
-			from sr_information_history, members m
-			where sr_no =#{srNo} and m.member_id=rqstr_id and hstry_type != 'A'
-			order by hstryId asc
-		)
+			select count(hstryId)
+			from(
+				select hstry_id as hstryId
+				from sr_information_history srh, sr_information si, sr_demand sd, members m
+				where srh.sr_no=si.sr_no and si.dmnd_no=sd.dmnd_no and srh.sr_no=#{srNo} and m.member_id=rqstr_id and hstry_type != 'A'
+				order by hstryId asc)
 		]]>
 	</select>
 

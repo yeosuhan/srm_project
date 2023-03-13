@@ -118,7 +118,7 @@ public class SrinformationController {
 
 		log.info("dd 목록: " + dd);
 		log.info("pi 목록: " + pi);
-		log.info("total 목록: " + total);
+		log.info("total 목록: " + total);	
 		return total;
 	}
 
