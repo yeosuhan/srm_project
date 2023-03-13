@@ -25,7 +25,7 @@
 		</span>
 		<c:if test="${pager.endPageNo < pager.totalPageNo }">
 			<a class="pagination-older" href="#"
-				onclick="mytodoPaging(${sttsCd},${num}); event.preventDefault()">NEXT</a>
+				onclick="mytodoPaging(${sttsCd},${pager.endPageNo+1}); event.preventDefault()">NEXT</a>
 		</c:if>
 		<c:if test="${pager.endPageNo >= pager.totalPageNo }">
 			<a style="visibility: hidden" class="pagination-older" href="#">NEXT</a>

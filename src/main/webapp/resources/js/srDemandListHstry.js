@@ -1,17 +1,12 @@
 /*작성자: 최은종*/
-
-var element = document.createElement('div');
-element.innerHTML = '<sec:authentication property="principal.username"/>';
-var user = element.innerHTML;
-
-/* 히스토리 리스트 페이징 처리 (공통) */
 function hstryPager(pager, url, onclickMethod) {
 	console.log("userHstry pager 들어옴 ~~~~~");
 	$('.hstryPager').empty();
 	var tags = "";
 	if (pager.startPageNo - 1 > 0) {
 		tags = "<a class='hstryPager-newer' href='#' onclick='" + onclickMethod
-				+ "(\"" + url + (pager.startPageNo - 1) + "\")'>PREV</a>";
+				+ "(\"" + url + (pager.startPageNo - pager.pagesPerGroup)
+				+ "\")'>PREV</a>";
 	}
 	for (var pageNo = pager.startPageNo; pageNo <= pager.endPageNo; pageNo++) {
 		if (pager.pageNo == pageNo) {
@@ -23,12 +18,26 @@ function hstryPager(pager, url, onclickMethod) {
 					+ pageNo + "\")'>" + pageNo + "</a>";
 		}
 	}
+	if ((pager.pageNo + 1) <= pager.totalPageNo) {
+		tags = tags
+				+ "<a href='#' onclick='"
+				+ onclickMethod
+				+ "(\""
+				+ url
+				+ ((pager.pageNo + 1) < pager.totalPageNo ? (pager.pageNo + 1)
+						: pager.totalPageNo) + "\")'>" + 'NEXT' + "</a>";
+	}
+	if ((pager.pageNo < pager.totalPageNo)
+			&& ((pager.pageNo + 1) <= pager.totalPageNo)) {
+		tags = tags + "<a href='#' onclick='" + onclickMethod + "(\"" + url
+				+ pager.totalPageNo + "\")'></a>";
+	}
 	$('.hstryPager').html(tags);
 }
 
 /* 고객 히스토리 */
 function userHstry() {
-	var dmndNo = $(".dmndNo").val();
+	var dmndNo = $(".dmndNo").text();
 	console.log("srHistoryList 글번호: " + dmndNo);
 
 	$.ajax({
@@ -43,7 +52,7 @@ function userHstry() {
 
 			// 히스토리 리스트
 			getHistoryList(result.srInformationHistory);
-
+		
 			// 페이저
 			var url = "/history/list?dmndNo=" + dmndNo + "&pageNo=";
 			hstryPager(result.pager, url, 'userHstryPager');
@@ -53,17 +62,16 @@ function userHstry() {
 
 /* 히스토리 리스트 가져오기 */
 function getHistoryList(srInformationHistory) {
-	console.log("----getHistoryList()-----");
+	console.log("----getUserHistoryList()-----");
 	var params;
 	$('#history').empty();
 	if (srInformationHistory.length == 0) {
 		$("#history").html('<td colspan="4">히스토리 내역이 없습니다.</td>');
 	}
 	for (var i = 0; i < srInformationHistory.length; i++) {
-
 		console.log("----getHistoryList() for문-----");
-		var historyId = srInformationHistory[i].hstryId;
-		var historyCount = [ i + 1 ];
+		var historyId = srInformationHistory[i].hstryId;	
+		var historyCount = [i+1];
 		if (srInformationHistory[i].hstryType == 'B') {
 			var historyType = "완료일 변경";
 		} else if (srInformationHistory[i].hstryType == 'C') {
@@ -102,7 +110,7 @@ function getHistoryList(srInformationHistory) {
 
 function userHstryPager(url) {
 	console.log(url);
-	var dmndNo = $(".dmndNo").val();
+	var dmndNo = $(".dmndNo").text();
 
 	$.ajax({
 		url : url,

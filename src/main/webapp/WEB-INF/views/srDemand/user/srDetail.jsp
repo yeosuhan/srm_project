@@ -8,7 +8,7 @@
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 		<div class="col col-sm-9">
-			<div type="text" class="form-control dmndNo"
+			<div class="form-control dmndNo"
 				style="font-size: 12px; width: 325px;">${sd.dmndNo}</div>
 		</div>
 	</div>

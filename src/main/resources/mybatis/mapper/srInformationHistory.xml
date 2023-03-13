@@ -3,7 +3,7 @@
 <mapper
 	namespace="com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao">
 
-	<!-- History 전체 내역 조회 (관리자/개발자용)-->
+	<!-- History 전체 내역 조회 (관리자/개발자용) -->
 	<select id="selectBySrNo" parameterType="map"
 		resultType="srInformationHistory">
 		<![CDATA[
@@ -13,26 +13,7 @@
 			    from(
 			        select hstry_id as hstryId, sr_no as srNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
 			        from sr_information_history, members m
-			        where sr_no like #{srNo} and m.member_id=rqstr_id
-			        order by hstryId asc
-			    )
-			    where rownum <= #{pager.endRowNo}
-			    )
-			where rnum >= #{pager.startRowNo}	
-		]]>
-	</select>
-	
-		<!-- History 전체 내역 조회 (고객용)-->
-	<select id="selectForClientBySrNo" parameterType="map"
-		resultType="srInformationHistory">
-		<![CDATA[
-			select hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
-			from 
-			    (select rownum as rnum, hstryId, srNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
-			    from(
-			        select hstry_id as hstryId, sr_no as srNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
-			        from sr_information_history, members m
-			        where sr_no like #{srNo} and m.member_id=rqstr_id and hstry_type != 'A'
+			        where sr_no=#{srNo} and m.member_id=rqstr_id
 			        order by hstryId asc
 			    )
 			    where rownum <= #{pager.endRowNo}
@@ -41,11 +22,48 @@
 		]]>
 	</select>
 
-	<!-- History 테이블 전체 행수 -->
-	<select id="countAll" resultType="int">
-		select count(*)
-		from
-		sr_information_history
+	<!-- History 전체 내역 조회 (관리자/개발자용) : 페이징 -->
+	<select id="countAllForEmp" parameterType="string" resultType="int">
+		<![CDATA[
+		select count(hstryId) 
+		from(
+			select hstry_id as hstryId
+			from sr_information_history, members m
+			where sr_no =#{srNo} and m.member_id=rqstr_id 
+			order by hstryId asc
+		)				
+		]]>
+	</select>
+
+	<!-- History 전체 내역 조회 (고객용) -->
+	<select id="selectForClientBySrNo" parameterType="map"
+		resultType="srInformationHistory">
+		<![CDATA[
+			select hstryId, srNo, dmndNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
+			from 
+				(select rownum as rnum, hstryId, srNo, dmndNo, hstryType, hstryStts, chgEndYmd, rqstrId, flnm
+				from(
+					select hstry_id as hstryId, srh.sr_no as srNo, si.dmnd_no as dmndNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, m.flnm as flnm
+					from sr_information_history srh, sr_information si, sr_demand sd, members m
+					where srh.sr_no=si.sr_no and si.dmnd_no=sd.dmnd_no and srh.sr_no=#{srNo} and m.member_id=rqstr_id and hstry_type != 'A'
+					order by hstryId asc
+				)
+				where rownum <= #{pager.endRowNo}
+			)
+			where rnum >= #{pager.startRowNo}
+		]]>
+	</select>
+	
+	<!-- History 전체 내역 조회 (고객용) : 페이징 -->
+	<select id="countAllForClient" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(hstryId)
+			from(
+				select hstry_id as hstryId
+				from sr_information_history srh, sr_information si, sr_demand sd, members m
+				where srh.sr_no=si.sr_no and si.dmnd_no=sd.dmnd_no and srh.sr_no=#{srNo} and m.member_id=rqstr_id and hstry_type != 'A'
+				order by hstryId asc)
+		]]>
 	</select>
 
 	<!-- History Id에 따른 상세조회 -->
@@ -65,28 +83,37 @@
 	</select>
 
 	<!-- History 요청일변경/개발취소 등록 -->
-	<insert id="insertSrHistory" parameterType="srInformationHistory">
+	<insert id="insertSrHistory"
+		parameterType="srInformationHistory">
 		<if test='chgEndYmd!=null and hstryStts!="Y" and hstryStts!="N"'>
-			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, chg_end_ymd, hstry_type, rqstr_id)
-			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{chgEndYmd}, #{hstryType}, #{rqstrId})		
+			insert into sr_information_history (hstry_id, sr_no,
+			hstry_ttl, hstry_cn, wrt_ymd, chg_end_ymd, hstry_type, rqstr_id)
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn},
+			SYSDATE, #{chgEndYmd}, #{hstryType}, #{rqstrId})
 		</if>
 		<if test='chgEndYmd!=null and hstryStts=="Y" or hstryStts=="N"'>
-			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, hstry_stts, chg_end_ymd, hstry_type, rqstr_id)
-			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, 'I', #{chgEndYmd}, #{hstryType}, #{rqstrId})		
+			insert into sr_information_history (hstry_id, sr_no,
+			hstry_ttl, hstry_cn, wrt_ymd, hstry_stts, chg_end_ymd, hstry_type,
+			rqstr_id)
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl},
+			#{hstryCn}, SYSDATE, 'I', #{chgEndYmd}, #{hstryType}, #{rqstrId})
 		</if>
 		<if test="chgEndYmd==null">
-			insert into sr_information_history (hstry_id, sr_no, hstry_ttl, hstry_cn, wrt_ymd, hstry_type, rqstr_id)
-			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn}, SYSDATE, #{hstryType}, #{rqstrId})		
+			insert into sr_information_history (hstry_id, sr_no,
+			hstry_ttl, hstry_cn, wrt_ymd, hstry_type, rqstr_id)
+			values(hstry_id_seq.nextval, #{srNo}, #{hstryTtl}, #{hstryCn},
+			SYSDATE, #{hstryType}, #{rqstrId})
 		</if>
 	</insert>
 
 	<!-- History 수락여부 상태 업데이트 -->
-	<update id="updateHstryStts" parameterType="srInformationHistory">	
-			update sr_information_history
-			set hstry_stts = #{hstryStts}
-			where hstry_id = #{hstryId} 
+	<update id="updateHstryStts"
+		parameterType="srInformationHistory">
+		update sr_information_history
+		set hstry_stts = #{hstryStts}
+		where hstry_id = #{hstryId}
 	</update>
-	
+
 
 	<!-- History 승인 전 상세 변경 업데이트 -->
 	<update id="updateHstry" parameterType="srInformationHistory">
@@ -98,85 +125,128 @@
 			</if>
 			<if test='hstryType == "C"'>
 				hstry_type = #{hstryType},
-				chg_end_ymd = #{chgEndYmd, jdbcType=NULL},
+				chg_end_ymd = #{chgEndYmd,
+				jdbcType=NULL},
 			</if>
 			<if test="hstryTtl != null">
 				hstry_ttl = #{hstryTtl},
 			</if>
 			<if test="hstryCn != null">
 				hstry_cn = #{hstryCn},
-			</if>		
+			</if>
 			<if test='chgEndYmd != null and hstryType != "C"'>
 				chg_end_ymd = #{chgEndYmd}
 			</if>
 		</trim>
-		where hstry_id = #{hstryId}		
+		where hstry_id = #{hstryId}
 	</update>
-	
+
 	<!-- mytodo 히스토리 탭(관리자용: 내가 담당자로 지정된 sr 리스트) -->
-	<select id="selectHstryTodoByPicId" parameterType="map" resultType="myTodoHistoryListDto">
-	<![CDATA[
-		select srNo, sysNm, flnm, hstryType, chgEndYmd, hstryStts, wrtYmd
-		from 
-			(select rownum as rnum, srNo, sysNm, flnm, hstryType, chgEndYmd, hstryStts, wrtYmd
-			from(
-				select si.sr_no as srNo, sd.sys_cd as sysCd, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, wrt_ymd as wrtYmd, m.flnm as flnm, si.dept_cd as deptCd, dept_nm as deptNm, sys_nm as sysNm
+	<select id="selectHstryTodoByPicId" parameterType="map"
+		resultType="myTodoHistoryListDto">
+		<![CDATA[
+			select srNo, sysNm, flnm, hstryType, chgEndYmd, hstryStts, wrtYmd
+			from 
+				(select rownum as rnum, srNo, sysNm, flnm, hstryType, chgEndYmd, hstryStts, wrtYmd
+				from(
+					select si.sr_no as srNo, sd.sys_cd as sysCd, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, wrt_ymd as wrtYmd, m.flnm as flnm, si.dept_cd as deptCd, dept_nm as deptNm, sys_nm as sysNm
+					from sr_information_history srh, members m, sr_demand sd, sr_information si, systems ss, departments d
+					where si.sr_no=srh.sr_no and m.member_id=rqstr_id and sd.dmnd_no=si.dmnd_no and ss.sys_cd=sd.sys_cd and d.dept_cd=si.dept_cd and si.pic_id=#{picId}
+					order by wrt_ymd desc
+				)srTable
+				where rownum <= #{pager.endRowNo}
+			)
+			where rnum >= #{pager.startRowNo}	
+		]]>
+	</select>
+	
+	<!-- mytodo 히스토리 탭(관리자용: 페이징) -->
+	<select id="countTodoForAdmin" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(srNo)
+			from(		
+				select si.sr_no as srNo
 				from sr_information_history srh, members m, sr_demand sd, sr_information si, systems ss, departments d
 				where si.sr_no=srh.sr_no and m.member_id=rqstr_id and sd.dmnd_no=si.dmnd_no and ss.sys_cd=sd.sys_cd and d.dept_cd=si.dept_cd and si.pic_id=#{picId}
 				order by wrt_ymd desc
-			)srTable
-			where rownum <= #{pager.endRowNo}
-		)
-		where rnum >= #{pager.startRowNo}	
-	]]>
+			)
+		]]>	
 	</select>
-	
+
 	<!-- mytodo 히스토리 탭(개발자용: 내가 투입 중인 sr건 + 내가 히스토리를 작성한 건) -->
-	<select id="selectHstryTodoByEmpId" parameterType="map" resultType="myTodoHistoryListDto">
-	<![CDATA[
-		select srNo, sysNm, flnm, hstryType, chgEndYmd, hstryStts, wrtYmd
-		from 
-			(select rownum as rnum, srNo, sysNm, flnm, hstryType, chgEndYmd, hstryStts , wrtYmd
-			from(
-				select si.sr_no as srNo, sd.sys_cd as sysCd, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, wrt_ymd as wrtYmd, m.flnm as flnm, si.dept_cd as deptCd, dept_nm as deptNm, sys_nm as sysNm
-				from sr_information_history srh, members m, sr_demand sd, sr_information si, systems ss, departments d
-				where si.sr_no=srh.sr_no and m.member_id=rqstr_id and rqstr_id=#{rqstrId} and sd.dmnd_no=si.dmnd_no and ss.sys_cd=sd.sys_cd and d.dept_cd=si.dept_cd
-				order by wrt_ymd desc
-			)srTable, sr_resources srr
-			where rownum <= #{pager.endRowNo} and srr.sr_no = srTable.srNo and srr.emp_id=#{empId} and sysdate <srr.schdl_end_ymd 
-		)
-		where rnum >= #{pager.startRowNo}	
-	]]>
+	<select id="selectHstryTodoByEmpId" parameterType="map"
+		resultType="myTodoHistoryListDto">
+		<![CDATA[
+			select srNo, sysNm, flnm, hstryType, chgEndYmd, hstryStts, wrtYmd
+			from 
+				(select rownum as rnum, srNo, sysNm, flnm, hstryType, chgEndYmd, hstryStts , wrtYmd
+				from(
+					select si.sr_no as srNo, sd.sys_cd as sysCd, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, wrt_ymd as wrtYmd, m.flnm as flnm, si.dept_cd as deptCd, dept_nm as deptNm, sys_nm as sysNm
+					from sr_information_history srh, members m, sr_demand sd, sr_information si, systems ss, departments d
+					where si.sr_no=srh.sr_no and m.member_id=rqstr_id and rqstr_id=#{rqstrId} and sd.dmnd_no=si.dmnd_no and ss.sys_cd=sd.sys_cd and d.dept_cd=si.dept_cd
+					order by wrt_ymd desc
+				)srTable, sr_resources srr
+				where rownum <= #{pager.endRowNo} and srr.sr_no = srTable.srNo and srr.emp_id=#{empId} and sysdate <srr.schdl_end_ymd 
+			)
+			where rnum >= #{pager.startRowNo}	
+		]]>
 	</select>
-	
-	
+
+	<!-- mytodo 히스토리 탭(개발자용: 페이징) -->
+	<select id="countTodoForDev" parameterType="map" resultType="int">
+		<![CDATA[
+		select count(srNo)
+		from(
+			select si.sr_no as srNo
+			from sr_information_history srh, members m, sr_demand sd, sr_information si, systems ss, departments d
+			where si.sr_no=srh.sr_no and m.member_id=rqstr_id and rqstr_id=#{rqstrId} and sd.dmnd_no=si.dmnd_no and ss.sys_cd=sd.sys_cd and d.dept_cd=si.dept_cd
+			order by wrt_ymd desc
+		)srTable, sr_resources srr
+		where srr.sr_no = srTable.srNo and srr.emp_id=#{empId} and sysdate <srr.schdl_end_ymd 
+		]]>	
+	</select>
+
 	<!-- mytodo 히스토리 탭(고객용: 나에게 들어온 요청건-타입이 B,C 인것 ) -->
-	<select id="selectHstryTodoByCustId" parameterType="map" resultType="myTodoHistoryListDto">
-	<![CDATA[
-		select srNo, dmndNo, sysNm, cmptnDmndYmd, deptNm, hstryType, chgEndYmd, hstryStts, wrtYmd
-		from 
-			(select rownum as rnum, srNo, dmndNo, sysNm, cmptnDmndYmd, deptNm, hstryType, chgEndYmd, hstryStts, wrtYmd
+	<select id="selectHstryTodoByCustId" parameterType="map"
+		resultType="myTodoHistoryListDto">
+		<![CDATA[
+			select srNo, dmndNo, sysNm, cmptnDmndYmd, deptNm, hstryType, chgEndYmd, hstryStts, wrtYmd
+			from 
+				(select rownum as rnum, srNo, dmndNo, sysNm, cmptnDmndYmd, deptNm, hstryType, chgEndYmd, hstryStts, wrtYmd
+				from(
+					select si.sr_no as srNo, si.dmnd_no as dmndNo, sd.sys_cd as sysCd, cmptn_dmnd_ymd as cmptnDmndYmd, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, wrt_ymd as wrtYmd, m.flnm as flnm, si.dept_cd as deptCd, dept_nm as deptNm, sys_nm as sysNm
+					from sr_information_history srh, members m, sr_demand sd, sr_information si, systems ss, departments d
+					where si.sr_no=srh.sr_no and m.member_id=rqstr_id and sd.dmnd_no=si.dmnd_no and ss.sys_cd=sd.sys_cd and d.dept_cd=si.dept_cd and hstry_type !='A' and sd.cust_id=#{custId}
+					order by wrt_ymd desc
+				)srTable
+				where rownum <= #{pager.endRowNo}  
+			)
+			where rnum >= #{pager.startRowNo}
+		]]>
+	</select>
+
+	<!-- mytodo 히스토리 탭(고객용: 페이징) -->
+	<select id="countTodoForCust" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(dmndNo)
 			from(
-				select si.sr_no as srNo, si.dmnd_no as dmndNo, sd.sys_cd as sysCd, cmptn_dmnd_ymd as cmptnDmndYmd, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, wrt_ymd as wrtYmd, m.flnm as flnm, si.dept_cd as deptCd, dept_nm as deptNm, sys_nm as sysNm
+				select si.sr_no as srNo, si.dmnd_no as dmndNo
 				from sr_information_history srh, members m, sr_demand sd, sr_information si, systems ss, departments d
 				where si.sr_no=srh.sr_no and m.member_id=rqstr_id and sd.dmnd_no=si.dmnd_no and ss.sys_cd=sd.sys_cd and d.dept_cd=si.dept_cd and hstry_type !='A' and sd.cust_id=#{custId}
 				order by wrt_ymd desc
-			)srTable
-			where rownum <= #{pager.endRowNo}  
-		)
-		where rnum >= #{pager.startRowNo}
-	]]>
+			)
+		]]>	
 	</select>
 	
-	<!-- mytodo 히스토리 탭 (페이지 수 ) -->
-<!--  	<select id="countByauthId" parameterType="map" resultType="int">
-      SELECT 
-         COUNT(DISTINCT sd.DMND_NO)
-      FROM sr_resources sr, sr_information si, sr_demand sd, STATUS s
-      WHERE  sr.EMP_ID = #{empId}
-              and sr.sr_no = si.sr_no
-              and sd.dmnd_no = si.dmnd_no
-              and sd.stts_cd = #{sttsCd}
-   	</select>  -->
-	
+	<!-- 개발자: 내가 자원으로 입력되어 있고 sysdate<투입종료일인 SR요청의 DMND번호를 채번한 리스트를 만들어서 요청버튼 
+		보이게 하기 -->
+	<select id="selectDmndNoBySrResouce" parameterType="map"
+		resultType="myTodoHistoryListDto">
+	   	<![CDATA[
+		   	select si.dmnd_no as dmndNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, rqstr_id as rqstrId, schdl_end_ymd as schdlEndYmd , wrt_ymd as wrtYmd, m.flnm as flnm
+			from sr_information_history srh, members m, sr_demand sd, sr_information si, sr_resources srr
+			where si.sr_no=srh.sr_no and sd.dmnd_no=si.dmnd_no and si.dmnd_no=#{dmndNo} and srr.sr_no = si.sr_no and srh.rqstr_id=m.member_id and srr.emp_id=#{empId} and sysdate <srr.schdl_end_ymd
+	   	]]>
+	</select>
+
 </mapper>

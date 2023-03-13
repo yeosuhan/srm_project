@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.department.dto.Department;
+import com.oti.team2.department.dto.DeptFilterDto;
 import com.oti.team2.department.service.IDepartmentService;
 import com.oti.team2.institution.dto.Institution;
 import com.oti.team2.institution.service.IInstitutionService;
@@ -56,7 +57,8 @@ public class JoinController {
 	 */
 	@GetMapping("/join-employee")
 	public String getJoinEmployee(Model model) {
-		List<Department> dept = departmentService.getDepartmentList();
+		DeptFilterDto deptFilterDto = new DeptFilterDto();
+		List<Department> dept = departmentService.getDepartmentList(deptFilterDto);
 		List<JobGrade> grade = jobGradeService.getJobGradeList();
 		model.addAttribute("dept", dept);
 		model.addAttribute("grade", grade);

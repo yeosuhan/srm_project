@@ -1,5 +1,6 @@
 package com.oti.team2.srinformation.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,6 @@ import com.oti.team2.srinformation.dto.SrplanInformation;
 import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.service.ISrInformationHistoryService;
-import com.oti.team2.srresource.dto.SrResource;
 import com.oti.team2.srresource.service.ISrResourceService;
 import com.oti.team2.util.pager.Pager;
 
@@ -52,7 +52,7 @@ public class SrinformationController {
 
 	@Autowired
 	ISrResourceService srResourceService;
-	
+
 	@Autowired
 	ISrInformationHistoryService srInformationHistoryService;
 
@@ -95,6 +95,11 @@ public class SrinformationController {
 					}
 				}
 			}
+			log.info("srlist: " + srlist);
+			/*
+			 * log.info("sd 상세 : " + sd); log.info("진척목록: " + srlist); log.info("개발부서 목록: "
+			 * + deptList);
+			 */
 			model.addAttribute("sd", sd);
 			model.addAttribute("sp", sp);
 			model.addAttribute("srlist", srlist);
@@ -107,16 +112,34 @@ public class SrinformationController {
 
 	/**
 	 * 
-	 * @author 여수한 작성일자 : 2023-02-22
+	 * @author 여수한 작성일자 : 2023-02-22 / 최은종 : 2023-03-13
 	 * @return sr요청 상세 조회 - 완료 => 계획정보도 같이 가져와야될듯
 	 */
 	@ResponseBody
 	@GetMapping(value = "/detail/{dmndNo}")
-	public SrTotal getDetail(@PathVariable("dmndNo") String dmndNo) {
+	public SrTotal getDetail(@PathVariable("dmndNo") String dmndNo, Authentication auth) {
+		SrTotal total = null;
+		int isDnumExists = 0;
+		
 		SrdemandDetail dd = srDemandService.getSrDemandDetail(dmndNo);
 		SrplanInformation pi = srinformationService.getPlan(dmndNo);
-		SrTotal total = new SrTotal(dd, pi);
 
+		// 개발자: 내가 맡은 + sysdate<투입종료일 인 sr에 대해서만 버튼 보이게 하기 (최은종)
+		String empId = auth.getName().toString();
+		List<MyTodoHistoryListDto> drlist = srInformationHistoryService.getDmndNoBySrResouce(dmndNo, empId);
+		log.info("drlist" + drlist);
+
+		if (drlist.size() > 0) {
+			isDnumExists = drlist.indexOf(drlist.get(1));
+			log.info("isDnumExists " + isDnumExists);
+		} else {
+			isDnumExists = 0;
+		}
+		// 개발자와 관리자별로 버튼제약 다르게 설정하기 위해 권한 보내기 (최은종)
+		String role = auth.getAuthorities().stream().findFirst().get().toString();
+
+		total = new SrTotal(dd, pi, isDnumExists, role);
+		
 		log.info("dd 목록: " + dd);
 		log.info("pi 목록: " + pi);
 		log.info("total 목록: " + total);	

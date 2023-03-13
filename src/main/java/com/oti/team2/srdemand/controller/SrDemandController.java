@@ -148,9 +148,12 @@ public class SrDemandController {
 
 		// 기본 첫번째 상세 or 선택된 상세
 		SrdemandDetail sd = null;
+		String prgrsRt = null;
 		if (dmndno != null||totalRows==0) {
+			prgrsRt = progressService.getPrgrsRt(dmndno);
 			sd = srdemandService.getSrDemandDetail(dmndno);
 		} else {
+			prgrsRt = progressService.getPrgrsRt(list.get(0).getDmndNo());
 			sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 		}
 		log.info(sd);
@@ -162,6 +165,7 @@ public class SrDemandController {
 			model.addAttribute("taskList",taskService.getTaskList(sysCd));
 		}
 		model.addAttribute("sd", sd);
+		model.addAttribute("prgrsRt", prgrsRt);
 		model.addAttribute("pager", pager);		
 		model.addAttribute("role", auth.getAuthorities().stream().findFirst().get().toString());
 		return "srDemand/userSrDemandList";

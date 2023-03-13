@@ -107,4 +107,57 @@
         	ATCH_YN != #{status}
 	</update>
 	
+	<!--게시글 삭제 -->
+	<delete id="deleteBoardByBbsNo" parameterType="int">
+		DELETE FROM BOARD
+		WHERE BBS_NO = #{bbsNo}
+	</delete>
+	
+	<!-- 관련 개발자의 문의게시판 총 행수 조회 -->
+	<select id="countByEmpId"  parameterType="string" resultType="int">
+		select  count(BBS_NO) 
+			from (
+
+        SELECT 
+                sr.sr_no , sd.dmnd_no
+              FROM sr_resources sr, sr_information si, sr_demand sd
+              WHERE  sr.EMP_ID = #{empId}
+                      and sr.sr_no = si.sr_no
+                      and sd.dmnd_no = si.dmnd_no
+    			) a  inner join Board b
+   		 on a.sr_no = b.sr_no
+	</select>
+	
+	<!-- 관련 개발자의 문의게시판 조회 -->
+	<select id="selectBoardByEmpId"  parameterType="map" resultType="boardListDto">
+		select  BBS_NO as bbsNo,
+				BBS_TTL as bbsTtl,
+				ANS_YN as ansYn,
+				INQ_CNT as inqCnt,
+				WRT_YMD as wrtYmd,
+				FLNM as wrtNm
+			from (
+
+        SELECT 
+                sr.sr_no , sd.dmnd_no, m.flnm
+              FROM sr_resources sr, sr_information si, sr_demand sd, members m
+              WHERE  sr.EMP_ID = #{empId}
+                      and sr.sr_no = si.sr_no
+                      and sd.dmnd_no = si.dmnd_no
+                      and  sd.cust_id = m.member_id
+    			) a  inner join Board b
+   		 on a.sr_no = b.sr_no
+   		 ORDER BY WRT_YMD DESC
+		 OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
+	</select>
+	
+	<!-- 문의글 답변 등록시 상태 수정-->
+	<update id="updateAnsYn" parameterType="int">
+		UPDATE BOARD
+		SET ANS_YN = 1
+        where BBS_NO = #{bbsNo}
+        	and 
+        	ANS_YN != 1
+	</update>
+		
 </mapper>

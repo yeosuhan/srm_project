@@ -8,9 +8,9 @@ import lombok.Data;
 
 @Data
 public class MyTodoHistoryListDto {
+	private String dmndNo;
 	private int hstryId;
 	private String srNo;
-	private String dmndNo;
 	private String hstryTtl;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date wrtYmd; // 히스토리 작성일

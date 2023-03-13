@@ -8,6 +8,20 @@
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/assets/css/deptlist.css">
+	
+<script>
+/* 검색 필터링 */
+function searchDept(){
+	$("#deptFilter input").each((index,value)=>{
+		if(!$(value).val()){
+			$(value).prop("disabled",true);
+		}
+	});
+	return true;
+}
+
+</script>	
+	
 </head>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -19,27 +33,31 @@
 			<div class="card-header">
 				<h5>부서 관리</h5>
 				<%--검색 --%>
-				<div class="mt-3">
-					<form>
-						<div class="form-group row">
-							<label class="col-sm-1 col-form-label text-right">부서명</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control">
+				<div class="col-sm-12 mt-3 justify-content-between row">
+					<div >
+						<form id="deptFilter" action="${pageContext.request.contextPath}/admin/department/list" onSubmit="return searchDept()">
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label text-right">부서명</label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name="deptNm" value="${deptNm}">
+								</div>
+								<label class="col-sm-2 col-form-label text-right">부서
+									담당자명</label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name="flnm" value="${flnm}">
+								</div>
+								<div class="col-sm-2 ">
+									<button type="submit" class="btn btn-oti waves-effect waves-light">검색</button>
+								</div>
 							</div>
-							<label class="col-sm-2 col-form-label text-right">부서 담당자명</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control">
-							</div>
-							<div class="col-sm-2 ">
-								<button class="btn btn-oti waves-effect waves-light">검색</button>
-							</div>
-							<div class="col-sm-3 d-flex justify-content-end pr-4">
-								<div class="btn btn-oti waves-effect waves-light"
-									onclick="show()" data-toggle="modal"
-									data-target="ModalRegister">부서 등록</div>
-							</div>
+						</form>
 						</div>
-					</form>
+						<div>
+							<div class="btn btn-oti waves-effect waves-light"
+								onclick="show()" data-toggle="modal" data-target="ModalRegister">부서
+								등록</div>
+						</div>
+				
 				</div>
 			</div>
 		</div>

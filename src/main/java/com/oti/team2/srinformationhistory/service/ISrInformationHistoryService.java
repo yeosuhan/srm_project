@@ -23,7 +23,8 @@ public interface ISrInformationHistoryService {
 	 * 
 	 * @author 최은종
 	 */
-	public int getTotalRows();
+	public int getCountAllForEmp(String srNo);
+	public int getCountAllForClient(String srNo);
 
 	/**
 	 * SR처리 히스토리 상세 조회 메서드
@@ -64,5 +65,21 @@ public interface ISrInformationHistoryService {
 	public List<MyTodoHistoryListDto> getHstryTodoByEmpId(Pager pager, String rqstrId, String empId);
 
 	public List<MyTodoHistoryListDto> getHstryTodoByCustId(Pager pager, String custId);
+
+	/**
+	 * 개발자 : 내가 자원으로 들어가있고 투입종료 이전일 때만 sr요청 버튼 보이게 하기 위한 메서드
+	 * 
+	 * @author 최은종
+	 */
+	public List<MyTodoHistoryListDto> getDmndNoBySrResouce(String dmndNo, String empId);
+	
+	/**
+	 * 나의 할 일에서 히스토리 목록 페이징 메서드
+	 * 
+	 * @author 최은종
+	 */
+	public int getCountTodoForAdmin(String picId);
+	public int getCountTodoForDev(String rqstrId, String empId);
+	public int getCountTodoForCust(String custId);
 
 }

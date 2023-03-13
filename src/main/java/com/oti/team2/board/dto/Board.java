@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.oti.team2.attachment.dto.AttachResponseDto;
+import com.oti.team2.comment.dto.CommentDto;
 
 import lombok.Data;
 
@@ -23,4 +24,5 @@ public class Board {
 	private String srNo; 
 	
 	private List<AttachResponseDto> srcList;
+	private CommentDto comments;
 }
