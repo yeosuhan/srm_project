@@ -105,19 +105,26 @@ public class MainController {
 
 		String authRole = auth.getAuthorities().stream().findFirst().get().toString();
 
-		int totalRows = srInformationHistoryService.getTotalRows();
-		Pager pager = new Pager(totalRows, pageNo);
+		int totalRows = 0;
+		Pager pager = null;
+		log.info("pageNo 조회" + pageNo);
 
 		List<MyTodoHistoryListDto> todoHstryList = null;
 
 		if (authRole.equals("ROLE_ADMIN")) {
 			log.info("나는 관리자");
+			totalRows = srInformationHistoryService.getCountTodoForAdmin(auth.getName());
+			pager = new Pager(totalRows, pageNo);
 			todoHstryList = srInformationHistoryService.getHstryTodoByPicId(pager, auth.getName());
 		} else if (authRole.equals("ROLE_DEVELOPER")) {
 			log.info("나는 개발자");
+			totalRows = srInformationHistoryService.getCountTodoForDev(auth.getName(), auth.getName());
+			pager = new Pager(totalRows, pageNo);
 			todoHstryList = srInformationHistoryService.getHstryTodoByEmpId(pager, auth.getName(), auth.getName());
 		} else {
 			log.info("나는 고객");
+			totalRows = srInformationHistoryService.getCountTodoForCust(auth.getName());
+			pager = new Pager(totalRows, pageNo);
 			todoHstryList = srInformationHistoryService.getHstryTodoByCustId(pager, auth.getName());
 		}
 

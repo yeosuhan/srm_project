@@ -48,6 +48,7 @@ function getSrHistoryList(srInformationHistory) {
 	console.log("----getSrHistoryList()-----");
 	var params;
 	$('#srhistory1').empty();
+	
 	if (srInformationHistory.length == 0) {
 		$("#srhistory1").html('<td colspan="5">히스토리 내역이 없습니다.</td>');
 	}
