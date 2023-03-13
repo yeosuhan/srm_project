@@ -75,6 +75,7 @@
          SYS_NM as sysNm,
          SYS_CD as sysCd ,
          clientNm as clientNm,
+         clientId as clientId,
          INST_NM as instNm,
          STTS_NM as sttsNm,
          STTS_CD as sttsCd,
@@ -97,6 +98,7 @@
                SYS_NM ,
                SYS_CD ,
                clientNm ,
+               clientId,
                INST_NM ,
                STTS_NM ,
                STTS_CD ,
@@ -121,6 +123,7 @@
                      d.dept_nm ,
                      si.PIC_ID ,
                      m.flnm as clientNm,
+                     sd.cust_id as clientId, <!-- 알림용 -->
                      i.INST_NM as INST_NM,
                      sd.rvwr_id as rvwr_id,
                      s.STTS_NM as STTS_NM,

@@ -18,7 +18,7 @@ public class SrinformationList {
 	
 	//members 테이블 - 등록자 이름, 아이디
 	private String flnm;
-	
+	private String custId;
 	//시스템 테이블 - 시스템 이름
 	private String sysNm;
 	
