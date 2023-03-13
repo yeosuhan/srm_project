@@ -23,6 +23,10 @@ import com.oti.team2.srinformation.dto.SrTotal;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInformation;
 import com.oti.team2.srinformation.service.ISrinformationService;
+import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
+import com.oti.team2.srinformationhistory.service.ISrInformationHistoryService;
+import com.oti.team2.srresource.dto.SrResource;
+import com.oti.team2.srresource.service.ISrResourceService;
 import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
@@ -37,6 +41,12 @@ public class SrinformationController {
 	
 	@Autowired
 	ISrDemandService srDemandService;
+	
+	@Autowired
+	ISrResourceService srResourceService;
+	
+	@Autowired
+	ISrInformationHistoryService srInformationHistoryService;
 	
 	/**
 	 * 
@@ -86,7 +96,7 @@ public class SrinformationController {
 	@GetMapping(value="/detail/{dmndNo}")
 	public SrTotal getDetail(@PathVariable("dmndNo")String dmndNo) {
 		SrdemandDetail dd = srDemandService.getSrDemandDetail(dmndNo);
-		SrplanInformation pi = srinformationService.getPlan(dmndNo);
+		SrplanInformation pi = srinformationService.getPlan(dmndNo);		
 		SrTotal total = new SrTotal(dd,pi);
 		log.info("dd 목록: " + dd);
 		log.info("pi 목록: " + pi);
@@ -133,4 +143,5 @@ public class SrinformationController {
 		log.info("바뀐 담당자: " + flnm);
 		return flnm;
 	}
+
 }

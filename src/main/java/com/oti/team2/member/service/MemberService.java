@@ -121,4 +121,17 @@ public class MemberService implements IMemberService {
 	public String getFlnm(String memberId) {
 		return memberDao.selectFlnmByMemberId(memberId);
 	}
+
+	@Override
+	public int getPswd(Member member) {
+		log.info("비번찾기 서비스");
+	 int rows= memberDao.selectPswd(member);
+		return rows;
+	}
+
+	@Override
+	public String updatePswd(String memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

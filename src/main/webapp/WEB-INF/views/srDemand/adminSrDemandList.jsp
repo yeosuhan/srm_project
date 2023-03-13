@@ -144,7 +144,7 @@ th {
 								<div class="col col-4 px-0">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
 										type="text" name="keyWord" id="keyWord">
-									<button onclick="srSearch()" type="button"
+									<button type="submit"
 										class="btn btn-sm btn-oti"
 										style="margin-right: 10px; height: 30px;">
 										<i class="ti-search"></i>

@@ -18,6 +18,7 @@ import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srdemand.dto.MytodoSrListDto;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
+import com.oti.team2.srdemand.dto.SrFilterDto;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srinformation.service.ISrinformationService;
@@ -94,8 +95,8 @@ public class SrDemandService implements ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public List<SrDemand> getSrDemandList(String custId, Pager pager, String sort) {
-		return srDemandDao.selectByCustId(custId, pager, sort);
+	public List<SrDemand> getSrDemandList(String custId, Pager pager, String sort,SrFilterDto srFilterDto) {
+		return srDemandDao.selectByCustId(custId, pager, sort,srFilterDto);
 	}
 
 	/**
@@ -136,8 +137,8 @@ public class SrDemandService implements ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public int getCountClientSr(String clientId) {
-		return srDemandDao.countByClientId(clientId);
+	public int getCountClientSr(String clientId,SrFilterDto srFilterDto) {
+		return srDemandDao.countByClientId(clientId,srFilterDto);
 	}
 
 	/**

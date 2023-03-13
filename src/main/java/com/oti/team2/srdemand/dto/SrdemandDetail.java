@@ -47,6 +47,7 @@ public class SrdemandDetail {
 	
 	//member 테이블
 	private String clientNm; // 요청자(고객)
+	private String clientId; // 알림 요청용 요청자 id
 	private String rvwrNm; //검토자 이름
 	
 	//첨부파일

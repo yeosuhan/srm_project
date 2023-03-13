@@ -36,6 +36,9 @@ function getSrDemandDetail(dmNo) {
 					$(".clientNm").text(res.sd.clientNm);
 					$(".rvwrNm").text(res.sd.rvwrNm);
 					var prgrsRt = res.prgrsRt;
+					
+					$("#srDmndDetailTab").tab("show");
+					
 					// 버튼 보이게 하기
 					console.log(prgrsRt + "  : prgrsRt");
 					console.log(sttsCd + " @");
@@ -241,4 +244,19 @@ function endSr() {
 			location.href = "/srdemand/list";
 		}
 	});
+}
+
+/*빈 검색 조건 비활성화*/
+function srSearch(){
+	$("#srSearchForm input").each((index,value)=>{
+		if(!$(value).val()){
+			$(value).prop("disabled",true);
+		}
+	});
+	$("#srSearchForm select").each((index,value)=>{
+		if(!$(value).children("option:selected").val()||$(value).children(" option").length==0){
+			$(value).prop("disabled",true);
+		}
+	});
+	return true;
 }

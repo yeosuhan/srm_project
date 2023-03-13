@@ -10,7 +10,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Controller
 public class LoginController {
-
+	
 	/**
 	 * 로그인 메소드
 	 *
@@ -23,6 +23,7 @@ public class LoginController {
 		
 		return "member/login";
 	}
+	
 
 	/**
 	 * 로그인 메소드

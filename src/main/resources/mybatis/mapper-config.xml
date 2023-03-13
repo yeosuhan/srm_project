@@ -46,5 +46,6 @@
 		<typeAlias type="com.oti.team2.board.dto.BoardUpdateDto" alias="boardUpdateDto"/>
 		<typeAlias type="com.oti.team2.comment.dto.CommentReqDto" alias="commentReqDto"/>
 		<typeAlias type="com.oti.team2.comment.dto.CommentResDto" alias="commentResDto"/>
+		<typeAlias type="com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto" alias="myTodoHistoryListDto" />
 	</typeAliases> 
 </configuration>

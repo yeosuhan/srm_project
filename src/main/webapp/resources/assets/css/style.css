@@ -1289,7 +1289,7 @@ a.bg-danger:hover {
 
 .nav-tabs .slide {
   background: #4C1342;
-  width: 100%;
+  width: 90%;
   height: 4px;
   position: absolute;
   -webkit-transition: left 0.3s ease-out;

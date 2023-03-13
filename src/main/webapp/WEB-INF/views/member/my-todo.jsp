@@ -1,19 +1,21 @@
 <%-- 작성자 : 신정은
    작성날짜 : 2023-02-20 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <link rel="stylesheet" type="text/css"
-   href="${pageContext.request.contextPath}/resources/css/srButton.css">
+	href="${pageContext.request.contextPath}/resources/css/srButton.css">
 <link rel="stylesheet" type="text/css"
-   href="${pageContext.request.contextPath}/resources/css/pagination.css">
+	href="${pageContext.request.contextPath}/resources/css/pagination.css">
 <script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/mytodoHstry.js"></script>
 <!-- 모달 -->
 <link rel="stylesheet" type="text/css"
-   href="${pageContext.request.contextPath}/resources/css/srModal.css">
+	href="${pageContext.request.contextPath}/resources/css/srModal.css">
 </head>
 <body>
    <%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -72,11 +74,14 @@
                      <li class="nav-item btn"><div class="nav-link sttsCd6"
                            onclick="moveTab(6)">개발 취소</div>
                         <div class="slide"></div></li>
+                     <li class="nav-item btn"><div class="nav-link hstry"
+                           onclick="moveHstryTab()">히스토리</div>
+                        <div class="slide"></div></li>
                   </ul>
                   <!-- Tab panes -->
                   <div class="tab-content card-block"
                      style="padding: 0px 20px 20px 20px;">
-                     <!---------------------------------------------------------------나의 할일 : 요청-------->
+                     <!------나의 할일 : 요청-------->
                      <div class="tab-pane active" id="requesttable" role="tabpanel">
                         <%@ include file="/WEB-INF/views/mytodo/srTable.jsp"%>
                      </div>
@@ -84,23 +89,17 @@
                </div>
             </div>
          </div>
-         <!-- Color Open Accordion ends -->
       </div>
-      <!-- Row end -->
-      <!-- Row start -->
       <div class="row">
-         <!-- Multiple Open Accordion start -->
+         <!-- 공지사항 게시판 -->
          <div class="col-lg-6" id="notie">
             <jsp:include page="/WEB-INF/views/mytodo/notice.jsp" />
          </div>
-         <!-- Multiple Open Accordion ends -->
-         <!-- Single Open Accordion start -->
+         <!-- qna 게시판 -->
          <div class="col-lg-6" id="qna">
             <jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
          </div>
-         <!-- Single Open Accordion ends -->
       </div>
-      <!-- Row end -->
    </div>
    <!-- Page-body end -->
    <%@include file="/WEB-INF/views/fragments/bottom.jsp"%>

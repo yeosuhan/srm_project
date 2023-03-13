@@ -37,8 +37,8 @@ $(document).ready(function(){
 		
 		var indexOfFilter = currentUrl.indexOf('&');
 		var filter=null;
-		//page파라미터를 제외한 파라미터가 있는경우
-		if(indexOfFilter!=-1){
+		//page파라미터와 다른 파라미터가 있는경우
+		if(indexOfFilter!=-1&&currentUrl.indexOf('page')!=-1){
 			filter=currentUrl.substring(indexOfFilter,currentUrl.length);
 			$(".pagination a").each((index,value)=>{
 
