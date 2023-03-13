@@ -61,6 +61,10 @@ public class BoardController {
 			pager = new Pager(boardService.getTotalRow(type, null), page);
 			list = boardService.getBoardList(type, null, pager);
 			if(type.equals("qna")) {
+				if(role.equals(Auth.ROLE_DEVELOPER.toString())) {
+					pager = new Pager(boardService.getcountByEmpId(memberId), 1);
+					list = boardService.getBoardListByEmpId(memberId, pager);
+				}
 				model.addAttribute("qPager", pager);
 				model.addAttribute("qnaList", list);
 			} else {

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -114,6 +115,22 @@ public class BoardService implements IBoardService {
 	 */
 	public void deleteBoard(int bbsNo) {
 		boardDao.deleteBoardByBbsNo(bbsNo);
+	}
+
+	/**
+	 * 관련개발자의 문의게시글의 총 행수
+	 * @author 신정은
+	 */
+	public int getcountByEmpId(String empId) {
+		return boardDao.countByEmpId(empId);
+	}
+	
+	/**
+	 * 관련개발자의 문의게시판 목록 조회
+	 * @author 신정은
+	 */
+	public List<BoardListDto> getBoardListByEmpId(String empId, Pager pager) {
+		return boardDao.selectBoardByEmpId(empId, pager);
 	}
 
 }

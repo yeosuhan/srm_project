@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.oti.team2.board.dao.IBoardDao;
 import com.oti.team2.comment.dao.ICommentDao;
 import com.oti.team2.comment.dto.CommentDto;
 import com.oti.team2.comment.dto.CommentReqDto;
@@ -19,13 +21,19 @@ public class CommentService implements ICommentService{
 
 	@Autowired
 	private ICommentDao commentDao;
+	
+	@Autowired
+	private IBoardDao boardDao;
+	
 	/**
 	 * 댓글 작성
 	 * @author 신정은
 	 */
+	@Transactional
 	public void addComment(CommentReqDto commentReqDto) {
 		log.info("서비스 들어옴 ~~~");
 		commentDao.insertComment(commentReqDto);
+		boardDao.updateAnsYn(commentReqDto.getBbsNo());
 	}
 
 	/**

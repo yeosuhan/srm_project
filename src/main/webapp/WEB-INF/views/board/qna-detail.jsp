@@ -76,7 +76,7 @@
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-header text-right">
-				<h6>댓글 8</h6>
+				<h6>댓글 ${board.comments.commpager.totalRows}</h6>
 			</div>
 			<div class="card-block">
 				<!-- 댓글 작성 -->
