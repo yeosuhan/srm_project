@@ -26,7 +26,7 @@ public class MainController {
 
 	@Autowired
 	private ISrDemandService srdemandService;
-	
+
 	@Autowired
 	private IBoardService boardService;
 
@@ -38,26 +38,26 @@ public class MainController {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		String memberId = auth.getName();
 		model.addAttribute("memberId", memberId);
-		
+
 		List<MytodoSrListDto> srList = null;
 		List<BoardListDto> qnaList = null;
 		List<BoardListDto> noticeList = null;
 		Pager qPager = null; // qna 페이저
 		Pager nPager = null; // notice 페이저
-		Pager pager = null;  //sr페이저
-		int atotal = 0;  // 요청 : 0
+		Pager pager = null; // sr페이저
+		int atotal = 0; // 요청 : 0
 		int rejTotal = 0; // 반려 : 1
 		int rtotal = 0; // 접수 : 2
 		int dtotal = 0; // 개발 : 3
 		int ttotal = 0; // 테스트 :4
 		int comtotal = 0; // 완료 : 5
 		int cantotal = 0; // 취소 : 6
-		int histotal = 0; //히스토리
-		
-		//공지사항
+		int histotal = 0; // 히스토리
+
+		// 공지사항
 		nPager = new Pager(boardService.getTotalRow("notice", null), 1);
 		noticeList = boardService.getBoardList("notice", null, nPager);
-		
+
 		if (role.equals(Auth.ROLE_CLIENT.toString())) {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 0, 1);
 			atotal = pager.getTotalRows();
@@ -69,16 +69,15 @@ public class MainController {
 			cantotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 6, 1).getTotalRows();
 			// 히스토리 총 수 가져와야 됨
 			histotal = srInformationHistoryService.getCountTodoForCust(auth.getName());
-			srList = srdemandService.getMytodoSrList(auth.getName(), null, 0, pager);	
-			
+			srList = srdemandService.getMytodoSrList(auth.getName(), null, 0, pager);
 			// 게시글
 			qPager = new Pager(boardService.getTotalRow("qna", memberId), 1);
 			qnaList = boardService.getBoardList("qna", memberId, qPager);
-		}
-		else if (role.equals(Auth.ROLE_DEVELOPER.toString())) {
+			
+		} else if (role.equals(Auth.ROLE_DEVELOPER.toString())) {
 			pager = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 3, 1);
 			srList = srdemandService.getMytodoSrListForDeveloper(auth.getName(), 3, pager);
-			
+
 			atotal = pager.getTotalRows();
 			rejTotal = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 1, 1).getTotalRows();
 			rtotal = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 2, 1).getTotalRows();
@@ -88,8 +87,11 @@ public class MainController {
 			cantotal = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 6, 1).getTotalRows();
 			// 히스토리 총 수 가져와야 됨
 			histotal = srInformationHistoryService.getCountTodoForDev(auth.getName(), auth.getName());
-		} 
-		else {
+			// 게시글
+			qPager = new Pager(boardService.getcountByEmpId(memberId), 1);
+			qnaList = boardService.getBoardListByEmpId(memberId, qPager);
+
+		} else {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(null, auth.getName(), 0, 1);
 			srList = srdemandService.getMytodoSrList(null, auth.getName(), 0, pager);
 
@@ -105,20 +107,20 @@ public class MainController {
 			// 게시글
 			qPager = new Pager(boardService.getTotalRow("qna", null), 1);
 			qnaList = boardService.getBoardList("qna", null, qPager);
+			
 		}
 		model.addAttribute("srList", srList);
 		model.addAttribute("pager", pager);
-		
+
 		model.addAttribute("atotal", atotal); // [요청]건의 총 수를 보여준다.
-		model.addAttribute("rejTotal", rejTotal); //  [반려]건의 총 수를 보여준다.
-		model.addAttribute("rtotal", rtotal); //   [접수]건의 총 수를 보여준다.
-		model.addAttribute("dtotal", dtotal); //   [개발]건의 총 수를 보여준다.
-		model.addAttribute("ttotal", ttotal); //   [테스트]건의 총 수를 보여준다.
-		model.addAttribute("comtotal", comtotal); //   [개발 완료]건의 총 수를 보여준다.
-		model.addAttribute("cantotal", cantotal); //   [취소]건의 총 수를 보여준다.
-		//히스토리 추가해야 됨
-		model.addAttribute("histotal", histotal); //[권한별로 히스토리]건의 총 수를 보여준다.
-		
+		model.addAttribute("rejTotal", rejTotal); // [반려]건의 총 수를 보여준다.
+		model.addAttribute("rtotal", rtotal); // [접수]건의 총 수를 보여준다.
+		model.addAttribute("dtotal", dtotal); // [개발]건의 총 수를 보여준다.
+		model.addAttribute("ttotal", ttotal); // [테스트]건의 총 수를 보여준다.
+		model.addAttribute("comtotal", comtotal); // [개발 완료]건의 총 수를 보여준다.
+		model.addAttribute("cantotal", cantotal); // [취소]건의 총 수를 보여준다.
+		model.addAttribute("histotal", histotal); // [권한별로 히스토리]건의 총 수를 보여준다.
+
 		model.addAttribute("qnaList", qnaList);
 		model.addAttribute("qPager", qPager);
 		model.addAttribute("noticeList", noticeList);

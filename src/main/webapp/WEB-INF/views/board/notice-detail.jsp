@@ -48,9 +48,11 @@
 					<button onclick="updateNotice(${board.bbsNo})"
 						class="btn btn-oti waves-effect waves-light mr-4">수정</button>
 				</div>
-				<form action="#">
-					<button class="btn btn-oti waves-effect waves-light">삭제</button>
-				</form>
+				<div>
+					<button 
+						onclick='location.href="/board/delete/${board.bbsNo}?type=notice"'
+						class="btn btn-oti waves-effect waves-light">삭제</button>
+				</div>
 			</div>
 		</c:if>
 	</div>

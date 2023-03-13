@@ -42,6 +42,7 @@ public class BoardController {
 	public String getBoardList(@RequestParam("type") String type,
 			Model model, 
 			Authentication auth,
+			@RequestParam(required = true, name = "bbsNo", defaultValue = "") String bbsNo,
 			@RequestParam(required = true, name = "view", defaultValue = "board") String view,
 			@RequestParam(required = true, name = "page", defaultValue = "1") int page) throws MalformedURLException {
 		String memberId = auth.getName();
@@ -60,6 +61,10 @@ public class BoardController {
 			pager = new Pager(boardService.getTotalRow(type, null), page);
 			list = boardService.getBoardList(type, null, pager);
 			if(type.equals("qna")) {
+				if(role.equals(Auth.ROLE_DEVELOPER.toString())) {
+					pager = new Pager(boardService.getcountByEmpId(memberId), 1);
+					list = boardService.getBoardListByEmpId(memberId, pager);
+				}
 				model.addAttribute("qPager", pager);
 				model.addAttribute("qnaList", list);
 			} else {
@@ -69,7 +74,11 @@ public class BoardController {
 		}		
 				
 		Board board = null;
-		if(list.size()>0) {
+		if(!bbsNo.equals("")) {
+			board = boardService.getBoard(Integer.parseInt(bbsNo));
+			model.addAttribute("board", board);
+		}
+		else if(list.size()>0) {
 			board = boardService.getBoard(list.get(0).getBbsNo());
 			model.addAttribute("board", board);
 		}
@@ -147,5 +156,14 @@ public class BoardController {
 		boardService.updateBoard(updateDto);
 		if(updateDto.getBbsType().equals("NOTICE")) return "redirect:/board/list?type=notice";
 		return "redirect:/board/list?type=qna";
+	}
+	
+	@GetMapping("/delete/{bbsNo}")
+	public String deleteBoard(@PathVariable("bbsNo") int bbsNo, @RequestParam("type") String type){
+		log.info("게시판 삭제 들어옴");
+		boardService.deleteBoard(bbsNo);
+		if(type.equals("qna")) return "redirect:/board/list?type=qna";
+		
+		return "redirect:/board/list?type=notice";
 	}
 }
