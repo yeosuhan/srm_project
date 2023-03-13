@@ -1,10 +1,8 @@
 package com.oti.team2.srinformationhistory.service;
 
-import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.security.core.Authentication;
-
+import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.util.pager.Pager;
@@ -55,5 +53,16 @@ public interface ISrInformationHistoryService {
 	 * 
 	 */
 	public void updateHstry(SrInformationHistory srInformationHistory);
+
+	/**
+	 * 나의 할 일에서의 히스토리 목록 조회 메서드
+	 * 
+	 * @author 최은종
+	 */
+	public List<MyTodoHistoryListDto> getHstryTodoByPicId(Pager pager, String picId);
+
+	public List<MyTodoHistoryListDto> getHstryTodoByEmpId(Pager pager, String rqstrId, String empId);
+
+	public List<MyTodoHistoryListDto> getHstryTodoByCustId(Pager pager, String custId);
 
 }

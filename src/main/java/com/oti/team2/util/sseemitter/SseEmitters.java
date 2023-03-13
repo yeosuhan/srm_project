@@ -22,6 +22,7 @@ public class SseEmitters {
 		this.emitters.put(memberId,emitter);
 		emitter.onCompletion(()->{
 			log.info("연결 만료");
+			log.info(this.emitters);
 			this.emitters.remove(memberId); //만료시 리스트에서 삭제
 		});
 		emitter.onTimeout(()->{

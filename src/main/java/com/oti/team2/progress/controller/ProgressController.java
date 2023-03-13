@@ -44,19 +44,15 @@ public class ProgressController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/srinformation/progress/update", method=RequestMethod.POST)
-	public String updateProgress2(@RequestParam(value="prgrsRt") int prgrsRt, 
+	public void updateProgress2(@RequestParam(value="prgrsRt") int prgrsRt, 
 			@RequestParam(value="bgngYmd") String bgngYmd, 
 			@RequestParam(value="endYmd") String endYmd,
 			@RequestParam(value="prgrsId") int prgrsId,
 			@RequestParam(value="prgrsSeNm") String prgrsSeNm,
-			String srNo) {
-		log.info("prgrsRt: " + prgrsRt);
-		log.info("prgrsSeNm: " + prgrsSeNm);
-		log.info("bgngYmd: " + bgngYmd);
-		log.info("endYmd: " + endYmd);
-		log.info("prgrsId: " + prgrsId);
-		log.info("srNo: " + srNo);
-		String message = progressService.updateProgress(prgrsRt, bgngYmd, endYmd, prgrsId, srNo, prgrsSeNm);
-		return message;
+			String srNo,
+			@RequestParam(value="rcvrId",required = false )String rcvrId,
+			@RequestParam(value="dmndNo",required = false )String dmndNo) {
+		
+		progressService.updateProgress(prgrsRt, bgngYmd, endYmd, prgrsId, srNo,rcvrId,dmndNo,prgrsSeNm);
 	}
 }

@@ -28,6 +28,10 @@ import com.oti.team2.srinformation.dto.SrTotal;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInformation;
 import com.oti.team2.srinformation.service.ISrinformationService;
+import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
+import com.oti.team2.srinformationhistory.service.ISrInformationHistoryService;
+import com.oti.team2.srresource.dto.SrResource;
+import com.oti.team2.srresource.service.ISrResourceService;
 import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
@@ -45,6 +49,12 @@ public class SrinformationController {
 
 	@Autowired
 	IProgressService progressService;
+
+	@Autowired
+	ISrResourceService srResourceService;
+	
+	@Autowired
+	ISrInformationHistoryService srInformationHistoryService;
 
 	/**
 	 * 
@@ -106,9 +116,10 @@ public class SrinformationController {
 		SrdemandDetail dd = srDemandService.getSrDemandDetail(dmndNo);
 		SrplanInformation pi = srinformationService.getPlan(dmndNo);
 		SrTotal total = new SrTotal(dd, pi);
+
 		log.info("dd 목록: " + dd);
 		log.info("pi 목록: " + pi);
-		log.info("total 목록: " + total);
+		log.info("total 목록: " + total);	
 		return total;
 	}
 

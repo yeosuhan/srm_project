@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.comment.dao.ICommentDao">
+	<insert id="insertComment" parameterType="commentReqDto">
+		INSERT INTO COMMENTS(CMNT_NO, CMNT_CN, BBS_NO, WRTR_ID, WRT_YMD)
+		VALUES(CMNT_NO_SEQ.nextval, #{cmntCn}, #{bbsNo}, #{wrtrId}, sysdate)
+	</insert>
+	
+	<select id="selectCommentsByBbsNo" parameterType="int">
+		SELECT CMNT_NO,
+				CMNT_CN,
+				m.flnm,
+				WRT_YMD
+		FROM COMMENTS c, MEMBERS m
+		WHERE c.WRTR_ID = m.MEMBER_ID
+		AND
+		BBS_NO = #{bbsNo}
+	</select>
+	
+	<delete id="deleteCommentByCmntNo" parameterType="int">
+		DELETE FROM COMMENTS
+		WHERE CMNT_NO = #{cmntNo}
+	</delete>
+
+</mapper>

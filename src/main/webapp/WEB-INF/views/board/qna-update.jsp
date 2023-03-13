@@ -10,7 +10,7 @@
 	<div class="card-block">
 		<form enctype="multipart/form-data" method="POST"
 			action="/board/update" id="updateForm">
-			<input type="hidden" value="${board.bbsNo}" name="bbsNo"> <input
+			<input type="hidden" value="${board.bbsNo}" name="bbsNo" id="bbsNo"> <input
 				type="hidden" value="${board.bbsType}" name="bbsType">
 			<div class="form-group row">
 				<div class="col-sm-2 font-weight-bold">작성일자</div>
@@ -58,6 +58,12 @@
 						<img src="${pageContext.request.contextPath}/resources/oti_images/trash.png"
 							 width="20px" height="20px" onclick="deleteFile(${f.fileSn})">
 					</c:forEach>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<input type="file" name="nattachFile" multiple>
 				</div>
 			</div>
 		</form>

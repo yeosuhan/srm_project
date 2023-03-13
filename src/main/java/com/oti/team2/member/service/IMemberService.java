@@ -96,4 +96,8 @@ public interface IMemberService {
 	 * @author 신정은
 	 */
 	public String getFlnm(String memberId);
+	
+	public int getPswd(Member member);
+	
+	public String updatePswd(String memberId);
 }

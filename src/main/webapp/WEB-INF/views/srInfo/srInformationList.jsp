@@ -314,7 +314,7 @@ li:before {
 												<c:forEach var="srlist" items="${srlist}" varStatus="num">
 													<tr
 														onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
-														<th scope="row">${num.count}</th>
+														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
 														<td>${srlist.sysNm}</td>
 														<td>${srlist.taskSeNm}</td>
@@ -459,6 +459,7 @@ li:before {
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDClientNm"
 													value="${sd.clientNm}">
+												<input type="hidden" value="${sd.clientId}" id="SRDClientId">
 											</div>
 										</div>
 									</div>

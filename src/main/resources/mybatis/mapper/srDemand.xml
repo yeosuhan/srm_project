@@ -51,6 +51,19 @@
 			and sd.stts_cd = s.stts_cd
 			and sd.sys_cd = sy.sys_cd
 			and sd.dmnd_no = si.dmnd_no (+)
+			<if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and sd.DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
+			<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and sd.DMND_YMD <= #{srFilterDto.dmndYmdEnd}]]></if>
+			<if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
+			<if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
+			<if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
+			<if test="srFilterDto.keyWord!=null">
+				and (
+				sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+				sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+				sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
+				sd.cn like '%'||#{srFilterDto.keyWord}||'%'
+			)</if>
+			
 		) w , members c
 		where w.rvwr_id = c.member_id(+)
 		<if test="sort=='DESC'">
@@ -75,6 +88,7 @@
          SYS_NM as sysNm,
          SYS_CD as sysCd ,
          clientNm as clientNm,
+         clientId as clientId,
          INST_NM as instNm,
          STTS_NM as sttsNm,
          STTS_CD as sttsCd,
@@ -97,6 +111,7 @@
                SYS_NM ,
                SYS_CD ,
                clientNm ,
+               clientId,
                INST_NM ,
                STTS_NM ,
                STTS_CD ,
@@ -121,6 +136,7 @@
                      d.dept_nm ,
                      si.PIC_ID ,
                      m.flnm as clientNm,
+                     sd.cust_id as clientId, <!-- 알림용 -->
                      i.INST_NM as INST_NM,
                      sd.rvwr_id as rvwr_id,
                      s.STTS_NM as STTS_NM,
@@ -171,7 +187,7 @@
             REL_GRUND = #{srRequestDto.relGrund},
          </if>
          <if test="srRequestDto.cmptnDmndYmd != null">
-            CMPTN_DMND_YMD = #{srRequestDto.cmptnDmndYmd},
+            CMPTN_DMND_YMD = TO_DATE(#{srRequestDto.cmptnDmndYmd},'YYYY-MM-DD'),
          </if>
          <if test="srRequestDto.sysCd != null">
             SYS_CD = #{srRequestDto.sysCd},
@@ -182,7 +198,7 @@
       </trim>
       where DMND_NO = #{srRequestDto.dmndNo}
 
-   </update>
+   </update> 
 
    <!-- 고객의 요청 총 행의 수 구하기 -->
    <select id="countByClientId" parameterType="string"
@@ -191,6 +207,18 @@
          FROM SR_DEMAND
       WHERE CUST_ID=#{clientId}
          and DEL_YN = 0
+         <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
+		 <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and DMND_YMD <= #{srFilterDto.dmndYmdEnd}]]></if>
+		 <if test="srFilterDto.sttsCd!=null">and stts_cd = #{srFilterDto.sttsCd}</if>
+		 <if test="srFilterDto.sysCd!=null">and sys_cd = #{srFilterDto.sysCd}</if>
+		 <if test="srFilterDto.taskSeCd!=null">and task_se_cd = #{srFilterDto.taskSeCd}</if>
+		 <if test="srFilterDto.keyWord!=null">
+			 and (
+			 dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+			 rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+			 ttl like '%'||#{srFilterDto.keyWord}||'%' or
+			 cn like '%'||#{srFilterDto.keyWord}||'%'
+		 )</if>
    </select>
 
    <!-- 관리자의 모든 요청의 총 행의 수 구하기 -->

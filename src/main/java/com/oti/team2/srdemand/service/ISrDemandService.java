@@ -1,5 +1,6 @@
 package com.oti.team2.srdemand.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.oti.team2.srdemand.dto.MytodoSrListDto;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
+import com.oti.team2.srdemand.dto.SrFilterDto;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.util.pager.Pager;
@@ -18,21 +20,22 @@ public interface ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public int addSrDemand(SrRequestDto srRequestDto);
+	public int addSrDemand(SrRequestDto srRequestDto) throws IllegalStateException, IOException;
 
 	/**
 	 * 고객의 나의 sr요청 목록 조회
 	 * 
 	 * @author 신정은
+	 * @param srFilterDto 
 	 */
-	public List<SrDemand> getSrDemandList(String custId, Pager pager, String sort);
+	public List<SrDemand> getSrDemandList(String custId, Pager pager, String sort, SrFilterDto srFilterDto);
 
 	/**
 	 * sr요청 수정 진행
 	 * 
 	 * @author 신정은
 	 */
-	public int updateSrDemand(@Param("srRequestDto") SrRequestDto srRequestDto);
+	public int updateSrDemand(SrRequestDto srRequestDto);
 
 	/**
 	 * 
@@ -52,8 +55,9 @@ public interface ISrDemandService {
 	 * 고객용 나의 요청 총 행의 수 구하기
 	 * 
 	 * @author 신정은
+	 * @param srFilterDto 
 	 */
-	public int getCountClientSr(String clientId);
+	public int getCountClientSr(String clientId, SrFilterDto srFilterDto);
 
 	/**
 	 * 관리자용 모든요청 총 행의 수 구하기

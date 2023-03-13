@@ -1,8 +1,10 @@
 package com.oti.team2.srdemand.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.oti.team2.attachment.dto.AttachResponseDto;
 
 import lombok.Data;
 
@@ -45,5 +47,9 @@ public class SrdemandDetail {
 	
 	//member 테이블
 	private String clientNm; // 요청자(고객)
+	private String clientId; // 알림 요청용 요청자 id
 	private String rvwrNm; //검토자 이름
+	
+	//첨부파일
+	private List<AttachResponseDto> attachFile;
 }

@@ -108,11 +108,11 @@ public interface ISrinformationDao {
 	 * @return 반영요청 수락시 SR진척에서 계획종료일 update
 	 */
 	public void updateEndYmdByDmndNo(@Param("dmndNo") String dmndNo);
+	
 	/**
 	 * 
 	 * @author 여수한 작성일자 : 2023-03-13
 	 * @return sr진척 엑셀 다운로드 목록 조회
 	 */
 	public List<SrinformationList> selectInfoAllToExcel(@Param("srInfoFilter") SrInfoFilter srInfoFilter, @Param("sort") String sort);
-
 }

@@ -10,7 +10,7 @@
 		<foreach collection="attachList" item="attach" separator=" " close="SELECT * FROM DUAL" index="index">
 			INTO 
 				ATTACHMENTS( FILE_SN, 
-					<if test="attach.bbsNo != null">
+					<if test="attach.bbsNo != 0">
 							BBS_NO, 					
 					</if>
 					<if test="attach.dmndNo != null">
@@ -23,7 +23,7 @@
 						)
 			VALUES
 				(	#{fileSn} + #{index},
-					<if test="attach.bbsNo != null">
+					<if test="attach.bbsNo != 0">
 						#{attach.bbsNo}, 
 					</if>
 					<if test="attach.dmndNo != null">
@@ -44,10 +44,10 @@
 			   FILE_SZ as fileSz,
 			   FILE_NM as fileNm
 		FROM ATTACHMENTS
-		<if test="bbsNo != 0">
+		<if test="bbsNo != null">
 			WHERE BBS_NO = #{bbsNo}
 		</if>
-		<if test="dmndNo != 0">
+		<if test="dmndNo != null">
 			WHERE DMND_NO = #{dmndNo}
 		</if>
 		
@@ -67,4 +67,18 @@
 		DELETE FROM ATTACHMENTS
 		WHERE FILE_SN = #{fileSn}
 	</delete>
+	
+	<!-- 파일번호로 해당 게시글 번호 가져오기 -->
+	<select id="selectBbsNoByFilseSn"  parameterType="int" resultType="int">
+		SELECT BBS_NO
+		FROM ATTACHMENTS
+		WHERE FILE_SN = #{fileSn}
+	</select>
+	
+	<!-- 해당 게시글의 총 파일 수 가져오기 -->
+	<select id="countFilesByBbsNo"  parameterType="int" resultType="int">
+		SELECT COUNT(FILE_SN)
+		FROM ATTACHMENTS
+		WHERE BBS_NO = #{bbsNo}
+	</select>
 </mapper>

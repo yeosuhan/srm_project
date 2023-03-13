@@ -22,6 +22,7 @@ import com.oti.team2.board.dto.SRKeyDto;
 import com.oti.team2.board.service.IBoardService;
 import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.util.Auth;
+import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -38,23 +39,51 @@ public class BoardController {
 
 	
 	@GetMapping("/list")
-	public String getBoardList(@RequestParam("type") String type, Model model, Authentication auth) throws MalformedURLException {
+	public String getBoardList(@RequestParam("type") String type,
+			Model model, 
+			Authentication auth,
+			@RequestParam(required = true, name = "view", defaultValue = "board") String view,
+			@RequestParam(required = true, name = "page", defaultValue = "1") int page) throws MalformedURLException {
 		String memberId = auth.getName();
 		model.addAttribute("memberId", memberId);
 		
-		List<BoardListDto> list = boardService.getBoardList(type);
-		model.addAttribute("list", list);
-		//log.info(list);
-		
+		String role = auth.getAuthorities().stream().findFirst().get().toString();
+		List<BoardListDto> list = null;
+		Pager pager = null;
+		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
+			pager = new Pager(boardService.getTotalRow(type, memberId), page);
+			list = boardService.getBoardList(type, memberId, pager);
+			model.addAttribute("qPager", pager);
+			model.addAttribute("qnaList", list);
+		}
+		else {
+			pager = new Pager(boardService.getTotalRow(type, null), page);
+			list = boardService.getBoardList(type, null, pager);
+			if(type.equals("qna")) {
+				model.addAttribute("qPager", pager);
+				model.addAttribute("qnaList", list);
+			} else {
+				model.addAttribute("nPager", pager);
+				model.addAttribute("noticeList", list);
+			}		
+		}		
+				
 		Board board = null;
 		if(list.size()>0) {
 			board = boardService.getBoard(list.get(0).getBbsNo());
 			model.addAttribute("board", board);
 		}
 		
+		if(view.equals("myportal")) {
+			log.info("여기 ~~~~~~");
+			log.info(pager);
+			return "mytodo/qna";
+		}
 		if(type.equals("notice")) {
+			log.info("notice ~~");
 			return "board/noticeList";
 		}
+		log.info("qna ~~");
 		return "board/qnaList";
 	}
 	
@@ -113,7 +142,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/update")
-	public String updateBoard(BoardUpdateDto updateDto){
+	public String updateBoard(BoardUpdateDto updateDto) throws IllegalStateException, IOException{
 		log.info(updateDto);
 		boardService.updateBoard(updateDto);
 		if(updateDto.getBbsType().equals("NOTICE")) return "redirect:/board/list?type=notice";

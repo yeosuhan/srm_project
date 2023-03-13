@@ -8,10 +8,17 @@
 <script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/addHstryModal.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/textarea.js"></script>
 <script type="text/javascript">
 	
 </script>
-
+<style>
+.wrap {
+	position: relative;
+	display: inline=block;
+}
+</style>
 <div class="modal" id="addHistoryModal">
 	<div class="modal-body modal-dialog modal-lg" style="height: 500px">
 		<div id="mHd" class="m_head" style="height: 13%">
@@ -19,8 +26,9 @@
 			<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 		</div>
 		<div class="m_body bg-light">
-			<form id="addHistoryForm" method="post" action="<c:url value='/history/add'/>"
-				class="form-material" onsubmit="return checkValue()">
+			<form id="addHistoryForm" method="post"
+				action="<c:url value='/history/add'/>" class="form-material"
+				onsubmit="return checkValue()">
 				<div class="row my-3">
 					<div class="col-2">SR 번호 :</div>
 					<div class="col-4">
@@ -45,7 +53,8 @@
 				<div class="row my-3">
 					<div class="col-2">발신일 :</div>
 					<div class="col-4">
-						<input type="date" id="HwrtYmd" type="text" value="" readonly style="width: 100%">
+						<input type="date" id="HwrtYmd" type="text" value="" readonly
+							style="width: 100%">
 					</div>
 					<div class="col-2">발신자 :</div>
 					<div class="col-4">
@@ -60,7 +69,8 @@
 						<label for="">기존 완료예정일 : </label>
 					</div>
 					<div class="col-4">
-						<input id="HcmptnDmndYmd" type="text" value="" readonly style="width: 100%">
+						<input id="HcmptnDmndYmd" type="text" value="" readonly
+							style="width: 100%">
 					</div>
 
 
@@ -68,7 +78,8 @@
 						<label for="chgEndYmd">요청 예정일 : </label>
 					</div>
 					<div class="col-4" id="chg2">
-						<input type="date" id="HchgEndYmd" name="chgEndYmd" style="width:73%">
+						<input type="date" id="HchgEndYmd" name="chgEndYmd"
+							style="width: 73%">
 					</div>
 				</div>
 				<div class="row my-3">
@@ -79,10 +90,13 @@
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">사유 :</div>
+					<div class="col-2">
+						사유 :
+						<p class="textCount" style="margin-top: 3px"></p>
+					</div>
 					<div class="col-10">
-						<textarea id="HhstryCn" name="hstryCn" style="width: 90%"
-							rows="10"></textarea>
+						<textarea id="HhstryCn" name="hstryCn"
+							style="width: 90%; resize: none;" maxlength="500" rows="10"></textarea>
 					</div>
 				</div>
 				<div align="center">

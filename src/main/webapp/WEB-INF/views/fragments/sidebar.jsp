@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <style>
 .pcoded-mtext, i {
@@ -30,13 +29,14 @@
 }
 
 .image_wrapper {
-	position: relative;
+	/* position: relative; */
 	overflow: hidden;
 	width: 94px;
 	height: 94px;
 	border-radius: 50%;
-	top: 3px;
-	left: 3px;
+	/* top: 3px;
+	left: 3px; */
+	margin: auto;
 }
 </style>
 <div class="pcoded-main-container"
@@ -55,14 +55,13 @@
 				<div id="mCSB_1"
 					class="mCustomScrollBox mCS-light mCSB_vertical_horizontal mCSB_inside"
 					style="max-height: none;" tabindex="0">
-
 					<div class="main-menu-header row mr-0">
 						<div class="profile_wrapper row mr-0 pr-0">
 							<div class="gradation_animate"></div>
 							<div class="image_wrapper">
 								<img class="img-80 img-radius"
-									src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg"
-									alt="User-Profile-Image" style="width: 90px;">
+									src="${pageContext.request.contextPath}/member/profile/<sec:authentication property='principal.username'/>"
+									alt="/resources/oti_images/user.png" style="width: 90px;">
 							</div>
 						</div>
 						<div class="user-details col-12 row"

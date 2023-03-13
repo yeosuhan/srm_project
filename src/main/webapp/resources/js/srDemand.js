@@ -4,12 +4,14 @@ function getSrDemandDetail(dmNo) {
 	console.log("sfsffd");
 	$("#userButtonDiv").empty();
 	$("#adminButtonDiv").empty();
+	$("#srDmndDetailTab").tab("show");
 	
 			$.ajax({
 				url : "/srdemand/detail/" + dmNo,
 				type : "GET",
 				success : function(res) {
-					var dmndNo = res.sd.dmndNo;
+					$("#sddetail").html(res);
+					/*var dmndNo = res.sd.dmndNo;
 					console.log(dmndNo);
 					$(".dmndNo").text(dmndNo);
 					$(".dmndNo").val(dmndNo);
@@ -35,6 +37,9 @@ function getSrDemandDetail(dmNo) {
 					$(".clientNm").text(res.sd.clientNm);
 					$(".rvwrNm").text(res.sd.rvwrNm);
 					var prgrsRt = res.prgrsRt;
+					
+					$("#srDmndDetailTab").tab("show");
+					
 					// 버튼 보이게 하기
 					console.log(prgrsRt + "  : prgrsRt");
 					console.log(sttsCd + " @");
@@ -68,7 +73,7 @@ function getSrDemandDetail(dmNo) {
 							var srRjctRsn = "<div class='form-control rjctRsn'>${sd.rjctRsn}</div>";
 							$("#rjctRsnDiv").html(srRjctRsn);
 						}
-					}
+					}*/
 				}
 			});
 }
@@ -136,17 +141,20 @@ function changeSystem(sysCd) {
 }
 
 /* 요청 수정 */
-$(document).on('click', '#modbtn', function(e) {
-	console.log("요청 수정");
-	setSystems();
-	$("#sddetail").css("display", "none");
-	$("#sdupdate").css("display", "block");
+function updateSr(dmndNo) {
+	$.ajax({
+		url : '/srdemand/modify/' + dmndNo,
+		type : 'GET',
+		success : function(res) {
+			console.log(res);
+			$("#sddetail").html(res);
+		}
+	});
 
-});
+}
 
 /* 사용자의 srDemand 삭제 */
-function deleteSr() {
-	var dmndNo = $(".dmndNo").val();
+function deleteSr(dmndNo) {
 	console.log(dmndNo);
 	$.ajax({
 		url : '/srdemand/delete/' + dmndNo,
@@ -237,4 +245,19 @@ function endSr() {
 			location.href = "/srdemand/list";
 		}
 	});
+}
+
+/*빈 검색 조건 비활성화*/
+function srSearch(){
+	$("#srSearchForm input").each((index,value)=>{
+		if(!$(value).val()){
+			$(value).prop("disabled",true);
+		}
+	});
+	$("#srSearchForm select").each((index,value)=>{
+		if(!$(value).children("option:selected").val()||$(value).children(" option").length==0){
+			$(value).prop("disabled",true);
+		}
+	});
+	return true;
 }

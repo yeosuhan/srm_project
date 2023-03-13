@@ -2,11 +2,14 @@ package com.oti.team2.member.controller;
 
 
 import java.io.IOException;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -93,8 +96,8 @@ public class MemberController {
 		HttpHeaders headers = new HttpHeaders();
 		String mtypes[] = profileImg.getFileType().split("/");
 		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));
-		return new ResponseEntity<byte[]>(profileImg.getFileData(),  headers, HttpStatus.OK);
 		
+		return new ResponseEntity<byte[]>(profileImg.getFileData(),  headers, HttpStatus.OK);
 	}
 	
 	/**
@@ -132,5 +135,27 @@ public class MemberController {
 			log.info("fileData: " + file.getFileData());
 			joinService.addFile(file,memberId);
 		}
+	}
+	
+	@PostMapping("/findPwForm")
+	public String getPswd(HttpServletRequest req, Member member, Model model) {
+		log.info("비번찾기 컨트롤러");
+		
+		member.setMemberId(member.getMemberId());
+		member.setTelNo(member.getTelNo());
+		
+		int rows=memberService.getPswd(member);
+		log.info(rows);
+		if(rows==1) {
+			String randomPw = UUID.randomUUID().toString().replaceAll("-", "");
+			randomPw = randomPw.substring(0,10);
+			log.info(randomPw);
+			model.addAttribute("randomPw", randomPw);
+		}else {
+			String undefinedUserMessage = "가입되지 않은 회원입니다. 다시 확인해주세요.";
+			log.info(undefinedUserMessage);
+			model.addAttribute("undefinedUserMessage", undefinedUserMessage);
+		}
+		return "redirect:/member/findPwModal";
 	}
 }

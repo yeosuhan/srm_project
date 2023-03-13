@@ -21,9 +21,11 @@ public interface IProgressDao {
 	 * 
 	 * @author 여수한
 	 * 작성일자 : 2023-02-28
+	 * @param dmndNo 
+	 * @param rcvrId 
 	 * @return sr요청 진척률 수정
 	 */
-	public void updateProgressByPrgrsId(@Param("prgrsId") int prgrsId, @Param("bgngYmd") String bgngYmd, @Param("endYmd") String endYmd, @Param("prgrsRt") int prgrsRt);
+	public void updateProgressByPrgrsId(@Param("prgrsId") int prgrsId, @Param("bgngYmd") String bgngYmd, @Param("endYmd") String endYmd, @Param("prgrsRt") int prgrsRt,@Param("rcvrId") String rcvrId,@Param("dmndNo") String dmndNo);
 	
 	/**
 	 * 진척률 insert
