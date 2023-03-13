@@ -80,7 +80,6 @@ function getAlertList(){
 								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?dmndNo="+value.dmndNo+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
 								"	<div class='media'>" +
 								"		<div class='media-body'>" +
-								"			<h5 class='notification-user'>"+value.dmndNo+"</h5>" +
 								"			<i class='fa fa open-card-option fa-times close' onclick='closeAlert(event,this,"+value.altNo+")'></i>" +
 								"			<p class='notification-msg'>"+value.altCn+"</p>" +
 								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
@@ -95,7 +94,7 @@ function getAlertList(){
 								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?hstryId="+value.hstryId+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
 								"	<div class='media'>" +
 								"		<div class='media-body'>" +
-								"			<h5 class='notification-user'>"+value.hstryId+"</h5>" +
+								"			<i class='fa fa open-card-option fa-times close' onclick='closeAlert(event,this,"+value.altNo+")'></i>" +
 								"			<p class='notification-msg'>"+value.altCn+"</p>" +
 								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
 								"		</div>" +
@@ -109,7 +108,7 @@ function getAlertList(){
 								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?hstryId="+value.hstryId+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
 								"	<div class='media'>" +
 								"		<div class='media-body'>" +
-								"			<h5 class='notification-user'>"+value.hstryId+"</h5>" +
+								"			<i class='fa fa open-card-option fa-times close' onclick='closeAlert(event,this,"+value.altNo+")'></i>" +
 								"			<p class='notification-msg'>"+value.altCn+"</p>" +
 								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
 								"		</div>" +
@@ -123,7 +122,7 @@ function getAlertList(){
 								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?hstryId="+value.hstryId+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
 								"	<div class='media'>" +
 								"		<div class='media-body'>" +
-								"			<h5 class='notification-user'>"+value.dmndNo+"</h5>" +
+								"			<i class='fa fa open-card-option fa-times close' onclick='closeAlert(event,this,"+value.altNo+")'></i>" +
 								"			<p class='notification-msg'>"+value.altCn+"</p>" +
 								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
 								"		</div>" +

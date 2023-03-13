@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oti.team2.alert.service.IAlertService;
+import com.oti.team2.member.dao.IMemberDao;
 import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
@@ -38,6 +40,11 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	@Autowired
 	private ISrinformationService srInformationService;
 
+	@Autowired
+	private IAlertService alertService;
+	
+	@Autowired
+	private IMemberDao memberDao;
 	/**
 	 * SR처리 히스토리 내역 조회 메서드 (관리자/개발자용)
 	 * 
@@ -109,7 +116,7 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		String hstryStts = srInformationHistory.getHstryStts();
 		int hstryId = srInformationHistory.getHstryId();
 		String srNo = srInformationHistory.getSrNo();
-
+		String rcvrId = null;
 		log.info("서비스----hstryType: " + hstryType);
 		log.info("서비스----role: " + role);
 
@@ -117,12 +124,28 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 			log.info("나는 개발자");
 			// 개발자가 신규등록 할 때
 			srInformationHistoryDao.insertSrHistory(srInformationHistory);
+			//모든 관리자에게 알림 전송
+			srInformationHistory.setHstryId(srInformationHistoryDao.selectLastHstryIdByRqstrId(srInformationHistory.getRqstrId()));
+			List<String> adminList =memberDao.selectAdmin();
+			adminList.forEach((value)->{
+				alertService.sendToClient(value, srInformationHistory.getHstryId(),"CHG_YMD_DVL");
+			});
 		} else if (role.equals("ROLE_ADMIN")) {
 			log.info("나는 관리자");
 			if (hstryId == 0) {
 				log.info("나는 관리자:신규등록");
 				// 관리자가 신규등록 할 때
 				srInformationHistoryDao.insertSrHistory(srInformationHistory);
+				//고객에게 알림 전송
+				srInformationHistory.setHstryId(srInformationHistoryDao.selectLastHstryIdByRqstrId(srInformationHistory.getRqstrId()));
+				rcvrId = srDemandDao.selectBySrNo(srInformationHistory.getSrNo());
+				String alertType=null;
+				if(srInformationHistory.getHstryType().equals("B")) {
+					alertType="CHG_YMD"; //예정일 변경 요청
+				}else if(srInformationHistory.getHstryType().equals("C")) {
+					alertType="RTRCN"; //개발 취소
+				}
+				alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),alertType);
 			} else if (hstryId != 0) {
 				log.info("나는 관리자:업데이트");
 				// 개발자가 신청한 등록이 있으면
@@ -130,9 +153,16 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 				log.info(srInformationHistory.getHstryStts());
 				srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
 						srInformationHistory.getHstryStts());
+				//개발자 에게 알림 전송
+				rcvrId = srInformationHistoryDao.selectRqstrIdByHstryId(srInformationHistory.getHstryId());
+				alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD_DVL");
 				if (hstryStts.equals("Y")) {
 					// 고객한테 새로 요청 보내기 (이 때 상태값 I로 바꿔서 insert)
 					srInformationHistoryDao.insertSrHistory(srInformationHistory);
+					//고객에게 알림 전송
+					srInformationHistory.setHstryId(srInformationHistoryDao.selectLastHstryIdByRqstrId(srInformationHistory.getRqstrId()));
+					rcvrId = srDemandDao.selectBySrNo(srInformationHistory.getSrNo());
+					alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD");
 				}
 			}
 		} else if (role.equals("ROLE_CLIENT")) {
@@ -156,14 +186,20 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 					int row = srDemandService.updateSrDemand(srRequestDto);
 					log.info(srRequestDto);
 					log.info(row);
+					//알림 전송
+					rcvrId = srInformationHistoryDao.selectRqstrIdByHstryId(srInformationHistory.getHstryId());
+					alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD");
 				} else {
 					// 요청일 변경 반려시 히스토리 승인여부만 업데이트
 					srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
 							srInformationHistory.getHstryStts());
+					//알림 전송
+					rcvrId = srInformationHistoryDao.selectRqstrIdByHstryId(srInformationHistory.getHstryId());
+					alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD");
 				}
 			} else if (hstryType.equals("C")) {
 				// 관리자가 요청한 유형이 개발취소인 경우 일단 상태값 업데이트
-
+				
 				srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
 						srInformationHistory.getHstryStts());
 				if (hstryStts.equals("Y")) {
@@ -179,6 +215,9 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 					srResourceService.modifySrResource(srResourceDto);
 
 				}
+				//알림 전송
+				rcvrId = srInformationHistoryDao.selectRqstrIdByHstryId(srInformationHistory.getHstryId());
+				alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD_DVL");
 			}
 		}
 	}

@@ -118,4 +118,9 @@ public interface IMemberDao {
 	public int selectPswd(Member member);
 	
 	public String updatePswdByMemberId(@Param("memberId")String memberId);
+
+	/* 전체 관리자 리스트 조회(알람 전송 수신자)
+	 * @author 안한길
+	 * */
+	public List<String> selectAdmin();
 }

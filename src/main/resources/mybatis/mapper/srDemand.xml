@@ -447,4 +447,15 @@
 		WHERE
 			DMND_NO = #{dmndNo}
 	</update>
+	
+	<!-- srNo를 통해 요청자 id조회 -->
+	<select id="selectBySrNo" parameterType="string" resultType="string">
+		SELECT
+			sd.CUST_ID as custId
+		FROM
+			SR_DEMAND sd , SR_INFORMATION si
+		WHERE
+			sd.DMND_NO = si.DMND_NO AND
+			si.SR_NO = #{srNo}
+	</select>
 </mapper>

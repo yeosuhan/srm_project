@@ -156,4 +156,9 @@ public interface ISrDemandDao {
 	 * @author 여수한
 	 */
 	public void updateSrdemandStts(@Param("dmndNo") String dmndNo);
+	
+	/* 알림을 보낼 요청자 아이디 조회
+	 * @author 안한길
+	 * */
+	public String selectBySrNo(@Param("srNo")String srNo);
 }

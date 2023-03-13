@@ -132,8 +132,8 @@ public class SrInformationHistoryController {
 			srInformationHistory.setSrNo(srNo);
 		}
 
-		srInformationHistoryService.addSrInformationHistory(srInformationHistory, role);
 		log.info("컨트롤러" + srInformationHistory);
+		srInformationHistoryService.addSrInformationHistory(srInformationHistory, role);
 
 		if (!role.equals("ROLE_CLIENT")) {
 			return "redirect:/srinformation/list";

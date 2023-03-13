@@ -178,5 +178,23 @@
               and sd.dmnd_no = si.dmnd_no
               and sd.stts_cd = #{sttsCd}
    	</select>  -->
+	<!-- 새로 insert된 히스토리 아이디를 조회 -->
+	<select id="selectLastHstryIdByRqstrId" parameterType="string" resultType="int">
+		SELECT
+			HSTRY_ID as hstryId
+		FROM
+		(SELECT ROWNUM, HSTRY_ID FROM SR_INFORMATION_HISTORY WHERE RQSTR_ID = #{rqstrId} ORDER BY WRT_YMD DESC )
+		WHERE
+			ROWNUM=1
+	</select>
 	
+	<!-- 발신자 조회 -->
+	<select id="selectRqstrIdByHstryId" parameterType="int" resultType="string">
+		SELECT
+			RQSTR_ID as rqstrId
+		FROM
+			SR_INFORMATION_HISTORY
+		WHERE
+			HSTRY_ID = #{hstryId}
+	</select>
 </mapper>
