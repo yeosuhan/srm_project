@@ -58,4 +58,22 @@ public interface IBoardDao {
 	 * @author 신정은
 	 */
 	void deleteBoardByBbsNo(int bbsNo);
+	
+	/**
+	 * 관련개발자의 문의게시글의 총 행수
+	 * @author 신정은
+	 */
+	int countByEmpId(@Param("empId")String empId);
+	
+	/**
+	 * 관련개발자의 문의게시판 목록 조회
+	 * @author 신정은
+	 */
+	List<BoardListDto> selectBoardByEmpId(@Param("empId")String empId, @Param("pager")Pager pager);
+	
+	/**
+	 * 문의글 답변 등록시 상태 수정
+	 * @author 신정은
+	 */
+	int updateAnsYn(int bbsNo);
 }

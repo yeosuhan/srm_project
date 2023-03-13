@@ -88,6 +88,10 @@ public class MainController {
 			cantotal = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 6, 1).getTotalRows();
 			// 히스토리 총 수 가져와야 됨
 			
+			// 게시글
+			qPager = new Pager(boardService.getcountByEmpId(memberId), 1);
+			qnaList = boardService.getBoardListByEmpId(memberId, qPager);
+
 		} 
 		else {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(null, auth.getName(), 0, 1);
