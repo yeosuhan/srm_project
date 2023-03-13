@@ -41,13 +41,13 @@ public class SrInformationHistoryController {
 	public SrHistoryListDto getSrInformationHistoryList(@RequestParam String dmndNo, @RequestParam(defaultValue = "1") int pageNo, Authentication auth) {
 		log.info("srInformationHistoryList 조회");
 
-		int totalRows = srInformationHistoryService.getTotalRows();
-		Pager pager = new Pager(totalRows, pageNo);
-		log.info("pageNo 조회" + pageNo);
-
 		String srNo = srInformationHistoryService.getSrNo(dmndNo);
 		log.info("dmndNo 조회" + dmndNo);
-
+		
+		int totalRows = srInformationHistoryService.getCountAllForClient(srNo);
+		Pager pager = new Pager(totalRows, pageNo);
+		log.info("pageNo 조회" + pageNo);
+		
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		log.info("role 조회" + role);
 
@@ -70,7 +70,7 @@ public class SrInformationHistoryController {
 			@RequestParam String srNo) {
 		log.info("srInformationHistoryList 조회");
 
-		int totalRows = srInformationHistoryService.getTotalRows();
+		int totalRows = srInformationHistoryService.getCountAllForEmp(srNo);
 		Pager pager = new Pager(totalRows, pageNo);
 
 		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryList(pager,

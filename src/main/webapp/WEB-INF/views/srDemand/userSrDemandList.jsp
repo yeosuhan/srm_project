@@ -302,9 +302,9 @@ th {
 							data-toggle="tab" href="#srDemandDetail" role="tab"
 							id="srDmndDetailTab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
-						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							id="srHistoryTab" href="#srHistory" onclick="userHstry()"
-							role="tab">SR 히스토리</a>
+						<li class="nav-item" onclick="userHstry()"><a
+							class="nav-link" data-toggle="tab" href="#srHistory" role="tab">SR
+								히스토리</a>
 							<div class="slide"></div></li>
 					</ul>
 
@@ -485,10 +485,8 @@ th {
 		</div>
 		<!-- *********** -->
 	</div>
-
 	<!-- Page body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
-
 
 	<%-- 상세, 등록, 수정 --%>
 	<script

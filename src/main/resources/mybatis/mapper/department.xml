@@ -3,13 +3,18 @@
 <mapper namespace="com.oti.team2.department.dao.IDepartmentDao">
 
 	<!-- 전체 부서 조회 -->
-	<select id="selectByMemberId" resultType="department">
-		<![CDATA[
+	<select id="selectByMemberId" parameterType="map" resultType="department">		
 		select d.dept_cd as deptCd, dept_nm as deptNm, ofc_telno as ofcTelno, mngr_id as mngrId, m.flnm as flnm, dept_nope as deptNope
 		from departments d, members m
-		where d.mngr_id = m.member_id
-		order by deptNm asc
-		]]>
+		where 
+        <if test="deptFiltering.deptNm != null">
+             d.DEPT_NM LIKE '%'||#{deptFiltering.deptNm}||'%' AND
+         </if>
+         <if test="deptFiltering.flnm != null">
+             m.FLNM LIKE '%'||#{deptFiltering.flnm}||'%' AND
+         </if>		
+		d.mngr_id = m.member_id
+		order by deptNm ASC	
 	</select>
 
 	<!-- 신규 부서 등록 -->

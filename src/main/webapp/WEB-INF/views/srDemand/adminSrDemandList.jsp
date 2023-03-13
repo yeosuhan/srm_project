@@ -6,10 +6,9 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 <script
-	src="${pageContext.request.contextPath}/resources/js/srDemandListHstry.js"></script>
+	src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
+
 <script>
 	</head>
 	<script>
@@ -144,8 +143,7 @@ th {
 								<div class="col col-4 px-0">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
 										type="text" name="keyWord" id="keyWord">
-									<button type="submit"
-										class="btn btn-sm btn-oti"
+									<button type="submit" class="btn btn-sm btn-oti"
 										style="margin-right: 10px; height: 30px;">
 										<i class="ti-search"></i>
 									</button>
@@ -271,9 +269,7 @@ th {
 						<li class="nav-item"><a class="nav-link active"
 							data-toggle="tab" href="#srDemandDetail" role="tab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
-						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#srHistory" onclick="userHstry()" role="tab">SR 히스토리</a>
-							<div class="slide"></div></li>
+
 					</ul>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
@@ -282,30 +278,7 @@ th {
 								<jsp:include page="/WEB-INF/views/srDemand/admin/adSrDetail.jsp" />
 							</div>
 						</div>
-						<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
-						<div class="tab-pane" id="srHistory" role="tabpanel">
-							<div class="card-block table-border-style" style="padding: 0px;">
-								<div class="table-responsive">
-									<table class="table table-hover text-center historyTable"
-										style="font-size: 12px; padding: 0px;">
-										<thead>
-											<tr>
-												<th style="width: 1px;">순번</th>
-												<th>요청유형</th>
-												<th>변경될 완료일</th>
-												<th>승인여부</th>
-											</tr>
-										</thead>
-										<tbody id="history">
-										</tbody>
-									</table>
-									<%-- 페이징 --%>
-									<div class="hstryPager-container">
-										<div class="hstryPager"></div>
-									</div>
-								</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -313,20 +286,13 @@ th {
 		<!-- *********** -->
 	</div>
 	<!-- Page-body end -->
-
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
-
-	<!-- 검색 -->
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
 
 	<%-- 상세, 등록, 수정 --%>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 	<!-- 모달 -->
-	<jsp:include page="/WEB-INF/views/history/approvalHistoryModal.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
-	<%@include file="/WEB-INF/views/history/addHistoryModal.jsp"%>
 </body>
 </html>

@@ -80,8 +80,14 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	 * @author 최은종
 	 */
 	@Override
-	public int getTotalRows() {
-		int rows = srInformationHistoryDao.countAll();
+	public int getCountAllForEmp(String srNo) {
+		int rows = srInformationHistoryDao.countAllForEmp(srNo);
+		return rows;
+	}
+
+	@Override
+	public int getCountAllForClient(String srNo) {
+		int rows = srInformationHistoryDao.countAllForClient(srNo);
 		return rows;
 	}
 
@@ -226,5 +232,38 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	@Override
 	public List<MyTodoHistoryListDto> getHstryTodoByCustId(Pager pager, String custId) {
 		return srInformationHistoryDao.selectHstryTodoByCustId(pager, custId);
+	}
+
+	/**
+	 * 개발자 : 내가 자원으로 들어가있고 투입종료 이전일 때만 sr요청 버튼 보이게 하기 위한 메서드
+	 * 
+	 * @author 최은종
+	 */
+	@Override
+	public List<MyTodoHistoryListDto> getDmndNoBySrResouce(String dmndNo, String empId) {
+		return srInformationHistoryDao.selectDmndNoBySrResouce(dmndNo, empId);
+	}
+
+	/**
+	 * 나의 할 일에서 히스토리 목록 페이징 메서드
+	 * 
+	 * @author 최은종
+	 */
+	@Override
+	public int getCountTodoForAdmin(String picId) {
+		int rows = srInformationHistoryDao.countTodoForAdmin(picId);
+		return rows;
+	}
+
+	@Override
+	public int getCountTodoForDev(String rqstrId, String empId) {
+		int rows = srInformationHistoryDao.countTodoForDev(rqstrId, empId);
+		return rows;
+	}
+
+	@Override
+	public int getCountTodoForCust(String custId) {
+		int rows = srInformationHistoryDao.countTodoForCust(custId);
+		return rows;
 	}
 }

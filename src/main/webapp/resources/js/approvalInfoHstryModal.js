@@ -124,8 +124,9 @@ function getInfoHstryDetail(historyId) {
 											'<input id="CHstryStts" type="text" value="반려" readonly>');
 							$('#footDiv').text("결재 권한이 없습니다.");
 						}
-					} else if (auth != 'ROLE_ADMIN') {
-						if (ArqstrId == autuId && AhstryStts == 'I') {
+					} else if (auth == 'ROLE_DEVELOPER') {
+						console.log("8");
+						if (AhstryStts == 'I') {
 							console.log("8");
 							$('.AhstryId').val(AhstryId);
 							$('.mheadDiv')

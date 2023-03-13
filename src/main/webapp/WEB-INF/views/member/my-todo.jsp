@@ -63,7 +63,7 @@
 									onclick="moveTab(6)">개발 취소 <span class="badge badge-danger">${cantotal}</span></div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link hstry"
-									onclick="moveHstryTab()">히스토리</div>
+									onclick="moveHstryTab()">히스토리<span class="badge badge-danger">${histotal}</span></div>
 								<div class="slide"></div></li>
 						</ul>
 						<!-- Tab panes -->
@@ -72,6 +72,7 @@
 							<!------나의 할일 : 요청-------->
 							<div class="tab-pane active" id="requesttable" role="tabpanel">
 								<%@ include file="/WEB-INF/views/mytodo/srTable.jsp"%>
+								
 							</div>
 						</div>
 					</div>

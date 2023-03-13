@@ -23,13 +23,14 @@ function moveHstryTab() {
  * 
  */
 function mytodoHstryPaging(pageNo) {
-	var url = "/myportal/mytodo?page=" + pageNo;
+	var url = "/myportal/mytodo/history?page=" + pageNo;
 
 	$.ajax({
 		url : url,
 		type : "GET",
 		success : function(result) { // 목록
 			$('#requesttable').html(result);
+			console.log("ajax success" + pageNo);
 		}
 
 	});
