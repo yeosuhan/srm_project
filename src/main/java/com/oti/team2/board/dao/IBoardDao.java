@@ -46,4 +46,10 @@ public interface IBoardDao {
 	 * @author 신정은
 	 */
 	int updateTtlAndCn(BoardUpdateDto boardUpdateDto);
+	
+	/**
+	 * 게시글의 첨부파일 존재 유무 상태 update
+	 * @author 신정은
+	 */
+	int updateAtchYn(@Param("bbsNo")int bbsNo, @Param("status")int status);
 }

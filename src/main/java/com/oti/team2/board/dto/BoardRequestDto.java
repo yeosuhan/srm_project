@@ -18,6 +18,6 @@ public class BoardRequestDto {
 	private String srNo; 
 	private List<MultipartFile> attachFile;
 	
-	private int inqCnt;
+	private Integer inqCnt;
 	private boolean ansYn = false;
 }

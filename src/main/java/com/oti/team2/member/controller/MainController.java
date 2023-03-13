@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oti.team2.board.dto.BoardListDto;
+import com.oti.team2.board.service.IBoardService;
 import com.oti.team2.srdemand.dto.MytodoSrListDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.util.Auth;
@@ -26,20 +28,38 @@ public class MainController {
 	@Autowired
 	private ISrDemandService srdemandService;
 	
+	@Autowired
+	private IBoardService boardService;
+
+	
 	@GetMapping("/myportal")
 	public String mypotal(Authentication auth, Model model) {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
+		String memberId = auth.getName();
+		model.addAttribute("memberId", memberId);
 		
 		List<MytodoSrListDto> srList = null;
-		Pager pager = null;
+		List<BoardListDto> qnaList = null;
+		List<BoardListDto> noticeList = null;
+		Pager qPager = null; // qna 페이저
+		Pager nPager = null; // notice 페이저
+		Pager pager = null;  //sr페이저
 		int rtotal = 0;
 		int dtotal = 0;
 		int atotal = 0;
+		
+		//공지사항
+		nPager = new Pager(boardService.getTotalRow("notice", null), 1);
+		noticeList = boardService.getBoardList("notice", null, nPager);
+		
 		if(role.equals(Auth.ROLE_CLIENT.toString())) {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName() , null, 0, 1);
 			rtotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName() , null, 2, 1).getTotalRows();
 			srList = srdemandService.getMytodoSrList(auth.getName(), null, 0, pager);
-			log.info("pager  : " + pager);
+			
+			// qna
+			qPager = new Pager(boardService.getTotalRow("qna", memberId), 1);
+			qnaList = boardService.getBoardList("qna", memberId, qPager);
 		}else if(role.equals(Auth.ROLE_DEVELOPER.toString())) {
 			pager = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 3, 1);
 			dtotal = pager.getTotalRows();
@@ -48,12 +68,19 @@ public class MainController {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(null, auth.getName(), 0, 1);
 			atotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(null, auth.getName(), 0, 1).getTotalRows();
 			srList = srdemandService.getMytodoSrList(null, auth.getName(), 0, pager);
+
+			qPager = new Pager(boardService.getTotalRow("qna", null), 1);
+			qnaList = boardService.getBoardList("qna", null, qPager);
 		}
 		model.addAttribute("srList", srList);
 		model.addAttribute("pager", pager);
 		model.addAttribute("atotal", atotal); // 관리자는 [요청]건의 총 수를 보여준다.
 		model.addAttribute("rtotal", rtotal); // 사용자는 [접수]건의 총 수를 보여준다.
 		model.addAttribute("dtotal", dtotal); // 개발자는  [개발]건의 총 수를 보여준다.
+		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("qPager", qPager);
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("nPager", nPager);
 		log.info(srList);
 		return "member/my-todo";
 	}

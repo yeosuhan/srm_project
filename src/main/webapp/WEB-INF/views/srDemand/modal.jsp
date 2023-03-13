@@ -77,7 +77,7 @@
 				<div class="modal_title" style="color: white;">SR 요청 등록</div>
 			</div>
 			<div class="m_body">
-				<form action="/srdemand/add" method="post" id="srRequest">
+				<form action="/srdemand/add" method="post" id="srRequest" enctype="multipart/form-data">
 					<div class="form-group row">
 						<div class="col-sm-6">
 							<div class="col col-sm-4">등록자</div>
@@ -132,8 +132,8 @@
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">첨부파일</label>
-						<div class="col-sm-9">
-							<input type="file" class="">
+						<div class="col-sm-10">
+							<input type="file" name="attachFile" multiple>
 						</div>
 					</div>
 					<div class="form-group row">

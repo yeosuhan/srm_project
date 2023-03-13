@@ -31,7 +31,7 @@
 			<div class="form-group row">
 				<p class="col-sm-2 font-weight-bold">첨부파일</p>
 				<div class="col-sm-5">
-					<c:forEach var="f" items="${board.srcList}">
+					<c:forEach var="f" items="${board.srcList}">						
 						<div>
 							<a href="<c:url value='/file/download/${f.fileSn}' />"> <span
 								class="glyphicon glyphicon-save" aria-hidden="true"></span> <span>

@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.oti.team2.attachment.dao.IAttachmentDao;
 import com.oti.team2.attachment.dto.AttachResponseDto;
 import com.oti.team2.attachment.dto.Attachment;
 import com.oti.team2.attachment.dto.OTIFilePath;
+import com.oti.team2.attachment.service.IAttachmentService;
 import com.oti.team2.board.dao.IBoardDao;
 import com.oti.team2.board.dto.Board;
 import com.oti.team2.board.dto.BoardListDto;
@@ -32,7 +32,7 @@ public class BoardService implements IBoardService {
 	private IBoardDao boardDao;
 	
 	@Autowired
-	private IAttachmentDao attachmentDao;
+	private IAttachmentService attachmentService;
 	
 	/**
 	 * 공지사항/문의게시판 + 첨부파일 글 저장
@@ -49,34 +49,9 @@ public class BoardService implements IBoardService {
 		} else boardRequestDto.setAtchYn(atchYn);
 		boardDao.insertBoard(boardRequestDto);
 		
-		log.info("key 들어옴 ~~  " + boardRequestDto.getBbsNo());
-		log.info(boardRequestDto.getAttachFile());
-		log.info(atchYn);
-		if (atchYn) {
-			boardRequestDto.setAtchYn(true);
-			
-			List<MultipartFile> mfList = boardRequestDto.getAttachFile();
-			List<Attachment> attachList = new ArrayList<>();
-			
-			for (MultipartFile mf : mfList) {
-				Attachment attch = new Attachment();
-				attch.setBbsNo(boardRequestDto.getBbsNo());
-				attch.setOrgnlFileNm(mf.getOriginalFilename());
-
-				String fiileName = new Date().getTime() + "-" + mf.getOriginalFilename(); // 저장될 이름
-				attch.setFileNm(fiileName);
-				attch.setFileSz(mf.getSize());
-				attch.setFileType(mf.getContentType());
-				attachList.add(attch);
-				// 서버 파일 시스템에 파일로 저장
-				File file = new File(OTIFilePath.filePath + fiileName);
-				mf.transferTo(file);
-				log.info(attch);
-			}
-			attachmentDao.insertAttachment(attachList);
-		}
-		
-
+		if (atchYn) {	
+			attachmentService.uploadFiles(boardRequestDto.getAttachFile(), boardRequestDto.getBbsNo(), null);
+		}	
 	}
 
 	/**
@@ -103,7 +78,7 @@ public class BoardService implements IBoardService {
 		Board board =  boardDao.selectBoardByBbsNo(bbsNo);
 		
 		if(board.isAtchYn()) {
-			List<AttachResponseDto> alist = attachmentDao.selectAttachByBbsNoOrDmndNo(bbsNo, 0);
+			List<AttachResponseDto> alist = attachmentService.getAttachFiles(bbsNo, null);
 			board.setSrcList(alist);
 		}
 		return board;
@@ -121,8 +96,13 @@ public class BoardService implements IBoardService {
 	 * 게시글 수정
 	 * @author 신정은
 	 */
-	public void updateBoard(BoardUpdateDto boardUpdateDto) {
+	public void updateBoard(BoardUpdateDto boardUpdateDto) throws IllegalStateException, IOException {
 		int row = boardDao.updateTtlAndCn(boardUpdateDto);
+		
+		if(boardUpdateDto.getNattachFile() != null) {
+			attachmentService.uploadFiles(boardUpdateDto.getNattachFile(), boardUpdateDto.getBbsNo(), null);
+			boardDao.updateAtchYn(boardUpdateDto.getBbsNo(), 1);
+		}
 	}
 
 }

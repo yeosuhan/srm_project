@@ -51,6 +51,7 @@
 			BBS_NO as bbsNo,
 			BBS_TTL as bbsTtl,
 			ANS_YN as ansYn,
+			INQ_CNT as inqCnt,
 			WRT_YMD as wrtYmd,
 			m.FLNM as wrtNm
 		FROM BOARD b, MEMBERS m
@@ -95,6 +96,15 @@
 		SET BBS_TTL = #{bbsTtl},
 			BBS_CN = #{bbsCn}
         where BBS_NO = #{bbsNo}
+	</update>
+	
+	<!-- 게시글의 첨부파일 존재 유무 상태 update-->
+	<update id="updateAtchYn" parameterType="map">
+		UPDATE BOARD
+		SET ATCH_YN = #{status}
+        where BBS_NO = #{bbsNo}
+        	and 
+        	ATCH_YN != #{status}
 	</update>
 	
 </mapper>

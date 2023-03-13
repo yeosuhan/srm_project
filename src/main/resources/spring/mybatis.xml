@@ -31,4 +31,5 @@
 	<mybatis-spring:scan base-package="com.oti.team2.alert.dao"/>
 	<mybatis-spring:scan base-package="com.oti.team2.board.dao"/>
 	<mybatis-spring:scan base-package="com.oti.team2.attachment.dao"/>
+	<mybatis-spring:scan base-package="com.oti.team2.comment.dao"/>
 </beans>

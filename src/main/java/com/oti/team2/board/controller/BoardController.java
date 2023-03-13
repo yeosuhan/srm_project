@@ -52,16 +52,21 @@ public class BoardController {
 		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
 			pager = new Pager(boardService.getTotalRow(type, memberId), page);
 			list = boardService.getBoardList(type, memberId, pager);
+			model.addAttribute("qPager", pager);
+			model.addAttribute("qnaList", list);
 		}
 		else {
 			pager = new Pager(boardService.getTotalRow(type, null), page);
 			list = boardService.getBoardList(type, null, pager);
-		}
-		
-		model.addAttribute("pager", pager);
-		model.addAttribute("list", list);
-		log.info(pager);
-		
+			if(type.equals("qna")) {
+				model.addAttribute("qPager", pager);
+				model.addAttribute("qnaList", list);
+			} else {
+				model.addAttribute("nPager", pager);
+				model.addAttribute("noticeList", list);
+			}		
+		}		
+				
 		Board board = null;
 		if(list.size()>0) {
 			board = boardService.getBoard(list.get(0).getBbsNo());
@@ -129,7 +134,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/update")
-	public String updateBoard(BoardUpdateDto updateDto){
+	public String updateBoard(BoardUpdateDto updateDto) throws IllegalStateException, IOException{
 		log.info(updateDto);
 		boardService.updateBoard(updateDto);
 		if(updateDto.getBbsType().equals("NOTICE")) return "redirect:/board/list?type=notice";

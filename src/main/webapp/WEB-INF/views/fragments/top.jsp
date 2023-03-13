@@ -1,11 +1,76 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
+
+<%!HttpServletRequest req;
+	int test = 30;
+	
+
+	Cookie getCookie(String s) {
+	    Cookie[] cookies = req.getCookies();
+	    Cookie res = null;
+	    if (cookies != null) {
+	        for (Cookie c : cookies) {
+	            if (s.equals(c.getName())) {
+	                res = c;
+	                break;
+	            }
+	        }
+	    }
+	    return res;
+	}
+%>
+<script>
+	$(document).ready(function(){
+		var test = <%=test%>
+		console.log(test);
+		init();
+	});
+	
+	var objLeftTime;
+	var objClickInfo;
+	var latestTime;
+	var expireTime;
+	var timeInterval = 1000; // 1초 간격 호출
+	var firstLocalTime = 0;
+	var elapsedLocalTime = 0;
+	var stateExpiredTime = false;
+	var logoutUrl = "<c:url value='/uat/uia/actionLogout.do'/>";
+	var timer;
+ 
+	function init() {
+		/* objLeftTime = document.getElementById("leftTimeInfo");
+ 
+		if (objLeftTime == null) {
+			console.log("'leftTimeInfo' ID is not exist!");
+			return;
+		}
+		objClickInfo = document.getElementById("clickInfo"); */
+		//console.log(objLeftTime.textContent);
+ 
+		latestTime = getCookie("serverTime");
+		expireTime = getCookie("sessionExpiry");
+		
+		$("#serverTime").html = latestTime;
+		$("#expireTime").html = expireTime;
+		
+		console.log("latestServerTime = "+latestTime);
+		console.log("expireSessionTime = "+expireTime);
+ 
+		elapsedTime = 0;
+		firstLocalTime = (new Date()).getTime();
+		//showRemaining();
+ 
+		//timer = setInterval(showRemaining, timeInterval); // 1초 간격 호출 
+		setInterval(() => console.log(++count), 2000);
+	}
+</script>
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 
 <div id="pcoded" class="pcoded iscollapsed" theme-layout="vertical"
 	vertical-placement="left" vertical-layout="wide"
@@ -44,6 +109,10 @@
 							href="#!" onclick="javascript:toggleFullScreen()"
 							class="waves-effect waves-light"> <i class="ti-fullscreen"></i>
 						</a></li>
+						<li style="color:white;">
+							<div id="serverTime"></div>
+							<div id="sessionExpiry"></div>
+						</li>
 					</ul>
 					<ul class="nav-right">
 						<li><button class="btn btn-sm btn-oti"
@@ -142,4 +211,4 @@
 			</div>
 		</nav>
 
-		<!-- ./top -->
+		<!-- ./top -->s

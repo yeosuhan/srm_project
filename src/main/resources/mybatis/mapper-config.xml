@@ -44,5 +44,7 @@
 		<typeAlias type="com.oti.team2.board.dto.BoardListDto" alias="boardListDto"/>
 		<typeAlias type="com.oti.team2.attachment.dto.AttachResponseDto" alias="attachResponseDto"/>
 		<typeAlias type="com.oti.team2.board.dto.BoardUpdateDto" alias="boardUpdateDto"/>
+		<typeAlias type="com.oti.team2.comment.dto.CommentReqDto" alias="commentReqDto"/>
+		<typeAlias type="com.oti.team2.comment.dto.CommentResDto" alias="commentResDto"/>
 	</typeAliases> 
 </configuration>

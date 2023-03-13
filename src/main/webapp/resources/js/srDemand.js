@@ -9,7 +9,8 @@ function getSrDemandDetail(dmNo) {
 				url : "/srdemand/detail/" + dmNo,
 				type : "GET",
 				success : function(res) {
-					var dmndNo = res.sd.dmndNo;
+					$("#sddetail").html(res);
+					/*var dmndNo = res.sd.dmndNo;
 					console.log(dmndNo);
 					$(".dmndNo").text(dmndNo);
 					$(".dmndNo").val(dmndNo);
@@ -68,7 +69,7 @@ function getSrDemandDetail(dmNo) {
 							var srRjctRsn = "<div class='form-control rjctRsn'>${sd.rjctRsn}</div>";
 							$("#rjctRsnDiv").html(srRjctRsn);
 						}
-					}
+					}*/
 				}
 			});
 }
@@ -136,17 +137,20 @@ function changeSystem(sysCd) {
 }
 
 /* 요청 수정 */
-$(document).on('click', '#modbtn', function(e) {
-	console.log("요청 수정");
-	setSystems();
-	$("#sddetail").css("display", "none");
-	$("#sdupdate").css("display", "block");
+function updateSr(dmndNo) {
+	$.ajax({
+		url : '/srdemand/modify/' + dmndNo,
+		type : 'GET',
+		success : function(res) {
+			console.log(res);
+			$("#sddetail").html(res);
+		}
+	});
 
-});
+}
 
 /* 사용자의 srDemand 삭제 */
-function deleteSr() {
-	var dmndNo = $(".dmndNo").val();
+function deleteSr(dmndNo) {
 	console.log(dmndNo);
 	$.ajax({
 		url : '/srdemand/delete/' + dmndNo,

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <style>
 .pcoded-mtext, i {
@@ -55,13 +54,13 @@
 				<div id="mCSB_1"
 					class="mCustomScrollBox mCS-light mCSB_vertical_horizontal mCSB_inside"
 					style="max-height: none;" tabindex="0">
-
+					
 					<div class="main-menu-header row mr-0">
 						<div class="profile_wrapper row mr-0 pr-0">
 							<div class="gradation_animate"></div>
 							<div class="image_wrapper">
 								<img class="img-80 img-radius"
-									src="${pageContext.request.contextPath}/resources/assets/images/avatar-4.jpg"
+									src='<c:url value="/member/profile/${memberId}"/>'
 									alt="User-Profile-Image" style="width: 90px;">
 							</div>
 						</div>
@@ -109,17 +108,6 @@
 								data-i18n="nav.form-components.main">내 정보 관리</span> <span
 								class="pcoded-mcaret"></span>
 						</a></li>
-						<%-- 
-						<sec:authorize access="hasRole('ROLE_CLIENT')">
-							<li class=""><a
-								href="${pageContext.request.contextPath}/institution/detail"
-								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
-										class="far fa-building pt-1"></i><b>FC</b></span> <span
-									class="pcoded-mtext" data-i18n="nav.form-components.main">내
-										기관 관리</span> <span class="pcoded-mcaret"></span>
-							</a></li>
-						</sec:authorize>
-						--%>
 					</ul>
 					<div class="pcoded-navigation-label" style="font-weight: bold;"
 						data-i18n="nav.category.navigation" menu-title-theme="theme1">SR

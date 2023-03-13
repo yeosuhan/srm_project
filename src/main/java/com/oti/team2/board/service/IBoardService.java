@@ -45,5 +45,5 @@ public interface IBoardService {
 	 * 게시글 수정
 	 * @author 신정은
 	 */
-	void updateBoard(BoardUpdateDto boardUpdateDto);
+	void updateBoard(BoardUpdateDto boardUpdateDto) throws IllegalStateException, IOException;
 }

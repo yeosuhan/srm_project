@@ -68,7 +68,14 @@ function goPost(type) {
 // 선택한 파일 삭제
 function deleteFile(fileSn) {
 	console.log("삭제 ~~~ ");
-		console.log(fileSn);
+	console.log(fileSn);
+	$.ajax({
+		url : '/file/delete/' + fileSn,
+		type : 'GET',
+		success : function(data) {			
+			alert("삭제 성공");
+		}
+	});
 }
 
 
