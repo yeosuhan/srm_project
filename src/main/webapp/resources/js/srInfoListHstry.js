@@ -114,5 +114,4 @@ function empHstryPager(url) {
 			hstryPager(result.pager, url, 'empHstryPager');
 		}
 	});
-
 }

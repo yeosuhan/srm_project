@@ -194,6 +194,17 @@
          FROM MEMBERS
          WHERE MEMBER_ID=#{memberId}
    </select>
+   
+   <!-- 비밀번호 찾기를 위한 eml select-->
+   <select id="selectPswd" parameterType="member" resultType="int">
+   		select count(EML)
+   		from members
+   		WHERE MEMBER_ID=#{memberId} and TELNO=#{telNo} 
+   </select>
+   <update id="updatePswdByMemberId" parameterType="string">
+   		update MEMBERS set PSWD = #{pswd} where MEMBER_ID=#{memberId}
+   </update>
+   
    <!-- Member 객체 안의 내부 객체와의 매핑을 위함 -->
    <resultMap type="member" id="memberResultMap">
       <id property="memberId" column="MEMBER_ID"/>
