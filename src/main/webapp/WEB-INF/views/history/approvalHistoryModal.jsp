@@ -78,7 +78,7 @@
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">내용 :</div>
+					<div class="col-2">사유 :</div>
 					<div class="col-10">
 						<textarea id="appvHstryCn" class="AhstryCn" name="hstryCn"
 							style="width: 90%" rows="5" readonly></textarea>

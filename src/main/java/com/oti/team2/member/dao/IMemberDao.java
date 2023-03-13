@@ -108,4 +108,14 @@ public interface IMemberDao {
 	 * @author 신정은
 	 */
 	public String selectFlnmByMemberId(@Param("memberId")String memberId);
+	
+	/**
+	 * 
+	 * @author 최은종
+	 * 아이디와 전화번호로 가입 유무 판단해서 비밀번호 찾기 
+	 * 
+	 */
+	public int selectPswd(Member member);
+	
+	public String updatePswdByMemberId(@Param("memberId")String memberId);
 }

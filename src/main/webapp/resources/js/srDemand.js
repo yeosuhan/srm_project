@@ -35,6 +35,9 @@ function getSrDemandDetail(dmNo) {
 					$(".clientNm").text(res.sd.clientNm);
 					$(".rvwrNm").text(res.sd.rvwrNm);
 					var prgrsRt = res.prgrsRt;
+					
+					$("#srDmndDetailTab").tab("show");
+					
 					// 버튼 보이게 하기
 					console.log(prgrsRt + "  : prgrsRt");
 					console.log(sttsCd + " @");

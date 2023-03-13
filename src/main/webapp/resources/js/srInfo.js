@@ -14,7 +14,8 @@ function getDetail(dmndNo, srNo) {
 			$('#SRPlFlnm').show();
 			$('#changeMemberId').remove();
 			$('#changeManager').remove();
-			
+			console.log(detail.todoHlist);
+					
 			if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 				$(".col-3").hide();
 			} else {

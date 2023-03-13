@@ -6,10 +6,13 @@
 
 <%-- 작성자: 최은종 / 작성 날짜: 2023-03-05 / 진척관리 뷰 --%>
 
-<script src="${pageContext.request.contextPath}/resources/js/modiHstryModal.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/modiHstryModal.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/textarea.js"></script>
 
 <script type="text/javascript">
-
+	
 </script>
 
 <div class="modal fade" id="modifyHistoryModal">
@@ -93,10 +96,13 @@
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">내용 :</div>
+					<div class="col-2">
+						사유 :
+						<p class="textCount" style="margin-top: 3px"></p>
+					</div>
 					<div class="col-10">
 						<textarea id="modiHstryCn" class="AhstryCn" name="hstryCn"
-							style="width: 90%" rows="5"></textarea>
+							style="width: 90%; resize: none;" maxlength="500" rows="5"></textarea>
 					</div>
 				</div>
 				<div id="footModiDiv" class="pt-3" align="center">

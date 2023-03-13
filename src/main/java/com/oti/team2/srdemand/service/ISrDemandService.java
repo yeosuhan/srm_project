@@ -34,7 +34,7 @@ public interface ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public int updateSrDemand(@Param("srRequestDto") SrRequestDto srRequestDto);
+	public int updateSrDemand(SrRequestDto srRequestDto);
 
 	/**
 	 * 

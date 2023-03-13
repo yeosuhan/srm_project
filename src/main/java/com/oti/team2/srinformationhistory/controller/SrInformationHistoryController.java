@@ -96,11 +96,15 @@ public class SrInformationHistoryController {
 	@GetMapping("/detail/{hstryId}")
 	public SrHistoryDetailDto getSrInformationHistory(@PathVariable("hstryId") int hstryId, Authentication auth) {
 		log.info("srInformationHistory 상세조회");
-
+	
 		SrHistoryDetailDto srHistoryDetailDto = srInformationHistoryService.getSrInformationHistory(hstryId);
+		//auth의 권한(role) 얻어오기
 		srHistoryDetailDto.setAuth(auth.getAuthorities().stream().findFirst().get().toString());
+		//auth의 아이디 얻어오기
+		srHistoryDetailDto.setAuthId(auth.getName().toString());
 		log.info(hstryId);
-		log.info("srHistoryDetailDto 조회 : " + srHistoryDetailDto + "/" + "hstryId : " + hstryId);
+		log.info(auth.getName().toString());
+		log.info("srHistoryDetailDto 조회 : " + srHistoryDetailDto);
 
 		return srHistoryDetailDto;
 	}
@@ -121,6 +125,9 @@ public class SrInformationHistoryController {
 		log.info("role 조회" + role);
 
 		if (role.equals("ROLE_CLIENT")) {
+			//dmndNo
+			srInformationHistory.setDmndNo(srInformationHistory.getSrNo());
+			//srNo
 			String srNo = srInformationHistoryService.getSrNo(srInformationHistory.getSrNo());
 			srInformationHistory.setSrNo(srNo);
 		}

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.srdemand.dao.ISrDemandDao;
+import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao;
+import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.srresource.dto.SrResource;
@@ -54,7 +56,8 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	 */
 	@Override
 	public List<SrInformationHistory> getSrInformationHistoryListForClient(String srNo, Pager pager, String role) {
-		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectForClientBySrNo(srNo, pager);
+		List<SrInformationHistory> srInformationHistoryList = srInformationHistoryDao.selectForClientBySrNo(srNo,
+				pager);
 		return srInformationHistoryList;
 	}
 
@@ -136,11 +139,28 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 
 			log.info("나는 고객");
 			log.info(hstryType);
-			// 관리자가 요청한 유형이 요청일변경일 경우 상태만 업데이트
+			// 관리자가 요청한 유형이 요청일변경일 경우 상태 + 고객의 완료요청일 업데이트
 			if (hstryType.equals("B")) {
 				log.info(srInformationHistory.getHstryStts());
-				srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
-						srInformationHistory.getHstryStts());
+				// 요청일 변경 수락시 히스토리 승인여부 및 고객의 완료요청일 업데이트
+				if (hstryStts.equals("Y")) {
+					srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
+							srInformationHistory.getHstryStts());
+
+					SrRequestDto srRequestDto = new SrRequestDto();
+					srRequestDto.setCmptnDmndYmd(srInformationHistory.getChgEndYmd());
+					log.info(srInformationHistory.getChgEndYmd());
+					srRequestDto.setDmndNo(srInformationHistory.getDmndNo());
+					log.info(srInformationHistory.getDmndNo());
+					// srDemandService.updateSrDemand(srRequestDto);
+					int row = srDemandService.updateSrDemand(srRequestDto);
+					log.info(srRequestDto);
+					log.info(row);
+				} else {
+					// 요청일 변경 반려시 히스토리 승인여부만 업데이트
+					srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
+							srInformationHistory.getHstryStts());
+				}
 			} else if (hstryType.equals("C")) {
 				// 관리자가 요청한 유형이 개발취소인 경우 일단 상태값 업데이트
 
@@ -176,5 +196,35 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		log.info("서비스----요청 수정row " + row);
 		log.info("서비스----요청 수정22 " + srInformationHistory);
 
+	}
+
+	/**
+	 * 나의 할 일에서의 히스토리 목록 조회 메서드 (관리자)
+	 * 
+	 * @author 최은종
+	 */
+	@Override
+	public List<MyTodoHistoryListDto> getHstryTodoByPicId(Pager pager, String picId) {
+		return srInformationHistoryDao.selectHstryTodoByPicId(pager, picId);
+	}
+
+	/**
+	 * 나의 할 일에서의 히스토리 목록 조회 메서드 (개발자)
+	 * 
+	 * @author 최은종
+	 */
+	@Override
+	public List<MyTodoHistoryListDto> getHstryTodoByEmpId(Pager pager, String rqstrId, String empId) {
+		return srInformationHistoryDao.selectHstryTodoByEmpId(pager, rqstrId, empId);
+	}
+
+	/**
+	 * 나의 할 일에서의 히스토리 목록 조회 메서드 (고객)
+	 * 
+	 * @author 최은종
+	 */
+	@Override
+	public List<MyTodoHistoryListDto> getHstryTodoByCustId(Pager pager, String custId) {
+		return srInformationHistoryDao.selectHstryTodoByCustId(pager, custId);
 	}
 }
