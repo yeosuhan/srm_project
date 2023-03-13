@@ -342,7 +342,7 @@ function updateProgress4() {
 			prgrsId : prgrsId,
 			srNo : $("#SRPgSrNo").val(),
 			rcvrId:$("#SRDClientId").val(), /*반영 요청할 요청자 아이디*/
-			dmndNo:${"#SRDDmndNo"}.val()
+			dmndNo:$("#SRDDmndNo").val()
 		},
 		success : function(prgrs) {
 		}
