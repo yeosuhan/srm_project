@@ -42,6 +42,7 @@ public class BoardController {
 	public String getBoardList(@RequestParam("type") String type,
 			Model model, 
 			Authentication auth,
+			@RequestParam(required = true, name = "view", defaultValue = "board") String view,
 			@RequestParam(required = true, name = "page", defaultValue = "1") int page) throws MalformedURLException {
 		String memberId = auth.getName();
 		model.addAttribute("memberId", memberId);
@@ -73,9 +74,16 @@ public class BoardController {
 			model.addAttribute("board", board);
 		}
 		
+		if(view.equals("myportal")) {
+			log.info("여기 ~~~~~~");
+			log.info(pager);
+			return "mytodo/qna";
+		}
 		if(type.equals("notice")) {
+			log.info("notice ~~");
 			return "board/noticeList";
 		}
+		log.info("qna ~~");
 		return "board/qnaList";
 	}
 	

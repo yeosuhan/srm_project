@@ -126,9 +126,9 @@
 		<c:if test="${sd.sttsCd == 0}">
 			<div class="col" style="text-align: right">
 				<div id="srAccept" style="float: right;"
-					class="btn btn-oti save center" onclick="goAccept('${sd.dmndNo}')">승인</div>
+					class="btn btn-sm btn-oti center" onclick="goAccept('${sd.dmndNo}')">승인</div>
 				<div id="srDecline" style="float: right; margin-right: 5px;"
-					class="btn btn-oti danger cancle"
+					class="btn btn-sm btn-oti cancle"
 					onclick="goDecline('${sd.dmndNo}')">반려</div>
 			</div>
 		</c:if>

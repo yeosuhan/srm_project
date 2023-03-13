@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+
 <div class="card">
 	<div class="card-header">
 		<h5 class="card-header-text">공지사항</h5>
@@ -19,7 +21,7 @@
 		<tbody>
 			<c:forEach items="${noticeList}" var="board" varStatus="status">
 				<tr onclick="noticeDetail(${board.bbsNo})">
-					<th style="text-align: center;">${pager.startRowNo + status.index}</th>
+					<th style="text-align: center;">${nPager.startRowNo + status.index}</th>
 					<c:choose>
 						<c:when test="${fn:length(board.bbsTtl) > 20}">
 							<td id="ttl" class="text-center"><c:out
@@ -39,5 +41,5 @@
 		</tbody>
 	</table>
 	<!-- 페이징 처리 -->
-	<%@ include file="/WEB-INF/views/board/noticePager.jsp"%>
+	<%@ include file="/WEB-INF/views/mytodo/mNoticePager.jsp"%>
 </div>

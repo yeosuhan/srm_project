@@ -179,6 +179,7 @@ public class SrDemandController {
 		SrdemandPrgrsrt sdpr = new SrdemandPrgrsrt(sd,prgrsRt);
 		log.info(sdpr);
 		model.addAttribute("sd", sd);
+		model.addAttribute("prgrsRt", prgrsRt);
 		if(auth.getAuthorities().stream().findFirst().get().toString().equals(Auth.ROLE_CLIENT.toString())) {
 			return "srDemand/user/srDetail";
 		}

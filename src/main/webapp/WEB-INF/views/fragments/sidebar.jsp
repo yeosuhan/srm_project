@@ -59,21 +59,9 @@
 						<div class="profile_wrapper row mr-0 pr-0">
 							<div class="gradation_animate"></div>
 							<div class="image_wrapper">
-								<%-- DB의 프로필 사진 불러오기 --%>
-							<%-- <c:if test="${member.fileData eq null}">
-									<img id="defaultImage" class="img-80 img-radius"
-										src="/resources/oti_images/user.png" alt="User-Profile-Image"
-										style="width: 90px;">
-								</c:if>
-								<c:if test="${member.fileData ne null}">
-									<img id="defaultImage" class="img-80 img-radius"
-										src="${member.fileData}" alt="User-Profile-Image"
-										style="width: 90px;">
-								</c:if> --%>
-								<%-- 샘플 --%>
 								<img class="img-80 img-radius"
 									src='<c:url value="/member/profile/${memberId}"/>'
-									alt="User-Profile-Image" style="width: 90px;">
+									alt="/resources/oti_images/user.png" style="width: 90px;">
 							</div>
 						</div>
 						<div class="user-details col-12 row"

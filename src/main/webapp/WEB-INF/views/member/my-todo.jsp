@@ -92,11 +92,11 @@
       </div>
       <div class="row">
          <!-- 공지사항 게시판 -->
-         <div class="col-lg-6" id="notie">
+         <div class="col-lg-6" id="noticeList">
             <jsp:include page="/WEB-INF/views/mytodo/notice.jsp" />
          </div>
          <!-- qna 게시판 -->
-         <div class="col-lg-6" id="qna">
+         <div class="col-lg-6" id="qnaList">
             <jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
          </div>
       </div>

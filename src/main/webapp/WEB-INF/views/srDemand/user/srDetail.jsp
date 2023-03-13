@@ -124,9 +124,14 @@
 		<c:if test="${sd.sttsCd == 0}">
 			<div class="col" style="text-align: right">
 				<button id="modbtn" style="float: right;"
-					class="btn btn-primary btn-round save center" onclick="updateSr('${sd.dmndNo}')">수정</button>
-				<div class="btn btn-primary btn-round danger cancle"
+					class="btn btn-sm btn-oti center" onclick="updateSr('${sd.dmndNo}')">수정</button>
+				<div class="btn btn-sm btn-oti btn-round danger cancle"
 					style="float: right; margin-right: 5px;" onclick="deleteSr('${sd.dmndNo}')">삭제</div>
+			</div>
+		</c:if>
+		<c:if test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
+			<div class="col" style="text-align: right">
+				<div class='btn btn-sm btn-oti cancle' onclick='endSr()' style='float:right;'>반영요청</div> 
 			</div>
 		</c:if>
 	</div>

@@ -4,6 +4,8 @@ function getSrDemandDetail(dmNo) {
 	console.log("sfsffd");
 	$("#userButtonDiv").empty();
 	$("#adminButtonDiv").empty();
+	$("#srDemandDetail").tab("show");
+
 	
 			$.ajax({
 				url : "/srdemand/detail/" + dmNo,

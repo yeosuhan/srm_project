@@ -112,6 +112,17 @@ function updateQna(bbsNo) {
 	});
 }
 
+function getNextList(url) {
+	console.log(" 여기 !!!");
+	$.ajax({
+		url :"/board/list" + url + "&view=myportal",
+		type : 'GET',
+		success : function(data) {
+			$("#qnaList").html(data);
+		}
+	});
+}
+
 /*********  notice board   ********* */
 function writeNotice() {
 	$.ajax({
@@ -141,6 +152,17 @@ function updateNotice(bbsNo) {
 		type : 'GET',
 		success : function(data) {
 			$("#noticeDetail").html(data);
+		}
+	});
+}
+
+function getNextNoticeList(url) {
+	console.log(" 여기  getNextNoticeList");
+	$.ajax({
+		url :"/board/list" + url + "&view=myportal",
+		type : 'GET',
+		success : function(data) {
+			$("#noticeList").html(data);
 		}
 	});
 }
