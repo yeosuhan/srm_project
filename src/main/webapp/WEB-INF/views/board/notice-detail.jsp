@@ -31,25 +31,28 @@
 			<div class="form-group row">
 				<p class="col-sm-2 font-weight-bold">첨부파일</p>
 				<div class="col-sm-5">
-					<c:forEach var="f" items="${board.srcList}">
-							<div>
-								<a href="<c:url value='/file/download/${f.fileSn}' />"> 
-								<span class="glyphicon glyphicon-save" aria-hidden="true"></span> 
-								<span> ${f.orgnlFileNm} </span>
-								</a> 
-								<span>  Size : ${f.fileSz} Bytes</span>
-							</div>
+					<c:forEach var="f" items="${board.srcList}">						
+						<div>
+							<a href="<c:url value='/file/download/${f.fileSn}' />"> <span
+								class="glyphicon glyphicon-save" aria-hidden="true"></span> <span>
+									${f.orgnlFileNm} </span>
+							</a> <span> Size : ${f.fileSz} Bytes</span>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
 		</form>
-		<c:if test="${board.wrtrId eq memberId}" >
+		<c:if test="${board.wrtrId eq memberId}">
 			<div class="d-flex justify-content-center">
-				<button onclick="updateNotice(${board.bbsNo})"
-					class="btn btn-oti btn-round waves-effect waves-light mr-4">수정</button>
-				<form action="#">
-					<button class="btn btn-oti btn-round waves-effect waves-light">삭제</button>
-				</form>
+				<div>
+					<button onclick="updateNotice(${board.bbsNo})"
+						class="btn btn-oti waves-effect waves-light mr-4">수정</button>
+				</div>
+				<div>
+					<button 
+						onclick='location.href="/board/delete/${board.bbsNo}?type=notice"'
+						class="btn btn-oti waves-effect waves-light">삭제</button>
+				</div>
 			</div>
 		</c:if>
 	</div>

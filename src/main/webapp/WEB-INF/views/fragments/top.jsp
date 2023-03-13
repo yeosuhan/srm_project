@@ -1,11 +1,34 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
+
+<%-- <%!HttpServletRequest req;
+
+	String getCookieValue(String cname) {
+	    Cookie[] cookies = req.getCookies();
+	    String cookieValue = null;
+	    if (cookies != null) {
+	        for (Cookie c : cookies) {
+	            if (cname.equals(c.getName())) {
+	            	cookieValue = c.getValue();
+	                break;
+	            }
+	        }
+	    }
+	    System.out.println("top.jsp의 getCookie 실행 됨~~~~");
+	    return cookieValue;
+	}
+%>
+<% 
+	String expiryTime = getCookieValue("expiryTime");
+%> --%>
+
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 
 <div id="pcoded" class="pcoded iscollapsed" theme-layout="vertical"
 	vertical-placement="left" vertical-layout="wide"
@@ -44,8 +67,13 @@
 							href="#!" onclick="javascript:toggleFullScreen()"
 							class="waves-effect waves-light"> <i class="ti-fullscreen"></i>
 						</a></li>
+						<li style="color:white;">
+							<div id="serverTime"></div>
+							<div id="sessionExpiry"></div>
+						</li>
 					</ul>
 					<ul class="nav-right">
+						<%-- <li>시간 :  <%= expiryTime %></li> --%>
 						<li><button class="btn btn-sm btn-oti"
 								style="background-color: #4C1342; margin-top: 10px;"
 								onclick="sendTestMessage()">메시지 전송 테스트</button></li>
@@ -142,4 +170,4 @@
 			</div>
 		</nav>
 
-		<!-- ./top -->
+		<!-- ./top -->s

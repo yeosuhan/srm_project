@@ -68,8 +68,16 @@ function goPost(type) {
 // 선택한 파일 삭제
 function deleteFile(fileSn) {
 	console.log("삭제 ~~~ ");
-		console.log(fileSn);
+	console.log(fileSn);
+	$.ajax({
+		url : '/file/delete/' + fileSn,
+		type : 'GET',
+		success : function(data) {			
+			alert("삭제 성공");
+		}
+	});
 }
+
 
 
 /*******************   Qna board ****************/
@@ -105,6 +113,33 @@ function updateQna(bbsNo) {
 	});
 }
 
+function getNextList(url) {
+	console.log(" 여기 !!!");
+	$.ajax({
+		url :"/board/list" + url + "&view=myportal",
+		type : 'GET',
+		success : function(data) {
+			$("#qnaList").html(data);
+		}
+	});
+}
+
+
+//댓글 더 보기
+function getComments(bbsNo, page) {
+	console.log("댓글 더 보기");
+	console.log(bbsNo);
+	console.log(page);
+	var url = "/comment/list/" + bbsNo + "?page=" + page;
+	$.ajax({
+		url : url,
+		type : 'GET',
+		success : function(data) {
+			$(".commentList:last").html(data);
+		}
+	});
+}
+
 /*********  notice board   ********* */
 function writeNotice() {
 	$.ajax({
@@ -134,6 +169,17 @@ function updateNotice(bbsNo) {
 		type : 'GET',
 		success : function(data) {
 			$("#noticeDetail").html(data);
+		}
+	});
+}
+
+function getNextNoticeList(url) {
+	console.log(" 여기  getNextNoticeList");
+	$.ajax({
+		url :"/board/list" + url + "&view=myportal",
+		type : 'GET',
+		success : function(data) {
+			$("#noticeList").html(data);
 		}
 	});
 }

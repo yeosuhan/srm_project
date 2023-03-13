@@ -66,7 +66,7 @@ label>img {
 															src="/resources/oti_images/user.png"
 															style="width: 200px; height: 200px; align-content: center;">
 													</c:if> <c:if test="${member.fileData ne null}">
-														<img id="defaultImage" src="${member.fileData}"
+														<img id="defaultImage" src='<c:url value="/member/profile/${member.memberId}"/>' 
 															style="width: 200px; height: 200px; align-content: center;">
 													</c:if>
 												</label>

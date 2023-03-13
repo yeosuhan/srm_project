@@ -76,7 +76,8 @@ public class AttachmentController {
 	 */
 	@GetMapping("/delete/{fileSn}")
 	public void deleteFile(@PathVariable("fileSn")int fileSn) {
-		
+		log.info(fileSn);
+		attachService.deleteAttach(fileSn);		
 	}
 
 }

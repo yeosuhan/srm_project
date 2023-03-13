@@ -11,6 +11,7 @@ public class BoardListDto {
 	private int bbsNo;
 	private String bbsTtl;
 	private boolean ansYn;
+	private int inqCnt;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date wrtYmd;
 	private String wrtNm;

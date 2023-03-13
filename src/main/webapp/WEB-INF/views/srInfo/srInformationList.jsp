@@ -329,7 +329,7 @@ li:before {
 												<c:forEach var="srlist" items="${srlist}" varStatus="num">
 													<tr
 														onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
-														<th scope="row">${num.count}</th>
+														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
 														<td>${srlist.sysNm}</td>
 														<td>${srlist.taskSeNm}</td>

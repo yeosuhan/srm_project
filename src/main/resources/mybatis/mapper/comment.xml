@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oti.team2.comment.dao.ICommentDao">
+	<insert id="insertComment" parameterType="commentReqDto">
+		INSERT INTO COMMENTS(CMNT_NO, CMNT_CN, BBS_NO, WRTR_ID, WRT_YMD)
+		VALUES(CMNT_NO_SEQ.nextval, #{commentReqDto.cmntCn}, #{commentReqDto.bbsNo}, #{commentReqDto.wrtrId}, sysdate)
+	</insert>
+	
+	<select id="selectCommentsByBbsNo" parameterType="map" resultType="commentResDto">
+		SELECT CMNT_NO as cmntNo,
+				CMNT_CN as cmntCn,
+				m.flnm as wrtrNm,
+				c.WRTR_ID as wrtrId,
+				WRT_YMD as wrtYmd
+		FROM COMMENTS c, MEMBERS m
+		WHERE c.WRTR_ID = m.MEMBER_ID
+		AND
+		BBS_NO = #{bbsNo}
+		ORDER BY WRT_YMD DESC
+		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
+	</select>
+	
+	<delete id="deleteCommentByCmntNo" parameterType="int">
+		DELETE FROM COMMENTS
+		WHERE CMNT_NO = #{cmntNo}
+	</delete>
+	
+	<select id="countCommentByBbsNo" parameterType="int" resultType="int">
+		SELECT COUNT(CMNT_NO) 
+		FROM COMMENTS c
+		WHERE
+		BBS_NO = #{bbsNo}
+	</select>
+
+</mapper>

@@ -1,5 +1,6 @@
 package com.oti.team2.srdemand.controller;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,6 +33,7 @@ import com.oti.team2.system.dto.SrSystem;
 import com.oti.team2.system.service.ISystemService;
 import com.oti.team2.task.dto.SystemTask;
 import com.oti.team2.task.service.ITaskService;
+import com.oti.team2.util.Auth;
 import com.oti.team2.util.pager.Pager;
 
 import lombok.extern.log4j.Log4j2;
@@ -95,7 +97,7 @@ public class SrDemandController {
 	 * @author 신정은
 	 */
 	@PostMapping("/add")
-	public String postSrDemand(SrRequestDto srRequest) {
+	public String postSrDemand(SrRequestDto srRequest) throws IllegalStateException, IOException {
 		log.info(srRequest);
 		srdemandService.addSrDemand(srRequest);
 		return "redirect:/srdemand/list";
@@ -172,17 +174,35 @@ public class SrDemandController {
 	 * 
 	 * @author 신정은
 	 */
-	@ResponseBody
 	@GetMapping("/detail/{dmNo}")
-	public SrdemandPrgrsrt getSrDemandDetail(@PathVariable String dmNo) {
+	public String getSrDemandDetail(@PathVariable String dmNo, Model model, Authentication auth) {
 		String prgrsRt = progressService.getPrgrsRt(dmNo);
 		SrdemandDetail sd = srdemandService.getSrDemandDetail(dmNo);
 		log.info(sd);
 		SrdemandPrgrsrt sdpr = new SrdemandPrgrsrt(sd,prgrsRt);
 		log.info(sdpr);
-		return sdpr;
+		model.addAttribute("sd", sd);
+		model.addAttribute("prgrsRt", prgrsRt);
+		if(auth.getAuthorities().stream().findFirst().get().toString().equals(Auth.ROLE_CLIENT.toString())) {
+			return "srDemand/user/srDetail";
+		}
+		return "srDemand/admin/adSrDetail";
 	}
 
+	/**
+	 * SR요청 수정하기
+	 * 
+	 * @author 신정은
+	 */
+	@GetMapping("/modify/{dmndNo}")
+	public String updateSrDemandForm(@PathVariable String dmndNo, Model model) {
+		// 수정 진행
+		log.info(dmndNo);
+		SrdemandDetail sd = srdemandService.getSrDemandDetail(dmndNo);
+		model.addAttribute("sd", sd);
+		return "srDemand/user/srUpdate";
+	}
+	
 	/**
 	 * SR요청 수정하기
 	 * 
@@ -205,7 +225,7 @@ public class SrDemandController {
 	public String deleteSrDemand(@PathVariable("dmndNo")String dmndNo) {
 		log.info(dmndNo);
 		srdemandService.deleteSrdemand(dmndNo);
-		return "";
+		return "redirect:/srdemand/list";
 	}
 	/**
 	 * 반영요청 수락하기
