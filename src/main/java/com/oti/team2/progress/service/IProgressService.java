@@ -23,7 +23,7 @@ public interface IProgressService {
 	 * @param rcvrId 
 	 * @return sr요청 진척률 수정
 	 */
-	void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo, String prgrsSeNm, String dmndNo, String prgrsSeNm2);
+	void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo, String prgrsSeNm, String dmndNo, String rcvrId);
 
 	/**
 	 * 진척데이터 삽입

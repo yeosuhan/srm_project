@@ -114,15 +114,15 @@ label>img {
 							<div class="card-block">
 								<div class="row m-b-20">
 									<div class="col-md-12">
-										<h3 class="text-center">Sign Up (Client)</h3>
+										<h3 class="text-center">회원가입 (고객용)</h3>
 									</div>
 								</div>
 								<hr />
 								<div class="form-group form-primary">
-									<input type="text" name="memberId" class="form-control"
-										id="memberId" required style="width: 74%;" placeholder="                    ex)영어,숫자 포함 8~15자리">
+									<input type="text" name="memberId" class="form-control"  maxlength='15'
+									oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g,'')" id="memberId" required style="width: 74%;" placeholder="                    ex)영어,숫자 포함 8~15자리">
 								 <label
-										class="float-label">ID</label>
+										class="float-label">아이디</label>
 									<button type="button" onclick="checkMemberId()"
 										class="btn btn-sm waves-effect waves-light hor-grd btn-oti ml-2"
 										style="width: 80px;">중복확인</button>
@@ -131,15 +131,15 @@ label>img {
 								<div class="form-group form-primary">
 									<input type="password" name="pswd" class="form-control" placeholder="                    ex)영어,숫자 포함 15자리 이상"
 										required="" style="width: 97%"> <span class="form-bar"></span> <label
-										class="float-label">Password</label>
+										class="float-label">비밀번호</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="text" name="flnm" class="form-control" id="flnm"placeholder="                    ex)홍길동
+									<input type="text" name="flnm" class="form-control" id="flnm"placeholder="                    ex)홍길동"
 										required="" style="width: 97%;"> <span class="form-bar"></span> <label
 										class="float-label">이름</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="number" name="telNo" class="form-control" placeholder="                    ex)010-1234-5678"
+									<input type="text" name="telNo" class="form-control" placeholder="                    ex)010-1234-5678"
 										required="" style="width: 97%"> <span class="form-bar"></span> <label
 										class="float-label">전화번호</label>
 								</div>

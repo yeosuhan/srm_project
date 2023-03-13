@@ -47,12 +47,17 @@ label>img {
 	<div class="page-body">
 		<div class="row">
 			<!-- *********** -->
-			<div class="col-7">
-				<div class="card">
+			<c:if test="${member.memberType eq 'ROLE_CLIENT'}">
+						<div class="col-7">
+			</c:if>
+			<c:if test="${member.memberType ne 'ROLE_CLIENT'}">
+						<div class="col-12">
+			</c:if>
+				<div class="card" style="height: 590px;">
 					<div class="card-header">
 						<h5>내정보 관리</h5>
 					</div>
-					<div class="row">
+						<div class="row">
 						<div class="col-4"
 							style="justify-content: center; text-align: center;">
 							<div class="mb-2">
@@ -66,7 +71,8 @@ label>img {
 															src="/resources/oti_images/user.png"
 															style="width: 200px; height: 200px; align-content: center;">
 													</c:if> <c:if test="${member.fileData ne null}">
-														<img id="defaultImage" src='<c:url value="/member/profile/${member.memberId}"/>' 
+														<img id="defaultImage"
+															src='<c:url value="/member/profile/${member.memberId}"/>'
 															style="width: 200px; height: 200px; align-content: center;">
 													</c:if>
 												</label>
@@ -80,7 +86,12 @@ label>img {
 								</div>
 							</div>
 						</div>
+						<c:if test="${member.memberType eq 'ROLE_CLIENT'}">
 						<div class="col-7 card-block">
+						</c:if>
+						<c:if test="${member.memberType ne 'ROLE_CLIENT'}">
+						<div class="col-8 card-block">
+						</c:if>
 							<form class="form-material" enctype="multipart/form-data"
 								id="myinfo" action="<c:url value='/member/myinfo'/>"
 								method="post">
@@ -146,44 +157,46 @@ label>img {
 					</div>
 				</div>
 			</div>
-			<div class="col-5">
-				<div class="card" style="height: 590px;">
-					<div class="card-header">
-						<h5>나의 기관</h5>
-					</div>
-					<div class="col-8 card-block"
-						style="margin-top: 10px; padding: 50px;">
-						<form method="post" action="<c:url value='/institution/update'/>"
-							id="myInstForm" class="form-material">
-							<div class="form-group form-default">
-								<input type="hidden" value="${inst.instCd}" name="instCd">
-								<input value="${inst.instNm}" type="text" name="InstNm"
-									class="form-control" required style="width: 50%"> <span
-									class="form-bar"></span> <label class="float-label">기업명</label>
+			<c:if test="${member.memberType eq 'ROLE_CLIENT'}">
+				<div class="col-5">
+					<div class="card" style="height: 590px;">
+						<div class="card-header">
+							<h5>나의 기관</h5>
+						</div>
+						<div class="col-8 card-block"
+							style="margin-top: 10px; padding: 50px;">
+							<form method="post" action="<c:url value='/institution/update'/>"
+								id="myInstForm" class="form-material">
+								<div class="form-group form-default">
+									<input type="hidden" value="${inst.instCd}" name="instCd">
+									<input value="${inst.instNm}" type="text" name="InstNm"
+										class="form-control" required style="width: 50%"> <span
+										class="form-bar"></span> <label class="float-label">기업명</label>
+								</div>
+								<div class="form-group form-default" style="padding-top: 20px;">
+									<input value="${inst.instTelno}" type="text" name="InstTelno"
+										class="form-control" required="" style="width: 50%"> <span
+										class="form-bar"></span> <label class="float-label"
+										style="padding-top: 20px;">대표 번호</label>
+								</div>
+								<div class="form-group form-default" style="padding-top: 20px;">
+									<input type="text" name="InstAddr" id="address_kakao"
+										class="form-control" required value="${inst.instAddr}">
+									<label class="float-label" style="padding-top: 20px;">주소</label>
+								</div>
+								<div class="form-group form-default" style="padding-top: 20px;">
+									<input value="${inst.instDetailAddr}" class="form-control"
+										type="text" name="InstDetailAddr" placeholder="상세주소">
+									<span class="form-bar"></span>
+								</div>
+							</form>
+							<div class="d-flex" style="padding-top: 108px;">
+								<button type="submit" form="myInstForm" class="btn btn-oti">수정</button>
 							</div>
-							<div class="form-group form-default" style="padding-top: 20px;">
-								<input value="${inst.instTelno}" type="text" name="InstTelno"
-									class="form-control" required="" style="width: 50%"> <span
-									class="form-bar"></span> <label class="float-label"
-									style="padding-top: 20px;">대표 번호</label>
-							</div>
-							<div class="form-group form-default" style="padding-top: 20px;">
-								<input type="text" name="InstAddr" id="address_kakao"
-									class="form-control" required value="${inst.instAddr}">
-								<label class="float-label" style="padding-top: 20px;">주소</label>
-							</div>
-							<div class="form-group form-default" style="padding-top: 20px;">
-								<input value="${inst.instDetailAddr}" class="form-control"
-									type="text" name="InstDetailAddr" placeholder="상세주소"> <span
-									class="form-bar"></span>
-							</div>
-						</form>
-						<div class="d-flex" style="padding-top: 108px;">
-							<button type="submit" form="myInstForm" class="btn btn-oti">수정</button>
 						</div>
 					</div>
 				</div>
-			</div>
+			</c:if>
 		</div>
 		<!-- *********** -->
 	</div>

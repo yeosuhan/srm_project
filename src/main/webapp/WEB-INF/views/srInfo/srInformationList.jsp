@@ -233,8 +233,7 @@ li:before {
 										<option value="4"
 											<c:if test="${srInfoFilter.sttsCd eq 4}"> selected</c:if>>테스트</option>
 										<option value="5"
-											<c:if test="${srInfoFilter.sttsCd eq 5}"> selected</c:if>>개발
-											완료</option>
+											<c:if test="${srInfoFilter.sttsCd eq 5}"> selected</c:if>>운영반영</option>
 									</select>
 								</div>
 							</div>
@@ -270,7 +269,7 @@ li:before {
 			</div>
 			<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card">
+				<div class="card"style="height:773px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
 						<div class="card-header-right">
@@ -282,7 +281,7 @@ li:before {
 						</div>
 					</div>
 					<div class="card-block" id="list">
-						<div id="sales-analytics" class="p-2">
+						<div id="sales-analytics">
 							<div class="card-block table-border-style">
 								<div class="table-responsive">
 									<table class="table table-hover text-center"

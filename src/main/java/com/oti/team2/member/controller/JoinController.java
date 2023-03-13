@@ -78,7 +78,9 @@ public class JoinController {
 		} else {
 			join.setMemberType("ROLE_DEVELOPER");
 		}
-
+		if(join.getMemberId().length()<8) {
+			return "member/join-client";
+		}
 		
 		/* 파일 추가
 		 * MultipartFile mfile = join.getFile();
@@ -106,8 +108,20 @@ public class JoinController {
 	@GetMapping("/join/check/{memberId}")
 	public Integer checkId(@PathVariable("memberId") String memberId) {
 		log.info("입력한 memberId : " + memberId);
-		int check = joinService.checkId(memberId);
-		log.info("Controller : " + check);
+		log.info("입력한 memberId의 길이 : " + memberId.length());
+		int check = 0;
+		if(memberId.equals("공백")) {
+			log.info("멤버 입력해");
+			check =2;
+			return check;
+		}
+		if(memberId.length()<8) {
+			check = 4;
+		} else if(memberId.length()>15) {
+			check = 3;
+		} else {
+			check = joinService.checkId(memberId);
+		}
 		return check;
 	}
 }
