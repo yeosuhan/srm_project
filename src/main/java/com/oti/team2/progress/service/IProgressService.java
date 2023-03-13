@@ -17,9 +17,10 @@ public interface IProgressService {
 	 * 
 	 * @author 여수한
 	 * 작성일자 : 2023-02-28
+	 * @param rcvrId 
 	 * @return sr요청 진척률 수정
 	 */
-	void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo);
+	void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo, String rcvrId,String dmndNo);
 
 	/**
 	 * 진척데이터 삽입

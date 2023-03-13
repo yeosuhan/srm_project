@@ -121,38 +121,55 @@ th {
 							</div>
 						</div>
 						<hr />
-						<form id="srSearchForm">
+						<form id="srSearchForm" action="/srdemand/list" onsubmit="return srSearch()">
 							<div class="row">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
-										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart">
-									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd">
+										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart" value="${srFilterDto.dmndYmdStart}">
+									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd" value="${srFilterDto.dmndYmdEnd}">
 								</div>
 								<div class="col col-2 pr-0">
 									<label for="sttsCd" style="margin-right: 10px;">진행 상태</label> <select
 										id="sttsCd" name="sttsCd">
-										<option value="0">요청</option>
-										<option value="1">반려</option>
-										<option value="2">접수</option>
-										<option value="3">개발중</option>
-										<option value="4">테스트</option>
-										<option value="5">개발 완료</option>
+										<option value="">전체</option>
+										<option value="0" <c:if test="${srFilterDto.sttsCd eq 0 }">selected</c:if>>요청</option>
+										<option value="1" <c:if test="${srFilterDto.sttsCd eq 1 }">selected</c:if>>반려</option>
+										<option value="2" <c:if test="${srFilterDto.sttsCd eq 2 }">selected</c:if>>접수</option>
+										<option value="3" <c:if test="${srFilterDto.sttsCd eq 3 }">selected</c:if>>개발중</option>
+										<option value="4" <c:if test="${srFilterDto.sttsCd eq 4 }">selected</c:if>>테스트</option>
+										<option value="5" <c:if test="${srFilterDto.sttsCd eq 5 }">selected</c:if>>개발 완료</option>
 									</select>
 								</div>
 								<div class="col col-3 pr-0">
 									<label for="sysCd" style="margin-right: 10px;">관련 시스템</label> <select
 										id="sysCd" name="sysCd">
-										<option value="0">워크넷</option>
-										<option value="1">고용정보원</option>
-									</select> <select id="taskSeCd" name="taskSeCd">
-										<option value="0">내부망</option>
-										<option value="1">외부망</option>
+										<option value="">전체</option>
+										<c:forEach var="system" items="${systemList}">
+											<c:if test="${srFilterDto.sysCd eq system.sysCd}">
+												<option value="${system.sysCd}" selected>${system.sysNm}</option>
+											</c:if>
+											<c:if test="${srFilterDto.sysCd ne system.sysCd}">
+												<option value="${system.sysCd}">${system.sysNm}</option>
+											</c:if>
+										</c:forEach>
+									</select> <select id="taskSeCd" name="taskSeCd" style="width:10px">
+										<option value=""></option>
+										<c:if test="${taskList ne null}">
+											<c:forEach var="task" items="${taskList}">
+												<c:if test="${srFilterDto.taskSeCd eq task.taskSeCd}">
+													<option value="${task.taskSeCd}" selected>${task.taskSeNm}</option>
+												</c:if>
+												<c:if test="${srFilterDto.taskSeCd ne task.taskSeCd }">
+													<option value="${task.taskSeCd}">${task.taskSeNm}</option>
+												</c:if>
+											</c:forEach>
+										</c:if>
 									</select>
 								</div>
 								<div class="col col-xl-3">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
-										type="text" name="keyWord" id="keyWord">
-									<button onclick="srSearch()" type="button"
+										type="text" name="keyWord" id="keyWord" value="${srFilterDto.keyWord}">
+									<button type="submit"
 										class="btn btn-sm btn-oti">
 										<i class="ti-search"></i>
 									</button>
@@ -202,6 +219,7 @@ th {
 											</tr>
 										</thead>
 										<tbody>
+											<c:if test="${mySrDemandList ne null}">
 											<c:forEach var="srDemand" items="${mySrDemandList}"
 												varStatus="status">
 												<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
@@ -239,6 +257,10 @@ th {
 													<td>${srDemand.endYmd}</td>
 												</tr>
 											</c:forEach>
+											</c:if>
+											<c:if test="${mySrDemandList eq null}">
+												<td colSpan="9">검색 결과가 없습니다.</td>
+											</c:if>
 										</tbody>
 									</table>
 									<!-- 페이징 처리 -->
@@ -535,9 +557,7 @@ th {
 	<!-- Page body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
-	<!-- 검색 -->
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
+	
 	<%-- 상세, 등록, 수정 --%>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>

@@ -241,3 +241,18 @@ function endSr() {
 		}
 	});
 }
+
+/*빈 검색 조건 비활성화*/
+function srSearch(){
+	$("#srSearchForm input").each((index,value)=>{
+		if(!$(value).val()){
+			$(value).prop("disabled",true);
+		}
+	});
+	$("#srSearchForm select").each((index,value)=>{
+		if(!$(value).children("option:selected").val()||$(value).children(" option").length==0){
+			$(value).prop("disabled",true);
+		}
+	});
+	return true;
+}
