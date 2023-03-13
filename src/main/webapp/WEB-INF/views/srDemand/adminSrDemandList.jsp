@@ -117,36 +117,56 @@ th {
 							</div>
 						</div>
 						<hr />
-						<form id="srSearchForm">
+						<form id="srSearchForm" action="${pageContext.request.contextPath}/admin/srdemand/list" >
 							<div class="row">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
-										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart">
-									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd">
+										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart" value="${srFilterDto.dmndYmdStart}">
+									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd" value="${srFilterDto.dmndYmdEnd}">
 								</div>
 								<div class="col col-2 pr-0">
 									<label for="sttsCd" style="margin-right: 10px;">진행 상태</label> <select
 										id="sttsCd" name="sttsCd">
-										<option value="0">요청</option>
-										<option value="1">반려</option>
+										<option value="">전체</option>
+										<option value="0" <c:if test="${srFilterDto.sttsCd eq 0 }">selected</c:if>>요청</option>
+										<option value="1" <c:if test="${srFilterDto.sttsCd eq 1 }">selected</c:if>>반려</option>
+										<option value="2" <c:if test="${srFilterDto.sttsCd eq 2 }">selected</c:if>>접수</option>
+										<option value="3" <c:if test="${srFilterDto.sttsCd eq 3 }">selected</c:if>>개발중</option>
+										<option value="4" <c:if test="${srFilterDto.sttsCd eq 4 }">selected</c:if>>테스트</option>
+										<option value="5" <c:if test="${srFilterDto.sttsCd eq 5 }">selected</c:if>>개발 완료</option>
 									</select>
 								</div>
-								<div class="col col-3 px-0">
+								<div class="col col-3 pr-0">
 									<label for="sysCd" style="margin-right: 10px;">관련 시스템</label> <select
 										id="sysCd" name="sysCd">
-										<option value="0">워크넷</option>
-										<option value="1">고용정보원</option>
-									</select> <select id="taskSeCd" name="taskSeCd">
-										<option value="0">내부망</option>
-										<option value="1">외부망</option>
+										<option value="">전체</option>
+										<c:forEach var="system" items="${systemList}">
+											<c:if test="${srFilterDto.sysCd eq system.sysCd}">
+												<option value="${system.sysCd}" selected>${system.sysNm}</option>
+											</c:if>
+											<c:if test="${srFilterDto.sysCd ne system.sysCd}">
+												<option value="${system.sysCd}">${system.sysNm}</option>
+											</c:if>
+										</c:forEach>
+									</select> <select id="taskSeCd" name="taskSeCd" style="width:10px">
+										<option value=""></option>
+										<c:if test="${taskList ne null}">
+											<c:forEach var="task" items="${taskList}">
+												<c:if test="${srFilterDto.taskSeCd eq task.taskSeCd}">
+													<option value="${task.taskSeCd}" selected>${task.taskSeNm}</option>
+												</c:if>
+												<c:if test="${srFilterDto.taskSeCd ne task.taskSeCd }">
+													<option value="${task.taskSeCd}">${task.taskSeNm}</option>
+												</c:if>
+											</c:forEach>
+										</c:if>
 									</select>
 								</div>
-								<div class="col col-4 px-0">
+								<div class="col col-xl-3">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
-										type="text" name="keyWord" id="keyWord">
+										type="text" name="keyWord" id="keyWord" value="${srFilterDto.keyWord}">
 									<button type="submit"
-										class="btn btn-sm btn-oti"
-										style="margin-right: 10px; height: 30px;">
+										class="btn btn-sm btn-oti">
 										<i class="ti-search"></i>
 									</button>
 									<button class="btn btn-sm btn-oti" style="height: 30px;">엑셀
@@ -184,9 +204,9 @@ th {
 											<tr>
 												<th style="width: 1px;"></th>
 												<th>요청 번호 <a
-													href="${pageContext.request.contextPath}/admin/srdemand/list?sort=ASC"><i
+													href="${pageContext.request.contextPath}/admin/srdemand/list"  class="sortBtnAsc"><i
 														class="ti-arrow-up" style="color: black;"></i></a> <a
-													href="${pageContext.request.contextPath}/admin/srdemand/list?sort=DESC"><i
+													href="${pageContext.request.contextPath}/admin/srdemand/list" class="sortBtnDesc"><i
 														class="ti-arrow-down" style="color: black;"></i></a>
 												</th>
 												<th>제목</th>
@@ -200,6 +220,7 @@ th {
 
 										</thead>
 										<tbody>
+											<c:if test="${srDemandList ne null}">
 											<c:forEach var="srDemand" items="${srDemandList}"
 												varStatus="status">
 												<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
@@ -237,6 +258,12 @@ th {
 													<td>${srDemand.endYmd}</td>
 												</tr>
 											</c:forEach>
+											</c:if>
+											<c:if test="${srDemandList eq null}">
+												<tr>
+													<td colSpan="9">검색 결과가 없습니다.</td>
+												</tr>
+											</c:if>
 										</tbody>
 									</table>
 									<!-- 페이징 처리 -->
@@ -447,13 +474,8 @@ th {
 
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
-	<!-- 검색 -->
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
+	
 
-	<%-- 상세, 등록, 수정 --%>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 	<!-- 모달 -->
 	<jsp:include page="/WEB-INF/views/history/approvalHistoryModal.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />

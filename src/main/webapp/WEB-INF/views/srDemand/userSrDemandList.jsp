@@ -121,7 +121,7 @@ th {
 							</div>
 						</div>
 						<hr />
-						<form id="srSearchForm" action="/srdemand/list" onsubmit="return srSearch()">
+						<form id="srSearchForm" action="${pageContext.request.contextPath}/srdemand/list" >
 							<div class="row">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
@@ -204,9 +204,9 @@ th {
 											<tr>
 												<th style="width: 1px;"></th>
 												<th>요청 번호 <a
-													href="${pageContext.request.contextPath}/srdemand/list?sort=ASC"><i
+													href="${pageContext.request.contextPath}/admin/srdemand/list"  class="sortBtnAsc"><i
 														class="ti-arrow-up" style="color: black;"></i></a> <a
-													href="${pageContext.request.contextPath}/srdemand/list?sort=DESC"><i
+													href="${pageContext.request.contextPath}/admin/srdemand/list" class="sortBtnDesc"><i
 														class="ti-arrow-down" style="color: black;"></i></a>
 												</th>
 												<th>제목</th>
@@ -259,7 +259,9 @@ th {
 											</c:forEach>
 											</c:if>
 											<c:if test="${mySrDemandList eq null}">
-												<td colSpan="9">검색 결과가 없습니다.</td>
+												<tr>
+													<td colSpan="9">검색 결과가 없습니다.</td>
+												</tr>
 											</c:if>
 										</tbody>
 									</table>
@@ -558,9 +560,7 @@ th {
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	
-	<%-- 상세, 등록, 수정 --%>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
+	
 	<!-- 모달 -->
 	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
 	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>

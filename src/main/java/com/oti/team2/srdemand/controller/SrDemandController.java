@@ -139,26 +139,27 @@ public class SrDemandController {
 		int totalRows = srdemandService.getCountClientSr(memberId, srFilterDto);
 		Pager pager = new Pager(totalRows, Integer.parseInt(page));
 		log.info(pager);
-		List<SrDemand> list = null;
-		list = srdemandService.getSrDemandList(memberId, pager,sort,srFilterDto);
-		model.addAttribute("mySrDemandList", list);
+		if(totalRows!=0) {
+			List<SrDemand> list = null;
+			list = srdemandService.getSrDemandList(memberId, pager,sort,srFilterDto);
+			model.addAttribute("mySrDemandList", list);
 
-		// 기본 첫번째 상세 or 선택된 상세
-		SrdemandDetail sd = null;
-		if (dmndno != null||totalRows==0) {
-			sd = srdemandService.getSrDemandDetail(dmndno);
-		} else {
-			sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
+			// 기본 첫번째 상세 or 선택된 상세
+			SrdemandDetail sd = null;
+			if (dmndno != null) {
+				sd = srdemandService.getSrDemandDetail(dmndno);
+			} else {
+				sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 		}
 		log.info(sd);
-		
+		model.addAttribute("sd", sd);
+		}
 		//시스템 목록
 		model.addAttribute("systemList",systemService.getSystemList());
 		//작업 구분
 		if(sysCd!=null) {
 			model.addAttribute("taskList",taskService.getTaskList(sysCd));
 		}
-		model.addAttribute("sd", sd);
 		model.addAttribute("pager", pager);		
 		model.addAttribute("role", auth.getAuthorities().stream().findFirst().get().toString());
 		return "srDemand/userSrDemandList";

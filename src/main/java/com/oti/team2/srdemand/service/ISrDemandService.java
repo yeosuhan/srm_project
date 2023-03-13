@@ -62,16 +62,18 @@ public interface ISrDemandService {
 	 * 관리자용 모든요청 총 행의 수 구하기
 	 * 
 	 * @author 신정은
+	 * @param srFilterDto 
 	 */
-	public int getCountAllSr();
+	public int getCountAllSr(SrFilterDto srFilterDto);
 
 	/**
 	 * 관리자용 모든요청 목록 가져오기
 	 * 
 	 * @author 신정은
 	 * @param sort 
+	 * @param srFilterDto 
 	 */
-	public List<SrDemand> getSrDemandListBy(Pager pager, String sort);
+	public List<SrDemand> getSrDemandListBy(Pager pager, String sort, SrFilterDto srFilterDto);
 
 	/**
 	 * 관리자의 sr요청 결재 기능

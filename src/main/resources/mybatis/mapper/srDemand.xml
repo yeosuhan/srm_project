@@ -226,6 +226,18 @@
       SELECT COUNT(DMND_NO)
       FROM SR_DEMAND
       WHERE DEL_YN = 0
+      <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
+	  <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and DMND_YMD <= #{srFilterDto.dmndYmdEnd}]]></if>
+	  <if test="srFilterDto.sttsCd!=null">and stts_cd = #{srFilterDto.sttsCd}</if>
+	  <if test="srFilterDto.sysCd!=null">and sys_cd = #{srFilterDto.sysCd}</if>
+	  <if test="srFilterDto.taskSeCd!=null">and task_se_cd = #{srFilterDto.taskSeCd}</if>
+	  <if test="srFilterDto.keyWord!=null">
+		  and (
+		  dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+		  rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+		  ttl like '%'||#{srFilterDto.keyWord}||'%' or
+		  cn like '%'||#{srFilterDto.keyWord}||'%'
+	  )</if>
    </select>
 
    <!--관리자 모든 요청 목록 가져오기 -->
@@ -259,7 +271,18 @@
          and sd.stts_cd = s.stts_cd
          and sd.sys_cd = sy.sys_cd
          and sd.dmnd_no = si.dmnd_no(+)
-
+		 <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and sd.DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
+		 <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and sd.DMND_YMD <= #{srFilterDto.dmndYmdEnd}]]></if>
+		 <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
+		 <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
+		 <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
+		 <if test="srFilterDto.keyWord!=null">
+			 and (
+			 sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+			 sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+			 sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
+			 sd.cn like '%'||#{srFilterDto.keyWord}||'%'
+		 )</if>
       ) w , members c
       where w.rvwr_id = c.member_id(+)
      <if test="sort=='DESC'">
