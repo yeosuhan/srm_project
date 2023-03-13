@@ -107,4 +107,9 @@
         	ATCH_YN != #{status}
 	</update>
 	
+	<!--게시글 삭제 -->
+	<delete id="deleteBoardByBbsNo" parameterType="int">
+		DELETE FROM BOARD
+		WHERE BBS_NO = #{bbsNo}
+	</delete>
 </mapper>
