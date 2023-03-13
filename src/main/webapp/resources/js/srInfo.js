@@ -62,6 +62,7 @@ function getDetail(dmndNo, srNo) {
 			$("#SiRnk").val(detail.dd.rnk);
 			$("#SRDRvwrNm").val(detail.dd.rvwrNm);
 			$("#SRDClientNm").val(detail.dd.clientNm);
+			$("#SRDClientId").val(detail.dd.clientId);/*알림 요청용 요청자 id*/
 			$("#SRDTitle").val(detail.dd.ttl);
 			$("#SRDRelgrund").val(detail.dd.relGrund);
 			$("#SRDSys").val(detail.dd.sysNm);
@@ -339,7 +340,8 @@ function updateProgress4() {
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
 			prgrsId : prgrsId,
-			srNo : $("#SRPgSrNo").val()
+			srNo : $("#SRPgSrNo").val(),
+			rcvrId:$("#SRDClientId").val() /*반영 요청할 요청자 아이디*/
 		},
 		success : function(prgrs) {
 		}

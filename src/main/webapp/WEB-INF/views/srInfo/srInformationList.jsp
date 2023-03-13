@@ -456,6 +456,7 @@ li:before {
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDClientNm"
 													value="${sd.clientNm}">
+												<input type="hidden" value="${sd.clientId}" id="SRDClientId">
 											</div>
 										</div>
 									</div>
