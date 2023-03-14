@@ -338,7 +338,7 @@ th {
 									<div class="form-group row">
 										<div class="col-sm-2 font-weight-bold px-0">관련 근거</div>
 										<div class="col-sm-9">
-											<div type="text" class="form-control relGrund"
+											<div class="form-control relGrund"
 												style="width: 325px;">${sd.relGrund}</div>
 										</div>
 									</div>
@@ -376,13 +376,13 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
 											<div class="col col-sm-6">
-												<div type="text" class="form-control picNm">${sd.picNm}</div>
+												<div class="form-control picNm">${sd.picNm}</div>
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
 											<div class="col col-sm-8">
-												<div type="text" class="form-control deptNm"
+												<div class="form-control deptNm"
 													style="width: 90%;">${sd.deptNm}</div>
 											</div>
 										</div>
@@ -391,7 +391,7 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">진행 상태</div>
 											<div class="col col-sm-6">
-												<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
+												<div class="form-control sttsNm">${sd.sttsNm}</div>
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
@@ -403,7 +403,7 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
 											<div class="col col-sm-6">
-												<div type="text" class="form-control rvwrNm">${sd.rvwrNm}</div>
+												<div class="form-control rvwrNm">${sd.rvwrNm}</div>
 											</div>
 										</div>
 									</div>
