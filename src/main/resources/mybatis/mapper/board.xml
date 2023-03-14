@@ -42,6 +42,25 @@
 				b.WRTR_ID = #{clientId}
 				and
 			</if>
+					
+				<if test="boardFilterDto != null">
+						<if test="boardFilterDto.dmndYmdStart != null">
+							<![CDATA[WRT_YMD >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD')]]> and
+						</if>
+						<if test="boardFilterDto.dmndYmdEnd != null">
+							<![CDATA[WRT_YMD <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]>and
+						</if>
+						<if test="boardFilterDto.ansYn != null">
+							<![CDATA[ANS_YN = #{boardFilterDto.ansYn} ]]>and
+						</if>
+						<if test="boardFilterDto.wrtrNm != null">
+							<![CDATA[m.FLNM LIKE #{boardFilterDto.wrtrNm} ]]>and
+						</if>
+						<if test="boardFilterDto.keyWord != null">
+							<![CDATA[WRT_YMD LIKE '%'||#{boardFilterDto.keyWord}||'%' ]]>and
+						</if>
+					
+				</if>
 			BBS_TYPE = upper(#{type})
 	</select>
 	
@@ -60,6 +79,25 @@
 				and b.WRTR_ID = #{clientId}
 			</if>
 			and BBS_TYPE = upper(#{type})
+				<trim suffixOverrides="and" prefix="and">
+					<if test="boardFilterDto != null">
+						<if test="boardFilterDto.dmndYmdStart != null">
+							<![CDATA[WRT_YMD >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]>and
+						</if>
+						<if test="boardFilterDto.dmndYmdEnd != null">
+							<![CDATA[WRT_YMD <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]>and
+						</if>
+						<if test="boardFilterDto.ansYn != null">
+							<![CDATA[ ANS_YN = #{boardFilterDto.ansYn} ]]>and
+						</if>
+						<if test="boardFilterDto.wrtrNm != null">
+							<![CDATA[m.FLNM LIKE #{boardFilterDto.wrtrNmand} ]]>and
+						</if>
+						<if test="boardFilterDto.keyWord != null">
+							<![CDATA[WRT_YMD LIKE '%'||#{boardFilterDto.keyWord}||'%']]>
+						</if>
+					</if>
+				</trim>
 		ORDER BY WRT_YMD DESC
 		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
@@ -114,7 +152,7 @@
 	</delete>
 	
 	<!-- 관련 개발자의 문의게시판 총 행수 조회 -->
-	<select id="countByEmpId"  parameterType="string" resultType="int">
+	<select id="countByEmpId"  parameterType="map" resultType="int">
 		select  count(BBS_NO) 
 			from (
 
@@ -124,6 +162,23 @@
               WHERE  sr.EMP_ID = #{empId}
                       and sr.sr_no = si.sr_no
                       and sd.dmnd_no = si.dmnd_no
+	                      <if test="boardFilterDto != null">
+								<if test="boardFilterDto.dmndYmdStart != null">
+									<![CDATA[WRT_YMD >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]> and
+								</if>
+								<if test="boardFilterDto.dmndYmdEnd != null">
+									<![CDATA[WRT_YMD <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> and
+								</if>
+								<if test="boardFilterDto.ansYn != null">
+									<![CDATA[ANS_YN = #{boardFilterDto.ansYn}]]> and
+								</if>
+								<if test="boardFilterDto.wrtrNm != null">
+									<![CDATA[m.FLNM LIKE #{boardFilterDto.wrtrNm}]]> and
+								</if>
+								<if test="boardFilterDto.keyWord != null">
+									<![CDATA[WRT_YMD LIKE '%'||#{boardFilterDto.keyWord}||'%']]>
+								</if>
+							</if>
     			) a  inner join Board b
    		 on a.sr_no = b.sr_no
 	</select>

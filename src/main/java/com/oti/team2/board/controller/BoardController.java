@@ -9,12 +9,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oti.team2.board.dto.Board;
+import com.oti.team2.board.dto.BoardFilterDto;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
 import com.oti.team2.board.dto.BoardUpdateDto;
@@ -40,6 +42,7 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public String getBoardList(@RequestParam("type") String type,
+			@ModelAttribute BoardFilterDto boardFilterDto,
 			Model model, 
 			Authentication auth,
 			@RequestParam(required = true, name = "bbsNo", defaultValue = "") String bbsNo,
@@ -48,22 +51,24 @@ public class BoardController {
 		String memberId = auth.getName();
 		model.addAttribute("memberId", memberId);
 		
+		log.info(boardFilterDto);
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		List<BoardListDto> list = null;
 		Pager pager = null;
+		if(type == null) type = boardFilterDto.getType();
 		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
-			pager = new Pager(boardService.getTotalRow(type, memberId), page);
-			list = boardService.getBoardList(type, memberId, pager);
+			pager = new Pager(boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			list = boardService.getBoardList(type, memberId, pager, boardFilterDto);
 			model.addAttribute("qPager", pager);
 			model.addAttribute("qnaList", list);
 		}
 		else {
-			pager = new Pager(boardService.getTotalRow(type, null), page);
-			list = boardService.getBoardList(type, null, pager);
+			pager = new Pager(boardService.getTotalRow(type, null, boardFilterDto), page);
+			list = boardService.getBoardList(type, null, pager, boardFilterDto);
 			if(type.equals("qna")) {
 				if(role.equals(Auth.ROLE_DEVELOPER.toString())) {
-					pager = new Pager(boardService.getcountByEmpId(memberId), 1);
-					list = boardService.getBoardListByEmpId(memberId, pager);
+					pager = new Pager(boardService.getcountByEmpId(memberId, boardFilterDto), 1);
+					list = boardService.getBoardListByEmpId(memberId, pager, boardFilterDto);
 				}
 				model.addAttribute("qPager", pager);
 				model.addAttribute("qnaList", list);
