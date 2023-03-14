@@ -159,7 +159,7 @@ th {
 									</select>
 								</div>
 								<div class="col col-3 pr-0">
-									<label for="sysCd" style="margin-right: 10px;">시스템 구분</label> <select
+									<label for="sysCd">시스템 구분</label> <select
 										id="sysCd" name="sysCd" onchange="systemFilter()">
 										<option value="">전체</option>
 										<c:forEach var="system" items="${systemList}">
@@ -172,8 +172,8 @@ th {
 										</c:forEach>
 									</select>
 								</div>
-								<div class="col col-xl-3">
-									<label for="taskSeCd" style="margin-right: 10px;">업무구분</label>
+								<div class="col col-1 pr-0">
+									<label for="taskSeCd">업무구분</label>
 									<select id="taskSeCd" name="taskSeCd" style="width: 150px">
 										<option value="">전체</option>
 										<c:if test="${taskList ne null}">
