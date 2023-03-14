@@ -134,6 +134,40 @@ li:before {
 	<!-- Page-body start -->
 	<div class="page-body text">
 		<!-- *********** -->
+		<%-- *********************************** [산출물 목록 모달] *********************************** --%>
+		<div class="modal" id="deliverableListModal">
+			<div class="modal_body" style="height: 300px">
+				<div class="m_head" style="height: 60px">
+					<div class="modal_title" style="color: white;">산출물 목록</div>
+				</div>
+				<div class="m_body" style="height: 190px">
+					<div>
+						<table
+							class="table table-border text-center deliverableTable"
+							style="font-size: 12px; padding: 0px;">
+							<thead>
+								<tr>
+									<th style="width: 1px;">#</th>
+									<th style="width: 1px;"></th>
+									<th>산출물구분</th>
+									<th>산출물명</th>
+									<th>산출물 경로</th>
+									<th>등록자</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="m_footer" style="height: 50px">
+					<button class="modal_btn btn-oti cancle" id="delbtn"
+								onclick="deleteDeliverable()">선택된 산출물 삭제</button>
+					<div class="modal_btn btn-oti cancle" data-dismiss="modal">닫기</div>
+				</div>
+			</div>
+		</div>
 		<%-- *********************************** [ 산출물 추가 모달 ] ***********************************--%>
 		<div class="modal" id="addmodal">
 			<div class="modal_body" style="height: 300px">
@@ -158,12 +192,6 @@ li:before {
 							</div>
 						</div>
 						<div class="col-sm-6">
-							<%-- <div class="row">
-                                                <div class="col col-sm-4">등록일</div>
-                                                <div class="col col-sm-6">
-                                                   <input type="date" id="regYmd" name="regYmd">
-                                                </div>
-                                             </div> --%>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -666,10 +694,11 @@ li:before {
 													<td id="0rt"><p><input type="number" class="form-control"
 														id="SRPgPrgrsRt0" min="1" max="10" placeholder="1~10이하 범위의 진척률을 입력하세요"></p></td>
 													<td><div class="accordion" id="accordionExample">
-															<button class="btn btn-link btn-block text-center"
-																type="button" data-toggle="collapse"
-																data-target="#collapse0" aria-expanded="true"
-																aria-controls="collapse0">첨부파일</button>
+															<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(0)"
+																>첨부파일</button>
 														</div></td>
 													<td style="padding: 0px; margin: 0px;">
 														<button class="btn btn-oti btn-lg"
@@ -677,33 +706,7 @@ li:before {
 															style="width: 100%; height: 100%">저장</button>
 													</td>
 												</tr>
-												<tr id="collapse0" class="collapse"
-													aria-labelledby="headingOne"
-													data-parent="#accordionExample">
-													<td colspan="6">
-														<div>
-															<table
-																class="table table-border text-center deliverableTable"
-																style="font-size: 12px; padding: 0px;">
-																<thead>
-																	<tr>
-																		<th style="width: 1px;">#</th>
-																		<th style="width: 1px;"><input type="checkbox"
-																			name="output" value="selectOutputAll"
-																			onclick="selectOutputAll(this)"></th>
-																		<th>산출물구분</th>
-																		<th>산출물명</th>
-																		<th>산출물 경로</th>
-																		<th>등록자</th>
-																		<th>등록일</th>
-																	</tr>
-																</thead>
-																<tbody>
-																</tbody>
-															</table>
-														</div>
-													</td>
-												</tr>
+												
 												<tr>
 													<th scope="row">2</th>
 													<td>분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
@@ -712,10 +715,11 @@ li:before {
 													<td id="1rt"><input type="number" class="form-control"
 														id="SRPgPrgrsRt1" min="11" max="40"></td>
 													<td><div class="accordion" id="accordionExample">
-															<button class="btn btn-link btn-block text-center"
-																type="button" data-toggle="collapse"
-																data-target="#collapse1" aria-expanded="true"
-																aria-controls="collapse1">첨부파일</button>
+															<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(1)"
+																>첨부파일</button>
 														</div></td>
 													<td style="padding: 0px; margin: 0px;">
 														<button class="btn btn-oti btn-lg"
@@ -723,33 +727,7 @@ li:before {
 															style="width: 100%; height: 100%">저장</button>
 													</td>
 												</tr>
-												<tr id="collapse1" class="collapse"
-													aria-labelledby="headingOne"
-													data-parent="#accordionExample">
-													<td colspan="6">
-														<div>
-															<table
-																class="table table-border text-center deliverableTable"
-																style="font-size: 12px; padding: 0px;">
-																<thead>
-																	<tr>
-																		<th style="width: 1px;">#</th>
-																		<th style="width: 1px;"><input type="checkbox"
-																			name="output" value="selectOutputAll"
-																			onclick="selectOutputAll(this)"></th>
-																		<th>산출물구분</th>
-																		<th>산출물명</th>
-																		<th>산출물 경로</th>
-																		<th>등록자</th>
-																		<th>등록일</th>
-																	</tr>
-																</thead>
-																<tbody>
-																</tbody>
-															</table>
-														</div>
-													</td>
-												</tr>
+												
 												<tr>
 													<th scope="row">3</th>
 													<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
@@ -758,10 +736,11 @@ li:before {
 													<td id="2rt"><input type="number" class="form-control"
 														id="SRPgPrgrsRt2" min="41" max="70"></td>
 													<td><div class="accordion" id="accordionExample">
-															<button class="btn btn-link btn-block text-center"
-																type="button" data-toggle="collapse"
-																data-target="#collapse2" aria-expanded="true"
-																aria-controls="collapse2">첨부파일</button>
+															<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(2)"
+																>첨부파일</button>
 														</div></td>
 													<td style="padding: 0px; margin: 0px;">
 														<button class="btn btn-oti btn-lg"
@@ -769,33 +748,7 @@ li:before {
 															style="width: 100%; height: 100%">저장</button>
 													</td>
 												</tr>
-												<tr id="collapse2" class="collapse"
-													aria-labelledby="headingOne"
-													data-parent="#accordionExample">
-													<td colspan="6">
-														<div>
-															<table
-																class="table table-border text-center deliverableTable"
-																style="font-size: 12px; padding: 0px;">
-																<thead>
-																	<tr>
-																		<th style="width: 1px;">#</th>
-																		<th style="width: 1px;"><input type="checkbox"
-																			name="output" value="selectOutputAll"
-																			onclick="selectOutputAll(this)"></th>
-																		<th>산출물구분</th>
-																		<th>산출물명</th>
-																		<th>산출물 경로</th>
-																		<th>등록자</th>
-																		<th>등록일</th>
-																	</tr>
-																</thead>
-																<tbody>
-																</tbody>
-															</table>
-														</div>
-													</td>
-												</tr>
+												
 												<tr>
 													<th scope="row">4</th>
 													<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
@@ -805,10 +758,11 @@ li:before {
 														id="SRPgPrgrsRt3" min="71" max="80"></td>
 													<td>
 														<div class="accordion" id="accordionExample">
-															<button class="btn btn-link btn-block text-center"
-																type="button" data-toggle="collapse"
-																data-target="#collapse3" aria-expanded="true"
-																aria-controls="collapse3">첨부파일</button>
+															<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(3)"
+																>첨부파일</button>
 														</div>
 													</td>
 													<td style="padding: 0px; margin: 0px;">
@@ -817,33 +771,7 @@ li:before {
 															style="width: 100%; height: 100%">저장</button>
 													</td>
 												</tr>
-												<tr id="collapse3" class="collapse"
-													aria-labelledby="headingOne"
-													data-parent="#accordionExample">
-													<td colspan="6">
-														<div>
-															<table
-																class="table table-border text-center deliverableTable"
-																style="font-size: 12px; padding: 0px;">
-																<thead>
-																	<tr>
-																		<th style="width: 1px;">#</th>
-																		<th style="width: 1px;"><input type="checkbox"
-																			name="output" value="selectOutputAll"
-																			onclick="selectOutputAll(this)"></th>
-																		<th>산출물구분</th>
-																		<th>산출물명</th>
-																		<th>산출물 경로</th>
-																		<th>등록자</th>
-																		<th>등록일</th>
-																	</tr>
-																</thead>
-																<tbody>
-																</tbody>
-															</table>
-														</div>
-													</td>
-												</tr>
+												
 												<tr>
 													<th scope="row">5</th>
 													<td>반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
@@ -852,10 +780,11 @@ li:before {
 													<td id="4rt"><input type="number" class="form-control"
 														id="SRPgPrgrsRt4" min="81" max="90"></td>
 													<td><div class="accordion" id="accordionExample">
-															<button class="btn btn-link btn-block text-center"
-																type="button" data-toggle="collapse"
-																data-target="#collapse4" aria-expanded="true"
-																aria-controls="collapse4">첨부파일</button>
+															<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(4)"
+																>첨부파일</button>
 														</div></td>
 													<td style="padding: 0px; margin: 0px;">
 														<button class="btn btn-oti btn-lg"
@@ -863,33 +792,7 @@ li:before {
 															style="width: 100%; height: 100%">저장</button>
 													</td>
 												</tr>
-												<tr id="collapse4" class="collapse"
-													aria-labelledby="headingOne"
-													data-parent="#accordionExample">
-													<td colspan="6">
-														<div>
-															<table
-																class="table table-border text-center deliverableTable"
-																style="font-size: 12px; padding: 0px;">
-																<thead>
-																	<tr>
-																		<th style="width: 1px;">#</th>
-																		<th style="width: 1px;"><input type="checkbox"
-																			name="output" value="selectOutputAll"
-																			onclick="selectOutputAll(this)"></th>
-																		<th>산출물구분</th>
-																		<th>산출물명</th>
-																		<th>산출물 경로</th>
-																		<th>등록자</th>
-																		<th>등록일</th>
-																	</tr>
-																</thead>
-																<tbody>
-																</tbody>
-															</table>
-														</div>
-													</td>
-												</tr>
+												
 												<tr>
 													<th scope="row">6</th>
 													<td>운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
@@ -898,10 +801,11 @@ li:before {
 													<td id="5rt"><input type="number" class="form-control"
 														id="SRPgPrgrsRt5" min="91" max="100"></td>
 													<td><div class="accordion" id="accordionExample">
-															<button class="btn btn-link btn-block text-center"
-																type="button" data-toggle="collapse"
-																data-target="#collapse5" aria-expanded="true"
-																aria-controls="collapse5">첨부파일</button>
+															<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(5)"
+																>첨부파일</button>
 														</div></td>
 													<td style="padding: 0px; margin: 0px;">
 														<button class="btn btn-oti btn-lg"
@@ -909,42 +813,13 @@ li:before {
 															style="width: 100%; height: 100%">저장</button>
 													</td>
 												</tr>
-												<tr id="collapse5" class="collapse"
-													aria-labelledby="headingOne"
-													data-parent="#accordionExample">
-													<td colspan="6">
-														<div>
-															<table
-																class="table table-border text-center deliverableTable"
-																style="font-size: 12px; padding: 0px;">
-																<thead>
-																	<tr>
-																		<th style="width: 1px;">#</th>
-																		<th style="width: 1px;"><input type="checkbox"
-																			name="output" value="selectOutputAll"
-																			onclick="selectOutputAll(this)"></th>
-																		<th>산출물구분</th>
-																		<th>산출물명</th>
-																		<th>산출물 경로</th>
-																		<th>등록자</th>
-																		<th>등록일</th>
-																	</tr>
-																</thead>
-																<tbody>
-																</tbody>
-															</table>
-														</div>
-													</td>
-												</tr>
+												
 											</tbody>
 										</table>
 									</div>
 								</div>
 							</div>
-							<button class="btn btn-oti" id="delbtn"
-								onclick="deleteDeliverable()"
-								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택된
-								산출물 삭제</button>
+							
 							<button class="btn btn-oti" id="addbtn"
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
 								추가</button>

@@ -3,15 +3,8 @@ $(document).ready(function(){
 	 * @author:안한길
 	 * 
 	 */	
-	$(".collapse").on("shown.bs.collapse",function(){
-		//console.log($(this).parent("tbody").children("tr").children(".prgrsIdTd").children("input").val());
-		console.log($(this).attr("id"));
-		getDeliverablesTableRow($(this).attr("id")); //진척율 아이디
-		});
-	$("a[href='#messages1']").on("hide.bs.tab",function(){
-		
-		$(".collapse").collapse("hide");
-	});
+	
+
 	$("#addmodal .modal_btn").on("click",function(){
 		$("#addmodal select option:selected").prop("selected",false);
 		$("#addmodal input").val("");
@@ -19,42 +12,39 @@ $(document).ready(function(){
 	
 });
 
-function getDeliverablesTableRow(collapseId){
+function getDeliverablesTableRow(id){
 	
-	var prgrsId=$("#SRPgPrgrsId"+collapseId.charAt(8)).val();
-    console.log(prgrsId);
-	if($("#"+collapseId+" .deliverableTable tbody tr").length==0){
-		
-		$.ajax({
-			url:"/deliverable/list",
-			type:"GET",
-			data:{prgrsId:prgrsId},
-			success:function(result){
-				//console.log(result);
-				if(result != null){
-					result.forEach((value,index)=>{
-						var count = index+1;
-						$("#"+collapseId+" .deliverableTable tbody").append(
-								"<tr id='tr"+value.delivId+"' class='deliverableTr' onclick='modifyDeliverable(this)'>" +
-								"	<th scope='row'>"+count+"</th>" +
-								"	<td class='delivIdTd' onclick='event.cancelBubble=true'>" +
-								"		<input value='"+value.delivId+"' name='delivId' type='checkbox'>" +
-								"		<button style='display:none' class='btn btn-info' onclick='modifyDeliverableSubmit("+value.delivId+")'>수정</button>"+
-								"	</td>" +
-								"	<td>"+value.prgrsSeNm+"</td>" +
-								"	<td class='delivNmTd'>"+value.delivNm+"</td>" +
-								"	<td class='delivUrlTd'>"+value.delivUrl+"</td>" +
-								"	<td>"+value.rgtrNm+"</td>" +
-								"	<td>"+value.regYmd+"</td>" +
-								"</tr>"
-						);
-					});
-				}else{
-					$("#"+collapseId).collapse("hide");
-				}
+	var prgrsId=$("#SRPgPrgrsId"+id).val();
+   
+	$(".deliverableTable tbody").empty();
+	$.ajax({
+		url:"/deliverable/list",
+		type:"GET",
+		data:{prgrsId:prgrsId},
+		success:function(result){
+			//console.log(result);
+			if(result != null){
+				result.forEach((value,index)=>{
+					var count = index+1;
+					$(".deliverableTable tbody").append(
+							"<tr id='tr"+value.delivId+"' class='deliverableTr' onclick='modifyDeliverable(this)'>" +
+							"	<th scope='row'>"+count+"</th>" +
+							"	<td class='delivIdTd' onclick='event.cancelBubble=true'>" +
+							"		<input value='"+value.delivId+"' name='delivId' type='checkbox'>" +
+							"		<button style='display:none' class='btn btn-info' onclick='modifyDeliverableSubmit("+value.delivId+")'>수정</button>"+
+							"	</td>" +
+							"	<td>"+value.prgrsSeNm+"</td>" +
+							"	<td class='delivNmTd'>"+value.delivNm+"</td>" +
+							"	<td class='delivUrlTd'>"+value.delivUrl+"</td>" +
+							"	<td>"+value.rgtrNm+"</td>" +
+							"	<td>"+value.regYmd+"</td>" +
+							"</tr>"
+					);
+				});
 			}
-		});
-	}
+		}
+	});
+	
 	
 }
 /* 산출물 삭제
@@ -174,8 +164,7 @@ function modifyDeliverableSubmit(delivId){
 	      success:function(result){
 	         //console.log(result);
 	         if(result!=0){
-	            $(".deliverableTable tbody").empty();
-	            $(".collapse").collapse("hide");
+	            $("#deliverableListModal").modal("hide");
 	         }
 	      }
 	   });
