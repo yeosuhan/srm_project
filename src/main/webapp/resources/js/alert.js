@@ -74,13 +74,14 @@ function getAlertList(){
 			type:"GET",
 			success:function(result){
 				result.forEach((value)=>{
+					var alertLi= null;
 					/*반영요청*/
 					if(value.altType == 'RFLT'){
 						$("#rfltTab ul").append(
 								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?dmndNo="+value.dmndNo+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
 								"	<div class='media'>" +
 								"		<div class='media-body'>" +
-								"			<h5 class='notification-user'>"+value.dmndNo+"</h5>" +
+								"			<h5>"+value.dmndNo+"</h5>" +
 								"			<i class='fa fa open-card-option fa-times close' onclick='closeAlert(event,this,"+value.altNo+")'></i>" +
 								"			<p class='notification-msg'>"+value.altCn+"</p>" +
 								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
@@ -88,48 +89,44 @@ function getAlertList(){
 								"	</div>" +
 								"</li>"
 						);
+					}else{
+						if(value.srNo!=null){
+							alertLi=
+								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?hstryId="+value.hstryId+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
+								"	<div class='media'>" +
+								"		<div class='media-body'>" +
+								"			<h5>"+value.srNo+"</h5>" +
+								"			<i class='fa fa open-card-option fa-times close' onclick='closeAlert(event,this,"+value.altNo+")'></i>" +
+								"			<p class='notification-msg'>"+value.altCn+"</p>" +
+								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
+								"		</div>" +
+								"	</div>" +
+								"</li>";
+						}else{
+							alertLi=
+								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?hstryId="+value.hstryId+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
+								"	<div class='media'>" +
+								"		<div class='media-body'>" +
+								"			<h5>"+value.srInfoDmndNo+"</h5>" +
+								"			<i class='fa fa open-card-option fa-times close' onclick='closeAlert(event,this,"+value.altNo+")'></i>" +
+								"			<p class='notification-msg'>"+value.altCn+"</p>" +
+								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
+								"		</div>" +
+								"	</div>" +
+								"</li>";
+						}
 					}
 					/*예정일 변경*/
 					if(value.altType == 'CHG_YMD'){
-						$("#chgDmndTab ul").append(
-								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?hstryId="+value.hstryId+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
-								"	<div class='media'>" +
-								"		<div class='media-body'>" +
-								"			<h5 class='notification-user'>"+value.hstryId+"</h5>" +
-								"			<p class='notification-msg'>"+value.altCn+"</p>" +
-								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
-								"		</div>" +
-								"	</div>" +
-								"</li>"
-						);
+						$("#chgDmndTab ul").append(alertLi);
 					}
 					/*예정일 변경(개발자)*/
 					if(value.altType == 'CHG_YMD_DVL'){
-						$("#developerTab ul").append(
-								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?hstryId="+value.hstryId+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
-								"	<div class='media'>" +
-								"		<div class='media-body'>" +
-								"			<h5 class='notification-user'>"+value.hstryId+"</h5>" +
-								"			<p class='notification-msg'>"+value.altCn+"</p>" +
-								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
-								"		</div>" +
-								"	</div>" +
-								"</li>"
-						);
+						$("#chgDmndTab ul").append(alertLi);
 					}
 					/*개발취소*/
 					if(value.altType == 'RTRCN'){
-						$("#cancleTab ul").append(
-								"<li class='waves-effect waves-light alertLi' onclick='location.href=\"/alert/checkalert?hstryId="+value.hstryId+"&altType="+value.altType+"&altNo="+value.altNo+"\";'>" +
-								"	<div class='media'>" +
-								"		<div class='media-body'>" +
-								"			<h5 class='notification-user'>"+value.dmndNo+"</h5>" +
-								"			<p class='notification-msg'>"+value.altCn+"</p>" +
-								"			<span class='notification-time'>"+value.trsmYmd+"</span>" +
-								"		</div>" +
-								"	</div>" +
-								"</li>"
-						);
+						$("#chgDmndTab ul").append(alertLi);
 					}
 				});
 				countAlert();

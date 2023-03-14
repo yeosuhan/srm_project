@@ -16,4 +16,6 @@ public class Alert {
 	private String dmndNo;
 	private Integer hstryId;
 	private String altType;
+	private String srNo;
+	private String srInfoDmndNo;
 }

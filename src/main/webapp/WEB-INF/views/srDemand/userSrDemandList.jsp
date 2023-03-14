@@ -25,6 +25,13 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+	
+	<%-- 히스토리id가 주어질경우 히스토리 탭 열기 --%>
+	<c:if test="${srFilterDto.hstryId ne null}">
+	$(function(){
+		$("#srHistoryTab").trigger("click");
+	});
+	</c:if>
 </script>
 
 <style>
@@ -121,8 +128,7 @@ th {
 							</div>
 						</div>
 						<hr />
-						<form id="srSearchForm" action="/srdemand/list"
-							onsubmit="return srSearch()">
+						<form id="srSearchForm" action="${pageContext.request.contextPath}/srdemand/list" >
 							<div class="row">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
@@ -214,14 +220,17 @@ th {
 											<tr>
 												<th style="width: 1px;"></th>
 												<th>요청 번호 
-												 <c:if test="${sort eq 'DESC'}">
-													<a href="${pageContext.request.contextPath}/srdemand/list?sort=ASC"><i
-														class="fas fa-caret-up" style="color: black;font-size:24px;"></i></a>
-												</c:if>
-												<c:if test="${sort eq 'ASC'}">
-												<a href="${pageContext.request.contextPath}/srdemand/list?sort=DESC"><i
+												<c:if test="${sort eq 'DESC'}">
+												<a
+													href="${pageContext.request.contextPath}/admin/srdemand/list"  class="sortBtnAsc"><i
 														class="fas fa-caret-down" style="color: black;font-size:24px;"></i></a>
 												</c:if>
+												<c:if test="${sort eq 'ASC'}">
+												<a
+													href="${pageContext.request.contextPath}/admin/srdemand/list" class="sortBtnDesc"><i
+														class="fas fa-caret-up" style="color: black;font-size:24px;"></i></a>
+												</c:if>
+
 												</th>
 												<th>제목</th>
 												<th>관련시스템</th>
@@ -232,7 +241,7 @@ th {
 												<th>완료예정일</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="dmndTbody">
 											<c:if test="${mySrDemandList ne null}">
 												<c:forEach var="srDemand" items="${mySrDemandList}"
 													varStatus="status">
@@ -273,7 +282,9 @@ th {
 												</c:forEach>
 											</c:if>
 											<c:if test="${mySrDemandList eq null}">
-												<td colSpan="9">검색 결과가 없습니다.</td>
+												<tr>
+													<td colSpan="9">검색 결과가 없습니다.</td>
+												</tr>
 											</c:if>
 										</tbody>
 									</table>
@@ -334,7 +345,7 @@ th {
 									<div class="form-group row">
 										<div class="col-sm-2 font-weight-bold px-0">관련 근거</div>
 										<div class="col-sm-9">
-											<div type="text" class="form-control relGrund"
+											<div class="form-control relGrund"
 												style="width: 325px;">${sd.relGrund}</div>
 										</div>
 									</div>
@@ -372,13 +383,13 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
 											<div class="col col-sm-6">
-												<div type="text" class="form-control picNm">${sd.picNm}</div>
+												<div class="form-control picNm">${sd.picNm}</div>
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
 											<div class="col col-sm-8">
-												<div type="text" class="form-control deptNm"
+												<div class="form-control deptNm"
 													style="width: 90%;">${sd.deptNm}</div>
 											</div>
 										</div>
@@ -387,7 +398,7 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">진행 상태</div>
 											<div class="col col-sm-6">
-												<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
+												<div class="form-control sttsNm">${sd.sttsNm}</div>
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
@@ -399,7 +410,7 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
 											<div class="col col-sm-6">
-												<div type="text" class="form-control rvwrNm">${sd.rvwrNm}</div>
+												<div class="form-control rvwrNm">${sd.rvwrNm}</div>
 											</div>
 										</div>
 									</div>
@@ -492,9 +503,6 @@ th {
 	<!-- Page body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
-	<%-- 상세, 등록, 수정 --%>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 	<!-- 모달 -->
 	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
 	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>

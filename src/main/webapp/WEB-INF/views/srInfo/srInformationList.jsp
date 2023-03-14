@@ -37,6 +37,13 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+	<%-- 히스토리id가 있는경우 탭을 열고 해당위치로 이동 --%>
+	<c:if test="${srInfoFilter.hstryId ne null}">
+		$(function(){
+			$("#srInfoHistoryTab").trigger("click");
+			$("#srInfoHistoryTab").focus();
+		});
+	</c:if>
 </script>
 
 <style>
@@ -292,12 +299,12 @@ li:before {
 												<th style="width: 1px;"></th>
 												<th>SR번호 
 												<c:if test="${sort eq 'DESC'}">
-													<a href="${pageContext.request.contextPath}/srinformation/list?sort=ASC"><i
-														class="fas fa-caret-up" style="color: black;font-size:24px;"></i></a>
+													<a href="${pageContext.request.contextPath}/srinformation/list" class="sortBtnAsc"><i
+														class="fas fa-caret-down" style="color: black;font-size:24px;"></i></a>
 												</c:if>
 												<c:if test="${sort eq 'ASC'}">
-												<a href="${pageContext.request.contextPath}/srinformation/list?sort=DESC"><i
-														class="fas fa-caret-down" style="color: black;font-size:24px;"></i></a>
+												<a href="${pageContext.request.contextPath}/srinformation/list" class="sortBtnDesc"><i
+														class="fas fa-caret-up" style="color: black;font-size:24px;"></i></a>
 												</c:if>
 												</th>
 												<th>시스템구분</th>
@@ -541,7 +548,7 @@ li:before {
 							class="nav-link" data-toggle="tab" href="#messages1" role="tab">SR
 								진척율</a>
 							<div class="slide"></div></li>
-						<li class="nav-item" onclick="empHstry()"><a class="nav-link"
+						<li class="nav-item" onclick="empHstry()"><a class="nav-link" id="srInfoHistoryTab"
 							data-toggle="tab" href="#srInfhistory" role="tab">SR 히스토리</a>
 							<div class="slide"></div></li>
 					</ul>

@@ -1,5 +1,8 @@
 package com.oti.team2.admin.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +30,11 @@ import com.oti.team2.member.dto.Member;
 import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
+import com.oti.team2.srdemand.dto.SrFilterDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.service.ISrDemandService;
+import com.oti.team2.system.service.ISystemService;
+import com.oti.team2.task.service.ITaskService;
 import com.oti.team2.util.Auth;
 import com.oti.team2.util.pager.Pager;
 
@@ -50,7 +56,12 @@ public class AdminController {
 
 	@Autowired
 	private ISrDemandService srdemandService;
-
+	
+	@Autowired
+	private ISystemService systemService;
+	
+	@Autowired
+	private ITaskService taskService;
 	/**
 	 * 부서목록 조회 메서드
 	 *
@@ -288,26 +299,57 @@ public class AdminController {
 	@GetMapping("/srdemand/list")
 	public String getSrDemandList(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
-			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort) {
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
+			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
+			@RequestParam(required = false, name = "sysCd")String sysCd,
+			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
+			@RequestParam(required = false, name = "keyWord")String keyWord,
+			@RequestParam(required = false, name = "hstryId")Integer hstryId) {
 		model.addAttribute("sort", sort);
+		log.info("sort : " + sort);
+		SrFilterDto srFilterDto = new SrFilterDto();
+		if(dmndYmdStart==null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, -1);
+			String stringDate = sdf.format(calendar.getTime());
+			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+		}
+		srFilterDto.setDmndYmdStart(dmndYmdStart);
+		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
+		srFilterDto.setSttsCd(sttsCd);
+		srFilterDto.setKeyWord(keyWord);
+		srFilterDto.setSysCd(sysCd);
+		srFilterDto.setTaskSeCd(taskSeCd);
+		srFilterDto.setHstryId(hstryId);
+		model.addAttribute("srFilterDto",srFilterDto);
+		log.info(srFilterDto);
 		// 목록
-		int totalRows = srdemandService.getCountAllSr();
+		int totalRows = srdemandService.getCountAllSr(srFilterDto);
 		Pager pager = new Pager(totalRows, Integer.parseInt(page));
 		log.info(pager);
+		if(totalRows!=0){
+			List<SrDemand> list = srdemandService.getSrDemandListBy(pager, sort,srFilterDto);
+			model.addAttribute("srDemandList", list);
+			log.info("srDemandList: " + list);
 
-		List<SrDemand> list = srdemandService.getSrDemandListBy(pager, sort);
-		model.addAttribute("srDemandList", list);
-		log.info("srDemandList: " + list);
-
-		// 기본 첫번째 상세 or 선택된 상세
-		SrdemandDetail sd = null;
-		if (dmndno != null) {
-			sd = srdemandService.getSrDemandDetail(dmndno);
-		} else {
-			sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
+			// 기본 첫번째 상세 or 선택된 상세
+			SrdemandDetail sd = null;
+			if (dmndno != null||totalRows==0) {
+				sd = srdemandService.getSrDemandDetail(dmndno);
+			} else {
+				sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
+			}
+			model.addAttribute("sd", sd);
 		}
-
-		model.addAttribute("sd", sd);
+		//시스템 목록
+		model.addAttribute("systemList",systemService.getSystemList());
+		//작업 구분
+		if(sysCd!=null) {
+			model.addAttribute("taskList",taskService.getTaskList(sysCd));
+		}
 		model.addAttribute("pager", pager);
 
 		return "srDemand/adminSrDemandList";

@@ -209,6 +209,10 @@
    		update MEMBERS set PSWD = #{pswd} WHERE EML=#{eml} and TELNO=#{telNo} 
    </update>
    
+   <!-- 관리자 리스트 조회 -->
+   <select id="selectAdmin" resultType="string">
+		SELECT MEMBER_ID as memberId FROM MEMBERS WHERE MEMBER_TYPE='ROLE_ADMIN'
+   </select>
    <!-- Member 객체 안의 내부 객체와의 매핑을 위함 -->
    <resultMap type="member" id="memberResultMap">
       <id property="memberId" column="MEMBER_ID"/>

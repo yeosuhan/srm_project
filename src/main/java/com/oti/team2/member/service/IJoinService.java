@@ -33,6 +33,4 @@ public interface IJoinService {
 	 */
 	void addFile(File file, String memberId);
 	
-
-	String getEncodedPassword(String pswd);
 }

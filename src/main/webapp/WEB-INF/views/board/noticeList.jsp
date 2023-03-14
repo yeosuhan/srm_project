@@ -3,19 +3,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <link rel="stylesheet" type="text/css"
-	href="/resources/css/pagination.css">
+	href="${pageContext.request.contextPath}/resources/css/pagination.css">
 <link rel="stylesheet" type="text/css"
-	href="/resources/js/pagination.js">
-<link rel="stylesheet" type="text/css"
-	href="/resources/css/srButton.css">
-<script src="/resources/js/board.js"></script>
-<script type="text/javascript">
-</script>
+	href="${pageContext.request.contextPath}/resources/css/srButton.css">
+<script src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+
 </head>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -31,20 +30,21 @@
 							</div>
 						</div>
 						<hr />
-						<form id="boardSearchForm">
+						<form id="boardSearchForm" action="${pageContext.request.contextPath}/board/list/notice"
+							onsubmit="return boardSearch()">
 							<div class="row">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
-										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart">
-									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd">
+										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart" value="${boardFilterDto.dmndYmdStart}">
+									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd" value="${boardFilterDto.dmndYmdEnd }">
 								</div>								
 								<div class="col col-3 px-0">
 									<label for="wrtrNm" style="margin-right: 10px;">작성자</label> <input
-										type="text" name="wrtrNm" id="keyWord">
+										type="text" name="wrtrNm" id="keyWord" value="${boardFilterDto.wrtrNm}">
 								</div>
 								<div class="col col-4 px-0">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
-										type="text" name="keyWord" id="keyWord">
+										type="text" name="keyWord" id="keyWord" value="${boardFilterDto.keyWord}">
 									<button type="submit" class="btn btn-sm btn-oti"
 										style="margin-right: 10px; height: 30px;">
 										<i class="ti-search"></i>

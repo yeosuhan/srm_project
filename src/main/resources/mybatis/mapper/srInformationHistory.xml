@@ -238,6 +238,35 @@
 		]]>	
 	</select>
 	
+	<!-- mytodo 히스토리 탭 (페이지 수 ) -->
+<!--  	<select id="countByauthId" parameterType="map" resultType="int">
+      SELECT 
+         COUNT(DISTINCT sd.DMND_NO)
+      FROM sr_resources sr, sr_information si, sr_demand sd, STATUS s
+      WHERE  sr.EMP_ID = #{empId}
+              and sr.sr_no = si.sr_no
+              and sd.dmnd_no = si.dmnd_no
+              and sd.stts_cd = #{sttsCd}
+   	</select>  -->
+	<!-- 새로 insert된 히스토리 아이디를 조회 -->
+	<select id="selectLastHstryIdByRqstrId" parameterType="string" resultType="int">
+		SELECT
+			HSTRY_ID as hstryId
+		FROM
+		(SELECT ROWNUM, HSTRY_ID FROM SR_INFORMATION_HISTORY WHERE RQSTR_ID = #{rqstrId} ORDER BY WRT_YMD DESC )
+		WHERE
+			ROWNUM=1
+	</select>
+	
+	<!-- 발신자 조회 -->
+	<select id="selectRqstrIdByHstryId" parameterType="int" resultType="string">
+		SELECT
+			RQSTR_ID as rqstrId
+		FROM
+			SR_INFORMATION_HISTORY
+		WHERE
+			HSTRY_ID = #{hstryId}
+	</select>
 	<!-- 개발자: 내가 자원으로 입력되어 있고 sysdate<투입종료일인 SR요청의 DMND번호를 채번한 리스트를 만들어서 요청버튼 
 		보이게 하기 -->
 	<select id="selectDmndNoBySrResouce" parameterType="map"
@@ -248,5 +277,4 @@
 			where si.sr_no=srh.sr_no and sd.dmnd_no=si.dmnd_no and si.dmnd_no=#{dmndNo} and srr.sr_no = si.sr_no and srh.rqstr_id=m.member_id and srr.emp_id=#{empId} and sysdate <srr.schdl_end_ymd
 	   	]]>
 	</select>
-
 </mapper>

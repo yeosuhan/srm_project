@@ -118,7 +118,8 @@ public class SrDemandController {
 			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
 			@RequestParam(required = false, name = "sysCd")String sysCd,
 			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
-			@RequestParam(required = false, name = "keyWord")String keyWord) {
+			@RequestParam(required = false, name = "keyWord")String keyWord,
+			@RequestParam(required = false, name = "hstryId")Integer hstryId) {
 		log.info("sort : " + sort);
 		model.addAttribute("sort", sort);
 		String memberId = auth.getName();
@@ -136,28 +137,29 @@ public class SrDemandController {
 		srFilterDto.setKeyWord(keyWord);
 		srFilterDto.setSysCd(sysCd);
 		srFilterDto.setTaskSeCd(taskSeCd);
+		srFilterDto.setHstryId(hstryId);
 		model.addAttribute("srFilterDto",srFilterDto);
 		log.info(srFilterDto);
 		// 목록
 		int totalRows = srdemandService.getCountClientSr(memberId, srFilterDto);
 		Pager pager = new Pager(totalRows, Integer.parseInt(page));
 		log.info(pager);
-		List<SrDemand> list = null;
-		list = srdemandService.getSrDemandList(memberId, pager,sort,srFilterDto);
-		model.addAttribute("mySrDemandList", list);
-
-		// 기본 첫번째 상세 or 선택된 상세
 		SrdemandDetail sd = null;
 		String prgrsRt = null;
-		if (dmndno != null||totalRows==0) {
-			prgrsRt = progressService.getPrgrsRt(dmndno);
-			sd = srdemandService.getSrDemandDetail(dmndno);
-		} else {
-			prgrsRt = progressService.getPrgrsRt(list.get(0).getDmndNo());
-			sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
-		}
+		if(totalRows!=0) {
+			List<SrDemand> list = null;
+			list = srdemandService.getSrDemandList(memberId, pager,sort,srFilterDto);
+			model.addAttribute("mySrDemandList", list);
+			// 기본 첫번째 상세 or 선택된 상세
+			if (dmndno != null) {
+				prgrsRt = progressService.getPrgrsRt(dmndno);
+				sd = srdemandService.getSrDemandDetail(dmndno);
+			} else {
+				prgrsRt = progressService.getPrgrsRt(list.get(0).getDmndNo());
+				sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
+			}
 		log.info(sd);
-		
+		}
 		//시스템 목록
 		model.addAttribute("systemList",systemService.getSystemList());
 		//작업 구분
