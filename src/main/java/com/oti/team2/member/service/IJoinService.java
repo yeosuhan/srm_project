@@ -25,5 +25,7 @@ public interface IJoinService {
 	 * @return 프로필 사진 추가
 	 */
 	void addFile(File file, String memberId);
+	
 
+	String getEncodedPassword(String pswd);
 }
