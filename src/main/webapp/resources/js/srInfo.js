@@ -1,5 +1,40 @@
 $(document).ready(function(){
 	getPlan();
+	var currentUrl=window.location.href;
+	//파라미터 여부
+	//console.log(currentUrl);
+	if(currentUrl.indexOf('?')!=-1 && currentUrl.indexOf('?')!=currentUrl.length-1){
+		
+		var indexOfFilter = currentUrl.indexOf('&');
+		var indexOfPage=currentUrl.indexOf('page');
+		var filter=null;
+		if(currentUrl.indexOf('sort')!=-1){
+			currentUrl=currentUrl.substring(0,currentUrl.indexOf('sort')-1);
+		}
+		//page파라미터와 다른 파라미터가 있는경우
+		if(indexOfFilter!=-1&&indexOfPage!=-1){
+			filter=currentUrl.substring(indexOfFilter+1,currentUrl.length);
+			
+			$(".sortBtnAsc").attr("href",$(".sortBtnAsc").attr("href")+"?"+filter+"&sort=ASC");
+			$(".sortBtnDesc").attr("href",$(".sortBtnDesc").attr("href")+"?"+filter+"&sort=DESC");
+		}else if(currentUrl.indexOf('page')==-1){//파라미터가 page가 아닌경우
+			indexOfFilter=currentUrl.indexOf('?');
+			if(indexOfFilter==-1){
+				currentUrl=currentUrl+"?"; //파라미터가 sort밖에 없는경우
+				$(".sortBtnAsc").attr("href","?sort=ASC");
+				$(".sortBtnDesc").attr("href","?sort=DESC");
+			}else{
+				
+				filter=currentUrl.substring(indexOfFilter,currentUrl.length);
+				$(".sortBtnAsc").attr("href",$(".sortBtnAsc").attr("href")+filter+"&sort=ASC");
+				$(".sortBtnDesc").attr("href",$(".sortBtnDesc").attr("href")+filter+"&sort=DESC");
+			}
+		}	
+		
+	}else{
+		$(".sortBtnAsc").attr("href","?sort=ASC");
+		$(".sortBtnDesc").attr("href","?sort=DESC");
+	}
 });
 /* SR요청 상세보기 */
 function getDetail(dmndNo, srNo) {

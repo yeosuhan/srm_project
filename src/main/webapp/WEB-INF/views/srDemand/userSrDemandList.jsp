@@ -223,12 +223,12 @@ th {
 												<c:if test="${sort eq 'DESC'}">
 												<a
 													href="${pageContext.request.contextPath}/admin/srdemand/list"  class="sortBtnAsc"><i
-														class="ti-arrow-up" style="color: black;font-size:24px;"></i></a>
+														class="fas fa-caret-down" style="color: black;font-size:24px;"></i></a>
 												</c:if>
 												<c:if test="${sort eq 'ASC'}">
 												<a
 													href="${pageContext.request.contextPath}/admin/srdemand/list" class="sortBtnDesc"><i
-														class="ti-arrow-down" style="color: black;font-size:24px;"></i></a>
+														class="fas fa-caret-up" style="color: black;font-size:24px;"></i></a>
 												</c:if>
 
 												</th>

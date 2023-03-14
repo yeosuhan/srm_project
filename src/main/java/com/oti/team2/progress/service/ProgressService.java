@@ -44,53 +44,6 @@ public class ProgressService implements IProgressService {
 	 */
 	@Override
 	@Transactional
-<<<<<<< HEAD
-	public void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo, String rcvrId,String dmndNo) {
-		if (prgrsRt <= 10) {
-			// 진척률만 업데이트
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt >= 11 && prgrsRt < 40) {
-			// 진척률만 업데이트
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd , prgrsRt);
-		} else if (prgrsRt == 40) {
-			int sttsCd = 3;
-			// 진척률 + 진행상태
-			log.info("sttsCd : " + sttsCd);
-			srDemandService.updateSrDemandStts(srNo, sttsCd);
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt >= 41 && prgrsRt < 70) {
-			// 진척률만 업데이트
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt == 70) {
-			int sttsCd = 4;
-			// 진척률 + 진행상태
-			log.info("sttsCd : " + sttsCd);
-			srDemandService.updateSrDemandStts(srNo, sttsCd);
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt >= 71 && prgrsRt < 80) {
-			// 진척률만 업데이트
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt == 80) {
-			// 진척률 + 진행상태
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt >= 81 && prgrsRt < 90) {
-			// 진척률만 업데이트
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt == 90) {
-			// 진척률,운영반영 시작일(=SYSDATE) 업데이트
-			progressDao.updateProgressYmd(srNo);
-			alertService.sendToClient(rcvrId,dmndNo);
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt >= 91 && prgrsRt < 100) {
-			// 진척률만 업데이트
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-		} else if (prgrsRt == 100) {
-			// 진척률 + 진행상태
-			int sttsCd = 5;
-			log.info("sttsCd : " + sttsCd);
-			srDemandService.updateSrDemandStts(srNo, sttsCd);
-			progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-=======
 	public void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo, String prgrsSeNm,
 			String rcvrId, String dmndNo) {
 		boolean flag = true;
@@ -271,7 +224,6 @@ public class ProgressService implements IProgressService {
 					break;
 				}
 			}
->>>>>>> branch 'main' of https://github.com/OTI-SRM/srm_project.git
 		}
 	}
 

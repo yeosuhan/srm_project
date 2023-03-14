@@ -246,13 +246,7 @@ li:before {
 								</div>
 							</div>
 							<div class="col col-xl-1"
-<<<<<<< HEAD
-								style="width: 80px; padding-left: 20px;">
-								SR 제목 <br /> <br /> <br />요청 번호
-							</div>
-=======
 								style="width: 80px; padding-left: 20px;">SR 제목</div>
->>>>>>> branch 'main' of https://github.com/OTI-SRM/srm_project.git
 							<div class="col col-xl-2" style="">
 								<input type="text" class="form-control" name="ttl"
 									value="${srInfoFilter.ttl}"> <br />
@@ -305,12 +299,12 @@ li:before {
 												<th style="width: 1px;"></th>
 												<th>SR번호 
 												<c:if test="${sort eq 'DESC'}">
-													<a href="${pageContext.request.contextPath}/srinformation/list?sort=ASC"><i
-														class="fas fa-caret-up" style="color: black;font-size:24px;"></i></a>
+													<a href="${pageContext.request.contextPath}/srinformation/list" class="sortBtnAsc"><i
+														class="fas fa-caret-down" style="color: black;font-size:24px;"></i></a>
 												</c:if>
 												<c:if test="${sort eq 'ASC'}">
-												<a href="${pageContext.request.contextPath}/srinformation/list?sort=DESC"><i
-														class="fas fa-caret-down" style="color: black;font-size:24px;"></i></a>
+												<a href="${pageContext.request.contextPath}/srinformation/list" class="sortBtnDesc"><i
+														class="fas fa-caret-up" style="color: black;font-size:24px;"></i></a>
 												</c:if>
 												</th>
 												<th>시스템구분</th>
