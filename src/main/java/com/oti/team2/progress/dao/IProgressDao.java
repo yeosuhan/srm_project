@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.oti.team2.progress.dto.Prgrs;
 import com.oti.team2.progress.dto.Progress;
 @Mapper
 public interface IProgressDao {
@@ -24,7 +25,7 @@ public interface IProgressDao {
 	 * @param rcvrId 
 	 * @return sr요청 진척률 수정
 	 */
-	public void updateProgressByPrgrsId(@Param("prgrsId") int prgrsId, @Param("bgngYmd") String bgngYmd, @Param("endYmd") String endYmd, @Param("prgrsRt") int prgrsRt,@Param("rcvrId") String rcvrId,@Param("dmndNo") String dmndNo);
+	public void updateProgressByPrgrsId(@Param("prgrsId") int prgrsId, @Param("bgngYmd") String bgngYmd, @Param("endYmd") String endYmd, @Param("prgrsRt") int prgrsRt);
 	
 	/**
 	 * 진척률 insert
@@ -53,5 +54,15 @@ public interface IProgressDao {
 	 * @author 여수한
 	 */
 	public void updateEndYmd(@Param("dmNo")String dmNo);
+	/**
+	 * 진척단계 끝나면 다음 진척단계 시작일 넣기
+	 * @author 여수한
+	 */
+	public void updateBgngYmdByPrgrsId(@Param("prgrsId") int prgrsId);
+	/**
+	 * 진척목록의 진척률 조회
+	 * @author 여수한
+	 */
+	public List<Prgrs> selectPrgrsSeNm();
 	
 }

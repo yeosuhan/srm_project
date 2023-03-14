@@ -288,8 +288,8 @@ public class AdminController {
 	@GetMapping("/srdemand/list")
 	public String getSrDemandList(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
-			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort) {
-
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort) {
+		model.addAttribute("sort", sort);
 		// 목록
 		int totalRows = srdemandService.getCountAllSr();
 		Pager pager = new Pager(totalRows, Integer.parseInt(page));

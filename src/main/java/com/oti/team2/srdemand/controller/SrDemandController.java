@@ -120,6 +120,7 @@ public class SrDemandController {
 			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
 			@RequestParam(required = false, name = "keyWord")String keyWord) {
 		log.info("sort : " + sort);
+		model.addAttribute("sort", sort);
 		String memberId = auth.getName();
 		SrFilterDto srFilterDto = new SrFilterDto();
 		if(dmndYmdStart==null) {

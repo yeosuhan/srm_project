@@ -143,6 +143,7 @@ th {
 								<div class="col col-4 px-0">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
 										type="text" name="keyWord" id="keyWord">
+
 									<button type="submit" class="btn btn-sm btn-oti"
 										style="margin-right: 10px; height: 30px;">
 										<i class="ti-search"></i>
@@ -181,11 +182,17 @@ th {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>요청 번호 <a
-													href="${pageContext.request.contextPath}/admin/srdemand/list?sort=ASC"><i
-														class="ti-arrow-up" style="color: black;"></i></a> <a
-													href="${pageContext.request.contextPath}/admin/srdemand/list?sort=DESC"><i
-														class="ti-arrow-down" style="color: black;"></i></a>
+												<th>요청 번호 <c:if test="${sort eq 'DESC'}">
+														<a
+															href="${pageContext.request.contextPath}/admin/srdemand/list?sort=ASC"><i
+															class="fas fa-caret-up"
+															style="color: black; font-size: 24px;"></i></a>
+													</c:if> <c:if test="${sort eq 'ASC'}">
+														<a
+															href="${pageContext.request.contextPath}/admin/srdemand/list?sort=DESC"><i
+															class="fas fa-caret-down"
+															style="color: black; font-size: 24px;"></i></a>
+													</c:if>
 												</th>
 												<th>제목</th>
 												<th>관련시스템</th>
