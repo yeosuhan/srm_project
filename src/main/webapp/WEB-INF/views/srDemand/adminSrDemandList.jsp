@@ -166,6 +166,7 @@ th {
 										type="text" name="keyWord" id="keyWord" value="${srFilterDto.keyWord}">
 									<button type="submit"
 										class="btn btn-sm btn-oti" style="margin-right: 10px; height: 30px;">
+
 										<i class="ti-search"></i>
 									</button>
 									<button class="btn btn-sm btn-oti" style="height: 30px;">엑셀
@@ -202,11 +203,17 @@ th {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>요청 번호 <a
+												<th>요청 번호
+												<c:if test="${sort eq 'DESC'}"> 
+													<a 
 													href="${pageContext.request.contextPath}/admin/srdemand/list"  class="sortBtnAsc"><i
-														class="ti-arrow-up" style="color: black;"></i></a> <a
+														class="ti-arrow-up" style="color: black;font-size: 24px;"></i></a> 
+														</c:if> <c:if test="${sort eq 'ASC'}">
+													<a
 													href="${pageContext.request.contextPath}/admin/srdemand/list" class="sortBtnDesc"><i
-														class="ti-arrow-down" style="color: black;"></i></a>
+														class="ti-arrow-down" style="color: black;font-size: 24px;"></i></a>
+												</c:if> 
+												
 												</th>
 												<th>제목</th>
 												<th>관련시스템</th>

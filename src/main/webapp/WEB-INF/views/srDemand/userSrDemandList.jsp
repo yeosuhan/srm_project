@@ -219,11 +219,18 @@ th {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>요청 번호 <a
+												<th>요청 번호 
+												<c:if test="${sort eq 'DESC'}">
+												<a
 													href="${pageContext.request.contextPath}/admin/srdemand/list"  class="sortBtnAsc"><i
-														class="ti-arrow-up" style="color: black;"></i></a> <a
+														class="ti-arrow-up" style="color: black;font-size:24px;"></i></a>
+												</c:if>
+												<c:if test="${sort eq 'ASC'}">
+												<a
 													href="${pageContext.request.contextPath}/admin/srdemand/list" class="sortBtnDesc"><i
-														class="ti-arrow-down" style="color: black;"></i></a>
+														class="ti-arrow-down" style="color: black;font-size:24px;"></i></a>
+												</c:if>
+
 												</th>
 												<th>제목</th>
 												<th>관련시스템</th>
@@ -345,7 +352,7 @@ th {
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">시스템구분</div>
-											<div class="col col-sm-6 sysNm">${sd.sysNm}</div>
+											<div class="col col-sm-8 sysNm">${sd.sysNm}</div>
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">업무구분</div>
@@ -355,7 +362,7 @@ th {
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청기관</div>
-											<div class="col col-sm-6 instNm">${sd.instNm}</div>
+											<div class="col col-sm-8 instNm">${sd.instNm}</div>
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청자</div>

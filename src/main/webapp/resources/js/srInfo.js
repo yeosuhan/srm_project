@@ -165,6 +165,7 @@ function getPlan() {
 			$("#SRPlBgngYmd").val(plan.bgngYmd);
 			$("#SRPlEndYmd").val(plan.endYmd);
 			$("#SRPlRvwCn").val(plan.rvwCn);
+			
 		}
 	});
 }
@@ -220,31 +221,49 @@ function getProgress() {
 			}
 			for (var i = 0; i < Progress.length; i++) {
 				if(Progress[i].endYmd==null || Progress[i].endYmd>=today) {
-					$("#btn"+i).show();
-					$("#SRPgBgngYmd"+i).remove();
-					$("#SRPgEndYmd"+i).remove();
-					$("#SRPgPrgrsRt"+i).remove();
-					$("#"+i+"bgngYmd").append($("<input type='date' id='SRPgBgngYmd"+i+"'>"));
-					$("#"+i+"endYmd").append($("<input type='date' id='SRPgEndYmd"+i+"'>"));
-					if(i==0) {
-						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='0' max='10'>"));
-					} else if(i==1) {
-						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='11' max='40'>"));
-					} else if(i==2) {
-						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='41' max='70'>"));
-					} else if(i==3) {
-						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='71' max='80'>"));
-					} else if(i==4) {
-						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='81' max='90'>"));
-					} else if(i==5) {
-						$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='91' max='100'>"));
+					if((Progress[i].prgrsRt!=10) || (Progress[i].prgrsRt!=40) || (Progress[i].prgrsRt!=70) || (Progress[i].prgrsRt!=80)||(Progress[i].prgrsRt!=90)||(Progress[i].prgrsRt!=100)) {
+						$("#btn"+i).show();
+						$("#SRPgBgngYmd"+i).remove();
+						$("#SRPgEndYmd"+i).remove();
+						$("#SRPgPrgrsRt"+i).remove();
+						$("#"+i+"bgngYmd").append($("<input type='date' id='SRPgBgngYmd"+i+"'>"));
+						$("#"+i+"endYmd").append($("<input type='date' id='SRPgEndYmd"+i+"'>"));
+						if(i==0) {
+							$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='0' max='10'>"));
+						} else if(i==1) {
+							$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='11' max='40'>"));
+						} else if(i==2) {
+							$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='41' max='70'>"));
+						} else if(i==3) {
+							$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='71' max='80'>"));
+						} else if(i==4) {
+							$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='81' max='90'>"));
+						} else if(i==5) {
+							$("#"+i+"rt").append($("<input type='number' class='form-control' id='SRPgPrgrsRt"+i+"'min='91' max='100'>"));
+						}
+						$("#SRPgSrNo").val(Progress[i].srNo);
+						$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
+						$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
+						$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
+						$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
+						document.getElementById('SRPgEndYmd' + i).setAttribute("min", $("#SRPgBgngYmd" + i).val());
+						if(i>0) {
+							var min=i-1;
+							document.getElementById('SRPgBgngYmd' + i).setAttribute("min", $("#SRPgEndYmd" + min).val());
+						}
+						
+					} else if((Progress[i].prgrsRt==10) || (Progress[i].prgrsRt==40) || (Progress[i].prgrsRt==70) || (Progress[i].prgrsRt==80)||(Progress[i].prgrsRt==90)||(Progress[i].prgrsRt==100)){
+						$("#btn"+i).hide();
+						$("#SRPgBgngYmd"+i).remove();
+						$("#SRPgEndYmd"+i).remove();
+						$("#SRPgPrgrsRt"+i).remove();
+						$("#"+i+"bgngYmd").append($("<input type='text' readonly class='form-control' style='width:100px;margin:0 auto;' id='SRPgBgngYmd"+i+"'>"));
+						$("#"+i+"endYmd").append($("<input type='text' readonly class='form-control' style='width:100px; margin:0 auto;'id='SRPgEndYmd"+i+"'>"));
+						$("#"+i+"rt").append($("<input type='text' readonly class='form-control' id='SRPgPrgrsRt"+i+"'>"));
+						$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
+						$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
+						$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
 					}
-					$("#SRPgSrNo").val(Progress[i].srNo);
-					$("#SRPgPrgrsId" + i).val(Progress[i].prgrsId);
-					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
-					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
-					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
-					document.getElementById('SRPgEndYmd' + i).setAttribute("min", $("#SRPgBgngYmd" + i).val());
 				} else if(Progress[i].endYmd<today) {
 					$("#btn"+i).hide();
 					$("#SRPgBgngYmd"+i).remove();
@@ -256,7 +275,12 @@ function getProgress() {
 					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
 					$("#SRPgEndYmd" + i).val(Progress[i].endYmd);
 					$("#SRPgPrgrsRt" + i).val(Progress[i].prgrsRt);
-				}	
+				}
+				if(Progress[i].bgngYmd<today) {
+					$("#SRPgBgngYmd"+i).remove();
+					$("#"+i+"bgngYmd").append($("<input type='text' readonly class='form-control' style='width:100px;margin:0 auto;' id='SRPgBgngYmd"+i+"'>"));
+					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
+				}
 			}
 			if(Progress[5].endYmd<today) {
 				$("#delbtn").hide();
@@ -274,10 +298,13 @@ function updateProgress0() {
 	var prgrsId = $("#SRPgPrgrsId0").val();
 	var endYmd = $("#SRPgEndYmd0").val();
 	var prgrsRt = $("#SRPgPrgrsRt0").val();
+	var prgrsSeNm = "요구정의";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -285,6 +312,7 @@ function updateProgress0() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -293,10 +321,13 @@ function updateProgress1() {
 	var prgrsId = $("#SRPgPrgrsId1").val();
 	var endYmd = $("#SRPgEndYmd1").val();
 	var prgrsRt = $("#SRPgPrgrsRt1").val();
+	var prgrsSeNm = "분석/설계";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -304,6 +335,7 @@ function updateProgress1() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -312,10 +344,13 @@ function updateProgress2() {
 	var prgrsId = $("#SRPgPrgrsId2").val();
 	var endYmd = $("#SRPgEndYmd2").val();
 	var prgrsRt = $("#SRPgPrgrsRt2").val();
+	var prgrsSeNm = "구현";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -323,6 +358,7 @@ function updateProgress2() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -331,10 +367,13 @@ function updateProgress3() {
 	var prgrsId = $("#SRPgPrgrsId3").val();
 	var endYmd = $("#SRPgEndYmd3").val();
 	var prgrsRt = $("#SRPgPrgrsRt3").val();
+	var prgrsSeNm = "테스트";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -342,6 +381,7 @@ function updateProgress3() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -350,10 +390,13 @@ function updateProgress4() {
 	var prgrsId = $("#SRPgPrgrsId4").val();
 	var endYmd = $("#SRPgEndYmd4").val();
 	var prgrsRt = $("#SRPgPrgrsRt4").val();
+	var prgrsSeNm = "반영요청";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -363,6 +406,7 @@ function updateProgress4() {
 			dmndNo:$("#SRDDmndNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -371,10 +415,13 @@ function updateProgress5() {
 	var prgrsId = $("#SRPgPrgrsId5").val();
 	var endYmd = $("#SRPgEndYmd5").val();
 	var prgrsRt = $("#SRPgPrgrsRt5").val();
+	var prgrsSeNm = "운영반영";
+	console.log(prgrsSeNm);
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
 		data : {
+			prgrsSeNm : prgrsSeNm,
 			prgrsRt : prgrsRt,
 			bgngYmd : bgngYmd,
 			endYmd : endYmd,
@@ -382,6 +429,7 @@ function updateProgress5() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
+			location.href = "/srinformation/list";
 		}
 	});
 }
@@ -408,6 +456,7 @@ function planUpdate() {
 			rvwCn : $("#SRPlRvwCn").val()
 		},
 		success : function(res) {
+			location.href = "/srinformation/list";
 		}
 	});
 }

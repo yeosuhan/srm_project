@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.member.dao.IMemberDao;
 import com.oti.team2.member.dto.Developer;
 import com.oti.team2.member.dto.FilterDto;
 import com.oti.team2.member.dto.Member;
+import com.oti.team2.member.dto.MemberDto;
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.util.pager.Pager;
 
@@ -122,16 +124,26 @@ public class MemberService implements IMemberService {
 		return memberDao.selectFlnmByMemberId(memberId);
 	}
 
+	/**
+	 * 아이디와 전화번호로 가입 유무 판단해서 비밀번호 찾기
+	 * 
+	 * @author 최은종 
+	 * 
+	 */
 	@Override
-	public int getPswd(Member member) {
-		log.info("비번찾기 서비스");
-	 int rows= memberDao.selectPswd(member);
-		return rows;
+	public String getPswd(MemberDto memberDto) {
+		return memberDao.selectPswd(memberDto);
 	}
 
-	@Override
-	public String updatePswd(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 비밀번호 찾기 후 임시 비밀번호로 업데이트
+	 * 
+	 * @author 최은종 
+	 * 
+	 */
+	@Transactional
+	public int updateNewPswd(MemberDto memberDto) {
+		int rows = memberDao.updateRandomPswd(memberDto);
+		return rows;
 	}
 }

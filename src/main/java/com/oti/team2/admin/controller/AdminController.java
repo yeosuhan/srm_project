@@ -307,6 +307,7 @@ public class AdminController {
 			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
 			@RequestParam(required = false, name = "keyWord")String keyWord,
 			@RequestParam(required = false, name = "hstryId")Integer hstryId) {
+		model.addAttribute("sort", sort);
 		log.info("sort : " + sort);
 		SrFilterDto srFilterDto = new SrFilterDto();
 		if(dmndYmdStart==null) {

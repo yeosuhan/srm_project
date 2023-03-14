@@ -6,6 +6,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script
+	src="${pageContext.request.contextPath}/resources/js/findPwModal.js"></script>
 <script>
 	
 </script>
@@ -24,36 +26,29 @@
 				<h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
 			</div>
 			<div class="modal-body">
-				<form class="form-material" id="findPswd" action="<c:url value='/member/findPwForm'/>" method="post">
+				<form class="form-material" id="findPswd"
+					action="<c:url value='/member/findPswd'/>" method="post">
 					<div class="form-group form-primary">
-						<input type="text" name="memberId"
-							class="form-control" required="" value=""> <span class="form-bar"></span>
-						<label class="float-label">아이디</label>
+						<input type="text" id="eml" name="eml" class="form-control"
+							required="" value=""> <span class="form-bar"></span> <label
+							class="float-label">이메일</label>
 					</div>
+					<input type="hidden" id="memberId" name="memberId"
+						class="form-control">
 					<div class="form-group form-primary">
-						<input type="text" name="telNo" class="form-control"
+						<input type="text" id="telNo" name="telNo" class="form-control"
 							required="" value=""> <span class="form-bar"></span> <label
 							class="float-label">전화번호</label>
 					</div>
 				</form>
 			</div>
-			<!-- 만약 올바른 이름과 전화번호를 입력하면 보여질 내용 !!!!!!!!!!!!! -->
-			<c:if test="${randomPw ne null}">	
 			<div style="margin: 20px; font-size: 12px; color: orangered;">
-				<span> 확인되었습니다.</span></br> <span> 임시 비밀번호가 ${randomPw} 로 설정되었습니다.</span></br> <span>로그인
-					후 비밀번호를 변경해주세요.</span>
+				<span> 회원정보와 일치하면 임시 비밀번호가 이메일로 발급됩니다.</span></br>
 			</div>
-					</c:if>
-					
-								<c:if test="${randomPw eq null}">	
-			<div style="margin: 20px; font-size: 12px; color: orangered;">
-				<span> 확인되었습니다.</span></br> <span> ${undefinedUserMessage} </span></br> <span>로그인
-					후 비밀번호를 변경해주세요.</span>
-			</div>
-					</c:if>
-					
+
 			<div class="modal-footer" align="center">
-				<button type="submit" form="findPswd" formmethod="post" class="btn btn-oti">확인</button>
+				<button type="submit" form="findPswd" formmethod="post"
+					onclick="checkVal()" class="btn btn-oti">확인</button>
 			</div>
 		</div>
 	</div>

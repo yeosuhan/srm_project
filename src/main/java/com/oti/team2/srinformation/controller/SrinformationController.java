@@ -2,6 +2,9 @@ package com.oti.team2.srinformation.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oti.team2.progress.dto.Prgrs;
+import com.oti.team2.progress.service.IProgressService;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.srinformation.dto.Dept;
@@ -42,6 +47,9 @@ public class SrinformationController {
 	ISrDemandService srDemandService;
 
 	@Autowired
+	IProgressService progressService;
+
+	@Autowired
 	ISrResourceService srResourceService;
 
 	@Autowired
@@ -59,17 +67,33 @@ public class SrinformationController {
 		if (srInfoFilter.isMySrOnly()) {
 			srInfoFilter.setEmpId(auth.getName());
 		}
+		model.addAttribute("sort", sort);
+		List<Prgrs> prgrs = progressService.getRrgrs();
+
 		log.info(srInfoFilter);
 		int totalRows = srinformationService.getTotalRow(page, srInfoFilter);
 		Pager pager = new Pager(totalRows, page);
 		log.info(pager);
 		// log.info(totalRows);
 		if (totalRows != 0) {
-
 			List<SrinformationList> srlist = srinformationService.getList(pager, srInfoFilter, sort);
 			SrdemandDetail sd = srDemandService.getSrDemandDetail(srlist.get(0).getDmndNo());
 			SrplanInformation sp = srinformationService.getPlan(srlist.get(0).getDmndNo());
 			List<Dept> deptList = srinformationService.getDeptList();
+			/*
+			 * log.info("sd 상세 : " + sd); log.info("진척목록: " + srlist); log.info("개발부서 목록: "
+			 * + deptList);
+			 */
+			for (int i = 0; i < srlist.size(); i++) {
+				if (!((srlist.get(i).getSttsNm().equals("접수")) || (srlist.get(i).getSttsNm().equals("개발취소"))
+						|| (srlist.get(i).getSttsNm().equals("반려")))) {
+					for (int j = 0; j < prgrs.size(); j++) {
+						if (prgrs.get(j).getSrNo().equals(srlist.get(i).getSrNo())) {
+							srlist.get(i).setPrgrsRt(prgrs.get(j).getPrgrsRt());
+						}
+					}
+				}
+			}
 			log.info("srlist: " + srlist);
 			/*
 			 * log.info("sd 상세 : " + sd); log.info("진척목록: " + srlist); log.info("개발부서 목록: "
@@ -95,7 +119,7 @@ public class SrinformationController {
 	public SrTotal getDetail(@PathVariable("dmndNo") String dmndNo, Authentication auth) {
 		SrTotal total = null;
 		int isDnumExists = 0;
-
+		
 		SrdemandDetail dd = srDemandService.getSrDemandDetail(dmndNo);
 		SrplanInformation pi = srinformationService.getPlan(dmndNo);
 
@@ -114,7 +138,7 @@ public class SrinformationController {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 
 		total = new SrTotal(dd, pi, isDnumExists, role);
-
+		
 		log.info("dd 목록: " + dd);
 		log.info("pi 목록: " + pi);
 		log.info("total 목록: " + total);	
@@ -158,4 +182,33 @@ public class SrinformationController {
 		return flnm;
 	}
 
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-13
+	 * @return sr진척 목록 엑셀 다운로드
+	 * @throws Exception 
+	 */
+	@GetMapping(value = "/excel")
+	public void downloadExcel(Model model,@ModelAttribute SrInfoFilter srInfoFilter, Authentication auth,
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		log.info("엑셀 가자잇 ");
+		if (srInfoFilter.isMySrOnly()) {
+			srInfoFilter.setEmpId(auth.getName());
+		}
+		model.addAttribute("sort", sort);
+		List<Prgrs> prgrs = progressService.getRrgrs();
+		List<SrinformationList> srlist = srinformationService.getExcelList(srInfoFilter, sort);
+		for (int i = 0; i < srlist.size(); i++) {
+			if (!((srlist.get(i).getSttsNm().equals("접수")) || (srlist.get(i).getSttsNm().equals("개발취소"))
+					|| (srlist.get(i).getSttsNm().equals("반려")))) {
+				for (int j = 0; j < prgrs.size(); j++) {
+					if (prgrs.get(j).getSrNo().equals(srlist.get(i).getSrNo())) {
+						srlist.get(i).setPrgrsRt(prgrs.get(j).getPrgrsRt());
+					}
+				}
+			}
+		}
+		srinformationService.downloadExcel(srlist,request,response);
+	}
 }

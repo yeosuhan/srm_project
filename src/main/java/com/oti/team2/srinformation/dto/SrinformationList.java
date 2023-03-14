@@ -28,4 +28,8 @@ public class SrinformationList {
 	//진행상태 테이블 - 진행상태
 	private String sttsNm;
 	
+	//진척률 테이블
+	private String prgrsSeNm;
+	private int prgrsRt;
+	
 }

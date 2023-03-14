@@ -207,11 +207,9 @@ li:before {
 						<form id="srInfoFilterForm"
 							action="${pageContext.request.contextPath}/srinformation/list"
 							onsubmit="return srSearch()">
-							<div class="col col-xl-1" style="width: 90px;">
-								시스템 구분<br /> <br /> <br />업무 구분
-							</div>
-
+							<div class="col col-xl-1" style="width: 90px;">시스템 구분</div>
 							<div class="col col-xl-2" style="padding: 0px; width: 200px;">
+
 								<div class="dropdown dropdown open">
 									<select name="sysCd" id="sysCdFilter" onclick="getSysCd()"
 										onchange="removeTaskSeCd()" style="width: 200px;">
@@ -221,50 +219,45 @@ li:before {
 													test="${sd.sysNm eq null}">${srInfoFilter.sysCd}</c:if></option>
 										</c:if>
 									</select>
-
-								</div>
-								<br /> <br />
-								<div class="dropdown dropdown open" style="float: left;">
-									<select name="taskSeCd" id="taskSeCdFilter"
-										onclick="getTaskSeCd()">
-										<c:if test="${srInfoFilter.taskSeCd ne null}">
-											<option value="${srInfoFilter.taskSeCd}">${sd.taskSeNm}<c:if
-													test="${sd.taskSeNm}">${srInfoFilter.taskSeCd}</c:if></option>
-										</c:if>
-									</select>
-
 								</div>
 							</div>
-
+							<div class="col col-xl-1" style="width: 80px;">업무 구분</div>
+							<div class="dropdown dropdown open" style="float: left;">
+								<select name="taskSeCd" id="taskSeCdFilter"
+									onclick="getTaskSeCd()" style="width: 120px;">
+									<c:if test="${srInfoFilter.taskSeCd ne null}">
+										<option value="${srInfoFilter.taskSeCd}">${sd.taskSeNm}<c:if
+												test="${sd.taskSeNm}">${srInfoFilter.taskSeCd}</c:if></option>
+									</c:if>
+								</select>
+							</div>
 							<div class="col col-xl-1" style="width: 80px;">진행 상태</div>
 							<div class="col col-xl-1" style="">
 								<div class="dropdown dropdown open">
-
 									<select name="sttsCd" id="sttsCdFilter">
 										<option value="">전체</option>
 										<option value="3"
-											<c:if test="${srInfoFilter.sttsCd eq 3}"> selected</c:if>>개발중</option>
+											<c:if test="${srInfoFilter.sttsCd eq 3}"> selected</c:if>>구현</option>
 										<option value="4"
 											<c:if test="${srInfoFilter.sttsCd eq 4}"> selected</c:if>>테스트</option>
 										<option value="5"
-											<c:if test="${srInfoFilter.sttsCd eq 5}"> selected</c:if>>반영
-											요청</option>
+											<c:if test="${srInfoFilter.sttsCd eq 5}"> selected</c:if>>운영반영</option>
 									</select>
-
 								</div>
 							</div>
 							<div class="col col-xl-1"
+<<<<<<< HEAD
 								style="width: 80px; padding-left: 20px;">
 								SR 제목 <br /> <br /> <br />요청 번호
 							</div>
+=======
+								style="width: 80px; padding-left: 20px;">SR 제목</div>
+>>>>>>> branch 'main' of https://github.com/OTI-SRM/srm_project.git
 							<div class="col col-xl-2" style="">
 								<input type="text" class="form-control" name="ttl"
-									value="${srInfoFilter.ttl}"> <br /> <input type="text"
-									class="form-control" name="dmndNo"
-									value="${srInfoFilter.dmndNo}">
+									value="${srInfoFilter.ttl}"> <br />
 							</div>
-
-							<div class="col col-xl-2" style="padding-left: 30px">
+							<div class="col col-xl-1" style="padding-left: 30px">
 								내 처리건
 								<c:if test="${srInfoFilter.mySrOnly eq true}">
 									<input type="checkbox" name="mySrOnly" value="true" checked>
@@ -280,17 +273,17 @@ li:before {
 								</button>
 							</div>
 							<div class="col col-xl-1">
-								<button class="btn btn-oti"
+								<button class="btn btn-oti" type="submit"
+								value="" onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/excel';"
 									style="float: right; margin-left: 50px;">엑셀 다운로드</button>
 							</div>
 						</form>
-
 					</div>
 				</div>
 			</div>
 			<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card">
+				<div class="card"style="height:773px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
 						<div class="card-header-right">
@@ -302,7 +295,7 @@ li:before {
 						</div>
 					</div>
 					<div class="card-block" id="list">
-						<div id="sales-analytics" class="p-2">
+						<div id="sales-analytics">
 							<div class="card-block table-border-style">
 								<div class="table-responsive">
 									<table class="table table-hover text-center"
@@ -310,11 +303,15 @@ li:before {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>SR번호 <a
-													href="${pageContext.request.contextPath}/srinformation/list?sort=ASC"><i
-														class="ti-arrow-up" style="color: black;"></i></a> <a
-													href="${pageContext.request.contextPath}/srinformation/list?sort=DESC"><i
-														class="ti-arrow-down" style="color: black;"></i></a>
+												<th>SR번호 
+												<c:if test="${sort eq 'DESC'}">
+													<a href="${pageContext.request.contextPath}/srinformation/list?sort=ASC"><i
+														class="fas fa-caret-up" style="color: black;font-size:24px;"></i></a>
+												</c:if>
+												<c:if test="${sort eq 'ASC'}">
+												<a href="${pageContext.request.contextPath}/srinformation/list?sort=DESC"><i
+														class="fas fa-caret-down" style="color: black;font-size:24px;"></i></a>
+												</c:if>
 												</th>
 												<th>시스템구분</th>
 												<th>업무구분</th>
@@ -347,21 +344,32 @@ li:before {
 														<td>${srlist.flnm}</td>
 														<td>${srlist.bgngYmd}</td>
 														<td>${srlist.endYmd}</td>
-														<td><c:if test="${(srlist.sttsNm) eq '요청'}">
-																<label class="badge badge-warning">${srlist.sttsNm}</label>
-															</c:if> <c:if test="${(srlist.sttsNm) eq '반려'}">
-																<label class="badge badge-danger">${srlist.sttsNm}</label>
-															</c:if> <c:if test="${(srlist.sttsNm) eq '접수'}">
-																<label class="badge badge-inverse-success">${srlist.sttsNm}</label>
-															</c:if> <c:if test="${(srlist.sttsNm) eq '개발중'}">
-																<label class="badge badge-success">${srlist.sttsNm}</label>
-															</c:if> <c:if test="${(srlist.sttsNm) eq '개발완료'}">
-																<label class="badge badge-primary">${srlist.sttsNm}</label>
-															</c:if> <c:if test="${(srlist.sttsNm) eq '개발취소'}">
-																<label class="badge badge-danger">${srlist.sttsNm}</label>
-															</c:if> <c:if test="${(srlist.sttsNm) eq '테스트'}">
-																<label class="badge badge-inverse-primary">${srlist.sttsNm}</label>
-															</c:if></td>
+														<td>
+															<c:if test="${srlist.prgrsRt  ge 0}">
+																<c:if test="${(srlist.prgrsRt  ge 1) && (srlist.prgrsRt le 10)}">
+																	<label class="badge badge-info">요구정의</label>
+																</c:if> <c:if test="${(srlist.prgrsRt  ge 11) && (srlist.prgrsRt le 40)}">
+																	<label class="badge badge-warning">분석/설계</label>
+																</c:if> <c:if test="${(srlist.prgrsRt  ge 41) && (srlist.prgrsRt le 70)}">
+																	<label class="badge badge-success">구현</label>
+																</c:if> <c:if test="${(srlist.prgrsRt  ge 71) && (srlist.prgrsRt le 80)}">
+																	<label class="badge badge-inverse-success">테스트</label>
+																</c:if> <c:if test="${(srlist.prgrsRt  ge 81) && (srlist.prgrsRt le 90)}">
+																	<label class="badge badge-inverse-primary">반영요청</label>
+																</c:if> <c:if test="${(srlist.prgrsRt  ge 91) && (srlist.prgrsRt le 100)}">
+																	<label class="badge badge-primary">운영반영</label>
+																</c:if> 
+															</c:if>
+															<c:if test="${srlist.prgrsRt eq 0}">
+																<c:if test="${(srlist.sttsNm) eq '접수'}">
+																	<label class="badge label-inverse-info">접수</label>
+																</c:if><c:if test="${srlist.sttsNm eq '개발취소'}">
+																	<label class="badge badge-inverse-danger">개발취소</label>
+																</c:if><c:if test="${srlist.sttsNm eq '반려'}">
+																	<label class="badge badge-danger">반려</label>
+																</c:if>
+															</c:if>
+														</td>
 													</tr>
 												</c:forEach>
 											</c:if>
@@ -566,7 +574,6 @@ li:before {
 											</c:forEach>
 										</select> <input type="hidden" id="SRPlDeptNm">
 									</div>
-
 								</div>
 								<div class="col-sm-6">
 									<div class="col col-sm-4">담당자</div>
@@ -602,7 +609,6 @@ li:before {
 							<button class="btn btn-oti" onclick="planUpdate()" id="planBtn"
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
 						</div>
-
 						<%-- *********************************** [ 자원정보 ] ***********************************--%>
 						<div class="tab-pane" id="profile1" role="tabpanel"
 							style="padding-bottom: 20px;">
@@ -664,8 +670,8 @@ li:before {
 													</td>
 													<td id="0bgngYmd"><input type="date" id="SRPgBgngYmd0"></td>
 													<td id="0endYmd"><input type="date" id="SRPgEndYmd0"></td>
-													<td id="0rt"><input type="number" class="form-control"
-														id="SRPgPrgrsRt0" min="0" max="10"></td>
+													<td id="0rt"><p><input type="number" class="form-control"
+														id="SRPgPrgrsRt0" min="1" max="10" placeholder="1~10이하 범위의 진척률을 입력하세요"></p></td>
 													<td><div class="accordion" id="accordionExample">
 															<button class="btn btn-link btn-block text-center"
 																type="button" data-toggle="collapse"
@@ -700,7 +706,6 @@ li:before {
 																	</tr>
 																</thead>
 																<tbody>
-
 																</tbody>
 															</table>
 														</div>
@@ -747,7 +752,6 @@ li:before {
 																	</tr>
 																</thead>
 																<tbody>
-
 																</tbody>
 															</table>
 														</div>
@@ -794,7 +798,6 @@ li:before {
 																	</tr>
 																</thead>
 																<tbody>
-
 																</tbody>
 															</table>
 														</div>
@@ -814,7 +817,6 @@ li:before {
 																data-target="#collapse3" aria-expanded="true"
 																aria-controls="collapse3">첨부파일</button>
 														</div>
-
 													</td>
 													<td style="padding: 0px; margin: 0px;">
 														<button class="btn btn-oti btn-lg"
@@ -844,7 +846,6 @@ li:before {
 																	</tr>
 																</thead>
 																<tbody>
-
 																</tbody>
 															</table>
 														</div>
@@ -891,7 +892,6 @@ li:before {
 																	</tr>
 																</thead>
 																<tbody>
-
 																</tbody>
 															</table>
 														</div>

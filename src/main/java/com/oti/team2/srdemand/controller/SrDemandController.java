@@ -121,6 +121,7 @@ public class SrDemandController {
 			@RequestParam(required = false, name = "keyWord")String keyWord,
 			@RequestParam(required = false, name = "hstryId")Integer hstryId) {
 		log.info("sort : " + sort);
+		model.addAttribute("sort", sort);
 		String memberId = auth.getName();
 		SrFilterDto srFilterDto = new SrFilterDto();
 		if(dmndYmdStart==null) {
