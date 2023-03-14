@@ -21,6 +21,42 @@
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
 	<div class="page-body button-page">
+	<div class="row">
+			<div class="col-xl-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="row">
+							<div class="col-10">
+								<h5>공지사항</h5>
+							</div>
+						</div>
+						<hr />
+						<form id="boardSearchForm">
+							<div class="row">
+								<div class="col col-3 pr-0">
+									<label for="dmndYmdStart" style="margin-right: 10px;">조회
+										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart">
+									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd">
+								</div>								
+								<div class="col col-3 px-0">
+									<label for="wrtrNm" style="margin-right: 10px;">작성자</label> <input
+										type="text" name="wrtrNm" id="keyWord">
+								</div>
+								<div class="col col-4 px-0">
+									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
+										type="text" name="keyWord" id="keyWord">
+									<button type="submit" class="btn btn-sm btn-oti"
+										style="margin-right: 10px; height: 30px;">
+										<i class="ti-search"></i>
+									</button>
+								</div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-sm-5" id="noticeList">
 				<!-- 공지사항 목록 -->

@@ -13,6 +13,7 @@ import com.oti.team2.attachment.dto.AttachResponseDto;
 import com.oti.team2.attachment.service.IAttachmentService;
 import com.oti.team2.board.dao.IBoardDao;
 import com.oti.team2.board.dto.Board;
+import com.oti.team2.board.dto.BoardFilterDto;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
 import com.oti.team2.board.dto.BoardUpdateDto;
@@ -58,16 +59,16 @@ public class BoardService implements IBoardService {
 	 * 공지사항/문의게시판 목록 페이징 처리
 	 * @author 신정은
 	 */
-	public int getTotalRow(String type, String clientId) {
-		return boardDao.countTotalByBbsType(type, clientId);
+	public int getTotalRow(String type, String clientId, BoardFilterDto boardFilterDto) {
+		return boardDao.countTotalByBbsType(type, clientId, boardFilterDto);
 	}
 	
 	/**
 	 * 공지사항/문의게시판 목록 조회
 	 * @author 신정은
 	 */
-	public List<BoardListDto> getBoardList(String type, String clientId, Pager pager) {
-		return boardDao.selectBoardListByBbsType(type, clientId, pager);
+	public List<BoardListDto> getBoardList(String type, String clientId, Pager pager, BoardFilterDto boardFilterDto) {
+		return boardDao.selectBoardListByBbsType(type, clientId, pager, boardFilterDto);
 	}
 	
 	/**
@@ -121,16 +122,16 @@ public class BoardService implements IBoardService {
 	 * 관련개발자의 문의게시글의 총 행수
 	 * @author 신정은
 	 */
-	public int getcountByEmpId(String empId) {
-		return boardDao.countByEmpId(empId);
+	public int getcountByEmpId(String empId, BoardFilterDto boardFilterDto) {
+		return boardDao.countByEmpId(empId, boardFilterDto);
 	}
 	
 	/**
 	 * 관련개발자의 문의게시판 목록 조회
 	 * @author 신정은
 	 */
-	public List<BoardListDto> getBoardListByEmpId(String empId, Pager pager) {
-		return boardDao.selectBoardByEmpId(empId, pager);
+	public List<BoardListDto> getBoardListByEmpId(String empId, Pager pager,  BoardFilterDto boardFilterDto) {
+		return boardDao.selectBoardByEmpId(empId, pager, boardFilterDto);
 	}
 
 }
