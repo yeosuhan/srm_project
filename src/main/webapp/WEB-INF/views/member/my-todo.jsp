@@ -26,7 +26,7 @@
 	<div class="page-body">
 		<div class="row">
 			<!-- Color Open Accordion start -->
-			<div class="col-lg-8">
+			<div class="col-lg-12">
 				<div class="card" id="mytodo">
 					<div class="card-header">
 						<h5 class="card-header-text">나의 할일</h5>
@@ -80,15 +80,17 @@
 					</div>
 				</div>
 			</div>
-			<<div class="col-lg-4"></div>
 		</div>
 		<div class="row">
 			<!-- 공지사항 게시판 -->
-			<div class="col-lg-6" id="noticeList">
+			<div class="col-lg-4" id="noticeList">
 				<jsp:include page="/WEB-INF/views/mytodo/notice.jsp" />
 			</div>
 			<!-- qna 게시판 -->
-			<div class="col-lg-6" id="qnaList">
+			<div class="col-lg-4" id="qnaList">
+				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
+			</div>
+			<div class="col-lg-4" id="qnaList">
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
 		</div>

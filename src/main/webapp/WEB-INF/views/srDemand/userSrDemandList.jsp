@@ -12,6 +12,7 @@
 	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 <script
 	src="${pageContext.request.contextPath}/resources/js/srDemandListHstry.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 <script>
 	
 <%-- 모달 실행 --%>
@@ -386,10 +387,12 @@ th {
 												<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
 											</div>
 										</div>
-										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
-											<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
-										</div>
+										<c:if test="${sd.sttsCd gt 1}">
+											<div class="col-sm-6 px-0">
+												<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
+												<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
+											</div>
+										</c:if>
 									</div>
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
@@ -488,9 +491,6 @@ th {
 	<!-- Page body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
-	<%-- 상세, 등록, 수정 --%>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 	<!-- 모달 -->
 	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
 	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>

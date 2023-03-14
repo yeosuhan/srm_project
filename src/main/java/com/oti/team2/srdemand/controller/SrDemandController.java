@@ -185,6 +185,7 @@ public class SrDemandController {
 		model.addAttribute("sd", sd);
 		model.addAttribute("prgrsRt", prgrsRt);
 		if(auth.getAuthorities().stream().findFirst().get().toString().equals(Auth.ROLE_CLIENT.toString())) {
+			log.info("여기~");
 			return "srDemand/user/srDetail";
 		}
 		return "srDemand/admin/adSrDetail";

@@ -5,22 +5,22 @@
 <div class="card_body" id="sddetail"
 	style="font-size: 12px; padding-top: 20px;">
 	<div class="form-group row">
-		<div class="col col-sm-2 px-0 font-weight-bold">SR번호</div>
+		<div class="col col-sm-2 px-0 font-weight-bold">요청번호</div>
 		<div class="col col-sm-9">
-			<div type="text" class="form-control dmndNo"
+			<div type="text" class="dmndNo font-weight-bold"
 				style="font-size: 12px; width: 325px;">${sd.dmndNo}</div>
 		</div>
 	</div>
 	<div class="form-group row">
-		<div class="col col-sm-2 font-weight-bold px-0">SR 제목</div>
+		<div class="col col-sm-2 font-weight-bold px-0 ">SR 제목</div>
 		<div class="col col-sm-9">
-			<div type="text" class="form-control ttl" style="width: 325px;">${sd.ttl}</div>
+			<div type="text" class="ttl" style="width: 325px;">${sd.ttl}</div>
 		</div>
 	</div>
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold px-0">관련 근거</div>
 		<div class="col col-sm-9">
-			<div type="text" class="form-control relGrund" style="width: 325px;">${sd.relGrund}</div>
+			<textarea class="relGrund" style="width: 100%;">${sd.relGrund}</textarea>
 		</div>
 	</div>
 	<div class="form-group row">
@@ -54,72 +54,93 @@
 			<div class="col col-sm-8 cmptnDmndYmd">${sd.cmptnDmndYmd}</div>
 		</div>
 	</div>
-	<div class="form-group row">
-		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
-			<div class="col col-sm-6">
-				<div type="text" class="form-control picNm">${sd.picNm}</div>
+	<c:if test="${sd.sttsCd gt 1}">
+		<div class="form-group row">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
+				<div class="col col-sm-6">
+					<div type="text" class="picNm">${sd.picNm}</div>
+				</div>
+			</div>
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
+				<div class="col col-sm-8">
+					<div type="text" class="deptNm" style="width: 90%;">${sd.deptNm}</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
-			<div class="col col-sm-8">
-				<div type="text" class="form-control deptNm" style="width: 90%;">${sd.deptNm}</div>
-			</div>
-		</div>
-	</div>
+	</c:if>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">진행 상태</div>
 			<div class="col col-sm-6">
-				<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
+				<div type="text" class="sttsNm">${sd.sttsNm}</div>
 			</div>
 		</div>
-		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
-			<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
-		</div>
+		<c:if test="${sd.sttsCd gt 1}">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
+				<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
+			</div>
+		</c:if>
 	</div>
 	<div class="form-group row">
-		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
-			<div class="col col-sm-6">
-				<div class="form-control rvwrNm">${sd.rvwrNm}</div>
+		<c:if test="${sd.sttsCd gt 0}">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
+				<div class="col col-sm-6">
+					<div class="rvwrNm">${sd.rvwrNm}</div>
+				</div>
+			</div>
+		</c:if>
+		<c:if test="${sd.sttsCd == 0}">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">우선순위</div>
+				<div class="col col-sm-6">
+					<select id="rnk">
+						<option value="상" selected>상</option>
+						<option value="중">중</option>
+						<option value="하">하</option>
+					</select>
+				</div>
+			</div>
+		</c:if>
+		<c:if test="${sd.sttsCd gt 1}">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">우선순위</div>
+				<div class="col col-sm-6">${sd.rnk}</div>
+			</div>
+		</c:if>
+	</div>
+	<c:if test="${sd.sttsCd == 1}">
+		<div class="form-group row">
+			<label id="companion"
+				class="col-sm-2 col-form-label px-0 font-weight-bold"
+				style="line-height: 100px; font-size: 12px;">반려사유</label>
+			<div class="col-sm-9">
+				<textarea class="form-control cn" style="height: 100px; width: 325px;">${sd.rjctRsn}</textarea>
 			</div>
 		</div>
-		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold">우선순위</div>
-			<div class="col col-sm-6">
-				<select id="rnk">
-					<option value="상" selected>상</option>
-					<option value="중">중</option>
-					<option value="하">하</option>
-				</select>
+	</c:if>
+	<div class="form-group row">
+			<label class="col-sm-2 px-0 col-form-label font-weight-bold"
+				style="line-height: 100px; font-size: 12px;">SR 내용</label>
+			<div class="col-sm-9">
+				<textarea class="form-control cn" style="width: 100%;"
+					>${sd.cn}</textarea>
 			</div>
-		</div>
 	</div>
 	<div class="form-group row">
-		<label id="companion"
-			class="col-sm-2 col-form-label px-0 font-weight-bold"
-			style="line-height: 100px; font-size: 12px;">반려사유</label>
-		<div class="col-sm-9">
-			<input class="form-control rjctRsn" id="srRjctRsn"
-				style="height: 100px; width: 325px;" value="${sd.rjctRsn}"></input>
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-2 px-0 col-form-label font-weight-bold"
-			style="line-height: 100px; font-size: 12px;">SR 내용</label>
-		<div class="col-sm-9">
-			<input class="form-control cn" style="height: 100px; width: 325px;"
-				value="${sd.cn}"></input>
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-2 px-0 col-form-label font-weight-bold"
-			style="font-size: 12px;">첨부파일</label>
-		<div class="col-sm-9">
-			<input type="file" class="">
+		<p class="col-sm-2 font-weight-bold">첨부파일</p>
+		<div class="col-sm-10">
+			<c:forEach var="f" items="${sd.attachFile}">
+				<div>
+					<a href="<c:url value='/file/download/${f.fileSn}' />"> <span
+						class="glyphicon glyphicon-save" aria-hidden="true"></span> <span>
+							${f.orgnlFileNm} </span><span style="ml-3">   ${f.fileSz} Bytes</span>
+					</a> 
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	<div class="row" id="adminButtonDiv">

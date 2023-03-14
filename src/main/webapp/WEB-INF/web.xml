@@ -65,7 +65,7 @@
 	
 	<!-- 세션 만료시간 설정  : 분 -->
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
 	<!-- 404 error 처리 설정 -->
 

@@ -4,7 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="${pageContext.request.contextPath}/resources/js/alert.js"></script>
-
 <sec:authorize access="isAuthenticated()">
 	<script>
 		$(function() {
@@ -20,26 +19,22 @@
 						localStorage.setItem('logintime', "" + (parseInt(localStorage.getItem('logintime'), 10)-1));
 					} else {
 						//로그아웃 요청
-						//~
-						//
 						$.ajax({
 							url : "/logout",
 							type : "POST",
 							success : function(res) {
 								localStorage.removeItem('logintime');
 								localStorage.setItem('logintime', "${pageContext.session.maxInactiveInterval}");
-								location.href="/loginForm";
+								//location.href="/loginForm";
+								showOtiAlert();
+								localStorage.removeItem('logintime');
+								clearInterval(timer);
 							}
 						});
 						
-						localStorage.removeItem('logintime');
-						clearInterval(timer);
 					}			
 				}, 1000);
-				
-				console.log("로그아웃 처리");
-				
-													
+																				
 			} else {
 				localStorage.removeItem('logintime');
 				localStorage.setItem('logintime', "${pageContext.session.maxInactiveInterval}");
@@ -77,6 +72,7 @@
 </sec:authorize>
 
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
+<jsp:include page="/WEB-INF/views/fragments/otiAlert.jsp" />
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
@@ -122,13 +118,15 @@
 							<div id="sessionExpiry"></div>
 						</li>
 					</ul>
-					<ul class="nav justify-content-center m-au">
+					<ul class="nav-left ml-5">
 						<li style="color: white; margin: auto;justify-content: center; font-weight: bolder; font-size: 18px;">
 							세션 만료시간 <span id="loginTime" ></span>
-						</li>
+						</li> 
+					</ul>
+					<ul class="nav-left">
 						<li><button class="btn btn-sm btn-oti"
-								style="background-color: #4C1342; margin-top: 10px;"
-								onclick="resetLoginTime()">로그인 시간 연장</button></li>
+									style="background-color: #4C1342; margin-top: 10px;"
+									onclick="resetLoginTime()">로그인 시간 연장</button></li>
 					</ul>
 					<ul class="nav-right">
 						<%-- 알림 --%>
