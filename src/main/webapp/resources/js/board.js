@@ -78,7 +78,20 @@ function deleteFile(fileSn) {
 	});
 }
 
-
+//게시판 필터링
+function boardSearch() {
+	$("#boardSearchForm input").each((index,value)=>{
+		if(!$(value).val()){
+			$(value).prop("disabled",true);
+		}
+	});
+	$("#boardSearchForm select").each((index,value)=>{
+		if(!$(value).children("option:selected").val()||$(value).children(" option").length==0){
+			$(value).prop("disabled",true);
+		}
+	});
+	return true;
+}
 
 /*******************   Qna board ****************/
 function writeQna() {

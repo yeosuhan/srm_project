@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.board.dto.Board;
+import com.oti.team2.board.dto.BoardFilterDto;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
 import com.oti.team2.board.dto.BoardUpdateDto;
@@ -21,13 +22,13 @@ public interface IBoardDao {
 	 * 공지사항/문의게시판 목록 페이징 처리
 	 * @author 신정은
 	 */
-	int countTotalByBbsType(@Param("type")String type, @Param("clientId")String clientId);
+	int countTotalByBbsType(@Param("type")String type, @Param("clientId")String clientId, @Param("boardFilterDto") BoardFilterDto boardFilterDto);
 	
 	/**
 	 * 공지사항/문의게시판 목록 조회
 	 * @author 신정은
 	 */
-	List<BoardListDto> selectBoardListByBbsType(@Param("type")String type, @Param("clientId")String clientId, @Param("pager")Pager pager);
+	List<BoardListDto> selectBoardListByBbsType(@Param("type")String type, @Param("clientId")String clientId, @Param("pager")Pager pager, @Param("boardFilterDto") BoardFilterDto boardFilterDto);
 	
 	/**
 	 * 공지사항/문의게시판 + 첨부파일  상세 조회
@@ -63,13 +64,13 @@ public interface IBoardDao {
 	 * 관련개발자의 문의게시글의 총 행수
 	 * @author 신정은
 	 */
-	int countByEmpId(@Param("empId")String empId);
+	int countByEmpId(@Param("empId")String empId, @Param("boardFilterDto") BoardFilterDto boardFilterDto);
 	
 	/**
 	 * 관련개발자의 문의게시판 목록 조회
 	 * @author 신정은
 	 */
-	List<BoardListDto> selectBoardByEmpId(@Param("empId")String empId, @Param("pager")Pager pager);
+	List<BoardListDto> selectBoardByEmpId(@Param("empId")String empId, @Param("pager")Pager pager, @Param("boardFilterDto") BoardFilterDto boardFilterDto);
 	
 	/**
 	 * 문의글 답변 등록시 상태 수정

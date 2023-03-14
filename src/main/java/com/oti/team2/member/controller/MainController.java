@@ -55,8 +55,8 @@ public class MainController {
 		int histotal = 0; // 히스토리
 
 		// 공지사항
-		nPager = new Pager(boardService.getTotalRow("notice", null), 1);
-		noticeList = boardService.getBoardList("notice", null, nPager);
+		nPager = new Pager(boardService.getTotalRow("notice", null, null), 1);
+		noticeList = boardService.getBoardList("notice", null, nPager, null);
 
 		if (role.equals(Auth.ROLE_CLIENT.toString())) {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 0, 1);
@@ -71,8 +71,8 @@ public class MainController {
 			histotal = srInformationHistoryService.getCountTodoForCust(auth.getName());
 			srList = srdemandService.getMytodoSrList(auth.getName(), null, 0, pager);
 			// 게시글
-			qPager = new Pager(boardService.getTotalRow("qna", memberId), 1);
-			qnaList = boardService.getBoardList("qna", memberId, qPager);
+			qPager = new Pager(boardService.getTotalRow("qna", memberId, null), 1);
+			qnaList = boardService.getBoardList("qna", memberId, qPager, null);
 			
 		} else if (role.equals(Auth.ROLE_DEVELOPER.toString())) {
 			pager = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 3, 1);
@@ -88,8 +88,8 @@ public class MainController {
 			// 히스토리 총 수 가져와야 됨
 			histotal = srInformationHistoryService.getCountTodoForDev(auth.getName(), auth.getName());
 			// 게시글
-			qPager = new Pager(boardService.getcountByEmpId(memberId), 1);
-			qnaList = boardService.getBoardListByEmpId(memberId, qPager);
+			qPager = new Pager(boardService.getcountByEmpId(memberId, null), 1);
+			qnaList = boardService.getBoardListByEmpId(memberId, qPager, null);
 
 		} else {
 			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(null, auth.getName(), 0, 1);
@@ -105,8 +105,8 @@ public class MainController {
 			// 히스토리 총 수 가져와야 됨
 			histotal = srInformationHistoryService.getCountTodoForAdmin(auth.getName());
 			// 게시글
-			qPager = new Pager(boardService.getTotalRow("qna", null), 1);
-			qnaList = boardService.getBoardList("qna", null, qPager);
+			qPager = new Pager(boardService.getTotalRow("qna", null, null), 1);
+			qnaList = boardService.getBoardList("qna", null, qPager, null);
 			
 		}
 		model.addAttribute("srList", srList);

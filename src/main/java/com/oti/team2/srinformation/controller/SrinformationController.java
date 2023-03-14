@@ -1,6 +1,5 @@
 package com.oti.team2.srinformation.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
