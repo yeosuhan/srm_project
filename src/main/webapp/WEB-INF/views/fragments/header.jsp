@@ -64,10 +64,11 @@
 	href="${pageContext.request.contextPath}/resources/css/button.css">
 --%>
 <%-- tr onclick 이벤트 --%>
-<script src="${pageContext.request.contextPath}/resources/js/onclickTr.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/onclickTr.js"></script>
 
 <%-- 페이지 css--%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/pagination.css">
-	
+<!-- 오름차순, 내림차순 아이콘 -->
 

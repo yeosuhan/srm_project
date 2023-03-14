@@ -23,5 +23,4 @@ public class SrInformationHistory {
 	private boolean delYn;
 	private String rqstrId;
 	private String flnm;
-
 }

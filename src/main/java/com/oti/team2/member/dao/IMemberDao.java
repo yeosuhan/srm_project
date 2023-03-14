@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import com.oti.team2.member.dto.Developer;
 import com.oti.team2.member.dto.FilterDto;
 import com.oti.team2.member.dto.Member;
+import com.oti.team2.member.dto.MemberDto;
 import com.oti.team2.member.dto.ProfileImg;
-import com.oti.team2.member.dto.Users;
 import com.oti.team2.util.pager.Pager;
 
 public interface IMemberDao {
@@ -115,7 +115,19 @@ public interface IMemberDao {
 	 * 아이디와 전화번호로 가입 유무 판단해서 비밀번호 찾기 
 	 * 
 	 */
-	public int selectPswd(Member member);
+	public String selectPswd(MemberDto memberDto);
 	
 	public String updatePswdByMemberId(@Param("memberId")String memberId);
+
+	/* 전체 관리자 리스트 조회(알람 전송 수신자)
+	 * @author 안한길
+	 * */
+	public List<String> selectAdmin();
+	/**
+	 * 
+	 * @author 최은종
+	 * 비밀번호 찾기 후 임시 비밀번호로 업데이트
+	 * 
+	 */
+	public int updateRandomPswd(MemberDto memberDto);
 }

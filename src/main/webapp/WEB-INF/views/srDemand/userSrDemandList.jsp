@@ -12,7 +12,8 @@
 	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 <script
 	src="${pageContext.request.contextPath}/resources/js/srDemandListHstry.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 <script>
 	
 <%-- 모달 실행 --%>
@@ -26,6 +27,12 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+<%-- 히스토리id가 주어질경우 히스토리 탭 열기 --%>
+	<c:if test="${srFilterDto.hstryId ne null}">
+	$(function() {
+		$("#srHistoryTab").trigger("click");
+	});
+	</c:if>
 </script>
 
 <style>
@@ -122,8 +129,8 @@ th {
 							</div>
 						</div>
 						<hr />
-						<form id="srSearchForm" action="/srdemand/list"
-							onsubmit="return srSearch()">
+						<form id="srSearchForm"
+							action="${pageContext.request.contextPath}/srdemand/list">
 							<div class="row">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
@@ -152,8 +159,8 @@ th {
 									</select>
 								</div>
 								<div class="col col-3 pr-0">
-									<label for="sysCd" style="margin-right: 10px;">관련 시스템</label> <select
-										id="sysCd" name="sysCd">
+									<label for="sysCd" style="margin-right: 10px;">시스템 구분</label> <select
+										id="sysCd" name="sysCd" onchange="systemFilter()">
 										<option value="">전체</option>
 										<c:forEach var="system" items="${systemList}">
 											<c:if test="${srFilterDto.sysCd eq system.sysCd}">
@@ -163,8 +170,12 @@ th {
 												<option value="${system.sysCd}">${system.sysNm}</option>
 											</c:if>
 										</c:forEach>
-									</select> <select id="taskSeCd" name="taskSeCd" style="width: 10px">
-										<option value=""></option>
+									</select>
+								</div>
+								<div class="col col-xl-3">
+									<label for="taskSeCd" style="margin-right: 10px;">업무구분</label>
+									<select id="taskSeCd" name="taskSeCd" style="width: 150px">
+										<option value="">전체</option>
 										<c:if test="${taskList ne null}">
 											<c:forEach var="task" items="${taskList}">
 												<c:if test="${srFilterDto.taskSeCd eq task.taskSeCd}">
@@ -214,11 +225,18 @@ th {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>요청 번호 <a
-													href="${pageContext.request.contextPath}/srdemand/list?sort=ASC"><i
-														class="ti-arrow-up" style="color: black;"></i></a> <a
-													href="${pageContext.request.contextPath}/srdemand/list?sort=DESC"><i
-														class="ti-arrow-down" style="color: black;"></i></a>
+												<th>요청 번호 <c:if test="${sort eq 'DESC'}">
+														<a
+															href="${pageContext.request.contextPath}/admin/srdemand/list"
+															class="sortBtnAsc"><i class="fas fa-caret-down"
+															style="color: black; font-size: 24px;"></i></a>
+													</c:if> <c:if test="${sort eq 'ASC'}">
+														<a
+															href="${pageContext.request.contextPath}/admin/srdemand/list"
+															class="sortBtnDesc"><i class="fas fa-caret-up"
+															style="color: black; font-size: 24px;"></i></a>
+													</c:if>
+
 												</th>
 												<th>제목</th>
 												<th>관련시스템</th>
@@ -229,7 +247,7 @@ th {
 												<th>완료예정일</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="dmndTbody">
 											<c:if test="${mySrDemandList ne null}">
 												<c:forEach var="srDemand" items="${mySrDemandList}"
 													varStatus="status">
@@ -270,7 +288,9 @@ th {
 												</c:forEach>
 											</c:if>
 											<c:if test="${mySrDemandList eq null}">
-												<td colSpan="9">검색 결과가 없습니다.</td>
+												<tr>
+													<td colSpan="9">검색 결과가 없습니다.</td>
+												</tr>
 											</c:if>
 										</tbody>
 									</table>
@@ -331,14 +351,13 @@ th {
 									<div class="form-group row">
 										<div class="col-sm-2 font-weight-bold px-0">관련 근거</div>
 										<div class="col-sm-9">
-											<div type="text" class="form-control relGrund"
-												style="width: 325px;">${sd.relGrund}</div>
+											<div class="form-control relGrund" style="width: 325px;">${sd.relGrund}</div>
 										</div>
 									</div>
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">시스템구분</div>
-											<div class="col col-sm-6 sysNm">${sd.sysNm}</div>
+											<div class="col col-sm-8 sysNm">${sd.sysNm}</div>
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">업무구분</div>
@@ -348,7 +367,7 @@ th {
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청기관</div>
-											<div class="col col-sm-6 instNm">${sd.instNm}</div>
+											<div class="col col-sm-8 instNm">${sd.instNm}</div>
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청자</div>
@@ -369,14 +388,13 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
 											<div class="col col-sm-6">
-												<div type="text" class="form-control picNm">${sd.picNm}</div>
+												<div class="form-control picNm">${sd.picNm}</div>
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
 											<div class="col col-sm-8">
-												<div type="text" class="form-control deptNm"
-													style="width: 90%;">${sd.deptNm}</div>
+												<div class="form-control deptNm" style="width: 90%;">${sd.deptNm}</div>
 											</div>
 										</div>
 									</div>
@@ -384,7 +402,7 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">진행 상태</div>
 											<div class="col col-sm-6">
-												<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
+												<div class="form-control sttsNm">${sd.sttsNm}</div>
 											</div>
 										</div>
 										<c:if test="${sd.sttsCd gt 1}">
@@ -398,7 +416,7 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
 											<div class="col col-sm-6">
-												<div type="text" class="form-control rvwrNm">${sd.rvwrNm}</div>
+												<div class="form-control rvwrNm">${sd.rvwrNm}</div>
 											</div>
 										</div>
 									</div>

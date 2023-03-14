@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class Progress {
 	private String srNo;
+	private String prgrsSeNm;
 	private int prgrsId;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")

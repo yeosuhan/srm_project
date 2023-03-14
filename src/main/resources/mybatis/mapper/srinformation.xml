@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oti.team2.srinformation.dao.ISrinformationDao"> <!-- 식별 이름은 전체 이름을 넣어야됨 -->
-
 	<!-- 모든 진척 목록(조회) -->
 	<select id="selectInfoAll" parameterType="string" resultType="srinformationlist">
 		SELECT
@@ -15,9 +14,12 @@
 		    SI.END_YMD AS endYmd,
 		    S2.STTS_NM AS sttsNm
 		FROM 
-		    SR_INFORMATION SI, SR_DEMAND SD, TASK T, MEMBERS M, SYSTEMS S1, STATUS S2 
+		    SR_INFORMATION SI, SR_DEMAND SD, TASK T, MEMBERS M, SYSTEMS S1, STATUS S2
 		    <if test="srInfoFilter.empId != null">
 		    , SR_RESOURCES R
+		    </if>
+		    <if test="srInfoFilter.hstryId != null">
+		    , SR_INFORMATION_HISTORY H
 		    </if>
 		WHERE 
 		    SD.DMND_NO = SI.DMND_NO
@@ -54,6 +56,12 @@
 		    R.SR_NO = SI.SR_NO
 		AND
 		    R.EMP_ID = #{srInfoFilter.empId}
+		</if>
+		<if test="srInfoFilter.hstryId != null">
+		AND
+			SI.SR_NO = H.SR_NO
+		AND 
+			H.HSTRY_ID = #{srInfoFilter.hstryId}
 		</if>
 		<if test="sort=='DESC'">
 		order by dmndNo DESC
@@ -175,6 +183,9 @@
 			<if test="srInfoFilter.empId != null">
 			, SR_RESOURCES R
 			</if>
+			<if test="srInfoFilter.hstryId != null">
+		    , SR_INFORMATION_HISTORY H
+		    </if>
 		WHERE 
 		    SD.DMND_NO = SI.DMND_NO
 		<if test="srInfoFilter.dmndNo != null">
@@ -209,6 +220,12 @@
 		AND
 		    R.EMP_ID = #{srInfoFilter.empId}
 		</if>
+		<if test="srInfoFilter.hstryId != null">
+		AND
+			SI.SR_NO = H.SR_NO
+		AND 
+			H.HSTRY_ID = #{srInfoFilter.hstryId}
+		</if>
 	</select>
 	
 	<!-- 고객이 문의글 작성 시 : 자신의 모든 진척-요청번호를 보여주기 위함 -->
@@ -229,4 +246,64 @@
 		WHERE
 			DMND_NO = #{dmndNo}
 	</update>
+	<!-- 엑셀 다운로드 목록 조회 -->
+	<select id="selectInfoAllToExcel" parameterType="string" resultType="srinformationlist">
+		SELECT
+		    SI.DMND_NO AS dmndNo,
+		    SI.SR_NO AS srNo,
+		    S1.SYS_NM AS sysNm,
+		    T.TASK_SE_NM AS taskSeNm,
+		    SD.TTL AS ttl,
+		    M.FLNM AS flnm,
+		    SI.BGNG_YMD AS bgngYmd,
+		    SI.END_YMD AS endYmd,
+		    S2.STTS_NM AS sttsNm
+		FROM 
+		    SR_INFORMATION SI, SR_DEMAND SD, TASK T, MEMBERS M, SYSTEMS S1, STATUS S2
+		    <if test="srInfoFilter.empId != null">
+		    , SR_RESOURCES R
+		    </if>
+		WHERE 
+		    SD.DMND_NO = SI.DMND_NO
+		AND
+		    SD.TASK_SE_CD = T.TASK_SE_CD
+		AND
+		    SD.CUST_ID = M.MEMBER_ID
+		AND
+		    S1.SYS_CD = SD.SYS_CD
+		AND
+		    S2.STTS_CD = SD.STTS_CD
+		<if test="srInfoFilter.sysCd != null">
+		AND
+		    SD.SYS_CD = #{srInfoFilter.sysCd}
+		</if>
+		<if test="srInfoFilter.taskSeCd != null">
+		AND 
+		    SD.TASK_SE_CD = #{srInfoFilter.taskSeCd}
+		</if>
+		<if test="srInfoFilter.sttsCd != null">
+		AND
+		    SD.STTS_CD = #{srInfoFilter.sttsCd}
+		</if>
+		<if test="srInfoFilter.ttl != null">
+		AND
+		    SD.TTL LIKE '%'||#{srInfoFilter.ttl}||'%'
+		</if>
+		<if test="srInfoFilter.dmndNo != null">
+		AND
+		    SD.DMND_NO LIKE '%'||#{srInfoFilter.dmndNo}||'%'
+		</if>
+		<if test="srInfoFilter.empId != null">
+		AND
+		    R.SR_NO = SI.SR_NO
+		AND
+		    R.EMP_ID = #{srInfoFilter.empId}
+		</if>
+		<if test="sort=='DESC'">
+		order by dmndNo DESC
+		</if>
+		<if test="sort=='ASC'">
+		order by dmndNo ASC
+		</if>
+	</select>
 </mapper>

@@ -259,16 +259,75 @@ function endSr() {
 }
 
 /* 빈 검색 조건 비활성화 */
-function srSearch(){
-	$("#srSearchForm input").each((index,value)=>{
-		if(!$(value).val()){
-			$(value).prop("disabled",true);
+$(function() {	
+	/*빈 검색 조건 비활성화*/
+	$("#srSearchForm").on("submit",function(){
+		
+		$("#srSearchForm input").each((index,value)=>{
+			if(!$(value).val()){
+				$(value).prop("disabled",true);
+			}
+		});
+		$("#srSearchForm select").each((index,value)=>{
+			if(!$(value).children("option:selected").val()||$(value).children(" option").length==0){
+				$(value).prop("disabled",true);
+			}
+		});
+		return true;
+	});
+	var currentUrlForSort=window.location.href;
+	//파라미터 여부
+	if(currentUrlForSort.indexOf('?')!=-1 && currentUrlForSort.indexOf('?')!=currentUrlForSort.length-1){
+		
+		var indexOfFilter = currentUrlForSort.indexOf('&');
+		var indexOfPage=currentUrlForSort.indexOf('page');
+		var filter=null;
+		if(currentUrlForSort.indexOf('sort')!=-1){
+			currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('sort')-1);
+		}
+		//page파라미터와 다른 파라미터가 있는경우
+		if(indexOfFilter!=-1&&indexOfPage!=-1){
+			filter=currentUrlForSort.substring(indexOfFilter+1,currentUrlForSort.length);
+			
+			$(".sortBtnAsc").attr("href",$(".sortBtnAsc").attr("href")+"?"+filter+"&sort=ASC");
+			$(".sortBtnDesc").attr("href",$(".sortBtnDesc").attr("href")+"?"+filter+"&sort=DESC");
+		}else if(currentUrlForSort.indexOf('page')==-1){//파라미터가 page가 아닌경우
+			indexOfFilter=currentUrlForSort.indexOf('?');
+			if(indexOfFilter==-1){
+				//파라미터가 sort밖에 없는경우
+				$(".sortBtnAsc").attr("href","?sort=ASC");
+				$(".sortBtnDesc").attr("href","?sort=DESC");
+			}else{
+				
+				filter=currentUrlForSort.substring(indexOfFilter,currentUrlForSort.length);
+				$(".sortBtnAsc").attr("href",$(".sortBtnAsc").attr("href")+filter+"&sort=ASC");
+				$(".sortBtnDesc").attr("href",$(".sortBtnDesc").attr("href")+filter+"&sort=DESC");
+			}
+		}	
+		
+	}else{
+		$(".sortBtnAsc").attr("href","?sort=ASC");
+		$(".sortBtnDesc").attr("href","?sort=DESC");
+	}
+});
+
+/* 요청 필터 바의 업무구분 가져오기*/
+function systemFilter() {
+	console.log("systemFilter ----------")
+	var sysCd = $("#sysCd option:selected").val();
+	$('#taskSeCd').empty();
+
+	$.ajax({
+		url : '/task/list/' + sysCd,
+		type : 'GET',
+		success : function(res) {
+			var option = "<option value=''>" + "전체" + "</option>";
+			$('#taskSeCd').append(option);
+			for (var idx = 0; idx < res.length; idx++) {
+				option = $("<option value=" + res[idx].taskSeCd + ">"
+						+ res[idx].taskSeNm + "</option>")
+				$('#taskSeCd').append(option);
+			}
 		}
 	});
-	$("#srSearchForm select").each((index,value)=>{
-		if(!$(value).children("option:selected").val()||$(value).children(" option").length==0){
-			$(value).prop("disabled",true);
-		}
-	});
-	return true;
 }

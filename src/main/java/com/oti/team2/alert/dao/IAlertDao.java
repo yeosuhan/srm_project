@@ -13,7 +13,7 @@ public interface IAlertDao {
 	 * @Param : rcvrId
 	 * @return : List<Alert>
 	 * */
-	List<Alert> selectByRcvrId(@Param("rcvrId")String rcvrId);
+	List<Alert> selectByRcvrId(@Param("rcvrId")String rcvrId, @Param("role")String role);
 
 	/* 새로운 알람을 테이블에 추가하는 메소드
 	 * @author : 안한길

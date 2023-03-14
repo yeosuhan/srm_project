@@ -31,14 +31,11 @@
 		SELECT
 			COUNT(BBS_NO)
 			
-		FROM BOARD b
-			<if test="clientId != null">
-				, MEMBERS m
-			</if>
+		FROM BOARD b, MEMBERS m
 		where 
-			<if test="clientId != null">
 				b.WRTR_ID = m.member_id
 				and 
+			<if test="clientId != null">
 				b.WRTR_ID = #{clientId}
 				and
 			</if>
@@ -82,19 +79,19 @@
 				<trim suffixOverrides="and" prefix="and">
 					<if test="boardFilterDto != null">
 						<if test="boardFilterDto.dmndYmdStart != null">
-							<![CDATA[WRT_YMD >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]>and
+							<![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]>and
 						</if>
 						<if test="boardFilterDto.dmndYmdEnd != null">
-							<![CDATA[WRT_YMD <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]>and
+							<![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> and
 						</if>
 						<if test="boardFilterDto.ansYn != null">
-							<![CDATA[ ANS_YN = #{boardFilterDto.ansYn} ]]>and
+							<![CDATA[ ANS_YN = #{boardFilterDto.ansYn} ]]> and
 						</if>
 						<if test="boardFilterDto.wrtrNm != null">
-							<![CDATA[m.FLNM LIKE #{boardFilterDto.wrtrNmand} ]]>and
+							<![CDATA[m.FLNM LIKE #{boardFilterDto.wrtrNm} ]]> and
 						</if>
 						<if test="boardFilterDto.keyWord != null">
-							<![CDATA[WRT_YMD LIKE '%'||#{boardFilterDto.keyWord}||'%']]>
+							<![CDATA[WRT_YMD LIKE '%'||#{boardFilterDto.keyWord}||'%']]> and
 						</if>
 					</if>
 				</trim>
@@ -167,7 +164,7 @@
 									<![CDATA[WRT_YMD >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]> and
 								</if>
 								<if test="boardFilterDto.dmndYmdEnd != null">
-									<![CDATA[WRT_YMD <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> and
+									<![CDATA[TO_DATE(WRT_YMD,'YYYY-MM-DD') <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> and
 								</if>
 								<if test="boardFilterDto.ansYn != null">
 									<![CDATA[ANS_YN = #{boardFilterDto.ansYn}]]> and
