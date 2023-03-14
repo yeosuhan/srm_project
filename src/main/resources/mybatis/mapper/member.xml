@@ -195,14 +195,18 @@
          WHERE MEMBER_ID=#{memberId}
    </select>
    
-   <!-- 비밀번호 찾기를 위한 eml select-->
-   <select id="selectPswd" parameterType="member" resultType="int">
-   		select count(EML)
-   		from members
-   		WHERE MEMBER_ID=#{memberId} and TELNO=#{telNo} 
+   <!-- 비밀번호 찾기 -->
+   <select id="selectPswd" parameterType="memberDto" resultType="string">
+   		<![CDATA[
+	   		select member_Id as memberId
+	   		from members
+	   		WHERE EML=#{eml} and TELNO=#{telNo} 
+   		]]>
    </select>
-   <update id="updatePswdByMemberId" parameterType="string">
-   		update MEMBERS set PSWD = #{pswd} where MEMBER_ID=#{memberId}
+   
+   <!-- 임시 비밀번호로 업데이트 -->
+   <update id="updateRandomPswd" parameterType="memberDto">
+   		update MEMBERS set PSWD = #{pswd} WHERE EML=#{eml} and TELNO=#{telNo} 
    </update>
    
    <!-- Member 객체 안의 내부 객체와의 매핑을 위함 -->

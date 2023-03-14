@@ -5,6 +5,7 @@ import java.util.List;
 import com.oti.team2.member.dto.Developer;
 import com.oti.team2.member.dto.FilterDto;
 import com.oti.team2.member.dto.Member;
+import com.oti.team2.member.dto.MemberDto;
 import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.util.pager.Pager;
 
@@ -96,8 +97,20 @@ public interface IMemberService {
 	 * @author 신정은
 	 */
 	public String getFlnm(String memberId);
-	
-	public int getPswd(Member member);
-	
-	public String updatePswd(String memberId);
+
+	/**
+	 * 아이디와 전화번호로 가입 유무 판단해서 비밀번호 찾기
+	 * 
+	 * @author 최은종 
+	 * 
+	 */
+	public String getPswd(MemberDto memberDto);
+
+	/**
+	 * 비밀번호 찾기 후 임시 비밀번호로 업데이트
+	 * 
+	 * @author 최은종 
+	 * 
+	 */
+	public int updateNewPswd(MemberDto memberDto);
 }
