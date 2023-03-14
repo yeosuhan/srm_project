@@ -26,8 +26,8 @@ public class AlertService implements IAlertService {
 	 * @return : List<Alert>
 	 * */
 	@Override
-	public List<Alert> getAlertList(String rcvrId) {
-		return alertDao.selectByRcvrId(rcvrId);
+	public List<Alert> getAlertList(String rcvrId,String role) {
+		return alertDao.selectByRcvrId(rcvrId,role);
 	}
 	/* 새로운 알람을 추가하고 메시지를 보내는 메소드(반영 요청)
 	 * @author : 안한길

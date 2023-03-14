@@ -73,10 +73,6 @@
 						</li>
 					</ul>
 					<ul class="nav-right">
-						<%-- <li>시간 :  <%= expiryTime %></li> --%>
-						<li><button class="btn btn-sm btn-oti"
-								style="background-color: #4C1342; margin-top: 10px;"
-								onclick="sendTestMessage()">메시지 전송 테스트</button></li>
 						<%-- 알림 --%>
 						<li class="header-notification" style="margin-top: 20px"><span
 							id="alertBadge" class="badge bg-c-yellow" style=""></span> <a
@@ -96,23 +92,48 @@
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs md-tabs " role="tablist"
 									style="width: 100%; margin: 0px">
-									<li class="nav-item" style="padding: 0px"><a
-										class="nav-link active" style="font-size: 10px;"
-										data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
-										<div class="slide"></div></li>
-									<li class="nav-item" style="padding: 0px"><a
-										class="nav-link" style="font-size: 10px;" data-toggle="tab"
-										href="#chgDmndTab" role="tab">예정일 변경</a>
-										<div class="slide"></div></li>
-									<li class="nav-item" style="padding: 0px"><a
-										class="nav-link" style="font-size: 10px;" data-toggle="tab"
-										href="#developerTab" role="tab">예정일 변경(개발자)</a>
-										<div class="slide"></div></li>
-									<li class="nav-item" style="padding: 0px"><a
-										class="nav-link" style="font-size: 10px;" data-toggle="tab"
-										href="#cancleTab" role="tab">개발 취소</a>
-										<div class="slide"></div></li>
-
+									<sec:authorize access="hasRole('ROLE_CLIENT')">
+										<li class="nav-item" style="padding: 0px"><a
+											class="nav-link active" style="font-size: 10px;"
+											data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
+											<div class="slide"></div></li>
+										<li class="nav-item" style="padding: 0px"><a
+											class="nav-link" style="font-size: 10px;" data-toggle="tab"
+											href="#chgDmndTab" role="tab">예정일 변경</a>
+											<div class="slide"></div></li>
+										<li class="nav-item" style="padding: 0px"><a
+											class="nav-link" style="font-size: 10px;" data-toggle="tab"
+											href="#cancleTab" role="tab">개발 취소</a>
+											<div class="slide"></div></li>
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_DEVELOPER')">
+										<li class="nav-item" style="padding: 0px"><a
+											class="nav-link active" style="font-size: 10px;"
+											data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
+											<div class="slide"></div></li>
+										<li class="nav-item" style="padding: 0px"><a
+											class="nav-link" style="font-size: 10px;" data-toggle="tab"
+											href="#developerTab" role="tab">예정일 변경</a>
+											<div class="slide"></div></li>
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<li class="nav-item" style="padding: 0px"><a
+											class="nav-link active" style="font-size: 10px;"
+											data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
+											<div class="slide"></div></li>
+										<li class="nav-item" style="padding: 0px"><a
+											class="nav-link" style="font-size: 10px;" data-toggle="tab"
+											href="#chgDmndTab" role="tab">예정일 변경</a>
+											<div class="slide"></div></li>
+										<li class="nav-item" style="padding: 0px"><a
+											class="nav-link" style="font-size: 10px;" data-toggle="tab"
+											href="#developerTab" role="tab">예정일 변경(개발자)</a>
+											<div class="slide"></div></li>
+										<li class="nav-item" style="padding: 0px"><a
+											class="nav-link" style="font-size: 10px;" data-toggle="tab"
+											href="#cancleTab" role="tab">개발 취소</a>
+											<div class="slide"></div></li>
+									</sec:authorize>
 								</ul>
 								<div id="alertTab" class="tab-content card-block ">
 									<!-- 반영 요청 알림 -->
