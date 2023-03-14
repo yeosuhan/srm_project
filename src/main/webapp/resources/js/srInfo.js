@@ -14,56 +14,73 @@ function getDetail(dmndNo, srNo) {
 			$('#SRPlFlnm').show();
 			$('#changeMemberId').remove();
 			$('#changeManager').remove();
-			console.log(detail.todoHlist);
-					
-			if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
-				$(".col-3").hide();
-			} else {
-				$(".col-3").show();
-			}
+			console.log(detail.isDnumExists);
+			console.log(detail.dd.sttsNm);
+			console.log(detail.role);
+			var role = detail.role;
 			
-			/*개발완료 or 개발취소일 때 계획정보*/
+			// 관리자 & 개발자 권한과 상황에 따른 요청 버튼 제한 (최은종)
+			if(role=='ROLE_DEVELOPER') {
+				if(detail.isDnumExists>0){
+					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'${srNo}'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
+				} else if(detail.isDnumExists<=0) {
+					$(".col-3").empty();
+				} else if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+					$(".col-3").empty();
+				} else {
+					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'${srNo}'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
+				}
+			} else {
+				if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+					$(".col-3").hide();
+				} else {
+					$(".col-3").show();
+				}			
+			}
+
+
+			/* 개발완료 or 개발취소일 때 계획정보 */
 			if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
-				/*처리팀*/
+				/* 처리팀 */
 				$("#dept").hide();
 				$("#SRPlDeptNm").remove();
 				$("#deptDiv").append($("<input type='text' readonly class='form-control' id='SRPlDeptNm'>"));
-				/*계획 시작일*/
+				/* 계획 시작일 */
 				$("#SRPlBgngYmd").remove();
 				$("#bgngYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlBgngYmd'>"));
-				/*계획 종료일*/
+				/* 계획 종료일 */
 				$("#SRPlEndYmd").remove();
 				$("#endYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlEndYmd'>"));
-				/*검토내용*/
+				/* 검토내용 */
 				$("#SRPlRvwCn").remove();
 				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
-				/*버튼*/
+				/* 버튼 */
 				$("#planBtn").hide();
-			} /*개발중*/
+			} /* 개발중 */
 			else {
-				/*처리팀*/
+				/* 처리팀 */
 				$("#dept").show();
 				$("#SRPlDeptNm").remove();
-				/*계획 시작일*/
+				/* 계획 시작일 */
 				$("#SRPlBgngYmd").remove();
 				$("#bgngYmdDiv").append($("<input type='text' class='form-control' id='SRPlBgngYmd'>"));
-				/*계획 종료일*/
+				/* 계획 종료일 */
 				$("#SRPlEndYmd").remove();
 				$("#endYmdDiv").append($("<input type='text' class='form-control' id='SRPlEndYmd'>"));
-				/*검토내용*/
+				/* 검토내용 */
 				$("#SRPlRvwCn").remove();
 				$("#rvwCnDiv").append($("<textarea rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
-				/*버튼*/
+				/* 버튼 */
 				$("#planBtn").show();
 			}
 			$("#SRDSrNo").val(srNo);
 			$("#SRDDmndNo").val(detail.dd.dmndNo);
-			// 우선순위 데이터 
-/*			$("#SiRnk").empty();*/
+			// 우선순위 데이터
+/* $("#SiRnk").empty(); */
 			$("#SiRnk").val(detail.dd.rnk);
 			$("#SRDRvwrNm").val(detail.dd.rvwrNm);
 			$("#SRDClientNm").val(detail.dd.clientNm);
-			$("#SRDClientId").val(detail.dd.clientId);/*알림 요청용 요청자 id*/
+			$("#SRDClientId").val(detail.dd.clientId);/* 알림 요청용 요청자 id */
 			$("#SRDTitle").val(detail.dd.ttl);
 			$("#SRDRelgrund").val(detail.dd.relGrund);
 			$("#SRDSys").val(detail.dd.sysNm);
@@ -103,38 +120,38 @@ function getPlan() {
 		url : '/srinformation/plan/' + $("#SRDDmndNo").val(),
 		type : 'GET',
 		success : function(plan) {
-			/*개발완료 or 개발취소*/
+			/* 개발완료 or 개발취소 */
 			if(plan.sttsCd>=5) {
-				/*처리팀*/
+				/* 처리팀 */
 				$("#dept").hide();
 				$("#SRPlDeptNm").remove();
 				$("#deptDiv").append($("<input type='text' readonly class='form-control' id='SRPlDeptNm'>"));
-				/*계획 시작일*/
+				/* 계획 시작일 */
 				$("#SRPlBgngYmd").remove();
 				$("#bgngYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlBgngYmd'>"));
-				/*계획 종료일*/
+				/* 계획 종료일 */
 				$("#SRPlEndYmd").remove();
 				$("#endYmdDiv").append($("<input type='text' readonly class='form-control' id='SRPlEndYmd'>"));
-				/*검토내용*/
+				/* 검토내용 */
 				$("#SRPlRvwCn").remove();
 				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
-				/*버튼*/
+				/* 버튼 */
 				$("#planBtn").hide();
-			} /*개발중*/
+			} /* 개발중 */
 			else {
-				/*처리팀*/
+				/* 처리팀 */
 				$("#dept").show();
 				$("#SRPlDeptNm").remove();
-				/*계획 시작일*/
+				/* 계획 시작일 */
 				$("#SRPlBgngYmd").remove();
 				$("#bgngYmdDiv").append($("<input type='text' class='form-control' id='SRPlBgngYmd'>"));
-				/*계획 종료일*/
+				/* 계획 종료일 */
 				$("#SRPlEndYmd").remove();
 				$("#endYmdDiv").append($("<input type='text' class='form-control' id='SRPlEndYmd'>"));
-				/*검토내용*/
+				/* 검토내용 */
 				$("#SRPlRvwCn").remove();
 				$("#rvwCnDiv").append($("<textarea rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
-				/*버튼*/
+				/* 버튼 */
 				$("#planBtn").show();
 			}
 			$('#SRPlFlnm').show();
@@ -395,7 +412,7 @@ function planUpdate() {
 	});
 }
 
-/*시스템 목록*/
+/* 시스템 목록 */
 function getSysCd(){
 	if($("#sysCdFilter option").length <= 2){
 		$("#sysCdFilter option").remove();
@@ -418,7 +435,7 @@ function getSysCd(){
 function removeTaskSeCd(){
 	$("#taskSeCdFilter option").remove();
 } 
-/*업무 목록*/
+/* 업무 목록 */
 function getTaskSeCd(){
 	if($("#taskSeCdFilter option").length == 1){
 		$("#taskSeCdFilter option").remove();
@@ -439,7 +456,7 @@ function getTaskSeCd(){
 		});
 	}
 }
-/*빈 검색 조건 비활성화*/
+/* 빈 검색 조건 비활성화 */
 function srSearch(){
 	$("#srInfoFilterForm input").each((index,value)=>{
 		if(!$(value).val()){

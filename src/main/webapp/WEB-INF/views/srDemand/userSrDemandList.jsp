@@ -132,19 +132,28 @@ th {
 							<div class="row">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
-										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart" value="${srFilterDto.dmndYmdStart}">
-									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd" value="${srFilterDto.dmndYmdEnd}">
+										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart"
+										value="${srFilterDto.dmndYmdStart}"> ~ <input
+										type="date" name="dmndYmdEnd" id="dmndYmdEnd"
+										value="${srFilterDto.dmndYmdEnd}">
 								</div>
 								<div class="col col-2 pr-0">
 									<label for="sttsCd" style="margin-right: 10px;">진행 상태</label> <select
 										id="sttsCd" name="sttsCd">
 										<option value="">전체</option>
-										<option value="0" <c:if test="${srFilterDto.sttsCd eq 0 }">selected</c:if>>요청</option>
-										<option value="1" <c:if test="${srFilterDto.sttsCd eq 1 }">selected</c:if>>반려</option>
-										<option value="2" <c:if test="${srFilterDto.sttsCd eq 2 }">selected</c:if>>접수</option>
-										<option value="3" <c:if test="${srFilterDto.sttsCd eq 3 }">selected</c:if>>개발중</option>
-										<option value="4" <c:if test="${srFilterDto.sttsCd eq 4 }">selected</c:if>>테스트</option>
-										<option value="5" <c:if test="${srFilterDto.sttsCd eq 5 }">selected</c:if>>개발 완료</option>
+										<option value="0"
+											<c:if test="${srFilterDto.sttsCd eq 0 }">selected</c:if>>요청</option>
+										<option value="1"
+											<c:if test="${srFilterDto.sttsCd eq 1 }">selected</c:if>>반려</option>
+										<option value="2"
+											<c:if test="${srFilterDto.sttsCd eq 2 }">selected</c:if>>접수</option>
+										<option value="3"
+											<c:if test="${srFilterDto.sttsCd eq 3 }">selected</c:if>>개발중</option>
+										<option value="4"
+											<c:if test="${srFilterDto.sttsCd eq 4 }">selected</c:if>>테스트</option>
+										<option value="5"
+											<c:if test="${srFilterDto.sttsCd eq 5 }">selected</c:if>>개발
+											완료</option>
 									</select>
 								</div>
 								<div class="col col-3 pr-0">
@@ -159,7 +168,7 @@ th {
 												<option value="${system.sysCd}">${system.sysNm}</option>
 											</c:if>
 										</c:forEach>
-									</select> <select id="taskSeCd" name="taskSeCd" style="width:10px">
+									</select> <select id="taskSeCd" name="taskSeCd" style="width: 10px">
 										<option value=""></option>
 										<c:if test="${taskList ne null}">
 											<c:forEach var="task" items="${taskList}">
@@ -175,9 +184,9 @@ th {
 								</div>
 								<div class="col col-xl-3">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
-										type="text" name="keyWord" id="keyWord" value="${srFilterDto.keyWord}">
-									<button type="submit"
-										class="btn btn-sm btn-oti">
+										type="text" name="keyWord" id="keyWord"
+										value="${srFilterDto.keyWord}">
+									<button type="submit" class="btn btn-sm btn-oti">
 										<i class="ti-search"></i>
 									</button>
 								</div>
@@ -227,43 +236,43 @@ th {
 										</thead>
 										<tbody id="dmndTbody">
 											<c:if test="${mySrDemandList ne null}">
-											<c:forEach var="srDemand" items="${mySrDemandList}"
-												varStatus="status">
-												<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
-													<th scope="row">${pager.startRowNo + status.index}</th>
-													<td><strong>${srDemand.dmndNo}</strong></td>
-													<c:choose>
-														<c:when test="${fn:length(srDemand.ttl) > 10}">
-															<td id="ttl" class="text-center"><c:out
-																	value="${fn:substring(srDemand.ttl,0,9)}" />...</td>
-														</c:when>
-														<c:otherwise>
-															<td id="ttl" class="text-center"><c:out
-																	value="${srDemand.ttl}" /></td>
-														</c:otherwise>
-													</c:choose>
-													<td>${srDemand.sysNm}</td>
-													<td>${srDemand.custNm}</td>
-													<td>${srDemand.instNm}</td>
-													<td><c:if test="${(srDemand.sttsNm) eq '요청'}">
-															<label class="badge badge-warning">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
-															<label class="badge badge-danger">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
-															<label class="badge badge-inverse-success">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
-															<label class="badge badge-success">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
-															<label class="badge badge-primary">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
-															<label class="badge badge-danger">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
-															<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
-														</c:if></td>
-													<td>${srDemand.dmndYmd}</td>
-													<td>${srDemand.endYmd}</td>
-												</tr>
-											</c:forEach>
+												<c:forEach var="srDemand" items="${mySrDemandList}"
+													varStatus="status">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
+														<th scope="row">${pager.startRowNo + status.index}</th>
+														<td><strong>${srDemand.dmndNo}</strong></td>
+														<c:choose>
+															<c:when test="${fn:length(srDemand.ttl) > 10}">
+																<td id="ttl" class="text-center"><c:out
+																		value="${fn:substring(srDemand.ttl,0,9)}" />...</td>
+															</c:when>
+															<c:otherwise>
+																<td id="ttl" class="text-center"><c:out
+																		value="${srDemand.ttl}" /></td>
+															</c:otherwise>
+														</c:choose>
+														<td>${srDemand.sysNm}</td>
+														<td>${srDemand.custNm}</td>
+														<td>${srDemand.instNm}</td>
+														<td><c:if test="${(srDemand.sttsNm) eq '요청'}">
+																<label class="badge badge-warning">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
+																<label class="badge badge-danger">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
+																<label class="badge badge-inverse-success">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
+																<label class="badge badge-success">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
+																<label class="badge badge-primary">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
+																<label class="badge badge-danger">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
+																<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
+															</c:if></td>
+														<td>${srDemand.dmndYmd}</td>
+														<td>${srDemand.endYmd}</td>
+													</tr>
+												</c:forEach>
 											</c:if>
 											<c:if test="${mySrDemandList eq null}">
 												<tr>
@@ -301,8 +310,9 @@ th {
 							data-toggle="tab" href="#srDemandDetail" role="tab"
 							id="srDmndDetailTab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
-						<li class="nav-item"><a class="nav-link" data-toggle="tab" id="srHistoryTab"
-							href="#srHistory" onclick="userHstry()" role="tab">SR 히스토리</a>
+						<li class="nav-item" onclick="userHstry()"><a
+							class="nav-link" data-toggle="tab" href="#srHistory" role="tab">SR
+								히스토리</a>
 							<div class="slide"></div></li>
 					</ul>
 
@@ -310,7 +320,7 @@ th {
 						style="padding: 0px; padding-top: 20px;">
 						<div class="tab-pane active" id="srDemandDetail" role="tabpanel">
 							<div class="card-block" id="sddetail">
-								<div class="card_body" 
+								<div class="card_body"
 									style="font-size: 12px; padding-top: 20px;">
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
@@ -322,8 +332,7 @@ th {
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold px-0">SR 제목</div>
 										<div class="col col-sm-9">
-											<div class="form-control ttl"
-												style="width: 325px;">${sd.ttl}</div>
+											<div class="form-control ttl" style="width: 325px;">${sd.ttl}</div>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -434,11 +443,19 @@ th {
 									<div class="row" id="userButtonDiv">
 										<c:if test="${sd.sttsCd == 0}">
 											<div class="col" style="text-align: right">
-												<button id="modbtn" style="float: right;" onclick="updateSr('${sd.dmndNo}')"
-													class="btn btn-primary btn-round save center">수정</button>
-												<div class="btn btn-primary btn-round danger cancle"
+												<button id="modbtn" style="float: right;"
+													class="btn btn-sm btn-oti center"
+													onclick="updateSr('${sd.dmndNo}')">수정</button>
+												<div class="btn btn-sm btn-oti btn-round danger cancle"
 													style="float: right; margin-right: 5px;"
 													onclick="deleteSr('${sd.dmndNo}')">삭제</div>
+											</div>
+										</c:if>
+										<c:if
+											test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
+											<div class="col" style="text-align: right">
+												<div class='btn btn-sm btn-oti cancle' onclick='endSr()'
+													style='float: right;'>반영요청</div>
 											</div>
 										</c:if>
 									</div>
@@ -476,12 +493,9 @@ th {
 		</div>
 		<!-- *********** -->
 	</div>
-
 	<!-- Page body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
-	
-	
 	<!-- 모달 -->
 	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
 	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>

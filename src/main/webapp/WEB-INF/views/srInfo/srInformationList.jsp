@@ -1,7 +1,8 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 <%-- 작성자 : 최은종 / 작성 날짜 : 2023-02-28 --%>
 
@@ -387,9 +388,11 @@ li:before {
 								<h5>SR요청 상세정보</h5>
 							</div>
 							<div class="col-3 ml-4">
-								<button class="btn btn-oti btn-sm"
-									onclick="addHistory('${srNo}')" data-toggle="modal"
-									data-target="#addHistoryModal">SR 변경요청</button>
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<button class="btn btn-oti btn-sm"
+										onclick="addHistory('${srNo}')" data-toggle="modal"
+										data-target="#addHistoryModal">SR 변경요청</button>
+								</sec:authorize>
 							</div>
 						</div>
 					</div>
@@ -462,8 +465,8 @@ li:before {
 											<div class="col col-sm-4 px-0 font-weight-bold">요청자</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDClientNm"
-													value="${sd.clientNm}">
-												<input type="hidden" value="${sd.clientId}" id="SRDClientId">
+													value="${sd.clientNm}"> <input type="hidden"
+													value="${sd.clientId}" id="SRDClientId">
 											</div>
 										</div>
 									</div>

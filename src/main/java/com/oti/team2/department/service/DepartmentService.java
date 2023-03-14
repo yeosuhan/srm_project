@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.department.dao.IDepartmentDao;
 import com.oti.team2.department.dto.Department;
+import com.oti.team2.department.dto.DeptFilterDto;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -23,8 +24,8 @@ public class DepartmentService implements IDepartmentService {
 	 * @author 최은종
 	 */
 	@Override
-	public List<Department> getDepartmentList() {
-		List<Department> department = departmentDao.selectByMemberId();
+	public List<Department> getDepartmentList(DeptFilterDto deptFilterDto) {
+		List<Department> department = departmentDao.selectByMemberId(deptFilterDto);
 		return department;
 	}
 

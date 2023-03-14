@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.department.dto.Department;
+import com.oti.team2.department.dto.DeptFilterDto;
+import com.oti.team2.member.dto.FilterDto;
 
 @Mapper
 public interface IDepartmentDao {
@@ -14,7 +16,7 @@ public interface IDepartmentDao {
 	 * 
 	 * @author 최은종
 	 */
-	public List<Department> selectByMemberId();
+	public List<Department> selectByMemberId(@Param("deptFiltering") DeptFilterDto deptFilterDto);
 
 	/**
 	 * 신규부서 등록 메서드
@@ -36,17 +38,20 @@ public interface IDepartmentDao {
 	 * @author 최은종
 	 */
 	public int deleteDept(String deptCd);
-	
+
 	/*
 	 * 부서 이름 목록
+	 * 
 	 * @author 안한길
+	 * 
 	 * @return 부서 이름 목록
-	 * */
+	 */
 	public List<Department> selectDepartmentNameList();
-	
+
 	/**
-	 *  부서cd로 담당자 아이디 가져오기
-	 *  @author 신정은
+	 * 부서cd로 담당자 아이디 가져오기
+	 * 
+	 * @author 신정은
 	 */
 	public String selectMngrNameByDeptCd(@Param("deptCd") String deptCd);
 }

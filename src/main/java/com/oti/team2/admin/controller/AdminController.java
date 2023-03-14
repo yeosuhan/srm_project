@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.department.dto.Department;
+import com.oti.team2.department.dto.DeptFilterDto;
 import com.oti.team2.department.service.IDepartmentService;
 import com.oti.team2.jobgrade.service.IJobGradeService;
 import com.oti.team2.member.dto.FilterDto;
@@ -68,10 +69,22 @@ public class AdminController {
 	 * @return 부서 목록으로 리턴
 	 */
 	@GetMapping("/department/list")
-	public String getDepartmentList(Model model) {
+	public String getDepartmentList(Model model, @RequestParam(value = "deptNm", required = false) String deptNm,
+			@RequestParam(value = "flnm", required = false) String flnm) {
 		log.info("departmentList 조회");
-
-		List<Department> departmentList = departmentService.getDepartmentList();
+		//검색
+		DeptFilterDto deptFilterDto = new DeptFilterDto();
+		if (deptNm != null) {
+			deptFilterDto.setDeptNm(deptNm);
+			model.addAttribute("deptNm", deptNm);
+		}
+		if (flnm != null) {
+			deptFilterDto.setFlnm(flnm);
+			model.addAttribute("flnm", flnm);
+		}
+		
+		//목록 불러오기
+		List<Department> departmentList = departmentService.getDepartmentList(deptFilterDto);
 		model.addAttribute("departmentList", departmentList);
 
 		return "management/departmentsList";
@@ -147,11 +160,11 @@ public class AdminController {
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_CLIENT.toString(), filterDto);
 		Pager pager = new Pager(totalRows, page);
-		//log.info(pager);
+		// log.info(pager);
 
 		// 목록 가져오기
 		List<Member> clientList = memberService.getMemberList(Auth.ROLE_CLIENT.toString(), pager, filterDto);
-		//log.info(clientList);
+		// log.info(clientList);
 		model.addAttribute("clientList", clientList);
 		// log.info(clientList);
 		// 상세 가져오기
@@ -191,7 +204,7 @@ public class AdminController {
 			@RequestParam(value = "flnm", required = false) String flnm,
 			@RequestParam(value = "deptNm", required = false) String deptNm,
 			@RequestParam(value = "jbgdNm", required = false) String jbgdNm, Model model) {
-		log.info("getEmployeeList" + page + flnm+deptNm+jbgdNm);
+		log.info("getEmployeeList" + page + flnm + deptNm + jbgdNm);
 		FilterDto filterDto = new FilterDto();
 		if (deptNm != null) {
 			filterDto.setDeptNm(deptNm);
@@ -208,12 +221,12 @@ public class AdminController {
 		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(), filterDto);
 		Pager pager = new Pager(totalRows, page);
 		log.info(pager);
-		if(totalRows !=0 ) {
-			//log.info(totalRows);
+		if (totalRows != 0) {
+			// log.info(totalRows);
 			List<Member> employeesList = memberService.getMemberList(Auth.ROLE_DEVELOPER.toString(), pager, filterDto);
-			//log.info(pager.getStartPageNo());
-			//log.info(employeesList.get(0));
-			if(employeesList!=null) {
+			// log.info(pager.getStartPageNo());
+			// log.info(employeesList.get(0));
+			if (employeesList != null) {
 				// 사원 목록 첫번째 사원 정보 사원정보 카드에 추가
 				employeesList.set(0,
 						memberService.getMember(employeesList.get(0).getMemberId(), Auth.ROLE_DEVELOPER.toString()));
@@ -224,7 +237,7 @@ public class AdminController {
 			}
 			model.addAttribute("pager", pager);
 			return "management/employeesList";
-		}else {
+		} else {
 			model.addAttribute("pager", pager);
 			return "management/employeesList";
 		}

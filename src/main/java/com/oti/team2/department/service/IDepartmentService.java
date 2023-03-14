@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.department.dto.Department;
-
+import com.oti.team2.department.dto.DeptFilterDto;
 import com.oti.team2.util.pager.Pager;
 
 public interface IDepartmentService {
@@ -15,7 +15,7 @@ public interface IDepartmentService {
 	 * 
 	 * @author 최은종
 	 */
-	public List<Department> getDepartmentList();
+	public List<Department> getDepartmentList(DeptFilterDto deptFilterDto);
 
 	/**
 	 * 신규부서 등록 메서드
