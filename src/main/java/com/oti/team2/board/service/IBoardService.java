@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import com.oti.team2.board.dto.Board;
+import com.oti.team2.board.dto.BoardFilterDto;
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.dto.BoardRequestDto;
 import com.oti.team2.board.dto.BoardUpdateDto;
@@ -21,13 +22,13 @@ public interface IBoardService {
 	 * 공지사항/문의게시판 목록 페이징 처리
 	 * @author 신정은
 	 */
-	int getTotalRow(String type, String clientId);
+	int getTotalRow(String type, String clientId, BoardFilterDto boardFilterDto);
 	
 	/**
 	 * 공지사항/문의게시판 목록 조회
 	 * @author 신정은
 	 */
-	List<BoardListDto> getBoardList(String type, String clientId, Pager pager);
+	List<BoardListDto> getBoardList(String type, String clientId, Pager pager, BoardFilterDto boardFilterDto);
 	
 	/**
 	 * 공지사항/문의게시판 + 첨부파일  상세 조회
@@ -57,11 +58,11 @@ public interface IBoardService {
 	 * 관련개발자의 문의게시글의 총 행수
 	 * @author 신정은
 	 */
-	int getcountByEmpId(String empId);
+	int getcountByEmpId(String empId, BoardFilterDto boardFilterDto);
 	
 	/**
 	 * 관련개발자의 문의게시판 목록 조회
 	 * @author 신정은
 	 */
-	List<BoardListDto> getBoardListByEmpId(String empId, Pager pager);
+	List<BoardListDto> getBoardListByEmpId(String empId, Pager pager, BoardFilterDto boardFilterDto);
 }

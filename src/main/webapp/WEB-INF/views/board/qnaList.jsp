@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -21,6 +22,54 @@
 	<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
 	<!-- Page-body start -->
 	<div class="page-body button-page">
+		<!--------------- 필터링 ------------------------->
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="row">
+							<div class="col-10">
+								<h5>문의사항</h5>
+							</div>
+						</div>
+						<hr />
+						<form id="boardSearchForm"
+							action="${pageContext.request.contextPath}/board/list?type=qna&"
+							onsubmit="return boardSearch()">>
+							<div class="row">
+								<input type="hidden" name="type" id="type" value="qna">
+								<div class="col col-3 pr-0">
+									<label for="dmndYmdStart" style="margin-right: 10px;">조회
+										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart">
+									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd">
+								</div>
+								<div class="col col-2 pr-0">
+									<label for="ansYn" style="margin-right: 10px;">답변 상태</label> <select
+										id="ansYn" name="ansYn">
+										<option value="">전체</option>
+										<option value="1">답변완료</option>
+										<option value="0">미답변</option>
+									</select>
+								</div>								
+								<div class="col col-3 px-0">
+									<label for="wrtrNm" style="margin-right: 10px;">작성자</label> <input
+										type="text" name="wrtrNm" id="wrtrNm">
+								</div>
+								<div class="col col-4 px-0">
+									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
+										type="text" name="keyWord" id="keyWord">
+									<button type="submit" class="btn btn-sm btn-oti"
+										style="margin-right: 10px; height: 30px;">
+										<i class="ti-search"></i>
+									</button>
+								</div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<!-- bootstrap modal start -->
 			<div class="col-sm-5" id="qnaList">
@@ -29,13 +78,13 @@
 					<div class="card-header">
 						<h5 class="card-header-text">문의사항</h5>
 					</div>
-							<c:if test="${fn:length(qnaList) == 0 }">
-								<div class="text-center d-flex justify-content-center"
-									style="height: 100px;">
-									<div style="margin: auto;">문의 내역이 없습니다.</div>
-								</div>
-							</c:if>
-							<c:if test="${fn:length(qnaList) gt 0}">
+					<c:if test="${fn:length(qnaList) == 0 }">
+						<div class="text-center d-flex justify-content-center"
+							style="height: 100px;">
+							<div style="margin: auto;">문의 내역이 없습니다.</div>
+						</div>
+					</c:if>
+					<c:if test="${fn:length(qnaList) gt 0}">
 						<table class="table table-hover">
 							<thead>
 								<tr>
