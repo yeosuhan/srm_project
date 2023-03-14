@@ -7,7 +7,6 @@
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <script src="/resources/js/kakaoAddress.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/check.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/image.js"></script>
 </head>
 <style>
@@ -103,7 +102,7 @@ label>img {
 				<div class="col-sm-12">
 					<!-- Authentication card start -->
 					<form class="md-float-material form-material" name="joinForm"
-						action="<c:url value='/join'/>" method="post">
+						action="${pageContext.request.contextPath}/join" method="post">
 						<input type="hidden" name="memberType" value="ROLE_CLIENT">
 						<input type="hidden" name="jbgdCd" value=""> <input
 							type="hidden" name="deptCd" value=""> <input
@@ -119,7 +118,7 @@ label>img {
 								</div>
 								<hr />
 								<div class="form-group form-primary">
-									<input type="text" name="memberId" class="form-control"  maxlength='15'
+									<input type="text" id="memberId" name="memberId" class="form-control"  maxlength='15'
 									oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g,'')" id="memberId" required style="width: 74%;" placeholder="                    ex)영어,숫자 포함 8~15자리">
 								 <label
 										class="float-label">아이디</label>
@@ -129,7 +128,7 @@ label>img {
 									<font id="checkId" size="2" style="padding-left: 10px;"></font>
 								</div>
 								<div class="form-group form-primary">
-									<input type="password" name="pswd" class="form-control" placeholder="                    ex)영어,숫자 포함 15자리 이상"
+									<input type="password" id="pswd" name="pswd" class="form-control" placeholder="                    ex)영어,숫자 포함 15자리 이상"
 										required="" style="width: 97%"> <span class="form-bar"></span> <label
 										class="float-label">비밀번호</label>
 								</div>
@@ -139,7 +138,7 @@ label>img {
 										class="float-label">이름</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="text" name="telNo" class="form-control" placeholder="                    ex)010-1234-5678"
+									<input type="text" id="telNo" name="telNo" class="form-control" placeholder="                    ex)010-1234-5678"
 										required="" style="width: 97%"> <span class="form-bar"></span> <label
 										class="float-label">전화번호</label>
 								</div>
@@ -149,7 +148,7 @@ label>img {
 										class="float-label">이메일</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="text" name="addr"
+									<input type="text" name="addr" id="addr"
 										class="form-control" required="" style="width: 70%">
 										<button type="button"   id="address_kakao"
 										class="btn btn-sm waves-effect waves-light hor-grd btn-oti ml-2"
@@ -172,7 +171,7 @@ label>img {
 								<hr />
 								<div class="row">
 									<div class="col-md-12">
-										<button type="submit"
+										<button type="button" id="joinCheck"
 											class="btn btn-oti btn-md btn-block waves-effect waves-light text-center">Sign
 											Up</button>
 									</div>
@@ -180,7 +179,7 @@ label>img {
 					</form>
 				</div>
 	</section>
-
+	<script src="${pageContext.request.contextPath}/resources/js/check.js"></script>
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 </body>
 </html>

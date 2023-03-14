@@ -127,27 +127,27 @@ label>img {
 									<font id="checkId" size="2" style="padding-left: 10px;"></font>
 								</div>
 								<div class="form-group form-primary">
-									<input type="password" name="pswd" class="form-control"
+									<input type="password" name="pswd" id="pswd" class="form-control"
 										required="" style="width: 97%" placeholder="                    ex)영어,숫자 포함 15자리 이상"> <span class="form-bar"></span>
 									<label class="float-label">비밀번호</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="text" name="flnm" class="form-control" required="" placeholder="                    ex)홍길동"
+									<input type="text" name="flnm" class="form-control" id="flnm" required="" placeholder="                    ex)홍길동"
 										style="width: 97%" oninput="this.value = this.value.replace(/^[가-힣]/g,'')"> <span class="form-bar"></span> <label
 										class="float-label">이름</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="text" name="telNo" class="form-control" placeholder="                    ex)010-1234-5678"
+									<input type="text" name="telNo" id="telNo" class="form-control" placeholder="                    ex)010-1234-5678"
 										required="" style="width: 97%"> <span class="form-bar"></span>
 									<label class="float-label">전화번호</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="email" name="eml" class="form-control" required="" placeholder="                    ex)example@naver.com"
+									<input type="email" name="eml" id="eml" class="form-control" required="" placeholder="                    ex)example@naver.com"
 										style="width: 97%"> <span class="form-bar"></span> <label
 										class="float-label">이메일</label>
 								</div>
 								<div class="form-group form-primary">
-									<input type="text" name="addr"
+									<input type="text" name="addr" id="addr"
 										class="form-control" required="" style="width: 70%"> 
 										<button type="button"   id="address_kakao"
 										class="btn btn-sm waves-effect waves-light hor-grd btn-oti ml-2"

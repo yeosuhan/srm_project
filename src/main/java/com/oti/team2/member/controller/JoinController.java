@@ -81,7 +81,7 @@ public class JoinController {
 			join.setMemberType("ROLE_DEVELOPER");
 		}
 		if(join.getMemberId().length()<8) {
-			return "member/join-client";
+			return "redirect:/member/join-client";
 		}
 		
 		/* 파일 추가
@@ -98,7 +98,7 @@ public class JoinController {
 
 		}*/
 		joinService.getJoin(join);
-		return "member/login";
+		return "redirect:/member/login";
 	}
 	/**
 	 * 
