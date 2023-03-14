@@ -39,18 +39,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- 세션만료 시간울 위한 쿠키 필터 적용 -->
-	<filter>
-		<filter-name>sessionTimeoutCookieFilter</filter-name>
-		<filter-class>com.oti.team2.util.filter.SessionTimeoutCookieFilter
-		</filter-class>
-		<!-- SseEmitters 비동기 처리 -->
-		<async-supported>true</async-supported>
-	</filter>
-	<filter-mapping>
-		<filter-name>sessionTimeoutCookieFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 
 	<!-- Spring Security Filter -->
 	<filter>
@@ -72,6 +60,13 @@
 		</listener-class>
 	</listener>
 	
+	<!-- 세션만료 시간울 위한 쿠키 필터 적용 -->
+	
+	
+	<!-- 세션 만료시간 설정  : 분 -->
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
 	<!-- 404 error 처리 설정 -->
 
 

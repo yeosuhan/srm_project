@@ -13,6 +13,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/mytodoHstry.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/sessionCookie.js"></script>
 <!-- 모달 -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/srModal.css">
@@ -24,7 +26,7 @@
 	<div class="page-body">
 		<div class="row">
 			<!-- Color Open Accordion start -->
-			<div class="col-lg-12">
+			<div class="col-lg-8">
 				<div class="card" id="mytodo">
 					<div class="card-header">
 						<h5 class="card-header-text">나의 할일</h5>
@@ -78,6 +80,7 @@
 					</div>
 				</div>
 			</div>
+			<<div class="col-lg-4"></div>
 		</div>
 		<div class="row">
 			<!-- 공지사항 게시판 -->

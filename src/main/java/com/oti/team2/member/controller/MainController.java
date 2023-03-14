@@ -125,6 +125,8 @@ public class MainController {
 		model.addAttribute("qPager", qPager);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("nPager", nPager);
+		
+		model.addAttribute("sttsCd", 0);
 		return "member/my-todo";
 	}
 
