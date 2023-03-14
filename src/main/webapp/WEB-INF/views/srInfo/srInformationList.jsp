@@ -20,7 +20,6 @@
 	src="${pageContext.request.contextPath}/resources/js/deliverables.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/srInfoListHstry.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/srInfo.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 
