@@ -15,7 +15,7 @@
 		    S2.STTS_NM AS sttsNm
 		FROM 
 		    SR_INFORMATION SI, SR_DEMAND SD, TASK T, MEMBERS M, SYSTEMS S1, STATUS S2
-		    <if test="srInfoFilter.empId != null">
+		    <if test="srInfoFilter.empId != null and role == 'ROLE_DEVELOPER'">
 		    , SR_RESOURCES R
 		    </if>
 		    <if test="srInfoFilter.hstryId != null">
@@ -51,11 +51,15 @@
 		AND
 		    SD.DMND_NO LIKE '%'||#{srInfoFilter.dmndNo}||'%'
 		</if>
-		<if test="srInfoFilter.empId != null">
+		<if test="srInfoFilter.empId != null and role == 'ROLE_DEVELOPER'">
 		AND
 		    R.SR_NO = SI.SR_NO
 		AND
 		    R.EMP_ID = #{srInfoFilter.empId}
+		</if>
+		<if test="srInfoFilter.empId != null and role == 'ROLE_ADMIN'">
+		AND
+			SI.PIC_ID = #{srInfoFilter.empId}
 		</if>
 		<if test="srInfoFilter.hstryId != null">
 		AND
@@ -180,7 +184,7 @@
 			<if test="srInfoFilter.sttsCd != null">
 			, STATUS S2 
 			</if>
-			<if test="srInfoFilter.empId != null">
+			<if test="srInfoFilter.empId != null and role == 'ROLE_DEVELOPER'">
 			, SR_RESOURCES R
 			</if>
 			<if test="srInfoFilter.hstryId != null">
@@ -214,11 +218,15 @@
 		AND
 		    SD.STTS_CD = #{srInfoFilter.sttsCd}
 		</if>
-		<if test="srInfoFilter.empId != null">
+		<if test="srInfoFilter.empId != null and role == 'ROLE_DEVELOPER'">
 		AND
 		    R.SR_NO = SI.SR_NO
 		AND
 		    R.EMP_ID = #{srInfoFilter.empId}
+		</if>
+		<if test="srInfoFilter.empId != null and role == 'ROLE_ADMIN'">
+		AND
+			SI.PIC_ID = #{srInfoFilter.empId}
 		</if>
 		<if test="srInfoFilter.hstryId != null">
 		AND
@@ -260,7 +268,7 @@
 		    S2.STTS_NM AS sttsNm
 		FROM 
 		    SR_INFORMATION SI, SR_DEMAND SD, TASK T, MEMBERS M, SYSTEMS S1, STATUS S2
-		    <if test="srInfoFilter.empId != null">
+		    <if test="srInfoFilter.empId != null and role == 'ROLE_DEVELOPER'">
 		    , SR_RESOURCES R
 		    </if>
 		WHERE 
@@ -293,11 +301,15 @@
 		AND
 		    SD.DMND_NO LIKE '%'||#{srInfoFilter.dmndNo}||'%'
 		</if>
-		<if test="srInfoFilter.empId != null">
+		<if test="srInfoFilter.empId != null and role == 'ROLE_DEVELOPER'">
 		AND
 		    R.SR_NO = SI.SR_NO
 		AND
 		    R.EMP_ID = #{srInfoFilter.empId}
+		</if>
+		<if test="srInfoFilter.empId != null and role == 'ROLE_ADMIN'">
+		AND
+			SI.PIC_ID = #{srInfoFilter.empId}
 		</if>
 		<if test="sort=='DESC'">
 		order by dmndNo DESC
