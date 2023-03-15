@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
+import com.oti.team2.srinformationhistory.dto.SrResourceAddHistoryDto;
 import com.oti.team2.util.pager.Pager;
 
 public interface ISrInformationHistoryDao {
@@ -88,5 +89,5 @@ public interface ISrInformationHistoryDao {
 	 * 
 	 * @author 최은종
 	 */
-	public List<MyTodoHistoryListDto> selectDmndNoBySrResouce(@Param("dmndNo") String dmndNo, @Param("empId") String empId);
+	public List<SrResourceAddHistoryDto> selectDmndNoBySrResouce(@Param("dmndNo") String dmndNo, @Param("empId") String empId);
 }
