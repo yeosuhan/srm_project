@@ -23,10 +23,11 @@ public interface ISrinformationDao {
 	 * @author 여수한 작성일자 : 2023-02-22
 	 * @param srInfoFilter
 	 * @param pager
+	 * @param role 
 	 * @return sr진척 목록 조회
 	 */
 	public List<SrinformationList> selectInfoAll(@Param("pager") Pager pager,
-			@Param("srInfoFilter") SrInfoFilter srInfoFilter, @Param("sort") String sort);
+			@Param("srInfoFilter") SrInfoFilter srInfoFilter, @Param("sort") String sort, @Param("role")String role);
 
 	/**
 	 * 
@@ -78,7 +79,7 @@ public interface ISrinformationDao {
 	 * 
 	 * @return 결과 행수
 	 * */
-	public int selectTotalRow(@Param("page") int page, @Param("srInfoFilter") SrInfoFilter srInfoFilter);
+	public int selectTotalRow(@Param("page") int page, @Param("srInfoFilter") SrInfoFilter srInfoFilter, @Param("role")String role);
 
 	/**
 	 * 
