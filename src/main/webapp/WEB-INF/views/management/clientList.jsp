@@ -56,11 +56,12 @@ table, th, td {
 			<!-- *********** -->
 			<%-- 고객 목록  --%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card">
+				<div class="card"  style="height:680px;">
 					<div class="card-header">
 						<h5 style="font-weight: bold;">고객 관리</h5>
+						<hr/>
 						<%-- 검색 기능 --%>
-						<div class="mt-4 mr-5" style="height: 30px;">
+						<div class="mr-5" style="height: 30px;">
 							<form id="clientFilterForm" onsubmit="return searchClient()">
 								<div class="form-group row">
 									<label class="col-sm-1 col-form-label text-right"
@@ -82,7 +83,7 @@ table, th, td {
 							</form>
 						</div>
 					</div>
-					<div class="card-block table-border-style">
+					<div class="card-block table-border-style p-0">
 						<div class="table-responsive">
 							<table class="table table-hover" style="font-size: 12;">
 								<thead>
@@ -164,10 +165,11 @@ table, th, td {
 							<p class="col-sm-5 font-weight-bold">기관 전화번호</p>
 							<div class="col-sm-7" id="MClientInsTel">${client.institution.instTelno}</div>
 						</div>
-						<div class="row">
+						<div class="row" style="height:50px;">
 							<p class="col-sm-5 font-weight-bold">기관 주소</p>
 							<div class="col-sm-7" id="MClientInsAddr">${client.institution.instAddr}</div>
 						</div>
+						
 						<div class="row">
 							<p class="col-sm-5 font-weight-bold">상세 주소</p>
 							<div class="col-sm-7" id="MClientInsAddrDetail">${client.institution.instDetailAddr}</div>
