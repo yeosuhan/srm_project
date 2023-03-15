@@ -121,7 +121,7 @@ public class SrinformationService implements ISrinformationService {
 			number = "0" + number;
 		}
 
-		srNO += number;
+		srNO = srNO + "-" + number;
 		log.info(srNO);
 		return srNO;
 	}

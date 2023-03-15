@@ -139,6 +139,7 @@ function updateQna(bbsNo) {
 		url : '/board/update/' + bbsNo,
 		type : 'GET',
 		success : function(data) {
+			console.log(data);
 			$("#qnaDetail").html(data);
 		}
 	});

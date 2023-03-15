@@ -94,7 +94,7 @@
 					<c:if test="${board.wrtrId eq memberId}">
 						<div class="d-flex justify-content-center">
 							<div class="p-0">
-								<button onclick="updateQna(${board.bbsNo})"
+								<button onclick="updateQna(${board.bbsNo})" type="button"
 									class="btn btn-oti waves-effect waves-light">수정</button>
 							</div>
 							<div class="p-0">

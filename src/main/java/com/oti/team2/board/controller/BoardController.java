@@ -40,8 +40,8 @@ public class BoardController {
 	private IBoardService boardService;
 
 	
-	@GetMapping("/list/{type}")
-	public String getBoardList(@PathVariable("type") String type,
+	@GetMapping("/list")
+	public String getBoardList(@RequestParam(name = "type", required = true, defaultValue = "qna") String type,
 			@ModelAttribute BoardFilterDto boardFilterDto,
 			Model model, 
 			Authentication auth,
