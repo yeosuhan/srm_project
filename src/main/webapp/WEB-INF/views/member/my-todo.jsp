@@ -152,7 +152,7 @@ font-size:13px;
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
 			<!-- qna 게시판 -->
-			<div class="col-lg-4" id="qnaList">
+			<div class="col-lg-4" id="qnaList pr-0">
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
 		</div>
