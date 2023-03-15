@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.progress.dto.Prgrs;
+import com.oti.team2.progress.dto.PrgrsPlanDto;
 import com.oti.team2.progress.dto.Progress;
 @Mapper
 public interface IProgressDao {
@@ -64,5 +65,10 @@ public interface IProgressDao {
 	 * @author 여수한
 	 */
 	public List<Prgrs> selectPrgrsSeNm();
+	/**
+	 * [나의할일] 오늘날짜에 해당하는 진척 단계의 값 가져오기
+	 * @author 신정은
+	 */
+	public int selectPrgrsRtBySrNoBetweenBgngAndEnd(@Param("srNo") String srNo);
 	
 }

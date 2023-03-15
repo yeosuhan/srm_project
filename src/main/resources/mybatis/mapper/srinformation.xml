@@ -306,4 +306,14 @@
 		order by dmndNo ASC
 		</if>
 	</select>
+	
+	<select id="selectMaxSrNoByPicId" parameterType="string" resultType="string">
+		select max(sr_no)
+		from sr_information
+		where bgng_ymd = ( select max(bgng_ymd)
+		        from sr_information 
+		        where pic_id = #{picId})
+		order by sr_no        
+ 
+	</select>
 </mapper>

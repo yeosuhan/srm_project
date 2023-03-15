@@ -1,6 +1,8 @@
 package com.oti.team2.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.board.dto.BoardListDto;
 import com.oti.team2.board.service.IBoardService;
@@ -33,6 +36,12 @@ public class MainController {
 	@Autowired
 	private ISrInformationHistoryService srInformationHistoryService;
 
+	/**
+	 * 나의 할일 화면 제공
+	 *
+	 * @author 신정은
+	 * 
+	 */
 	@GetMapping("/myportal")
 	public String mypotal(Authentication auth, Model model) {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
@@ -73,7 +82,7 @@ public class MainController {
 			// 게시글
 			qPager = new Pager(boardService.getTotalRow("qna", memberId, null), 1);
 			qnaList = boardService.getBoardList("qna", memberId, qPager, null);
-			
+
 		} else if (role.equals(Auth.ROLE_DEVELOPER.toString())) {
 			pager = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 3, 1);
 			srList = srdemandService.getMytodoSrListForDeveloper(auth.getName(), 3, pager);
@@ -107,7 +116,7 @@ public class MainController {
 			// 게시글
 			qPager = new Pager(boardService.getTotalRow("qna", null, null), 1);
 			qnaList = boardService.getBoardList("qna", null, qPager, null);
-			
+
 		}
 		model.addAttribute("srList", srList);
 		model.addAttribute("pager", pager);
@@ -125,11 +134,17 @@ public class MainController {
 		model.addAttribute("qPager", qPager);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("nPager", nPager);
-		
+
 		model.addAttribute("sttsCd", 0);
 		return "member/my-todo";
 	}
 
+	/**
+	 * 나의 할 일의 요청상태별 처리
+	 *
+	 * @author 신정은
+	 * 
+	 */
 	@GetMapping("/myportal/mytodo")
 	public String mytodo(Authentication auth, Model model,
 			@RequestParam(required = true, name = "sttsCd", defaultValue = "0") int stts,
@@ -201,6 +216,45 @@ public class MainController {
 
 		log.info(todoHstryList);
 		return "mytodo/srHstryTable";
-	}	
+	}
+
+	/**
+	 * 고객의 차트 구성
+	 * 
+	 * @author 신정은
+	 */
+	@ResponseBody
+	@GetMapping("/client/chart")
+	public Map<Integer, Integer> getClientChart(Authentication auth) {
+		String memberId = auth.getName();
+
+		int atotal = 0; // 요청 : 0
+		int rejTotal = 0; // 반려 : 1
+		int rtotal = 0; // 접수 : 2
+		int dtotal = 0; // 개발 : 3
+		int ttotal = 0; // 테스트 :4
+		int comtotal = 0; // 완료 : 5
+		int cantotal = 0; // 취소 : 6
+
+		atotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 0, 1).getTotalRows();
+		rejTotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 1, 1).getTotalRows();
+		rtotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 2, 1).getTotalRows();
+		dtotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 3, 1).getTotalRows();
+		ttotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 4, 1).getTotalRows();
+		comtotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 5, 1).getTotalRows();
+		cantotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 6, 1).getTotalRows();
+		
+		Map<Integer, Integer> map = new HashMap<>();
+		map.put(0, atotal);
+		map.put(1, rejTotal);
+		map.put(2, rtotal);
+		map.put(3, dtotal);
+		map.put(4, ttotal);
+		map.put(5, comtotal);
+		map.put(6, cantotal);
+		
+		log.info(map);
+		return map;
+	}
 
 }

@@ -121,7 +121,7 @@ public class SrinformationService implements ISrinformationService {
 			number = "0" + number;
 		}
 
-		srNO += number;
+		srNO = srNO + "-" + number;
 		log.info(srNO);
 		return srNO;
 	}
@@ -368,4 +368,17 @@ public class SrinformationService implements ISrinformationService {
 		  response.setHeader("Content-Disposition", String.format("attachment; filename=\"SrInformationList.xlsx\""));
 		  wb.write(response.getOutputStream());
 		}
+
+	/*
+	 * 해당 관리자가 담당하는 가장 최근의 요청에대한 진척번호 조회
+	 * @author 신정은
+	 */
+	public String getMaxSrNo(String picId) {
+		return srinformationDao.selectMaxSrNoByPicId(picId);
+	}
+
+	@Override
+	public void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {		
+	}
 }

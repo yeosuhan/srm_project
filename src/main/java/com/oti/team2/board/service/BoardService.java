@@ -104,7 +104,8 @@ public class BoardService implements IBoardService {
 	public void updateBoard(BoardUpdateDto boardUpdateDto) throws IllegalStateException, IOException {
 		int row = boardDao.updateTtlAndCn(boardUpdateDto);
 		
-		if(boardUpdateDto.getNattachFile() != null) {
+		if(boardUpdateDto.getNattachFile().get(0).getSize() != 0) {
+			log.info("첨부파일 있어요");
 			attachmentService.uploadFiles(boardUpdateDto.getNattachFile(), boardUpdateDto.getBbsNo(), null);
 			boardDao.updateAtchYn(boardUpdateDto.getBbsNo(), 1);
 		}
