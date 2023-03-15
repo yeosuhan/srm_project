@@ -3,6 +3,7 @@ package com.oti.team2.progress.service;
 import java.util.List;
 
 import com.oti.team2.progress.dto.Prgrs;
+import com.oti.team2.progress.dto.PrgrsPlanDto;
 import com.oti.team2.progress.dto.Progress;
 
 public interface IProgressService {
@@ -45,4 +46,10 @@ public interface IProgressService {
 	 * @author 여수한
 	 */
 	List<Prgrs> getRrgrs();
+	
+	/**
+	 * [나의할일] 해당 진척의 계획과 현재 진척률 그래프로 표현하기
+	 * @author 신정은
+	 */
+	PrgrsPlanDto showPrgrsChart(String srNo);
 }

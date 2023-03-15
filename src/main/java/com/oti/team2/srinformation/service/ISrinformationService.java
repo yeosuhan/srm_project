@@ -103,4 +103,10 @@ public interface ISrinformationService {
 	 * @throws Exception 
 	 */
 	void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	/*
+	 * 해당 관리자가 담당하는 가장 최근의 요청에대한 진척번호 조회
+	 * @author 신정은
+	 */
+	String getMaxSrNo(String picId);
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.oti.team2.progress.dao.IProgressDao;
 import com.oti.team2.progress.dto.Prgrs;
+import com.oti.team2.progress.dto.PrgrsPlanDto;
 import com.oti.team2.progress.dto.Progress;
 import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.alert.service.IAlertService;
@@ -244,5 +245,20 @@ public class ProgressService implements IProgressService {
 	public List<Prgrs> getRrgrs() {
 		List<Prgrs> prgrs = progressDao.selectPrgrsSeNm();
 		return prgrs;
+	}
+
+	/**
+	 * [나의할일] 해당 진척의 계획과 현재 진척률 그래프로 표현하기
+	 * @author 신정은
+	 */
+	public PrgrsPlanDto showPrgrsChart(String srNo) {
+		List<Progress> list = getProgress(srNo);
+		log.info(list);
+		int nowRt = progressDao.selectPrgrsRtBySrNoBetweenBgngAndEnd(srNo);
+		if(nowRt == 0) nowRt = 1;
+		log.info(nowRt);
+		PrgrsPlanDto p = new PrgrsPlanDto();
+		PrgrsPlanDto ppdto = p.createPrgrsPlanDto(list, nowRt);
+		return ppdto;
 	}
 }

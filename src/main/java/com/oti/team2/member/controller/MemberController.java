@@ -101,10 +101,12 @@ public class MemberController {
 		ProfileImg profileImg = memberService.getProfileImg(memberId);
 		log.info(profileImg);
 		HttpHeaders headers = new HttpHeaders();
-		String mtypes[] = profileImg.getFileType().split("/");
-		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));
+		if(profileImg != null) {
+			String mtypes[] = profileImg.getFileType().split("/");
+			headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
+		}
 
-		return new ResponseEntity<byte[]>(profileImg.getFileData(), headers, HttpStatus.OK);
+		return new ResponseEntity<byte[]>(null, headers, HttpStatus.OK);
 	}
 
 	/**

@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
@@ -11,10 +12,22 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/pagination.css">
 <script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/mytodoHstry.js"></script>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<script src="${pageContext.request.contextPath}/resources/js/graph.js"></script>
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_DEVELOPER')">
+	<script src="${pageContext.request.contextPath}/resources/js/devCal.js"></script>
+</sec:authorize>
+
+
 <script
-	src="${pageContext.request.contextPath}/resources/js/mytodoHstry.js"></script>
+	src="${pageContext.request.contextPath}/resources/calendar/packages/daygrid/main.js'/>"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/js/sessionCookie.js"></script>
+	src="${pageContext.request.contextPath}/resources/calendar/js/main.js'/>"></script>
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+
 <!-- 모달 -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/srModal.css">
@@ -41,7 +54,9 @@
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div class="nav-link sttsCd1"
-										onclick="moveTab(1)">반려 <span class="badge badge-danger">${rejTotal}</span></div>
+										onclick="moveTab(1)">
+										반려 <span class="badge badge-danger">${rejTotal}</span>
+									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div class="nav-link sttsCd2"
 										onclick="moveTab(2)">
@@ -49,23 +64,30 @@
 									</div>
 									<div class="slide"></div></li>
 							</sec:authorize>
-								<li class="nav-item btn"><div
-										class="nav-link sttsCd3 active" onclick="moveTab(3)">
-										개발중 <span class="badge badge-danger">${dtotal}</span>
-									</div>
-									<div class="slide"></div>
-								</li>
+							<li class="nav-item btn"><div
+									class="nav-link sttsCd3 active" onclick="moveTab(3)">
+									개발중 <span class="badge badge-danger">${dtotal}</span>
+								</div>
+								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link sttsCd4"
-									onclick="moveTab(4)">테스트 <span class="badge badge-danger">${ttotal}</span></div>
+									onclick="moveTab(4)">
+									테스트 <span class="badge badge-danger">${ttotal}</span>
+								</div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link sttsCd5"
-									onclick="moveTab(5)">개발완료 <span class="badge badge-danger">${comtotal}</span></div>
+									onclick="moveTab(5)">
+									개발완료 <span class="badge badge-danger">${comtotal}</span>
+								</div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link sttsCd6"
-									onclick="moveTab(6)">개발 취소 <span class="badge badge-danger">${cantotal}</span></div>
+									onclick="moveTab(6)">
+									개발 취소 <span class="badge badge-danger">${cantotal}</span>
+								</div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link hstry"
-									onclick="moveHstryTab()">히스토리<span class="badge badge-danger">${histotal}</span></div>
+									onclick="moveHstryTab()">
+									히스토리<span class="badge badge-danger">${histotal}</span>
+								</div>
 								<div class="slide"></div></li>
 						</ul>
 						<!-- Tab panes -->
@@ -74,7 +96,7 @@
 							<!------나의 할일 : 요청-------->
 							<div class="tab-pane active" id="requesttable" role="tabpanel">
 								<%@ include file="/WEB-INF/views/mytodo/srTable.jsp"%>
-								
+
 							</div>
 						</div>
 					</div>
@@ -90,9 +112,23 @@
 			<div class="col-lg-4" id="qnaList">
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
-			<div class="col-lg-4" id="qnaList">
-				<jsp:include page="/WEB-INF/views/mytodo/progressGraph.jsp" />
-			</div>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<div class="col-lg-4">
+					<jsp:include page="/WEB-INF/views/mytodo/progressGraph.jsp" />
+				</div>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROLE_DEVELOPER')">
+				<div class="card col-lg-4">
+ 					<div class="card-body">
+						<div id="calendar" style="background-color: white"></div>
+					</div>
+				</div>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROLE_CLIENT')">
+				<div >
+					<jsp:include page="/WEB-INF/views/mytodo/progressGraph.jsp" />
+				</div>
+			</sec:authorize>
 		</div>
 	</div>
 	<!-- Page-body end -->

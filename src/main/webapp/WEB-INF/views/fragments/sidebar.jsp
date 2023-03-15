@@ -61,7 +61,7 @@
 							<div class="image_wrapper">
 								<img class="img-80 img-radius"
 									src="${pageContext.request.contextPath}/member/profile/<sec:authentication property='principal.username'/>"
-									alt="/resources/oti_images/user.png" style="width: 90px;">
+									alt="${pageContext.request.contextPath}/resources/oti_images/user.png" style="width: 90px;">
 							</div>
 						</div>
 						<div class="user-details col-12 row"

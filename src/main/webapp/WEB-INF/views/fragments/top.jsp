@@ -13,23 +13,21 @@
 				var stime = localStorage.getItem('logintime');
 				var myLoginTime = parseInt(stime, 10);
 
-				var timer = setInterval(
-						function() {
-							// 세션 만료 5분 전일 경우
-							if (parseInt(localStorage.getItem('logintime'), 10) > 0) {
-								$("#loginTime").text(
-										timeFormate(parseInt(localStorage
-												.getItem('logintime'), 10)));
-								localStorage
-										.setItem('logintime', ""
-												+ (parseInt(localStorage
-														.getItem('logintime'),
-														10) - 1));
-							} else {
-								//로그아웃 요청
-								logOut();
-							}
-						}, 1000);
+				var timer = setInterval(function() {
+					// 세션 만료 5분 전일 경우
+					if (parseInt(localStorage.getItem('logintime'), 10) > 0) {
+						$("#loginTime").text(
+								timeFormate(parseInt(localStorage
+										.getItem('logintime'), 10)));
+						localStorage.setItem('logintime', ""
+								+ (parseInt(localStorage.getItem('logintime'),
+										10) - 1));
+					} else {
+						//로그아웃 요청
+						showOtiAlert();
+						logOut();
+					}
+				}, 1000);
 
 			} else {
 				localStorage.removeItem('logintime');
@@ -48,7 +46,7 @@
 				localStorage.setItem('logintime',
 						"${pageContext.session.maxInactiveInterval}");
 		}
-		
+
 		//날짜 포맷
 		function timeFormate(myNum) {
 			var hours = Math.floor(myNum / 3600);
@@ -76,25 +74,21 @@
 	</script>
 </sec:authorize>
 <script>
-//로그아웃
-function logOut() {
-	console.log("로그아웃 실행");
-	$.ajax({
-		url : "${pageContext.request.contextPath}/logout",
-		type : "POST",
-		success : function(res) {
-			localStorage
-					.removeItem('logintime');
-			localStorage
-					.setItem('logintime',
-							"${pageContext.session.maxInactiveInterval}");
-			showOtiAlert();
-			localStorage
-					.removeItem('logintime');
-			clearInterval(timer);
-		}
-	});
-}
+	//로그아웃
+	function logOut() {
+		console.log("로그아웃 실행");
+		$.ajax({
+			url : "${pageContext.request.contextPath}/logout",
+			type : "POST",
+			success : function(res) {
+				localStorage.removeItem('logintime');
+				localStorage.setItem('logintime',
+						"${pageContext.session.maxInactiveInterval}");
+				localStorage.removeItem('logintime');
+				location.reload();
+			}
+		});
+	}
 </script>
 
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
@@ -250,9 +244,9 @@ function logOut() {
 						<li class="user-profile header-notification"><sec:authorize
 								access="isAuthenticated()">
 								<li class="waves-effect waves-light">
-										<button class="btn btn-sm btn-oti" onclick="logOut()"
-											style="margin-top: 12px; margin-left: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
-											type="button">LOGOUT</button>
+									<button class="btn btn-sm btn-oti" onclick="logOut()"
+										style="margin-top: 12px; margin-left: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
+										type="button">LOGOUT</button>
 								</li>
 							</sec:authorize></li>
 					</ul>

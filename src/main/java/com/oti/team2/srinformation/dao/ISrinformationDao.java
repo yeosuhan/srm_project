@@ -115,4 +115,11 @@ public interface ISrinformationDao {
 	 * @return sr진척 엑셀 다운로드 목록 조회
 	 */
 	public List<SrinformationList> selectInfoAllToExcel(@Param("srInfoFilter") SrInfoFilter srInfoFilter, @Param("sort") String sort);
+	
+	/*
+	 * 해당 관리자가 담당하는 가장 최근의 요청에대한 진척번호 조회
+	 * @author 신정은
+	 */
+	public String selectMaxSrNoByPicId(String picId);
+	
 }

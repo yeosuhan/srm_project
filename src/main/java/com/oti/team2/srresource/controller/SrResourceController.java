@@ -3,6 +3,7 @@ package com.oti.team2.srresource.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,8 +46,11 @@ public class SrResourceController {
 	 * */
 	@ResponseBody
 	@GetMapping("/resource/schedule")
-	public List<SrResourceOfDeveloper> getSrResourceOfDeveloperList(@RequestParam() String empId){
+	public List<SrResourceOfDeveloper> getSrResourceOfDeveloperList(@RequestParam(value="empId", required=false) String empId, Authentication auth){
 		log.info(empId);
+		if(empId == null) {
+			return srResourceService.getSrResourceListByEmpId(auth.getName());
+		}
 		return srResourceService.getSrResourceListByEmpId(empId);
 	}
 	

@@ -77,7 +77,7 @@ public class SrDemandService implements ISrDemandService {
 
 		int count = srDemandDao.countByDmndNo(srCode + "%");
 
-		// ex) SR230222_0008 에서 _ 뒤의 숫자 4자리를 세팅하는 로직
+		// ex) SR230222-0008 에서 _ 뒤의 숫자 4자리를 세팅하는 로직
 		String number = (count + 1) + "";
 		while (number.length() < 4) {
 			number = "0" + number;
