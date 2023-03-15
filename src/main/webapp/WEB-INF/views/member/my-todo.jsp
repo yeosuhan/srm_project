@@ -91,7 +91,7 @@
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
 			<div class="col-lg-4" id="qnaList">
-				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
+				<jsp:include page="/WEB-INF/views/mytodo/progressGraph.jsp" />
 			</div>
 		</div>
 	</div>

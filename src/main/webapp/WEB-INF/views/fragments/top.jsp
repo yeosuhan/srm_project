@@ -27,24 +27,7 @@
 														10) - 1));
 							} else {
 								//로그아웃 요청
-								$
-										.ajax({
-											url : "/logout",
-											type : "POST",
-											success : function(res) {
-												localStorage
-														.removeItem('logintime');
-												localStorage
-														.setItem('logintime',
-																"${pageContext.session.maxInactiveInterval}");
-												//location.href="/loginForm";
-												showOtiAlert();
-												localStorage
-														.removeItem('logintime');
-												clearInterval(timer);
-											}
-										});
-
+								logOut();
 							}
 						}, 1000);
 
@@ -65,7 +48,7 @@
 				localStorage.setItem('logintime',
 						"${pageContext.session.maxInactiveInterval}");
 		}
-
+		
 		//날짜 포맷
 		function timeFormate(myNum) {
 			var hours = Math.floor(myNum / 3600);
@@ -92,6 +75,27 @@
 		$("#loginTime").html("<p>없음2</p>");
 	</script>
 </sec:authorize>
+<script>
+//로그아웃
+function logOut() {
+	console.log("로그아웃 실행");
+	$.ajax({
+		url : "${pageContext.request.contextPath}/logout",
+		type : "POST",
+		success : function(res) {
+			localStorage
+					.removeItem('logintime');
+			localStorage
+					.setItem('logintime',
+							"${pageContext.session.maxInactiveInterval}");
+			showOtiAlert();
+			localStorage
+					.removeItem('logintime');
+			clearInterval(timer);
+		}
+	});
+}
+</script>
 
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
 <jsp:include page="/WEB-INF/views/fragments/otiAlert.jsp" />
@@ -246,11 +250,9 @@
 						<li class="user-profile header-notification"><sec:authorize
 								access="isAuthenticated()">
 								<li class="waves-effect waves-light">
-									<form method="POST" action="<c:url value='/logout'/>">
-										<button class="btn btn-sm btn-oti"
+										<button class="btn btn-sm btn-oti" onclick="logOut()"
 											style="margin-top: 12px; margin-left: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
-											type="submit">LOGOUT</button>
-									</form>
+											type="button">LOGOUT</button>
 								</li>
 							</sec:authorize></li>
 					</ul>
