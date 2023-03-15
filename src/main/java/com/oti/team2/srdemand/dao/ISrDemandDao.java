@@ -161,4 +161,17 @@ public interface ISrDemandDao {
 	 * @author 안한길
 	 * */
 	public String selectBySrNo(@Param("srNo")String srNo);
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-15
+	 * @return 사용자의 sr요청 목록 엑셀 다운로드
+	 * @throws Exception
+	 */
+	public List<SrDemand> selectMyInfoAllToExcel(@Param("custId")String memberId,@Param("sort") String sort,@Param("srFilterDto") SrFilterDto srFilterDto);
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-15
+	 * @return 관리자의 sr요청목록 엑셀 다운로드
+	 */
+	public List<SrDemand> selectAdAllSrDemand(@Param("sort")String sort, @Param("srFilterDto")SrFilterDto srFilterDto);
 }

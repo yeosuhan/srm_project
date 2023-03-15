@@ -109,4 +109,7 @@ public interface ISrinformationService {
 	 * @author 신정은
 	 */
 	String getMaxSrNo(String picId);
+
+	
+	void SrListdownload(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

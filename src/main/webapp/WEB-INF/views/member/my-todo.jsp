@@ -74,9 +74,7 @@
 					});
 				}			
 		});
-	});
-	
-		
+	});		
 </script>
 
 
@@ -91,7 +89,29 @@
 <!-- 모달 -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/srModal.css">
+<style type="text/css">
+.btn {
+	padding: 3px;
+}
+
+.badge {
+	padding: 4px 8px;
+}
+
+.card .card-header {
+	background: linear-gradient(135deg, #F05F57 10%, #92344B 100%);
+}
+
+.card .card-body table td ,.card-block table td, table td{
+font-size:13px;
+}
+
+.card .card-body table th,.card-block table th, table th{
+	font-size:14px;
+}
+</style>
 </head>
+
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
@@ -101,13 +121,10 @@
 			<!-- Color Open Accordion start -->
 			<div class="col-lg-12">
 				<div class="card" id="mytodo">
-					<div class="card-header">
-						<h5 class="card-header-text">나의 할일</h5>
-					</div>
 					<div class="col-12">
 						<!-- Nav tabs -->
-						<ul class="nav nav-tabs md-tabs" role="tablist">
-							<sec:authorize access="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')">
+						<ul class="nav card-header-pills nav-tabs md-tabs" role="tablist">
+							<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 								<li class="nav-item btn"><div
 										class="nav-link sttsCd0 active" onclick="moveTab(0)">
 										요청<span class="badge badge-danger">${atotal}</span>
@@ -124,11 +141,45 @@
 									</div>
 									<div class="slide"></div></li>
 							</sec:authorize>
-							<li class="nav-item btn"><div
-									class="nav-link sttsCd3 active" onclick="moveTab(3)">
-									개발중 <span class="badge badge-danger">${dtotal}</span>
-								</div>
-								<div class="slide"></div></li>
+							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
+								<li class="nav-item btn active">
+									<div class="nav-link sttsCd3" onclick="moveTab(3)">
+										개발중 <span class="badge badge-danger">${dtotal}</span>
+									</div>
+									<div class="slide"></div>
+								</li>
+							</sec:authorize>
+							<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+								<li class="nav-item btn"><div class="nav-link sttsCd0"
+										onclick="moveTab(0)">
+										요청<span class="badge badge-danger">${atotal}</span>
+									</div>
+									<div class="slide"></div></li>
+								<li class="nav-item btn"><div class="nav-link sttsCd1"
+										onclick="moveTab(1)">
+										반려 <span class="badge badge-danger">${rejTotal}</span>
+									</div>
+									<div class="slide"></div></li>
+								<li class="nav-item btn"><div
+										class="nav-link sttsCd2 active" onclick="moveTab(2)">
+										접수 <span class="badge badge-danger">${rtotal}</span>
+									</div>
+									<div class="slide"></div></li>
+								<li class="nav-item btn">
+									<div class="nav-link sttsCd3" onclick="moveTab(3)">
+										개발중 <span class="badge badge-danger">${dtotal}</span>
+									</div>
+									<div class="slide"></div>
+								</li>
+							</sec:authorize>
+							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
+								<li class="nav-item btn">
+									<div class="nav-link sttsCd3 active" onclick="moveTab(3)">
+										개발중 <span class="badge badge-danger">${dtotal}</span>
+									</div>
+									<div class="slide"></div>
+								</li>
+							</sec:authorize>
 							<li class="nav-item btn"><div class="nav-link sttsCd4"
 									onclick="moveTab(4)">
 									테스트 <span class="badge badge-danger">${ttotal}</span>
@@ -168,7 +219,7 @@
 			<div class="col-lg-4" id="noticeList">
 				<jsp:include page="/WEB-INF/views/mytodo/notice.jsp" />
 			</div>
-			<!-- qna 게시판 -->
+			<!-- 시각자료 넣을 곳 -->
 			<div class="col-lg-4" id="qnaList">
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
@@ -197,6 +248,7 @@
 					</div>
 				</div>
 			</sec:authorize>
+
 		</div>
 	</div>
 	<!-- Page-body end -->

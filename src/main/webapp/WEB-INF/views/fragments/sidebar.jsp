@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <style>
 .pcoded-mtext, i {
@@ -39,10 +40,9 @@
 	margin: auto;
 }
 </style>
-<div class="pcoded-main-container"
-	style="margin-top: 56px; margin-bottom: 0px">
-	<div class="pcoded-wrapper">
 
+<div class="pcoded-main-container" style="margin-top: 0px">
+	<div class="pcoded-wrapper">
 		<nav class="pcoded-navbar" navbar-theme="themelight1"
 			active-item-theme="theme1" sub-item-theme="theme2"
 			active-item-style="style0" pcoded-navbar-position="fixed">
@@ -60,8 +60,7 @@
 							<div class="gradation_animate"></div>
 							<div class="image_wrapper">
 								<img class="img-80 img-radius"
-									src="${pageContext.request.contextPath}/member/profile/<sec:authentication property='principal.username'/>"
-									alt="${pageContext.request.contextPath}/resources/oti_images/user.png" style="width: 90px;">
+									src="${pageContext.request.contextPath}/member/profile/<sec:authentication property='principal.username'/>">
 							</div>
 						</div>
 						<div class="user-details col-12 row"
@@ -158,7 +157,7 @@
 							href="${pageContext.request.contextPath}/board/list?type=qna"
 							class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 									class="far fa-comments pt-1"></i><b>FC</b></span> <span
-								class="pcoded-mtext" data-i18n="nav.form-components.main">QnA</span>
+								class="pcoded-mtext" data-i18n="nav.form-components.main">문의사항</span>
 								<span class="pcoded-mcaret"></span>
 						</a></li>
 					</ul>

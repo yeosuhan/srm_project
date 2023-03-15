@@ -23,9 +23,11 @@
 					</c:if>
 					<th width="10%" class="text-center">완료요청일</th>
 					<th width="10%" class="text-center">진행상태</th>
-					<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
-						<th width="5%">우선순위</th>
-					</sec:authorize>
+					<c:if test="${sttsCd gt 1}">
+						<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
+							<th width="5%">우선순위</th>
+						</sec:authorize>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
@@ -62,7 +64,7 @@
 						</c:if> <c:if test="${(sr.sttsCd) eq 6}">
 							<label class="badge badge-inverse-primary">${sr.sttsNm}</label>
 						</c:if></td>
-					<c:if test="${sttsCd ne 0}">
+					<c:if test="${sttsCd gt 1}">
 						<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
 							<td id="rnk" class="text-center">${sr.rnk}</td>
 						</sec:authorize>

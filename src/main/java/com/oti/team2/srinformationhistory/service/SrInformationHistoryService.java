@@ -16,6 +16,7 @@ import com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao;
 import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
+import com.oti.team2.srinformationhistory.dto.SrResourceAddHistoryDto;
 import com.oti.team2.srresource.dto.SrResource;
 import com.oti.team2.srresource.service.ISrResourceService;
 import com.oti.team2.util.pager.Pager;
@@ -279,7 +280,7 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	 * @author 최은종
 	 */
 	@Override
-	public List<MyTodoHistoryListDto> getDmndNoBySrResouce(String dmndNo, String empId) {
+	public List<SrResourceAddHistoryDto> getDmndNoBySrResouce(String dmndNo, String empId) {
 		return srInformationHistoryDao.selectDmndNoBySrResouce(dmndNo, empId);
 	}
 

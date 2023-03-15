@@ -245,7 +245,7 @@
 								access="isAuthenticated()">
 								<li class="waves-effect waves-light">
 									<button class="btn btn-sm btn-oti" onclick="logOut()"
-										style="margin-top: 12px; margin-left: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
+										style="margin-top: 15px; margin-left: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
 										type="button">LOGOUT</button>
 								</li>
 							</sec:authorize></li>
@@ -253,5 +253,3 @@
 				</div>
 			</div>
 		</nav>
-
-		<!-- ./top -->

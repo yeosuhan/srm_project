@@ -139,7 +139,7 @@ th {
 										type="date" name="dmndYmdEnd" id="dmndYmdEnd"
 										value="${srFilterDto.dmndYmdEnd}">
 								</div>
-								<div class="col col-2 pr-0">
+								<div class="col col-2 p-0">
 									<label for="sttsCd" style="margin-right: 10px;">진행 상태</label> <select
 										id="sttsCd" name="sttsCd">
 										<option value="">전체</option>
@@ -158,7 +158,7 @@ th {
 											완료</option>
 									</select>
 								</div>
-								<div class="col col-3 pr-0">
+								<div class="col col-3 p-0" style="margin-left:-60px;">
 									<label for="sysCd">시스템 구분</label> <select
 										id="sysCd" name="sysCd" onchange="systemFilter()">
 										<option value="">전체</option>
@@ -172,7 +172,7 @@ th {
 										</c:forEach>
 									</select>
 								</div>
-								<div class="col col-1 pr-0">
+								<div class="col col-2 p-0"style="margin-left:-85px;">
 									<label for="taskSeCd">업무구분</label>
 									<select id="taskSeCd" name="taskSeCd" style="width: 150px">
 										<option value="">전체</option>
@@ -188,13 +188,16 @@ th {
 										</c:if>
 									</select>
 								</div>
-								<div class="col col-xl-3">
+								<div class="col col-3 p-0" style="margin-left:-20px;">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
 										type="text" name="keyWord" id="keyWord"
-										value="${srFilterDto.keyWord}">
+										value="${srFilterDto.keyWord}" style="width:140px;">
 									<button type="submit" class="btn btn-sm btn-oti">
 										<i class="ti-search"></i>
 									</button>
+									<button class="btn btn-sm btn-oti" style="height: 30px;"
+									onclick="javascript: form.action='${pageContext.request.contextPath}/srdemand/list/download';">엑셀
+										다운로드</button>
 								</div>
 							</div>
 						</form>
@@ -337,21 +340,21 @@ th {
 									style="font-size: 12px; padding-top: 20px;">
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
-										<div class="col col-sm-9">
+										<div class="col col-sm-10">
 											<div class="form-control dmndNo"
-												style="font-size: 12px; width: 325px;">${sd.dmndNo}</div>
+												style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
 										</div>
 									</div>
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold px-0">SR 제목</div>
-										<div class="col col-sm-9">
-											<div class="form-control ttl" style="width: 325px;">${sd.ttl}</div>
+										<div class="col col-sm-10">
+											<div class="form-control ttl" style="width: 100%;">${sd.ttl}</div>
 										</div>
 									</div>
 									<div class="form-group row">
 										<div class="col-sm-2 font-weight-bold px-0">관련 근거</div>
-										<div class="col-sm-9">
-											<div class="form-control relGrund" style="width: 325px;">${sd.relGrund}</div>
+										<div class="col-sm-10">
+											<div class="form-control relGrund" style="width:  100%;">${sd.relGrund}</div>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -394,7 +397,7 @@ th {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
 											<div class="col col-sm-8">
-												<div class="form-control deptNm" style="width: 90%;">${sd.deptNm}</div>
+												<div class="form-control deptNm" style="width: 100%;">${sd.deptNm}</div>
 											</div>
 										</div>
 									</div>
@@ -434,14 +437,14 @@ th {
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label px-0 font-weight-bold"
 											style="line-height: 100px; font-size: 12px;">SR 내용</label>
-										<div class="col-sm-9">
+										<div class="col-sm-10">
 											<input class="form-control cn"
-												style="height: 100px; width: 325px;" value="${sd.cn}"
+												style="height: 100px; width:  100%;" value="${sd.cn}"
 												readonly></input>
 										</div>
 									</div>
 									<div class="form-group row">
-										<p class="col-sm-2 font-weight-bold">첨부파일</p>
+										<p class="col-sm-2 p-0 font-weight-bold">첨부파일</p>
 										<div class="col-sm-5">
 											<c:forEach var="f" items="${sd.attachFile}">
 												<div>

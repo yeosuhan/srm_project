@@ -251,7 +251,7 @@ public class SrinformationService implements ISrinformationService {
 		  cell.setCellStyle(cs);
 		}
 	@Override
-	public void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request,
+	public void SrListdownload(List<SrinformationList> srlist, HttpServletRequest request,
 			HttpServletResponse response)throws Exception {
 		SXSSFWorkbook wb = new SXSSFWorkbook();
 		  Sheet sheet = wb.createSheet();
@@ -375,5 +375,10 @@ public class SrinformationService implements ISrinformationService {
 	 */
 	public String getMaxSrNo(String picId) {
 		return srinformationDao.selectMaxSrNoByPicId(picId);
+	}
+
+	@Override
+	public void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {		
 	}
 }

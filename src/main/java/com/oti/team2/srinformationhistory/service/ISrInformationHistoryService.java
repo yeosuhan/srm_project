@@ -5,6 +5,7 @@ import java.util.List;
 import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
+import com.oti.team2.srinformationhistory.dto.SrResourceAddHistoryDto;
 import com.oti.team2.util.pager.Pager;
 
 public interface ISrInformationHistoryService {
@@ -71,7 +72,7 @@ public interface ISrInformationHistoryService {
 	 * 
 	 * @author 최은종
 	 */
-	public List<MyTodoHistoryListDto> getDmndNoBySrResouce(String dmndNo, String empId);
+	public List<SrResourceAddHistoryDto> getDmndNoBySrResouce(String dmndNo, String empId);
 	
 	/**
 	 * 나의 할 일에서 히스토리 목록 페이징 메서드

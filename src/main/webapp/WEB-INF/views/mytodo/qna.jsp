@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
+<style>
+
+</style>
 <div class="card">
 	<div class="card-header">
 		<h5 class="card-header-text">문의사항</h5>

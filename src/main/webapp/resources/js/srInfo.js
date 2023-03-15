@@ -46,23 +46,23 @@ function getDetail(dmndNo, srNo) {
 			$('#SRPlFlnm').show();
 			$('#changeMemberId').remove();
 			$('#changeManager').remove();
+			console.log("srinfo.js 들어옴");
+			console.log(detail);
 			console.log(detail.isDnumExists);
-			console.log(detail.dd.sttsNm);
+			console.log(detail.dd);
 			console.log(detail.role);
 			var role = detail.role;
 			
 			// 관리자 & 개발자 권한과 상황에 따른 요청 버튼 제한 (최은종)
 			if(role=='ROLE_DEVELOPER') {
 				if(detail.isDnumExists>0){
-					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'${srNo}'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
-				} else if(detail.isDnumExists<=0) {
-					$(".col-3").empty();
-				} else if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'srNo'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
+				} else if((detail.isDnumExists)<=0 || (detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 					$(".col-3").empty();
 				} else {
-					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'${srNo}'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
+					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'srNo'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
 				}
-			} else {
+			} else if (role=='ROLE_ADMIN'){
 				if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 					$(".col-3").hide();
 				} else {

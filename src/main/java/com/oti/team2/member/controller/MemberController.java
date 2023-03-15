@@ -90,8 +90,7 @@ public class MemberController {
 
 	/**
 	 * 
-	 * 멤버의 프로필 사진 조회 수정 필요 !!!
-	 * 
+	 * 멤버의 프로필 사진 조회
 	 * @author : 신정은
 	 * @param memberId
 	 * @return
@@ -101,10 +100,9 @@ public class MemberController {
 		ProfileImg profileImg = memberService.getProfileImg(memberId);
 		log.info(profileImg);
 		HttpHeaders headers = new HttpHeaders();
-		if(profileImg != null) {
-			String mtypes[] = profileImg.getFileType().split("/");
-			headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
-		}
+		String mtypes[] = profileImg.getFileType().split("/");
+		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
+		
 
 		return new ResponseEntity<byte[]>(null, headers, HttpStatus.OK);
 	}
@@ -188,11 +186,11 @@ public class MemberController {
 			memberService.updateNewPswd(memberDto);
 
 			// 발신인 정보
-			String fromEmail = "srmteam2@gmail.com"; // 받는 사람 메일에 표시됨
+			String fromEmail = "otiteam2@gmail.com"; // 받는 사람 메일에 표시됨
 			String fromName = "오티아이"; // 발신인 이름
 			String title = "[OTI 오티아이] OTI-SRM 임시 비밀번호 입니다.";
 			String content = memberDto.getMemberId()
-					+ "님 안녕하세요. OTI-SRM 임시 비밀번호 입니다. 비밀번호를 변경하여 사용 부탁드립니다. 본인이 새로운 비밀번호를 요청하지 않았다면 이 이메일은 무시해 주세요.";
+					+ "님 안녕하세요. 로그인 후 비밀번호를 변경하여 사용 부탁드립니다. 본인이 새로운 비밀번호를 요청하지 않았다면 이 이메일은 무시해 주세요.";
 			content += "OTI-SRM 임시 비밀번호 : " + randomPswd;
 
 			// 수신인 정보
