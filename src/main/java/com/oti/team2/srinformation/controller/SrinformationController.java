@@ -28,7 +28,7 @@ import com.oti.team2.srinformation.dto.SrTotal;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInformation;
 import com.oti.team2.srinformation.service.ISrinformationService;
-import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
+import com.oti.team2.srinformationhistory.dto.SrResourceAddHistoryDto;
 import com.oti.team2.srinformationhistory.service.ISrInformationHistoryService;
 import com.oti.team2.srresource.service.ISrResourceService;
 import com.oti.team2.util.pager.Pager;
@@ -119,17 +119,20 @@ public class SrinformationController {
 	public SrTotal getDetail(@PathVariable("dmndNo") String dmndNo, Authentication auth) {
 		SrTotal total = null;
 		int isDnumExists = 0;
-		
+
 		SrdemandDetail dd = srDemandService.getSrDemandDetail(dmndNo);
 		SrplanInformation pi = srinformationService.getPlan(dmndNo);
 
 		// 개발자: 내가 맡은 + sysdate<투입종료일 인 sr에 대해서만 버튼 보이게 하기 (최은종)
 		String empId = auth.getName().toString();
-		List<MyTodoHistoryListDto> drlist = srInformationHistoryService.getDmndNoBySrResouce(dmndNo, empId);
+		log.info("empId" + empId);
+		List<SrResourceAddHistoryDto> drlist = srInformationHistoryService.getDmndNoBySrResouce(dmndNo, empId);
 		log.info("drlist" + drlist);
 
+		log.info("drlist size" + drlist.size());
 		if (drlist.size() > 0) {
-			isDnumExists = drlist.indexOf(drlist.get(1));
+			isDnumExists = 1;
+			// isDnumExists = drlist.indexOf(drlist.get(0));
 			log.info("isDnumExists " + isDnumExists);
 		} else {
 			isDnumExists = 0;
@@ -138,10 +141,10 @@ public class SrinformationController {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 
 		total = new SrTotal(dd, pi, isDnumExists, role);
-		
+
 		log.info("dd 목록: " + dd);
 		log.info("pi 목록: " + pi);
-		log.info("total 목록: " + total);	
+		log.info("total 목록: " + total);
 		return total;
 	}
 
@@ -186,7 +189,7 @@ public class SrinformationController {
 	 * 
 	 * @author 여수한 작성일자 : 2023-03-13
 	 * @return sr진척 목록 엑셀 다운로드
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@GetMapping(value = "/list/download")
 	public void downloadExcel(Model model,@ModelAttribute SrInfoFilter srInfoFilter, Authentication auth,
