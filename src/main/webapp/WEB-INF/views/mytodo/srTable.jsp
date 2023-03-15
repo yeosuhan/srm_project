@@ -17,7 +17,9 @@
 					<th width="15%" class="text-left">시스템구분</th>
 					<th width="15%" class="text-left">업무구분</th>
 					<th width="20%" class="text-center">SR제목</th>
-					<th width="7%" class="text-center">담당자</th>
+					<c:if test="${sttsCd ne 0}">
+						<th width="7%" class="text-center">담당자</th>
+					</c:if>
 					<th width="10%" class="text-center">완료요청일</th>
 					<th width="10%" class="text-center">진행상태</th>
 					<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
@@ -40,7 +42,9 @@
 							<td id="ttl" class="text-center"><c:out value="${sr.ttl}" /></td>
 						</c:otherwise>
 					</c:choose>
-					<td id="picNm" class="text-center">${sr.picNm}</td>
+					<c:if test="${sttsCd ne 0}">
+						<td id="picNm" class="text-center">${sr.picNm}</td>
+					</c:if>
 					<td id="cmptnDmndYmd" class="text-center text-center">${sr.cmptnDmndYmd}</td>
 					<td class="text-center"><c:if test="${(sr.sttsCd) eq 0}">
 							<label class="badge badge-warning">${sr.sttsNm}</label>
@@ -57,7 +61,7 @@
 						</c:if> <c:if test="${(sr.sttsCd) eq 6}">
 							<label class="badge badge-inverse-primary">${sr.sttsNm}</label>
 						</c:if></td>
-					<c:if test="${sr.sttsCd} > 1">
+					<c:if test="${sttsCd ne 0}">
 						<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
 							<td id="rnk" class="text-center">${sr.rnk}</td>
 						</sec:authorize>

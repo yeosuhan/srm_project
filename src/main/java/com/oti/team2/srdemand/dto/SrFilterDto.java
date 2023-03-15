@@ -16,4 +16,5 @@ public class SrFilterDto {
 	private Date dmndYmdEnd;
 	private Integer sttsCd;
 	private String keyWord;
+	private Integer hstryId;
 }

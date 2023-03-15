@@ -13,6 +13,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/mytodoHstry.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/sessionCookie.js"></script>
 <!-- 모달 -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/srModal.css">
@@ -81,11 +83,14 @@
 		</div>
 		<div class="row">
 			<!-- 공지사항 게시판 -->
-			<div class="col-lg-6" id="noticeList">
+			<div class="col-lg-4" id="noticeList">
 				<jsp:include page="/WEB-INF/views/mytodo/notice.jsp" />
 			</div>
 			<!-- qna 게시판 -->
-			<div class="col-lg-6" id="qnaList">
+			<div class="col-lg-4" id="qnaList">
+				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
+			</div>
+			<div class="col-lg-4" id="qnaList">
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
 		</div>

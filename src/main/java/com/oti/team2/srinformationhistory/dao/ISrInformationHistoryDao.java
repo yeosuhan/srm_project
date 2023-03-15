@@ -64,6 +64,16 @@ public interface ISrInformationHistoryDao {
 	public List<MyTodoHistoryListDto> selectHstryTodoByEmpId(@Param("pager") Pager pager, @Param("rqstrId") String rqstrId, @Param("empId") String empId);
 	public List<MyTodoHistoryListDto> selectHstryTodoByCustId(@Param("pager") Pager pager, @Param("custId") String custId);
 	
+	/* 새로 insert된 히스토리 아이디를 조회(알람 전송에 필요)
+	 * @author 안한길
+	 * */
+	public int selectLastHstryIdByRqstrId(@Param("rqstrId")String rqstrId);
+
+	/* 받은 요청에 대한 발신자 조회
+	 * @author 안한길
+	 * */
+	public String selectRqstrIdByHstryId(@Param("hstryId")int hstryId);
+
 	/**
 	 * 나의 할 일에서 히스토리 목록 페이징 메서드
 	 * 

@@ -14,14 +14,14 @@
 	</div>
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold px-0">SR 제목</div>
-		<div class="col col-sm-9">
-			<div type="text" class="form-control ttl" style="width: 325px;">${sd.ttl}</div>
+		<div class="col col-sm-10">
+			<div class="form-control ttl" style="width: 325px;">${sd.ttl}</div>
 		</div>
 	</div>
 	<div class="form-group row">
 		<div class="col-sm-2 font-weight-bold px-0">관련 근거</div>
-		<div class="col-sm-9">
-			<div type="text" class="form-control relGrund" style="width: 325px;">${sd.relGrund}</div>
+		<div class="col-sm-10">
+			<textarea class="form-control relGrund" style="width: 100%;">${sd.relGrund}</textarea>
 		</div>
 	</div>
 	<div class="form-group row">
@@ -54,20 +54,22 @@
 			<div class="col col-sm-8 cmptnDmndYmd">${sd.cmptnDmndYmd}</div>
 		</div>
 	</div>
-	<div class="form-group row">
-		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
-			<div class="col col-sm-6">
-				<div type="text" class="form-control picNm">${sd.picNm}</div>
+	<c:if test="${sd.sttsCd gt 1}">
+		<div class="form-group row">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
+				<div class="col col-sm-6">
+					<div type="text" class="form-control picNm">${sd.picNm}</div>
+				</div>
+			</div>
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
+				<div class="col col-sm-8">
+					<div type="text" class="form-control deptNm" style="width: 90%;">${sd.deptNm}</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
-			<div class="col col-sm-8">
-				<div type="text" class="form-control deptNm" style="width: 90%;">${sd.deptNm}</div>
-			</div>
-		</div>
-	</div>
+	</c:if>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">진행 상태</div>
@@ -75,10 +77,12 @@
 				<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
 			</div>
 		</div>
-		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
-			<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
-		</div>
+		<c:if test="${sd.sttsCd gt 1}">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
+				<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
+			</div>
+		</c:if>
 	</div>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
@@ -102,14 +106,14 @@
 	<div class="form-group row">
 		<label class="col-sm-2 col-form-label px-0 font-weight-bold"
 			style="line-height: 100px; font-size: 12px;">SR 내용</label>
-		<div class="col-sm-9">
-			<input class="form-control cn" style="height: 100px; width: 325px;"
-				value="${sd.cn}" readonly></input>
+		<div class="col-sm-10">
+			<textarea class="form-control cn" style="width: 100%;"
+				>${sd.cn}</textarea>
 		</div>
 	</div>
 	<div class="form-group row">
-		<p class="col-sm-2 font-weight-bold">첨부파일</p>
-		<div class="col-sm-5">
+		<p class="col-sm-2 font-weight-bold px-0">첨부파일</p>
+		<div class="col-sm-10">
 			<c:forEach var="f" items="${sd.attachFile}">
 				<div>
 					<a href="<c:url value='/file/download/${f.fileSn}' />"> <span
@@ -125,7 +129,7 @@
 			<div class="col" style="text-align: right">
 				<button id="modbtn" style="float: right;"
 					class="btn btn-sm btn-oti center" onclick="updateSr('${sd.dmndNo}')">수정</button>
-				<div class="btn btn-sm btn-oti btn-round danger cancle"
+				<div class="btn btn-sm btn-oti center"
 					style="float: right; margin-right: 5px;" onclick="deleteSr('${sd.dmndNo}')">삭제</div>
 			</div>
 		</c:if>

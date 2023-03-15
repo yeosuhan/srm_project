@@ -39,29 +39,47 @@ function goPost(type) {
 					 		
 		console.log(bbsCn);
 		
-		
+		var flag = true;
 		// fileInput 개수를 구한다.
 		for (var i = 0; i < flist.length; i++) {
-			console.log(flist[i]);
+			var maxSize = 1024 * 1024 * 3;
+			var fsize = Math.floor(flist[i].size / 1024);
+			var fileName = flist[i].name;
+			let dot = fileName.lastIndexOf('.');
+			let type = fileName.substring(dot+1, fileName.length).toLowerCase();
 			
-			formData.append('attachFile', flist[i]);					
+			if(type == "exe") {
+				flag = false;
+				alert(".exe 파일은 업로드할 수 없습니다.")
+				break;
+			}
+			
+			if(fsize > maxSize) {
+				flag = false;
+				alert("3MB이상의 파일은 업로드할 수 없습니다.")
+				break;
+			}
+			console.log(type);
+			formData.append('attachFile', flist[i]);
 		}
 		
-		$.ajax({
-			url : '/board/write',
-			type : 'POST',
-			data : formData ,
-			enctype: "multipart/form-data",
-			processData: false, //프로세스 데이터 설정 : false 값을 해야 form data로 인식함
-	        contentType: false,
-			success : function(res) {
-				alert("성공");
-			},
-			error : function(error) {
-		       console.log("사류");
-		    }
+		if(flag){
+			$.ajax({
+				url : '/board/write',
+				type : 'POST',
+				data : formData ,
+				enctype: "multipart/form-data",
+				processData: false, //프로세스 데이터 설정 : false 값을 해야 form data로 인식함
+		        contentType: false,
+				success : function(res) {
+				},
+				error : function(error) {
+			    }
+			
+			});
+		}
+		location.reload();
 		
-		});
 	}	
 }
 

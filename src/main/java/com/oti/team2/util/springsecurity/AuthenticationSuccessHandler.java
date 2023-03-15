@@ -32,7 +32,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
 		log.info("로그인 성공");
 
 		alertService.connectSseEmitter(auth.getName());
-
+		
 		super.onAuthenticationSuccess(req, res, auth);
 	}
 }

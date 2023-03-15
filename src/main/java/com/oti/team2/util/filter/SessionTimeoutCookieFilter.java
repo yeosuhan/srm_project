@@ -1,6 +1,8 @@
 package com.oti.team2.util.filter;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -23,22 +25,24 @@ public class SessionTimeoutCookieFilter implements Filter{
         HttpServletRequest httpReq = (HttpServletRequest) request;
  
         long currTime = System.currentTimeMillis();
-        long expiryTime = currTime + (((HttpServletRequest) request).getSession().getMaxInactiveInterval() * 60000);
- 
-        Cookie cookie = new Cookie("serverTime", "" + currTime);
- 
+        
+        log.info("getMaxInactiveInterval");
+        log.info(((HttpServletRequest) request).getSession(false).getMaxInactiveInterval());
+        long expiryTime = currTime + (((HttpServletRequest) request).getSession().getMaxInactiveInterval() * 60);
+        
+        Cookie cookie = new Cookie("sessionExpiry", "" + expiryTime);
+        Date date = new Date(expiryTime);
+        log.info(currTime);
+        log.info(expiryTime);
+        log.info(date);
+        
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
+        log.info(simpleDateFormat.format(date));
         cookie.setPath("/");
         httpRes.addCookie(cookie);
  
  
-        Cookie cookie2 = new Cookie("sessionExpiry", "" + expiryTime);
- 
-        cookie2.setPath("/");
-        httpRes.addCookie(cookie2);
-        log.info("쿠키 필터 ~~~ ");
-        log.info("serverTime ~~~ " + currTime);
-        log.info("sessionExpiry ~~~ " + expiryTime);
-       
+        log.info("쿠키 필터 ~~~ ");       
         chain.doFilter(request, response);
 	}
 

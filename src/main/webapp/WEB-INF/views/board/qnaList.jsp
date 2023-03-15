@@ -4,6 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
@@ -11,9 +12,8 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/pagination.css">
 <link rel="stylesheet" type="text/css"
-	href="/${pageContext.request.contextPath}resources/js/pagination.js">
-<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/srButton.css">
+<script src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
 
 </head>
@@ -40,24 +40,24 @@
 								<input type="hidden" name="type" id="type" value="qna">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
-										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart">
-									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd">
+										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart" value="${boardFilterDto.dmndYmdStart}">
+									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd" value="${boardFilterDto.dmndYmdEnd }">
 								</div>
 								<div class="col col-2 pr-0">
 									<label for="ansYn" style="margin-right: 10px;">답변 상태</label> <select
 										id="ansYn" name="ansYn">
 										<option value="">전체</option>
-										<option value="1">답변완료</option>
-										<option value="0">미답변</option>
+										<option value="1" <c:if test="${boardFilterDto.ansYn eq 1}">selected</c:if>>답변완료</option>
+										<option value="0" <c:if test="${boardFilterDto.ansYn eq 0}">selected</c:if>>미답변</option>
 									</select>
 								</div>								
 								<div class="col col-3 px-0">
 									<label for="wrtrNm" style="margin-right: 10px;">작성자</label> <input
-										type="text" name="wrtrNm" id="wrtrNm">
+										type="text" name="wrtrNm" id="wrtrNm" value="${boardFilterDto.wrtrNm}">
 								</div>
 								<div class="col col-2 px-0">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
-										type="text" name="keyWord" id="keyWord">
+										type="text" name="keyWord" id="keyWord" value="${boardFilterDto.keyWord}">
 								</div>
 									<button type="submit" class="btn btn-sm btn-oti"
 										style="margin-right: 10px; height: 30px;">

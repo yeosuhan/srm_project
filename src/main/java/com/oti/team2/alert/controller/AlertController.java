@@ -35,7 +35,7 @@ public class AlertController {
 	@ResponseBody
 	@GetMapping("/list")
 	public List<Alert> getAlertList(Authentication auth){
-		List<Alert> alertList = alertService.getAlertList(auth.getName());
+		List<Alert> alertList = alertService.getAlertList(auth.getName(),auth.getAuthorities().stream().findFirst().get().toString());
 		//log.info(alertList);
 		return alertList;
 	}
