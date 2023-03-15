@@ -55,7 +55,7 @@ label>img {
 			</c:if>
 				<div class="card" style="height: 590px;">
 					<div class="card-header">
-						<h5>내정보 관리</h5>
+						<h5>나의 정보</h5>
 					</div>
 						<div class="row">
 						<div class="col-4"
@@ -69,11 +69,11 @@ label>img {
 														test="${member.fileData eq null}">
 														<img id="defaultImage"
 															src="/resources/oti_images/user.png"
-															style="width: 200px; height: 200px; align-content: center;">
+															style="width: 300px; height: 300px; align-content: center;">
 													</c:if> <c:if test="${member.fileData ne null}">
 														<img id="defaultImage"
 															src='<c:url value="/member/profile/${member.memberId}"/>'
-															style="width: 200px; height: 200px; align-content: center;">
+															style="width: 300px; height: 300px; align-content: center;">
 													</c:if>
 												</label>
 											</div>

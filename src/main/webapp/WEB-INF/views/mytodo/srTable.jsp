@@ -17,7 +17,7 @@
 					<th width="15%" class="text-left">SR번호</th>
 					<th width="15%" class="text-left">시스템구분</th>
 					<th width="15%" class="text-left">업무구분</th>
-					<th width="20%" class="text-center">SR제목</th>
+					<th width="20%" class="text-center">제목</th>
 					<c:if test="${sttsCd ne 0}">
 						<th width="7%" class="text-center">담당자</th>
 					</c:if>

@@ -106,6 +106,18 @@ th {
 #card_body, .form-control {
 	font-size: 12px;
 }
+
+.badge {
+	padding: 5px 8px;
+}
+
+#headerFirst {
+	background: #6b2146;
+}
+
+.card .card-header {
+	background: linear-gradient(135deg, #6b2146 10%, #93344b 100%);
+}
 </style>
 </head>
 
@@ -119,7 +131,7 @@ th {
 			<%-- *********************************** [SR 요청 관리 ] ***********************************--%>
 			<div class="col-xl-12">
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
 								<h5>SR 요청 관리</h5>
@@ -128,7 +140,8 @@ th {
 								<button class="btn btn-oti" id="addbtn">요청 등록</button>
 							</div>
 						</div>
-						<hr />
+					</div>
+					<div class="card-body">
 						<form id="srSearchForm"
 							action="${pageContext.request.contextPath}/srdemand/list">
 							<div class="row">
@@ -158,9 +171,11 @@ th {
 											완료</option>
 									</select>
 								</div>
-								<div class="col col-3 p-0" style="margin-left:-60px;">
-									<label for="sysCd">시스템 구분</label> <select
-										id="sysCd" name="sysCd" onchange="systemFilter()">
+
+								<div class="col col-3 p-0" style="margin-left: -60px;">
+									<label for="sysCd">시스템 구분</label> <select id="sysCd"
+										name="sysCd" onchange="systemFilter()">
+
 										<option value="">전체</option>
 										<c:forEach var="system" items="${systemList}">
 											<c:if test="${srFilterDto.sysCd eq system.sysCd}">
@@ -172,9 +187,9 @@ th {
 										</c:forEach>
 									</select>
 								</div>
-								<div class="col col-2 p-0"style="margin-left:-85px;">
-									<label for="taskSeCd">업무구분</label>
-									<select id="taskSeCd" name="taskSeCd" style="width: 150px">
+								<div class="col col-2 p-0" style="margin-left: -85px;">
+									<label for="taskSeCd">업무구분</label> <select id="taskSeCd"
+										name="taskSeCd" style="width: 150px">
 										<option value="">전체</option>
 										<c:if test="${taskList ne null}">
 											<c:forEach var="task" items="${taskList}">
@@ -188,15 +203,15 @@ th {
 										</c:if>
 									</select>
 								</div>
-								<div class="col col-3 p-0" style="margin-left:-20px;">
+								<div class="col col-3 p-0" style="margin-left: -20px;">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
 										type="text" name="keyWord" id="keyWord"
-										value="${srFilterDto.keyWord}" style="width:140px;">
+										value="${srFilterDto.keyWord}" style="width: 140px;">
 									<button type="submit" class="btn btn-sm btn-oti">
 										<i class="ti-search"></i>
 									</button>
 									<button class="btn btn-sm btn-oti" style="height: 30px;"
-									onclick="javascript: form.action='${pageContext.request.contextPath}/srdemand/list/download';">엑셀
+										onclick="javascript: form.action='${pageContext.request.contextPath}/srdemand/list/download';">엑셀
 										다운로드</button>
 								</div>
 							</div>
@@ -232,12 +247,12 @@ th {
 														<a
 															href="${pageContext.request.contextPath}/admin/srdemand/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
-															style="color: black; font-size: 24px;"></i></a>
+															style="color: #93344b; font-size: 24px;"></i></a>
 													</c:if> <c:if test="${sort eq 'ASC'}">
 														<a
 															href="${pageContext.request.contextPath}/admin/srdemand/list"
 															class="sortBtnDesc"><i class="fas fa-caret-up"
-															style="color: black; font-size: 24px;"></i></a>
+															style="color: #93344b; font-size: 24px;"></i></a>
 													</c:if>
 
 												</th>
@@ -354,7 +369,7 @@ th {
 									<div class="form-group row">
 										<div class="col-sm-2 font-weight-bold px-0">관련 근거</div>
 										<div class="col-sm-10">
-											<div class="form-control relGrund" style="width:  100%;">${sd.relGrund}</div>
+											<div class="form-control relGrund" style="width: 100%;">${sd.relGrund}</div>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -439,7 +454,7 @@ th {
 											style="line-height: 100px; font-size: 12px;">SR 내용</label>
 										<div class="col-sm-10">
 											<input class="form-control cn"
-												style="height: 100px; width:  100%;" value="${sd.cn}"
+												style="height: 100px; width: 100%;" value="${sd.cn}"
 												readonly></input>
 										</div>
 									</div>

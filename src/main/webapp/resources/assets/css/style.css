@@ -161,7 +161,7 @@ b, strong {
     padding: 15px 20px;
     border-radius: 0 0 5px 5px; }
   .card .card-header {
-    background: #92344B; 
+    background: #4C1342; 
     border-bottom: none;
     padding: 13px;
     position: relative;
@@ -5280,6 +5280,14 @@ select.form-control:not([size]):not([multiple]) {
 .badge-info {
   background: #00bcd4; }
 
+.badge-otitodo {
+  margin-left: 3px;
+  background: #92344B; }
+  
+ .badge-otidanger {
+ margin-left: 3px;
+ background: #ff5252; }
+  
 /*======= Badge-color css end  ======= */
 /*======= Background-color css starts  ======= */
 .bg-color-box {
@@ -6222,8 +6230,8 @@ table tbody .border-bottom-info td {
     .header-navbar .navbar-wrapper .navbar-container .header-notification.active:before {
       content: "";
       border: 10px solid transparent;
-      border-left-color: #fff;
-      border-top-color: #fff;
+      border-left-color: #92344B;
+      border-top-color: #92344B;
       position: absolute;
       border-radius: 5px;
       bottom: -32px;

@@ -5,7 +5,6 @@
 <script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
 <style>
 
-
 </style>
 
 <div class="card">

@@ -42,7 +42,6 @@
 	href="${pageContext.request.contextPath}/resources/assets/css/style.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/assets/css/jquery.mCustomScrollbar.css">
-
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/yshmodal.css" />
 <link rel="stylesheet"
