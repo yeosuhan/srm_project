@@ -501,4 +501,128 @@
 			sd.DMND_NO = si.DMND_NO AND
 			si.SR_NO = #{srNo}
 	</select>
+	<!-- 고객의 요청 목록 엑셀용 추출 -->
+	<select id="selectMyInfoAllToExcel" parameterType="map"
+		resultType="srDemand">
+		SELECT
+			DISTINCT DMND_NO as dmndNo ,
+			TTL as ttl ,
+			SYS_NM as sysNm ,
+			clientNm as custNm ,
+			INST_NM as instNm ,
+			STTS_NM as sttsNm ,
+			DMND_YMD as dmndYmd ,
+			c.flnm as rvwrNm ,
+			END_YMD as endYmd
+			from ( SELECT
+			DISTINCT sd.DMND_NO ,
+			sd.TTL ,
+			sy.SYS_NM ,
+			m.flnm as clientNm ,
+			i.INST_NM ,
+			sd.rvwr_id ,
+			s.STTS_NM ,
+			sd.DMND_YMD ,
+			si.END_YMD
+		FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
+			sr_information si
+			<if test="srFilterDto.hstryId != null">
+		    , SR_INFORMATION_HISTORY h
+		    </if>
+		WHERE sd.CUST_ID = #{custId}
+			and sd.DEL_YN = 0
+			and sd.cust_id = m.member_id
+			and m.inst_cd = i.inst_cd
+			and sd.stts_cd = s.stts_cd
+			and sd.sys_cd = sy.sys_cd
+			and sd.dmnd_no = si.dmnd_no (+)
+			<if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and sd.DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
+			<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(sd.DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= #{srFilterDto.dmndYmdEnd}]]></if>
+			<if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
+			<if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
+			<if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
+			<if test="srFilterDto.keyWord!=null">
+				and (
+				sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+				sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+				sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
+				sd.cn like '%'||#{srFilterDto.keyWord}||'%'
+			)</if>
+			<if test="srFilterDto.hstryId != null">
+			AND
+				si.SR_NO = h.SR_NO
+			AND 
+				h.HSTRY_ID = #{srFilterDto.hstryId}
+			</if>
+		) w , members c
+		where w.rvwr_id = c.member_id(+)
+		<if test="sort=='DESC'">
+		order by dmndNo DESC
+		</if>
+		<if test="sort=='ASC'">
+		order by dmndNo ASC
+		</if>
+	</select>
+	
+	<!-- 관리자의 모든 요청 목록 엑셀용 추출 -->
+   <select id="selectAdAllSrDemand" parameterType="string"
+      resultType="srDemand">
+      SELECT
+         DISTINCT DMND_NO as dmndNo ,
+         TTL as ttl ,
+         SYS_NM as sysNm ,
+         clientNm as custNm ,
+         INST_NM as instNm ,
+         STTS_NM as sttsNm ,
+         DMND_YMD as dmndYmd ,
+         c.flnm as rvwrNm ,
+         END_YMD as endYmd
+         from ( SELECT
+         DISTINCT sd.DMND_NO ,
+         sd.TTL ,
+         sy.SYS_NM ,
+         m.flnm as clientNm ,
+         i.INST_NM ,
+         sd.rvwr_id ,
+         s.STTS_NM ,
+         sd.DMND_YMD ,
+         si.END_YMD
+      FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
+            sr_information si
+            <if test="srFilterDto.hstryId != null">
+		    , SR_INFORMATION_HISTORY h
+		    </if>
+      where sd.cust_id = m.member_id
+         and sd.DEL_YN = 0
+         and m.inst_cd = i.inst_cd
+         and sd.stts_cd = s.stts_cd
+         and sd.sys_cd = sy.sys_cd
+         and sd.dmnd_no = si.dmnd_no(+)
+		 <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and sd.DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
+		 <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(sd.DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= #{srFilterDto.dmndYmdEnd}]]></if>
+		 <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
+		 <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
+		 <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
+		 <if test="srFilterDto.keyWord!=null">
+			 and (
+			 sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+			 sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+			 sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
+			 sd.cn like '%'||#{srFilterDto.keyWord}||'%'
+		 )</if>
+		 <if test="srFilterDto.hstryId != null">
+			AND
+				si.SR_NO = h.SR_NO
+			AND 
+				h.HSTRY_ID = #{srFilterDto.hstryId}
+		  </if>
+      ) w , members c
+      where w.rvwr_id = c.member_id(+)
+     <if test="sort=='DESC'">
+		order by dmndNo DESC
+		</if>
+		<if test="sort=='ASC'">
+		order by dmndNo ASC
+		</if>
+   </select>
 </mapper>

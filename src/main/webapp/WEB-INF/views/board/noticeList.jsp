@@ -45,10 +45,6 @@
 								<div class="col col-2 px-0">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
 										type="text" name="keyWord" id="keyWord" value="${boardFilterDto.keyWord}">
-									<button type="submit" class="btn btn-sm btn-oti"
-										style="margin-right: 10px; height: 30px;">
-										<i class="ti-search"></i>
-									</button>
 								</div>
 								<button type="submit" class="btn btn-sm btn-oti"
 									style="margin-right: 10px; height: 30px;">
@@ -66,7 +62,7 @@
 				<!-- 공지사항 목록 -->
 				<div class="card" style="height: 650px;">
 					<div class="card-header">
-						<h5 class="card-header-text">공지사항</h5>
+						<h5 class="card-header-text">목록</h5>
 					</div>
 					<table class="table table-hover" style="text-align: center;">
 						<thead>

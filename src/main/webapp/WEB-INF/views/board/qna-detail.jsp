@@ -43,7 +43,7 @@
 </style>
 <div class="card" id="asd" style="height: 800px;">
 	<div class="card-header">
-		<h5>문의사항</h5>
+		<h5>내용</h5>
 	</div>
 	<div class="card-block px-0 py-50">
 		<form enctype="multipart/form-data">

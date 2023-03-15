@@ -4,7 +4,7 @@
 
 <div class="card" style="height:650px;">
 	<div class="card-header">
-		<h5>공지사항</h5>
+		<h5>내용</h5>
 	</div>
 	<div class="card-block">
 		<form enctype="multipart/form-data">

@@ -74,9 +74,9 @@
 			<!-- bootstrap modal start -->
 			<div class="col-sm-5" id="qnaList">
 				<!--목록-->
-				<div class="card">
+				<div class="card" style="height:800px;">
 					<div class="card-header">
-						<h5 class="card-header-text">문의사항</h5>
+						<h5 class="card-header-text">목록</h5>
 					</div>
 					<c:if test="${fn:length(qnaList) == 0 }">
 						<div class="text-center d-flex justify-content-center"

@@ -102,5 +102,5 @@ public interface ISrinformationService {
 	 * @return sr진척 목록 엑셀 다운로드
 	 * @throws Exception 
 	 */
-	void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	void SrListdownload(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
