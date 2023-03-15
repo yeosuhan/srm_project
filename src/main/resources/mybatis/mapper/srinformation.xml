@@ -18,6 +18,9 @@
 		    <if test="srInfoFilter.empId != null">
 		    , SR_RESOURCES R
 		    </if>
+		    <if test="srInfoFilter.hstryId != null">
+		    , SR_INFORMATION_HISTORY H
+		    </if>
 		WHERE 
 		    SD.DMND_NO = SI.DMND_NO
 		AND
@@ -53,6 +56,12 @@
 		    R.SR_NO = SI.SR_NO
 		AND
 		    R.EMP_ID = #{srInfoFilter.empId}
+		</if>
+		<if test="srInfoFilter.hstryId != null">
+		AND
+			SI.SR_NO = H.SR_NO
+		AND 
+			H.HSTRY_ID = #{srInfoFilter.hstryId}
 		</if>
 		<if test="sort=='DESC'">
 		order by dmndNo DESC
@@ -174,6 +183,9 @@
 			<if test="srInfoFilter.empId != null">
 			, SR_RESOURCES R
 			</if>
+			<if test="srInfoFilter.hstryId != null">
+		    , SR_INFORMATION_HISTORY H
+		    </if>
 		WHERE 
 		    SD.DMND_NO = SI.DMND_NO
 		<if test="srInfoFilter.dmndNo != null">
@@ -207,6 +219,12 @@
 		    R.SR_NO = SI.SR_NO
 		AND
 		    R.EMP_ID = #{srInfoFilter.empId}
+		</if>
+		<if test="srInfoFilter.hstryId != null">
+		AND
+			SI.SR_NO = H.SR_NO
+		AND 
+			H.HSTRY_ID = #{srInfoFilter.hstryId}
 		</if>
 	</select>
 	

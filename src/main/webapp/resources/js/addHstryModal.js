@@ -2,7 +2,7 @@
 
 /* 고정값 넣어놓기 */
 function addHistory(srNo) {
-	var srNo = $("#srNo").val();
+	var srNo = $("#SRDSrNo").val();
 	var cmptnDmndYmd = $("#SRDCmptnDmndYmd").val();
 	document.getElementById('HwrtYmd').valueAsDate = new Date();
 
@@ -50,10 +50,11 @@ function checkValue() {
 	// 제목이나 사유 빈값이면 안넘어가게
 	const ttl1 = document.querySelector('#HhstryTtl');
 	const cn1 = document.querySelector('#HhstryCn');
-	if (ttl1.value == null || ttl1.value == "" || cn1.value == null || cn1.value == "") {
+	if (ttl1.value == null || ttl1.value == "" || cn1.value == null
+			|| cn1.value == "") {
 		alert("미입력 칸이 있습니다. 모든 항목을 입력해주세요.");
 		return false;
 	}
-	
+
 	return true;
 }

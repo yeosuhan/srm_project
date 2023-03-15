@@ -8,7 +8,7 @@ import com.oti.team2.alert.dto.Alert;
 
 public interface IAlertService {
 
-	List<Alert> getAlertList(String rcvrId);
+	List<Alert> getAlertList(String rcvrId,String role);
 
 	int sendToClient(String rcvrId, String dmndNo);
 

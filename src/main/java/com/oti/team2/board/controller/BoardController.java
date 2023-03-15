@@ -40,8 +40,8 @@ public class BoardController {
 	private IBoardService boardService;
 
 	
-	@GetMapping("/list")
-	public String getBoardList(@RequestParam("type") String type,
+	@GetMapping("/list/{type}")
+	public String getBoardList(@PathVariable("type") String type,
 			@ModelAttribute BoardFilterDto boardFilterDto,
 			Model model, 
 			Authentication auth,
@@ -50,8 +50,9 @@ public class BoardController {
 			@RequestParam(required = true, name = "page", defaultValue = "1") int page) throws MalformedURLException {
 		String memberId = auth.getName();
 		model.addAttribute("memberId", memberId);
-		
+		log.info(memberId);
 		log.info(boardFilterDto);
+		model.addAttribute("boardFilterDto",boardFilterDto);
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		List<BoardListDto> list = null;
 		Pager pager = null;
@@ -77,7 +78,7 @@ public class BoardController {
 				model.addAttribute("noticeList", list);
 			}		
 		}		
-				
+		log.info(pager);
 		Board board = null;
 		if(!bbsNo.equals("")) {
 			board = boardService.getBoard(Integer.parseInt(bbsNo));

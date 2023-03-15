@@ -9,7 +9,7 @@
 <div class="pagination-container">
 	<div class="pagination">
 		<c:if test="${pager.startPageNo -1 > 0 }">
-			<a class="pagination-newer" href="?page=${pager.startPageNo - 1}">PREV</a>
+			<a class="pagination-newer" href="?page=${pager.startPageNo - pager.pagesPerGroup}">PREV</a>
 		</c:if>
 		<c:if test="${pager.startPageNo -1 <= 0 }">
 			<a style="visibility: hidden" class="pagination-newer" href="#">PREV</a>

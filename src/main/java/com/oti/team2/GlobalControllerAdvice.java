@@ -22,10 +22,11 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler(Exception.class)
 	public String exceptionAll(Exception exception, Model model, Authentication auth) {
-		log.error(exception.getMessage());
+		log.error(exception.toString());
+		exception.printStackTrace();
 
 		model.addAttribute("exception", exception);
-		if((auth.getAuthorities().stream().findFirst().get().toString()).equals("ROLE_CLIENT")) {
+		if ((auth.getAuthorities().stream().findFirst().get().toString()).equals("ROLE_CLIENT")) {
 			log.info("고객용 에러페이지");
 			return "error/runtimeClient";
 		} else {

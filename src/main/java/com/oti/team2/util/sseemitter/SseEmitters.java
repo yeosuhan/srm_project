@@ -41,16 +41,18 @@ public class SseEmitters {
 	 * */
 	public void sendAlert(String memberId) {
 		SseEmitter emitter = this.emitters.get(memberId);
-		log.info(emitter);
+		//log.info(emitter);
 		String data = "new message";
-		try {
-			emitter.send(SseEmitter.event()
-					.name("alert")
-					.data(data)
-					);
-			log.info(memberId+" 에게 메시지 전송 완료");
-		}catch(Exception ex) {
-			emitter.completeWithError(ex);
+		if(emitter != null) {
+			try {
+				emitter.send(SseEmitter.event()
+						.name("alert")
+						.data(data)
+						);
+				log.info(memberId+" 에게 메시지 전송 완료");
+			}catch(Exception ex) {
+				emitter.completeWithError(ex);
+			}
 		}
 	}
 	/* 기존의 연결을 가져오는 메소드

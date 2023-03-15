@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
+<script src="${pageContext.request.contextPath}/resources/js/textarea.js"></script>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 <%-- 상세, 등록, 수정 --%>
 <script src="/resources/js/srDemand.js"></script>
@@ -38,6 +38,12 @@
 		$('#devmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+	
+	var now_utc = Date.now() // 지금 날짜를 밀리초로
+	var timeOff = new Date().getTimezoneOffset()*60000; 
+	var today = new Date(now_utc-timeOff).toISOString().substring(0, 16);
+	document.getElementById("addEndRequestDatepicker").setAttribute("min", today);
+	
 </script>
 <style>
 .ui-datepicker-trigger {
@@ -77,12 +83,12 @@
 				<div class="modal_title" style="color: white;">SR 요청 등록</div>
 			</div>
 			<div class="m_body">
-				<form action="/srdemand/add" method="post" id="srRequest" enctype="multipart/form-data">
+				<form  id="srRequest" enctype="multipart/form-data">
 					<div class="form-group row">
 						<div class="col-sm-6">
 							<div class="col col-sm-4">등록자</div>
 							<div class="col col-sm-6" id="writerName"></div>
-							<input type="hidden" name="custId" id="custId">
+							<input type="hidden" name="custIdd" id="custId">
 						</div>
 						<div class="col-sm-6">
 							<div class="col col-sm-4">소속</div>
@@ -94,7 +100,7 @@
 							<div class="col col-sm-4">시스템구분</div>
 							<div class="col col-sm-6">
 								<div class="dropdown dropdown open">
-									<select name="sysCd" class="srSystems"
+									<select name="sysCdd" class="srSystems" id = "srSystem"
 										onchange="changeSystem(this.value)">
 									</select>
 								</div>
@@ -104,7 +110,7 @@
 							<div class="col col-sm-4">업무구분</div>
 							<div class="col col-sm-6">
 								<div class="dropdown dropdown open">
-									<select name="taskSeCd" class="sysTask">
+									<select name="taskSeCdd" class="sysTask" id="sysTask">
 									</select>
 								</div>
 							</div>
@@ -114,21 +120,23 @@
 					<div class="form-group row">
 						<div class="col col-sm-2">SR 제목</div>
 						<div class="col col-sm-9">
-							<input type="text" class="form-control" name="ttl">
+							<input type="text" class="form-control" name="ttld">
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="col col-sm-2">관련 근거</div>
 						<div class="col col-sm-9">
-							<input type="text" class="form-control" name="relGrund">
+							<textarea rows="5" cols="80"  class="form-control" name="relGrundd" id="relGrundd" style="resize: none;" maxlength="500;"></textarea>
 						</div>
+						<p class="textCount" style="margin-top: 3px"></p>
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label" style="line-height: 120px">SR
 							내용</label>
 						<div class="col-sm-9">
-							<textarea rows="5" cols="5" class="form-control" name="cn"></textarea>
+							<textarea rows="5" cols="5" class="form-control" name="cnd" id="cnd"></textarea>
 						</div>
+						<p class="textCount" style="margin-top: 3px"></p>
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">첨부파일</label>
@@ -139,17 +147,17 @@
 					<div class="form-group row">
 						<div class="col-sm-6">
 							<div class="col col-sm-4">완료 요청일</div>
-							<div class="col col-sm-6">
+							<div class="col col-sm-8">
 								<input type="date" id="addEndRequestDatepicker"
-									name="cmptnDmndYmd">
+									name="cmptnDmndYmdd">
 							</div>
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="m_footer">
-				<button type="submit" class="modal_btn btn-oti save center"
-					form="srRequest">등록</button>
+				<button class="modal_btn btn-oti save center"
+					onclick="addSr()">등록</button>
 				<div class="modal_btn btn-oti cancle" id="closebtn">닫기</div>
 			</div>
 		</div>

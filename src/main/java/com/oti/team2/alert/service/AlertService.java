@@ -26,8 +26,8 @@ public class AlertService implements IAlertService {
 	 * @return : List<Alert>
 	 * */
 	@Override
-	public List<Alert> getAlertList(String rcvrId) {
-		return alertDao.selectByRcvrId(rcvrId);
+	public List<Alert> getAlertList(String rcvrId,String role) {
+		return alertDao.selectByRcvrId(rcvrId,role);
 	}
 	/* 새로운 알람을 추가하고 메시지를 보내는 메소드(반영 요청)
 	 * @author : 안한길
@@ -41,7 +41,7 @@ public class AlertService implements IAlertService {
 		alert.setRcvrId(rcvrId);
 		alert.setDmndNo(dmndNo);
 		alert.setAltType("RFLT");
-		alert.setAltCn("요청에 대한 반영 요청이 왔습니다.");
+		alert.setAltCn("요청에 대한 상태가 변경 되었습니다.");
 		log.info("알림 테이블에 추가 호출");
 		int result = alertDao.insertAlertDao(alert);
 		log.info("알림 생성 결과: "+result);
@@ -64,11 +64,11 @@ public class AlertService implements IAlertService {
 		alert.setHstryId(hstryId);
 		alert.setAltType(altType);
 		if(altType.equals("CHG_YMD")) {
-			alert.setAltCn("요청에 대한 예정일 변경 요청이 왔습니다.");
+			alert.setAltCn("요청에 대한 변경 사항이 있습니다.");
 		}else if(altType.equals("CHG_YMD_DVL")) {
-			alert.setAltCn("개발중인 항목에 대해 예정일 변경 요청이 왔습니다.");
+			alert.setAltCn("개발중인 항목에 대해 예정일 변경 사항이 있습니다.");
 		}else if(altType.equals("RTRCN")) {
-			alert.setAltCn("요청에 대한 개발 취소 요청이 왔습니다.");
+			alert.setAltCn("요청에 대한 변경 사항이 있습니다.");
 		}
 		int result = alertDao.insertAlertDao(alert);
 		log.info("알림 생성 결과: "+result);
@@ -122,7 +122,7 @@ public class AlertService implements IAlertService {
 		String url=null;
 		if(alert.getAltType().equals("RFLT")) {	//반영 요청 관련
 			
-			url="/srdemand/list?dmndNo="+alert.getDmndNo();
+			url="/srdemand/list?dmndno="+alert.getDmndNo();
 			if(role.equals(Auth.ROLE_ADMIN.toString())) {
 				url="/admin"+url;
 			}
@@ -139,16 +139,16 @@ public class AlertService implements IAlertService {
 			alertDao.updateIdntyYn(alert.getAltNo());
 		}else if(alert.getAltType().equals("CHG_YMD_DVL")){
 			
-			url="/srinformation/list";
+			url="/srinformation/list?hstryId="+alert.getHstryId();
 			
 			alertDao.updateIdntyYn(alert.getAltNo());
 			
 		}else if(alert.getAltType().equals("RTRCN")){
 			
 			if(role.equals(Auth.ROLE_CLIENT.toString())){
-				url="/srdemand/list";
+				url="/srdemand/list?hstryId="+alert.getHstryId();
 			}else if(role.equals(Auth.ROLE_ADMIN.toString())) {
-				url="/srinformation/list";
+				url="/srinformation/list?hstryId="+alert.getHstryId();
 			}
 			
 			alertDao.updateIdntyYn(alert.getAltNo());

@@ -1,5 +1,37 @@
 $(document).ready(function(){
 	getPlan();
+	var currentUrlForSort=window.location.href;
+	//파라미터 여부
+	if(currentUrlForSort.indexOf('?')!=-1 && currentUrlForSort.indexOf('?')!=currentUrlForSort.length-1){
+		
+		var indexOfFilter = currentUrlForSort.indexOf('&');
+		var indexOfPage=currentUrlForSort.indexOf('page');
+		var filter=null;
+		if(currentUrlForSort.indexOf('sort')!=-1){
+			currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('sort')-1);
+		}
+		//page파라미터와 다른 파라미터가 있는경우
+		if(indexOfFilter!=-1&&indexOfPage!=-1){
+			filter=currentUrlForSort.substring(indexOfFilter+1,currentUrlForSort.length);
+			
+			$(".sortBtnAsc").attr("href",$(".sortBtnAsc").attr("href")+"?"+filter+"&sort=ASC");
+			$(".sortBtnDesc").attr("href",$(".sortBtnDesc").attr("href")+"?"+filter+"&sort=DESC");
+		}else if(currentUrlForSort.indexOf('page')==-1){//파라미터가 page가 아닌경우
+			indexOfFilter=currentUrlForSort.indexOf('?');
+			if(indexOfFilter==-1){
+				//파라미터가 sort밖에 없는경우
+				$(".sortBtnAsc").attr("href","?sort=ASC");
+				$(".sortBtnDesc").attr("href","?sort=DESC");
+			}else{
+				filter=currentUrlForSort.substring(indexOfFilter,currentUrlForSort.length);
+				$(".sortBtnAsc").attr("href",$(".sortBtnAsc").attr("href")+filter+"&sort=ASC");
+				$(".sortBtnDesc").attr("href",$(".sortBtnDesc").attr("href")+filter+"&sort=DESC");
+			}
+		}	
+	}else{
+		$(".sortBtnAsc").attr("href","?sort=ASC");
+		$(".sortBtnDesc").attr("href","?sort=DESC");
+	}
 });
 /* SR요청 상세보기 */
 function getDetail(dmndNo, srNo) {
@@ -14,23 +46,23 @@ function getDetail(dmndNo, srNo) {
 			$('#SRPlFlnm').show();
 			$('#changeMemberId').remove();
 			$('#changeManager').remove();
+			console.log("srinfo.js 들어옴");
+			console.log(detail);
 			console.log(detail.isDnumExists);
-			console.log(detail.dd.sttsNm);
+			console.log(detail.dd);
 			console.log(detail.role);
 			var role = detail.role;
 			
 			// 관리자 & 개발자 권한과 상황에 따른 요청 버튼 제한 (최은종)
 			if(role=='ROLE_DEVELOPER') {
 				if(detail.isDnumExists>0){
-					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'${srNo}'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
-				} else if(detail.isDnumExists<=0) {
-					$(".col-3").empty();
-				} else if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'srNo'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
+				} else if((detail.isDnumExists)<=0 || (detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 					$(".col-3").empty();
 				} else {
-					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'${srNo}'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
+					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'srNo'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
 				}
-			} else {
+			} else if (role=='ROLE_ADMIN'){
 				if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 					$(".col-3").hide();
 				} else {
