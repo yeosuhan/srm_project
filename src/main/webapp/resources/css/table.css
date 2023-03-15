@@ -5,13 +5,13 @@
  */
 .card .card-body table td ,.card-block table td, table td{
 	
-	font-size:12px;
+	font-size:13px;
 	vertical-align: middle;
 }
 
 
 .card .card-body table th,.card-block table th, table th{
-	font-size:12px;
+	font-size:14px;
 	font-weight: bold;
 	vertical-align: middle;
 }

@@ -160,7 +160,7 @@
 								<li class="waves-effect waves-light">
 									<form method="POST" action="<c:url value='/logout'/>">
 										<button class="btn btn-sm btn-oti"
-											style="margin-top: 12px; margin-left: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
+											style="margin-top: 15px; margin-left: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
 											type="submit">LOGOUT</button>
 									</form>
 								</li>
