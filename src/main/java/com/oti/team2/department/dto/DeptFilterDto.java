@@ -7,4 +7,5 @@ public class DeptFilterDto {
 	private String deptNm;
 	private String mngrId;
 	private String flnm;
+
 }

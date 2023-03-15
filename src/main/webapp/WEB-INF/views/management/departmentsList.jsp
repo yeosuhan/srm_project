@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%-- 작성자: 최은종 / 작성 날짜: 230218 --%>
 
 <html>
@@ -21,7 +23,16 @@ function searchDept(){
 }
 
 </script>	
-	
+<style>
+#headerFirst {
+	background: #4C1342;
+}
+
+.card .card-header {
+	background: linear-gradient(135deg, #360940 10%, #782748 100%);
+}
+
+</style>	
 </head>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -30,11 +41,13 @@ function searchDept(){
 	<div class="page-body">
 		<!-- *********** -->
 		<div class="card col-xs-12">
-			<div class="card-header">
-				<h5>부서 관리</h5>
-				<hr/>
+			<div class="card-header" id="headerFirst">
+				<h5 style="font-weight: bold;">부서 관리</h5>
+				</div>
+				<div class="card-block"
+						style="padding-top: 10px; padding-bottom: 10px;">
 				<%--검색 --%>
-				<div class="col-sm-12 mt-3 justify-content-between row" style="height:40px;">
+				<div class="col-sm-12 mt-3 justify-content-between row">
 					<div >
 						<form id="deptFilter" action="${pageContext.request.contextPath}/admin/department/list" onSubmit="return searchDept()">
 							<div class="form-group row">
@@ -76,7 +89,7 @@ function searchDept(){
 										<div class="card-body text-center">
 											<p>
 												<img class=" img-fluid"
-													src="/resources/assets/images/ejexample.png"
+													src="${pageContext.request.contextPath}/resources/assets/images/ejexample.png"
 													alt="card image">
 											</p>
 											<h4 class="card-title">${department.deptNm}</h4>
@@ -100,7 +113,7 @@ function searchDept(){
 														action="<c:url value='/admin/department/delete'/>">
 														<input type="hidden" name="deptCd"
 															value="${department.deptCd}">
-														<button type="submit" class="btn btn-sm btn-oti">
+														<button type="submit" class="btn btn-sm btn-oti" style="padding-left:10px; padding-right:8px;">
 															<i class="fa fa-trash" data-html="true"
 																data-toggle="tooltip" data-placement="top" title=""
 																data-original-title="부서정보가 삭제됩니다.<br/>정말 삭제하시겠습니까?"></i>

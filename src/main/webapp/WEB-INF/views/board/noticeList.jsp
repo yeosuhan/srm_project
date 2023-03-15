@@ -36,7 +36,7 @@
 					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
-								<h5>공지사항</h5>
+								<h5 style="font-weight: bold;">공지사항</h5>
 							</div>
 						</div>
 					</div>

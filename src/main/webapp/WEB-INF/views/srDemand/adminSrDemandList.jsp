@@ -124,7 +124,7 @@ th {
 					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
-								<h5>SR 요청 관리</h5>
+								<h5 style="font-weight: bold;">SR 요청 관리</h5>
 							</div>
 						</div>
 					</div>
@@ -253,7 +253,7 @@ th {
 													varStatus="status">
 													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
 														<th scope="row">${pager.startRowNo + status.index}</th>
-														<td>${srDemand.dmndNo}</td>
+														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
 															<c:when test="${fn:length(srDemand.ttl) > 10}">
 																<td id="ttl" class="text-center"><c:out
@@ -308,23 +308,15 @@ th {
 			</div>
 
 			<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
-			<div class="col-xl-4 col-md-12">
+			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
 					<div class="card-header">
 						<h5>SR 요청 상세정보</h5>
-						<div class="card-header-right">
-							<ul class="list-unstyled card-option">
-								<li><i class="fa fa fa-wrench open-card-option"></i></li>
-								<li><i class="fa fa-window-maximize full-card"></i></li>
-								<li><i class="fa fa-refresh reload-card"></i></li>
-							</ul>
-						</div>
 					</div>
 					<ul class="nav nav-tabs  md-tabs" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
 							data-toggle="tab" href="#srDemandDetail" role="tab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
-
 					</ul>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">

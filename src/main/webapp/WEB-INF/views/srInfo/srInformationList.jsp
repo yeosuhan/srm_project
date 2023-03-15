@@ -249,7 +249,7 @@ li:before {
 			<div class="col-xl-12">
 				<div class="card">
 					<div class="card-header" id="headerFirst">
-						<h5>SR 진척 관리</h5>
+						<h5 style="font-weight: bold;">SR 진척 관리</h5>
 					</div>
 					<div class="card-body">
 						<form id="srInfoFilterForm"
@@ -443,7 +443,7 @@ li:before {
 			<%-- *********************************** [SR요청 상세정보 ] ***********************************--%>
 			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header pb-2">
 						<div class="row">
 							<div class="col-8">
 								<h5>SR 요청 상세정보</h5>
@@ -590,7 +590,7 @@ li:before {
 						<h5>SR 요청 처리정보</h5>
 					</div>
 					<div class="card-block" style="padding: 0px;">
-						<ul class="nav nav-tabs  md-tabs" id="otiTabs" role="tablist">
+						<ul class="nav nav-tabs md-tabs" id="otiTabs" role="tablist">
 							<li class="nav-item" onclick="getPlan()"><a id="srPlanTab"
 								class="nav-link active" data-toggle="tab" href="#home1"
 								role="tab">SR 계획정보</a>

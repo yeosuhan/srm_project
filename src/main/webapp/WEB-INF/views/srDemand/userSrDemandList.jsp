@@ -118,6 +118,17 @@ th {
 .card .card-header {
 	background: linear-gradient(135deg, #6b2146 10%, #93344b 100%);
 }
+
+#otiTabs .nav-item a {
+	color: #4C1342;
+	padding: 15px !important;
+}
+
+#otiTabs .nav-link {
+	color: #4C1342;
+	background-color: white !important;
+}
+
 </style>
 </head>
 
@@ -132,12 +143,12 @@ th {
 			<div class="col-xl-12">
 				<div class="card">
 					<div class="card-header" id="headerFirst">
-						<div class="row">
+						<div class="row justify-content-between">
 							<div class="col-10">
-								<h5>SR 요청 관리</h5>
+								<h5 style="font-weight: bold;">SR 요청 관리</h5>
 							</div>
-							<div class="col-2 pl-5">
-								<button class="btn btn-oti" id="addbtn">요청 등록</button>
+							<div class="col-1 mr-2">
+								<button class="btn btn-oti btn-sm" id="addbtn" style="font-size:14px">요청 등록</button>
 							</div>
 						</div>
 					</div>
@@ -225,7 +236,7 @@ th {
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5>고객용! SR 요청 목록</h5>
+						<h5>SR 요청 목록</h5>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -324,19 +335,12 @@ th {
 			</div>
 
 			<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
-			<div class="col-xl-4 col-md-12">
+			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
 					<div class="card-header">
-						<h5>SR요청 상세</h5>
-						<div class="card-header-right">
-							<ul class="list-unstyled card-option pl-3">
-								<li><i class="fa fa fa-wrench open-card-option"></i></li>
-								<li><i class="fa fa-window-maximize full-card"></i></li>
-								<li><i class="fa fa-refresh reload-card"></i></li>
-							</ul>
-						</div>
+						<h5>SR 요청 상세정보</h5>
 					</div>
-					<ul class="nav nav-tabs  md-tabs" role="tablist">
+					<ul class="nav nav-tabs md-tabs" id="otiTabs" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
 							data-toggle="tab" href="#srDemandDetail" role="tab"
 							id="srDmndDetailTab">SR요청 상세정보</a>
