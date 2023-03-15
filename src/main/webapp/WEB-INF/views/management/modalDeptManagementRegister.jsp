@@ -11,7 +11,6 @@
 
 <style>
 .modal-header {
-	background-color: #4778FF;
 	color: white;
 }
 </style>
@@ -23,8 +22,8 @@
 	<div class="modal-dialog" role="document">
 		<!-- Modal content-->
 		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title" id="ModalDepartmentRegister" style="">신규
+			<div class="modal-header" style="height:55px;">
+				<h4 class="modal-title" style="font-weight: bold;" id="ModalDepartmentRegister" style="">신규
 					부서 등록</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
@@ -37,7 +36,7 @@
 						<form class="form-material" id="registerDeptInfo" method="post"
 							action="<c:url value='/admin/department/add'/>">
 							<div class="form-group row">
-								<p class="col-sm-4 font-weight-bold mt-2">부서명 (한글)</p>
+								<p class="col-sm-4 font-weight-bold mt-2">부서명</p>
 								<div class="col-sm-8" id="MDepartmentName">
 									<input name="deptNm" type="text" class="form-control"
 										required="" style="width: 90%" placeholder="부서명 (한글)"
