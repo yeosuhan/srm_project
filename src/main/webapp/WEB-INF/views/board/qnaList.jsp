@@ -94,7 +94,7 @@
 			<!-- bootstrap modal start -->
 			<div class="col-sm-5" id="qnaList">
 				<!--목록-->
-				<div class="card">
+				<div class="card" style="height: 800px;">
 					<div class="card-header">
 						<h5 class="card-header-text">전체 목록</h5>
 					</div>

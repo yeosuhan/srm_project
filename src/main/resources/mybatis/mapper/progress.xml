@@ -103,4 +103,11 @@
 		AND
 			PROGRESS.PRGRS_SE_NM = '운영반영'
 	</update>
+	<select id="selectPrgrsRtBySrNoBetweenBgngAndEnd" parameterType="string" resultType="int">
+		SELECT PRGRS_RT
+		FROM PROGRESS
+		WHERE SR_NO = #{srNo}
+		AND
+		SYSDATE BETWEEN BGNG_YMD AND END_YMD
+	</select>
 </mapper>

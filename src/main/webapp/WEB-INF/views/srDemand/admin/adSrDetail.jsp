@@ -11,39 +11,44 @@
 				style="font-size: 12px; width: 325px;">${sd.dmndNo}</div>
 		</div>
 	</div>
+	<hr/>
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold px-0 ">SR 제목</div>
 		<div class="col col-sm-9">
 			<div type="text" class="ttl" style="width: 325px;">${sd.ttl}</div>
 		</div>
 	</div>
+	<hr/>
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold px-0">관련 근거</div>
 		<div class="col col-sm-9">
 			<textarea class="relGrund" style="width: 100%;">${sd.relGrund}</textarea>
 		</div>
 	</div>
+	<hr/>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">시스템구분</div>
-			<div class="col col-sm-6 sysNm">${sd.sysNm}</div>
+			<div class="col col-sm-8 sysNm pr-0">${sd.sysNm}</div>
 		</div>
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">업무구분</div>
 			<div class="col col-sm-8 taskSeNm">${sd.taskSeNm}</div>
 		</div>
 	</div>
+	<hr/>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">요청기관</div>
-			<div class="col col-sm-6 instNm">${sd.instNm}</div>
+			<div class="col col-sm-8 instNm pr-0">${sd.instNm}</div>
 
 		</div>
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">요청자</div>
-			<div class="dropdown dropdown open clientNm">${sd.clientNm}</div>
+			<div class="col col-sm-8 dropdown dropdown open clientNm">${sd.clientNm}</div>
 		</div>
 	</div>
+	<hr/>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">요청일</div>
@@ -54,6 +59,7 @@
 			<div class="col col-sm-8 cmptnDmndYmd">${sd.cmptnDmndYmd}</div>
 		</div>
 	</div>
+	<hr/>
 	<c:if test="${sd.sttsCd gt 1}">
 		<div class="form-group row">
 			<div class="col-sm-6 px-0">
@@ -65,11 +71,12 @@
 			<div class="col-sm-6 px-0">
 				<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
 				<div class="col col-sm-8">
-					<div type="text" class="deptNm" style="width: 90%;">${sd.deptNm}</div>
+					<div type="text" class="deptNm" style="width: 100%;">${sd.deptNm}</div>
 				</div>
 			</div>
 		</div>
 	</c:if>
+	<hr/>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">진행 상태</div>
@@ -84,6 +91,7 @@
 			</div>
 		</c:if>
 	</div>
+	<hr/>
 	<div class="form-group row">
 		<c:if test="${sd.sttsCd gt 0}">
 			<div class="col-sm-6 px-0">
@@ -112,26 +120,29 @@
 			</div>
 		</c:if>
 	</div>
+	<hr/>
 	<c:if test="${sd.sttsCd == 1}">
 		<div class="form-group row">
 			<label id="companion"
 				class="col-sm-2 col-form-label px-0 font-weight-bold"
 				style="line-height: 100px; font-size: 12px;">반려사유</label>
 			<div class="col-sm-9">
-				<textarea class="form-control cn" style="height: 100px; width: 325px;">${sd.rjctRsn}</textarea>
+				<textarea class="form-control cn" style="height: 100px; width: 100%;">${sd.rjctRsn}</textarea>
 			</div>
 		</div>
+	<hr/>
 	</c:if>
 	<div class="form-group row">
 			<label class="col-sm-2 px-0 col-form-label font-weight-bold"
 				style="line-height: 100px; font-size: 12px;">SR 내용</label>
 			<div class="col-sm-9">
-				<textarea class="form-control cn" style="width: 100%;"
+				<textarea class="form-control cn" style="width: 100%;height:120px;"
 					>${sd.cn}</textarea>
 			</div>
 	</div>
+	<hr/>
 	<div class="form-group row">
-		<p class="col-sm-2 font-weight-bold">첨부파일</p>
+		<p class="col-sm-2 font-weight-bold px-0">첨부파일</p>
 		<div class="col-sm-10">
 			<c:forEach var="f" items="${sd.attachFile}">
 				<div>

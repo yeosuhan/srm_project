@@ -7,6 +7,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +49,7 @@ public class SrDemandService implements ISrDemandService {
 
 	@Autowired
 	private IProgressService progressService;
-	
+
 	@Autowired
 	private IAttachmentService attachmentService;
 
@@ -53,9 +64,9 @@ public class SrDemandService implements ISrDemandService {
 		String dmndNo = createSrDemandCode();
 		srRequestDto.setDmndNo(dmndNo);
 		int row = srDemandDao.insertSrDemand(srRequestDto);
-		
-		if(srRequestDto.getAttachFile() != null) {
-			attachmentService.uploadFiles(srRequestDto.getAttachFile(), 0 , srRequestDto.getDmndNo());
+
+		if (srRequestDto.getAttachFile() != null) {
+			attachmentService.uploadFiles(srRequestDto.getAttachFile(), 0, srRequestDto.getDmndNo());
 		}
 		log.info(row);
 		return row;
@@ -77,7 +88,7 @@ public class SrDemandService implements ISrDemandService {
 
 		int count = srDemandDao.countByDmndNo(srCode + "%");
 
-		// ex) SR230222_0008 에서 _ 뒤의 숫자 4자리를 세팅하는 로직
+		// ex) SR230222-0008 에서 _ 뒤의 숫자 4자리를 세팅하는 로직
 		String number = (count + 1) + "";
 		while (number.length() < 4) {
 			number = "0" + number;
@@ -95,8 +106,8 @@ public class SrDemandService implements ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public List<SrDemand> getSrDemandList(String custId, Pager pager, String sort,SrFilterDto srFilterDto) {
-		return srDemandDao.selectByCustId(custId, pager, sort,srFilterDto);
+	public List<SrDemand> getSrDemandList(String custId, Pager pager, String sort, SrFilterDto srFilterDto) {
+		return srDemandDao.selectByCustId(custId, pager, sort, srFilterDto);
 	}
 
 	/**
@@ -137,8 +148,8 @@ public class SrDemandService implements ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public int getCountClientSr(String clientId,SrFilterDto srFilterDto) {
-		return srDemandDao.countByClientId(clientId,srFilterDto);
+	public int getCountClientSr(String clientId, SrFilterDto srFilterDto) {
+		return srDemandDao.countByClientId(clientId, srFilterDto);
 	}
 
 	/**
@@ -155,8 +166,8 @@ public class SrDemandService implements ISrDemandService {
 	 * 
 	 * @author 신정은
 	 */
-	public List<SrDemand> getSrDemandListBy(Pager pager, String sort,SrFilterDto srFilterDto) {
-		return srDemandDao.selectAllSrDemand(pager,sort,srFilterDto);
+	public List<SrDemand> getSrDemandListBy(Pager pager, String sort, SrFilterDto srFilterDto) {
+		return srDemandDao.selectAllSrDemand(pager, sort, srFilterDto);
 	}
 
 	/**
@@ -258,6 +269,7 @@ public class SrDemandService implements ISrDemandService {
 	public List<MytodoSrListDto> getMytodoSrListForDeveloper(String empId, int sttsCd, Pager pager) {
 		return srDemandDao.selectByEmpIdAndSttsCd(empId, sttsCd, pager);
 	}
+
 	/**
 	 * 반영요청 수락하기
 	 * 
@@ -266,6 +278,175 @@ public class SrDemandService implements ISrDemandService {
 	@Override
 	public void endSr(String dmndNo) {
 		srDemandDao.updateSrdemandStts(dmndNo);
-		
+
 	}
+
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-15
+	 * @return 사용자의 sr요청 목록 엑셀 다운로드
+	 * @throws Exception
+	 */
+	public List<SrDemand> getMyExcelList(String memberId, String sort, SrFilterDto srFilterDto) {
+		List<SrDemand> list = srDemandDao.selectMyInfoAllToExcel(memberId, sort, srFilterDto);
+		return list;
+	}
+
+	private void setHeaderCS(CellStyle cs, Font font, Cell cell) {
+		cs.setAlignment(CellStyle.ALIGN_CENTER);
+		cs.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		cs.setBorderTop(CellStyle.BORDER_THIN);
+		cs.setBorderBottom(CellStyle.BORDER_THIN);
+		cs.setBorderLeft(CellStyle.BORDER_THIN);
+		cs.setBorderRight(CellStyle.BORDER_THIN);
+		cs.setFillForegroundColor(HSSFColor.GREY_80_PERCENT.index);
+		cs.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		setHeaderFont(font, cell);
+		cs.setFont(font);
+		cell.setCellStyle(cs);
+	}
+
+	private void setHeaderFont(Font font, Cell cell) {
+		font.setBoldweight((short) 700);
+		font.setColor(HSSFColor.WHITE.index);
+	}
+
+	private void setCmmnCS2(CellStyle cs, Cell cell) {
+		cs.setAlignment(CellStyle.ALIGN_LEFT);
+		cs.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		cs.setBorderTop(CellStyle.BORDER_THIN);
+		cs.setBorderBottom(CellStyle.BORDER_THIN);
+		cs.setBorderLeft(CellStyle.BORDER_THIN);
+		cs.setBorderRight(CellStyle.BORDER_THIN);
+		cell.setCellStyle(cs);
+	}
+
+	@Override
+	public void SrDemandListdownload(List<SrDemand> list, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		SXSSFWorkbook wb = new SXSSFWorkbook();
+		Sheet sheet = wb.createSheet();
+		sheet.setColumnWidth((short) 0, (short) 1000);
+		sheet.setColumnWidth((short) 1, (short) 4500);
+		sheet.setColumnWidth((short) 2, (short) 7000);
+		sheet.setColumnWidth((short) 3, (short) 8000);
+		sheet.setColumnWidth((short) 4, (short) 15000);
+		sheet.setColumnWidth((short) 5, (short) 2000);
+		sheet.setColumnWidth((short) 6, (short) 3000);
+		sheet.setColumnWidth((short) 7, (short) 3000);
+		Row row = sheet.createRow(0);
+		Cell cell = null;
+		CellStyle cs = wb.createCellStyle();
+		Font font = wb.createFont();
+		cell = row.createCell(0);
+		cell.setCellValue("SR진척목록 리스트");
+		setHeaderCS(cs, font, cell);
+		sheet.addMergedRegion(new CellRangeAddress(row.getRowNum(), row.getRowNum(), 0, 8));
+
+		row = sheet.createRow(1);
+		cell = null;
+		cs = wb.createCellStyle();
+		font = wb.createFont();
+
+		cell = row.createCell(0);
+		cell.setCellValue("번호");
+		setCmmnCS2(cs, cell);
+
+		cell = row.createCell(1);
+		cell.setCellValue("요청번호");
+		setHeaderCS(cs, font, cell);
+
+		cell = row.createCell(2);
+		cell.setCellValue("제목");
+		setHeaderCS(cs, font, cell);
+
+		cell = row.createCell(3);
+		cell.setCellValue("관련시스템");
+		setHeaderCS(cs, font, cell);
+
+		cell = row.createCell(4);
+		cell.setCellValue("등록자");
+		setHeaderCS(cs, font, cell);
+
+		cell = row.createCell(5);
+		cell.setCellValue("소속");
+		setHeaderCS(cs, font, cell);
+
+		cell = row.createCell(6);
+		cell.setCellValue("진행상태");
+		setHeaderCS(cs, font, cell);
+
+		cell = row.createCell(7);
+		cell.setCellValue("등록일");
+		setHeaderCS(cs, font, cell);
+
+		cell = row.createCell(8);
+		cell.setCellValue("완료예정일");
+		setHeaderCS(cs, font, cell);
+
+		int i = 2;
+		int ii = list.size();
+		for (SrDemand SrDemand : list) {
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String dmndYmd = sdf.format(SrDemand.getDmndYmd());
+			String endYmd = sdf.format(SrDemand.getEndYmd());
+			row = sheet.createRow(i);
+			cell = null;
+			cs = wb.createCellStyle();
+			font = wb.createFont();
+
+			cell = row.createCell(0);
+			cell.setCellValue(ii);
+			setCmmnCS2(cs, cell);
+
+			cell = row.createCell(1);
+			cell.setCellValue(SrDemand.getDmndNo());
+			setCmmnCS2(cs, cell);
+
+			cell = row.createCell(2);
+			cell.setCellValue(SrDemand.getTtl());
+			setCmmnCS2(cs, cell);
+
+			cell = row.createCell(3);
+			cell.setCellValue(SrDemand.getSysNm());
+			setCmmnCS2(cs, cell);
+
+			cell = row.createCell(4);
+			cell.setCellValue(SrDemand.getCustNm());
+			setCmmnCS2(cs, cell);
+
+			cell = row.createCell(5);
+			cell.setCellValue(SrDemand.getInstNm());
+			setCmmnCS2(cs, cell);
+
+			cell = row.createCell(6);
+			cell.setCellValue(SrDemand.getSttsNm());
+			setCmmnCS2(cs, cell);
+
+			cell = row.createCell(7);
+			cell.setCellValue(dmndYmd);
+			setCmmnCS2(cs, cell);
+
+			cell = row.createCell(8);
+			cell.setCellValue(endYmd);
+			setCmmnCS2(cs, cell);
+
+			i++;
+			ii--;
+		}
+		response.setHeader("Set-Cookie", "fileDownload=true; path=/");
+		response.setHeader("Content-Disposition", String.format("attachment; filename=\"SrDemandList.xlsx\""));
+		wb.write(response.getOutputStream());
+	}
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-15
+	 * @return 관리자의 sr요청목록 엑셀 다운로드
+	 */
+	@Override
+	public List<SrDemand> getSrExcelList(String sort, SrFilterDto srFilterDto) {
+		List<SrDemand> list = srDemandDao.selectAdAllSrDemand(sort, srFilterDto);
+		return list;
+	}
+
 }

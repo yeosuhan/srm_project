@@ -7,15 +7,15 @@
 <div class="card_body" style="font-size: 12px; padding-top: 20px;">
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
-		<div class="col col-sm-9">
+		<div class="col col-sm-10">
 			<div class="form-control dmndNo"
-				style="font-size: 12px; width: 325px;">${sd.dmndNo}</div>
+				style="font-size: 12px; width:100%;">${sd.dmndNo}</div>
 		</div>
 	</div>
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold px-0">SR 제목</div>
 		<div class="col col-sm-10">
-			<div class="form-control ttl" style="width: 325px;">${sd.ttl}</div>
+			<div class="form-control ttl" style="width: 100%;">${sd.ttl}</div>
 		</div>
 	</div>
 	<div class="form-group row">
@@ -27,7 +27,7 @@
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">시스템구분</div>
-			<div class="col col-sm-6 sysNm">${sd.sysNm}</div>
+			<div class="col col-sm-8 pr-0 sysNm">${sd.sysNm}</div>
 		</div>
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">업무구분</div>
@@ -37,7 +37,7 @@
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">요청기관</div>
-			<div class="col col-sm-6 instNm">${sd.instNm}</div>
+			<div class="col col-sm-8 pr-0 instNm">${sd.instNm}</div>
 		</div>
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">요청자</div>
@@ -65,7 +65,7 @@
 			<div class="col-sm-6 px-0">
 				<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
 				<div class="col col-sm-8">
-					<div type="text" class="form-control deptNm" style="width: 90%;">${sd.deptNm}</div>
+					<div type="text" class="form-control deptNm" style="width: 100%;">${sd.deptNm}</div>
 				</div>
 			</div>
 		</div>
@@ -107,7 +107,7 @@
 		<label class="col-sm-2 col-form-label px-0 font-weight-bold"
 			style="line-height: 100px; font-size: 12px;">SR 내용</label>
 		<div class="col-sm-10">
-			<textarea class="form-control cn" style="width: 100%;"
+			<textarea class="form-control cn" style="width: 100%;height:120px;"
 				>${sd.cn}</textarea>
 		</div>
 	</div>

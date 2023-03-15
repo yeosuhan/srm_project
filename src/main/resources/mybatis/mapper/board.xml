@@ -51,10 +51,10 @@
 							<![CDATA[ANS_YN = #{boardFilterDto.ansYn} ]]>and
 						</if>
 						<if test="boardFilterDto.wrtrNm != null">
-							<![CDATA[m.FLNM LIKE #{boardFilterDto.wrtrNm} ]]>and
+							<![CDATA[m.FLNM LIKE '%'||#{boardFilterDto.wrtrNm}||'%' ]]>and
 						</if>
 						<if test="boardFilterDto.keyWord != null">
-							<![CDATA[WRT_YMD LIKE '%'||#{boardFilterDto.keyWord}||'%' ]]>and
+							<![CDATA[BBS_CN LIKE '%'||#{boardFilterDto.keyWord}||'%' ]]>and
 						</if>
 					
 				</if>
@@ -88,10 +88,10 @@
 							<![CDATA[ ANS_YN = #{boardFilterDto.ansYn} ]]> and
 						</if>
 						<if test="boardFilterDto.wrtrNm != null">
-							<![CDATA[m.FLNM LIKE #{boardFilterDto.wrtrNm} ]]> and
+							<![CDATA[m.FLNM LIKE %'||#{boardFilterDto.wrtrNm}||'%' ]]> and
 						</if>
 						<if test="boardFilterDto.keyWord != null">
-							<![CDATA[WRT_YMD LIKE '%'||#{boardFilterDto.keyWord}||'%']]> and
+							<![CDATA[BBS_CN LIKE '%'||#{boardFilterDto.keyWord}||'%']]> and
 						</if>
 					</if>
 				</trim>

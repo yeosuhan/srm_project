@@ -9,5 +9,5 @@ public class BoardFilterDto {
 	private Integer ansYn;
 	private String wrtrNm;
 	private String keyWord;
-	private String type;
+	private String btype;
 }

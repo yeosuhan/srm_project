@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/graph.js"></script>
 <table class="table table-hover" style="table-layout: fixed;">
 		<c:if test="${fn:length(srList) == 0 }">
 			<div class="text-center d-flex justify-content-center" style="height: 100px;">
@@ -22,14 +23,16 @@
 					</c:if>
 					<th width="10%" class="text-center">완료요청일</th>
 					<th width="10%" class="text-center">진행상태</th>
-					<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
-						<th width="5%">우선순위</th>
-					</sec:authorize>
+					<c:if test="${sttsCd gt 1}">
+						<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
+							<th width="5%">우선순위</th>
+						</sec:authorize>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach var="sr" items="${srList}">
-				<tr>
+				<tr onclick="showAdminGraph('${sr.dmndNo}')">
 					<td id="dmndNo" class="text-left font-weight-bold">${sr.dmndNo}</td>
 					<td id="sysNm" class="text-left">${sr.sysNm}</td>
 					<td id="taskNm" class="text-left">${sr.taskNm}</td>
@@ -61,7 +64,7 @@
 						</c:if> <c:if test="${(sr.sttsCd) eq 6}">
 							<label class="badge badge-inverse-primary">${sr.sttsNm}</label>
 						</c:if></td>
-					<c:if test="${sttsCd ne 0}">
+					<c:if test="${sttsCd gt 1}">
 						<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
 							<td id="rnk" class="text-center">${sr.rnk}</td>
 						</sec:authorize>

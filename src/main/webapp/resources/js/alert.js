@@ -31,7 +31,7 @@ function countAlert(){
 			$(value).children(".noAlert").remove();
 			var href ="#"+ $(value).parent("div").attr("id");
 			
-			$("a[href='"+href+"']").append("<span class='badge badge-danger alertListCount'>"+$(value).children("li").length+"</span>");
+			$("a[href='"+href+"']").append("<span class='badge badge-danger alertListCount' style='padding:4px;'>"+$(value).children("li").length+"</span>");
 		}
 	});
 }

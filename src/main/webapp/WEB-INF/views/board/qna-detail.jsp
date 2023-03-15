@@ -63,7 +63,6 @@
 			</div>
 		</div>
 		<div class="card-block px-0 py-50">
-
 			<input type="hidden" value="${board.bbsNo}">
 			<div class="form-group row">
 				<div class="col-sm-2 font-weight-bold">작성일자</div>
@@ -95,7 +94,7 @@
 					<c:if test="${board.wrtrId eq memberId}">
 						<div class="d-flex justify-content-center">
 							<div class="p-0">
-								<button onclick="updateQna(${board.bbsNo})"
+								<button onclick="updateQna(${board.bbsNo})" type="button"
 									class="btn btn-oti waves-effect waves-light">수정</button>
 							</div>
 							<div class="p-0">
@@ -170,5 +169,4 @@
 			</c:if>
 		</c:forEach>
 	</div>
-</div>
 </div>

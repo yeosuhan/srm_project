@@ -40,8 +40,8 @@ public class BoardController {
 	private IBoardService boardService;
 
 	
-	@GetMapping("/list/{type}")
-	public String getBoardList(@PathVariable("type") String type,
+	@GetMapping("/list")
+	public String getBoardList(@RequestParam(name = "type", required = true, defaultValue = "qna") String type,
 			@ModelAttribute BoardFilterDto boardFilterDto,
 			Model model, 
 			Authentication auth,
@@ -56,7 +56,8 @@ public class BoardController {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		List<BoardListDto> list = null;
 		Pager pager = null;
-		if(type == null) type = boardFilterDto.getType();
+		//if(type == null) type = boardFilterDto.getType();
+		boardFilterDto.setBtype(type);
 		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
 			pager = new Pager(boardService.getTotalRow(type, memberId, boardFilterDto), page);
 			list = boardService.getBoardList(type, memberId, pager, boardFilterDto);

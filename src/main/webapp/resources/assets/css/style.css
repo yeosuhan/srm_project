@@ -6230,8 +6230,8 @@ table tbody .border-bottom-info td {
     .header-navbar .navbar-wrapper .navbar-container .header-notification.active:before {
       content: "";
       border: 10px solid transparent;
-      border-left-color: #fff;
-      border-top-color: #fff;
+      border-left-color: #92344B;
+      border-top-color: #92344B;
       position: absolute;
       border-radius: 5px;
       bottom: -32px;

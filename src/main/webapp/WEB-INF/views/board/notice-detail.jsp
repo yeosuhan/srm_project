@@ -47,11 +47,11 @@
 	<c:if test="${board.wrtrId eq memberId}">
 		<div class="d-flex justify-content-center" style="margin-top: 70px;">
 			<div>
-				<button onclick="updateNotice(${board.bbsNo})"
+				<button onclick="updateNotice(${board.bbsNo})" type="button"
 					class="btn btn-oti waves-effect waves-light mr-4">수정</button>
 			</div>
 			<div>
-				<button
+				<button type="button"
 					onclick='location.href="/board/delete/${board.bbsNo}?type=notice"'
 					class="btn btn-oti waves-effect waves-light">삭제</button>
 			</div>
