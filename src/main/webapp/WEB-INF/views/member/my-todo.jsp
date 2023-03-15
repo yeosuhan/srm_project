@@ -109,6 +109,10 @@ font-size:13px;
 .card .card-body table th,.card-block table th, table th{
 	font-size:14px;
 }
+.nav-item {
+margin-top: 3px;
+margin-bottom: 3px;
+}
 </style>
 </head>
 
@@ -123,7 +127,7 @@ font-size:13px;
 				<div class="card" id="mytodo">
 					<div class="col-12">
 						<!-- Nav tabs -->
-						<ul class="nav card-header-pills nav-tabs md-tabs" role="tablist">
+						<ul class="nav card-header-pills nav-tabs md-tabs" style="padding:6px;" role="tablist">
 							<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 								<li class="nav-item btn"><div
 										class="nav-link sttsCd0 active" onclick="moveTab(0)">
@@ -220,16 +224,16 @@ font-size:13px;
 				<jsp:include page="/WEB-INF/views/mytodo/notice.jsp" />
 			</div>
 			<!-- 시각자료 넣을 곳 -->
-			<div class="col-lg-4" id="qnaList">
+			<div class="col-lg-4 pl-0" id="qnaList">
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<div class="col-lg-4">
+				<div class="col-lg-4 px-0">
 					<jsp:include page="/WEB-INF/views/mytodo/progressGraph.jsp" />
 				</div>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_DEVELOPER')">
-				<div class="card col-lg-4">
+				<div class="card col-lg-4 px-0">
 					<div class="card-header">
 						<h5 class="card-header-text">나의 일정</h5>
 					</div>
@@ -239,7 +243,7 @@ font-size:13px;
 				</div>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_CLIENT')">
-				<div class="card col-lg-4">
+				<div class="card col-lg-4 px-0">
 					<div class="card-header">
 						<h5 class="card-header-text">나의 요청 현황</h5>
 					</div>

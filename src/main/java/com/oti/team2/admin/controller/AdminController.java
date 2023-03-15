@@ -1,6 +1,5 @@
 package com.oti.team2.admin.controller;
 
-import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,6 +30,7 @@ import com.oti.team2.department.service.IDepartmentService;
 import com.oti.team2.jobgrade.service.IJobGradeService;
 import com.oti.team2.member.dto.FilterDto;
 import com.oti.team2.member.dto.Member;
+import com.oti.team2.member.dto.ProfileImg;
 import com.oti.team2.member.service.IMemberService;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srdemand.dto.SrDemand;
@@ -66,6 +66,7 @@ public class AdminController {
 	
 	@Autowired
 	private ITaskService taskService;
+	
 	/**
 	 * 부서목록 조회 메서드
 	 *
@@ -74,7 +75,7 @@ public class AdminController {
 	 */
 	@GetMapping("/department/list")
 	public String getDepartmentList(Model model, @RequestParam(value = "deptNm", required = false) String deptNm,
-			@RequestParam(value = "flnm", required = false) String flnm) {
+			@RequestParam(value = "flnm", required = false) String flnm, Authentication auth) {
 		log.info("departmentList 조회");
 		//검색
 		DeptFilterDto deptFilterDto = new DeptFilterDto();

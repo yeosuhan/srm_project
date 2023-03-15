@@ -14,7 +14,7 @@
 	<div class="page-body row d-flex justify-content-center">
 		<div class="card col-7">
 			<div class="card-header">
-				<h5>나의 기관</h5>
+				<h5 style="font-weight: bold;">나의 기관</h5>
 			</div>
 			<div class="col-8 card-block">
 				<form method="post" action="<c:url value='/institution/update'/>"
