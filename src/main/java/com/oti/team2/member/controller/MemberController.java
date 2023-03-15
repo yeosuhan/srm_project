@@ -103,8 +103,7 @@ public class MemberController {
 		String mtypes[] = profileImg.getFileType().split("/");
 		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
 		
-
-		return new ResponseEntity<byte[]>(null, headers, HttpStatus.OK);
+		return new ResponseEntity<byte[]>(profileImg.getFileData(), headers, HttpStatus.OK);
 	}
 
 	/**

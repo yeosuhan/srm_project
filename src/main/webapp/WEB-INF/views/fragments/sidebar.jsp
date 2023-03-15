@@ -59,7 +59,7 @@
 						<div class="profile_wrapper row mr-0 pr-0">
 							<div class="gradation_animate"></div>
 							<div class="image_wrapper">
-								<img class="img-80 img-radius"
+								<img class="img-80 img-radius" style="width: 90px"
 									src="${pageContext.request.contextPath}/member/profile/<sec:authentication property='principal.username'/>">
 							</div>
 						</div>
