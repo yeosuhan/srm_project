@@ -3,7 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
@@ -12,13 +13,72 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/pagination.css">
 <script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/mytodoHstry.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/mytodoHstry.js"></script>
 <sec:authorize access="hasRole('ROLE_ADMIN')">
 	<script src="${pageContext.request.contextPath}/resources/js/graph.js"></script>
 </sec:authorize>
 <sec:authorize access="hasRole('ROLE_DEVELOPER')">
 	<script src="${pageContext.request.contextPath}/resources/js/devCal.js"></script>
 </sec:authorize>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		console.log("djlljldfdfd");
+		var ctx = $('#myChart');
+		$.ajax({
+			url : "/client/chart",
+			type : "GET",
+			success : function(res) {
+				console.log(res[0]);
+				var myChart = new Chart(ctx,
+					{
+						type : 'pie',
+						data : {
+							labels : [ '요청', '반려', '접수', '개발중', '테스트',
+									'개발완료', '개발취소' ],
+							datasets : [ {
+								label : '# of Votes',
+								data : [ res[0], res[1],res[2], res[3], res[4], res[5], res[6] ],
+								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+										'rgba(54, 162, 235, 0.2)',
+										'rgba(255, 206, 86, 0.2)',
+										'rgba(75, 192, 192, 0.2)',
+										'rgba(153, 102, 255, 0.2)',
+										'rgba(255, 159, 64, 0.2)' ],
+								borderColor : [ 'rgba(255, 99, 132, 1)',
+										'rgba(54, 162, 235, 1)',
+										'rgba(255, 206, 86, 1)',
+										'rgba(75, 192, 192, 1)',
+										'rgba(153, 102, 255, 1)',
+										'rgba(255, 159, 64, 1)' ],
+								borderWidth : 1
+							} ]
+						},
+						options : {
+							scales : {
+								yAxes : [ {
+									ticks : {
+										beginAtZero : true
+									}
+								} ]
+							}
+						}
+					});
+				}			
+		});
+	});
+	
+		
+</script>
+
 
 
 <script
@@ -119,14 +179,22 @@
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_DEVELOPER')">
 				<div class="card col-lg-4">
- 					<div class="card-body">
+					<div class="card-header">
+						<h5 class="card-header-text">나의 일정</h5>
+					</div>
+					<div class="card-body">
 						<div id="calendar" style="background-color: white"></div>
 					</div>
 				</div>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_CLIENT')">
-				<div >
-					<jsp:include page="/WEB-INF/views/mytodo/progressGraph.jsp" />
+				<div class="card col-lg-4">
+					<div class="card-header">
+						<h5 class="card-header-text">나의 요청 현황</h5>
+					</div>
+					<div class="card-body">
+						<canvas id="myChart" width="100%" height="100%"></canvas>
+					</div>
 				</div>
 			</sec:authorize>
 		</div>

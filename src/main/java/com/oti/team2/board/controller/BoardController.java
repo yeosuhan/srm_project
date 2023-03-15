@@ -56,7 +56,8 @@ public class BoardController {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		List<BoardListDto> list = null;
 		Pager pager = null;
-		if(type == null) type = boardFilterDto.getType();
+		//if(type == null) type = boardFilterDto.getType();
+		boardFilterDto.setBtype(type);
 		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
 			pager = new Pager(boardService.getTotalRow(type, memberId, boardFilterDto), page);
 			list = boardService.getBoardList(type, memberId, pager, boardFilterDto);
