@@ -32,8 +32,9 @@ function searchDept(){
 		<div class="card col-xs-12">
 			<div class="card-header">
 				<h5>부서 관리</h5>
+				<hr/>
 				<%--검색 --%>
-				<div class="col-sm-12 mt-3 justify-content-between row">
+				<div class="col-sm-12 mt-3 justify-content-between row" style="height:40px;">
 					<div >
 						<form id="deptFilter" action="${pageContext.request.contextPath}/admin/department/list" onSubmit="return searchDept()">
 							<div class="form-group row">

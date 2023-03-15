@@ -87,7 +87,7 @@ th {
    padding: 0.75rem;
 } */
 .card .card-block {
-	padding: 0px 5px !important;
+	padding: 0px 5px;
 }
 
 .col-xl-1 {
@@ -270,7 +270,7 @@ li:before {
 			</div>
 			<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card"style="height:773px;">
+				<div class="card"style="height:1255px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
 						<div class="card-header-right">
@@ -375,7 +375,7 @@ li:before {
 				</div>
 			</div>
 			<%-- *********************************** [SR요청 상세정보 ] ***********************************--%>
-			<div class="col-xl-4 col-md-12">
+			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
 					<div class="card-header">
 						<div class="row">
@@ -394,9 +394,9 @@ li:before {
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
 						<div class="tab-pane active" id="srDemandDetail" role="tabpanel">
-							<div class="card-block" style="height: 700px;">
+							<div class="card-block" style="height: 630px;">
 								<div class="card_body "
-									style="font-size: 12px; padding-top: 20px;">
+									style="font-size: 12px;">
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 px-0 font-weight-bold">요청 번호</div>
@@ -520,10 +520,457 @@ li:before {
 						</div>
 					</div>
 				</div>
+				<div class="card">
+				<div class="card-header">
+					<h5>SR요청 처리정보</h5>
+				</div>
+				<div class="card-block" style="padding:0px;">
+					<ul class="nav nav-tabs  md-tabs" role="tablist">
+						<li class="nav-item" onclick="getPlan()"><a id="srPlanTab"
+							class="nav-link active" data-toggle="tab" href="#home1"
+							role="tab">SR 계획정보</a>
+							<div class="slide"></div></li>
+						<li class="nav-item"><a id="srResourceTab" class="nav-link"
+							data-toggle="tab" href="#profile1" role="tab">SR 자원정보</a>
+							<div class="slide"></div></li>
+						<li class="nav-item" onclick="getProgress()"><a
+							class="nav-link" data-toggle="tab" href="#messages1" role="tab">SR
+								진척율</a>
+							<div class="slide"></div></li>
+						<li class="nav-item" onclick="empHstry()"><a class="nav-link"
+							data-toggle="tab" href="#srInfhistory" role="tab">SR 히스토리</a>
+							<div class="slide"></div></li>
+					</ul>
+					<%-- *********************************** [ 계획정보 ] ***********************************--%>
+					<div class="tab-content tabs card-block"
+						style="padding: 0px;">
+						<input type="hidden" id="SRPlDmndNo">
+						<div class="tab-pane active" id="home1" role="tabpanel"
+							style="padding: 10px;">
+							<div class="form-group row">
+								<div class="col-sm-6 p-0">
+									<div class="col col-sm-4">처리팀</div>
+									<div class="col col-sm-6" id="deptDiv">
+										<select id="dept" onchange="changeDept()">
+											<c:forEach var="deptList" items="${deptList}">
+												<option id="SRDept" value="${deptList.deptCd}">${deptList.deptNm}</option>
+											</c:forEach>
+										</select> <input type="hidden" id="SRPlDeptNm">
+									</div>
+								</div>
+								<div class="col-sm-6 p-0">
+									<div class="col col-sm-4">담당자</div>
+									<div class="col col-sm-6" id="SRPlFlnmBySelect">
+										<input type="hidden" id="SRPlMemberId"> <input
+											readonly class="form-control" id="SRPlFlnm"
+											value="${sp.flnm}">
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6 p-0">
+									<div class="col col-sm-4">계획시작일</div>
+									<div class="col col-sm-6" id="bgngYmdDiv">
+										<input type="date" class="form-control" id="SRPlBgngYmd"
+											value="${sp.bgngYmd}">
+									</div>
+								</div>
+								<div class="col-sm-6 p-0">
+									<div class="col col-sm-4">계획종료일</div>
+									<div class="col col-sm-6" id="endYmdDiv">
+										<input type="date" class="form-control" id="SRPlEndYmd"
+											value="${sp.endYmd}">
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col col-sm-2  p-0" style="line-height: 90px;">검토 내용</div>
+								<div class="col col-sm-9" id="rvwCnDiv">
+									<textarea rows="5" cols="5" class="form-control" id="SRPlRvwCn">${sp.rvwCn}</textarea>
+								</div>
+							</div>
+							<button class="btn btn-oti" onclick="planUpdate()" id="planBtn"
+								style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
+						</div>
+						<%-- *********************************** [ 자원정보 ] ***********************************--%>
+						<div class="tab-pane" id="profile1" role="tabpanel"
+							style="padding-bottom: 20px;">
+							<div class="card-block table-border-style" style="padding: 0px;">
+								<div class="table-responsive">
+									<table class="table table-hover text-center"
+										style="font-size: 12px; padding: 0px;">
+										<thead>
+											<tr>
+												<th style="width: 1px;"><input type="checkbox"
+													name="resource" value="selectResourceAll"
+													onclick="selectResourceAll(this)"></th>
+												<th style="width: 1px;">순번</th>
+												<th>개발자명</th>
+												<th>역할</th>
+												<th>투입시작일</th>
+												<th>투입종료일</th>
+											</tr>
+										</thead>
+										<tbody id="resourceTableRow">
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<button class="btn btn-oti"
+								style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
+							<button onclick="deleteResource()" class="btn btn-oti"
+								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
+								삭제</button>
+							<button class="btn btn-oti"
+								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
+								data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
+						</div>
+						<%-- *********************************** [ 진척률 ] ***********************************--%>
+						<!-- 진행상태에 따라서 inpu readonly로 출력 및 버튼 안보여야됨 -->
+						<div class="tab-pane" id="messages1" role="tabpanel"
+							style="padding-bottom: 20px;">
+							<div class="tab-pane" id="profile1" role="tabpanel">
+								<div class="card-block table-border-style" style="padding: 0px;">
+									<div class="table-responsive">
+										<table class="table table-hover text-center"
+											style="font-size: 12px; padding: 0px; width:500px;">
+											<thead>
+												<tr>
+													<th style="width: 10%;">작업구분</th>
+													<th style="width: 10%;">시작일</th>
+													<th style="width: 10%;">종료일</th>
+													<th style="width: 10%;">진척률(누적)</th>
+													<th>산출물</th>
+													<th style="width: 50px;"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+									
+													<td>요구정의 <input type="hidden" id="SRPgPrgrsId0">
+														<input type="hidden" id="SRPgSrNo">
+													</td>
+													<td id="0bgngYmd"><input type="date" id="SRPgBgngYmd0"></td>
+													<td id="0endYmd"><input type="date" id="SRPgEndYmd0"></td>
+													<td id="0rt"><input type="number" class="form-control"
+														id="SRPgPrgrsRt0" min="1" max="10" placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
+													<td><div class="accordion" id="accordionExample">
+															<button class="btn btn-link btn-block text-center"
+																type="button" data-toggle="collapse"
+																data-target="#collapse0" aria-expanded="true"
+																aria-controls="collapse0">첨부파일</button>
+														</div></td>
+													<td style="padding: 0px; margin: 0px;">
+														<button class="btn btn-oti btn-lg"
+															onclick="updateProgress0()" id="btn0"
+															style="width: 100%; height: 100%">저장</button>
+													</td>
+												</tr>
+												<tr id="collapse0" class="collapse"
+													aria-labelledby="headingOne"
+													data-parent="#accordionExample">
+													<td colspan="6">
+														<div>
+															<table
+																class="table table-border text-center deliverableTable"
+																style="font-size: 12px; padding: 0px;">
+																<thead>
+																	<tr>
+																		<th style="width: 1px;">#</th>
+																		<th style="width: 1px;"><input type="checkbox"
+																			name="output" value="selectOutputAll"
+																			onclick="selectOutputAll(this)"></th>
+																		<th>산출물구분</th>
+																		<th>산출물명</th>
+																		<th>산출물 경로</th>
+																		<th>등록자</th>
+																		<th>등록일</th>
+																	</tr>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+													</td>
+												</tr>
+												<tr>
+											
+													<td>분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
+													<td id="1bgngYmd"><input type="date" id="SRPgBgngYmd1"></td>
+													<td id="1endYmd"><input type="date" id="SRPgEndYmd1"></td>
+													<td id="1rt"><input type="number" class="form-control"
+														id="SRPgPrgrsRt1" min="11" max="40"></td>
+													<td><div class="accordion" id="accordionExample">
+															<button class="btn btn-link btn-block text-center"
+																type="button" data-toggle="collapse"
+																data-target="#collapse1" aria-expanded="true"
+																aria-controls="collapse1">첨부파일</button>
+														</div></td>
+													<td style="padding: 0px; margin: 0px;">
+														<button class="btn btn-oti btn-lg"
+															onclick="updateProgress1()" id="btn1"
+															style="width: 100%; height: 100%">저장</button>
+													</td>
+												</tr>
+												<tr id="collapse1" class="collapse"
+													aria-labelledby="headingOne"
+													data-parent="#accordionExample">
+													<td colspan="6">
+														<div>
+															<table
+																class="table table-border text-center deliverableTable"
+																style="font-size: 12px; padding: 0px;">
+																<thead>
+																	<tr>
+																		<th style="width: 1px;">#</th>
+																		<th style="width: 1px;"><input type="checkbox"
+																			name="output" value="selectOutputAll"
+																			onclick="selectOutputAll(this)"></th>
+																		<th>산출물구분</th>
+																		<th>산출물명</th>
+																		<th>산출물 경로</th>
+																		<th>등록자</th>
+																		<th>등록일</th>
+																	</tr>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+													</td>
+												</tr>
+												<tr>
+										
+													<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
+													<td id="2bgngYmd"><input type="date" id="SRPgBgngYmd2"></td>
+													<td id="2endYmd"><input type="date" id="SRPgEndYmd2"></td>
+													<td id="2rt"><input type="number" class="form-control"
+														id="SRPgPrgrsRt2" min="41" max="70"></td>
+													<td><div class="accordion" id="accordionExample">
+															<button class="btn btn-link btn-block text-center"
+																type="button" data-toggle="collapse"
+																data-target="#collapse2" aria-expanded="true"
+																aria-controls="collapse2">첨부파일</button>
+														</div></td>
+													<td style="padding: 0px; margin: 0px;">
+														<button class="btn btn-oti btn-lg"
+															onclick="updateProgress2()" id="btn2"
+															style="width: 100%; height: 100%">저장</button>
+													</td>
+												</tr>
+												<tr id="collapse2" class="collapse"
+													aria-labelledby="headingOne"
+													data-parent="#accordionExample">
+													<td colspan="6">
+														<div>
+															<table
+																class="table table-border text-center deliverableTable"
+																style="font-size: 12px; padding: 0px;">
+																<thead>
+																	<tr>
+																		<th style="width: 1px;">#</th>
+																		<th style="width: 1px;"><input type="checkbox"
+																			name="output" value="selectOutputAll"
+																			onclick="selectOutputAll(this)"></th>
+																		<th>산출물구분</th>
+																		<th>산출물명</th>
+																		<th>산출물 경로</th>
+																		<th>등록자</th>
+																		<th>등록일</th>
+																	</tr>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+													</td>
+												</tr>
+												<tr>
+										
+													<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
+													<td id="3bgngYmd"><input type="date" id="SRPgBgngYmd3"></td>
+													<td id="3endYmd"><input type="date" id="SRPgEndYmd3"></td>
+													<td id="3rt"><input type="number" class="form-control"
+														id="SRPgPrgrsRt3" min="71" max="80"></td>
+													<td>
+														<div class="accordion" id="accordionExample">
+															<button class="btn btn-link btn-block text-center"
+																type="button" data-toggle="collapse"
+																data-target="#collapse3" aria-expanded="true"
+																aria-controls="collapse3">첨부파일</button>
+														</div>
+													</td>
+													<td style="padding: 0px; margin: 0px;">
+														<button class="btn btn-oti btn-lg"
+															onclick="updateProgress3()" id="btn3"
+															style="width: 100%; height: 100%">저장</button>
+													</td>
+												</tr>
+												<tr id="collapse3" class="collapse"
+													aria-labelledby="headingOne"
+													data-parent="#accordionExample">
+													<td colspan="6">
+														<div>
+															<table
+																class="table table-border text-center deliverableTable"
+																style="font-size: 12px; padding: 0px;">
+																<thead>
+																	<tr>
+																		<th style="width: 1px;">#</th>
+																		<th style="width: 1px;"><input type="checkbox"
+																			name="output" value="selectOutputAll"
+																			onclick="selectOutputAll(this)"></th>
+																		<th>산출물구분</th>
+																		<th>산출물명</th>
+																		<th>산출물 경로</th>
+																		<th>등록자</th>
+																		<th>등록일</th>
+																	</tr>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+													</td>
+												</tr>
+												<tr>
+											
+													<td>반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
+													<td id="4bgngYmd"><input type="date" id="SRPgBgngYmd4"></td>
+													<td id="4endYmd"><input type="date" id="SRPgEndYmd4"></td>
+													<td id="4rt"><input type="number" class="form-control"
+														id="SRPgPrgrsRt4" min="81" max="90"></td>
+													<td><div class="accordion" id="accordionExample">
+															<button class="btn btn-link btn-block text-center"
+																type="button" data-toggle="collapse"
+																data-target="#collapse4" aria-expanded="true"
+																aria-controls="collapse4">첨부파일</button>
+														</div></td>
+													<td style="padding: 0px; margin: 0px;">
+														<button class="btn btn-oti btn-lg"
+															onclick="updateProgress4()" id="btn4"
+															style="width: 100%; height: 100%">저장</button>
+													</td>
+												</tr>
+												<tr id="collapse4" class="collapse"
+													aria-labelledby="headingOne"
+													data-parent="#accordionExample">
+													<td colspan="6">
+														<div>
+															<table
+																class="table table-border text-center deliverableTable"
+																style="font-size: 12px; padding: 0px;">
+																<thead>
+																	<tr>
+																		<th style="width: 1px;">#</th>
+																		<th style="width: 1px;"><input type="checkbox"
+																			name="output" value="selectOutputAll"
+																			onclick="selectOutputAll(this)"></th>
+																		<th>산출물구분</th>
+																		<th>산출물명</th>
+																		<th>산출물 경로</th>
+																		<th>등록자</th>
+																		<th>등록일</th>
+																	</tr>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+													</td>
+												</tr>
+												<tr>
+											
+													<td>운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
+													<td id="5bgngYmd"><input type="date" id="SRPgBgngYmd5"></td>
+													<td id="5endYmd"><input type="date" id="SRPgEndYmd5"></td>
+													<td id="5rt"><input type="number" class="form-control"
+														id="SRPgPrgrsRt5" min="91" max="100"></td>
+													<td><div class="accordion" id="accordionExample">
+															<button class="btn btn-link btn-block text-center"
+																type="button" data-toggle="collapse"
+																data-target="#collapse5" aria-expanded="true"
+																aria-controls="collapse5">첨부파일</button>
+														</div></td>
+													<td style="padding: 0px; margin: 0px;">
+														<button class="btn btn-oti btn-lg"
+															onclick="updateProgress5()" id="btn5"
+															style="width: 100%; height: 100%">저장</button>
+													</td>
+												</tr>
+												<tr id="collapse5" class="collapse"
+													aria-labelledby="headingOne"
+													data-parent="#accordionExample">
+													<td colspan="6">
+														<div>
+															<table
+																class="table table-border text-center deliverableTable"
+																style="font-size: 12px; padding: 0px;">
+																<thead>
+																	<tr>
+																		<th style="width: 1px;">#</th>
+																		<th style="width: 1px;"><input type="checkbox"
+																			name="output" value="selectOutputAll"
+																			onclick="selectOutputAll(this)"></th>
+																		<th>산출물구분</th>
+																		<th>산출물명</th>
+																		<th>산출물 경로</th>
+																		<th>등록자</th>
+																		<th>등록일</th>
+																	</tr>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<button class="btn btn-oti" id="delbtn"
+								onclick="deleteDeliverable()"
+								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택된
+								산출물 삭제</button>
+							<button class="btn btn-oti" id="addbtn"
+								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
+								추가</button>
+						</div>
+						<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
+						<div class="tab-pane" id="srInfhistory" role="tabpanel"
+							style="padding-bottom: 20px;">
+							<div class="card-block table-border-style" style="padding: 0px;">
+								<div class="table-responsive">
+									<table class="table table-hover text-center historyTable"
+										style="font-size: 12px; padding: 0px;">
+										<thead>
+											<tr>
+												<th style="width: 1px;">순번</th>
+												<th>요청자명</th>
+												<th>요청유형</th>
+												<th>변경될 완료예정일</th>
+												<th>승인여부</th>
+											</tr>
+										</thead>
+										<tbody id="srhistory1">
+										</tbody>
+									</table>
+									<%-- 페이징 --%>
+									<div class="hstryPager-container">
+										<div class="hstryPager"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			</div>
 		</div>
 		<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
-		<div class="col-xl-12 col-md-12">
+<%-- 		<div class="col-xl-12 col-md-12">
 			<div class="card">
 				<div class="card-header">
 					<h5>SR요청 처리정보</h5>
@@ -545,7 +992,7 @@ li:before {
 							data-toggle="tab" href="#srInfhistory" role="tab">SR 히스토리</a>
 							<div class="slide"></div></li>
 					</ul>
-					<%-- *********************************** [ 계획정보 ] ***********************************--%>
+					*********************************** [ 계획정보 ] ***********************************
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
 						<input type="hidden" id="SRPlDmndNo">
@@ -596,7 +1043,7 @@ li:before {
 							<button class="btn btn-oti" onclick="planUpdate()" id="planBtn"
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
 						</div>
-						<%-- *********************************** [ 자원정보 ] ***********************************--%>
+						*********************************** [ 자원정보 ] ***********************************
 						<div class="tab-pane" id="profile1" role="tabpanel"
 							style="padding-bottom: 20px;">
 							<div class="card-block table-border-style" style="padding: 0px;">
@@ -629,7 +1076,7 @@ li:before {
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
 								data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
 						</div>
-						<%-- *********************************** [ 진척률 ] ***********************************--%>
+						*********************************** [ 진척률 ] ***********************************
 						<!-- 진행상태에 따라서 inpu readonly로 출력 및 버튼 안보여야됨 -->
 						<div class="tab-pane" id="messages1" role="tabpanel"
 							style="padding-bottom: 20px;">
@@ -943,7 +1390,7 @@ li:before {
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
 								추가</button>
 						</div>
-						<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
+						*********************************** [ SR 히스토리  ] ***********************************
 						<div class="tab-pane" id="srInfhistory" role="tabpanel"
 							style="padding-bottom: 20px;">
 							<div class="card-block table-border-style" style="padding: 0px;">
@@ -962,7 +1409,7 @@ li:before {
 										<tbody id="srhistory1">
 										</tbody>
 									</table>
-									<%-- 페이징 --%>
+									페이징
 									<div class="hstryPager-container">
 										<div class="hstryPager"></div>
 									</div>
@@ -971,7 +1418,7 @@ li:before {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --%>
 		</div>
 		<!-- *********** -->
 	</div>
