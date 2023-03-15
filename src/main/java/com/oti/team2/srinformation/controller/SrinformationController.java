@@ -188,7 +188,7 @@ public class SrinformationController {
 	 * @return sr진척 목록 엑셀 다운로드
 	 * @throws Exception 
 	 */
-	@GetMapping(value = "/excel")
+	@GetMapping(value = "/list/download")
 	public void downloadExcel(Model model,@ModelAttribute SrInfoFilter srInfoFilter, Authentication auth,
 			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -209,6 +209,6 @@ public class SrinformationController {
 				}
 			}
 		}
-		srinformationService.downloadExcel(srlist,request,response);
+		srinformationService.SrListdownload(srlist,request,response);
 	}
 }

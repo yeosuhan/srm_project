@@ -109,7 +109,7 @@ th {
 			<%-- *********************************** [SR 요청 관리 ] ***********************************--%>
 			<div class="col-xl-12">
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header" style="height:130px;">
 						<div class="row">
 							<div class="col-10">
 								<h5>SR 요청 관리</h5>
@@ -161,7 +161,7 @@ th {
 										</c:if>
 									</select>
 								</div>
-								<div class="col col-xl-3">
+								<div class="col col-xl-4">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
 										type="text" name="keyWord" id="keyWord" value="${srFilterDto.keyWord}">
 									<button type="submit"
@@ -169,7 +169,8 @@ th {
 
 										<i class="ti-search"></i>
 									</button>
-									<button class="btn btn-sm btn-oti" style="height: 30px;">엑셀
+									<button class="btn btn-sm btn-oti" style="height: 30px;"
+									onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';">엑셀
 										다운로드</button>
 								</div>
 
@@ -196,7 +197,7 @@ th {
 					</div>
 					<div class="card-block" id="list">
 						<div id="sales-analytics">
-							<div class="card-block table-border-style">
+							<div class="card-block table-border-style" style="height:783px;">
 								<div class="table-responsive">
 									<table class="table table-hover text-center"
 										style="font-size: 12;">

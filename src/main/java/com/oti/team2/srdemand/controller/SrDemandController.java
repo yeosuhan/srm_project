@@ -6,11 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.institution.service.IInstitutionService;
 import com.oti.team2.member.service.IMemberService;
+import com.oti.team2.progress.dto.Prgrs;
 import com.oti.team2.progress.service.IProgressService;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrFilterDto;
@@ -28,6 +33,8 @@ import com.oti.team2.srdemand.dto.SrdemandPrgrsrt;
 import com.oti.team2.srdemand.dto.WriteSdBaseDto;
 import com.oti.team2.srdemand.dto.WriterDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
+import com.oti.team2.srinformation.dto.SrInfoFilter;
+import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.system.dto.SrSystem;
 import com.oti.team2.system.service.ISystemService;
@@ -51,16 +58,16 @@ public class SrDemandController {
 
 	@Autowired
 	private IMemberService memberService;
-	
+
 	@Autowired
 	private ISystemService systemService;
-	
+
 	@Autowired
 	private ITaskService taskService;
-	
+
 	@Autowired
 	private IProgressService progressService;
-	
+
 	@Autowired
 	private ISrinformationService srinformationService;
 
@@ -77,13 +84,13 @@ public class SrDemandController {
 		// 세션에서 사용자의 이름을 가져와야 됨.
 		String memberId = auth.getName();
 		String flnm = memberService.getFlnm(memberId);
-		
+
 		// 시스템 목록의 첫 시스템과, 해당 시스템의 업무구분 데이터를 기본적으로 세팅한다.
 		SrSystem system = systemService.getFirstSystem();
 		log.info("system" + system);
 		List<SystemTask> taskList = taskService.getTaskList(system.getSysCd());
 		log.info("taskList" + taskList);
-		
+
 		String instName = institutionService.getInst(memberId).getInstNm();
 		WriterDto writerDto = new WriterDto(memberId, flnm, instName);
 		WriteSdBaseDto wbDto = new WriteSdBaseDto(writerDto, system, taskList);
@@ -112,24 +119,24 @@ public class SrDemandController {
 	public String getSrDemandList(Authentication auth, Model model,
 			@RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
-			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
-			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort,
+			@RequestParam(required = false, name = "dmndYmdStart") Date dmndYmdStart,
 			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
-			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
-			@RequestParam(required = false, name = "sysCd")String sysCd,
-			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
-			@RequestParam(required = false, name = "keyWord")String keyWord,
-			@RequestParam(required = false, name = "hstryId")Integer hstryId) {
+			@RequestParam(required = false, name = "sttsCd") Integer sttsCd,
+			@RequestParam(required = false, name = "sysCd") String sysCd,
+			@RequestParam(required = false, name = "taskSeCd") String taskSeCd,
+			@RequestParam(required = false, name = "keyWord") String keyWord,
+			@RequestParam(required = false, name = "hstryId") Integer hstryId) {
 		log.info("sort : " + sort);
 		model.addAttribute("sort", sort);
 		String memberId = auth.getName();
 		SrFilterDto srFilterDto = new SrFilterDto();
-		if(dmndYmdStart==null) {
+		if (dmndYmdStart == null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, -1);
 			String stringDate = sdf.format(calendar.getTime());
-			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+			dmndYmdStart = Date.valueOf(stringDate);// 기본값 한달전
 		}
 		srFilterDto.setDmndYmdStart(dmndYmdStart);
 		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
@@ -138,7 +145,7 @@ public class SrDemandController {
 		srFilterDto.setSysCd(sysCd);
 		srFilterDto.setTaskSeCd(taskSeCd);
 		srFilterDto.setHstryId(hstryId);
-		model.addAttribute("srFilterDto",srFilterDto);
+		model.addAttribute("srFilterDto", srFilterDto);
 		log.info(srFilterDto);
 		// 목록
 		int totalRows = srdemandService.getCountClientSr(memberId, srFilterDto);
@@ -146,9 +153,9 @@ public class SrDemandController {
 		log.info(pager);
 		SrdemandDetail sd = null;
 		String prgrsRt = null;
-		if(totalRows!=0) {
+		if (totalRows != 0) {
 			List<SrDemand> list = null;
-			list = srdemandService.getSrDemandList(memberId, pager,sort,srFilterDto);
+			list = srdemandService.getSrDemandList(memberId, pager, sort, srFilterDto);
 			model.addAttribute("mySrDemandList", list);
 			// 기본 첫번째 상세 or 선택된 상세
 			if (dmndno != null) {
@@ -158,17 +165,17 @@ public class SrDemandController {
 				prgrsRt = progressService.getPrgrsRt(list.get(0).getDmndNo());
 				sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 			}
-		log.info(sd);
+			log.info(sd);
 		}
-		//시스템 목록
-		model.addAttribute("systemList",systemService.getSystemList());
-		//작업 구분
-		if(sysCd!=null) {
-			model.addAttribute("taskList",taskService.getTaskList(sysCd));
+		// 시스템 목록
+		model.addAttribute("systemList", systemService.getSystemList());
+		// 작업 구분
+		if (sysCd != null) {
+			model.addAttribute("taskList", taskService.getTaskList(sysCd));
 		}
 		model.addAttribute("sd", sd);
 		model.addAttribute("prgrsRt", prgrsRt);
-		model.addAttribute("pager", pager);		
+		model.addAttribute("pager", pager);
 		model.addAttribute("role", auth.getAuthorities().stream().findFirst().get().toString());
 		return "srDemand/userSrDemandList";
 	}
@@ -183,11 +190,11 @@ public class SrDemandController {
 		String prgrsRt = progressService.getPrgrsRt(dmNo);
 		SrdemandDetail sd = srdemandService.getSrDemandDetail(dmNo);
 		log.info(sd);
-		SrdemandPrgrsrt sdpr = new SrdemandPrgrsrt(sd,prgrsRt);
+		SrdemandPrgrsrt sdpr = new SrdemandPrgrsrt(sd, prgrsRt);
 		log.info(sdpr);
 		model.addAttribute("sd", sd);
 		model.addAttribute("prgrsRt", prgrsRt);
-		if(auth.getAuthorities().stream().findFirst().get().toString().equals(Auth.ROLE_CLIENT.toString())) {
+		if (auth.getAuthorities().stream().findFirst().get().toString().equals(Auth.ROLE_CLIENT.toString())) {
 			log.info("여기~");
 			return "srDemand/user/srDetail";
 		}
@@ -207,7 +214,7 @@ public class SrDemandController {
 		model.addAttribute("sd", sd);
 		return "srDemand/user/srUpdate";
 	}
-	
+
 	/**
 	 * SR요청 수정하기
 	 * 
@@ -220,18 +227,19 @@ public class SrDemandController {
 		srdemandService.updateSrDemand(srRequestDto);
 		return "redirect:/srdemand/list?dmndno=" + srRequestDto.getDmndNo();
 	}
-	
+
 	/**
 	 * SR요청 삭제하기
 	 * 
 	 * @author 신정은
 	 */
-	@GetMapping("/delete/{dmndNo}") 
-	public String deleteSrDemand(@PathVariable("dmndNo")String dmndNo) {
+	@GetMapping("/delete/{dmndNo}")
+	public String deleteSrDemand(@PathVariable("dmndNo") String dmndNo) {
 		log.info(dmndNo);
 		srdemandService.deleteSrdemand(dmndNo);
 		return "redirect:/srdemand/list";
 	}
+
 	/**
 	 * 반영요청 수락하기
 	 * 
@@ -239,8 +247,8 @@ public class SrDemandController {
 	 */
 	@PostMapping("/end")
 	public String endSr(String dmndNo) {
-		log.info("반영요청 - controller: "+dmndNo);
-		
+		log.info("반영요청 - controller: " + dmndNo);
+
 		srdemandService.endSr(dmndNo); // SR요청 진행상황 개발완료
 		log.info("SR요청 진행상황 개발완료 완료");
 		progressService.endProgress(dmndNo); // 진척률 운영반영 종료일, 진척률 넣기
@@ -248,5 +256,50 @@ public class SrDemandController {
 		srinformationService.endYmd(dmndNo); // SR진척 계획 종료일
 		log.info("SR진척 계획 종료일 완료");
 		return "redirect:/srdemand/list";
+	}
+
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-15
+	 * @return 사용자의 sr요청 목록 엑셀 다운로드
+	 * @throws Exception
+	 */
+	@GetMapping(value = "/list/download")
+	public void downloadExcel(Authentication auth, Model model,
+			@RequestParam(required = false, name = "dmndno") String dmndno,
+			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort,
+			@RequestParam(required = false, name = "dmndYmdStart") Date dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "sttsCd") Integer sttsCd,
+			@RequestParam(required = false, name = "sysCd") String sysCd,
+			@RequestParam(required = false, name = "taskSeCd") String taskSeCd,
+			@RequestParam(required = false, name = "keyWord") String keyWord,
+			@RequestParam(required = false, name = "hstryId") Integer hstryId, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		log.info("엑셀 가자잇 ");
+		log.info("sort : " + sort);
+		model.addAttribute("sort", sort);
+		String memberId = auth.getName();
+		SrFilterDto srFilterDto = new SrFilterDto();
+		if (dmndYmdStart == null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, -1);
+			String stringDate = sdf.format(calendar.getTime());
+			dmndYmdStart = Date.valueOf(stringDate);// 기본값 한달전
+		}
+		srFilterDto.setDmndYmdStart(dmndYmdStart);
+		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
+		srFilterDto.setSttsCd(sttsCd);
+		srFilterDto.setKeyWord(keyWord);
+		srFilterDto.setSysCd(sysCd);
+		srFilterDto.setTaskSeCd(taskSeCd);
+		srFilterDto.setHstryId(hstryId);
+		log.info(srFilterDto);
+		List<SrDemand> list = null;
+		list = srdemandService.getMyExcelList(memberId, sort, srFilterDto);
+		log.info(list);
+		srdemandService.SrDemandListdownload(list,request,response);
 	}
 }

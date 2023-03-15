@@ -3,6 +3,9 @@ package com.oti.team2.srdemand.service;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.oti.team2.srdemand.dto.MytodoSrListDto;
@@ -133,4 +136,18 @@ public interface ISrDemandService {
 	 * @author 여수한
 	 */
 	public void endSr(String dmndNo);
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-15
+	 * @return 사용자의 sr요청 목록 엑셀 다운로드
+	 * @throws Exception
+	 */
+	public List<SrDemand> getMyExcelList(String memberId, String sort, SrFilterDto srFilterDto);
+	public void SrDemandListdownload(List<SrDemand> list, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-15
+	 * @return 관리자의 sr요청목록 엑셀 다운로드
+	 */
+	public List<SrDemand> getSrExcelList(String sort, SrFilterDto srFilterDto);
 }

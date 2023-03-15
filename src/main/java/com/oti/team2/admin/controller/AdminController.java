@@ -1,11 +1,15 @@
 package com.oti.team2.admin.controller;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
@@ -376,5 +380,41 @@ public class AdminController {
 		map.put("result", result);
 		return map;
 	}
-
+	/**
+	 * 
+	 * @author 여수한 작성일자 : 2023-03-15
+	 * @return 관리자의 sr요청목록 엑셀 다운로드
+	 * @throws Exception 
+	 */
+	@GetMapping("/srdemand/list/download")
+	public void SrDemandListDownload(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
+			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
+			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
+			@RequestParam(required = false, name = "sysCd")String sysCd,
+			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
+			@RequestParam(required = false, name = "keyWord")String keyWord,
+			@RequestParam(required = false, name = "hstryId")Integer hstryId,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		SrFilterDto srFilterDto = new SrFilterDto();
+		if(dmndYmdStart==null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, -1);
+			String stringDate = sdf.format(calendar.getTime());
+			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+		}
+		srFilterDto.setDmndYmdStart(dmndYmdStart);
+		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
+		srFilterDto.setSttsCd(sttsCd);
+		srFilterDto.setKeyWord(keyWord);
+		srFilterDto.setSysCd(sysCd);
+		srFilterDto.setTaskSeCd(taskSeCd);
+		srFilterDto.setHstryId(hstryId);
+		// 목록
+		List<SrDemand> list = srdemandService.getSrExcelList(sort,srFilterDto);
+		srdemandService.SrDemandListdownload(list,request,response);
+	}
 }
