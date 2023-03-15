@@ -99,6 +99,18 @@ th {
 #card_body, .form-control {
 	font-size: 12px;
 }
+
+#headerFirst{
+	background: #6b2146;
+}
+
+.card .card-header {
+	background: linear-gradient(135deg, #6b2146 10%, #93344b 100%);
+}
+
+.badge {
+	padding: 5px 8px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -109,13 +121,16 @@ th {
 			<%-- *********************************** [SR 요청 관리 ] ***********************************--%>
 			<div class="col-xl-12">
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
 								<h5>SR 요청 관리</h5>
 							</div>
 						</div>
-						<hr />
+				
+						</div>
+											<div class="card-body">
+						
 						<form id="srSearchForm" action="${pageContext.request.contextPath}/admin/srdemand/list" >
 							<div class="row">
 								<div class="col col-3 pr-0">
@@ -175,7 +190,9 @@ th {
 
 							</div>
 						</form>
+						
 					</div>
+					
 				</div>
 			</div>
 
@@ -183,14 +200,12 @@ th {
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5>관리자 !!SR 요청 목록</h5>
+						<h5>SR 요청 목록</h5>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
 								<li><i class="fa fa-window-maximize full-card"></i></li>
-								<li><i class="fa fa-minus minimize-card"></i></li>
 								<li><i class="fa fa-refresh reload-card"></i></li>
-								<li><i class="fa fa-trash close-card"></i></li>
 							</ul>
 						</div>
 					</div>
@@ -207,11 +222,11 @@ th {
 												<c:if test="${sort eq 'DESC'}"> 
 													<a 
 													href="${pageContext.request.contextPath}/admin/srdemand/list"  class="sortBtnAsc"><i
-														class="fas fa-caret-down" style="color: black;font-size: 24px;"></i></a> 
+														class="fas fa-caret-down" style="color: #93344b;font-size: 24px;"></i></a> 
 														</c:if> <c:if test="${sort eq 'ASC'}">
 													<a
 													href="${pageContext.request.contextPath}/admin/srdemand/list" class="sortBtnDesc"><i
-														class="fas fa-caret-up" style="color: black;font-size: 24px;"></i></a>
+														class="fas fa-caret-up" style="color: #93344b;font-size: 24px;"></i></a>
 												</c:if> 
 												
 												</th>
@@ -289,14 +304,12 @@ th {
 			<div class="col-xl-4 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5>SR요청 상세</h5>
+						<h5>SR 요청 상세정보</h5>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
 								<li><i class="fa fa-window-maximize full-card"></i></li>
-								<li><i class="fa fa-minus minimize-card"></i></li>
 								<li><i class="fa fa-refresh reload-card"></i></li>
-								<li><i class="fa fa-trash close-card"></i></li>
 							</ul>
 						</div>
 					</div>

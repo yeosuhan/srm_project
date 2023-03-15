@@ -127,6 +127,28 @@ th {
 li:before {
 	content: none;
 }
+
+#headerFirst{
+	background: #4C1342;
+}
+
+.card .card-header {
+	background: linear-gradient(135deg, #360940 10%, #782748 100%);
+}
+
+#otiTabs .nav-item a{
+color:#4C1342;
+padding:15px !important;
+}
+
+#otiTabs .nav-link{
+color:#4C1342;
+background-color:white !important;
+}
+
+.badge {
+	padding: 5px 8px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -228,9 +250,10 @@ li:before {
 		<div class="row">
 			<div class="col-xl-12">
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header" id="headerFirst">
 						<h5>SR 진척 관리</h5>
-						<hr />
+					</div>
+					<div class="card-body">
 						<form id="srInfoFilterForm"
 							action="${pageContext.request.contextPath}/srinformation/list"
 							onsubmit="return srSearch()">
@@ -278,23 +301,23 @@ li:before {
 								<input type="text" class="form-control" name="ttl"
 									value="${srInfoFilter.ttl}"> <br />
 							</div>
-							<div class="col col-xl-1" style="padding-left: 30px">
-								내 처리건
+							<div class="col col-xl-1" style="padding-left: 30px">	
 								<c:if test="${srInfoFilter.mySrOnly eq true}">
 									<input type="checkbox" name="mySrOnly" value="true" checked>
 								</c:if>
 								<c:if test="${srInfoFilter.mySrOnly ne true}">
 									<input type="checkbox" name="mySrOnly" value="true">
 								</c:if>
+								내 처리건
 							</div>
 							<div class="col col-xl-1">
-								<button type="submit" class="btn btn-lg btn-oti"
+								<button type="submit" class="btn btn-sm btn-oti"
 									style="float: center;">
 									<i class="ti-search"></i>
 								</button>
 							</div>
 							<div class="col col-xl-1">
-								<button class="btn btn-oti" type="submit"
+								<button class="btn btn-oti btn-sm" type="submit"
 								value="" onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/excel';"
 									style="float: right; margin-left: 50px;">엑셀 다운로드</button>
 							</div>
@@ -327,11 +350,11 @@ li:before {
 												<th>SR번호 
 												<c:if test="${sort eq 'DESC'}">
 													<a href="${pageContext.request.contextPath}/srinformation/list" class="sortBtnAsc"><i
-														class="fas fa-caret-down" style="color: black;font-size:24px;"></i></a>
+														class="fas fa-caret-down" style="color: #782748 ;font-size:24px;"></i></a>
 												</c:if>
 												<c:if test="${sort eq 'ASC'}">
 												<a href="${pageContext.request.contextPath}/srinformation/list" class="sortBtnDesc"><i
-														class="fas fa-caret-up" style="color: black;font-size:24px;"></i></a>
+														class="fas fa-caret-up" style="color: #782748;font-size:24px;"></i></a>
 												</c:if>
 												</th>
 												<th>시스템구분</th>
@@ -414,7 +437,7 @@ li:before {
 					<div class="card-header">
 						<div class="row">
 							<div class="col-8">
-								<h5>SR요청 상세정보</h5>
+								<h5>SR 요청 상세정보</h5>
 							</div>
 							<div class="col-3 ml-4">
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -556,10 +579,10 @@ li:before {
 				</div>
 				<div class="card">
 				<div class="card-header">
-					<h5>SR요청 처리정보</h5>
+					<h5>SR 요청 처리정보</h5>
 				</div>
 				<div class="card-block" style="padding:0px;">
-					<ul class="nav nav-tabs  md-tabs" role="tablist">
+					<ul class="nav nav-tabs  md-tabs" id="otiTabs" role="tablist">
 						<li class="nav-item" onclick="getPlan()"><a id="srPlanTab"
 							class="nav-link active" data-toggle="tab" href="#home1"
 							role="tab">SR 계획정보</a>
@@ -569,7 +592,7 @@ li:before {
 							<div class="slide"></div></li>
 						<li class="nav-item" onclick="getProgress()"><a
 							class="nav-link" data-toggle="tab" href="#messages1" role="tab">SR
-								진척율</a>
+								진척률</a>
 							<div class="slide"></div></li>
 						<li class="nav-item" onclick="empHstry()"><a class="nav-link"
 							data-toggle="tab" href="#srInfhistory" role="tab">SR 히스토리</a>
@@ -623,7 +646,7 @@ li:before {
 									<textarea rows="5" cols="5" class="form-control" id="SRPlRvwCn">${sp.rvwCn}</textarea>
 								</div>
 							</div>
-							<button class="btn btn-oti" onclick="planUpdate()" id="planBtn"
+							<button class="btn btn-oti btn-sm" onclick="planUpdate()" id="planBtn"
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
 						</div>
 						<%-- *********************************** [ 자원정보 ] ***********************************--%>
@@ -650,12 +673,12 @@ li:before {
 									</table>
 								</div>
 							</div>
-							<button class="btn btn-oti"
+							<button class="btn btn-oti btn-sm"
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
-							<button onclick="deleteResource()" class="btn btn-oti"
+							<button onclick="deleteResource()" class="btn btn-oti btn-sm"
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
 								삭제</button>
-							<button class="btn btn-oti"
+							<button class="btn btn-oti btn-sm"
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
 								data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
 						</div>
@@ -964,11 +987,10 @@ li:before {
 									</div>
 								</div>
 							</div>
-							<button class="btn btn-oti" id="delbtn"
+							<button class="btn btn-oti btn-sm" id="delbtn"
 								onclick="deleteDeliverable()"
-								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택된
-								산출물 삭제</button>
-							<button class="btn btn-oti" id="addbtn"
+								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택 삭제</button>
+							<button class="btn btn-oti btn-sm" id="addbtn"
 								style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
 								추가</button>
 						</div>

@@ -24,11 +24,11 @@
 }
 
 .badge {
-	padding: 4px 8px;
+	padding: 5px 8px;
 }
 
 .card .card-header {
-	background: linear-gradient(135deg, #F05F57 10%, #92344B 100%);
+	background: linear-gradient(135deg, #c94d52 10%, #92344B 100%);
 }
 
 .card .card-body table td ,.card-block table td, table td{
@@ -56,22 +56,22 @@ font-size:13px;
 							<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 								<li class="nav-item btn"><div
 										class="nav-link sttsCd0 active" onclick="moveTab(0)">
-										요청<span class="badge badge-danger">${atotal}</span>
+										요청<span class="badge badge-otidanger">${atotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div class="nav-link sttsCd1"
 										onclick="moveTab(1)">
-										반려 <span class="badge badge-danger">${rejTotal}</span>
+										반려 <span class="badge badge-otitodo">${rejTotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div class="nav-link sttsCd2"
 										onclick="moveTab(2)">
-										접수 <span class="badge badge-danger">${rtotal}</span>
+										접수 <span class="badge badge-otitodo">${rtotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn">
 									<div class="nav-link sttsCd3" onclick="moveTab(3)">
-										개발중 <span class="badge badge-danger">${dtotal}</span>
+										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
 									</div>
 									<div class="slide"></div>
 								</li>
@@ -79,22 +79,22 @@ font-size:13px;
 							<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
 								<li class="nav-item btn"><div class="nav-link sttsCd0"
 										onclick="moveTab(0)">
-										요청<span class="badge badge-danger">${atotal}</span>
+										요청<span class="badge badge-otitodo">${atotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div class="nav-link sttsCd1"
 										onclick="moveTab(1)">
-										반려 <span class="badge badge-danger">${rejTotal}</span>
+										반려 <span class="badge badge-otitodo">${rejTotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div
 										class="nav-link sttsCd2 active" onclick="moveTab(2)">
-										접수 <span class="badge badge-danger">${rtotal}</span>
+										접수 <span class="badge badge-otidanger">${rtotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn">
 									<div class="nav-link sttsCd3" onclick="moveTab(3)">
-										개발중 <span class="badge badge-danger">${dtotal}</span>
+										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
 									</div>
 									<div class="slide"></div>
 								</li>
@@ -102,30 +102,30 @@ font-size:13px;
 							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
 								<li class="nav-item btn">
 									<div class="nav-link sttsCd3 active" onclick="moveTab(3)">
-										개발중 <span class="badge badge-danger">${dtotal}</span>
-									</div>
+										개발 중 <span class="badge badge-otidanger">${dtotal}</span>
+									</div> 
 									<div class="slide"></div>
 								</li>
 							</sec:authorize>
 
 							<li class="nav-item btn"><div class="nav-link sttsCd4"
 									onclick="moveTab(4)">
-									테스트 <span class="badge badge-danger">${ttotal}</span>
+									테스트 <span class="badge badge-otitodo">${ttotal}</span>
 								</div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link sttsCd5"
 									onclick="moveTab(5)">
-									개발완료 <span class="badge badge-danger">${comtotal}</span>
+									개발완료 <span class="badge badge-otitodo">${comtotal}</span>
 								</div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link sttsCd6"
 									onclick="moveTab(6)">
-									개발 취소 <span class="badge badge-danger">${cantotal}</span>
+									개발취소 <span class="badge badge-otitodo">${cantotal}</span>
 								</div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link hstry"
 									onclick="moveHstryTab()">
-									히스토리<span class="badge badge-danger">${histotal}</span>
+									히스토리<span class="badge badge-otitodo">${histotal}</span>
 								</div>
 								<div class="slide"></div></li>
 						</ul>

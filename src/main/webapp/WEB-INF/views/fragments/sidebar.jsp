@@ -18,7 +18,7 @@
 
 .gradation_animate {
 	position: absolute;
-	top: -2px;
+	top: -5px;
 	left: 0px;
 	width: 100px;
 	height: 100px;

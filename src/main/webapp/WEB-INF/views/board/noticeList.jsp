@@ -12,9 +12,19 @@
 	href="${pageContext.request.contextPath}/resources/css/pagination.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/srButton.css">
-<script src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
 
+<style>
+#headerFirst {
+	background: #4C1342;
+}
+
+.card .card-header {
+	background: linear-gradient(135deg, #360940 10%, #782748 100%);
+}
+</style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -23,28 +33,35 @@
 		<div class="row">
 			<div class="col-xl-12">
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
 								<h5>공지사항</h5>
 							</div>
 						</div>
-						<hr />
-						<form id="boardSearchForm" action="${pageContext.request.contextPath}/board/list/notice"
+					</div>
+					<div class="card-body">
+
+						<form id="boardSearchForm"
+							action="${pageContext.request.contextPath}/board/list/notice"
 							onsubmit="return boardSearch()">
 							<div class="row" style="height: 30px;">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
-										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart" value="${boardFilterDto.dmndYmdStart}">
-									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd" value="${boardFilterDto.dmndYmdEnd }">
-								</div>								
+										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart"
+										value="${boardFilterDto.dmndYmdStart}"> ~ <input
+										type="date" name="dmndYmdEnd" id="dmndYmdEnd"
+										value="${boardFilterDto.dmndYmdEnd }">
+								</div>
 								<div class="col col-3 px-0">
 									<label for="wrtrNm" style="margin-right: 10px;">작성자</label> <input
-										type="text" name="wrtrNm" id="keyWord" value="${boardFilterDto.wrtrNm}">
+										type="text" name="wrtrNm" id="keyWord"
+										value="${boardFilterDto.wrtrNm}">
 								</div>
 								<div class="col col-2 px-0">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
-										type="text" name="keyWord" id="keyWord" value="${boardFilterDto.keyWord}">
+										type="text" name="keyWord" id="keyWord"
+										value="${boardFilterDto.keyWord}">
 									<button type="submit" class="btn btn-sm btn-oti"
 										style="margin-right: 10px; height: 30px;">
 										<i class="ti-search"></i>
@@ -66,7 +83,7 @@
 				<!-- 공지사항 목록 -->
 				<div class="card" style="height: 650px;">
 					<div class="card-header">
-						<h5 class="card-header-text">공지사항</h5>
+						<h5 class="card-header-text">전체 목록</h5>
 					</div>
 					<table class="table table-hover" style="text-align: center;">
 						<thead>

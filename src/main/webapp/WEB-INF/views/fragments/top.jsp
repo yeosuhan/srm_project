@@ -141,7 +141,7 @@
 							<div id="sessionExpiry"></div>
 						</li>
 					</ul>
-					<ul class="nav-left ml-5">
+					<ul class="nav-left" style="margin-left:150px;">
 						<li
 							style="color: white; margin: auto; justify-content: center; font-weight: bolder; font-size: 18px;">
 							세션 만료시간 <span id="loginTime"></span>
@@ -149,7 +149,7 @@
 					</ul>
 					<ul class="nav-left">
 						<li><button class="btn btn-sm btn-oti"
-								style="background-color: #4C1342; margin-top: 10px;"
+								style="background-color: #92344B; margin-top: 10px; padding: 5px; border-color: white; border-width: 2;"
 								onclick="resetLoginTime()">로그인 시간 연장</button></li>
 					</ul>
 					<ul class="nav-right">
@@ -248,7 +248,7 @@
 								<li class="waves-effect waves-light">
 									<form method="POST" action="<c:url value='/logout'/>">
 										<button class="btn btn-sm btn-oti"
-											style="margin-top: 15px; margin-left: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
+											style="margin-top: 15px; margin-left: 5px; padding: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
 											type="submit">LOGOUT</button>
 									</form>
 								</li>
