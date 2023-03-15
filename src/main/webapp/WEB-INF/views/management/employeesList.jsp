@@ -41,7 +41,8 @@ p {
 					<div class="card-header">
 						<h5 style="font-weight: bold;">사원 관리</h5>
 						<%-- 검색 기능 --%>
-						<div class="mt-4 mr-5" style="height: 30px;">
+						<hr/>
+						<div class="mr-5" style="height: 30px;">
 							<form id="empFilter"
 								action="${pageContext.request.contextPath}/admin/employee/list"
 								onsubmit="return search()">
@@ -72,7 +73,7 @@ p {
 							</form>
 						</div>
 					</div>
-					<div class="card-block table-border-style">
+					<div class="card-block table-border-style p-0">
 						<div class="table-responsive">
 							<table class="table table-hover" style="font-size: 12;">
 								<thead>
@@ -144,31 +145,31 @@ p {
 						<div class="card-block">
 							<form class="form-material">
 								<div class="form-group row">
-									<p class="col-sm-2 font-weight-bold">아이디</p>
-									<div class="col-sm-10" id="MEmployeeId">${employeesList[0].memberId}</div>
+									<p class="col-sm-3 font-weight-bold">아이디</p>
+									<div class="col-sm-9" id="MEmployeeId">${employeesList[0].memberId}</div>
 								</div>
 								<div class="form-group row">
-									<p class="col-sm-2 font-weight-bold pt-3">이름</p>
-									<div class="col-sm-10 pt-3" id="MEmployeeName">${employeesList[0].flnm }</div>
+									<p class="col-sm-3 font-weight-bold pt-3">이름</p>
+									<div class="col-sm-9 pt-3" id="MEmployeeName">${employeesList[0].flnm }</div>
 								</div>
 								<div class="form-group form-default row">
-									<p class="col-sm-2 font-weight-bold pt-2">전화번호</p>
-									<div class="col-sm-10 pt-2" id="MEmployeeTel">
+									<p class="col-sm-3 font-weight-bold pt-3">전화번호</p>
+									<div class="col-sm-9 pt-3" id="MEmployeeTel">
 										${employeesList[0].telNo }</div>
 								</div>
 								<div class="form-group form-default row">
-									<p class="col-sm-2 font-weight-bold">이메일</p>
-									<div class="col-sm-10" id="MEmployeeEmail">
+									<p class="col-sm-3 font-weight-bold pt-3">이메일</p>
+									<div class="col-sm-9 pt-3" id="MEmployeeEmail">
 										${employeesList[0].eml }</div>
 								</div>
 								<div class="form-group form-default row">
-									<p class="col-sm-2 font-weight-bold">주소</p>
-									<div class="col-sm-10" id="MEmployeeAddr">
+									<p class="col-sm-3 font-weight-bold pt-3">주소</p>
+									<div class="col-sm-9 pt-3" id="MEmployeeAddr">
 										${employeesList[0].addr }</div>
 								</div>
 								<div class="form-group form-default row">
-									<p class="col-sm-2 font-weight-bold">부서</p>
-									<div class="col-sm-10" id="MEmployeeDepartment">
+									<p class="col-sm-3 font-weight-bold pt-3">부서</p>
+									<div class="col-sm-9 pt-3" id="MEmployeeDepartment">
 										<select name="selectDepartment" class="form-control"
 											style="width: 60%">
 											<%-- 부서 목록 --%>
@@ -186,8 +187,8 @@ p {
 									</div>
 								</div>
 								<div class="form-group form-default row">
-									<p class="col-sm-2 font-weight-bold">직급</p>
-									<div class="col-sm-10" id="MEmployeeJobGrade">
+									<p class="col-sm-3 font-weight-bold">직급</p>
+									<div class="col-sm-9" id="MEmployeeJobGrade">
 										<select name="selectJobGrade" class="form-control"
 											style="width: 60%">
 											<c:forEach var="jobGrade" items="${jobGradeList}">

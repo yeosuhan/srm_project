@@ -34,9 +34,9 @@
 						</div>
 						<hr />
 						<form id="boardSearchForm"
-							action="${pageContext.request.contextPath}/board/list/qna"
+							action="${pageContext.request.contextPath}/board/list?type=qna&"
 							onsubmit="return boardSearch()">
-							<div class="row">
+							<div class="row" style="height:30px;">
 								<input type="hidden" name="type" id="type" value="qna">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
@@ -55,14 +55,14 @@
 									<label for="wrtrNm" style="margin-right: 10px;">작성자</label> <input
 										type="text" name="wrtrNm" id="wrtrNm" value="${boardFilterDto.wrtrNm}">
 								</div>
-								<div class="col col-4 px-0">
+								<div class="col col-2 px-0">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
 										type="text" name="keyWord" id="keyWord" value="${boardFilterDto.keyWord}">
+								</div>
 									<button type="submit" class="btn btn-sm btn-oti"
 										style="margin-right: 10px; height: 30px;">
 										<i class="ti-search"></i>
 									</button>
-								</div>
 
 							</div>
 						</form>
@@ -85,13 +85,13 @@
 						</div>
 					</c:if>
 					<c:if test="${fn:length(qnaList) gt 0}">
-						<table class="table table-hover">
+						<table class="table table-hover" style="text-align:center;">
 							<thead>
 								<tr>
-									<th class="col-1" style="text-align: center;"></th>
-									<th class="col-7 text-center">제목</th>
+									<th class="col-1" style="text-align: center;">순번</th>
+									<th class="col-6 text-center">제목</th>
 									<th class="col-1">작성자</th>
-									<th class="col-3">작성날짜</th>
+									<th class="col-3" style="text-align:center;">작성날짜</th>
 									<th class="col-3">답변상태</th>
 								</tr>
 							</thead>
@@ -101,11 +101,11 @@
 										<th style="text-align: center;">${qPager.startRowNo + status.index}</th>
 										<c:choose>
 											<c:when test="${fn:length(board.bbsTtl) > 20}">
-												<td id="ttl" class="text-center"><c:out
+												<td id="ttl" class="text-left"><c:out
 														value="${fn:substring(board.bbsTtl,0,19)}" />...</td>
 											</c:when>
 											<c:otherwise>
-												<td id="ttl" class="text-center"><c:out
+												<td id="ttl" class="text-left"><c:out
 														value="${board.bbsTtl}" /></td>
 											</c:otherwise>
 										</c:choose>

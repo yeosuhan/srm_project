@@ -158,6 +158,8 @@ function getNextList(url) {
 
 //댓글 더 보기
 function getComments(bbsNo, page) {
+	var afterHeight = document.getElementById('asd').offsetHeight+100;
+	
 	console.log("댓글 더 보기");
 	console.log(bbsNo);
 	console.log(page);
@@ -166,6 +168,7 @@ function getComments(bbsNo, page) {
 		url : url,
 		type : 'GET',
 		success : function(data) {
+			document.getElementById('asd').style.height=afterHeight;
 			$(".commentList:last").html(data);
 		}
 	});
