@@ -99,6 +99,18 @@ th {
 #card_body, .form-control {
 	font-size: 12px;
 }
+
+#headerFirst {
+	background: #6b2146;
+}
+
+.card .card-header {
+	background: linear-gradient(135deg, #6b2146 10%, #93344b 100%);
+}
+
+.badge {
+	padding: 5px 8px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -109,30 +121,41 @@ th {
 			<%-- *********************************** [SR 요청 관리 ] ***********************************--%>
 			<div class="col-xl-12">
 				<div class="card">
-					<div class="card-header" style="height:130px;">
+					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
-								<h5>SR 요청 관리</h5>
+								<h5 style="font-weight: bold;">SR 요청 관리</h5>
 							</div>
 						</div>
-						<hr />
-						<form id="srSearchForm" action="${pageContext.request.contextPath}/admin/srdemand/list" >
+					</div>
+					<div class="card-body">
+						<form id="srSearchForm"
+							action="${pageContext.request.contextPath}/admin/srdemand/list">
 							<div class="row">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
-										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart" value="${srFilterDto.dmndYmdStart}">
-									~ <input type="date" name="dmndYmdEnd" id="dmndYmdEnd" value="${srFilterDto.dmndYmdEnd}">
+										기간</label> <input type="date" name="dmndYmdStart" id="dmndYmdStart"
+										value="${srFilterDto.dmndYmdStart}"> ~ <input
+										type="date" name="dmndYmdEnd" id="dmndYmdEnd"
+										value="${srFilterDto.dmndYmdEnd}">
 								</div>
 								<div class="col col-2 pr-0">
 									<label for="sttsCd" style="margin-right: 10px;">진행 상태</label> <select
 										id="sttsCd" name="sttsCd">
 										<option value="">전체</option>
-										<option value="0" <c:if test="${srFilterDto.sttsCd eq 0 }">selected</c:if>>요청</option>
-										<option value="1" <c:if test="${srFilterDto.sttsCd eq 1 }">selected</c:if>>반려</option>
-										<option value="2" <c:if test="${srFilterDto.sttsCd eq 2 }">selected</c:if>>접수</option>
-										<option value="3" <c:if test="${srFilterDto.sttsCd eq 3 }">selected</c:if>>개발중</option>
-										<option value="4" <c:if test="${srFilterDto.sttsCd eq 4 }">selected</c:if>>테스트</option>
-										<option value="5" <c:if test="${srFilterDto.sttsCd eq 5 }">selected</c:if>>개발 완료</option>
+										<option value="0"
+											<c:if test="${srFilterDto.sttsCd eq 0 }">selected</c:if>>요청</option>
+										<option value="1"
+											<c:if test="${srFilterDto.sttsCd eq 1 }">selected</c:if>>반려</option>
+										<option value="2"
+											<c:if test="${srFilterDto.sttsCd eq 2 }">selected</c:if>>접수</option>
+										<option value="3"
+											<c:if test="${srFilterDto.sttsCd eq 3 }">selected</c:if>>개발중</option>
+										<option value="4"
+											<c:if test="${srFilterDto.sttsCd eq 4 }">selected</c:if>>테스트</option>
+										<option value="5"
+											<c:if test="${srFilterDto.sttsCd eq 5 }">selected</c:if>>개발
+											완료</option>
 									</select>
 								</div>
 								<div class="col col-3 pr-0">
@@ -147,7 +170,7 @@ th {
 												<option value="${system.sysCd}">${system.sysNm}</option>
 											</c:if>
 										</c:forEach>
-									</select> <select id="taskSeCd" name="taskSeCd" style="width:10px">
+									</select> <select id="taskSeCd" name="taskSeCd" style="width: 10px">
 										<option value=""></option>
 										<c:if test="${taskList ne null}">
 											<c:forEach var="task" items="${taskList}">
@@ -163,58 +186,56 @@ th {
 								</div>
 								<div class="col col-xl-4">
 									<label for="keyWord" style="margin-right: 10px;">키워드</label> <input
-										type="text" name="keyWord" id="keyWord" value="${srFilterDto.keyWord}">
-									<button type="submit"
-										class="btn btn-sm btn-oti" style="margin-right: 10px; height: 30px;">
+										type="text" name="keyWord" id="keyWord"
+										value="${srFilterDto.keyWord}">
+									<button type="submit" class="btn btn-sm btn-oti"
+										style="margin-right: 10px; height: 30px;">
 
 										<i class="ti-search"></i>
 									</button>
 									<button class="btn btn-sm btn-oti" style="height: 30px;"
-									onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';">엑셀
+										onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';">엑셀
 										다운로드</button>
 								</div>
-
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-
 			<%-- *********************************** [SR 요청 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5>관리자 !!SR 요청 목록</h5>
+						<h5>SR 요청 목록</h5>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
 								<li><i class="fa fa-window-maximize full-card"></i></li>
-								<li><i class="fa fa-minus minimize-card"></i></li>
 								<li><i class="fa fa-refresh reload-card"></i></li>
-								<li><i class="fa fa-trash close-card"></i></li>
 							</ul>
 						</div>
 					</div>
 					<div class="card-block" id="list">
 						<div id="sales-analytics">
-							<div class="card-block table-border-style" style="height:783px;">
+							<div class="card-block table-border-style" style="height: 783px;">
 								<div class="table-responsive">
 									<table class="table table-hover text-center"
 										style="font-size: 12;">
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>요청 번호
-												<c:if test="${sort eq 'DESC'}"> 
-													<a 
-													href="${pageContext.request.contextPath}/admin/srdemand/list"  class="sortBtnAsc"><i
-														class="fas fa-caret-down" style="color: black;font-size: 24px;"></i></a> 
-														</c:if> <c:if test="${sort eq 'ASC'}">
-													<a
-													href="${pageContext.request.contextPath}/admin/srdemand/list" class="sortBtnDesc"><i
-														class="fas fa-caret-up" style="color: black;font-size: 24px;"></i></a>
-												</c:if> 
-												
+												<th>요청 번호 <c:if test="${sort eq 'DESC'}">
+														<a
+															href="${pageContext.request.contextPath}/admin/srdemand/list"
+															class="sortBtnAsc"><i class="fas fa-caret-down"
+															style="color: #93344b; font-size: 24px;"></i></a>
+													</c:if> <c:if test="${sort eq 'ASC'}">
+														<a
+															href="${pageContext.request.contextPath}/admin/srdemand/list"
+															class="sortBtnDesc"><i class="fas fa-caret-up"
+															style="color: #93344b; font-size: 24px;"></i></a>
+													</c:if>
+
 												</th>
 												<th>제목</th>
 												<th>관련시스템</th>
@@ -228,43 +249,43 @@ th {
 										</thead>
 										<tbody id="dmndTbody">
 											<c:if test="${srDemandList ne null}">
-											<c:forEach var="srDemand" items="${srDemandList}"
-												varStatus="status">
-												<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
-													<th scope="row">${pager.startRowNo + status.index}</th>
-													<td>${srDemand.dmndNo}</td>
-													<c:choose>
-														<c:when test="${fn:length(srDemand.ttl) > 10}">
-															<td id="ttl" class="text-center"><c:out
-																	value="${fn:substring(srDemand.ttl,0,9)}" />...</td>
-														</c:when>
-														<c:otherwise>
-															<td id="ttl" class="text-center"><c:out
-																	value="${srDemand.ttl}" /></td>
-														</c:otherwise>
-													</c:choose>
-													<td>${srDemand.sysNm}</td>
-													<td>${srDemand.custNm}</td>
-													<td>${srDemand.instNm}</td>
-													<td><c:if test="${(srDemand.sttsNm) eq '요청'}">
-															<label class="badge badge-warning">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
-															<label class="badge badge-danger">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
-															<label class="badge badge-inverse-success">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
-															<label class="badge badge-success">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
-															<label class="badge badge-primary">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
-															<label class="badge badge-danger">${srDemand.sttsNm}</label>
-														</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
-															<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
-														</c:if></td>
-													<td>${srDemand.dmndYmd}</td>
-													<td>${srDemand.endYmd}</td>
-												</tr>
-											</c:forEach>
+												<c:forEach var="srDemand" items="${srDemandList}"
+													varStatus="status">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
+														<th scope="row">${pager.startRowNo + status.index}</th>
+														<td><strong>${srDemand.dmndNo}</strong></td>
+														<c:choose>
+															<c:when test="${fn:length(srDemand.ttl) > 10}">
+																<td id="ttl" class="text-center"><c:out
+																		value="${fn:substring(srDemand.ttl,0,9)}" />...</td>
+															</c:when>
+															<c:otherwise>
+																<td id="ttl" class="text-center"><c:out
+																		value="${srDemand.ttl}" /></td>
+															</c:otherwise>
+														</c:choose>
+														<td>${srDemand.sysNm}</td>
+														<td>${srDemand.custNm}</td>
+														<td>${srDemand.instNm}</td>
+														<td><c:if test="${(srDemand.sttsNm) eq '요청'}">
+																<label class="badge badge-warning">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
+																<label class="badge badge-danger">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
+																<label class="badge badge-inverse-success">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
+																<label class="badge badge-success">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
+																<label class="badge badge-primary">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
+																<label class="badge badge-danger">${srDemand.sttsNm}</label>
+															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
+																<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
+															</c:if></td>
+														<td>${srDemand.dmndYmd}</td>
+														<td>${srDemand.endYmd}</td>
+													</tr>
+												</c:forEach>
 											</c:if>
 											<c:if test="${srDemandList eq null}">
 												<tr>
@@ -287,25 +308,15 @@ th {
 			</div>
 
 			<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
-			<div class="col-xl-4 col-md-12">
+			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
 					<div class="card-header">
-						<h5>SR요청 상세</h5>
-						<div class="card-header-right">
-							<ul class="list-unstyled card-option">
-								<li><i class="fa fa fa-wrench open-card-option"></i></li>
-								<li><i class="fa fa-window-maximize full-card"></i></li>
-								<li><i class="fa fa-minus minimize-card"></i></li>
-								<li><i class="fa fa-refresh reload-card"></i></li>
-								<li><i class="fa fa-trash close-card"></i></li>
-							</ul>
-						</div>
+						<h5>SR 요청 상세정보</h5>
 					</div>
 					<ul class="nav nav-tabs  md-tabs" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
 							data-toggle="tab" href="#srDemandDetail" role="tab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
-
 					</ul>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
@@ -314,7 +325,6 @@ th {
 								<jsp:include page="/WEB-INF/views/srDemand/admin/adSrDetail.jsp" />
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>

@@ -40,10 +40,26 @@
 	width: 15%;
 	height: 100px;
 }
+
+.badge {
+	padding: 5px 8px;
+}
 </style>
 <div class="card" id="asd" style="height: 800px;">
-	<div class="card-header">
-		<h5>내용</h5>
+	<div class="card-header" style="height: 50px;">
+		<div class="form-group row justify-content-between">
+			<div>
+				<h5>상세보기</h5>
+			</div>
+			<div class="mr-3 mt-1 text-center" style="color: white">
+				<c:if test="${board.ansYn == false}">
+					<label class="badge badge-inverse-danger">미답변</label>
+				</c:if>
+				<c:if test="${board.ansYn == true}">
+					<label class="badge badge-success">답변완료</label>
+				</c:if>
+			</div>
+		</div>
 	</div>
 	<div class="card-block px-0 py-50">
 		<form enctype="multipart/form-data">
@@ -51,24 +67,14 @@
 			<div class="form-group row">
 				<div class="col-sm-2 font-weight-bold">작성일자</div>
 				<div class="col-sm-4">${board.wrtYmd}</div>
-				<div class="col-sm-2 font-weight-bold text-right">답변상태</div>
-				<c:if test="${board.ansYn == false}">
-					<div class="col-sm-2">미답변</div>
-				</c:if>
-				<c:if test="${board.ansYn == true}">
-					<div class="col-sm-2">답변완료</div>
-				</c:if>
-
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-2 font-weight-bold">제목</div>
-				<div class="col-sm-4">${board.bbsTtl}</div>
 				<div class="col-sm-2 font-weight-bold text-right">작성자</div>
 				<div class="col-sm-2">${board.wrtrNm}</div>
 			</div>
 			<div class="form-group row">
-				<div class="col-sm-2 font-weight-bold">SR번호</div>
-				<div class="col-sm-4">${board.srNo}</div>
+				<div class="col-sm-2 font-weight-bold">제목</div>
+				<div class="col-sm-5">${board.bbsTtl}</div>
+				<div class="col-sm-1 pl-2 font-weight-bold">SR번호</div>
+				<div class="col-sm-2">${board.srNo}</div>
 			</div>
 			<div class="form-group row">
 				<p class="col-sm-2 font-weight-bold" style="line-height: 150px;">내용</p>
@@ -108,26 +114,24 @@
 			</div>
 			<hr />
 		</form>
-		<h6 class="col-sm-2 font-weight-bold">댓글
+
+		<h6 class="font-weight-bold ml-2">댓글
 			${board.comments.commpager.totalRows}</h6>
-		<hr style="margin-bottom: 0px;" />
 		<div class="card-block p-0">
 			<!-- 댓글 작성 -->
 			<!-- 여기에 댓글 id  -->
 			<form action="/comment/write" method="POST"
-				class="col-sm-12 text-left d-flex p-0 justify-content-start"
-				style="margin: auto;">
-				<input type="hidden" value="1"> <input type="hidden"
-					name="bbsNo" value="${board.bbsNo}"> <input type="hidden"
-					name="wrtrId"
-					value="<sec:authentication property="principal.username"/>">
-				<input type="text" name="cmntCn" class="form-control"
-					style="width: 100%;" placeholder="댓글을 작성해주세요">
-				<button style="padding-top: 9px">저장</button>
-
+				class="md-float-material  form-material">
+				<div class="form-group form-primary mt-3">
+					<input type="hidden" value="1"> <input type="hidden"
+						name="bbsNo" value="${board.bbsNo}"> <input type="hidden"
+						name="wrtrId"
+						value="<sec:authentication property="principal.username"/>">
+					<input type="text" name="cmntCn" class="form-control" required="">
+					<span class="form-bar"></span> <label class="float-label">댓글을
+						작성해주세요.</label>
+				</div>
 			</form>
-			<div class="col-2"></div>
-			<div class="col-1 "></div>
 			<!-- 댓글 조회  -->
 			<table class="table table-hover text-center" style="font-size: 12;">
 				<thead>
@@ -158,8 +162,8 @@
 					</c:forEach>
 				</tbody>
 			</table>
-				<c:forEach items="${board.comments.commentList}" var="comm"
-						varStatus="i">
+			<c:forEach items="${board.comments.commentList}" var="comm"
+				varStatus="i">
 				<c:if
 					test="${i.last and (board.comments.commpager.pageNo lt board.comments.commpager.endPageNo)}">
 					<div class="text-center commentList">
@@ -168,7 +172,7 @@
 							class="font-weight-bold">더 보기</a>
 					</div>
 				</c:if>
-				</c:forEach>
+			</c:forEach>
 		</div>
 	</div>
 </div>

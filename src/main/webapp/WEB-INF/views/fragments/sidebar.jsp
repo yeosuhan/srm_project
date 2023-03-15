@@ -18,7 +18,7 @@
 
 .gradation_animate {
 	position: absolute;
-	top: -2px;
+	top: -5px;
 	left: 0px;
 	width: 100px;
 	height: 100px;
@@ -59,9 +59,8 @@
 						<div class="profile_wrapper row mr-0 pr-0">
 							<div class="gradation_animate"></div>
 							<div class="image_wrapper">
-								<img class="img-80 img-radius"
-									src="${pageContext.request.contextPath}/member/profile/<sec:authentication property='principal.username'/>"
-									alt="/resources/oti_images/user.png" style="width: 90px;">
+								<img class="img-80 img-radius" style="width: 90px"
+									src="${pageContext.request.contextPath}/member/profile/<sec:authentication property='principal.username'/>">
 							</div>
 						</div>
 						<div class="user-details col-12 row"
@@ -148,14 +147,14 @@
 					<ul class="pcoded-item pcoded-left-item" item-border="true"
 						item-border-style="none" subitem-border="true">
 						<li class=""><a
-							href="${pageContext.request.contextPath}/board/list/notice"
+							href="${pageContext.request.contextPath}/board/list?type=notice"
 							class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 									class="fas fa-bullhorn pt-1"></i><b>FC</b></span> <span
 								class="pcoded-mtext" data-i18n="nav.form-components.main">공지사항</span>
 								<span class="pcoded-mcaret"></span>
 						</a></li>
 						<li class=""><a
-							href="${pageContext.request.contextPath}/board/list/qna"
+							href="${pageContext.request.contextPath}/board/list?type=qna"
 							class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 									class="far fa-comments pt-1"></i><b>FC</b></span> <span
 								class="pcoded-mtext" data-i18n="nav.form-components.main">문의사항</span>

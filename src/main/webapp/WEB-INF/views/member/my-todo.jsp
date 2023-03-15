@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
@@ -13,8 +15,77 @@
 <script src="${pageContext.request.contextPath}/resources/js/mytodo.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/mytodoHstry.js"></script>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<script src="${pageContext.request.contextPath}/resources/js/graph.js"></script>
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_DEVELOPER')">
+	<script src="${pageContext.request.contextPath}/resources/js/devCal.js"></script>
+</sec:authorize>
+
 <script
-	src="${pageContext.request.contextPath}/resources/js/sessionCookie.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		console.log("djlljldfdfd");
+		var ctx = $('#myChart');
+		$.ajax({
+			url : "/client/chart",
+			type : "GET",
+			success : function(res) {
+				console.log(res[0]);
+				var myChart = new Chart(ctx,
+					{
+						type : 'pie',
+						data : {
+							labels : [ '요청', '반려', '접수', '개발중', '테스트',
+									'개발완료', '개발취소' ],
+							datasets : [ {
+								label : '# of Votes',
+								data : [ res[0], res[1],res[2], res[3], res[4], res[5], res[6] ],
+								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+										'rgba(54, 162, 235, 0.2)',
+										'rgba(255, 206, 86, 0.2)',
+										'rgba(75, 192, 192, 0.2)',
+										'rgba(153, 102, 255, 0.2)',
+										'rgba(255, 159, 64, 0.2)' ],
+								borderColor : [ 'rgba(255, 99, 132, 1)',
+										'rgba(54, 162, 235, 1)',
+										'rgba(255, 206, 86, 1)',
+										'rgba(75, 192, 192, 1)',
+										'rgba(153, 102, 255, 1)',
+										'rgba(255, 159, 64, 1)' ],
+								borderWidth : 1
+							} ]
+						},
+						options : {
+							scales : {
+								yAxes : [ {
+									ticks : {
+										beginAtZero : true
+									}
+								} ]
+							}
+						}
+					});
+				}			
+		});
+	});		
+</script>
+
+
+
+<script
+	src="${pageContext.request.contextPath}/resources/calendar/packages/daygrid/main.js'/>"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/calendar/js/main.js'/>"></script>
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+
 <!-- 모달 -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/srModal.css">
@@ -24,11 +95,11 @@
 }
 
 .badge {
-	padding: 4px 8px;
+	padding: 5px 8px;
 }
 
 .card .card-header {
-	background: linear-gradient(135deg, #F05F57 10%, #92344B 100%);
+	background: linear-gradient(135deg, #93344b 10%, #6b2146 100%);
 }
 
 .card .card-body table td ,.card-block table td, table td{
@@ -37,6 +108,10 @@ font-size:13px;
 
 .card .card-body table th,.card-block table th, table th{
 	font-size:14px;
+}
+.nav-item {
+margin-top: 3px;
+margin-bottom: 3px;
 }
 </style>
 </head>
@@ -52,26 +127,28 @@ font-size:13px;
 				<div class="card" id="mytodo">
 					<div class="col-12">
 						<!-- Nav tabs -->
-						<ul class="nav card-header-pills nav-tabs md-tabs" role="tablist">
+						<ul class="nav card-header-pills nav-tabs md-tabs" style="padding:6px;" role="tablist">
 							<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 								<li class="nav-item btn"><div
 										class="nav-link sttsCd0 active" onclick="moveTab(0)">
-										요청<span class="badge badge-danger">${atotal}</span>
+										요청<span class="badge badge-otidanger">${atotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div class="nav-link sttsCd1"
 										onclick="moveTab(1)">
-										반려 <span class="badge badge-danger">${rejTotal}</span>
+										반려 <span class="badge badge-otitodo">${rejTotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div class="nav-link sttsCd2"
 										onclick="moveTab(2)">
-										접수 <span class="badge badge-danger">${rtotal}</span>
+										접수 <span class="badge badge-otitodo">${rtotal}</span>
 									</div>
 									<div class="slide"></div></li>
-								<li class="nav-item btn">
+							</sec:authorize>
+							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
+								<li class="nav-item btn active">
 									<div class="nav-link sttsCd3" onclick="moveTab(3)">
-										개발중 <span class="badge badge-danger">${dtotal}</span>
+										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
 									</div>
 									<div class="slide"></div>
 								</li>
@@ -79,22 +156,22 @@ font-size:13px;
 							<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
 								<li class="nav-item btn"><div class="nav-link sttsCd0"
 										onclick="moveTab(0)">
-										요청<span class="badge badge-danger">${atotal}</span>
+										요청<span class="badge badge-otitodo">${atotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div class="nav-link sttsCd1"
 										onclick="moveTab(1)">
-										반려 <span class="badge badge-danger">${rejTotal}</span>
+										반려 <span class="badge badge-otitodo">${rejTotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn"><div
 										class="nav-link sttsCd2 active" onclick="moveTab(2)">
-										접수 <span class="badge badge-danger">${rtotal}</span>
+										접수 <span class="badge badge-otidanger">${rtotal}</span>
 									</div>
 									<div class="slide"></div></li>
 								<li class="nav-item btn">
 									<div class="nav-link sttsCd3" onclick="moveTab(3)">
-										개발중 <span class="badge badge-danger">${dtotal}</span>
+										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
 									</div>
 									<div class="slide"></div>
 								</li>
@@ -102,30 +179,29 @@ font-size:13px;
 							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
 								<li class="nav-item btn">
 									<div class="nav-link sttsCd3 active" onclick="moveTab(3)">
-										개발중 <span class="badge badge-danger">${dtotal}</span>
-									</div>
+										개발 중 <span class="badge badge-otidanger">${dtotal}</span>
+									</div> 
 									<div class="slide"></div>
 								</li>
 							</sec:authorize>
-
 							<li class="nav-item btn"><div class="nav-link sttsCd4"
 									onclick="moveTab(4)">
-									테스트 <span class="badge badge-danger">${ttotal}</span>
+									테스트 <span class="badge badge-otitodo">${ttotal}</span>
 								</div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link sttsCd5"
 									onclick="moveTab(5)">
-									개발완료 <span class="badge badge-danger">${comtotal}</span>
+									개발완료 <span class="badge badge-otitodo">${comtotal}</span>
 								</div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link sttsCd6"
 									onclick="moveTab(6)">
-									개발 취소 <span class="badge badge-danger">${cantotal}</span>
+									개발취소 <span class="badge badge-otitodo">${cantotal}</span>
 								</div>
 								<div class="slide"></div></li>
 							<li class="nav-item btn"><div class="nav-link hstry"
 									onclick="moveHstryTab()">
-									히스토리<span class="badge badge-danger">${histotal}</span>
+									히스토리<span class="badge badge-otitodo">${histotal}</span>
 								</div>
 								<div class="slide"></div></li>
 						</ul>
@@ -148,13 +224,35 @@ font-size:13px;
 				<jsp:include page="/WEB-INF/views/mytodo/notice.jsp" />
 			</div>
 			<!-- 시각자료 넣을 곳 -->
-			<div class="col-lg-4" id="qnaList">
+			<div class="col-lg-4 pl-0" id="qnaList">
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
-			<!-- qna 게시판 -->
-			<div class="col-lg-4" id="qnaList pr-0">
-				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
-			</div>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<div class="col-lg-4 px-0">
+					<jsp:include page="/WEB-INF/views/mytodo/progressGraph.jsp" />
+				</div>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROLE_DEVELOPER')">
+				<div class="card col-lg-4 px-0">
+					<div class="card-header">
+						<h5 class="card-header-text">나의 일정</h5>
+					</div>
+					<div class="card-body">
+						<div id="calendar" style="background-color: white"></div>
+					</div>
+				</div>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROLE_CLIENT')">
+				<div class="card col-lg-4 px-0">
+					<div class="card-header">
+						<h5 class="card-header-text">나의 요청 현황</h5>
+					</div>
+					<div class="card-body">
+						<canvas id="myChart" width="100%" height="100%"></canvas>
+					</div>
+				</div>
+			</sec:authorize>
+
 		</div>
 	</div>
 	<!-- Page-body end -->

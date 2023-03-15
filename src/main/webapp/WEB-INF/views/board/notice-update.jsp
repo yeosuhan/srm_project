@@ -4,7 +4,7 @@
 <!------------------- 수정 누르면 바뀌는 화면 -------------------->
 <div class="card">
 	<div class="card-header">
-		<h5>공지글 수정</h5>
+		<h5>공지사항 글 수정</h5>
 	</div>
 	<div class="card-block">
 		<form enctype="multipart/form-data" method="POST"

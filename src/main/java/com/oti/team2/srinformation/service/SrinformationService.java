@@ -60,8 +60,8 @@ public class SrinformationService implements ISrinformationService {
 	 * @return sr진척 목록 조회
 	 */
 	@Override
-	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort) {
-		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter, sort);
+	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort,String role) {
+		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter, sort,role);
 		return srlist;
 	}
 
@@ -121,7 +121,7 @@ public class SrinformationService implements ISrinformationService {
 			number = "0" + number;
 		}
 
-		srNO += number;
+		srNO = srNO + "-" + number;
 		log.info(srNO);
 		return srNO;
 	}
@@ -166,8 +166,8 @@ public class SrinformationService implements ISrinformationService {
 	 * @return 결과 행수
 	 */
 	@Override
-	public int getTotalRow(int page, SrInfoFilter srInfoFilter) {
-		return srinformationDao.selectTotalRow(page, srInfoFilter);
+	public int getTotalRow(int page, SrInfoFilter srInfoFilter,String role) {
+		return srinformationDao.selectTotalRow(page, srInfoFilter,role);
 	}
 
 	/**
@@ -368,4 +368,17 @@ public class SrinformationService implements ISrinformationService {
 		  response.setHeader("Content-Disposition", String.format("attachment; filename=\"SrInformationList.xlsx\""));
 		  wb.write(response.getOutputStream());
 		}
+
+	/*
+	 * 해당 관리자가 담당하는 가장 최근의 요청에대한 진척번호 조회
+	 * @author 신정은
+	 */
+	public String getMaxSrNo(String picId) {
+		return srinformationDao.selectMaxSrNoByPicId(picId);
+	}
+
+	@Override
+	public void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {		
+	}
 }

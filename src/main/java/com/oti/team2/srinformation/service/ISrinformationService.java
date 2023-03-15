@@ -20,9 +20,10 @@ public interface ISrinformationService {
 	 * @author 여수한 작성일자 : 2023-02-22
 	 * @param srInfoFilter
 	 * @param pager
+	 * @param role 
 	 * @return sr진척 목록 조회
 	 */
-	List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort);
+	List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort, String role);
 
 	/**
 	 * @author 여수한 작성일자 : 2023-03-02
@@ -67,7 +68,7 @@ public interface ISrinformationService {
 	 * 
 	 * @return 결과 행수
 	 */
-	int getTotalRow(int page, SrInfoFilter srInfoFilter);
+	int getTotalRow(int page, SrInfoFilter srInfoFilter, String role);
 
 	/**
 	 * 
@@ -102,5 +103,14 @@ public interface ISrinformationService {
 	 * @return sr진척 목록 엑셀 다운로드
 	 * @throws Exception 
 	 */
+	void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	/*
+	 * 해당 관리자가 담당하는 가장 최근의 요청에대한 진척번호 조회
+	 * @author 신정은
+	 */
+	String getMaxSrNo(String picId);
+
+	
 	void SrListdownload(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

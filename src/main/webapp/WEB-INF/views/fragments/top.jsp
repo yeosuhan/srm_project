@@ -13,40 +13,21 @@
 				var stime = localStorage.getItem('logintime');
 				var myLoginTime = parseInt(stime, 10);
 
-				var timer = setInterval(
-						function() {
-							// 세션 만료 5분 전일 경우
-							if (parseInt(localStorage.getItem('logintime'), 10) > 0) {
-								$("#loginTime").text(
-										timeFormate(parseInt(localStorage
-												.getItem('logintime'), 10)));
-								localStorage
-										.setItem('logintime', ""
-												+ (parseInt(localStorage
-														.getItem('logintime'),
-														10) - 1));
-							} else {
-								//로그아웃 요청
-								$
-										.ajax({
-											url : "/logout",
-											type : "POST",
-											success : function(res) {
-												localStorage
-														.removeItem('logintime');
-												localStorage
-														.setItem('logintime',
-																"${pageContext.session.maxInactiveInterval}");
-												//location.href="/loginForm";
-												showOtiAlert();
-												localStorage
-														.removeItem('logintime');
-												clearInterval(timer);
-											}
-										});
-
-							}
-						}, 1000);
+				var timer = setInterval(function() {
+					// 세션 만료 5분 전일 경우
+					if (parseInt(localStorage.getItem('logintime'), 10) > 0) {
+						$("#loginTime").text(
+								timeFormate(parseInt(localStorage
+										.getItem('logintime'), 10)));
+						localStorage.setItem('logintime', ""
+								+ (parseInt(localStorage.getItem('logintime'),
+										10) - 1));						 
+					} else {
+						//로그아웃 요청
+						showOtiAlert();
+						logOut();
+					}
+				}, 1000);
 
 			} else {
 				localStorage.removeItem('logintime');
@@ -92,6 +73,38 @@
 		$("#loginTime").html("<p>없음2</p>");
 	</script>
 </sec:authorize>
+<script>
+	//로그아웃
+	function logOut() {
+		console.log("로그아웃 실행");
+		$.ajax({
+			url : "${pageContext.request.contextPath}/logout",
+			type : "POST",
+			success : function(res) {
+				localStorage.removeItem('logintime');
+				localStorage.setItem('logintime',
+						"${pageContext.session.maxInactiveInterval}");
+				localStorage.removeItem('logintime');
+				location.reload();
+			}
+		});
+	}
+</script>
+
+<style>
+#otiTabs .nav-item a {
+	color: #4C1342;
+	padding: 15px !important;
+}
+
+#otiTabs .nav-link {
+	color: #4C1342;
+	background-color: white !important;
+}
+#mes{
+background: linear-gradient( 135deg, #F05F57 10%, #92344B 100%); 
+}
+</style>
 
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
 <jsp:include page="/WEB-INF/views/fragments/otiAlert.jsp" />
@@ -141,15 +154,15 @@
 							<div id="sessionExpiry"></div>
 						</li>
 					</ul>
-					<ul class="nav-left ml-5">
+					<ul class="nav-left" style="margin-left: 350px;">
 						<li
 							style="color: white; margin: auto; justify-content: center; font-weight: bolder; font-size: 18px;">
-							세션 만료시간 <span id="loginTime"></span>
+							세션 만료시간 <span id="loginTime" style="margin-left:3px;"></span>
 						</li>
 					</ul>
 					<ul class="nav-left">
 						<li><button class="btn btn-sm btn-oti"
-								style="background-color: #4C1342; margin-top: 10px;"
+								style="background-color: #92344B; margin-top: 10px; padding: 5px; border-color: white; border-width: 2;"
 								onclick="resetLoginTime()">로그인 시간 연장</button></li>
 					</ul>
 					<ul class="nav-right">
@@ -163,55 +176,55 @@
 						</a>
 
 							<div class="show-notification" onclick='event.stopPropagation()'
-								style="display: none;">
+								style="display: none; width:500px;">
 								<ul>
-									<li>
-										<h6>Notifications</h6>
+									<li style="color:white;" id="mes">
+										<h6>알림 메시지</h6>
 									</li>
 								</ul>
 								<!-- Nav tabs -->
-								<ul class="nav nav-tabs md-tabs " role="tablist"
+								<ul class="nav nav-tabs md-tabs" id="otiTabs" role="tablist"
 									style="width: 100%; margin: 0px">
 									<sec:authorize access="hasRole('ROLE_CLIENT')">
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link active" style="font-size: 10px;"
-											data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
+											data-toggle="tab" href="#rfltTab" role="tab">반영요청</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#chgDmndTab" role="tab">예정일 변경</a>
+											href="#chgDmndTab" role="tab">완료예정일 변경</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#cancleTab" role="tab">개발 취소</a>
+											href="#cancleTab" role="tab">개발취소</a>
 											<div class="slide"></div></li>
 									</sec:authorize>
 									<sec:authorize access="hasRole('ROLE_DEVELOPER')">
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link active" style="font-size: 10px;"
-											data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
+											data-toggle="tab" href="#rfltTab" role="tab">반영요청</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#developerTab" role="tab">예정일 변경</a>
+											href="#developerTab" role="tab">완료예정일 변경</a>
 											<div class="slide"></div></li>
 									</sec:authorize>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link active" style="font-size: 10px;"
-											data-toggle="tab" href="#rfltTab" role="tab">반영 요청</a>
+											data-toggle="tab" href="#rfltTab" role="tab">반영요청</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#chgDmndTab" role="tab">예정일 변경</a>
+											href="#chgDmndTab" role="tab">완료예정일 변경</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#developerTab" role="tab">예정일 변경(개발자)</a>
+											href="#developerTab" role="tab">완료예정일 변경(from Dev)</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#cancleTab" role="tab">개발 취소</a>
+											href="#cancleTab" role="tab">개발취소</a>
 											<div class="slide"></div></li>
 									</sec:authorize>
 								</ul>
@@ -246,16 +259,12 @@
 						<li class="user-profile header-notification"><sec:authorize
 								access="isAuthenticated()">
 								<li class="waves-effect waves-light">
-									<form method="POST" action="<c:url value='/logout'/>">
-										<button class="btn btn-sm btn-oti"
-											style="margin-top: 15px; margin-left: 5px; border-color: white; border-width: 2; background-color: #4C1342;"
-											type="submit">LOGOUT</button>
-									</form>
+									<button class="btn btn-sm btn-oti" onclick="logOut()"
+										style="margin-top: 14px; margin-left: 5px; padding:6px; border-color: white; border-width: 2; background-color: #4C1342;"
+										type="button">로그아웃</button>
 								</li>
 							</sec:authorize></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
-
-		<!-- ./top -->
