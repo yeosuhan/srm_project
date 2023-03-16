@@ -20,7 +20,7 @@
 				<thead>
 					<tr>
 						<th class="col-1" style="text-align: center;"></th>
-						<th class="col-7 text-center">제목</th>
+						<th class="col-7 text-left">제목</th>
 						<th class="col-1">작성자</th>
 						<th class="col-3">작성날짜</th>
 						<th class="col-3">답변상태</th>
@@ -31,12 +31,12 @@
 					<tr onclick="qnaDetail(${board.bbsNo})">
 						<th style="text-align: center;">${qPager.startRowNo + status.index}</th>
 						<c:choose>
-							<c:when test="${fn:length(board.bbsTtl) > 20}">
-								<td id="ttl" class="text-center"><c:out
-										value="${fn:substring(board.bbsTtl,0,19)}" />...</td>
+							<c:when test="${fn:length(board.bbsTtl) > 15}">
+								<td id="ttl" class="text-left"><c:out
+										value="${fn:substring(board.bbsTtl,0,14)}" />...</td>
 							</c:when>
 							<c:otherwise>
-								<td id="ttl" class="text-center"><c:out
+								<td id="ttl" class="text-left"><c:out
 										value="${board.bbsTtl}" /></td>
 							</c:otherwise>
 						</c:choose>

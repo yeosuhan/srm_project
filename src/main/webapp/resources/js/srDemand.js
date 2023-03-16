@@ -87,6 +87,7 @@ function addSr() {
 			});			
 		}
 		$("#addmodal").removeClass("show");
+		location.reload();
 	
 }
 
@@ -204,6 +205,7 @@ function goAccept(dmndNo) {
 		dataType : "json",
 		success : function(res) {
 			alert(res.result);
+			location.reload();
 		},
 		error : function(error) {
 			console.log(error);
@@ -214,11 +216,12 @@ function goAccept(dmndNo) {
 /* sr요청 반려 */
 function goDecline(dmndNo) {
 	// 반려사유 작성하지 않을 경우 g화면 다시 이동시키기
-	var rjctRsn = $('#srRjctRsn').val();
+	var rjctRsn = $('#srRjctRsnn').val();
 	console.log("~~~~~~~~~~~~~~~~~~!");
+	console.log($('#srRjctRsnn').val());
 	if (!rjctRsn) {
 		alert('반려사유를 입력하여주세요.');
-		$('#srRjctRsn').focus();
+		$('#srRjctRsnn').focus();
 	} else {
 		var jsonData = {
 			"dmndNo" : dmndNo,
@@ -233,6 +236,7 @@ function goDecline(dmndNo) {
 			contentType : "application/json; charset=UTF-8",
 			success : function(res) {
 				alert(res.result);
+				location.reload();
 			},
 			error : function(error) {
 				console.log(error);

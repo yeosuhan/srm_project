@@ -59,17 +59,17 @@ public class BoardController {
 		//if(type == null) type = boardFilterDto.getType();
 		boardFilterDto.setBtype(type);
 		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
-			pager = new Pager(boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			pager = new Pager(10,boardService.getTotalRow(type, memberId, boardFilterDto), page);
 			list = boardService.getBoardList(type, memberId, pager, boardFilterDto);
 			model.addAttribute("qPager", pager);
 			model.addAttribute("qnaList", list);
 		}
 		else {
-			pager = new Pager(boardService.getTotalRow(type, null, boardFilterDto), page);
+			pager = new Pager(10,boardService.getTotalRow(type, null, boardFilterDto), page);
 			list = boardService.getBoardList(type, null, pager, boardFilterDto);
 			if(type.equals("qna")) {
 				if(role.equals(Auth.ROLE_DEVELOPER.toString())) {
-					pager = new Pager(boardService.getcountByEmpId(memberId, boardFilterDto), 1);
+					pager = new Pager(10,boardService.getcountByEmpId(memberId, boardFilterDto), 1);
 					list = boardService.getBoardListByEmpId(memberId, pager, boardFilterDto);
 				}
 				model.addAttribute("qPager", pager);

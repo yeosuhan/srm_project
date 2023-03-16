@@ -75,8 +75,8 @@
 				</div>
 			</div>
 		</div>
+		<hr/>
 	</c:if>
-	<hr/>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">진행 상태</div>
@@ -101,7 +101,7 @@
 				</div>
 			</div>
 		</c:if>
-		<c:if test="${sd.sttsCd == 0}">
+		<c:if test="${sd.sttsCd eq 0}">
 			<div class="col-sm-6 px-0">
 				<div class="col col-sm-4 font-weight-bold">우선순위</div>
 				<div class="col col-sm-6">
@@ -121,9 +121,20 @@
 		</c:if>
 	</div>
 	<hr/>
-	<c:if test="${sd.sttsCd == 1}">
+	<c:if test="${sd.sttsCd eq 0}">
 		<div class="form-group row">
-			<label id="companion"
+			<label 
+				class="col-sm-2 col-form-label px-0 font-weight-bold"
+				style="line-height: 100px; font-size: 12px;">반려사유</label>
+			<div class="col-sm-9">
+				<textarea id="srRjctRsnn" class="form-control cn" style="height: 100px; width: 100%;"></textarea>
+			</div>
+		</div>
+	<hr/>
+	</c:if>
+	<c:if test="${sd.sttsCd eq 1}">
+		<div class="form-group row">
+			<label
 				class="col-sm-2 col-form-label px-0 font-weight-bold"
 				style="line-height: 100px; font-size: 12px;">반려사유</label>
 			<div class="col-sm-9">
@@ -155,7 +166,7 @@
 		</div>
 	</div>
 	<div class="row" id="adminButtonDiv">
-		<c:if test="${sd.sttsCd == 0}">
+		<c:if test="${sd.sttsCd eq 0}">
 			<div class="col" style="text-align: right">
 				<div id="srAccept" style="float: right;"
 					class="btn btn-sm btn-oti center" onclick="goAccept('${sd.dmndNo}')">승인</div>

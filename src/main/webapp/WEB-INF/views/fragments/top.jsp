@@ -9,25 +9,35 @@
 	<script>
 		$(function() {
 			//세션스토리지에 값 검사 후 뷰에 제공
+			console.log("타이머 시작");
 			if (localStorage.getItem('logintime')) {
 				var stime = localStorage.getItem('logintime');
 				var myLoginTime = parseInt(stime, 10);
 
-				var timer = setInterval(function() {
-					// 세션 만료 5분 전일 경우
-					if (parseInt(localStorage.getItem('logintime'), 10) > 0) {
-						$("#loginTime").text(
-								timeFormate(parseInt(localStorage
-										.getItem('logintime'), 10)));
-						localStorage.setItem('logintime', ""
-								+ (parseInt(localStorage.getItem('logintime'),
-										10) - 1));						 
-					} else {
-						//로그아웃 요청
-						showOtiAlert();
-						logOut();
-					}
-				}, 1000);
+				var timer = setInterval(
+						function() {
+							if (parseInt(localStorage.getItem('logintime'), 10) > 5 * 60) {
+								$("#loginTime").text(
+										timeFormate(parseInt(localStorage
+												.getItem('logintime'), 10)));
+								localStorage
+										.setItem('logintime', ""
+												+ (parseInt(localStorage
+														.getItem('logintime'),
+														10) - 1));
+							}
+							// // 세션 만료 5분 전일 경우
+							else if (parseInt(
+									localStorage.getItem('logintime'), 10) <= 5 * 60) {
+								console.log("5분 전");
+								/* $('logintime').css('', 'black'); */
+							} else if (parseInt(localStorage
+									.getItem('logintime'), 10) = 0) {
+								showOtiAlert();
+								logOut();
+							}
+
+						}, 1000);
 
 			} else {
 				localStorage.removeItem('logintime');
@@ -101,8 +111,9 @@
 	color: #4C1342;
 	background-color: white !important;
 }
-#mes{
-background: linear-gradient( 135deg, #F05F57 10%, #92344B 100%); 
+
+#mes {
+	background: linear-gradient(135deg, #F05F57 10%, #92344B 100%);
 }
 </style>
 
@@ -157,7 +168,7 @@ background: linear-gradient( 135deg, #F05F57 10%, #92344B 100%);
 					<ul class="nav-left" style="margin-left: 350px;">
 						<li
 							style="color: white; margin: auto; justify-content: center; font-weight: bolder; font-size: 18px;">
-							세션 만료시간 <span id="loginTime" style="margin-left:3px;"></span>
+							세션 만료시간 <span id="loginTime" style="margin-left: 3px;"></span>
 						</li>
 					</ul>
 					<ul class="nav-left">
@@ -176,9 +187,9 @@ background: linear-gradient( 135deg, #F05F57 10%, #92344B 100%);
 						</a>
 
 							<div class="show-notification" onclick='event.stopPropagation()'
-								style="display: none; width:500px;">
+								style="display: none; width: 500px;">
 								<ul>
-									<li style="color:white;" id="mes">
+									<li style="color: white;" id="mes">
 										<h6>알림 메시지</h6>
 									</li>
 								</ul>
@@ -260,7 +271,7 @@ background: linear-gradient( 135deg, #F05F57 10%, #92344B 100%);
 								access="isAuthenticated()">
 								<li class="waves-effect waves-light">
 									<button class="btn btn-sm btn-oti" onclick="logOut()"
-										style="margin-top: 14px; margin-left: 5px; padding:6px; border-color: white; border-width: 2; background-color: #4C1342;"
+										style="margin-top: 14px; margin-left: 5px; padding: 6px; border-color: white; border-width: 2; background-color: #4C1342;"
 										type="button">로그아웃</button>
 								</li>
 							</sec:authorize></li>

@@ -574,10 +574,17 @@ li:before {
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-sm-2 px-0 col-form-label font-weight-bold"
-											style="font-size: 12px;">첨부파일</label>
-										<div class="col-sm-9 px-0">
-											<input type="file" class="" id="SRDFile">
+										<p class="col-sm-2 font-weight-bold px-0">첨부파일</p>
+										<div class="col-sm-10">
+											<c:forEach var="f" items="${sd.attachFile}">
+												<div>
+													<a href="<c:url value='/file/download/${f.fileSn}' />">
+														<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+														<span> ${f.orgnlFileNm} </span><span style="">
+															${f.fileSz} Bytes</span>
+													</a>
+												</div>
+											</c:forEach>
 										</div>
 									</div>
 								</div>

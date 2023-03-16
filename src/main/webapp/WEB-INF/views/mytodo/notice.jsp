@@ -26,12 +26,12 @@
 				<tr onclick="noticeDetail(${board.bbsNo})">
 					<th style="text-align: center;">${nPager.startRowNo + status.index}</th>
 					<c:choose>
-						<c:when test="${fn:length(board.bbsTtl) > 20}">
-							<td id="ttl" class="text-center"><c:out
-									value="${fn:substring(board.bbsTtl,0,19)}" />...</td>
+						<c:when test="${fn:length(board.bbsTtl) > 15}">
+							<td id="ttl" class="text-left"><c:out
+									value="${fn:substring(board.bbsTtl,0,14)}" />...</td>
 						</c:when>
 						<c:otherwise>
-							<td id="ttl" class="text-center"><c:out
+							<td id="ttl" class="text-left"><c:out
 									value="${board.bbsTtl}" /></td>
 						</c:otherwise>
 					</c:choose>
