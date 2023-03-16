@@ -36,6 +36,7 @@ $(document).ready(function(){
 /* SR요청 상세보기 */
 function getDetail(dmndNo, srNo) {
 	console.log("상세보기 : " + dmndNo + srNo);
+
 	$.ajax({
 		url : '/srinformation/detail/' + dmndNo,
 		type : 'GET',
@@ -67,10 +68,8 @@ function getDetail(dmndNo, srNo) {
 					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'srNo'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
 				} else if((detail.isDnumExists)<=0 || (detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 					$(".col-3").empty();
-				} else {
-					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'srNo'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
-				}
-			} else if (role=='ROLE_ADMIN'){
+				} 
+			} else if(role=='ROLE_ADMIN'){
 				if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 					$(".col-3").hide();
 				} else {

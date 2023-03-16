@@ -1,6 +1,9 @@
 /*작성자: 최은종*/
 function getInfoHstryDetail(historyId) {
 	console.log("historyId: " + historyId);
+	$('#HstrySttsDiv2').empty();
+	$('#footDiv').empty();
+	$('.mheadDiv').empty();
 
 	$
 			.ajax({
@@ -16,7 +19,7 @@ function getInfoHstryDetail(historyId) {
 					var auth = result.auth;
 					var autuId = result.authId;
 					console.log(auth);
-					console.log("autuId: "+autuId);
+					console.log("autuId: " + autuId);
 					console.log(AhstryType);
 					console.log(AhstryStts);
 					console.log(ArqstrId);
@@ -28,7 +31,7 @@ function getInfoHstryDetail(historyId) {
 					$('.AdeptNm').val(result.deptNm);
 					$('.AwrtYmd').val(result.wrtYmd);
 					$('.AcmptnDmndYmd').val(result.cmptnDmndYmd);
-					// 이거 + empty 왜 안먹히는지 모르겠음
+
 					if (AhstryType != 'C') {
 						$('.AchgEndYmd').val(result.chgEndYmd);
 					} else {
@@ -124,9 +127,9 @@ function getInfoHstryDetail(historyId) {
 											'<input id="CHstryStts" type="text" value="반려" readonly>');
 							$('#footDiv').text("결재 권한이 없습니다.");
 						}
-					} else if (auth == 'ROLE_DEVELOPER') {
+					} else if (auth == 'ROLE_DEVELOPER' && AhstryType == 'A') {
 						console.log("8");
-						if (AhstryStts == 'I') {
+						if (ArqstrId == autuId && AhstryStts == 'I') {
 							console.log("8");
 							$('.AhstryId').val(AhstryId);
 							$('.mheadDiv')
@@ -138,22 +141,50 @@ function getInfoHstryDetail(historyId) {
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
 													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
 							$('#footDiv').text("결재 권한이 없습니다.");
-						} else if (AhstryStts == 'Y') {
+
+						} else if (ArqstrId != autuId && AhstryStts == 'I') {
 							console.log("9");
+							$('#HstrySttsDiv2')
+									.html(
+											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
+													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
+							$('#footDiv').text("결재 권한이 없습니다.");
+						} else if (AhstryStts == 'Y') {
+							console.log("10");
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="BHstryStts" type="text" value="승인" readonly>');
 							$('#footDiv').text("결재 처리 된 요청입니다.");
 						} else if (AhstryStts == 'N') {
-							console.log("10");
+							console.log("11");
+							$('#HstrySttsDiv2')
+									.html(
+											'<input id="CHstryStts" type="text" value="반려" readonly>');
+							$('#footDiv').text("결재 처리 된 요청입니다.");
+						}
+					} else if (auth == 'ROLE_DEVELOPER' && AhstryType != 'A') {
+						if (AhstryStts == 'I') {
+							console.log("12");
+							$('.AhstryId').val(AhstryId);
+							$('#HstrySttsDiv2')
+									.html(
+											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
+													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
+							$('#footDiv').text("결재 권한이 없습니다.");
+						} else if (AhstryStts == 'Y') {
+							console.log("13");
+							$('#HstrySttsDiv2')
+									.html(
+											'<input id="BHstryStts" type="text" value="승인" readonly>');
+							$('#footDiv').text("결재 처리 된 요청입니다.");
+						} else if (AhstryStts == 'N') {
+							console.log("14");
 							$('#HstrySttsDiv2')
 									.html(
 											'<input id="CHstryStts" type="text" value="반려" readonly>');
 							$('#footDiv').text("결재 처리 된 요청입니다.");
 						}
 					}
-
-
 				}
 			});
 }
