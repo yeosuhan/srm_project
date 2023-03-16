@@ -86,7 +86,7 @@
 						<thead>
 							<tr>
 								<th class="col-1" style="text-align: center;">순번</th>
-								<th class="col-7 text-center">제목</th>
+								<th class="col-7 text-left">제목</th>
 								<th class="col-1">작성자</th>
 								<th class="col-3" style="text-align: center;">작성날짜</th>
 								<th class="col-3">조회수</th>

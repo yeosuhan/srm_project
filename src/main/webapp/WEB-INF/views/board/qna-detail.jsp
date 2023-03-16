@@ -120,19 +120,21 @@
 		<div class="card-block p-0">
 			<!-- 댓글 작성 -->
 			<!-- 여기에 댓글 id  -->
-			<form action="/comment/write" method="POST"
-				class="md-float-material  form-material">
-				<div class="form-group form-primary mt-3">
-					<input type="hidden" value="1"> <input type="hidden"
-						name="bbsNo" value="${board.bbsNo}"> <input type="hidden"
-						name="wrtrId"
-						value="<sec:authentication property="principal.username"/>">
-					<input type="text" name="cmntCn" class="form-control" required="">
-					<span class="form-bar"></span> <label class="float-label">댓글을
-						작성해주세요.</label>
-				</div>
-			</form>
-			<!-- 댓글 조회  -->
+         <form action="/comment/write" method="POST"
+            class="col-sm-12 text-left d-flex p-0 justify-content-start"
+            style="margin: auto;">
+            <input type="hidden" value="1"> <input type="hidden"
+               name="bbsNo" value="${board.bbsNo}"> <input type="hidden"
+               name="wrtrId"
+               value="<sec:authentication property="principal.username"/>">
+            <input type="text" name="cmntCn" class="form-control"
+               style="width: 100%;" placeholder="댓글을 작성해주세요">
+            <button style="padding-top: 9px">저장</button>
+
+         </form>
+         <div class="col-2"></div>
+         <div class="col-1 "></div>
+         <!-- 댓글 조회  -->
 			<table class="table table-hover text-center" style="font-size: 12;">
 				<thead>
 					<tr>
