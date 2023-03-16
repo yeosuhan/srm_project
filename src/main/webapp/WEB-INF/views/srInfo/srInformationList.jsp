@@ -251,7 +251,7 @@ li:before {
 					<div class="card-header" id="headerFirst">
 						<h5 style="font-weight: bold;">SR 진척 관리</h5>
 					</div>
-					<div class="card-body">
+					<div class="card-body" style="height:70px;">
 						<form id="srInfoFilterForm"
 							action="${pageContext.request.contextPath}/srinformation/list"
 							onsubmit="return srSearch()">
@@ -344,7 +344,7 @@ li:before {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>SR번호 <c:if test="${sort eq 'DESC'}">
+												<th style="font-size:15px;">SR번호 <c:if test="${sort eq 'DESC'}">
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
@@ -356,13 +356,13 @@ li:before {
 															style="color: #782748; font-size: 24px;"></i></a>
 													</c:if>
 												</th>
-												<th>시스템구분</th>
-												<th>업무구분</th>
-												<th style="width: 200px;">SR명</th>
-												<th>요청자</th>
-												<th>완료요청일</th>
-												<th>완료예정일</th>
-												<th>진행상태</th>
+												<th style="font-size:15px;">시스템구분</th>
+												<th style="font-size:15px;">업무구분</th>
+												<th style="font-size:15px;width: 200px;">SR명</th>
+												<th style="font-size:15px;">요청자</th>
+												<th style="font-size:15px;">완료요청일</th>
+												<th style="font-size:15px;">완료예정일</th>
+												<th style="font-size:15px;">진행상태</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -625,7 +625,7 @@ li:before {
 									</div>
 									<div class="col-sm-6 p-0">
 										<div class="col col-sm-4">담당자</div>
-										<div class="col col-sm-6" id="SRPlFlnmBySelect">
+										<div class="col col-sm-8" id="SRPlFlnmBySelect">
 											<input type="hidden" id="SRPlMemberId"> <input
 												readonly class="form-control" id="SRPlFlnm"
 												value="${sp.flnm}">
@@ -635,14 +635,14 @@ li:before {
 								<div class="form-group row">
 									<div class="col-sm-6 p-0">
 										<div class="col col-sm-4">계획시작일</div>
-										<div class="col col-sm-6" id="bgngYmdDiv">
+										<div class="col col-sm-8" id="bgngYmdDiv">
 											<input type="date" class="form-control" id="SRPlBgngYmd"
 												value="${sp.bgngYmd}">
 										</div>
 									</div>
 									<div class="col-sm-6 p-0">
 										<div class="col col-sm-4">계획종료일</div>
-										<div class="col col-sm-6" id="endYmdDiv">
+										<div class="col col-sm-8" id="endYmdDiv">
 											<input type="date" class="form-control" id="SRPlEndYmd"
 												value="${sp.endYmd}">
 										</div>
@@ -651,7 +651,7 @@ li:before {
 								<div class="form-group row">
 									<div class="col col-sm-2  p-0" style="line-height: 90px;">검토
 										내용</div>
-									<div class="col col-sm-9" id="rvwCnDiv">
+									<div class="col col-sm-10" id="rvwCnDiv">
 										<textarea rows="5" cols="5" class="form-control"
 											id="SRPlRvwCn">${sp.rvwCn}</textarea>
 									</div>
@@ -708,7 +708,7 @@ li:before {
 														<th style="width: 12%;">작업구분</th>
 														<th>시작일</th>
 														<th>종료일</th>
-														<th style="width: 15%;">진척률(누적)</th>
+														<th style="width: 19%;">진척률(누적)</th>
 														<th style="width: 18%;">산출물</th>
 														<th style="width: 8%;"></th>
 													</tr>

@@ -152,7 +152,7 @@ th {
 							</div>
 						</div>
 					</div>
-					<div class="card-body">
+					<div class="card-body" style="height:70px;">
 						<form id="srSearchForm"
 							action="${pageContext.request.contextPath}/srdemand/list">
 							<div class="row">
@@ -253,8 +253,8 @@ th {
 										style="font-size: 12;">
 										<thead>
 											<tr>
-												<th style="width: 1px;"></th>
-												<th>요청 번호 <c:if test="${sort eq 'DESC'}">
+												<th style="width: 1px;font-size:15px;"></th>
+												<th style="font-size:15px;">요청 번호 <c:if test="${sort eq 'DESC'}">
 														<a
 															href="${pageContext.request.contextPath}/admin/srdemand/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
@@ -267,13 +267,13 @@ th {
 													</c:if>
 
 												</th>
-												<th>제목</th>
-												<th>관련시스템</th>
-												<th style="width: 200px;">등록자</th>
-												<th>소속</th>
-												<th>진행상태</th>
-												<th>등록일</th>
-												<th>완료예정일</th>
+												<th style="font-size:15px;">제목</th>
+												<th style="font-size:15px;">관련시스템</th>
+												<th style="width: 200px;font-size:15px;">등록자</th>
+												<th style="font-size:15px;">소속</th>
+												<th style="font-size:15px;">진행상태</th>
+												<th style="font-size:15px;">등록일</th>
+												<th style="font-size:15px;">완료예정일</th>
 											</tr>
 										</thead>
 										<tbody id="dmndTbody">
