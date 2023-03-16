@@ -6,12 +6,9 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
 
 <script>
-	</head>
-	<script>
+	
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -112,6 +109,7 @@ th {
 	padding: 5px 8px;
 }
 </style>
+</head>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
@@ -128,7 +126,7 @@ th {
 							</div>
 						</div>
 					</div>
-					<div class="card-body" style="height:70px;">
+					<div class="card-body" style="height: 70px;">
 						<form id="srSearchForm"
 							action="${pageContext.request.contextPath}/admin/srdemand/list">
 							<div class="row">
@@ -221,9 +219,10 @@ th {
 								<div class="table-responsive">
 									<table class="table table-hover text-center">
 										<thead>
-											<tr style="padding:0px;">
+											<tr style="padding: 0px;">
 												<th style="width: 1px;"></th>
-												<th style="font-size:15px;">요청 번호 <c:if test="${sort eq 'DESC'}">
+												<th style="font-size: 15px;">요청 번호 <c:if
+														test="${sort eq 'DESC'}">
 														<a
 															href="${pageContext.request.contextPath}/admin/srdemand/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
@@ -236,13 +235,13 @@ th {
 													</c:if>
 
 												</th>
-												<th style="font-size:15px;">제목</th>
-												<th style="font-size:15px;">관련시스템</th>
-												<th style="width: 200px; font-size:15px;">등록자</th>
-												<th style="font-size:15px;">소속</th>
-												<th style="font-size:15px;">진행상태</th>
-												<th style="font-size:15px;">등록일</th>
-												<th style="font-size:15px;">완료예정일</th>
+												<th style="font-size: 15px;">제목</th>
+												<th style="font-size: 15px;">관련시스템</th>
+												<th style="width: 200px; font-size: 15px;">등록자</th>
+												<th style="font-size: 15px;">소속</th>
+												<th style="font-size: 15px;">진행상태</th>
+												<th style="font-size: 15px;">등록일</th>
+												<th style="font-size: 15px;">완료예정일</th>
 											</tr>
 
 										</thead>

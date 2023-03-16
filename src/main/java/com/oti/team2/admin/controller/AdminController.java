@@ -60,13 +60,13 @@ public class AdminController {
 
 	@Autowired
 	private ISrDemandService srdemandService;
-	
+
 	@Autowired
 	private ISystemService systemService;
-	
+
 	@Autowired
 	private ITaskService taskService;
-	
+
 	/**
 	 * 부서목록 조회 메서드
 	 *
@@ -77,19 +77,20 @@ public class AdminController {
 	public String getDepartmentList(Model model, @RequestParam(value = "deptNm", required = false) String deptNm,
 			@RequestParam(value = "flnm", required = false) String flnm, Authentication auth) {
 		log.info("departmentList 조회");
-		//검색
-		DeptFilterDto deptFilterDto = new DeptFilterDto();
+		// 검색
+		Department deptFilter = new Department();
 		if (deptNm != null) {
-			deptFilterDto.setDeptNm(deptNm);
+			deptFilter.setDeptNm(deptNm);
 			model.addAttribute("deptNm", deptNm);
 		}
 		if (flnm != null) {
-			deptFilterDto.setFlnm(flnm);
+			deptFilter.setFlnm(flnm);
 			model.addAttribute("flnm", flnm);
 		}
-		
-		//목록 불러오기
-		List<Department> departmentList = departmentService.getDepartmentList(deptFilterDto);
+		// 목록 불러오기
+		List<Department> departmentList = departmentService.getDepartmentList(deptFilter);
+		log.info(departmentList);
+
 		model.addAttribute("departmentList", departmentList);
 
 		return "management/departmentsList";
@@ -304,23 +305,23 @@ public class AdminController {
 	@GetMapping("/srdemand/list")
 	public String getSrDemandList(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
-			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
-			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort,
+			@RequestParam(required = false, name = "dmndYmdStart") Date dmndYmdStart,
 			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
-			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
-			@RequestParam(required = false, name = "sysCd")String sysCd,
-			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
-			@RequestParam(required = false, name = "keyWord")String keyWord,
-			@RequestParam(required = false, name = "hstryId")Integer hstryId) {
+			@RequestParam(required = false, name = "sttsCd") Integer sttsCd,
+			@RequestParam(required = false, name = "sysCd") String sysCd,
+			@RequestParam(required = false, name = "taskSeCd") String taskSeCd,
+			@RequestParam(required = false, name = "keyWord") String keyWord,
+			@RequestParam(required = false, name = "hstryId") Integer hstryId) {
 		model.addAttribute("sort", sort);
 		log.info("sort : " + sort);
 		SrFilterDto srFilterDto = new SrFilterDto();
-		if(dmndYmdStart==null) {
+		if (dmndYmdStart == null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, -1);
 			String stringDate = sdf.format(calendar.getTime());
-			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+			dmndYmdStart = Date.valueOf(stringDate);// 기본값 한달전
 		}
 		srFilterDto.setDmndYmdStart(dmndYmdStart);
 		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
@@ -329,31 +330,31 @@ public class AdminController {
 		srFilterDto.setSysCd(sysCd);
 		srFilterDto.setTaskSeCd(taskSeCd);
 		srFilterDto.setHstryId(hstryId);
-		model.addAttribute("srFilterDto",srFilterDto);
+		model.addAttribute("srFilterDto", srFilterDto);
 		log.info(srFilterDto);
 		// 목록
 		int totalRows = srdemandService.getCountAllSr(srFilterDto);
 		Pager pager = new Pager(12, totalRows, Integer.parseInt(page));
 		log.info(pager);
-		if(totalRows!=0){
-			List<SrDemand> list = srdemandService.getSrDemandListBy(pager, sort,srFilterDto);
+		if (totalRows != 0) {
+			List<SrDemand> list = srdemandService.getSrDemandListBy(pager, sort, srFilterDto);
 			model.addAttribute("srDemandList", list);
 			log.info("srDemandList: " + list);
 
 			// 기본 첫번째 상세 or 선택된 상세
 			SrdemandDetail sd = null;
-			if (dmndno != null||totalRows==0) {
+			if (dmndno != null || totalRows == 0) {
 				sd = srdemandService.getSrDemandDetail(dmndno);
 			} else {
 				sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 			}
 			model.addAttribute("sd", sd);
 		}
-		//시스템 목록
-		model.addAttribute("systemList",systemService.getSystemList());
-		//작업 구분
-		if(sysCd!=null) {
-			model.addAttribute("taskList",taskService.getTaskList(sysCd));
+		// 시스템 목록
+		model.addAttribute("systemList", systemService.getSystemList());
+		// 작업 구분
+		if (sysCd != null) {
+			model.addAttribute("taskList", taskService.getTaskList(sysCd));
 		}
 		model.addAttribute("pager", pager);
 
@@ -381,31 +382,32 @@ public class AdminController {
 		map.put("result", result);
 		return map;
 	}
+
 	/**
 	 * 
 	 * @author 여수한 작성일자 : 2023-03-15
 	 * @return 관리자의 sr요청목록 엑셀 다운로드
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@GetMapping("/srdemand/list/download")
 	public void SrDemandListDownload(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
-			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
-			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
+			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort,
+			@RequestParam(required = false, name = "dmndYmdStart") Date dmndYmdStart,
 			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
-			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
-			@RequestParam(required = false, name = "sysCd")String sysCd,
-			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
-			@RequestParam(required = false, name = "keyWord")String keyWord,
-			@RequestParam(required = false, name = "hstryId")Integer hstryId,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+			@RequestParam(required = false, name = "sttsCd") Integer sttsCd,
+			@RequestParam(required = false, name = "sysCd") String sysCd,
+			@RequestParam(required = false, name = "taskSeCd") String taskSeCd,
+			@RequestParam(required = false, name = "keyWord") String keyWord,
+			@RequestParam(required = false, name = "hstryId") Integer hstryId, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		SrFilterDto srFilterDto = new SrFilterDto();
-		if(dmndYmdStart==null) {
+		if (dmndYmdStart == null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, -1);
 			String stringDate = sdf.format(calendar.getTime());
-			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+			dmndYmdStart = Date.valueOf(stringDate);// 기본값 한달전
 		}
 		srFilterDto.setDmndYmdStart(dmndYmdStart);
 		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
@@ -415,7 +417,7 @@ public class AdminController {
 		srFilterDto.setTaskSeCd(taskSeCd);
 		srFilterDto.setHstryId(hstryId);
 		// 목록
-		List<SrDemand> list = srdemandService.getSrExcelList(sort,srFilterDto);
-		srdemandService.SrDemandListdownload(list,request,response);
+		List<SrDemand> list = srdemandService.getSrExcelList(sort, srFilterDto);
+		srdemandService.SrDemandListdownload(list, request, response);
 	}
 }

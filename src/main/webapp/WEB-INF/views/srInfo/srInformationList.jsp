@@ -251,7 +251,7 @@ li:before {
 					<div class="card-header" id="headerFirst">
 						<h5 style="font-weight: bold;">SR 진척 관리</h5>
 					</div>
-					<div class="card-body" style="height:70px;">
+					<div class="card-body" style="height: 70px;">
 						<form id="srInfoFilterForm"
 							action="${pageContext.request.contextPath}/srinformation/list"
 							onsubmit="return srSearch()">
@@ -324,7 +324,7 @@ li:before {
 			</div>
 			<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card" style="height: 1325px;">
+				<div class="card" style="height: 1140px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
 						<div class="card-header-right">
@@ -344,7 +344,8 @@ li:before {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th style="font-size:15px;">SR번호 <c:if test="${sort eq 'DESC'}">
+												<th style="font-size: 15px;">SR번호 <c:if
+														test="${sort eq 'DESC'}">
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
@@ -356,13 +357,13 @@ li:before {
 															style="color: #782748; font-size: 24px;"></i></a>
 													</c:if>
 												</th>
-												<th style="font-size:15px;">시스템구분</th>
-												<th style="font-size:15px;">업무구분</th>
-												<th style="font-size:15px;width: 200px;">SR명</th>
-												<th style="font-size:15px;">요청자</th>
-												<th style="font-size:15px;">완료요청일</th>
-												<th style="font-size:15px;">완료예정일</th>
-												<th style="font-size:15px;">진행상태</th>
+												<th style="font-size: 15px;">시스템구분</th>
+												<th style="font-size: 15px;">업무구분</th>
+												<th style="font-size: 15px; width: 200px;">SR명</th>
+												<th style="font-size: 15px;">요청자</th>
+												<th style="font-size: 15px;">완료요청일</th>
+												<th style="font-size: 15px;">완료예정일</th>
+												<th style="font-size: 15px;">진행상태</th>
 											</tr>
 										</thead>
 										<tbody>

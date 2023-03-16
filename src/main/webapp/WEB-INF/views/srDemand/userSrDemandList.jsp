@@ -94,7 +94,7 @@ th {
 }
 
 .m.body {
-	height: 50vh;
+	: 50vh;
 	overflow-y: auto;
 }
 
@@ -247,7 +247,7 @@ th {
 					</div>
 					<div class="card-block" id="list">
 						<div id="sales-analytics">
-							<div class="card-block table-border-style">
+							<div class="card-block table-border-style" style="height: 770px;">
 								<div class="table-responsive">
 									<table class="table table-hover text-center"
 										style="font-size: 12;">
