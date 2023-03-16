@@ -16,7 +16,7 @@ public interface IDepartmentDao {
 	 * 
 	 * @author 최은종
 	 */
-	public List<Department> selectByMemberId(@Param("deptFiltering") DeptFilterDto deptFilterDto);
+	public List<Department> selectByMemberId(@Param("deptFilter") Department deptFilter);
 
 	/**
 	 * 신규부서 등록 메서드
@@ -54,4 +54,11 @@ public interface IDepartmentDao {
 	 * @author 신정은
 	 */
 	public String selectMngrNameByDeptCd(@Param("deptCd") String deptCd);
+	
+	/**
+	 * 부서별 인원수 구하기
+	 * 
+	 * @author 최은종
+	 */
+	public int selectCountBydeptCd(@Param("deptCd") String deptCd);
 }

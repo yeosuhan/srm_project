@@ -251,7 +251,7 @@ li:before {
 					<div class="card-header" id="headerFirst">
 						<h5 style="font-weight: bold;">SR 진척 관리</h5>
 					</div>
-					<div class="card-body" style="height:70px;">
+					<div class="card-body" style="height: 70px;">
 						<form id="srInfoFilterForm"
 							action="${pageContext.request.contextPath}/srinformation/list"
 							onsubmit="return srSearch()">
@@ -324,7 +324,7 @@ li:before {
 			</div>
 			<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card" style="height: 1325px;">
+				<div class="card" style="height: 1140px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
 						<div class="card-header-right">
@@ -344,7 +344,8 @@ li:before {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th style="font-size:15px;">SR번호 <c:if test="${sort eq 'DESC'}">
+												<th style="font-size: 15px;">SR번호 <c:if
+														test="${sort eq 'DESC'}">
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
@@ -356,13 +357,13 @@ li:before {
 															style="color: #782748; font-size: 24px;"></i></a>
 													</c:if>
 												</th>
-												<th style="font-size:15px;">시스템구분</th>
-												<th style="font-size:15px;">업무구분</th>
-												<th style="font-size:15px;width: 200px;">SR명</th>
-												<th style="font-size:15px;">요청자</th>
-												<th style="font-size:15px;">완료요청일</th>
-												<th style="font-size:15px;">완료예정일</th>
-												<th style="font-size:15px;">진행상태</th>
+												<th style="font-size: 15px;">시스템구분</th>
+												<th style="font-size: 15px;">업무구분</th>
+												<th style="font-size: 15px; width: 200px;">SR명</th>
+												<th style="font-size: 15px;">요청자</th>
+												<th style="font-size: 15px;">완료요청일</th>
+												<th style="font-size: 15px;">완료예정일</th>
+												<th style="font-size: 15px;">진행상태</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -574,10 +575,17 @@ li:before {
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-sm-2 px-0 col-form-label font-weight-bold"
-											style="font-size: 12px;">첨부파일</label>
-										<div class="col-sm-9 px-0">
-											<input type="file" class="" id="SRDFile">
+										<p class="col-sm-2 font-weight-bold px-0">첨부파일</p>
+										<div class="col-sm-10">
+											<c:forEach var="f" items="${sd.attachFile}">
+												<div>
+													<a href="<c:url value='/file/download/${f.fileSn}' />">
+														<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+														<span> ${f.orgnlFileNm} </span><span style="">
+															${f.fileSz} Bytes</span>
+													</a>
+												</div>
+											</c:forEach>
 										</div>
 									</div>
 								</div>

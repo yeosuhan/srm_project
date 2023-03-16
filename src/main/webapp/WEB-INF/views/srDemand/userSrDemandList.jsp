@@ -94,7 +94,7 @@ th {
 }
 
 .m.body {
-	height: 50vh;
+	: 50vh;
 	overflow-y: auto;
 }
 
@@ -247,7 +247,7 @@ th {
 					</div>
 					<div class="card-block" id="list">
 						<div id="sales-analytics">
-							<div class="card-block table-border-style">
+							<div class="card-block table-border-style" style="height: 770px;">
 								<div class="table-responsive">
 									<table class="table table-hover text-center"
 										style="font-size: 12;">
@@ -284,9 +284,9 @@ th {
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srDemand.ttl) > 10}">
+															<c:when test="${fn:length(srDemand.ttl) > 25}">
 																<td id="ttl" class="text-center"><c:out
-																		value="${fn:substring(srDemand.ttl,0,9)}" />...</td>
+																		value="${fn:substring(srDemand.ttl,0,24)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td id="ttl" class="text-center"><c:out
