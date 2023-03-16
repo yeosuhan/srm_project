@@ -140,7 +140,7 @@
 			<tbody>
 				<c:forEach items="${board.comments.commentList}" var="comm"
 					varStatus="i">
-					<tr>
+					<tr class="commentList">
 						<td>${comm.wrtrNm}</td>
 						<td>${comm.cmntCn}</td>
 						<td>${comm.wrtYmd}</td>
@@ -154,19 +154,20 @@
 								</a>
 							</c:if></td>
 					</tr>
+					<c:if test="${i.last and (board.comments.commpager.pageNo lt board.comments.commpager.endPageNo)}">
+							<tr class="commentList">
+								<td></td>
+								<td>
+									<a onclick="getComments(${board.bbsNo},${board.comments.commpager.pageNo + 1})"
+										class="font-weight-bold"
+										href="#">더 보기</a>
+								</td>
+								<td></td>
+							</tr>
+						</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
-		<c:forEach items="${board.comments.commentList}" var="comm"
-			varStatus="i">
-			<c:if
-				test="${i.last and (board.comments.commpager.pageNo lt board.comments.commpager.endPageNo)}">
-				<div class="text-center commentList">
-					<a
-						onclick="getComments(${board.bbsNo},${board.comments.commpager.pageNo + 1})"
-						class="font-weight-bold">더 보기</a>
-				</div>
-			</c:if>
-		</c:forEach>
+
 	</div>
 </div>

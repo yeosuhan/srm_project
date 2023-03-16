@@ -37,9 +37,9 @@
 					<td id="sysNm" class="text-left">${sr.sysNm}</td>
 					<td id="taskNm" class="text-left">${sr.taskNm}</td>
 					<c:choose>
-						<c:when test="${fn:length(sr.ttl) > 10}">
+						<c:when test="${fn:length(sr.ttl) > 30}">
 							<td id="ttl" class="text-center"><c:out
-									value="${fn:substring(sr.ttl,0,9)}" />...</td>
+									value="${fn:substring(sr.ttl,0,29)}" />...</td>
 						</c:when>
 						<c:otherwise>
 							<td id="ttl" class="text-center"><c:out value="${sr.ttl}" /></td>

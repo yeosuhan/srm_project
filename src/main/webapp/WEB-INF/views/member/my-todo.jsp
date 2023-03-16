@@ -141,7 +141,7 @@ font-size:13px;
 									</div>
 									<div class="slide"></div></li>
 							</sec:authorize>
-							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
+							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER','ROLE_ADMIN')">
 								<li class="nav-item btn active">
 									<div class="nav-link sttsCd3" onclick="moveTab(3)">
 										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
@@ -244,7 +244,7 @@ font-size:13px;
 						<h5 class="card-header-text">나의 요청 현황</h5>
 					</div>
 					<div class="card-body">
-						<canvas id="myChart" width="100%" height="100%"></canvas>
+						<canvas id="myChart" width="100px" height="100px"></canvas>
 					</div>
 				</div>
 			</sec:authorize>

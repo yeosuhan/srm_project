@@ -51,6 +51,14 @@ function getDetail(dmndNo, srNo) {
 			console.log(detail.isDnumExists);
 			console.log(detail.dd);
 			console.log(detail.role);
+			console.log(detail.dd.attachFile.length); 
+			
+			// 첨부파일 유뮤 확인 용도
+			var attYn = 0;
+			if(detail.dd.attachFile.length > 0) {
+				attYn = 1;
+			}
+			
 			var role = detail.role;
 			
 			// 관리자 & 개발자 권한과 상황에 따른 요청 버튼 제한 (최은종)

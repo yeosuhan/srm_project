@@ -72,7 +72,7 @@ public class SrinformationController {
 
 		log.info(srInfoFilter);
 		int totalRows = srinformationService.getTotalRow(page, srInfoFilter);
-		Pager pager = new Pager(totalRows, page);
+		Pager pager = new Pager(18, totalRows, page);
 		log.info(pager);
 		// log.info(totalRows);
 		if (totalRows != 0) {

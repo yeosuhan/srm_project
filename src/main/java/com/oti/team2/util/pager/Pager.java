@@ -16,12 +16,13 @@ public class Pager {
 	private int pageNo;			//현재 페이지 번호
 	private int pagesPerGroup = 4;	//그룹당 페이지 수
 	private int groupNo;		//현재 그룹 번호
-	private int rowsPerPage = 5;	//페이지당 행 수 
+	private int rowsPerPage;	//페이지당 행 수 
 	private int startRowNo;		//페이지의 시작 행 번호(1, ..., n)
 	private int endRowNo;		//페이지의 마지막 행 번호
 
 
-	public Pager(int totalRows, int pageNo) {
+	public Pager(int rowsPerPage, int totalRows, int pageNo) {
+		this.rowsPerPage = rowsPerPage;
 		this.totalRows = totalRows;
 		this.pageNo = pageNo;
 
