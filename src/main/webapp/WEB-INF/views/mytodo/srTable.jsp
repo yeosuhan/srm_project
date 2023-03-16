@@ -17,7 +17,7 @@
 					<th width="15%" class="text-left">SR번호</th>
 					<th width="15%" class="text-left">시스템구분</th>
 					<th width="15%" class="text-left">업무구분</th>
-					<th width="20%" class="text-center">제목</th>
+					<th width="20%" class="text-left">제목</th>
 					<c:if test="${sttsCd ne 0}">
 						<th width="7%" class="text-center">담당자</th>
 					</c:if>
@@ -37,12 +37,12 @@
 					<td id="sysNm" class="text-left">${sr.sysNm}</td>
 					<td id="taskNm" class="text-left">${sr.taskNm}</td>
 					<c:choose>
-						<c:when test="${fn:length(sr.ttl) > 10}">
+						<c:when test="${fn:length(sr.ttl) > 30}">
 							<td id="ttl" class="text-center"><c:out
-									value="${fn:substring(sr.ttl,0,9)}" />...</td>
+									value="${fn:substring(sr.ttl,0,29)}" />...</td>
 						</c:when>
 						<c:otherwise>
-							<td id="ttl" class="text-center"><c:out value="${sr.ttl}" /></td>
+							<td id="ttl" class="text-left"><c:out value="${sr.ttl}" /></td>
 						</c:otherwise>
 					</c:choose>
 					<c:if test="${sttsCd ne 0}">

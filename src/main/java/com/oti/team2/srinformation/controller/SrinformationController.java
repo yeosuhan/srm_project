@@ -71,8 +71,9 @@ public class SrinformationController {
 		List<Prgrs> prgrs = progressService.getRrgrs();
 
 		log.info(srInfoFilter);
+		
 		int totalRows = srinformationService.getTotalRow(page, srInfoFilter, auth.getAuthorities().stream().findFirst().get().toString());
-		Pager pager = new Pager(totalRows, page);
+		Pager pager = new Pager(18, totalRows, page);
 		log.info(pager);
 		// log.info(totalRows);
 		if (totalRows != 0) {

@@ -39,164 +39,237 @@ public class ProgressService implements IProgressService {
 	}
 
 	/**
-	 * 
-	 * @author 여수한 작성일자 : 2023-02-27
-	 * @return sr요청 진척률 수정
-	 */
-	@Override
-	@Transactional
-	public void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo, String prgrsSeNm,
-			String rcvrId, String dmndNo) {
-		boolean flag = true;
-		int[] array = { 10, 40, 70, 80, 90, 100 };
-		log.info("진척률 수정 서비스");
-		log.info("prgrsRt: " + prgrsRt);
-		log.info("bgngYmd : " + bgngYmd);
-		log.info("endYmd : " + endYmd);
-		log.info("prgrsId : " + prgrsId);
-		log.info("prgrsSeNm : " + prgrsSeNm);
-		log.info("srNo : " + srNo);
-		// 진척률이 종료값일 경우
-		for (int i = 0; i < array.length; i++) {
-			// 진척률이 종료값이지만 종료일이 없을경우
-			if (prgrsRt == array[i] && endYmd == "") {
-				log.info("111");
-				flag = false;
-				break;
-				// 에러 메시지 줘야돼 > 종료일이 없습니다.
-			}
-		}
+	    * 
+	    * @author 여수한 작성일자 : 2023-02-27
+	    * @return sr요청 진척률 수정
+	    */
+	   @Override
+	   @Transactional
+	   public void updateProgress(int prgrsRt, String bgngYmd, String endYmd, int prgrsId, String srNo, String prgrsSeNm,
+	         String rcvrId, String dmndNo) {
+	      boolean flag = true;
+	      int[] array = { 10, 40, 70, 80, 90, 100 };
+	      log.info("진척률 수정 서비스");
+	      log.info("prgrsRt: " + prgrsRt);
+	      log.info("bgngYmd : " + bgngYmd);
+	      log.info("endYmd : " + endYmd);
+	      log.info("prgrsId : " + prgrsId);
+	      log.info("prgrsSeNm : " + prgrsSeNm);
+	      log.info("srNo : " + srNo);
+	      // 진척률이 종료값일 경우
+	      for (int i = 0; i < array.length; i++) {
+	         // 진척률이 종료값이지만 종료일이 없을경우
+	         if (prgrsRt == array[i] && endYmd == "") {
+	            log.info("111");
+	            flag = false;
+	            break;
+	            // 에러 메시지 줘야돼 > 종료일이 없습니다.
+	         }
+	      }
 
-		// 진척률이 범위내에 있을 경우
-		if (flag) {
-			switch (prgrsSeNm) {
-			case "요구정의":
-				if (!(prgrsRt >= 0 && prgrsRt <= 10)) {
-					log.info("진척률이 범위에 없습니다.");
-					// 에러 메시지 줘야돼 > 진척률이 범위에 없습니다.
-					flag = false;
-					break;
-				} else if (prgrsRt >= 0 && prgrsRt <= 10) {
-					// 진척률이 범위내 있으면서 종료일이 없을 경우 = 그냥 진척률만 업데이트할 경우
-					if (endYmd == "" && (prgrsRt >= 0 && prgrsRt < 10)) {
-						log.info("그냥 진척률만 업데이트할 경우.");
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						flag = false;
-						break;
-					}
-					// 진척률이 종료값이면서 종료일이 있을 경우 = 다음 진척단계로 넘어감 > 다음 진척단계 시작일을 SYSDATE로 줘야돼
-					else if (endYmd != "" && (prgrsRt >= 0 && prgrsRt <= 10)) {
-						log.info(" 다음 진척단계로 넘어감 > 다음 진척단계 시작일을 SYSDATE로 줘야돼.");
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						prgrsId++;
-						progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
-						flag = false;
-						break;
-					}
-				}
-				break;
-			case "분석/설계":
-				if (!(prgrsRt >= 11 && prgrsRt <= 40)) {
-					// 에러 메시지 줘야돼 > 진척률이 범위에 없습니다.
-					flag = false;
-					break;
-				} else if (prgrsRt >= 11 && prgrsRt <= 40) {
-					if (endYmd == "" &&(prgrsRt >= 11 && prgrsRt < 40)) {
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						flag = false;
-						break;
-					} else if (endYmd != "" && (prgrsRt >= 11 && prgrsRt <= 40)) {
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						prgrsId++;
-						progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
-						flag = false;
-						break;
-					}
-				}
-				break;
-			case "구현":
-				if (!(prgrsRt >= 41 && prgrsRt <= 70)) {
-					// 에러 메시지 줘야돼 > 진척률이 범위에 없습니다.
-					flag = false;
-					break;
-				} else if (prgrsRt >= 41 && prgrsRt <= 70) {
-					if (endYmd == "" &&(prgrsRt >= 41 && prgrsRt < 70)) {
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						flag = false;
-						break;
-					} else if (endYmd != "" && (prgrsRt >= 41 && prgrsRt <= 70)) {
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						prgrsId++;
-						progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
-						int sttsCd = 4;
-						srDemandService.updateSrDemandStts(srNo, sttsCd);
-						flag = false;
-						break;
-					}
-				}
-				break;
-			case "테스트":
-				if (!(prgrsRt >= 71 && prgrsRt <= 80)) {
-					// 에러 메시지 줘야돼 > 진척률이 범위에 없습니다.
-					flag = false;
-					break;
-				} else if (prgrsRt >= 71 && prgrsRt <= 80) {
-					if (endYmd == "" &&(prgrsRt >= 71 && prgrsRt < 80)) {
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						flag = false;
-						break;
-					} else if (endYmd != "" && (prgrsRt >= 71 && prgrsRt <= 80)) {
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						prgrsId++;
-						progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
-						flag = false;
-						break;
-					}
-				}
-				break;
-			case "반영요청":
-				if (!(prgrsRt >= 81 && prgrsRt <= 90)) {
-					// 에러 메시지 줘야돼 > 진척률이 범위에 없습니다.
-					flag = false;
-					break;
-				} else if (prgrsRt >= 81 && prgrsRt <= 90) {
-					if (endYmd == "" &&(prgrsRt >= 81 && prgrsRt < 90)) {
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						flag = false;
-						break;
-					} else if (endYmd != "" && (prgrsRt >= 81 && prgrsRt <= 90)) {
-						alertService.sendToClient(rcvrId, dmndNo);
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						prgrsId++;
-						progressDao.updateProgressYmd(srNo); // 운영반영 시작일(=SYSDATE) 업데이트
-						progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
-						flag = false;
-						break;
-					}
-				}
-				break;
-			case "운영반영":
-				if (!(prgrsRt >= 91 && prgrsRt <= 100)) {
-					// 에러 메시지 줘야돼 > 진척률이 범위에 없습니다.
-					flag = false;
-					break;
-				} else if (prgrsRt >= 91 && prgrsRt <= 100) {
-					if (endYmd == "" &&(prgrsRt >= 91 && prgrsRt < 100)) {
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						flag = false;
-						break;
-					} else if (endYmd != "" && (prgrsRt >= 91 && prgrsRt <= 100)) {
-						int sttsCd = 5;
-						srDemandService.updateSrDemandStts(srNo, sttsCd);
-						progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
-						flag = false;
-						break;
-					}
-				}
-				break;
-			}
-		}
-	}
+	      // 진척률이 범위내에 있을 경우
+	      if (flag) {
+	         switch (prgrsSeNm) {
+	         case "요구정의":
+	            if (prgrsRt==0) {
+	               if(endYmd != "") {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               } else {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               }
+	            } else if (prgrsRt >= 0 && prgrsRt <= 10) {
+	               // 진척률이 범위내 있으면서 종료일이 없을 경우 = 그냥 진척률만 업데이트할 경우
+	               if (endYmd == "" && (prgrsRt >= 0 && prgrsRt < 10)) {
+	                  log.info("그냥 진척률만 업데이트할 경우.");
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               }
+	               // 진척률이 종료값이면서 종료일이 있을 경우 = 다음 진척단계로 넘어감 > 다음 진척단계 시작일을 SYSDATE로 줘야돼
+	               else if (endYmd != "" && (prgrsRt >= 0 && prgrsRt <= 10)) {
+	                  log.info(" 다음 진척단계로 넘어감 > 다음 진척단계 시작일을 SYSDATE로 줘야돼.");
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               }
+	            } else if(!(prgrsRt >= 0 && prgrsRt <= 10)) {
+	               
+	               flag = false;
+	               break;
+	            }
+	            break;
+	         case "분석/설계":
+	            if (prgrsRt==0) {
+	               if(endYmd != "") {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               }else {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               }
+	            } else if (prgrsRt >= 11 && prgrsRt <= 40) {
+	               if (endYmd == "" &&(prgrsRt >= 11 && prgrsRt < 40)) {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               } else if (endYmd != "" && (prgrsRt >= 11 && prgrsRt <= 40)) {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               }
+	            } else if(!(prgrsRt >= 11 && prgrsRt <= 40)) {
+	               
+	               flag = false;
+	               break;
+	            }
+	            break;
+	         case "구현":
+	            if (prgrsRt==0) {
+	               if(endYmd != "") {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               }else {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               }
+	            } else if (prgrsRt >= 41 && prgrsRt <= 70) {
+	               if (endYmd == "" &&(prgrsRt >= 41 && prgrsRt < 70)) {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               } else if (endYmd != "" && (prgrsRt >= 41 && prgrsRt <= 70)) {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  int sttsCd = 4;
+	                  srDemandService.updateSrDemandStts(srNo, sttsCd);
+	                  flag = false;
+	                  break;
+	               }
+	            } else if(!(prgrsRt >= 41 && prgrsRt <= 70)) {
+	               
+	               flag = false;
+	               break;
+	            }
+	            break;
+	         case "테스트":
+	            if (prgrsRt==0) {
+	               if(endYmd != "") {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               }else {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               }
+	            } else if (prgrsRt >= 71 && prgrsRt <= 80) {
+	               if (endYmd == "" &&(prgrsRt >= 71 && prgrsRt < 80)) {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               } else if (endYmd != "" && (prgrsRt >= 71 && prgrsRt <= 80)) {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               }
+	            } else if(!(prgrsRt >= 71 && prgrsRt <= 80)) {
+	               
+	               flag = false;
+	               break;
+	            }
+	            break;
+	         case "반영요청":
+	            if (prgrsRt==0) {
+	               if(endYmd != "") {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               }else {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               }
+	            } else if (prgrsRt >= 81 && prgrsRt <= 90) {
+	               if (endYmd == "" &&(prgrsRt >= 81 && prgrsRt < 90)) {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               } else if (endYmd != "" && (prgrsRt >= 81 && prgrsRt <= 90)) {
+	                  alertService.sendToClient(rcvrId, dmndNo);
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateProgressYmd(srNo); // 운영반영 시작일(=SYSDATE) 업데이트
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               }
+	            } else if(!(prgrsRt >= 81 && prgrsRt <= 90)) {
+	               
+	               flag = false;
+	               break;
+	            }
+	            break;
+	         case "운영반영":
+	            if (prgrsRt==0) {
+	               if(endYmd != "") {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  prgrsId++;
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  flag = false;
+	                  break;
+	               }else {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               }
+	            } else if (prgrsRt >= 91 && prgrsRt <= 100) {
+	               if (endYmd == "" &&(prgrsRt >= 91 && prgrsRt < 100)) {
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               } else if (endYmd != "" && (prgrsRt >= 91 && prgrsRt <= 100)) {
+	                  int sttsCd = 5;
+	                  srDemandService.updateSrDemandStts(srNo, sttsCd);
+	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
+	                  flag = false;
+	                  break;
+	               }
+	            } else if(!(prgrsRt >= 91 && prgrsRt <= 100)) {
+	               
+	               flag = false;
+	               break;
+	            }
+	            break;
+	         }
+	      }
+	   }
+	
+
 	/**
 	 * 진척데이터 삽입
 	 * 
@@ -249,13 +322,15 @@ public class ProgressService implements IProgressService {
 
 	/**
 	 * [나의할일] 해당 진척의 계획과 현재 진척률 그래프로 표현하기
+	 * 
 	 * @author 신정은
 	 */
 	public PrgrsPlanDto showPrgrsChart(String srNo) {
 		List<Progress> list = getProgress(srNo);
 		log.info(list);
 		int nowRt = progressDao.selectPrgrsRtBySrNoBetweenBgngAndEnd(srNo);
-		if(nowRt == 0) nowRt = 1;
+		if (nowRt == 0)
+			nowRt = 1;
 		log.info(nowRt);
 		PrgrsPlanDto p = new PrgrsPlanDto();
 		PrgrsPlanDto ppdto = p.createPrgrsPlanDto(list, nowRt);

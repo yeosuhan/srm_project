@@ -51,6 +51,14 @@ function getDetail(dmndNo, srNo) {
 			console.log(detail.isDnumExists);
 			console.log(detail.dd);
 			console.log(detail.role);
+			console.log(detail.dd.attachFile.length); 
+			
+			// 첨부파일 유뮤 확인 용도
+			var attYn = 0;
+			if(detail.dd.attachFile.length > 0) {
+				attYn = 1;
+			}
+			
 			var role = detail.role;
 			
 			// 관리자 & 개발자 권한과 상황에 따른 요청 버튼 제한 (최은종)
@@ -467,9 +475,11 @@ function updateProgress5() {
 }
 /* 계획정보 변경 */
 function planUpdate() {
-	console.log("$('#SRPlMemberId').val() : " + $("#SRPlMemberId").val())
-	console.log("$('#changeMemberId').val() : " + $("#changeMemberId").val())
-
+	var selectedElement = document.getElementById("dept");
+	var deptCd = selectedElement.options[selectedElement.selectedIndex].value;
+	console.log("계획정보 변경");
+	console.log("바뀔 부서" + deptCd);
+	
 	if($("#changeMemberId").val()==null) {
 		var memberId = $("#SRPlMemberId").val();
 	} else {
@@ -482,7 +492,7 @@ function planUpdate() {
 		data : {
 			dmndNo : $("#SRPlDmndNo").val(),
 			memberId : memberId,
-			deptCd : $("#SRDept").val(),
+			deptCd : deptCd,
 			bgngYmd : $("#SRPlBgngYmd").val(),
 			endYmd : $("#SRPlEndYmd").val(),
 			rvwCn : $("#SRPlRvwCn").val()

@@ -237,7 +237,7 @@ public class SrDemandService implements ISrDemandService {
 	 */
 	public Pager getcountsByCustIdOrPicIdAndSttsCd(String custId, String picId, int sttsCd, int pageNo) {
 		int totalRows = srDemandDao.countByCustIdOrPicIdAndSttsCd(custId, picId, sttsCd);
-		Pager pager = new Pager(totalRows, pageNo);
+		Pager pager = new Pager(5,totalRows, pageNo);
 		return pager;
 	}
 
@@ -257,7 +257,7 @@ public class SrDemandService implements ISrDemandService {
 	 */
 	public Pager getcountsByEmpIdAndSttsCd(String empId, int sttsCd, int pageNo) {
 		int totalRows = srDemandDao.countByEmpIdAndSttsCd(empId, sttsCd);
-		Pager pager = new Pager(totalRows, pageNo);
+		Pager pager = new Pager(5,totalRows, pageNo);
 		return pager;
 	}
 

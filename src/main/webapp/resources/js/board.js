@@ -170,7 +170,8 @@ function getComments(bbsNo, page) {
 		type : 'GET',
 		success : function(data) {
 			document.getElementById('asd').style.height=afterHeight;
-			$(".commentList:last").html(data);
+			$(".commentList:last").remove();
+			$(".commentList:last").after(data);
 		}
 	});
 }

@@ -11,7 +11,8 @@
 				CMNT_CN as cmntCn,
 				m.flnm as wrtrNm,
 				c.WRTR_ID as wrtrId,
-				WRT_YMD as wrtYmd
+				WRT_YMD as wrtYmd,
+				BBS_NO as bbsNo
 		FROM COMMENTS c, MEMBERS m
 		WHERE c.WRTR_ID = m.MEMBER_ID
 		AND
