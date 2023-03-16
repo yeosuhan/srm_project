@@ -10,7 +10,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CommentDto {
-
 	private List<CommentResDto> commentList;
 	
 	private Pager commpager;

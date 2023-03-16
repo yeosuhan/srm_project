@@ -165,7 +165,7 @@ public class AdminController {
 			model.addAttribute("flnm", flnm);
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_CLIENT.toString(), filterDto);
-		Pager pager = new Pager(totalRows, page);
+		Pager pager = new Pager(7, totalRows, page);
 		// log.info(pager);
 
 		// 목록 가져오기
@@ -225,7 +225,7 @@ public class AdminController {
 			model.addAttribute("jbgdNm", jbgdNm);
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(), filterDto);
-		Pager pager = new Pager(totalRows, page);
+		Pager pager = new Pager(7,totalRows, page);
 		log.info(pager);
 		if (totalRows != 0) {
 			// log.info(totalRows);
@@ -334,7 +334,7 @@ public class AdminController {
 		log.info(srFilterDto);
 		// 목록
 		int totalRows = srdemandService.getCountAllSr(srFilterDto);
-		Pager pager = new Pager(totalRows, Integer.parseInt(page));
+		Pager pager = new Pager(12, totalRows, Integer.parseInt(page));
 		log.info(pager);
 		if (totalRows != 0) {
 			List<SrDemand> list = srdemandService.getSrDemandListBy(pager, sort, srFilterDto);

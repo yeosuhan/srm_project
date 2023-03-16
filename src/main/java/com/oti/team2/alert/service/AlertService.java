@@ -127,7 +127,7 @@ public class AlertService implements IAlertService {
 				url="/admin"+url;
 			}
 			
-			alertDao.updateIdntyYn(alert.getAltNo());
+			//alertDao.updateIdntyYn(alert.getAltNo()); x버튼을 눌러 알람을 닫도록 수정
 		}else if(alert.getAltType().equals("CHG_YMD")){
 			
 			if(role.equals(Auth.ROLE_CLIENT.toString())){
@@ -136,12 +136,12 @@ public class AlertService implements IAlertService {
 				url="/srinformation/list";
 			}
 			url=url+"?hstryId="+alert.getHstryId();
-			alertDao.updateIdntyYn(alert.getAltNo());
+			//alertDao.updateIdntyYn(alert.getAltNo());
 		}else if(alert.getAltType().equals("CHG_YMD_DVL")){
 			
 			url="/srinformation/list?hstryId="+alert.getHstryId();
 			
-			alertDao.updateIdntyYn(alert.getAltNo());
+			//alertDao.updateIdntyYn(alert.getAltNo());
 			
 		}else if(alert.getAltType().equals("RTRCN")){
 			
@@ -151,7 +151,7 @@ public class AlertService implements IAlertService {
 				url="/srinformation/list?hstryId="+alert.getHstryId();
 			}
 			
-			alertDao.updateIdntyYn(alert.getAltNo());
+			//alertDao.updateIdntyYn(alert.getAltNo());
 		}
 		return url;
 	}

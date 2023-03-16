@@ -109,10 +109,6 @@ font-size:13px;
 .card .card-body table th,.card-block table th, table th{
 	font-size:14px;
 }
-.nav-item {
-margin-top: 3px;
-margin-bottom: 3px;
-}
 </style>
 </head>
 
@@ -127,7 +123,7 @@ margin-bottom: 3px;
 				<div class="card" id="mytodo">
 					<div class="col-12">
 						<!-- Nav tabs -->
-						<ul class="nav card-header-pills nav-tabs md-tabs" style="padding:6px;" role="tablist">
+						<ul class="nav card-header-pills nav-tabs md-tabs" role="tablist">
 							<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 								<li class="nav-item btn"><div
 										class="nav-link sttsCd0 active" onclick="moveTab(0)">
@@ -145,7 +141,7 @@ margin-bottom: 3px;
 									</div>
 									<div class="slide"></div></li>
 							</sec:authorize>
-							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
+							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER','ROLE_ADMIN')">
 								<li class="nav-item btn active">
 									<div class="nav-link sttsCd3" onclick="moveTab(3)">
 										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
@@ -224,16 +220,16 @@ margin-bottom: 3px;
 				<jsp:include page="/WEB-INF/views/mytodo/notice.jsp" />
 			</div>
 			<!-- 시각자료 넣을 곳 -->
-			<div class="col-lg-4 pl-0" id="qnaList">
+			<div class="col-lg-4" id="qnaList">
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<div class="col-lg-4 px-0">
+				<div class="col-lg-4">
 					<jsp:include page="/WEB-INF/views/mytodo/progressGraph.jsp" />
 				</div>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_DEVELOPER')">
-				<div class="card col-lg-4 px-0">
+				<div class="card col-lg-4">
 					<div class="card-header">
 						<h5 class="card-header-text">나의 일정</h5>
 					</div>
@@ -243,12 +239,12 @@ margin-bottom: 3px;
 				</div>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_CLIENT')">
-				<div class="card col-lg-4 px-0">
+				<div class="card col-lg-4">
 					<div class="card-header">
 						<h5 class="card-header-text">나의 요청 현황</h5>
 					</div>
 					<div class="card-body">
-						<canvas id="myChart" width="100%" height="100%"></canvas>
+						<canvas id="myChart" width="100px" height="100px"></canvas>
 					</div>
 				</div>
 			</sec:authorize>

@@ -149,7 +149,7 @@ public class SrDemandController {
 		log.info(srFilterDto);
 		// 목록
 		int totalRows = srdemandService.getCountClientSr(memberId, srFilterDto);
-		Pager pager = new Pager(totalRows, Integer.parseInt(page));
+		Pager pager = new Pager(10,totalRows, Integer.parseInt(page));
 		log.info(pager);
 		SrdemandDetail sd = null;
 		String prgrsRt = null;

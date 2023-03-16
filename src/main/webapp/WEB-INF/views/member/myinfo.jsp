@@ -73,7 +73,7 @@ label>img {
 											<label for="chooseFile" id="newImg"> <c:if
 													test="${member.fileData eq null}">
 													<img id="defaultImage" src="/resources/oti_images/user.png"
-														style="width: 300px; height: 300px; align-content: center;">
+														style="width: 230px; height: 230px; align-content: center;">
 												</c:if> <c:if
 													test="${member.fileData ne null and (member.memberType ne 'ROLE_CLIENT')}">
 													<img id="defaultImage"

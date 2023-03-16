@@ -45,7 +45,7 @@ public class SrInformationHistoryController {
 		log.info("dmndNo 조회" + dmndNo);
 		
 		int totalRows = srInformationHistoryService.getCountAllForClient(srNo);
-		Pager pager = new Pager(totalRows, pageNo);
+		Pager pager = new Pager(5, totalRows, pageNo);
 		log.info("pageNo 조회" + pageNo);
 		
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
@@ -71,7 +71,7 @@ public class SrInformationHistoryController {
 		log.info("srInformationHistoryList 조회");
 
 		int totalRows = srInformationHistoryService.getCountAllForEmp(srNo);
-		Pager pager = new Pager(totalRows, pageNo);
+		Pager pager = new Pager(5, totalRows, pageNo);
 
 		List<SrInformationHistory> srInformationHistory = srInformationHistoryService.getSrInformationHistoryList(pager,
 				srNo);

@@ -31,7 +31,7 @@ public class PrgrsPlanDto {
 			
 	public PrgrsPlanDto createPrgrsPlanDto(List<Progress> pList, int nowRt) {
 		PrgrsPlanDto ppDto = new PrgrsPlanDto();
-		
+		if(nowRt == 0) nowRt = 2;
 		TreeSet<String> dSet = new TreeSet<>();
 		for(Progress p : pList) {
 			dSet.add(p.getBgngYmd().toString());

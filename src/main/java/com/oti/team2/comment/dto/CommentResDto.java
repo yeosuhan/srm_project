@@ -9,6 +9,7 @@ import lombok.Data;
 
 @Data
 public class CommentResDto {
+	private int bbsNo;
 	private int cmntNo;
 	private String cmntCn;
 	private String wrtrNm;

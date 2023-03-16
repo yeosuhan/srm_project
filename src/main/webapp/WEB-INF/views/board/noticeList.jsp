@@ -86,7 +86,7 @@
 						<thead>
 							<tr>
 								<th class="col-1" style="text-align: center;">순번</th>
-								<th class="col-7 text-center">제목</th>
+								<th class="col-7 text-left">제목</th>
 								<th class="col-1">작성자</th>
 								<th class="col-3" style="text-align: center;">작성날짜</th>
 								<th class="col-3">조회수</th>
@@ -97,12 +97,12 @@
 								<tr onclick="noticeDetail(${board.bbsNo})">
 									<th style="text-align: center;">${nPager.startRowNo + status.index}</th>
 									<c:choose>
-										<c:when test="${fn:length(board.bbsTtl) > 20}">
-											<td id="ttl" class="text-center"><c:out
-													value="${fn:substring(board.bbsTtl,0,19)}" />...</td>
+										<c:when test="${fn:length(board.bbsTtl) > 30}">
+											<td id="ttl" class="text-left"><c:out
+													value="${fn:substring(board.bbsTtl,0,29)}" />...</td>
 										</c:when>
 										<c:otherwise>
-											<td id="ttl" class="text-center"><c:out
+											<td id="ttl" class="text-left"><c:out
 													value="${board.bbsTtl}" /></td>
 										</c:otherwise>
 									</c:choose>
