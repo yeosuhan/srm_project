@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
+import com.oti.team2.srinformationhistory.dto.SrHistoryMailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.srinformationhistory.dto.SrResourceAddHistoryDto;
 import com.oti.team2.util.pager.Pager;
@@ -83,4 +84,5 @@ public interface ISrInformationHistoryService {
 	public int getCountTodoForDev(String rqstrId, String empId);
 	public int getCountTodoForCust(String custId);
 
+	public String sendHistoryMail(SrHistoryMailDto historyMailDto, String srNo, String hstryType);
 }

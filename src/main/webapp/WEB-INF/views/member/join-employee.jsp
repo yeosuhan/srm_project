@@ -133,7 +133,7 @@ label>img {
 								</div>
 								<div class="form-group form-primary">
 									<input type="text" name="flnm" class="form-control" id="flnm" required="" placeholder="                    ex)홍길동"
-										style="width: 97%" oninput="this.value = this.value.replace(/^[가-힣]/g,'')"> <span class="form-bar"></span> <label
+										style="width: 97%"> <span class="form-bar"></span> <label
 										class="float-label">이름</label>
 								</div>
 								<div class="form-group form-primary">

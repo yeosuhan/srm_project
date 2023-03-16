@@ -14,9 +14,9 @@ public class Pager {
 	private int startPageNo;	//그룹의 시작 페이지 번호
 	private int endPageNo;		//그룹의 끝 페이지 번호
 	private int pageNo;			//현재 페이지 번호
-	private int pagesPerGroup = 4;	//그룹당 페이지 수
+	private int pagesPerGroup = 3;	//그룹당 페이지 수
 	private int groupNo;		//현재 그룹 번호
-	private int rowsPerPage = 5;	//페이지당 행 수 
+	private int rowsPerPage = 12;	//페이지당 행 수 
 	private int startRowNo;		//페이지의 시작 행 번호(1, ..., n)
 	private int endRowNo;		//페이지의 마지막 행 번호
 
