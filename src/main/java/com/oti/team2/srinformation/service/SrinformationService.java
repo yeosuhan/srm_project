@@ -60,8 +60,8 @@ public class SrinformationService implements ISrinformationService {
 	 * @return sr진척 목록 조회
 	 */
 	@Override
-	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort) {
-		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter, sort);
+	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort,String role) {
+		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter, sort,role);
 		return srlist;
 	}
 
@@ -166,8 +166,8 @@ public class SrinformationService implements ISrinformationService {
 	 * @return 결과 행수
 	 */
 	@Override
-	public int getTotalRow(int page, SrInfoFilter srInfoFilter) {
-		return srinformationDao.selectTotalRow(page, srInfoFilter);
+	public int getTotalRow(int page, SrInfoFilter srInfoFilter,String role) {
+		return srinformationDao.selectTotalRow(page, srInfoFilter,role);
 	}
 
 	/**

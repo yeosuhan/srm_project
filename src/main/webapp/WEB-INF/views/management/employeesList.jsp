@@ -26,6 +26,14 @@ table, th, td {
 p {
 	margin: auto;
 }
+
+#headerFirst {
+	background: #4C1342;
+}
+
+.card .card-header {
+	background: linear-gradient(135deg, #360940 10%, #782748 100%);
+}
 </style>
 </head>
 <body>
@@ -38,11 +46,20 @@ p {
 			<%-- 사원목록  --%>
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header" id="headerFirst">
 						<h5 style="font-weight: bold;">사원 관리</h5>
+						<div class="card-header-right">
+							<ul class="list-unstyled card-option" align="right">
+								<li><i class="fa fa fa-wrench open-card-option"></i></li>
+								<li><i class="fa fa-window-maximize full-card"></i></li>
+								<li><i class="fa fa-refresh reload-card"></i></li>
+							</ul>
+						</div>
 						<%-- 검색 기능 --%>
-						<hr/>
-						<div class="mr-5" style="height: 30px;">
+					</div>
+					<div class="card-block"
+						style="padding-top: 20px; padding-bottom: 10px;">
+						<div class="mr-5">
 							<form id="empFilter"
 								action="${pageContext.request.contextPath}/admin/employee/list"
 								onsubmit="return search()">
@@ -67,7 +84,7 @@ p {
 									</div>
 									<div class="col-sm-3 d-flex justify-content-end">
 										<button type="submit"
-											class="btn btn-oti btn-sm waves-effect waves-light">검색</button>
+											class="btn btn-oti waves-effect waves-light">검색</button>
 									</div>
 								</div>
 							</form>
@@ -126,13 +143,6 @@ p {
 					<div class="card">
 						<div class="card-header">
 							<h5 style="font-weight: bold;">사원 정보</h5>
-							<div class="card-header-right">
-								<ul class="list-unstyled card-option" align="right">
-									<li><i class="fa fa fa-wrench open-card-option"></i></li>
-									<li><i class="fa fa-window-maximize full-card"></i></li>
-									<li><i class="fa fa-refresh reload-card"></i></li>
-								</ul>
-							</div>
 						</div>
 						<div class="card-block"
 							style="justify-content: center; text-align: center;">
@@ -209,12 +219,12 @@ p {
 						</div>
 						<div class="card-footer">
 							<div align="center">
-								<button onclick="deleteInfo('${employeesList[0].memberId}')"
-									type="button" id="deleteInfo"
-									class="btn btn-oti btn-sm waves-effect waves-light">삭제</button>
 								<button onclick="updateInfo('${employeesList[0].memberId}')"
 									type="button" id="modifyInfo"
-									class="btn btn-oti btn-sm btn-out waves-effect waves-light">저장</button>
+									class="btn btn-oti waves-effect waves-light">저장</button>
+								<button onclick="deleteInfo('${employeesList[0].memberId}')"
+									type="button" id="deleteInfo"
+									class="btn btn-oti waves-effect waves-light">삭제</button>
 							</div>
 						</div>
 					</div>

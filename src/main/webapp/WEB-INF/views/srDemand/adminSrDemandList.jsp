@@ -124,11 +124,11 @@ th {
 					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
-								<h5>SR 요청 관리</h5>
+								<h5 style="font-weight: bold;">SR 요청 관리</h5>
 							</div>
 						</div>
 					</div>
-					<div class="card-body">
+					<div class="card-body" style="height:70px;">
 						<form id="srSearchForm"
 							action="${pageContext.request.contextPath}/admin/srdemand/list">
 							<div class="row">
@@ -219,12 +219,11 @@ th {
 						<div id="sales-analytics">
 							<div class="card-block table-border-style" style="height: 783px;">
 								<div class="table-responsive">
-									<table class="table table-hover text-center"
-										style="font-size: 12;">
+									<table class="table table-hover text-center">
 										<thead>
-											<tr>
+											<tr style="padding:0px;">
 												<th style="width: 1px;"></th>
-												<th>요청 번호 <c:if test="${sort eq 'DESC'}">
+												<th style="font-size:15px;">요청 번호 <c:if test="${sort eq 'DESC'}">
 														<a
 															href="${pageContext.request.contextPath}/admin/srdemand/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
@@ -237,13 +236,13 @@ th {
 													</c:if>
 
 												</th>
-												<th>제목</th>
-												<th>관련시스템</th>
-												<th style="width: 200px;">등록자</th>
-												<th>소속</th>
-												<th>진행상태</th>
-												<th>등록일</th>
-												<th>완료예정일</th>
+												<th style="font-size:15px;">제목</th>
+												<th style="font-size:15px;">관련시스템</th>
+												<th style="width: 200px; font-size:15px;">등록자</th>
+												<th style="font-size:15px;">소속</th>
+												<th style="font-size:15px;">진행상태</th>
+												<th style="font-size:15px;">등록일</th>
+												<th style="font-size:15px;">완료예정일</th>
 											</tr>
 
 										</thead>
@@ -253,7 +252,7 @@ th {
 													varStatus="status">
 													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
 														<th scope="row">${pager.startRowNo + status.index}</th>
-														<td>${srDemand.dmndNo}</td>
+														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
 															<c:when test="${fn:length(srDemand.ttl) > 25}">
 																<td id="ttl" class="text-center"><c:out
@@ -308,23 +307,15 @@ th {
 			</div>
 
 			<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
-			<div class="col-xl-4 col-md-12">
+			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
 					<div class="card-header">
 						<h5>SR 요청 상세정보</h5>
-						<div class="card-header-right">
-							<ul class="list-unstyled card-option">
-								<li><i class="fa fa fa-wrench open-card-option"></i></li>
-								<li><i class="fa fa-window-maximize full-card"></i></li>
-								<li><i class="fa fa-refresh reload-card"></i></li>
-							</ul>
-						</div>
 					</div>
 					<ul class="nav nav-tabs  md-tabs" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
 							data-toggle="tab" href="#srDemandDetail" role="tab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
-
 					</ul>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">

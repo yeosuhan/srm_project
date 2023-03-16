@@ -71,12 +71,13 @@ public class SrinformationController {
 		List<Prgrs> prgrs = progressService.getRrgrs();
 
 		log.info(srInfoFilter);
-		int totalRows = srinformationService.getTotalRow(page, srInfoFilter);
+		
+		int totalRows = srinformationService.getTotalRow(page, srInfoFilter, auth.getAuthorities().stream().findFirst().get().toString());
 		Pager pager = new Pager(18, totalRows, page);
 		log.info(pager);
 		// log.info(totalRows);
 		if (totalRows != 0) {
-			List<SrinformationList> srlist = srinformationService.getList(pager, srInfoFilter, sort);
+			List<SrinformationList> srlist = srinformationService.getList(pager, srInfoFilter, sort, auth.getAuthorities().stream().findFirst().get().toString());
 			SrdemandDetail sd = srDemandService.getSrDemandDetail(srlist.get(0).getDmndNo());
 			SrplanInformation sp = srinformationService.getPlan(srlist.get(0).getDmndNo());
 			List<Dept> deptList = srinformationService.getDeptList();

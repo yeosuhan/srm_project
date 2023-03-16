@@ -14,6 +14,14 @@ table, th, td {
 	text-align: center;
 	line-height: 35px;
 }
+
+#headerFirst {
+	background: #4C1342;
+}
+
+.card .card-header {
+	background: linear-gradient(135deg, #360940 10%, #782748 100%);
+}
 </style>
 <script>
 	function getClient(cid) {
@@ -56,12 +64,21 @@ table, th, td {
 			<!-- *********** -->
 			<%-- 고객 목록  --%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card"  style="height:680px;">
-					<div class="card-header">
+				<div class="card" style="height: 675px;">
+					<div class="card-header" id="headerFirst">
 						<h5 style="font-weight: bold;">고객 관리</h5>
-						<hr/>
+						<div class="card-header-right">
+							<ul class="list-unstyled card-option" align="right">
+								<li><i class="fa fa fa-wrench open-card-option"></i></li>
+								<li><i class="fa fa-window-maximize full-card"></i></li>
+								<li><i class="fa fa-refresh reload-card"></i></li>
+							</ul>
+						</div>
+					</div>
+					<div class="card-block"
+						style="padding-top: 20px; padding-bottom: 10px;">
 						<%-- 검색 기능 --%>
-						<div class="mr-5" style="height: 30px;">
+						<div class="mr-5">
 							<form id="clientFilterForm" onsubmit="return searchClient()">
 								<div class="form-group row">
 									<label class="col-sm-1 col-form-label text-right"
@@ -77,7 +94,7 @@ table, th, td {
 											id="instNmFilter" value="${instNm}">
 									</div>
 									<div class="col-sm-4 d-flex justify-content-end">
-										<button class="btn btn-oti btn-sm waves-effect waves-light ">검색</button>
+										<button class="btn btn-oti waves-effect waves-light ">검색</button>
 									</div>
 								</div>
 							</form>
@@ -121,13 +138,6 @@ table, th, td {
 				<div class="card">
 					<div class="card-header">
 						<h5 style="font-weight: bold;">기관명</h5>
-						<div class="card-header-right">
-							<ul class="list-unstyled card-option" align="right">
-								<li><i class="fa fa fa-wrench open-card-option"></i></li>
-								<li><i class="fa fa-window-maximize full-card"></i></li>
-								<li><i class="fa fa-refresh reload-card"></i></li>
-							</ul>
-						</div>
 					</div>
 					<div class="card-block"
 						style="justify-content: center; text-align: center;">
@@ -165,11 +175,11 @@ table, th, td {
 							<p class="col-sm-5 font-weight-bold">기관 전화번호</p>
 							<div class="col-sm-7" id="MClientInsTel">${client.institution.instTelno}</div>
 						</div>
-						<div class="row" style="height:50px;">
+						<div class="row" style="height: 50px;">
 							<p class="col-sm-5 font-weight-bold">기관 주소</p>
 							<div class="col-sm-7" id="MClientInsAddr">${client.institution.instAddr}</div>
 						</div>
-						
+
 						<div class="row">
 							<p class="col-sm-5 font-weight-bold">상세 주소</p>
 							<div class="col-sm-7" id="MClientInsAddrDetail">${client.institution.instDetailAddr}</div>
