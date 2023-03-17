@@ -11,21 +11,21 @@
 	</script>
 <style>
 	.modal {
-	position: block;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background: rgba(0, 0, 0, 0.4);
-}
-
-.m.body {
-	height: 50vh;
-	overflow-y: auto;
-}
+		position: block;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: rgba(0, 0, 0, 0.4);
+	}
+	
+	.m.body {
+		height: 50vh;
+		overflow-y: auto;
+	}
 </style>
 <!-- Basic Form Inputs card start------------------------------------------------------ -->
-<div class="modal-dialog">
+<div class="mt-5 pr-5 pl-5" style="width: 60%; margin: auto; font-size: 14px; !important">
 	<div class="modal-content">
 		<div class="modal-header">
 			<h5 style="color:white;">공지사항 작성</h5>

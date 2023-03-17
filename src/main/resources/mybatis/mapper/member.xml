@@ -105,6 +105,7 @@
             PSWD ,
             FLNM ,
             ADDR ,
+            ADDR_DETAIL as addrDetail,
             TELNO ,
             EML ,
             m.INST_CD ,
@@ -146,7 +147,15 @@
    <!-- 멤버의 내 정보 수정 -->
    <update id="updateMember" parameterType="member">
        UPDATE MEMBERS
-       SET PSWD=#{member.pswd}, ADDR=#{member.addr}, TELNO=#{member.telNo}, EML=#{member.eml}
+       SET PSWD=#{member.pswd},
+       <if test="member.addr != null"> 
+      	 ADDR=#{member.addr}, 
+       </if>
+       <if test="member.addrDetail != null"> 
+      	 ADDR_DETAIL=#{member.addrDetail},
+       </if>
+       TELNO=#{member.telNo},
+        EML=#{member.eml}
        WHERE MEMBER_ID=#{member.memberId}
    </update>   
    
@@ -219,6 +228,7 @@
       <id property="pswd" column="PSWD"/>
       <id property="flnm" column="FLNM"/>
       <id property="addr" column="ADDR"/>
+      <id property="addrDetail" column="ADDR_DETAIL"/>
       <id property="telNo" column="TELNO"/>
       <id property="eml" column="EML"/>
       <id property="instCd" column="INST_CD"/>

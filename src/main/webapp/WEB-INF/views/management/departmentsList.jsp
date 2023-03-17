@@ -89,7 +89,7 @@ function searchDept(){
 										<div class="card-body text-center">
 											<p>
 												<img class=" img-fluid"
-													src="${pageContext.request.contextPath}/resources/assets/images/ejexample.png"
+													src="${pageContext.request.contextPath}/member/img/${department.mngrId}"
 													alt="card image">
 											</p>
 											<h4 class="card-title">${department.deptNm}</h4>

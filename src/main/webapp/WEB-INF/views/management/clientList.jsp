@@ -36,6 +36,8 @@ table, th, td {
 						clientId : cid
 					},
 					success : function(res) {
+						$("#pimg").html('<img src="${pageContext.request.contextPath}/member/img/' + res.memberId +
+							'"   style="height: 200px; width: 200px; align-content: center;">');
 						$("#MClientId").text(res.memberId);
 						$("#MClientName").text(res.flnm);
 						$("#MClientTel").text(res.telNo);
@@ -82,13 +84,13 @@ table, th, td {
 							<form id="clientFilterForm" onsubmit="return searchClient()">
 								<div class="form-group row">
 									<label class="col-sm-1 col-form-label text-right"
-										style="font-size: 14;">이름</label>
+										style="font-size: 14; font-weight: bold">이름</label>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" name="flnm"
 											id="flnmFilter" value="${flnm}">
 									</div>
 									<label class="col-sm-2 col-form-label text-right"
-										style="font-size: 14;">소속기관</label>
+										style="font-size: 14; font-weight: bold">소속기관</label>
 									<div class="col-sm-3">
 										<input type="text" class="form-control" name="instNm"
 											id="instNmFilter" value="${instNm}">
@@ -102,25 +104,25 @@ table, th, td {
 					</div>
 					<div class="card-block table-border-style p-0">
 						<div class="table-responsive">
-							<table class="table table-hover" style="font-size: 12;">
-								<thead>
-									<tr>
-										<th>번호</th>
-										<th>아이디</th>
-										<th>이름</th>
-										<th>전화번호</th>
-										<th>소속기관</th>
+							<table class="table table-hover" >
+								<thead style="font-size: 15px;">
+									<tr style="font-size: 15px;">
+										<th style="font-size: 15px;">번호</th>
+										<th style="font-size: 15px;">아이디</th>
+										<th style="font-size: 15px;">이름</th>
+										<th style="font-size: 15px;">전화번호</th>
+										<th style="font-size: 15px;">소속기관</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="client" items="${clientList}"
 										varStatus="status">
-										<tr onclick="getClient('${client.memberId}')">
-											<th>${status.count}</th>
-											<td>${client.memberId}</td>
-											<td>${client.flnm}</td>
-											<td>${client.telNo}</td>
-											<td>${client.institution.instNm}</td>
+										<tr onclick="getClient('${client.memberId}')" style="font-size: 15px;">
+											<th style="font-size: 15px;">${status.count}</th>
+											<td style="font-size: 15px; text-align: left;">${client.memberId}</td>
+											<td style="font-size: 15px;">${client.flnm}</td>
+											<td style="font-size: 15px;">${client.telNo}</td>
+											<td style="font-size: 15px;">${client.institution.instNm}</td>
 										</tr>
 									</c:forEach>
 
@@ -134,55 +136,55 @@ table, th, td {
 			</div>
 			<%-- 고객 목록 끝 --%>
 			<%-- 고객 상세조회 카드--%>
-			<div class="col-xl-4 col-md-12">
+			<div class="col-xl-4 col-md-12" style="font-size: 15px;">
 				<div class="card">
 					<div class="card-header">
-						<h5 style="font-weight: bold;">기관명</h5>
+						<h5 style="font-weight: bold;">고객 상세</h5>
 					</div>
 					<div class="card-block"
 						style="justify-content: center; text-align: center;">
-						<div class="my-2">
-							<img src="/resources/assets/images/ejexample.png"
+						<div class="my-2" id ="pimg">
+							<img src="${pageContext.request.contextPath}/member/img/${client.memberId}"
 								style="height: 200px; width: 200px; align-content: center;">
 						</div>
 					</div>
-					<div class="card-block">
-						<div class="row">
-							<p class="col-sm-5 font-weight-bold">아이디</p>
-							<div class="col-sm-7" id="MClientId">${client.memberId}</div>
+					<div class="card-block" style="font-size: 15px;">
+						<div class="row" style="font-size: 15px;">
+							<p class="col-sm-5 font-weight-bold" style="font-size: 15px;">아이디</p>
+							<div class="col-sm-7" id="MClientId" style="font-size: 15px;">${client.memberId}</div>
 						</div>
 						<div class="row">
-							<p class="col-sm-5 font-weight-bold">이름</p>
-							<div class="col-sm-7" id="MClientName">${client.flnm}</div>
+							<p class="col-sm-5 font-weight-bold" style="font-size: 15px;">이름</p>
+							<div class="col-sm-7" id="MClientName" style="font-size: 15px;">${client.flnm}</div>
 						</div>
 						<div class="row">
-							<p class="col-sm-5 font-weight-bold">전화번호</p>
-							<div class="col-sm-7" id="MClientTel">${client.telNo}</div>
+							<p class="col-sm-5 font-weight-bold" style="font-size: 15px;">전화번호</p>
+							<div class="col-sm-7" id="MClientTel" style="font-size: 15px;">${client.telNo}</div>
 						</div>
 						<div class="row">
-							<p class="col-sm-5 font-weight-bold">이메일</p>
-							<div class="col-sm-7" id="MClientemail">${client.eml}</div>
+							<p class="col-sm-5 font-weight-bold" style="font-size: 15px;">이메일</p>
+							<div class="col-sm-7" id="MClientemail" style="font-size: 15px;">${client.eml}</div>
 						</div>
 						<div class="row">
-							<p class="col-sm-5 font-weight-bold">주소</p>
-							<div class="col-sm-7" id="MClientAddr">${client.addr}</div>
+							<p class="col-sm-5 font-weight-bold" style="font-size: 15px;">주소</p>
+							<div class="col-sm-7" id="MClientAddr" style="font-size: 15px;">${client.addr}</div>
 						</div>
 						<div class="row">
-							<p class="col-sm-5 font-weight-bold">소속기관</p>
-							<div class="col-sm-7" id="MClientIns">${client.institution.instNm}</div>
+							<p class="col-sm-5 font-weight-bold" style="font-size: 15px;">소속기관</p>
+							<div class="col-sm-7" id="MClientIns" style="font-size: 15px;">${client.institution.instNm}</div>
 						</div>
 						<div class="row">
-							<p class="col-sm-5 font-weight-bold">기관 전화번호</p>
-							<div class="col-sm-7" id="MClientInsTel">${client.institution.instTelno}</div>
+							<p class="col-sm-5 font-weight-bold" style="font-size: 15px;">기관 전화번호</p>
+							<div class="col-sm-7" id="MClientInsTel" style="font-size: 15px;">${client.institution.instTelno}</div>
 						</div>
 						<div class="row" style="height: 50px;">
-							<p class="col-sm-5 font-weight-bold">기관 주소</p>
-							<div class="col-sm-7" id="MClientInsAddr">${client.institution.instAddr}</div>
+							<p class="col-sm-5 font-weight-bold" style="font-size: 15px;">기관 주소</p>
+							<div class="col-sm-7" id="MClientInsAddr" style="font-size: 15px;">${client.institution.instAddr}</div>
 						</div>
 
 						<div class="row">
-							<p class="col-sm-5 font-weight-bold">상세 주소</p>
-							<div class="col-sm-7" id="MClientInsAddrDetail">${client.institution.instDetailAddr}</div>
+							<p class="col-sm-5 font-weight-bold" style="font-size: 15px;">상세 주소</p>
+							<div class="col-sm-7" id="MClientInsAddrDetail" style="font-size: 15px;">${client.institution.instDetailAddr}</div>
 						</div>
 					</div>
 				</div>

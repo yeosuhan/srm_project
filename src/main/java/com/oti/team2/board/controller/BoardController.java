@@ -32,16 +32,19 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/board")
 @Log4j2
 public class BoardController {
-
+	
 	@Autowired
 	private ISrinformationService srinformationService;
-
+	
 	@Autowired
 	private IBoardService boardService;
 
+	
 	@GetMapping("/list")
 	public String getBoardList(@RequestParam(name = "type", required = true, defaultValue = "qna") String type,
-			@ModelAttribute BoardFilterDto boardFilterDto, Model model, Authentication auth,
+			@ModelAttribute BoardFilterDto boardFilterDto,
+			Model model, 
+			Authentication auth,
 			@RequestParam(required = true, name = "bbsNo", defaultValue = "") String bbsNo,
 			@RequestParam(required = true, name = "view", defaultValue = "board") String view,
 			@RequestParam(required = true, name = "page", defaultValue = "1") int page) throws MalformedURLException {
@@ -49,31 +52,28 @@ public class BoardController {
 		model.addAttribute("memberId", memberId);
 		log.info(memberId);
 		log.info(boardFilterDto);
-		model.addAttribute("boardFilterDto", boardFilterDto);
+		model.addAttribute("boardFilterDto",boardFilterDto);
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		List<BoardListDto> list = null;
 		Pager pager = null;
-		// if(type == null) type = boardFilterDto.getType();
+		
 		boardFilterDto.setBtype(type);
-		if (role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
-			if (view.equals("myportal"))
-				pager = new Pager(5, boardService.getTotalRow(type, memberId, boardFilterDto), page);
-			else
-				pager = new Pager(10, boardService.getTotalRow(type, memberId, boardFilterDto), page);
-
+		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
+			if(view.equals("myportal")) pager = new Pager(6,boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			else pager = new Pager(10,boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			
 			list = boardService.getBoardList(type, memberId, pager, boardFilterDto);
 			model.addAttribute("qPager", pager);
 			model.addAttribute("qnaList", list);
-		} else {
-			if (view.equals("myportal"))
-				pager = new Pager(5, boardService.getTotalRow(type, null, boardFilterDto), page);
-			else
-				pager = new Pager(10, boardService.getTotalRow(type, null, boardFilterDto), page);
-
+		}
+		else {
+			if(view.equals("myportal")) pager = new Pager(6,boardService.getTotalRow(type, null, boardFilterDto), page);
+			else pager = new Pager(10,boardService.getTotalRow(type, null, boardFilterDto), page);
+			
 			list = boardService.getBoardList(type, null, pager, boardFilterDto);
-			if (type.equals("qna")) {
-				if (role.equals(Auth.ROLE_DEVELOPER.toString())) {
-					pager = new Pager(10, boardService.getcountByEmpId(memberId, boardFilterDto), 1);
+			if(type.equals("qna")) {
+				if(role.equals(Auth.ROLE_DEVELOPER.toString())) {
+					pager = new Pager(10,boardService.getcountByEmpId(memberId, boardFilterDto), 1);
 					list = boardService.getBoardListByEmpId(memberId, pager, boardFilterDto);
 				}
 				model.addAttribute("qPager", pager);
@@ -81,105 +81,100 @@ public class BoardController {
 			} else {
 				model.addAttribute("nPager", pager);
 				model.addAttribute("noticeList", list);
-			}
-		}
+			}		
+		}		
 		log.info(pager);
 		Board board = null;
-		if (!bbsNo.equals("")) {
+		if(!bbsNo.equals("")) {
 			board = boardService.getBoard(Integer.parseInt(bbsNo));
 			model.addAttribute("board", board);
-		} else if (list.size() > 0) {
+		}
+		else if(list.size()>0) {
 			board = boardService.getBoard(list.get(0).getBbsNo());
 			model.addAttribute("board", board);
 		}
-
-		if (view.equals("myportal")) {
+		
+		if(view.equals("myportal")) {
 			log.info("여기 ~~~~~~");
 			log.info(pager);
 			return "mytodo/qna";
 		}
-		if (type.equals("notice")) {
+		if(type.equals("notice")) {
 			log.info("notice ~~");
 			return "board/noticeList";
 		}
 		log.info("qna ~~");
 		return "board/qnaList";
 	}
-
+	
 	@GetMapping("/detail")
-	public String getBoardList(@RequestParam("bbsNo") int bbsNo, Model model, Authentication auth)
-			throws MalformedURLException {
+	public String getBoardList(@RequestParam("bbsNo") int bbsNo, Model model, Authentication auth) throws MalformedURLException {
 		String memberId = auth.getName();
 		model.addAttribute("memberId", memberId);
-
+		
 		Board board = boardService.getBoard(bbsNo);
 		log.info(board);
 		model.addAttribute("board", board);
-
-		if (board.getBbsType().equals("NOTICE")) {
+		
+		if(board.getBbsType().equals("NOTICE")) {
 			// 조회수 +1 증가
-			// log.info("조회수 증가 ~~~ ");
+			//log.info("조회수 증가 ~~~ ");
 			boardService.updateInqCnt(bbsNo);
 			return "board/notice-detail";
 		}
-
+		
 		return "board/qna-detail";
 	}
-
+	
 	// 문의사항 작성을 위해 현재 사용자의 요청번호 모두 가져오기
 	@GetMapping("/write")
 	public String getSrNoList(@RequestParam("type") String type, Authentication auth, Model model) {
 		String clientId = auth.getName();
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		model.addAttribute("clientId", clientId);
-//      log.info(role);
-		if (type.equals("qna") && role.equals(Auth.ROLE_CLIENT.toString())) {
+//		log.info(role);
+		if(type.equals("qna") && role.equals(Auth.ROLE_CLIENT.toString())) {
 			List<SRKeyDto> list = srinformationService.getSrNoAndDmndNo(clientId);
 			model.addAttribute("srList", list);
-//         log.info(list);
-			return "board/qna-write";
+//			log.info(list);
+			return "board/qna-write";		
 		}
 		return "board/notice-write";
 	}
-
+	
 	@PostMapping("/write")
 	public String postBoard(BoardRequestDto boardRequestDto) throws IllegalStateException, IOException {
 		log.info(boardRequestDto);
-
+		
 		boardService.addBoard(boardRequestDto);
-		if (boardRequestDto.getBbsType().equals("NOTICE"))
-			return "redirect:/board/list?type=notice";
+		if(boardRequestDto.getBbsType().equals("NOTICE")) return "redirect:/board/list?type=notice";
 		return "redirect:/board/list?type=qna";
 	}
-
+	
 	@GetMapping("/update/{bbsNo}")
-	public String getUpdateForm(@PathVariable("bbsNo") int bbsNo, Authentication auth, Model model)
-			throws MalformedURLException {
+	public String getUpdateForm(@PathVariable("bbsNo") int bbsNo, Authentication auth, Model model) throws MalformedURLException {
 		Board board = boardService.getBoard(bbsNo);
 		model.addAttribute("board", board);
 		log.info(board);
-		if (board.getBbsType().equals("QNA"))
-			return "board/qna-update";
-
+		if(board.getBbsType().equals("QNA")) return "board/qna-update";
+		
 		return "board/notice-update";
 	}
-
+	
 	@PostMapping("/update")
-	public String updateBoard(BoardUpdateDto updateDto) throws IllegalStateException, IOException {
+	public String updateBoard(BoardUpdateDto updateDto) throws IllegalStateException, IOException{
 		log.info(updateDto);
 		boardService.updateBoard(updateDto);
-		if (updateDto.getBbsType().equals("NOTICE"))
-			return "redirect:/board/list?type=notice";
+		if(updateDto.getBbsType().equals("NOTICE")) return "redirect:/board/list?type=notice";
 		return "redirect:/board/list?type=qna";
 	}
-
+	
 	@GetMapping("/delete/{bbsNo}")
-	public String deleteBoard(@PathVariable("bbsNo") int bbsNo, @RequestParam("type") String type) {
+	public String deleteBoard(@PathVariable("bbsNo") int bbsNo, @RequestParam("type") String type){
 		log.info("게시판 삭제 들어옴");
 		boardService.deleteBoard(bbsNo);
-		if (type.equals("qna"))
-			return "redirect:/board/list?type=qna";
-
+		if(type.equals("qna")) return "redirect:/board/list?type=qna";
+		
 		return "redirect:/board/list?type=notice";
 	}
 }

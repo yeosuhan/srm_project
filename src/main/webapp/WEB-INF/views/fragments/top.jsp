@@ -16,7 +16,7 @@
 
 				var timer = setInterval(
 						function() {
-							if (parseInt(localStorage.getItem('logintime'), 10) > 5 * 60) {
+							if (parseInt(localStorage.getItem('logintime'), 10) > 0) {
 								$("#loginTime").text(
 										timeFormate(parseInt(localStorage
 												.getItem('logintime'), 10)));
@@ -26,15 +26,8 @@
 														.getItem('logintime'),
 														10) - 1));
 							}
-							// // 세션 만료 5분 전일 경우
-							else if (parseInt(
-									localStorage.getItem('logintime'), 10) <= 5 * 60) {
-								console.log("5분 전");
-								/* $('logintime').css('', 'black'); */
-							} else if (parseInt(localStorage
-									.getItem('logintime'), 10) = 0) {
+							 else {
 								showOtiAlert();
-								logOut();
 							}
 
 						}, 1000);
@@ -179,15 +172,15 @@
 					<ul class="nav-right">
 						<%-- 알림 --%>
 						<li class="header-notification" style="margin-top: 20px"><span
-							id="alertBadge" class="badge bg-c-yellow" style=""></span> <a
+							id="alertBadge" class="badge bg-c-yellow" style="width: 15px; height: 15px;"></span> <a
 							href="#!" id="alertBtn" class="waves-effect waves-light"
 							onclick="getAlertList();event.preventDefault();"
 							style="display: block; padding-right: 4px"> <i
-								class="far fa-bell" style="font-size: 19px;"></i>
+								class="far fa-bell" style="font-size: 30px;"></i>
 						</a>
 
 							<div class="show-notification" onclick='event.stopPropagation()'
-								style="display: none; width: 500px;">
+								style="display: none; width: 600px;">
 								<ul>
 									<li style="color: white;" id="mes">
 										<h6>알림 메시지</h6>
@@ -198,43 +191,43 @@
 									style="width: 100%; margin: 0px">
 									<sec:authorize access="hasRole('ROLE_CLIENT')">
 										<li class="nav-item" style="padding: 0px"><a
-											class="nav-link active" style="font-size: 10px;"
+											class="nav-link active" style="font-size: 15px; font-weight: bold;"
 											data-toggle="tab" href="#rfltTab" role="tab">반영요청</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
-											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#chgDmndTab" role="tab">완료예정일 변경</a>
+											class="nav-link" style="font-size: 13px; font-weight: bold;" data-toggle="tab"
+											href="#chgDmndTab" role="tab">완료요청일 변경</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
-											class="nav-link" style="font-size: 10px;" data-toggle="tab"
+											class="nav-link" style="font-size: 15px;" data-toggle="tab"
 											href="#cancleTab" role="tab">개발취소</a>
 											<div class="slide"></div></li>
 									</sec:authorize>
 									<sec:authorize access="hasRole('ROLE_DEVELOPER')">
 										<li class="nav-item" style="padding: 0px"><a
-											class="nav-link active" style="font-size: 10px;"
+											class="nav-link active" style="font-size: 15px; font-weight: bold;"
 											data-toggle="tab" href="#rfltTab" role="tab">반영요청</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
-											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#developerTab" role="tab">완료예정일 변경</a>
+											class="nav-link" style="font-size: 15px; font-weight: bold;" data-toggle="tab"
+											href="#developerTab" role="tab">완료요청일 변경</a>
 											<div class="slide"></div></li>
 									</sec:authorize>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">
 										<li class="nav-item" style="padding: 0px"><a
-											class="nav-link active" style="font-size: 10px;"
+											class="nav-link active" style="font-size: 15px; font-weight: bold;"
 											data-toggle="tab" href="#rfltTab" role="tab">반영요청</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
-											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#chgDmndTab" role="tab">완료예정일 변경</a>
+											class="nav-link" style="font-size: 15px; font-weight: bold;" data-toggle="tab"
+											href="#chgDmndTab" role="tab">완료요청일 변경</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
-											class="nav-link" style="font-size: 10px;" data-toggle="tab"
-											href="#developerTab" role="tab">완료예정일 변경(from Dev)</a>
+											class="nav-link" style="font-size: 15px; font-weight: bold;" data-toggle="tab"
+											href="#developerTab" role="tab">완료요청일 변경(from Dev)</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
-											class="nav-link" style="font-size: 10px;" data-toggle="tab"
+											class="nav-link" style="font-size: 15px; font-weight: bold;" data-toggle="tab"
 											href="#cancleTab" role="tab">개발취소</a>
 											<div class="slide"></div></li>
 									</sec:authorize>
