@@ -21,9 +21,11 @@ public interface ISrinformationService {
 	 * @param srInfoFilter
 	 * @param pager
 	 * @param role 
+	 * @param by 
+	 * @param ey 
 	 * @return sr진척 목록 조회
 	 */
-	List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort, String role);
+	List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort, String role, String ey, String by);
 
 	/**
 	 * @author 여수한 작성일자 : 2023-03-02
@@ -113,4 +115,6 @@ public interface ISrinformationService {
 
 	
 	void SrListdownload(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	void updateEndYmdBySrNo(String srNo);
 }

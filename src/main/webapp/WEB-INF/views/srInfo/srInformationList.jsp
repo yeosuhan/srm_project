@@ -44,7 +44,6 @@
 	});
 	</c:if>
 </script>
-
 <style>
 .ui-datepicker-trigger {
 	width: 29px;
@@ -352,15 +351,13 @@ font-size: 13px !important;
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th style="font-size: 15px;">SR번호 <c:if
-														test="${sort eq 'DESC'}">
-														<a
-															href="${pageContext.request.contextPath}/srinformation/list"
+												<th style="font-size: 15px;">SR번호
+												 <c:if test="${sort eq 'DESC' || sort eq '1'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
 															style="color: #782748; font-size: 24px;"></i></a>
 													</c:if> <c:if test="${sort eq 'ASC'}">
-														<a
-															href="${pageContext.request.contextPath}/srinformation/list"
+														<a href="${pageContext.request.contextPath}/srinformation/list"
 															class="sortBtnDesc"><i class="fas fa-caret-up"
 															style="color: #782748; font-size: 24px;"></i></a>
 													</c:if>
@@ -369,8 +366,26 @@ font-size: 13px !important;
 												<th style="font-size: 15px;">시스템구분</th>
 												<th style="font-size: 15px;">업무구분</th>
 												<th style="font-size: 15px;">요청자</th>
-												<th style="font-size: 15px;">SR요청일</th>
-												<th style="font-size: 15px;">완료예정일</th>
+												<th style="font-size: 15px;">완료요청일
+											 <c:if test="${by eq 'DESC' || by eq '1'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
+															class="sortBtnAscBy"><i class="fas fa-caret-down"
+															style="color: #782748; font-size: 24px;"></i></a>
+													</c:if> <c:if test="${by eq 'ASC'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
+															class="sortBtnDescBy"><i class="fas fa-caret-up"
+															style="color: #782748; font-size: 24px;"></i></a>
+													</c:if></th>
+												<th style="font-size: 15px;">완료예정일
+												 <c:if test="${ey eq 'DESC'|| ey eq '1'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
+															class="sortBtnAscEy"><i class="fas fa-caret-down"
+															style="color: #782748; font-size: 24px;"></i></a>
+													</c:if> <c:if test="${ey eq 'ASC'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
+															class="sortBtnDescEy"><i class="fas fa-caret-up"
+															style="color: #782748; font-size: 24px;"></i></a>
+													</c:if></th>
 												<th style="font-size: 15px;">진행상태</th>
 											</tr>
 										</thead>
