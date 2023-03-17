@@ -4,7 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
 <style>
-
+table th{
+font-size: 14px !important;
+	}
+	
+table tbody td{
+font-size: 13px !important;
+	}
 </style>
 
 <div class="card">
@@ -26,9 +32,9 @@
 				<tr onclick="noticeDetail(${board.bbsNo})">
 					<th style="text-align: center;">${nPager.startRowNo + status.index}</th>
 					<c:choose>
-						<c:when test="${fn:length(board.bbsTtl) > 15}">
+						<c:when test="${fn:length(board.bbsTtl) > 20}">
 							<td id="ttl" class="text-left"><c:out
-									value="${fn:substring(board.bbsTtl,0,14)}" />...</td>
+									value="${fn:substring(board.bbsTtl,0,19)}" />...</td>
 						</c:when>
 						<c:otherwise>
 							<td id="ttl" class="text-left"><c:out

@@ -50,7 +50,7 @@
 		<div class="card-header" style="height: 50px;">
 			<div class="form-group row justify-content-between">
 				<div>
-					<h5>${board.bbsTtl}</h5>
+					<h5>상세보기</h5>
 				</div>
 				<div class="mr-3 mt-1 text-center" style="color: white">
 					<c:if test="${board.ansYn == false}">
@@ -65,18 +65,16 @@
 		<div class="card-block px-0 py-50">
 			<input type="hidden" value="${board.bbsNo}">
 			<div class="form-group row">
-				<div class="col-sm-2 font-weight-bold">작성일자</div>
-				<div class="col-sm-4">${board.wrtYmd}</div>
+				<div class="col-sm-2 font-weight-bold">제목</div>
+				<div class="col-sm-6">${board.bbsTtl}</div>
 				<div class="col-sm-2 font-weight-bold text-right">작성자</div>
 				<div class="col-sm-2">${board.wrtrNm}</div>
 			</div>
 			<div class="form-group row">
 				<p class="col-sm-2 font-weight-bold" style="line-height: 150px;">내용</p>
 				<div class="col-sm-9">
-					<input class="form-control"
-						style="border: none; height: 150px; background-color: #DFDEDE"
-						readonly value="${board.bbsCn}"></input>
-				</div>
+					<textarea class="form-control"
+						style="border: none;  height: 300px; background-color: #DFDEDE;">${board.bbsCn}</textarea>				</div>
 			</div>
 			<div class="form-group row m-0">
 				<p class="col-sm-2 font-weight-bold">첨부파일</p>
@@ -154,17 +152,16 @@
 								</a>
 							</c:if></td>
 					</tr>
-					<c:if test="${i.last and (board.comments.commpager.pageNo lt board.comments.commpager.endPageNo)}">
-							<tr class="commentList">
-								<td></td>
-								<td>
-									<a onclick="getComments(${board.bbsNo},${board.comments.commpager.pageNo + 1})"
-										class="font-weight-bold"
-										href="#">더 보기</a>
-								</td>
-								<td></td>
-							</tr>
-						</c:if>
+					<c:if
+						test="${i.last and (board.comments.commpager.pageNo lt board.comments.commpager.endPageNo)}">
+						<tr class="commentList">
+							<td></td>
+							<td><a
+								onclick="getComments(${board.bbsNo},${board.comments.commpager.pageNo + 1})"
+								class="font-weight-bold" href="#">더 보기</a></td>
+							<td></td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>

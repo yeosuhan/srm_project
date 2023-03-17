@@ -12,6 +12,14 @@
 #todoHT th, td {
 	text-align: center;
 }
+
+#todoHT th{
+font-size: 15px !important;
+	}
+	
+#todoHT tbody td{
+font-size: 15px !important;
+	}
 </style>
 <table id="todoHT" class="table table-hover"
 	style="table-layout: fixed;">

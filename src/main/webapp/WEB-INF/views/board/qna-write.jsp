@@ -3,11 +3,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+$(document).on('click', '#closewq', function(e) {
+	console.log("click event");
+	$('#writeQna').hide();
+});
+
+</script>
+
+<style>
+.modal {
+	position: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.4);
+}
+
+.m.body {
+	height: 50vh;
+	overflow-y: auto;
+}
+</style>
 <!-- Basic Form Inputs card start------------------------------------------------------ -->
-<div class="modal-dialog">
+<div class="mt-5 pr-5 pl-5" id="writeQna" style="width: 60%; margin: auto;">
 	<div class="modal-content">
 		<div class="modal-header">
-			<h5>문의사항 작성</h5>
+			<h5 style="color:white;">문의사항 작성</h5>
 		</div>
 		<div class="modal-body">
 			<form enctype="multipart/form-data" method="POST"
@@ -47,7 +70,9 @@
 			<div class="modal-footer d-flex justify-content-center">
 				<button type="button" onclick="goPost('QNA')"
 					class="btn btn-oti waves-effect waves-light mr-4">저장</button>
+				<button type="button" class="btn btn-oti waves-effect waves-light mr-4" id="closewq">닫기</button>
 			</div>
+			
 		</div>
 	</div>
 </div>

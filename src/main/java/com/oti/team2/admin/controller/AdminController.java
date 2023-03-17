@@ -305,8 +305,8 @@ public class AdminController {
 	public String getSrDemandList(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
 			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
-			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
-			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "dmndYmdStart" )  String dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") String dmndYmdEnd,
 			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
 			@RequestParam(required = false, name = "sysCd")String sysCd,
 			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
@@ -320,7 +320,7 @@ public class AdminController {
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, -1);
 			String stringDate = sdf.format(calendar.getTime());
-			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+			dmndYmdStart = stringDate;//기본값 한달전
 		}
 		srFilterDto.setDmndYmdStart(dmndYmdStart);
 		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
@@ -391,8 +391,8 @@ public class AdminController {
 	public void SrDemandListDownload(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
 			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
-			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
-			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "dmndYmdStart" )  String dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") String dmndYmdEnd,
 			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
 			@RequestParam(required = false, name = "sysCd")String sysCd,
 			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
@@ -405,7 +405,7 @@ public class AdminController {
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, -1);
 			String stringDate = sdf.format(calendar.getTime());
-			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+			dmndYmdStart = stringDate;//기본값 한달전
 		}
 		srFilterDto.setDmndYmdStart(dmndYmdStart);
 		srFilterDto.setDmndYmdEnd(dmndYmdEnd);

@@ -76,25 +76,23 @@
 				and b.WRTR_ID = #{clientId}
 			</if>
 			and BBS_TYPE = upper(#{type})
-				<trim suffixOverrides="and" prefix="and">
 					<if test="boardFilterDto != null">
 						<if test="boardFilterDto.dmndYmdStart != null">
-							<![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]>and
+							and <![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]>
 						</if>
 						<if test="boardFilterDto.dmndYmdEnd != null">
-							<![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> and
+							and <![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> 
 						</if>
 						<if test="boardFilterDto.ansYn != null">
-							<![CDATA[ ANS_YN = #{boardFilterDto.ansYn} ]]> and
+							and 	<![CDATA[ ANS_YN = #{boardFilterDto.ansYn} ]]> 
 						</if>
 						<if test="boardFilterDto.wrtrNm != null">
-							<![CDATA[m.FLNM LIKE %'||#{boardFilterDto.wrtrNm}||'%' ]]> and
+							and 	<![CDATA[m.FLNM LIKE '%'||#{boardFilterDto.wrtrNm}||'%' ]]> 
 						</if>
 						<if test="boardFilterDto.keyWord != null">
-							<![CDATA[BBS_CN LIKE '%'||#{boardFilterDto.keyWord}||'%']]> and
+							and <![CDATA[BBS_CN LIKE '%'||#{boardFilterDto.keyWord}||'%']]> 
 						</if>
 					</if>
-				</trim>
 		ORDER BY WRT_YMD DESC
 		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
