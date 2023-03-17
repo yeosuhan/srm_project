@@ -3,13 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<script src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 <div class="card_body" style="font-size: 12px; padding-top: 20px;">
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 		<div class="col col-sm-10">
 			<div class="form-control dmndNo"
-				style="font-size: 12px; width:100%;">${sd.dmndNo}</div>
+				style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
 		</div>
 	</div>
 	<div class="form-group row">
@@ -77,12 +78,18 @@
 				<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
 			</div>
 		</div>
-		<c:if test="${sd.sttsCd gt 1}">
+		<c:if test="${(sd.sttsCd) gt 1 and (sd.sttsNm) ne '개발취소'}">
 			<div class="col-sm-6 px-0">
 				<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
 				<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
 			</div>
 		</c:if>
+ 		<c:if test="${sd.sttsNm eq '개발취소'}">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">개발취소일</div>
+				<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
+			</div>
+		</c:if> 
 	</div>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
@@ -107,8 +114,7 @@
 		<label class="col-sm-2 col-form-label px-0 font-weight-bold"
 			style="line-height: 100px; font-size: 12px;">SR 내용</label>
 		<div class="col-sm-10">
-			<textarea class="form-control cn" style="width: 100%;height:120px;"
-				>${sd.cn}</textarea>
+			<textarea class="form-control cn" style="width: 100%; height: 120px;">${sd.cn}</textarea>
 		</div>
 	</div>
 	<div class="form-group row">
@@ -128,14 +134,17 @@
 		<c:if test="${sd.sttsCd == 0}">
 			<div class="col" style="text-align: right">
 				<button id="modbtn" style="float: right;"
-					class="btn btn-sm btn-oti center" onclick="updateSr('${sd.dmndNo}')">수정</button>
+					class="btn btn-sm btn-oti center"
+					onclick="updateSr('${sd.dmndNo}')">수정</button>
 				<div class="btn btn-sm btn-oti center"
-					style="float: right; margin-right: 5px;" onclick="deleteSr('${sd.dmndNo}')">삭제</div>
+					style="float: right; margin-right: 5px;"
+					onclick="deleteSr('${sd.dmndNo}')">삭제</div>
 			</div>
 		</c:if>
 		<c:if test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
 			<div class="col" style="text-align: right">
-				<div class='btn btn-sm btn-oti cancle' onclick='endSr()' style='float:right;'>반영요청</div> 
+				<div class='btn btn-sm btn-oti cancle' onclick='endSr()'
+					style='float: right;'>반영요청</div>
 			</div>
 		</c:if>
 	</div>

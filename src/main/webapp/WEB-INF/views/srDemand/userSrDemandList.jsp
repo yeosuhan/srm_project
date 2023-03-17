@@ -93,8 +93,7 @@ th {
 	background: rgba(0, 0, 0, 0.4);
 }
 
-.m.body {
-	: 50vh;
+.m.body { : 50vh;
 	overflow-y: auto;
 }
 
@@ -128,7 +127,6 @@ th {
 	color: #4C1342;
 	background-color: white !important;
 }
-
 </style>
 </head>
 
@@ -148,11 +146,12 @@ th {
 								<h5 style="font-weight: bold;">SR 요청 관리</h5>
 							</div>
 							<div class="col-1 mr-2">
-								<button class="btn btn-oti btn-sm" id="addbtn" style="font-size:14px">요청 등록</button>
+								<button class="btn btn-oti btn-sm" id="addbtn"
+									style="font-size: 14px">요청 등록</button>
 							</div>
 						</div>
 					</div>
-					<div class="card-body" style="height:70px;">
+					<div class="card-body" style="height: 70px;">
 						<form id="srSearchForm"
 							action="${pageContext.request.contextPath}/srdemand/list">
 							<div class="row">
@@ -253,8 +252,9 @@ th {
 										style="font-size: 12;">
 										<thead>
 											<tr>
-												<th style="width: 1px;font-size:15px;"></th>
-												<th style="font-size:15px;">요청 번호 <c:if test="${sort eq 'DESC'}">
+												<th style="width: 1px; font-size: 15px;"></th>
+												<th style="font-size: 15px;">요청 번호 <c:if
+														test="${sort eq 'DESC'}">
 														<a
 															href="${pageContext.request.contextPath}/admin/srdemand/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
@@ -267,13 +267,13 @@ th {
 													</c:if>
 
 												</th>
-												<th style="font-size:15px;">제목</th>
-												<th style="font-size:15px;">관련시스템</th>
-												<th style="width: 200px;font-size:15px;">등록자</th>
-												<th style="font-size:15px;">소속</th>
-												<th style="font-size:15px;">진행상태</th>
-												<th style="font-size:15px;">등록일</th>
-												<th style="font-size:15px;">완료예정일</th>
+												<th style="font-size: 15px;">제목</th>
+												<th style="font-size: 15px;">관련시스템</th>
+												<th style="width: 200px; font-size: 15px;">등록자</th>
+												<th style="font-size: 15px;">소속</th>
+												<th style="font-size: 15px;">진행상태</th>
+												<th style="font-size: 15px;">등록일</th>
+												<th style="font-size: 15px;">완료예정일</th>
 											</tr>
 										</thead>
 										<tbody id="dmndTbody">
@@ -312,7 +312,10 @@ th {
 																<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
 															</c:if></td>
 														<td>${srDemand.dmndYmd}</td>
-														<td>${srDemand.endYmd}</td>
+														<td><c:if test="${(srDemand.sttsNm) eq '개발취소'}">
+															-</c:if> <c:if test="${(srDemand.sttsNm) ne '개발취소'}">
+																${srDemand.endYmd}
+															</c:if></td>
 													</tr>
 												</c:forEach>
 											</c:if>

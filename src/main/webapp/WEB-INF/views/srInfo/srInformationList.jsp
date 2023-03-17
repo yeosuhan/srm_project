@@ -361,7 +361,7 @@ li:before {
 												<th style="font-size: 15px;">업무구분</th>
 												<th style="font-size: 15px; width: 200px;">SR명</th>
 												<th style="font-size: 15px;">요청자</th>
-												<th style="font-size: 15px;">완료요청일</th>
+												<th style="font-size: 15px;">SR요청일</th>
 												<th style="font-size: 15px;">완료예정일</th>
 												<th style="font-size: 15px;">진행상태</th>
 											</tr>
@@ -534,7 +534,7 @@ li:before {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold">SR요청일</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDDmndymd"
 													value="${sd.dmndYmd}">
@@ -1034,7 +1034,7 @@ li:before {
 													<th style="width: 1px;">순번</th>
 													<th>요청자명</th>
 													<th>요청유형</th>
-													<th>변경될 완료예정일</th>
+													<th>변경될 완료요청일</th>
 													<th>승인여부</th>
 												</tr>
 											</thead>
