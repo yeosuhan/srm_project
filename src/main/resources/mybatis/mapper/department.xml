@@ -4,18 +4,27 @@
 
 	<!-- 전체 부서 조회 -->
 	<select id="selectByMemberId" parameterType="map" resultType="department">		
-		select d.dept_cd as deptCd, dept_nm as deptNm, ofc_telno as ofcTelno, mngr_id as mngrId, m.flnm as flnm, dept_nope as deptNope
+		select d.dept_cd as deptCd, dept_nm as deptNm, ofc_telno as ofcTelno, mngr_id as mngrId, m.flnm as flnm
 		from departments d, members m
 		where 
-        <if test="deptFiltering.deptNm != null">
-             d.DEPT_NM LIKE '%'||#{deptFiltering.deptNm}||'%' AND
+        <if test="deptFilter.deptNm != null">
+             d.DEPT_NM LIKE '%'||#{deptFilter.deptNm}||'%' AND
          </if>
-         <if test="deptFiltering.flnm != null">
-             m.FLNM LIKE '%'||#{deptFiltering.flnm}||'%' AND
+         <if test="deptFilter.flnm != null">
+             m.FLNM LIKE '%'||#{deptFilter.flnm}||'%' AND
          </if>		
 		d.mngr_id = m.member_id
 		order by deptNm ASC	
 	</select>
+	
+	<!-- 부서 인원 수 가져오기 -->
+	<select id="selectCountBydeptCd" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(member_Id) as deptNope
+			from members m
+			where m.dept_cd=#{deptCd}
+			]]>
+		</select>
 
 	<!-- 신규 부서 등록 -->
 	<insert id="insertDept" parameterType="department">

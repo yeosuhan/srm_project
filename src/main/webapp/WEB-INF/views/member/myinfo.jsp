@@ -82,7 +82,7 @@ label>img {
 													test="${member.fileData ne null and (member.memberType ne 'ROLE_CLIENT')}">
 													<img id="defaultImage"
 														src='<c:url value="/member/profile/${member.memberId}"/>'
-														style="width: 300px; height: 300px; align-content: center;">
+														style="width: 230px; height: 230px; align-content: center;">
 												</c:if> <c:if
 													test="${(member.fileData ne null) and (member.memberType eq 'ROLE_CLIENT')}">
 													<img id="defaultImage"

@@ -13,7 +13,7 @@ font-size: 13px !important;
 	}
 </style>
 
-<div class="card">
+<div class="card" style="height:450px;">
 	<div class="card-header">
 		<h5 class="card-header-text">공지사항</h5>
 	</div>
@@ -32,9 +32,9 @@ font-size: 13px !important;
 				<tr onclick="noticeDetail(${board.bbsNo})">
 					<th style="text-align: center;">${nPager.startRowNo + status.index}</th>
 					<c:choose>
-						<c:when test="${fn:length(board.bbsTtl) > 20}">
-							<td id="ttl" class="text-left font-weight-bold"><c:out
-									value="${fn:substring(board.bbsTtl,0,19)}" />...</td>
+						<c:when test="${fn:length(board.bbsTtl) > 19}">
+							<td id="ttl" class="text-left"><c:out
+									value="${fn:substring(board.bbsTtl,0,18)}" />...</td>
 						</c:when>
 						<c:otherwise>
 							<td id="ttl" class="text-left font-weight-bold"><c:out
@@ -43,12 +43,13 @@ font-size: 13px !important;
 					</c:choose>
 					<td>${board.wrtNm}</td>
 					<td>${board.wrtYmd}</td>
-					<td>${board.inqCnt}</td>
+					<td class="text-center">${board.inqCnt}</td>
 
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<!-- 페이징 처리 -->
+	<br/>
 	<%@ include file="/WEB-INF/views/mytodo/mNoticePager.jsp"%>
 </div>

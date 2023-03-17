@@ -370,6 +370,7 @@ font-size: 13px !important;
 												<th style="font-size: 15px;">업무구분</th>
 												<th style="font-size: 15px;">요청자</th>
 												<th style="font-size: 15px;">SR요청일</th>
+												<th style="font-size: 15px;">완료예정일</th>
 												<th style="font-size: 15px;">진행상태</th>
 											</tr>
 										</thead>

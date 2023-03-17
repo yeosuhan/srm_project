@@ -71,6 +71,10 @@
 				<div class="col-sm-2">${board.wrtrNm}</div>
 			</div>
 			<div class="form-group row">
+				<div class="col-sm-2 font-weight-bold">SR번호</div>
+				<div class="col-sm-4">${board.srNo}</div>
+			</div>
+			<div class="form-group row">
 				<p class="col-sm-2 font-weight-bold" style="line-height: 150px;">내용</p>
 				<div class="col-sm-9">
 					<textarea class="form-control"

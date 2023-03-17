@@ -10,9 +10,9 @@
 	src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
+
 <script>
-	</head>
-	<script>
+	
 <%-- 모달 실행 --%>
 	$(document).on('click', '#addbtn', function(e) {
 		console.log("click event");
@@ -130,6 +130,7 @@ width: 100%;
 	margin-right: 0;
 }
 </style>
+</head>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
 	<%@include file="/WEB-INF/views/fragments/sidebar.jsp"%>
@@ -240,9 +241,10 @@ width: 100%;
 								<div class="table-responsive">
 									<table class="table table-hover text-center">
 										<thead>
-											<tr style="padding:0px;">
+											<tr style="padding: 0px;">
 												<th style="width: 1px;"></th>
-												<th style="font-size:15px;">요청 번호 <c:if test="${sort eq 'DESC'}">
+												<th style="font-size: 15px;">요청 번호 <c:if
+														test="${sort eq 'DESC'}">
 														<a
 															href="${pageContext.request.contextPath}/admin/srdemand/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
@@ -261,6 +263,7 @@ width: 100%;
 												<th style="font-size:15px;">진행상태</th>
 												<th style="font-size:15px;">등록일</th>
 												<th style="font-size:15px;">완료예정일</th>
+
 											</tr>
 
 										</thead>

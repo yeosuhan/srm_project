@@ -94,7 +94,7 @@ th {
 }
 
 .m.body {
-	height: 50vh;
+	: 50vh;
 	overflow-y: auto;
 }
 
@@ -260,7 +260,7 @@ width: 100%;
 					</div>
 					<div class="card-block" id="list">
 						<div id="sales-analytics">
-							<div class="card-block table-border-style">
+							<div class="card-block table-border-style" style="height: 770px;">
 								<div class="table-responsive">
 									<table class="table table-hover text-center"
 										style="font-size: 12; width: 100%">
@@ -373,7 +373,7 @@ width: 100%;
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 										<div class="col col-sm-10">
-											<div class="form-control dmndNo"
+											<div class="form-control" id="dmndNo"
 												style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
 										</div>
 									</div>

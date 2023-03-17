@@ -73,27 +73,28 @@ public class AdminController {
 	 * @author 최은종
 	 * @return 부서 목록으로 리턴
 	 */
-	@GetMapping("/department/list")
-	public String getDepartmentList(Model model, @RequestParam(value = "deptNm", required = false) String deptNm,
-			@RequestParam(value = "flnm", required = false) String flnm, Authentication auth) {
-		log.info("departmentList 조회");
-		//검색
-		DeptFilterDto deptFilterDto = new DeptFilterDto();
-		if (deptNm != null) {
-			deptFilterDto.setDeptNm(deptNm);
-			model.addAttribute("deptNm", deptNm);
-		}
-		if (flnm != null) {
-			deptFilterDto.setFlnm(flnm);
-			model.addAttribute("flnm", flnm);
-		}
-		
-		//목록 불러오기
-		List<Department> departmentList = departmentService.getDepartmentList(deptFilterDto);
-		model.addAttribute("departmentList", departmentList);
+	   @GetMapping("/department/list")
+	   public String getDepartmentList(Model model, @RequestParam(value = "deptNm", required = false) String deptNm,
+	         @RequestParam(value = "flnm", required = false) String flnm, Authentication auth) {
+	      log.info("departmentList 조회");
+	      // 검색
+	      Department deptFilter = new Department();
+	      if (deptNm != null) {
+	         deptFilter.setDeptNm(deptNm);
+	         model.addAttribute("deptNm", deptNm);
+	      }
+	      if (flnm != null) {
+	         deptFilter.setFlnm(flnm);
+	         model.addAttribute("flnm", flnm);
+	      }
+	      // 목록 불러오기
+	      List<Department> departmentList = departmentService.getDepartmentList(deptFilter);
+	      log.info(departmentList);
 
-		return "management/departmentsList";
-	}
+	      model.addAttribute("departmentList", departmentList);
+
+	      return "management/departmentsList";
+	   }
 
 	/**
 	 * 신규부서 등록 메서드
