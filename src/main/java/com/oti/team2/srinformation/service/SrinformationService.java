@@ -60,8 +60,8 @@ public class SrinformationService implements ISrinformationService {
 	 * @return sr진척 목록 조회
 	 */
 	@Override
-	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort,String role) {
-		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter, sort,role);
+	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort,String role, String ey, String by) {
+		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter, sort,role, ey,by);
 		return srlist;
 	}
 
@@ -185,6 +185,7 @@ public class SrinformationService implements ISrinformationService {
 	 * 작성일자 : 2023-03-08
 	 * @return 개발취소시 계획종료일 SYSDATE
 	 */
+	@Override
 	public void updateEndYmdBySrNo(String srNo) {
 		srinformationDao.updateEndYmdBySrNo(srNo);
 	}

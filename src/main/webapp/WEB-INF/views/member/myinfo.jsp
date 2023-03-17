@@ -43,7 +43,6 @@ label>img {
 #headerFirst {
 	background: linear-gradient(135deg, #360940 10%, #782748 100%);
 }
-
 </style>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -134,6 +133,11 @@ label>img {
 								class="form-control" required="" value="${member.addr}">
 							<span class="form-bar"></span> <label class="float-label">주소</label>
 						</div>
+						<%-- <div class="form-group form-default" style="padding-top: 20px;">
+							<input value="${member.addrDetail}" class="form-control"
+								type="text" name="addrDetail" placeholder="상세주소"> <span
+								class="form-bar"></span>
+						</div> --%>
 						<c:if test="${member.memberType eq 'ROLE_CLIENT'}">
 							<div class="form-group form-default" style="display: flex;">
 								<input type="text" name="instNm" class="form-control"

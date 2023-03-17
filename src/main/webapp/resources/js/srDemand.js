@@ -248,7 +248,8 @@ function goDecline(dmndNo) {
 }
 
 function endSr() {
-   var dmndNo = document.getElementById("dmndNo").innerText;
+	var selectedElement = document.getElementById("dmndNo");
+	var dmndNo = selectedElement.options[selectedElement.selectedIndex].value;
    $.ajax({
       url : '/srdemand/end',
       type : 'POST',
