@@ -11,6 +11,8 @@ function getEmployee(employeeId){
 		type:"GET",
 		data:{employeeId:employeeId},
 		success:function(result){
+			$("#eimg").html('<img src="/member/img/' +employeeId +
+			'"   style="height: 200px; width: 200px; align-content: center;">');
 			$("#MEmployeeId").text(result.memberId);
 			$("#MEmployeeName").text(result.flnm);
 			$("#MEmployeeTel").text(result.telNo);

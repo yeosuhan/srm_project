@@ -16,7 +16,7 @@
 
 				var timer = setInterval(
 						function() {
-							if (parseInt(localStorage.getItem('logintime'), 10) > 5 * 60) {
+							if (parseInt(localStorage.getItem('logintime'), 10) > 0) {
 								$("#loginTime").text(
 										timeFormate(parseInt(localStorage
 												.getItem('logintime'), 10)));
@@ -26,15 +26,8 @@
 														.getItem('logintime'),
 														10) - 1));
 							}
-							// // 세션 만료 5분 전일 경우
-							else if (parseInt(
-									localStorage.getItem('logintime'), 10) <= 5 * 60) {
-								console.log("5분 전");
-								/* $('logintime').css('', 'black'); */
-							} else if (parseInt(localStorage
-									.getItem('logintime'), 10) = 0) {
+							 else {
 								showOtiAlert();
-								logOut();
 							}
 
 						}, 1000);

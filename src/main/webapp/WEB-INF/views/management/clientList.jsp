@@ -36,6 +36,8 @@ table, th, td {
 						clientId : cid
 					},
 					success : function(res) {
+						$("#pimg").html('<img src="${pageContext.request.contextPath}/member/img/' + res.memberId +
+							'"   style="height: 200px; width: 200px; align-content: center;">');
 						$("#MClientId").text(res.memberId);
 						$("#MClientName").text(res.flnm);
 						$("#MClientTel").text(res.telNo);
@@ -137,12 +139,12 @@ table, th, td {
 			<div class="col-xl-4 col-md-12" style="font-size: 15px;">
 				<div class="card">
 					<div class="card-header">
-						<h5 style="font-weight: bold;">기관명</h5>
+						<h5 style="font-weight: bold;">고객 상세</h5>
 					</div>
 					<div class="card-block"
 						style="justify-content: center; text-align: center;">
-						<div class="my-2">
-							<img src="/resources/assets/images/ejexample.png"
+						<div class="my-2" id ="pimg">
+							<img src="${pageContext.request.contextPath}/member/img/${client.memberId}"
 								style="height: 200px; width: 200px; align-content: center;">
 						</div>
 					</div>

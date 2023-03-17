@@ -64,7 +64,7 @@ function addSr() {
 				break;
 			}
 			
-			if(fsize > maxSize) {
+			if(fsize >= maxSize) {
 				flag = false;
 				alert("3MB이상의 파일은 업로드할 수 없습니다.")
 				break;
@@ -83,11 +83,12 @@ function addSr() {
 		        contentType: false,
 				success : function(res) {
 					alert("요청을 성공적으로 등록했습니다.");
+					location.href("/srdemand/list");
+
 				}			
 			});			
 		}
 		$("#addmodal").removeClass("show");
-		location.reload();
 	
 }
 

@@ -19,6 +19,7 @@ font-size: 15px !important;
 	
 #todoHT tbody td{
 font-size: 15px !important;
+   padding: 2	;
 	}
 </style>
 <table id="todoHT" class="table table-hover"

@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<script src="${pageContext.request.contextPath}/resources/js/textarea.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/textarea2.js"></script>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 <%-- 상세, 등록, 수정 --%>
 <script src="/resources/js/srDemand.js"></script>
@@ -126,17 +126,17 @@
 					<div class="form-group row">
 						<div class="col col-sm-2 font-weight-bold">관련 근거</div>
 						<div class="col col-sm-9">
-							<textarea rows="5" cols="80"  class="form-control" name="relGrundd" id="relGrundd" style="resize: none;" maxlength="500;"></textarea>
+							<textarea rows="5" cols="80"  class="form-control" name="relGrundd" id="tarea2" style="resize: none;" maxlength="500;"></textarea>
 						</div>
-						<p class="textCount" style="margin-top: 3px"></p>
+						<p class="textCount2" style="margin-top: 3px"></p>
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label font-weight-bold" style="line-height: 120px">SR
 							내용</label>
 						<div class="col-sm-9">
-							<textarea rows="5" cols="5" class="form-control" name="cnd" id="cnd"></textarea>
+							<textarea rows="5" cols="5" class="form-control" name="cnd" id="tarea1"></textarea>
 						</div>
-						<p class="textCount" style="margin-top: 3px"></p>
+						<p class="textCount1" style="margin-top: 3px"></p>
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label font-weight-bold">첨부파일</label>

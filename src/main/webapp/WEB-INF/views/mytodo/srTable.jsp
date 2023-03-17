@@ -12,8 +12,9 @@ font-size: 15px !important;
 	}
 	
 .srTable tbody td{
-font-size: 15px !important;
-	}
+	font-size: 15px !important;
+    padding: 2	;
+    }
 </style>
 <table class="table table-hover srTable" style="table-layout: fixed;">
 	<c:if test="${fn:length(srList) == 0 }">
@@ -57,7 +58,7 @@ font-size: 15px !important;
 				<td id="taskNm" class="text-left">${sr.taskNm}</td>
 				<c:choose>
 					<c:when test="${fn:length(sr.ttl) > 21}">
-						<td id="ttl" class="text-center"><c:out
+						<td id="ttl" class="text-left"><c:out
 								value="${fn:substring(sr.ttl,0,20)}" />...</td>
 					</c:when>
 					<c:otherwise>

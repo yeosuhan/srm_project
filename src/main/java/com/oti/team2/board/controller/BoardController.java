@@ -56,7 +56,7 @@ public class BoardController {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		List<BoardListDto> list = null;
 		Pager pager = null;
-		//if(type == null) type = boardFilterDto.getType();
+		
 		boardFilterDto.setBtype(type);
 		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
 			if(view.equals("myportal")) pager = new Pager(6,boardService.getTotalRow(type, memberId, boardFilterDto), page);

@@ -45,10 +45,10 @@ font-size: 15px !important;
 						</div>
 					</div>
 					<div class="card-body">
-
-						<form id="boardSearchForm"
+						<form id="nboardSearch"
 							action="${pageContext.request.contextPath}/board/list?type=notice"
-							> 
+							onsubmit="return nboardSearch()"> 
+							<input type="hidden" name="btype" value="notice">
 							<input type="hidden" name="type" value="notice">
 							<div class="row" style="height: 30px;">
 								<div class="col col-3 pr-0">
