@@ -9,14 +9,14 @@
  * 
  * */
 $(function() {
-	$('textarea').keyup(function(e) {
+	$('#tarea1').keyup(function(e) {
 		var content = $(this).val();
-
+		console.log("durld");
 		// 글자수 세기
 		if (content.length == 0 || content == "") {
-			$('.textCount').html('(0/500자)');
+			$('.textCount1').html('(0/500자)');
 		} else {
-			$('.textCount').html('('+ content.length + '/500자)');
+			$('.textCount1').html('('+ content.length + '/500자)');
 		}
 
 		// 글자수 제한
@@ -29,3 +29,23 @@ $(function() {
 	$('textarea').keyup();
 });
 
+$(function() {
+	$('#tarea2').keyup(function(e) {
+		var content = $(this).val();
+
+		// 글자수 세기
+		if (content.length == 0 || content == "") {
+			$('.textCount2').html('(0/500자)');
+		} else {
+			$('.textCount2').html('('+ content.length + '/500자)');
+		}
+
+		// 글자수 제한
+		if (content.length > 500) {
+			console.log("500자 초과")
+			$(this).val($(this).val().substring(0, 500));
+			alert('글자수는 최대 500자까지 입력 가능합니다.');
+		}
+	});	
+	$('textarea').keyup();
+});

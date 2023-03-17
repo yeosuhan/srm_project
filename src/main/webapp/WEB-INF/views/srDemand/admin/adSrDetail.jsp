@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="card_body" id="sddetail"
-	style="font-size: 12px; padding-top: 20px;">
+	style="font-size: 14px; padding-top: 20px;">
 	<div class="form-group row">
 		<div class="col col-sm-2 px-0 font-weight-bold">요청번호</div>
 		<div class="col col-sm-9">

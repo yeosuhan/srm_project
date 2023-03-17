@@ -7,28 +7,28 @@
 		<h5>상세보기</h5>
 	</div>
 	<div class="card-block">
-		<form enctype="multipart/form-data">
+		<form enctype="multipart/form-data" style="font-size: 15px;">
 			<input type="hidden" value="${board.bbsNo}">
-			<div class="form-group row">
+			<div class="form-group row ">
 				<div class="col-sm-2 font-weight-bold">작성일자</div>
-				<div class="col-sm-4">${board.wrtYmd}</div>
+				<div class="col-sm-6">${board.wrtYmd}</div>
 				<div class="col-sm-2 font-weight-bold text-right">조회수</div>
-				<div class="col-sm-2">${board.inqCnt}</div>
+				<div class="col-sm-2 text-right">${board.inqCnt}</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-2 font-weight-bold">제목</div>
-				<div class="col-sm-4">${board.bbsTtl}</div>
+				<div class="col-sm-6">${board.bbsTtl}</div>
 				<div class="col-sm-2 font-weight-bold text-right">작성자</div>
-				<div class="col-sm-2">${board.wrtrNm}</div>
+				<div class="col-sm-2 text-right">${board.wrtrNm}</div>
 			</div>
 			<div class="form-group row">
 				<p class="col-sm-2 font-weight-bold">내용</p>
 				<div class="col-sm-10">
-					<input class="form-control" value="${board.bbsCn}"
-						style="border: none; opacity: 0.5; height: 300px;" readonly></input>
+					<textarea class="form-control"
+						style="border: none;  height: 300px; background-color: #DFDEDE;">${board.bbsCn}</textarea>
 				</div>
 			</div>
-			<div class="form-group row">
+			<div class="form-group row" style="font-size: 15px;">
 				<p class="col-sm-2 font-weight-bold">첨부파일</p>
 				<div class="col-sm-5">
 					<c:forEach var="f" items="${board.srcList}">

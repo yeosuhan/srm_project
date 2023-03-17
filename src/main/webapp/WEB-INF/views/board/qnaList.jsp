@@ -92,11 +92,11 @@
 		</div>
 		<div class="row">
 			<!-- bootstrap modal start -->
-			<div class="col-sm-5" id="qnaList">
+			<div class="col-sm-7" id="qnaList">
 				<!--목록-->
 				<div class="card" style="height: 800px;">
 					<div class="card-header">
-						<h5 class="card-header-text">전체 목록</h5>
+						<h5>전체 목록</h5>
 					</div>
 					<c:if test="${fn:length(qnaList) == 0 }">
 						<div class="text-center d-flex justify-content-center"
@@ -105,37 +105,30 @@
 						</div>
 					</c:if>
 					<c:if test="${fn:length(qnaList) gt 0}">
-						<table class="table table-hover" style="text-align: center;">
+						<table class="table table-hover" style="text-align: center; ">
 							<thead>
-								<tr>
-									<th class="col-1" style="text-align: center;">순번</th>
+								<tr style="font-size: 15px;">
+									<th class="col-1" style="text-align: center; font-size: 15px;">순번</th>
 									<th class="col-6 text-center">제목</th>
 									<th class="col-1">작성자</th>
-									<th class="col-3" style="text-align: center;">작성날짜</th>
+									<th class="col-3" style="text-align: center; font-size: 15px;">작성날짜</th>
 									<th class="col-3">답변상태</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${qnaList}" var="board" varStatus="status">
-									<tr onclick="qnaDetail(${board.bbsNo})">
-										<th style="text-align: center;">${qPager.startRowNo + status.index}</th>
-										<c:choose>
-											<c:when test="${fn:length(board.bbsTtl) > 20}">
-												<td id="ttl" class="text-left"><c:out
-														value="${fn:substring(board.bbsTtl,0,19)}" />...</td>
-											</c:when>
-											<c:otherwise>
-												<td id="ttl" class="text-left"><c:out
-														value="${board.bbsTtl}" /></td>
-											</c:otherwise>
-										</c:choose>
-										<td>${board.wrtNm}</td>
-										<td>${board.wrtYmd}</td>
+									<tr onclick="qnaDetail(${board.bbsNo})" >
+										<th style="text-align: center; font-size: 15px;">${qPager.startRowNo + status.index}</th>
+
+											<td style="font-size: 15px;" id="ttl" class="text-left">${board.bbsTtl}</td>
+
+										<td style="font-size: 15px;">${board.wrtNm}</td>
+										<td style="font-size: 15px;">${board.wrtYmd}</td>
 										<c:if test="${board.ansYn == false}">
-											<td><label class="badge badge-inverse-danger">미답변</label></td>
+											<td style="font-size: 15px;"><label class="badge badge-inverse-danger">미답변</label></td>
 										</c:if>
 										<c:if test="${board.ansYn == true}">
-											<td><label class="badge badge-success">답변완료</label></td>
+											<td style="font-size: 15px;"><label class="badge badge-success">답변완료</label></td>
 										</c:if>
 									</tr>
 								</c:forEach>
@@ -146,7 +139,7 @@
 					<%@ include file="/WEB-INF/views/board/qnaPager.jsp"%>
 				</div>
 			</div>
-			<div class="col-sm-7" id="qnaDetail">
+			<div class="col-sm-5" id="qnaDetail">
 				<!-- 상세 보기 ------------------------------------------------------ -->
 				<jsp:include page="/WEB-INF/views/board/qna-detail.jsp" />
 				<!-- Input Alignment card end -->
