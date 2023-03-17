@@ -1041,7 +1041,7 @@ font-size: 13px !important;
 													<th style="width: 1px;">순번</th>
 													<th>요청자명</th>
 													<th>요청유형</th>
-													<th>변경될 완료예정일</th>
+													<th>변경될 완료요청일</th>
 													<th>승인여부</th>
 												</tr>
 											</thead>

@@ -66,7 +66,7 @@
 				</div>
 				<div class="row my-3">
 					<div class="col-2 pr-0">
-						<label for="">기존 완료예정일 : </label>
+						<label for="">기존 완료요청일 : </label>
 					</div>
 					<div class="col-4">
 						<input id="HcmptnDmndYmd" type="text" value="" readonly
