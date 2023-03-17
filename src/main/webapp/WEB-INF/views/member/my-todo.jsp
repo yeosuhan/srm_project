@@ -31,7 +31,6 @@
 	src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
-		console.log("djlljldfdfd");
 		var ctx = $('#myChart');
 		$.ajax({
 			url : "/client/chart",
@@ -124,12 +123,12 @@ font-size:13px;
 					<div class="col-12">
 						<!-- Nav tabs -->
 						<ul class="nav card-header-pills nav-tabs md-tabs" role="tablist">
-							<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-								<li class="nav-item btn"><div
-										class="nav-link sttsCd0 active" onclick="moveTab(0)">
-										요청<span class="badge badge-otidanger">${atotal}</span>
-									</div>
-									<div class="slide"></div></li>
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<li class="nav-item btn"><div
+											class="nav-link sttsCd0 active" onclick="moveTab(0)">
+											요청<span class="badge badge-otidanger">${atotal}</span>
+										</div>
+										<div class="slide"></div></li>								
 								<li class="nav-item btn"><div class="nav-link sttsCd1"
 										onclick="moveTab(1)">
 										반려 <span class="badge badge-otitodo">${rejTotal}</span>
@@ -141,15 +140,16 @@ font-size:13px;
 									</div>
 									<div class="slide"></div></li>
 							</sec:authorize>
-							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER','ROLE_ADMIN')">
+							<sec:authorize access="hasRole('ROLE_DEVELOPER')">
 								<li class="nav-item btn active">
-									<div class="nav-link sttsCd3" onclick="moveTab(3)">
+									<div class="nav-link sttsCd3 active" onclick="moveTab(3)">
 										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
 									</div>
 									<div class="slide"></div>
 								</li>
 							</sec:authorize>
-							<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+							
+							<sec:authorize access="hasRole('ROLE_CLIENT')">
 								<li class="nav-item btn"><div class="nav-link sttsCd0"
 										onclick="moveTab(0)">
 										요청<span class="badge badge-otitodo">${atotal}</span>
@@ -169,14 +169,6 @@ font-size:13px;
 									<div class="nav-link sttsCd3" onclick="moveTab(3)">
 										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
 									</div>
-									<div class="slide"></div>
-								</li>
-							</sec:authorize>
-							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
-								<li class="nav-item btn">
-									<div class="nav-link sttsCd3 active" onclick="moveTab(3)">
-										개발 중 <span class="badge badge-otidanger">${dtotal}</span>
-									</div> 
 									<div class="slide"></div>
 								</li>
 							</sec:authorize>

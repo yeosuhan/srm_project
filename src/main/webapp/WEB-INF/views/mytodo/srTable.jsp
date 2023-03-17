@@ -9,12 +9,12 @@
 <style>
 .srTable th{
 font-size: 15px !important;
-	}
+}
 	
 .srTable tbody td{
 	font-size: 15px !important;
-    padding: 2	;
-    }
+    padding: 2;
+   }
 </style>
 <table class="table table-hover srTable" style="table-layout: fixed;">
 	<c:if test="${fn:length(srList) == 0 }">
@@ -47,7 +47,7 @@ font-size: 15px !important;
 
 				<c:choose>
 					<c:when test="${sttsCd gt 3}">
-							<<tr onclick="showAdminGraph('${sr.dmndNo}')">
+							<tr onclick="showAdminGraph('${sr.dmndNo}')">
 					</c:when>
 					<c:otherwise>
 						<tr>
@@ -89,7 +89,6 @@ font-size: 15px !important;
 						<td id="rnk" class="text-center">${sr.rnk}</td>
 					</sec:authorize>
 				</c:if>
-				</tr>
 			</c:forEach>
 	</c:if>
 	</tbody>

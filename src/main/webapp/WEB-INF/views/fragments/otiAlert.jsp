@@ -10,7 +10,7 @@
 	
 	function closeOtiAlert(){
 		$("#otiAlert").removeClass("show");
-		location.reload();
+		location.href="/loginForm";
 	}
 </script>    
 <!-- Modal -->
