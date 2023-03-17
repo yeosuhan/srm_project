@@ -40,25 +40,31 @@
 				and
 			</if>
 					
-				<if test="boardFilterDto != null">
-						<if test="boardFilterDto.dmndYmdStart != null">
-							<![CDATA[WRT_YMD >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD')]]> and
-						</if>
-						<if test="boardFilterDto.dmndYmdEnd != null">
-							<![CDATA[WRT_YMD <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]>and
-						</if>
-						<if test="boardFilterDto.ansYn != null">
-							<![CDATA[ANS_YN = #{boardFilterDto.ansYn} ]]>and
-						</if>
-						<if test="boardFilterDto.wrtrNm != null">
-							<![CDATA[m.FLNM LIKE '%'||#{boardFilterDto.wrtrNm}||'%' ]]>and
-						</if>
-						<if test="boardFilterDto.keyWord != null">
-							<![CDATA[BBS_CN LIKE '%'||#{boardFilterDto.keyWord}||'%' ]]>and
-						</if>
-					
-				</if>
-			BBS_TYPE = upper(#{type})
+			<if test="boardFilterDto != null">
+					<if test="boardFilterDto.dmndYmdStart != null and boardFilterDto.dmndYmdStart != '' ">
+						<![CDATA[WRT_YMD >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD')]]> and
+					</if>
+					<if test="boardFilterDto.dmndYmdEnd != null and boardFilterDto.dmndYmdEnd != ''">
+						<![CDATA[WRT_YMD <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]>and
+					</if>
+					<if test="boardFilterDto.ansYn != null">
+						<![CDATA[ANS_YN = #{boardFilterDto.ansYn} ]]>and
+					</if>
+					<if test="boardFilterDto.wrtrNm != null">
+						<![CDATA[m.FLNM LIKE '%'||#{boardFilterDto.wrtrNm}||'%' ]]>and
+					</if>
+					<if test="boardFilterDto.keyWord != null">
+						<![CDATA[BBS_CN LIKE '%'||#{boardFilterDto.keyWord}||'%' ]]>and
+					</if>				
+			</if>
+			<choose>
+				<when test="boardFilterDto != null and boardFilterDto.btype != null">
+					BBS_TYPE = upper(#{boardFilterDto.btype})
+				</when>
+				<otherwise>
+					BBS_TYPE = upper(#{type})
+				</otherwise>
+			</choose>
 	</select>
 	
 	<!--  공지사항/문의게시판 목록 조회 -->
@@ -76,25 +82,23 @@
 				and b.WRTR_ID = #{clientId}
 			</if>
 			and BBS_TYPE = upper(#{type})
-				<trim suffixOverrides="and" prefix="and">
 					<if test="boardFilterDto != null">
-						<if test="boardFilterDto.dmndYmdStart != null">
-							<![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]>and
+						<if test="boardFilterDto.dmndYmdStart != null and boardFilterDto.dmndYmdStart != '' ">
+							and <![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]>
 						</if>
-						<if test="boardFilterDto.dmndYmdEnd != null">
-							<![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> and
+						<if test="boardFilterDto.dmndYmdEnd != null and boardFilterDto.dmndYmdEnd != ''">
+							and <![CDATA[TO_DATE(TO_CHAR(WRT_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> 
 						</if>
 						<if test="boardFilterDto.ansYn != null">
-							<![CDATA[ ANS_YN = #{boardFilterDto.ansYn} ]]> and
+							and 	<![CDATA[ ANS_YN = #{boardFilterDto.ansYn} ]]> 
 						</if>
 						<if test="boardFilterDto.wrtrNm != null">
-							<![CDATA[m.FLNM LIKE %'||#{boardFilterDto.wrtrNm}||'%' ]]> and
+							and 	<![CDATA[m.FLNM LIKE '%'||#{boardFilterDto.wrtrNm}||'%' ]]> 
 						</if>
 						<if test="boardFilterDto.keyWord != null">
-							<![CDATA[BBS_CN LIKE '%'||#{boardFilterDto.keyWord}||'%']]> and
+							and <![CDATA[BBS_CN LIKE '%'||#{boardFilterDto.keyWord}||'%']]> 
 						</if>
 					</if>
-				</trim>
 		ORDER BY WRT_YMD DESC
 		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
@@ -153,28 +157,28 @@
 		select  count(BBS_NO) 
 			from (
 
-        SELECT 
-                sr.sr_no , sd.dmnd_no
-              FROM sr_resources sr, sr_information si, sr_demand sd
-              WHERE  sr.EMP_ID = #{empId}
-                      and sr.sr_no = si.sr_no
-                      and sd.dmnd_no = si.dmnd_no
-	                      <if test="boardFilterDto != null">
-								<if test="boardFilterDto.dmndYmdStart != null">
-									<![CDATA[WRT_YMD >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]> and
-								</if>
-								<if test="boardFilterDto.dmndYmdEnd != null">
-									<![CDATA[TO_DATE(WRT_YMD,'YYYY-MM-DD') <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> and
-								</if>
-								<if test="boardFilterDto.ansYn != null">
-									<![CDATA[ANS_YN = #{boardFilterDto.ansYn}]]> and
-								</if>
-								<if test="boardFilterDto.wrtrNm != null">
-									<![CDATA[m.FLNM LIKE #{boardFilterDto.wrtrNm}]]> and
-								</if>
-								<if test="boardFilterDto.keyWord != null">
-									<![CDATA[WRT_YMD LIKE '%'||#{boardFilterDto.keyWord}||'%']]>
-								</if>
+			        SELECT 
+			                sr.sr_no , sd.dmnd_no
+			              FROM sr_resources sr, sr_information si, sr_demand sd
+			              WHERE  sr.EMP_ID = #{empId}
+	                      and sr.sr_no = si.sr_no
+	                      and sd.dmnd_no = si.dmnd_no
+		                      <if test="boardFilterDto != null">
+									<if test="boardFilterDto.dmndYmdStart != null">
+										<![CDATA[WRT_YMD >= TO_DATE(#{boardFilterDto.dmndYmdStart},'YYYY-MM-DD') ]]> and
+									</if>
+									<if test="boardFilterDto.dmndYmdEnd != null">
+										<![CDATA[TO_DATE(WRT_YMD,'YYYY-MM-DD') <= TO_DATE(#{boardFilterDto.dmndYmdEnd},'YYYY-MM-DD') ]]> and
+									</if>
+									<if test="boardFilterDto.ansYn != null">
+										<![CDATA[ANS_YN = #{boardFilterDto.ansYn}]]> and
+									</if>
+									<if test="boardFilterDto.wrtrNm != null">
+										<![CDATA[m.FLNM LIKE #{boardFilterDto.wrtrNm}]]> and
+									</if>
+									<if test="boardFilterDto.keyWord != null">
+										<![CDATA[WRT_YMD LIKE '%'||#{boardFilterDto.keyWord}||'%']]>
+									</if>
 							</if>
     			) a  inner join Board b
    		 on a.sr_no = b.sr_no

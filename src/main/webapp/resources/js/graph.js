@@ -4,7 +4,6 @@ function showAdminGraph(dmndNo) {
 		url : "/progress/chart?dmndNo=" + dmndNo,
 		type : "GET",
 		success : function(res) {
-			console.log("res  " + res);
 			var gname = res.srNo;
 			if(!res) {
 				console.log("ㅁㅁ");

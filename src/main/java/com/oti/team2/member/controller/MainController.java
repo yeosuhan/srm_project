@@ -64,7 +64,7 @@ public class MainController {
 		int histotal = 0; // 히스토리
 
 		// 공지사항
-		nPager = new Pager(5, boardService.getTotalRow("notice", null, null), 1);
+		nPager = new Pager(6, boardService.getTotalRow("notice", null, null), 1);
 		noticeList = boardService.getBoardList("notice", null, nPager, null);
 
 		if (role.equals(Auth.ROLE_CLIENT.toString())) {
@@ -80,7 +80,7 @@ public class MainController {
 			histotal = srInformationHistoryService.getCountTodoForCust(auth.getName());
 			srList = srdemandService.getMytodoSrList(auth.getName(), null, 2, pager);
 			// 게시글
-			qPager = new Pager(5, boardService.getTotalRow("qna", memberId, null), 1);
+			qPager = new Pager(6, boardService.getTotalRow("qna", memberId, null), 1);
 			qnaList = boardService.getBoardList("qna", memberId, qPager, null);
 
 		} else if (role.equals(Auth.ROLE_DEVELOPER.toString())) {
@@ -97,7 +97,7 @@ public class MainController {
 			// 히스토리 총 수 가져와야 됨
 			histotal = srInformationHistoryService.getCountTodoForDev(auth.getName(), auth.getName());
 			// 게시글
-			qPager = new Pager(5, boardService.getcountByEmpId(memberId, null), 1);
+			qPager = new Pager(6, boardService.getcountByEmpId(memberId, null), 1);
 			qnaList = boardService.getBoardListByEmpId(memberId, qPager, null);
 
 		} else {
@@ -114,7 +114,7 @@ public class MainController {
 			// 히스토리 총 수 가져와야 됨
 			histotal = srInformationHistoryService.getCountTodoForAdmin(auth.getName());
 			// 게시글
-			qPager = new Pager(5, boardService.getTotalRow("qna", null, null), 1);
+			qPager = new Pager(6, boardService.getTotalRow("qna", null, null), 1);
 			qnaList = boardService.getBoardList("qna", null, qPager, null);
 
 		}

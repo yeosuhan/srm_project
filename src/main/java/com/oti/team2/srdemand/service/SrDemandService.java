@@ -388,8 +388,12 @@ public class SrDemandService implements ISrDemandService {
 		for (SrDemand SrDemand : list) {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String dmndYmd = sdf.format(SrDemand.getDmndYmd());
-			String endYmd = sdf.format(SrDemand.getEndYmd());
+			
+			String dmndYmd = null;
+			String endYmd = null;
+			if(SrDemand.getDmndYmd() != null)  dmndYmd = sdf.format(SrDemand.getDmndYmd());
+			if(SrDemand.getEndYmd() != null) endYmd = sdf.format(SrDemand.getEndYmd());
+			
 			row = sheet.createRow(i);
 			cell = null;
 			cs = wb.createCellStyle();

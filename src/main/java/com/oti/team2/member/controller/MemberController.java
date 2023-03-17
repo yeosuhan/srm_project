@@ -98,7 +98,7 @@ public class MemberController {
 	@GetMapping("/profile/{memberId}")
 	public ResponseEntity<byte[]> getProfile(@PathVariable String memberId) {
 		ProfileImg profileImg = memberService.getProfileImg(memberId);
-		log.info(profileImg);
+		log.info(memberId);
 		HttpHeaders headers = new HttpHeaders();
 		String mtypes[] = profileImg.getFileType().split("/");
 		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
@@ -214,6 +214,25 @@ public class MemberController {
 			return "redirect:/loginForm";
 		}
 
+	}
+	
+	/**
+	 * 
+	 *  사진 조회
+	 * @author : 신정은
+	 * @param memberId
+	 * @return
+	 */
+	@GetMapping("/img/{memberId}")
+	public ResponseEntity<byte[]> getimg(@PathVariable String memberId) {
+		ProfileImg profileImg = memberService.getProfileImg(memberId);
+		log.info(" 영기 ~~~ " );
+		log.info(memberId);
+		HttpHeaders headers = new HttpHeaders();
+		String mtypes[] = profileImg.getFileType().split("/");
+		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
+		
+		return new ResponseEntity<byte[]>(profileImg.getFileData(), headers, HttpStatus.OK);
 	}
 
 }

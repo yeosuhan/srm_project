@@ -244,7 +244,7 @@ font-size:13px;
 						<h5 class="card-header-text">나의 요청 현황</h5>
 					</div>
 					<div class="card-body">
-						<canvas id="myChart" width="100px" height="100px"></canvas>
+						<canvas id="myChart" height="240"></canvas>
 					</div>
 				</div>
 			</sec:authorize>

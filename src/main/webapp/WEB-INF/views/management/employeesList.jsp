@@ -146,9 +146,9 @@ p {
 						</div>
 						<div class="card-block"
 							style="justify-content: center; text-align: center;">
-							<div class="my-2">
-								<img
-									src="${pageContext.request.contextPath}/resources/assets/images/ejexample.png"
+							<div class="my-2" id="eimg">
+								<img 
+									src="${pageContext.request.contextPath}/member/img/${employeesList[0].memberId}"
 									style="height: 200px; width: 200px; align-content: center;">
 							</div>
 						</div>

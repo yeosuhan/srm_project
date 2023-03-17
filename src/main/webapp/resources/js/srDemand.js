@@ -18,77 +18,78 @@ function getSrDemandDetail(dmNo) {
 
 /* 요청 등록 */
 function addSr() {
-      console.log("들어옴 ~~~ ");
-      console.log($("select[name=sysCdd]"));
-      var custId = $("input[name=custIdd]").val();
-      var sysCd =  $("select[name=sysCdd]").val();
-      var taskSeCd =  $("select[name=taskSeCdd]").val();
-      var ttl =  $("input[name=ttld]").val();
-      var relGrund =  $("#relGrundd").val();
-      var cn =  $("#cnd").val();
-      var cmptnDmndYmd =  $("input[name=cmptnDmndYmdd]").val();
-      
-      console.log(custId);
-      console.log(sysCd);
-      console.log(taskSeCd);
-      console.log(ttl);
-      console.log(relGrund);
-      console.log(cn);
-      console.log(cmptnDmndYmd);
-      
-      
-      var formData = new FormData();
-      var flist = $('input[name=attachFile]')[0].files;
-      
-      formData.append("custId", custId);
-      formData.append("sysCd", sysCd);
-      formData.append("taskSeCd", taskSeCd);
-      formData.append("ttl", ttl);
-      formData.append("relGrund", relGrund);
-      formData.append("cn", cn);
-      formData.append("cmptnDmndYmd", cmptnDmndYmd);
-                      
-      
-      var flag = true;
-      // fileInput 개수를 구한다.
-      for (var i = 0; i < flist.length; i++) {
-         var maxSize = 1024 * 1024 * 3;
-         var fsize = Math.floor(flist[i].size / 1024);
-         var fileName = flist[i].name;
-         let dot = fileName.lastIndexOf('.');
-         let type = fileName.substring(dot+1, fileName.length).toLowerCase();
-         
-         if(type == "exe") {
-            flag = false;
-            alert(".exe 파일은 업로드할 수 없습니다.")
-            break;
-         }
-         
-         if(fsize > maxSize) {
-            flag = false;
-            alert("3MB이상의 파일은 업로드할 수 없습니다.")
-            break;
-         }
-         console.log(type);
-         formData.append('attachFile', flist[i]);
-      }
-      
-      if(flag) {
-         $.ajax({
-            url : '/srdemand/add',
-            type : 'POST',
-            data : formData ,
-            enctype: "multipart/form-data",
-            processData: false, // 프로세스 데이터 설정 : false 값을 해야 form data로 인식함
-              contentType: false,
-            success : function(res) {
-               alert("요청을 성공적으로 등록했습니다.");
-            }         
-         });         
-      }
-      $("#addmodal").removeClass("show");
-      location.reload();
-   
+		console.log("들어옴 ~~~ ");
+		console.log($("select[name=sysCdd]"));
+		var custId = $("input[name=custIdd]").val();
+		var sysCd =  $("select[name=sysCdd]").val();
+		var taskSeCd =  $("select[name=taskSeCdd]").val();
+		var ttl =  $("input[name=ttld]").val();
+		var relGrund =  $("#relGrundd").val();
+		var cn =  $("#cnd").val();
+		var cmptnDmndYmd =  $("input[name=cmptnDmndYmdd]").val();
+		
+		console.log(custId);
+		console.log(sysCd);
+		console.log(taskSeCd);
+		console.log(ttl);
+		console.log(relGrund);
+		console.log(cn);
+		console.log(cmptnDmndYmd);
+		
+		
+		var formData = new FormData();
+		var flist = $('input[name=attachFile]')[0].files;
+		
+		formData.append("custId", custId);
+		formData.append("sysCd", sysCd);
+		formData.append("taskSeCd", taskSeCd);
+		formData.append("ttl", ttl);
+		formData.append("relGrund", relGrund);
+		formData.append("cn", cn);
+		formData.append("cmptnDmndYmd", cmptnDmndYmd);
+					 		
+		
+		var flag = true;
+		// fileInput 개수를 구한다.
+		for (var i = 0; i < flist.length; i++) {
+			var maxSize = 1024 * 1024 * 3;
+			var fsize = Math.floor(flist[i].size / 1024);
+			var fileName = flist[i].name;
+			let dot = fileName.lastIndexOf('.');
+			let type = fileName.substring(dot+1, fileName.length).toLowerCase();
+			
+			if(type == "exe") {
+				flag = false;
+				alert(".exe 파일은 업로드할 수 없습니다.")
+				break;
+			}
+			
+			if(fsize >= maxSize) {
+				flag = false;
+				alert("3MB이상의 파일은 업로드할 수 없습니다.")
+				break;
+			}
+			console.log(type);
+			formData.append('attachFile', flist[i]);
+		}
+		
+		if(flag) {
+			$.ajax({
+				url : '/srdemand/add',
+				type : 'POST',
+				data : formData ,
+				enctype: "multipart/form-data",
+				processData: false, //프로세스 데이터 설정 : false 값을 해야 form data로 인식함
+		        contentType: false,
+				success : function(res) {
+					alert("요청을 성공적으로 등록했습니다.");
+					location.href("/srdemand/list");
+
+				}			
+			});			
+		}
+		$("#addmodal").removeClass("show");
+	
 }
 
 /** *************SR 등록 , 수정********************************** */

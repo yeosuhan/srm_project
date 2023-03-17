@@ -24,6 +24,10 @@
 .card .card-header {
 	background: linear-gradient(135deg, #360940 10%, #782748 100%);
 }
+
+#noticeList{
+font-size: 15px !important;
+	}
 </style>
 </head>
 <body>
@@ -41,10 +45,11 @@
 						</div>
 					</div>
 					<div class="card-body">
-
-						<form id="boardSearchForm"
-							action="${pageContext.request.contextPath}/board/list/notice"
-							onsubmit="return boardSearch()">
+						<form id="nboardSearch"
+							action="${pageContext.request.contextPath}/board/list?type=notice"
+							onsubmit="return nboardSearch()"> 
+							<input type="hidden" name="btype" value="notice">
+							<input type="hidden" name="type" value="notice">
 							<div class="row" style="height: 30px;">
 								<div class="col col-3 pr-0">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
@@ -76,11 +81,11 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-5" id="noticeList">
+			<div class="col-sm-7" id="noticeList">
 				<!-- 공지사항 목록 -->
 				<div class="card" style="height: 650px;">
-					<div class="card-header">
-						<h5 class="card-header-text">전체 목록</h5>
+					<div class="card-header" style="height: 50px;">
+						<h5>전체 목록</h5>
 					</div>
 					<table class="table table-hover" style="text-align: center;">
 						<thead>
@@ -92,11 +97,11 @@
 								<th class="col-3">조회수</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody style="font-size: 15px !important;">
 							<c:forEach items="${noticeList}" var="board" varStatus="status">
 								<tr onclick="noticeDetail(${board.bbsNo})">
 									<th style="text-align: center;">${nPager.startRowNo + status.index}</th>
-									<c:choose>
+									<%-- <c:choose>
 										<c:when test="${fn:length(board.bbsTtl) > 30}">
 											<td id="ttl" class="text-left"><c:out
 													value="${fn:substring(board.bbsTtl,0,29)}" />...</td>
@@ -105,10 +110,11 @@
 											<td id="ttl" class="text-left"><c:out
 													value="${board.bbsTtl}" /></td>
 										</c:otherwise>
-									</c:choose>
-									<td>${board.wrtNm}</td>
-									<td>${board.wrtYmd}</td>
-									<td>${board.inqCnt}</td>
+									</c:choose> --%>
+									<td id="ttl" class="text-left" style="font-size: 15px;">${board.bbsTtl}</td>
+									<td style="font-size: 15px;">${board.wrtNm}</td>
+									<td style="font-size: 15px;">${board.wrtYmd}</td>
+									<td style="font-size: 15px;">${board.inqCnt}</td>
 
 								</tr>
 							</c:forEach>
@@ -119,7 +125,7 @@
 				</div>
 			</div>
 			<!-- 공지사항 상세 ----->
-			<div class="col-sm-7" id="noticeDetail">
+			<div class="col-sm-5" id="noticeDetail">
 				<jsp:include page="/WEB-INF/views/board/notice-detail.jsp" />
 			</div>
 		</div>

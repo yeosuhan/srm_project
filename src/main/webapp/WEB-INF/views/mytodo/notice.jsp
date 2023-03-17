@@ -4,7 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="${pageContext.request.contextPath}/resources/js/board.js"></script>
 <style>
-
+table th{
+font-size: 14px !important;
+	}
+	
+table tbody td{
+font-size: 13px !important;
+	}
 </style>
 
 <div class="card" style="height:450px;">
@@ -31,7 +37,7 @@
 									value="${fn:substring(board.bbsTtl,0,18)}" />...</td>
 						</c:when>
 						<c:otherwise>
-							<td id="ttl" class="text-left"><c:out
+							<td id="ttl" class="text-left font-weight-bold"><c:out
 									value="${board.bbsTtl}" /></td>
 						</c:otherwise>
 					</c:choose>

@@ -129,6 +129,19 @@ th {
 	background-color: white !important;
 }
 
+table thead tr {
+width: 100%;
+}
+.fontWrapper {
+	/* display: block; *//* 블록태그로 만들어준다 */
+	text-overflow: ellipsis;/* 말줄임 css */
+	white-space: nowrap;/*글자를 한줄로 모아준다*/
+	overflow: hidden;
+	background:pink;/*실제 글자 영역 상태 확인하기 위함*/
+	margin-right: 0;
+}
+
+
 </style>
 </head>
 
@@ -250,7 +263,7 @@ th {
 							<div class="card-block table-border-style" style="height: 770px;">
 								<div class="table-responsive">
 									<table class="table table-hover text-center"
-										style="font-size: 12;">
+										style="font-size: 12; width: 100%">
 										<thead>
 											<tr>
 												<th style="width: 1px;font-size:15px;"></th>
@@ -269,7 +282,6 @@ th {
 												</th>
 												<th style="font-size:15px;">제목</th>
 												<th style="font-size:15px;">관련시스템</th>
-												<th style="width: 200px;font-size:15px;">등록자</th>
 												<th style="font-size:15px;">소속</th>
 												<th style="font-size:15px;">진행상태</th>
 												<th style="font-size:15px;">등록일</th>
@@ -283,20 +295,21 @@ th {
 													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
-														<c:choose>
-															<c:when test="${fn:length(srDemand.ttl) > 25}">
-																<td id="ttl" class="text-center"><c:out
-																		value="${fn:substring(srDemand.ttl,0,24)}" />...</td>
+														 <c:choose>
+															<c:when test="${fn:length(srDemand.ttl) > 16}">
+																<td id="ttl" class="text-left" style="font-size:15px;"><c:out
+																		value="${fn:substring(srDemand.ttl,0,15)}" />...</td>
 															</c:when>
 															<c:otherwise>
-																<td id="ttl" class="text-center"><c:out
+																<td id="ttl" class="text-left" style="font-size:15px;"><c:out
 																		value="${srDemand.ttl}" /></td>
 															</c:otherwise>
-														</c:choose>
-														<td>${srDemand.sysNm}</td>
-														<td>${srDemand.custNm}</td>
-														<td>${srDemand.instNm}</td>
-														<td><c:if test="${(srDemand.sttsNm) eq '요청'}">
+														</c:choose> 
+														<%-- <td nowrap id="ttl" class="text-left" style=" font-size:15px;  display: flex;
+  overflow: hidden;"><span class="fontWrapper">${srDemand.ttl}</span></td> --%>
+														<td class="text-left" style="font-size:15px;">${srDemand.sysNm}</td>
+														<td style="font-size:15px;" class="text-left">${srDemand.instNm}</td>
+														<td style="font-size:15px;"><c:if test="${(srDemand.sttsNm) eq '요청'}">
 																<label class="badge badge-warning">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
 																<label class="badge badge-danger">${srDemand.sttsNm}</label>
@@ -311,8 +324,8 @@ th {
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
 																<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
 															</c:if></td>
-														<td>${srDemand.dmndYmd}</td>
-														<td>${srDemand.endYmd}</td>
+														<td style="font-size:15px;">${srDemand.dmndYmd}</td>
+														<td style="font-size:15px;">${srDemand.endYmd}</td>
 													</tr>
 												</c:forEach>
 											</c:if>
