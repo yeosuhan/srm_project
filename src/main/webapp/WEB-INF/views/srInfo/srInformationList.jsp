@@ -616,12 +616,10 @@ font-size: 13px !important;
 												style="display:none"
 											</c:if>
 											>
-												<sec:authorize access="hasRole('ROLE_ADMIN')">
-													<button class="btn btn-oti btn-sm"
-														onclick="addHistory('${srNo}')" data-toggle="modal"
-														data-target="#addHistoryModal"
-														>SR 변경요청</button>
-												</sec:authorize>
+												<button class="btn btn-oti btn-sm"
+													onclick="addHistory('${srNo}')" data-toggle="modal"
+													data-target="#addHistoryModal"
+													>SR 변경요청</button>
 											</div>
 										</div>
 								</div>
