@@ -1,6 +1,4 @@
-/**
- * 
- * @param sttsCd
+/*
  * @returns
  */
 var sttsCode;

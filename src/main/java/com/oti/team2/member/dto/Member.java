@@ -16,6 +16,7 @@ public class Member {
 	private String authority;
 	private String flnm;
 	private String addr;
+	private String addrDetail;
 	private String telNo;
 	private String eml;
 	private String instCd;

@@ -100,7 +100,7 @@ public class AlertService implements IAlertService {
 	 * */
 	@Override
 	public SseEmitter connectSseEmitter(String memberId) {
-		SseEmitter emitter=new SseEmitter(1000L*60L*20L);//1000ms*60*20: 20분
+		SseEmitter emitter=new SseEmitter(1000L*60L*30L);//1000ms*60*20: 20분
 		try {
 			emitter.send(SseEmitter.event()
 					.name("connect")

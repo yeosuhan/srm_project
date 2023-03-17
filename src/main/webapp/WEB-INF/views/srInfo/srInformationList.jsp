@@ -44,7 +44,6 @@
 	});
 	</c:if>
 </script>
-
 <style>
 .ui-datepicker-trigger {
 	width: 29px;
@@ -149,6 +148,14 @@ li:before {
 .badge {
 	padding: 5px 8px;
 }
+
+table th{
+font-size: 15px !important;
+	}
+	
+table tbody td{
+font-size: 13px !important;
+	}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -255,7 +262,7 @@ li:before {
 						<form id="srInfoFilterForm"
 							action="${pageContext.request.contextPath}/srinformation/list"
 							onsubmit="return srSearch()">
-							<div class="col col-xl-1" style="width: 90px;">시스템 구분</div>
+							<div class="col col-xl-1 font-weight-bold" style="width: 90px;">시스템 구분</div>
 							<div class="col col-xl-2" style="padding: 0px; width: 200px;">
 
 								<div class="dropdown dropdown open">
@@ -269,7 +276,7 @@ li:before {
 									</select>
 								</div>
 							</div>
-							<div class="col col-xl-1" style="width: 80px;">업무 구분</div>
+							<div class="col col-xl-1 font-weight-bold" style="width: 80px;">업무 구분</div>
 							<div class="dropdown dropdown open" style="float: left;">
 								<select name="taskSeCd" id="taskSeCdFilter"
 									onclick="getTaskSeCd()" style="width: 120px;">
@@ -279,7 +286,7 @@ li:before {
 									</c:if>
 								</select>
 							</div>
-							<div class="col col-xl-1" style="width: 80px;">진행 상태</div>
+							<div class="col col-xl-1 font-weight-bold" style="width: 80px;">진행 상태</div>
 							<div class="col col-xl-1" style="">
 								<div class="dropdown dropdown open">
 									<select name="sttsCd" id="sttsCdFilter">
@@ -293,7 +300,7 @@ li:before {
 									</select>
 								</div>
 							</div>
-							<div class="col col-xl-1"
+							<div class="col col-xl-1  font-weight-bold"
 								style="width: 80px; padding-left: 20px;">SR 제목</div>
 							<div class="col col-xl-2" style="">
 								<input type="text" class="form-control" name="ttl"
@@ -306,7 +313,7 @@ li:before {
 								<c:if test="${srInfoFilter.mySrOnly ne true}">
 									<input type="checkbox" name="mySrOnly" value="true">
 								</c:if>
-								내 처리건
+								<span class="font-weight-bold">내 처리건</span>
 							</div>
 
 							<div class="col col-xl-2">
@@ -314,7 +321,7 @@ li:before {
 									style="float: center;">
 									<i class="ti-search"></i>
 								</button>
-								<button class="btn btn-oti btn-sm" type="submit" value=""
+								<button type="submit" class="btn btn-oti btn-sm"
 									onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
 									style="float: right; margin-left: 50px;">엑셀 다운로드</button>
 							</div>
@@ -355,9 +362,9 @@ li:before {
 															style="color: #782748; font-size: 24px;"></i></a>
 													</c:if>
 												</th>
+												<th style="font-size: 15px; width: 200px;">SR명</th>
 												<th style="font-size: 15px;">시스템구분</th>
 												<th style="font-size: 15px;">업무구분</th>
-												<th style="font-size: 15px; width: 200px;">SR명</th>
 												<th style="font-size: 15px;">요청자</th>
 												<th style="font-size: 15px;">완료요청일
 											 <c:if test="${by eq 'DESC' || by eq '1'}">
@@ -389,18 +396,17 @@ li:before {
 														onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
 														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
-														<td>${srlist.sysNm}</td>
-														<td>${srlist.taskSeNm}</td>
 														<c:choose>
-															<c:when test="${fn:length(srlist.ttl) > 10}">
-																<td class="text-center"><c:out
-																		value="${fn:substring(srlist.ttl,0,9)}" />...</td>
+															<c:when test="${fn:length(srlist.ttl) > 15}">
+																<td class="text-left"><c:out
+																		value="${fn:substring(srlist.ttl,0,10)}" />...</td>
 															</c:when>
 															<c:otherwise>
-																<td class="text-center"><c:out
-																		value="${srlist.ttl}" /></td>
+																<td class="text-left"><c:out value="${srlist.ttl}" /></td>
 															</c:otherwise>
 														</c:choose>
+														<td class="text-left">${srlist.sysNm}</td>
+														<td class="text-left">${srlist.taskSeNm}</td>
 														<td>${srlist.flnm}</td>
 														<td>${srlist.bgngYmd}</td>
 														<td>${srlist.endYmd}</td>
@@ -550,7 +556,7 @@ li:before {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold">SR요청일</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDDmndymd"
 													value="${sd.dmndYmd}">
@@ -615,18 +621,18 @@ li:before {
 					</div>
 					<div class="card-block" style="padding: 0px;">
 						<ul class="nav nav-tabs md-tabs" id="otiTabs" role="tablist">
-							<li class="nav-item" onclick="getPlan()"><a id="srPlanTab"
+							<li class="nav-item font-weight-bold" onclick="getPlan()"><a id="srPlanTab"
 								class="nav-link active" data-toggle="tab" href="#home1"
 								role="tab">SR 계획정보</a>
 								<div class="slide"></div></li>
-							<li class="nav-item"><a id="srResourceTab" class="nav-link"
+							<li class="nav-item font-weight-bold"><a id="srResourceTab" class="nav-link"
 								data-toggle="tab" href="#profile1" role="tab">SR 자원정보</a>
 								<div class="slide"></div></li>
-							<li class="nav-item" onclick="getProgress()"><a
+							<li class="nav-item font-weight-bold" onclick="getProgress()"><a
 								class="nav-link" data-toggle="tab" href="#messages1" role="tab">SR
 									진척률</a>
 								<div class="slide"></div></li>
-							<li class="nav-item" onclick="empHstry()"><a
+							<li class="nav-item font-weight-bold" onclick="empHstry()"><a
 								class="nav-link" data-toggle="tab" href="#srInfhistory"
 								role="tab">SR 히스토리</a>
 								<div class="slide"></div></li>
@@ -638,7 +644,7 @@ li:before {
 								style="padding: 10px;">
 								<div class="form-group row">
 									<div class="col-sm-6 p-0">
-										<div class="col col-sm-4">처리팀</div>
+										<div class="col col-sm-4 font-weight-bold">처리팀</div>
 										<div class="col col-sm-6" id="deptDiv">
 											<select id="dept" onchange="changeDept()">
 												<c:forEach var="deptList" items="${deptList}">
@@ -648,7 +654,7 @@ li:before {
 										</div>
 									</div>
 									<div class="col-sm-6 p-0">
-										<div class="col col-sm-4">담당자</div>
+										<div class="col col-sm-4 font-weight-bold">담당자</div>
 										<div class="col col-sm-8" id="SRPlFlnmBySelect">
 											<input type="hidden" id="SRPlMemberId"> <input
 												readonly class="form-control" id="SRPlFlnm"
@@ -658,14 +664,14 @@ li:before {
 								</div>
 								<div class="form-group row">
 									<div class="col-sm-6 p-0">
-										<div class="col col-sm-4">계획시작일</div>
+										<div class="col col-sm-4 font-weight-bold">계획시작일</div>
 										<div class="col col-sm-8" id="bgngYmdDiv">
 											<input type="date" class="form-control" id="SRPlBgngYmd"
 												value="${sp.bgngYmd}">
 										</div>
 									</div>
 									<div class="col-sm-6 p-0">
-										<div class="col col-sm-4">계획종료일</div>
+										<div class="col col-sm-4 font-weight-bold">계획종료일</div>
 										<div class="col col-sm-8" id="endYmdDiv">
 											<input type="date" class="form-control" id="SRPlEndYmd"
 												value="${sp.endYmd}">
@@ -673,7 +679,7 @@ li:before {
 									</div>
 								</div>
 								<div class="form-group row">
-									<div class="col col-sm-2  p-0" style="line-height: 90px;">검토
+									<div class="col col-sm-2  p-0 font-weight-bold" style="line-height: 90px;">검토
 										내용</div>
 									<div class="col col-sm-10" id="rvwCnDiv">
 										<textarea rows="5" cols="5" class="form-control"
@@ -1050,7 +1056,7 @@ li:before {
 													<th style="width: 1px;">순번</th>
 													<th>요청자명</th>
 													<th>요청유형</th>
-													<th>변경될 완료예정일</th>
+													<th>변경될 완료요청일</th>
 													<th>승인여부</th>
 												</tr>
 											</thead>

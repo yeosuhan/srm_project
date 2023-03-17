@@ -66,7 +66,7 @@
 			<input type="hidden" value="${board.bbsNo}">
 			<div class="form-group row">
 				<div class="col-sm-2 font-weight-bold">제목</div>
-				<div class="col-sm-4">${board.bbsTtl}</div>
+				<div class="col-sm-6">${board.bbsTtl}</div>
 				<div class="col-sm-2 font-weight-bold text-right">작성자</div>
 				<div class="col-sm-2">${board.wrtrNm}</div>
 			</div>
@@ -77,10 +77,8 @@
 			<div class="form-group row">
 				<p class="col-sm-2 font-weight-bold" style="line-height: 150px;">내용</p>
 				<div class="col-sm-9">
-					<input class="form-control"
-						style="border: none; height: 150px; background-color: #DFDEDE"
-						readonly value="${board.bbsCn}"></input>
-				</div>
+					<textarea class="form-control"
+						style="border: none;  height: 300px; background-color: #DFDEDE;">${board.bbsCn}</textarea>				</div>
 			</div>
 			<div class="form-group row m-0">
 				<p class="col-sm-2 font-weight-bold">첨부파일</p>

@@ -98,7 +98,7 @@ public class MemberController {
 	@GetMapping("/profile/{memberId}")
 	public ResponseEntity<byte[]> getProfile(@PathVariable String memberId) {
 		ProfileImg profileImg = memberService.getProfileImg(memberId);
-		log.info(profileImg);
+		log.info(memberId);
 		HttpHeaders headers = new HttpHeaders();
 		String mtypes[] = profileImg.getFileType().split("/");
 		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
@@ -171,9 +171,10 @@ public class MemberController {
 		if (joinedMember == null) {
 			// 회원정보가 없다면 비밀번호 찾기로 리다이렉트
 			log.info("회원정보 없음");
+			//return "Mismatch";
 			return "redirect:/loginForm";
 		} else {
-			// 회원정보가 있다면 임시 비밀번호 생성
+			// 회원정보가 있다면 임시 비밀번호 생성s
 			log.info("회원정보 있음");
 			String randomPswd = UUID.randomUUID().toString().replaceAll("-", "");
 			randomPswd = randomPswd.substring(0, 10);
@@ -209,9 +210,29 @@ public class MemberController {
 			}
 
 			// 회원정보가 있다면 로그인 폼으로 리턴
+			//return "Match";
 			return "redirect:/loginForm";
 		}
 
+	}
+	
+	/**
+	 * 
+	 *  사진 조회
+	 * @author : 신정은
+	 * @param memberId
+	 * @return
+	 */
+	@GetMapping("/img/{memberId}")
+	public ResponseEntity<byte[]> getimg(@PathVariable String memberId) {
+		ProfileImg profileImg = memberService.getProfileImg(memberId);
+		log.info(" 영기 ~~~ " );
+		log.info(memberId);
+		HttpHeaders headers = new HttpHeaders();
+		String mtypes[] = profileImg.getFileType().split("/");
+		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
+		
+		return new ResponseEntity<byte[]>(profileImg.getFileData(), headers, HttpStatus.OK);
 	}
 
 }

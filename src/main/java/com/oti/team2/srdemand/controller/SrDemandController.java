@@ -1,4 +1,4 @@
-package com.oti.team2.srdemand.controller;
+ package com.oti.team2.srdemand.controller;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -120,8 +120,8 @@ public class SrDemandController {
 			@RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
 			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort,
-			@RequestParam(required = false, name = "dmndYmdStart") Date dmndYmdStart,
-			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "dmndYmdStart") String dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") String dmndYmdEnd,
 			@RequestParam(required = false, name = "sttsCd") Integer sttsCd,
 			@RequestParam(required = false, name = "sysCd") String sysCd,
 			@RequestParam(required = false, name = "taskSeCd") String taskSeCd,
@@ -136,7 +136,7 @@ public class SrDemandController {
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, -1);
 			String stringDate = sdf.format(calendar.getTime());
-			dmndYmdStart = Date.valueOf(stringDate);// 기본값 한달전
+			dmndYmdStart = stringDate;// 기본값 한달전
 		}
 		srFilterDto.setDmndYmdStart(dmndYmdStart);
 		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
@@ -269,8 +269,8 @@ public class SrDemandController {
 			@RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
 			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort,
-			@RequestParam(required = false, name = "dmndYmdStart") Date dmndYmdStart,
-			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "dmndYmdStart") String dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") String dmndYmdEnd,
 			@RequestParam(required = false, name = "sttsCd") Integer sttsCd,
 			@RequestParam(required = false, name = "sysCd") String sysCd,
 			@RequestParam(required = false, name = "taskSeCd") String taskSeCd,
@@ -287,7 +287,7 @@ public class SrDemandController {
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, -1);
 			String stringDate = sdf.format(calendar.getTime());
-			dmndYmdStart = Date.valueOf(stringDate);// 기본값 한달전
+			dmndYmdStart = stringDate;// 기본값 한달전
 		}
 		srFilterDto.setDmndYmdStart(dmndYmdStart);
 		srFilterDto.setDmndYmdEnd(dmndYmdEnd);

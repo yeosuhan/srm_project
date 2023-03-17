@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			var calendar = new FullCalendar.Calendar(calendarEl, {
 				defaultDate : '2023-03-10',
 				locale : "ko",
-				contentHeight : 420,
-				height : 400,
+				contentHeight : 300,
+				height : 300,
 				eventLimit : true,
 				events : data
 		        });

@@ -98,7 +98,10 @@ function deleteFile(fileSn) {
 
 //게시판 필터링
 function boardSearch() {
+	console.log("~>>");
 	$("#boardSearchForm input").each((index,value)=>{
+		console.log("~~~~");
+		console.log($(value).val());
 		if(!$(value).val()){
 			$(value).prop("disabled",true);
 		}
@@ -110,6 +113,24 @@ function boardSearch() {
 	});
 	return true;
 }
+
+function nboardSearch() {
+	console.log("~>>");
+	$("#nboardSearchForm input").each((index,value)=>{
+		console.log("~~~~");
+		console.log($(value).val());
+		if(!$(value).val()){
+			$(value).prop("disabled",true);
+		}
+	});
+	$("#nboardSearchForm select").each((index,value)=>{
+		if(!$(value).children("option:selected").val()||$(value).children(" option").length==0){
+			$(value).prop("disabled",true);
+		}
+	});
+	return true;
+}
+
 
 /*******************   Qna board ****************/
 function writeQna() {
