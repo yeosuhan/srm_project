@@ -184,7 +184,7 @@ li:before {
 				</div>
 				<div class="m_footer" style="height: 50px">
 					<button class="modal_btn btn-oti cancle" id="delbtn"
-						onclick="deleteDeliverable()">선택된 산출물 삭제</button>
+						onclick="deleteDeliverable()">선택 삭제</button>
 					<div class="modal_btn btn-oti cancle" data-dismiss="modal">닫기</div>
 				</div>
 			</div>
@@ -441,28 +441,27 @@ li:before {
 					</div>
 				</div>
 			</div>
-			<%-- *********************************** [SR요청 상세정보 ] ***********************************--%>
-			<div class="col-xl-4 col-md-12 p-0">
+			<div class="col-xl-4 col-md-12 pl-0">
 				<div class="card">
-					<div class="card-header pb-2">
-						<div class="row">
-							<div class="col-8">
-								<h5>SR 요청 상세정보</h5>
-							</div>
-							<div class="col-3 ml-4">
-								<sec:authorize access="hasRole('ROLE_ADMIN')">
-									<button class="btn btn-oti btn-sm"
-										onclick="addHistory('${srNo}')" data-toggle="modal"
-										data-target="#addHistoryModal">SR 변경요청</button>
-								</sec:authorize>
-							</div>
-						</div>
+					<div class="card-header" style="padding:0px 10px; background:rgba(0,0,0,0);">
+						<%-- *********************************** 상세 탭 *********************************** --%>
+								<ul class="nav nav-tabs md-tabs card-header-pills"  role="tablist">
+									<li class="nav-item"><a class="nav-link active"
+										data-toggle="tab" href="#srDemandDetail" role="tab">SR 요청 정보</a>
+										<div class="slide"></div></li>
+									<li class="nav-item"><a
+										class="nav-link" data-toggle="tab" href="#srInfoDetail"
+										role="tab">SR 처리 정보</a>
+										<div class="slide"></div></li>
+								</ul>
 					</div>
+			<%-- *********************************** [SR요청 상세정보 ] ***********************************--%>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
 						<div class="tab-pane active" id="srDemandDetail" role="tabpanel">
-							<div class="card-block" style="height: 630px;">
+							<div class="card-block" style="height: 675px;">
 								<div class="card_body " style="font-size: 12px;">
+								
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 px-0 font-weight-bold">요청 번호</div>
@@ -588,15 +587,21 @@ li:before {
 											</c:forEach>
 										</div>
 									</div>
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<div class="form-group row">
+											<div class="col-8"></div>
+											<div class="col-4" >
+											<button class="btn btn-oti btn-sm"
+												onclick="addHistory('${srNo}')" data-toggle="modal"
+												data-target="#addHistoryModal">SR 변경요청</button>
+											</div>
+										</div>
+									</sec:authorize>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header">
-						<h5>SR 요청 처리정보</h5>
-					</div>
+					<%-- *********************************** SR처리 정보탭 *********************************** --%>
+					<div class="tab-pane" id="srInfoDetail" role="tabpanel">
 					<div class="card-block" style="padding: 0px;">
 						<ul class="nav nav-tabs md-tabs" id="otiTabs" role="tablist">
 							<li class="nav-item" onclick="getPlan()"><a id="srPlanTab"
@@ -734,10 +739,11 @@ li:before {
 															class="form-control" id="SRPgPrgrsRt0" min="1" max="10"
 															placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse0" aria-expanded="true"
-																	aria-controls="collapse0">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(0)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -745,33 +751,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse0" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
@@ -781,10 +761,11 @@ li:before {
 														<td id="1rt"><input type="number"
 															class="form-control" id="SRPgPrgrsRt1" min="11" max="40"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse1" aria-expanded="true"
-																	aria-controls="collapse1">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(1)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -792,33 +773,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse1" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
@@ -828,10 +783,11 @@ li:before {
 														<td id="2rt"><input type="number"
 															class="form-control" id="SRPgPrgrsRt2" min="41" max="70"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse2" aria-expanded="true"
-																	aria-controls="collapse2">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(2)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -839,33 +795,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse2" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
@@ -876,10 +806,11 @@ li:before {
 															class="form-control" id="SRPgPrgrsRt3" min="71" max="80"></td>
 														<td>
 															<div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse3" aria-expanded="true"
-																	aria-controls="collapse3">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(3)"
+																>첨부파일</button>
 															</div>
 														</td>
 														<td style="padding: 0px; margin: 0px;">
@@ -888,33 +819,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse3" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
@@ -924,10 +829,11 @@ li:before {
 														<td id="4rt"><input type="number"
 															class="form-control" id="SRPgPrgrsRt4" min="81" max="90"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse4" aria-expanded="true"
-																	aria-controls="collapse4">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(4)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -935,33 +841,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse4" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
@@ -971,10 +851,11 @@ li:before {
 														<td id="5rt"><input type="number"
 															class="form-control" id="SRPgPrgrsRt5" min="91" max="100"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse5" aria-expanded="true"
-																	aria-controls="collapse5">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(5)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -982,42 +863,13 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse5" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 												</tbody>
 											</table>
 										</div>
 									</div>
 								</div>
-								<button class="btn btn-oti btn-sm" id="delbtn"
-									onclick="deleteDeliverable()"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px;">선택된
-									산출물 삭제</button>
+								
 								<button class="btn btn-oti btn-sm" id="addbtn"
 									style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
 									추가</button>
@@ -1050,6 +902,7 @@ li:before {
 							</div>
 						</div>
 					</div>
+				</div>
 				</div>
 			</div>
 		</div>
