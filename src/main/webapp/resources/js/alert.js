@@ -122,11 +122,11 @@ function getAlertList(){
 					}
 					/*예정일 변경(개발자)*/
 					if(value.altType == 'CHG_YMD_DVL'){
-						$("#chgDmndTab ul").append(alertLi);
+						$("#developerTab ul").append(alertLi);
 					}
 					/*개발취소*/
 					if(value.altType == 'RTRCN'){
-						$("#chgDmndTab ul").append(alertLi);
+						$("#cancleTab ul").append(alertLi);
 					}
 				});
 				countAlert();

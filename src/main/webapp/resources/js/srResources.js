@@ -24,26 +24,43 @@ function getResourceTableRow(){
 			data:{srNo:srNo},
 			success:function(result){
 				//console.log(result);
-				result.forEach((value,index)=>{
-					var count = index+1;
-					$("#resourceTableRow").append(
-							"<tr onclick='openUpdateResourceModal(\""+value.srSrc+"\",\""+value.empId+"\",\""+value.ptcptnRoleCd+"\")'>" +					
-							"	<td onclick='event.cancelBubble=true'>" +
-							"		<input value='"+value.srSrc+"' name='resource' type='checkbox'>" +
-							"	</td>" +
-							"	<th scope='row'>"+count+"</th>" +
-							"	<td id='empNm"+value.srSrc+"'>"+value.empNm+"</td>" +
-							"	<td id='ptcptnRoleNm"+value.srSrc+"'>"+value.ptcptnRoleNm+"</td>" +
-							"	<td id='schdlBgngYmd"+value.srSrc+"'>"+value.schdlBgngYmd+"</td>" +
-							"	<td id='schdlEndYmd"+value.srSrc+"'>"+value.schdlEndYmd+"</td>" +
-							"</tr>"
-					);
-					
-				});
+				//개발자가 아니고 개발완료, 개발 취소가 아닌경우
+				if($("#SRDSttsNm").val()!='개발완료'&&$("#SRDSttsNm").val()!='개발취소'&&$("#deleteSrResourceBtn").length!=0){
+					result.forEach((value,index)=>{
+						var count = index+1;
+						$("#resourceTableRow").append(
+								"<tr onclick='openUpdateResourceModal(\""+value.srSrc+"\",\""+value.empId+"\",\""+value.ptcptnRoleCd+"\")'>" +					
+								"	<td onclick='event.cancelBubble=true'>" +
+								"		<input value='"+value.srSrc+"' name='resource' type='checkbox'>" +
+								"	</td>" +
+								"	<th scope='row'>"+count+"</th>" +
+								"	<td id='empNm"+value.srSrc+"'>"+value.empNm+"</td>" +
+								"	<td id='ptcptnRoleNm"+value.srSrc+"'>"+value.ptcptnRoleNm+"</td>" +
+								"	<td id='schdlBgngYmd"+value.srSrc+"'>"+value.schdlBgngYmd+"</td>" +
+								"	<td id='schdlEndYmd"+value.srSrc+"'>"+value.schdlEndYmd+"</td>" +
+								"</tr>"
+						);
+					});
+				}else{
+					result.forEach((value,index)=>{
+						var count = index+1;
+						$("#resourceTableRow").append(
+								"<tr>" +					
+								"	<td onclick='event.cancelBubble=true'>" +
+								"		<input value='"+value.srSrc+"' name='resource' type='checkbox'>" +
+								"	</td>" +
+								"	<th scope='row'>"+count+"</th>" +
+								"	<td id='empNm"+value.srSrc+"'>"+value.empNm+"</td>" +
+								"	<td id='ptcptnRoleNm"+value.srSrc+"'>"+value.ptcptnRoleNm+"</td>" +
+								"	<td id='schdlBgngYmd"+value.srSrc+"'>"+value.schdlBgngYmd+"</td>" +
+								"	<td id='schdlEndYmd"+value.srSrc+"'>"+value.schdlEndYmd+"</td>" +
+								"</tr>"
+						);
+					});
+				}
 			}
 		});
 	}
-	
 }
 function deleteResource(){
 	var srSrcList=new Array();

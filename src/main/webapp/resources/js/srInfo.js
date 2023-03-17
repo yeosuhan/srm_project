@@ -66,8 +66,10 @@ function getDetail(dmndNo, srNo) {
 			if(role=='ROLE_DEVELOPER') {
 				if(detail.isDnumExists>0){
 					$(".col-3").html('<button class="btn btn-oti btn-sm" onclick="addHistory('+'srNo'+')" data-toggle="modal" data-target="#addHistoryModal">SR 변경요청</button>');
+					$(".col-3").show();
 				} else if((detail.isDnumExists)<=0 || (detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
 					$(".col-3").empty();
+					$(".col-3").hide();
 				} 
 			} else if(role=='ROLE_ADMIN'){
 				if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
@@ -95,6 +97,9 @@ function getDetail(dmndNo, srNo) {
 				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
 				/* 버튼 */
 				$("#planBtn").hide();
+				/* 자원정보 버튼*/
+				$("#deleteSrResourceBtn").hide();
+				$("#addSrResourceBtn").hide();
 			} /* 개발중 */
 			else {
 				/* 처리팀 */
@@ -111,6 +116,9 @@ function getDetail(dmndNo, srNo) {
 				$("#rvwCnDiv").append($("<textarea rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
 				/* 버튼 */
 				$("#planBtn").show();
+				/* 자원정보 버튼*/
+				$("#deleteSrResourceBtn").show();
+				$("#addSrResourceBtn").show();
 			}
 			$("#SRDSrNo").val(srNo);
 			$("#SRDDmndNo").val(detail.dd.dmndNo);

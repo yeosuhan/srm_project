@@ -6,7 +6,7 @@
 
 	<div class="modal-body modal-dialog modal-lg" style="height: 700px">
 		<div class="m_head ">
-			<div class="modal_title" style="color: white">SR 요청 상세</div>
+			<div class="modal_title" style="color: white">자원정보</div>
 			<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 		</div>
 		<div class="m_body bg-light">

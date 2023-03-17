@@ -594,18 +594,21 @@ font-size: 13px !important;
 											</c:forEach>
 										</div>
 									</div>
-									<sec:authorize access="hasRole('ROLE_ADMIN')">
-										<c:if test="${sd.sttsNm ne '개발취소' && sd.sttsNm ne '개발완료'}">
 										<div class="form-group row">
 											<div class="col-9"></div>
-											<div class="col-3" >
-											<button class="btn btn-oti btn-sm"
-												onclick="addHistory('${srNo}')" data-toggle="modal"
-												data-target="#addHistoryModal">SR 변경요청</button>
+											<div class="col-3" 
+											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
+												style="display:none"
+											</c:if>
+											>
+												<sec:authorize access="hasRole('ROLE_ADMIN')">
+													<button class="btn btn-oti btn-sm"
+														onclick="addHistory('${srNo}')" data-toggle="modal"
+														data-target="#addHistoryModal"
+														>SR 변경요청</button>
+												</sec:authorize>
 											</div>
 										</div>
-										</c:if>
-									</sec:authorize>
 								</div>
 							</div>
 						</div>
@@ -678,9 +681,11 @@ font-size: 13px !important;
 											id="SRPlRvwCn">${sp.rvwCn}</textarea>
 									</div>
 								</div>
-								<button class="btn btn-oti btn-sm" onclick="planUpdate()"
-									id="planBtn"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<button class="btn btn-oti btn-sm" onclick="planUpdate()"
+										id="planBtn"
+										style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
+								</sec:authorize>
 							</div>
 							<%-- *********************************** [ 자원정보 ] ***********************************--%>
 							<div class="tab-pane" id="profile1" role="tabpanel"
@@ -706,14 +711,22 @@ font-size: 13px !important;
 										</table>
 									</div>
 								</div>
-								<button class="btn btn-oti btn-sm"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
-								<button onclick="deleteResource()" class="btn btn-oti btn-sm"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
-									삭제</button>
-								<button class="btn btn-oti btn-sm"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
-									data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<button onclick="deleteResource()" class="btn btn-oti btn-sm" id="deleteSrResourceBtn"
+										style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
+										<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
+													style="display:none"
+										</c:if>
+										>선택
+										삭제</button>
+									<button class="btn btn-oti btn-sm" id="addSrResourceBtn"
+										style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
+										data-toggle="modal" data-target="#addSrResourcesModal"
+										<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
+											style="display:none"
+										</c:if>
+										>추가</button>
+								</sec:authorize>
 							</div>
 							<%-- *********************************** [ 진척률 ] ***********************************--%>
 							<!-- 진행상태에 따라서 inpu readonly로 출력 및 버튼 안보여야됨 -->
