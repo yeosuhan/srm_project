@@ -1,7 +1,9 @@
 /*작성자: 최은종*/
 function getHstryDetail(historyId) {
 	console.log("historyId: " + historyId);
-
+	$('#appvHstrySttsDiv2').empty();
+	$('#footDivUSer').empty();
+	
 	$
 			.ajax({
 				url : '/history/detail/' + historyId,

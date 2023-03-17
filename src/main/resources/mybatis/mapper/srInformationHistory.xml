@@ -274,7 +274,7 @@
 	   	<![CDATA[
 		   	select si.dmnd_no as dmndNo, si.sr_no as srNo, hstry_type as hstryType, hstry_stts as hstryStts, chg_end_ymd as chgEndYmd, cmptn_dmnd_ymd as cmptnDmndYmd, rqstr_id as rqstrId, schdl_end_ymd as schdlEndYmd , wrt_ymd as wrtYmd, m.flnm as flnm
 			from members m, sr_demand sd, sr_information si, sr_resources srr, sr_information_history srh
-			where sd.dmnd_no=si.dmnd_no and si.dmnd_no=#{dmndNo} and srr.sr_no = si.sr_no and m.member_id=srr.emp_id and srr.emp_id=#{empId} and srr.emp_id=srh.rqstr_id and sysdate <srr.schdl_end_ymd
+			where sd.dmnd_no=si.dmnd_no and si.dmnd_no=#{dmndNo} and srr.sr_no = si.sr_no and m.member_id=srr.emp_id and srr.emp_id=#{empId} and sysdate <srr.schdl_end_ymd
 	   	]]>
 	</select>
 </mapper>

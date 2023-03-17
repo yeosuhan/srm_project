@@ -128,18 +128,25 @@ public class SrinformationController {
 		String empId = auth.getName().toString();
 		log.info("empId" + empId);
 		List<SrResourceAddHistoryDto> drlist = srInformationHistoryService.getDmndNoBySrResouce(dmndNo, empId);
+		log.info("dmndNo" + dmndNo);
+		
 		log.info("drlist" + drlist);
-
 		log.info("drlist size" + drlist.size());
-		if (drlist.size() > 0) {
-			isDnumExists = 1;
-			// isDnumExists = drlist.indexOf(drlist.get(0));
-			log.info("isDnumExists " + isDnumExists);
-		} else {
-			isDnumExists = 0;
-		}
+		
 		// 개발자와 관리자별로 버튼제약 다르게 설정하기 위해 권한 보내기 (최은종)
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
+		
+		if(role.equals("ROLE_DEVELOPER")) {
+			if (drlist.size() > 0) {
+				isDnumExists = 1;
+				// isDnumExists = drlist.indexOf(drlist.get(0));
+				log.info("isDnumExists " + isDnumExists);
+			} else {
+				isDnumExists = 0;
+			}
+		} else if(role.equals("ROLE_ADMIN")) {
+			isDnumExists = 1;
+		}
 
 		total = new SrTotal(dd, pi, isDnumExists, role);
 
