@@ -27,7 +27,7 @@ public interface ISrinformationDao {
 	 * @return sr진척 목록 조회
 	 */
 	public List<SrinformationList> selectInfoAll(@Param("pager") Pager pager,
-			@Param("srInfoFilter") SrInfoFilter srInfoFilter, @Param("sort") String sort, @Param("role")String role);
+			@Param("srInfoFilter") SrInfoFilter srInfoFilter, @Param("sort") String sort, @Param("role")String role, @Param("ey") String ey, @Param("by") String by);
 
 	/**
 	 * 

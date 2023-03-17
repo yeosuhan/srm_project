@@ -10,27 +10,57 @@ $(document).ready(function(){
 		if(currentUrlForSort.indexOf('sort')!=-1){
 			currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('sort')-1);
 		}
+		if(currentUrlForSort.indexOf('by')!=-1) {
+			currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('by')-1);
+		}
+		if(currentUrlForSort.indexOf('ey')!=-1) {
+			currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('ey')-1);
+		}
 		//page파라미터와 다른 파라미터가 있는경우
 		if(indexOfFilter!=-1&&indexOfPage!=-1){
 			filter=currentUrlForSort.substring(indexOfFilter+1,currentUrlForSort.length);
 			
 			$(".sortBtnAsc").attr("href",$(".sortBtnAsc").attr("href")+"?"+filter+"&sort=ASC");
 			$(".sortBtnDesc").attr("href",$(".sortBtnDesc").attr("href")+"?"+filter+"&sort=DESC");
+			
+			$(".sortBtnAscBy").attr("href",$(".sortBtnAscBy").attr("href")+"?"+filter+"&by=ASC");
+			$(".sortBtnDescBy").attr("href",$(".sortBtnDescBy").attr("href")+"?"+filter+"&by=DESC");
+			
+			$(".sortBtnAscEy").attr("href",$(".sortBtnAscEy").attr("href")+"?"+filter+"&ey=ASC");
+			$(".sortBtnDescEy").attr("href",$(".sortBtnDescEy").attr("href")+"?"+filter+"&ey=DESC");
 		}else if(currentUrlForSort.indexOf('page')==-1){//파라미터가 page가 아닌경우
 			indexOfFilter=currentUrlForSort.indexOf('?');
 			if(indexOfFilter==-1){
 				//파라미터가 sort밖에 없는경우
 				$(".sortBtnAsc").attr("href","?sort=ASC");
 				$(".sortBtnDesc").attr("href","?sort=DESC");
+				
+				$(".sortBtnAscBy").attr("href","?by=ASC");
+				$(".sortBtnDescBy").attr("href","?by=DESC");
+				
+				$(".sortBtnAscEy").attr("href","?ey=ASC");
+				$(".sortBtnDescEy").attr("href","?ey=DESC");
 			}else{
 				filter=currentUrlForSort.substring(indexOfFilter,currentUrlForSort.length);
 				$(".sortBtnAsc").attr("href",$(".sortBtnAsc").attr("href")+filter+"&sort=ASC");
 				$(".sortBtnDesc").attr("href",$(".sortBtnDesc").attr("href")+filter+"&sort=DESC");
+				
+				$(".sortBtnAscBy").attr("href",$(".sortBtnAscBy").attr("href")+filter+"&by=ASC");
+				$(".sortBtnDescBy").attr("href",$(".sortBtnDescBy").attr("href")+filter+"&by=DESC");
+				
+				$(".sortBtnAscEy").attr("href",$(".sortBtnAscEy").attr("href")+filter+"&ey=ASC");
+				$(".sortBtnDescEy").attr("href",$(".sortBtnDescEy").attr("href")+filter+"&ey=DESC");
 			}
 		}	
 	}else{
 		$(".sortBtnAsc").attr("href","?sort=ASC");
 		$(".sortBtnDesc").attr("href","?sort=DESC");
+		
+		$(".sortBtnAscBy").attr("href","?by=ASC");
+		$(".sortBtnDescBy").attr("href","?by=DESC");
+		
+		$(".sortBtnAscEy").attr("href","?ey=ASC");
+		$(".sortBtnDescEy").attr("href","?ey=DESC");
 	}
 });
 /* SR요청 상세보기 */
