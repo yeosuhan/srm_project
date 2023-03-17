@@ -131,6 +131,17 @@ function getDetail(dmndNo, srNo) {
 			$("#SRDCn").val(detail.dd.cn);
 			$("#SRDFile").val(detail.dd.fileNm);
 			$("#dept").val(detail.pi.deptCd).prop("selected", true);
+			$("#SRDSttsNm").val(detail.dd.sttsNm);
+			//파일
+			$("#SRDAttachFile").empty();
+			detail.dd.attachFile.forEach((value)=>{
+				$("#SRDAttachFile").append(
+						"<a href='/file/download/'"+value.fileSn+"/>" +
+						"	<span class='glyphicon glyphicon-save' aria-hidden='true'></span>" +
+						"	<span>"+value.orgnlFileNm+"</span><span>"+value.fileSz+" Bytes</span>" +
+						"</a>"
+				);
+			});
 			
 			$("#SRPlDeptNm").val(detail.dd.deptNm);
 			$("#SRPlDmndNo").val(detail.pi.dmndNo);

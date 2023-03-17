@@ -568,14 +568,14 @@ li:before {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">진행상태</div>
 											<div class="col col-sm-7 pl-0">
-												<input readonly class="form-control" id="SRDCmptnDmndYmd"
+												<input readonly class="form-control" id="SRDSttsNm"
 													value="${sd.sttsNm}">
 											</div>
 										</div>
 									</div>
 									<div class="form-group row">
 										<p class="col-sm-2 font-weight-bold px-0">첨부파일</p>
-										<div class="col-sm-10">
+										<div class="col-sm-10" id="SRDAttachFile">
 											<c:forEach var="f" items="${sd.attachFile}">
 												<div>
 													<a href="<c:url value='/file/download/${f.fileSn}' />">
@@ -588,14 +588,16 @@ li:before {
 										</div>
 									</div>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<c:if test="${sd.sttsNm ne '개발취소' && sd.sttsNm ne '개발완료'}">
 										<div class="form-group row">
-											<div class="col-8"></div>
-											<div class="col-4" >
+											<div class="col-9"></div>
+											<div class="col-3" >
 											<button class="btn btn-oti btn-sm"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
 												data-target="#addHistoryModal">SR 변경요청</button>
 											</div>
 										</div>
+										</c:if>
 									</sec:authorize>
 								</div>
 							</div>
