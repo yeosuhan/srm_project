@@ -132,5 +132,3 @@ function empHstryPager(url) {
 		}
 	});
 }
-
-//var trrow =$('#historyTable >tbody tr').length;

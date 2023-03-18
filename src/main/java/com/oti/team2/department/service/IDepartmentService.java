@@ -15,7 +15,7 @@ public interface IDepartmentService {
 	 * 
 	 * @author 최은종
 	 */
-	public List<Department> getDepartmentList(DeptFilterDto deptFilterDto);
+	public List<Department> getDepartmentList(Department deptFilter);
 
 	/**
 	 * 신규부서 등록 메서드

@@ -64,7 +64,7 @@ public class MainController {
 		int histotal = 0; // 히스토리
 
 		// 공지사항
-		nPager = new Pager(boardService.getTotalRow("notice", null, null), 1);
+		nPager = new Pager(6, boardService.getTotalRow("notice", null, null), 1);
 		noticeList = boardService.getBoardList("notice", null, nPager, null);
 
 		if (role.equals(Auth.ROLE_CLIENT.toString())) {
@@ -78,9 +78,9 @@ public class MainController {
 			cantotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 6, 1).getTotalRows();
 			// 히스토리 총 수 가져와야 됨
 			histotal = srInformationHistoryService.getCountTodoForCust(auth.getName());
-			srList = srdemandService.getMytodoSrList(auth.getName(), null, 0, pager);
+			srList = srdemandService.getMytodoSrList(auth.getName(), null, 2, pager);
 			// 게시글
-			qPager = new Pager(boardService.getTotalRow("qna", memberId, null), 1);
+			qPager = new Pager(6, boardService.getTotalRow("qna", memberId, null), 1);
 			qnaList = boardService.getBoardList("qna", memberId, qPager, null);
 
 		} else if (role.equals(Auth.ROLE_DEVELOPER.toString())) {
@@ -97,7 +97,7 @@ public class MainController {
 			// 히스토리 총 수 가져와야 됨
 			histotal = srInformationHistoryService.getCountTodoForDev(auth.getName(), auth.getName());
 			// 게시글
-			qPager = new Pager(boardService.getcountByEmpId(memberId, null), 1);
+			qPager = new Pager(6, boardService.getcountByEmpId(memberId, null), 1);
 			qnaList = boardService.getBoardListByEmpId(memberId, qPager, null);
 
 		} else {
@@ -114,7 +114,7 @@ public class MainController {
 			// 히스토리 총 수 가져와야 됨
 			histotal = srInformationHistoryService.getCountTodoForAdmin(auth.getName());
 			// 게시글
-			qPager = new Pager(boardService.getTotalRow("qna", null, null), 1);
+			qPager = new Pager(6, boardService.getTotalRow("qna", null, null), 1);
 			qnaList = boardService.getBoardList("qna", null, qPager, null);
 
 		}
@@ -136,6 +136,8 @@ public class MainController {
 		model.addAttribute("nPager", nPager);
 
 		model.addAttribute("sttsCd", 0);
+		log.info(srList);
+		log.info(pager);
 		return "member/my-todo";
 	}
 
@@ -169,6 +171,8 @@ public class MainController {
 		model.addAttribute("srList", srList);
 		model.addAttribute("pager", pager);
 		model.addAttribute("sttsCd", stts);
+		log.info(srList);
+		log.info(pager);
 		return "mytodo/srTable";
 	}
 
@@ -196,17 +200,17 @@ public class MainController {
 		if (authRole.equals("ROLE_ADMIN")) {
 			log.info("나는 관리자");
 			totalRows = srInformationHistoryService.getCountTodoForAdmin(auth.getName());
-			pager = new Pager(totalRows, pageNo);
+			pager = new Pager(5, totalRows, pageNo);
 			todoHstryList = srInformationHistoryService.getHstryTodoByPicId(pager, auth.getName());
 		} else if (authRole.equals("ROLE_DEVELOPER")) {
 			log.info("나는 개발자");
 			totalRows = srInformationHistoryService.getCountTodoForDev(auth.getName(), auth.getName());
-			pager = new Pager(totalRows, pageNo);
+			pager = new Pager(5, totalRows, pageNo);
 			todoHstryList = srInformationHistoryService.getHstryTodoByEmpId(pager, auth.getName(), auth.getName());
 		} else {
 			log.info("나는 고객");
 			totalRows = srInformationHistoryService.getCountTodoForCust(auth.getName());
-			pager = new Pager(totalRows, pageNo);
+			pager = new Pager(5, totalRows, pageNo);
 			todoHstryList = srInformationHistoryService.getHstryTodoByCustId(pager, auth.getName());
 		}
 

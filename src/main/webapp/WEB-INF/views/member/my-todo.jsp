@@ -31,50 +31,49 @@
 	src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
-		console.log("djlljldfdfd");
 		var ctx = $('#myChart');
 		$.ajax({
 			url : "/client/chart",
 			type : "GET",
 			success : function(res) {
 				console.log(res[0]);
-				var myChart = new Chart(ctx,
-					{
-						type : 'pie',
-						data : {
-							labels : [ '요청', '반려', '접수', '개발중', '테스트',
-									'개발완료', '개발취소' ],
-							datasets : [ {
-								label : '# of Votes',
-								data : [ res[0], res[1],res[2], res[3], res[4], res[5], res[6] ],
-								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)',
-										'rgba(255, 206, 86, 0.2)',
-										'rgba(75, 192, 192, 0.2)',
-										'rgba(153, 102, 255, 0.2)',
-										'rgba(255, 159, 64, 0.2)' ],
-								borderColor : [ 'rgba(255, 99, 132, 1)',
-										'rgba(54, 162, 235, 1)',
-										'rgba(255, 206, 86, 1)',
-										'rgba(75, 192, 192, 1)',
-										'rgba(153, 102, 255, 1)',
-										'rgba(255, 159, 64, 1)' ],
-								borderWidth : 1
+				var myChart = new Chart(ctx, {
+					type : 'pie',
+					data : {
+						labels : [ '요청', '반려', '접수', '개발중', '테스트', '개발완료',
+								'개발취소' ],
+						datasets : [ {
+							label : '# of Votes',
+							data : [ res[0], res[1], res[2], res[3], res[4],
+									res[5], res[6] ],
+							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+									'rgba(54, 162, 235, 0.2)',
+									'rgba(255, 206, 86, 0.2)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(153, 102, 255, 0.2)',
+									'rgba(255, 159, 64, 0.2)' ],
+							borderColor : [ 'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)',
+									'rgba(255, 159, 64, 1)' ],
+							borderWidth : 1
+						} ]
+					},
+					options : {
+						scales : {
+							yAxes : [ {
+								ticks : {
+									beginAtZero : true
+								}
 							} ]
-						},
-						options : {
-							scales : {
-								yAxes : [ {
-									ticks : {
-										beginAtZero : true
-									}
-								} ]
-							}
 						}
-					});
-				}			
+					}
+				});
+			}
 		});
-	});		
+	});
 </script>
 
 
@@ -102,16 +101,12 @@
 	background: linear-gradient(135deg, #93344b 10%, #6b2146 100%);
 }
 
-.card .card-body table td ,.card-block table td, table td{
-font-size:13px;
+.card .card-body table td, .card-block table td, table td {
+	font-size: 13px;
 }
 
-.card .card-body table th,.card-block table th, table th{
-	font-size:14px;
-}
-.nav-item {
-margin-top: 3px;
-margin-bottom: 3px;
+.card .card-body table th, .card-block table th, table th {
+	font-size: 14px;
 }
 </style>
 </head>
@@ -127,8 +122,8 @@ margin-bottom: 3px;
 				<div class="card" id="mytodo">
 					<div class="col-12">
 						<!-- Nav tabs -->
-						<ul class="nav card-header-pills nav-tabs md-tabs" style="padding:6px;" role="tablist">
-							<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+						<ul class="nav card-header-pills nav-tabs md-tabs" role="tablist">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
 								<li class="nav-item btn"><div
 										class="nav-link sttsCd0 active" onclick="moveTab(0)">
 										요청<span class="badge badge-otidanger">${atotal}</span>
@@ -145,15 +140,16 @@ margin-bottom: 3px;
 									</div>
 									<div class="slide"></div></li>
 							</sec:authorize>
-							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
+							<sec:authorize access="hasRole('ROLE_DEVELOPER')">
 								<li class="nav-item btn active">
-									<div class="nav-link sttsCd3" onclick="moveTab(3)">
-										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
+									<div class="nav-link sttsCd3 active" onclick="moveTab(3)">
+										개발 중 <span class="badge badge-danger">${dtotal}</span>
 									</div>
 									<div class="slide"></div>
 								</li>
 							</sec:authorize>
-							<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+
+							<sec:authorize access="hasRole('ROLE_CLIENT')">
 								<li class="nav-item btn"><div class="nav-link sttsCd0"
 										onclick="moveTab(0)">
 										요청<span class="badge badge-otitodo">${atotal}</span>
@@ -173,14 +169,6 @@ margin-bottom: 3px;
 									<div class="nav-link sttsCd3" onclick="moveTab(3)">
 										개발 중 <span class="badge badge-otitodo">${dtotal}</span>
 									</div>
-									<div class="slide"></div>
-								</li>
-							</sec:authorize>
-							<sec:authorize access="hasAnyRole('ROLE_DEVELOPER')">
-								<li class="nav-item btn">
-									<div class="nav-link sttsCd3 active" onclick="moveTab(3)">
-										개발 중 <span class="badge badge-otidanger">${dtotal}</span>
-									</div> 
 									<div class="slide"></div>
 								</li>
 							</sec:authorize>
@@ -206,12 +194,10 @@ margin-bottom: 3px;
 								<div class="slide"></div></li>
 						</ul>
 						<!-- Tab panes -->
-						<div class="tab-content card-block"
-							style="padding: 0px 20px 20px 20px;">
+						<div class="tab-content card-block" style="padding: 0px 20px 20px 20px;">
 							<!------나의 할일 : 요청-------->
 							<div class="tab-pane active" id="requesttable" role="tabpanel">
 								<%@ include file="/WEB-INF/views/mytodo/srTable.jsp"%>
-
 							</div>
 						</div>
 					</div>
@@ -224,16 +210,16 @@ margin-bottom: 3px;
 				<jsp:include page="/WEB-INF/views/mytodo/notice.jsp" />
 			</div>
 			<!-- 시각자료 넣을 곳 -->
-			<div class="col-lg-4 pl-0" id="qnaList">
+			<div class="col-lg-4" style="padding-left:0px;" id="qnaList">
 				<jsp:include page="/WEB-INF/views/mytodo/qna.jsp" />
 			</div>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<div class="col-lg-4 px-0">
+				<div class="col-lg-4" style="padding-left:0px;">
 					<jsp:include page="/WEB-INF/views/mytodo/progressGraph.jsp" />
 				</div>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_DEVELOPER')">
-				<div class="card col-lg-4 px-0">
+				<div class="card col-lg-4" style="padding:0px;">
 					<div class="card-header">
 						<h5 class="card-header-text">나의 일정</h5>
 					</div>
@@ -243,12 +229,12 @@ margin-bottom: 3px;
 				</div>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_CLIENT')">
-				<div class="card col-lg-4 px-0">
+				<div class="card col-lg-4" style="padding:0px;">
 					<div class="card-header">
 						<h5 class="card-header-text">나의 요청 현황</h5>
 					</div>
 					<div class="card-body">
-						<canvas id="myChart" width="100%" height="100%"></canvas>
+						<canvas id="myChart" height="240"></canvas>
 					</div>
 				</div>
 			</sec:authorize>

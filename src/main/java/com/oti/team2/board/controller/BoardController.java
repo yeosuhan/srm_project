@@ -56,20 +56,24 @@ public class BoardController {
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		List<BoardListDto> list = null;
 		Pager pager = null;
-		//if(type == null) type = boardFilterDto.getType();
+		
 		boardFilterDto.setBtype(type);
 		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
-			pager = new Pager(boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			if(view.equals("myportal")) pager = new Pager(6,boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			else pager = new Pager(10,boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			
 			list = boardService.getBoardList(type, memberId, pager, boardFilterDto);
 			model.addAttribute("qPager", pager);
 			model.addAttribute("qnaList", list);
 		}
 		else {
-			pager = new Pager(boardService.getTotalRow(type, null, boardFilterDto), page);
+			if(view.equals("myportal")) pager = new Pager(6,boardService.getTotalRow(type, null, boardFilterDto), page);
+			else pager = new Pager(10,boardService.getTotalRow(type, null, boardFilterDto), page);
+			
 			list = boardService.getBoardList(type, null, pager, boardFilterDto);
 			if(type.equals("qna")) {
 				if(role.equals(Auth.ROLE_DEVELOPER.toString())) {
-					pager = new Pager(boardService.getcountByEmpId(memberId, boardFilterDto), 1);
+					pager = new Pager(10,boardService.getcountByEmpId(memberId, boardFilterDto), 1);
 					list = boardService.getBoardListByEmpId(memberId, pager, boardFilterDto);
 				}
 				model.addAttribute("qPager", pager);

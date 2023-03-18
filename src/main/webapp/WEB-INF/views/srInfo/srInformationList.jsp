@@ -44,7 +44,6 @@
 	});
 	</c:if>
 </script>
-
 <style>
 .ui-datepicker-trigger {
 	width: 29px;
@@ -149,6 +148,14 @@ li:before {
 .badge {
 	padding: 5px 8px;
 }
+
+table th{
+font-size: 15px !important;
+	}
+	
+table tbody td{
+font-size: 13px !important;
+	}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -184,7 +191,7 @@ li:before {
 				</div>
 				<div class="m_footer" style="height: 50px">
 					<button class="modal_btn btn-oti cancle" id="delbtn"
-						onclick="deleteDeliverable()">선택된 산출물 삭제</button>
+						onclick="deleteDeliverable()">선택 삭제</button>
 					<div class="modal_btn btn-oti cancle" data-dismiss="modal">닫기</div>
 				</div>
 			</div>
@@ -251,11 +258,11 @@ li:before {
 					<div class="card-header" id="headerFirst">
 						<h5 style="font-weight: bold;">SR 진척 관리</h5>
 					</div>
-					<div class="card-body">
+					<div class="card-body" style="height: 70px;">
 						<form id="srInfoFilterForm"
 							action="${pageContext.request.contextPath}/srinformation/list"
 							onsubmit="return srSearch()">
-							<div class="col col-xl-1" style="width: 90px;">시스템 구분</div>
+							<div class="col col-xl-1 font-weight-bold" style="width: 90px;">시스템 구분</div>
 							<div class="col col-xl-2" style="padding: 0px; width: 200px;">
 
 								<div class="dropdown dropdown open">
@@ -269,7 +276,7 @@ li:before {
 									</select>
 								</div>
 							</div>
-							<div class="col col-xl-1" style="width: 80px;">업무 구분</div>
+							<div class="col col-xl-1 font-weight-bold" style="width: 80px;">업무 구분</div>
 							<div class="dropdown dropdown open" style="float: left;">
 								<select name="taskSeCd" id="taskSeCdFilter"
 									onclick="getTaskSeCd()" style="width: 120px;">
@@ -279,7 +286,7 @@ li:before {
 									</c:if>
 								</select>
 							</div>
-							<div class="col col-xl-1" style="width: 80px;">진행 상태</div>
+							<div class="col col-xl-1 font-weight-bold" style="width: 80px;">진행 상태</div>
 							<div class="col col-xl-1" style="">
 								<div class="dropdown dropdown open">
 									<select name="sttsCd" id="sttsCdFilter">
@@ -293,7 +300,7 @@ li:before {
 									</select>
 								</div>
 							</div>
-							<div class="col col-xl-1"
+							<div class="col col-xl-1  font-weight-bold"
 								style="width: 80px; padding-left: 20px;">SR 제목</div>
 							<div class="col col-xl-2" style="">
 								<input type="text" class="form-control" name="ttl"
@@ -306,7 +313,7 @@ li:before {
 								<c:if test="${srInfoFilter.mySrOnly ne true}">
 									<input type="checkbox" name="mySrOnly" value="true">
 								</c:if>
-								내 처리건
+								<span class="font-weight-bold">내 처리건</span>
 							</div>
 
 							<div class="col col-xl-2">
@@ -314,7 +321,7 @@ li:before {
 									style="float: center;">
 									<i class="ti-search"></i>
 								</button>
-								<button class="btn btn-oti btn-sm" type="submit" value=""
+								<button type="submit" class="btn btn-oti btn-sm"
 									onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
 									style="float: right; margin-left: 50px;">엑셀 다운로드</button>
 							</div>
@@ -324,7 +331,7 @@ li:before {
 			</div>
 			<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card" style="height: 1325px;">
+				<div class="card" style="height: 1140px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
 						<div class="card-header-right">
@@ -344,25 +351,42 @@ li:before {
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
-												<th>SR번호 <c:if test="${sort eq 'DESC'}">
-														<a
-															href="${pageContext.request.contextPath}/srinformation/list"
+												<th style="font-size: 15px;">SR번호
+												 <c:if test="${sort eq 'DESC' || sort eq '1'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
 															style="color: #782748; font-size: 24px;"></i></a>
 													</c:if> <c:if test="${sort eq 'ASC'}">
-														<a
-															href="${pageContext.request.contextPath}/srinformation/list"
+														<a href="${pageContext.request.contextPath}/srinformation/list"
 															class="sortBtnDesc"><i class="fas fa-caret-up"
 															style="color: #782748; font-size: 24px;"></i></a>
 													</c:if>
 												</th>
-												<th>시스템구분</th>
-												<th>업무구분</th>
-												<th style="width: 200px;">SR명</th>
-												<th>요청자</th>
-												<th>완료요청일</th>
-												<th>완료예정일</th>
-												<th>진행상태</th>
+												<th style="font-size: 15px; width: 200px;">SR명</th>
+												<th style="font-size: 15px;">시스템구분</th>
+												<th style="font-size: 15px;">업무구분</th>
+												<th style="font-size: 15px;">요청자</th>
+												<th style="font-size: 15px;">완료요청일
+											 <c:if test="${by eq 'DESC' || by eq '1'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
+															class="sortBtnAscBy"><i class="fas fa-caret-down"
+															style="color: #782748; font-size: 24px;"></i></a>
+													</c:if> <c:if test="${by eq 'ASC'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
+															class="sortBtnDescBy"><i class="fas fa-caret-up"
+															style="color: #782748; font-size: 24px;"></i></a>
+													</c:if></th>
+												<th style="font-size: 15px;">완료예정일
+												 <c:if test="${ey eq 'DESC'|| ey eq '1'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
+															class="sortBtnAscEy"><i class="fas fa-caret-down"
+															style="color: #782748; font-size: 24px;"></i></a>
+													</c:if> <c:if test="${ey eq 'ASC'}">
+														<a href="${pageContext.request.contextPath}/srinformation/list"
+															class="sortBtnDescEy"><i class="fas fa-caret-up"
+															style="color: #782748; font-size: 24px;"></i></a>
+													</c:if></th>
+												<th style="font-size: 15px;">진행상태</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -372,18 +396,17 @@ li:before {
 														onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
 														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
-														<td>${srlist.sysNm}</td>
-														<td>${srlist.taskSeNm}</td>
 														<c:choose>
-															<c:when test="${fn:length(srlist.ttl) > 10}">
-																<td class="text-center"><c:out
-																		value="${fn:substring(srlist.ttl,0,9)}" />...</td>
+															<c:when test="${fn:length(srlist.ttl) > 15}">
+																<td class="text-left"><c:out
+																		value="${fn:substring(srlist.ttl,0,10)}" />...</td>
 															</c:when>
 															<c:otherwise>
-																<td class="text-center"><c:out
-																		value="${srlist.ttl}" /></td>
+																<td class="text-left"><c:out value="${srlist.ttl}" /></td>
 															</c:otherwise>
 														</c:choose>
+														<td class="text-left">${srlist.sysNm}</td>
+														<td class="text-left">${srlist.taskSeNm}</td>
 														<td>${srlist.flnm}</td>
 														<td>${srlist.bgngYmd}</td>
 														<td>${srlist.endYmd}</td>
@@ -440,28 +463,27 @@ li:before {
 					</div>
 				</div>
 			</div>
-			<%-- *********************************** [SR요청 상세정보 ] ***********************************--%>
-			<div class="col-xl-4 col-md-12 p-0">
+			<div class="col-xl-4 col-md-12 pl-0">
 				<div class="card">
-					<div class="card-header pb-2">
-						<div class="row">
-							<div class="col-8">
-								<h5>SR 요청 상세정보</h5>
-							</div>
-							<div class="col-3 ml-4">
-								<sec:authorize access="hasRole('ROLE_ADMIN')">
-									<button class="btn btn-oti btn-sm"
-										onclick="addHistory('${srNo}')" data-toggle="modal"
-										data-target="#addHistoryModal">SR 변경요청</button>
-								</sec:authorize>
-							</div>
-						</div>
+					<div class="card-header" style="padding:0px 10px; background:rgba(0,0,0,0);">
+						<%-- *********************************** 상세 탭 *********************************** --%>
+								<ul class="nav nav-tabs md-tabs card-header-pills"  role="tablist">
+									<li class="nav-item"><a class="nav-link active"
+										data-toggle="tab" href="#srDemandDetail" role="tab">SR 요청 정보</a>
+										<div class="slide"></div></li>
+									<li class="nav-item"><a
+										class="nav-link" data-toggle="tab" href="#srInfoDetail"
+										role="tab">SR 처리 정보</a>
+										<div class="slide"></div></li>
+								</ul>
 					</div>
+			<%-- *********************************** [SR요청 상세정보 ] ***********************************--%>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
 						<div class="tab-pane active" id="srDemandDetail" role="tabpanel">
-							<div class="card-block" style="height: 630px;">
+							<div class="card-block" style="height: 675px;">
 								<div class="card_body " style="font-size: 12px;">
+								
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 px-0 font-weight-bold">요청 번호</div>
@@ -533,7 +555,7 @@ li:before {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold">SR요청일</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDDmndymd"
 													value="${sd.dmndYmd}">
@@ -568,41 +590,57 @@ li:before {
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">진행상태</div>
 											<div class="col col-sm-7 pl-0">
-												<input readonly class="form-control" id="SRDCmptnDmndYmd"
+												<input readonly class="form-control" id="SRDSttsNm"
 													value="${sd.sttsNm}">
 											</div>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-sm-2 px-0 col-form-label font-weight-bold"
-											style="font-size: 12px;">첨부파일</label>
-										<div class="col-sm-9 px-0">
-											<input type="file" class="" id="SRDFile">
+										<p class="col-sm-2 font-weight-bold px-0">첨부파일</p>
+										<div class="col-sm-10" id="SRDAttachFile">
+											<c:forEach var="f" items="${sd.attachFile}">
+												<div>
+													<a href="<c:url value='/file/download/${f.fileSn}' />">
+														<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+														<span> ${f.orgnlFileNm} </span><span style="">
+															${f.fileSz} Bytes</span>
+													</a>
+												</div>
+											</c:forEach>
 										</div>
 									</div>
+										<div class="form-group row">
+											<div class="col-9"></div>
+											<div class="col-3" 
+											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
+												style="display:none"
+											</c:if>
+											>
+												<button class="btn btn-oti btn-sm"
+													onclick="addHistory('${srNo}')" data-toggle="modal"
+													data-target="#addHistoryModal"
+													>SR 변경요청</button>
+											</div>
+										</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header">
-						<h5>SR 요청 처리정보</h5>
-					</div>
+					<%-- *********************************** SR처리 정보탭 *********************************** --%>
+					<div class="tab-pane" id="srInfoDetail" role="tabpanel">
 					<div class="card-block" style="padding: 0px;">
 						<ul class="nav nav-tabs md-tabs" id="otiTabs" role="tablist">
-							<li class="nav-item" onclick="getPlan()"><a id="srPlanTab"
+							<li class="nav-item font-weight-bold" onclick="getPlan()"><a id="srPlanTab"
 								class="nav-link active" data-toggle="tab" href="#home1"
 								role="tab">SR 계획정보</a>
 								<div class="slide"></div></li>
-							<li class="nav-item"><a id="srResourceTab" class="nav-link"
+							<li class="nav-item font-weight-bold"><a id="srResourceTab" class="nav-link"
 								data-toggle="tab" href="#profile1" role="tab">SR 자원정보</a>
 								<div class="slide"></div></li>
-							<li class="nav-item" onclick="getProgress()"><a
+							<li class="nav-item font-weight-bold" onclick="getProgress()"><a
 								class="nav-link" data-toggle="tab" href="#messages1" role="tab">SR
 									진척률</a>
 								<div class="slide"></div></li>
-							<li class="nav-item" onclick="empHstry()"><a
+							<li class="nav-item font-weight-bold" onclick="empHstry()"><a
 								class="nav-link" data-toggle="tab" href="#srInfhistory"
 								role="tab">SR 히스토리</a>
 								<div class="slide"></div></li>
@@ -614,7 +652,7 @@ li:before {
 								style="padding: 10px;">
 								<div class="form-group row">
 									<div class="col-sm-6 p-0">
-										<div class="col col-sm-4">처리팀</div>
+										<div class="col col-sm-4 font-weight-bold">처리팀</div>
 										<div class="col col-sm-6" id="deptDiv">
 											<select id="dept" onchange="changeDept()">
 												<c:forEach var="deptList" items="${deptList}">
@@ -624,8 +662,8 @@ li:before {
 										</div>
 									</div>
 									<div class="col-sm-6 p-0">
-										<div class="col col-sm-4">담당자</div>
-										<div class="col col-sm-6" id="SRPlFlnmBySelect">
+										<div class="col col-sm-4 font-weight-bold">담당자</div>
+										<div class="col col-sm-8" id="SRPlFlnmBySelect">
 											<input type="hidden" id="SRPlMemberId"> <input
 												readonly class="form-control" id="SRPlFlnm"
 												value="${sp.flnm}">
@@ -634,31 +672,33 @@ li:before {
 								</div>
 								<div class="form-group row">
 									<div class="col-sm-6 p-0">
-										<div class="col col-sm-4">계획시작일</div>
-										<div class="col col-sm-6" id="bgngYmdDiv">
+										<div class="col col-sm-4 font-weight-bold">계획시작일</div>
+										<div class="col col-sm-8" id="bgngYmdDiv">
 											<input type="date" class="form-control" id="SRPlBgngYmd"
 												value="${sp.bgngYmd}">
 										</div>
 									</div>
 									<div class="col-sm-6 p-0">
-										<div class="col col-sm-4">계획종료일</div>
-										<div class="col col-sm-6" id="endYmdDiv">
+										<div class="col col-sm-4 font-weight-bold">계획종료일</div>
+										<div class="col col-sm-8" id="endYmdDiv">
 											<input type="date" class="form-control" id="SRPlEndYmd"
 												value="${sp.endYmd}">
 										</div>
 									</div>
 								</div>
 								<div class="form-group row">
-									<div class="col col-sm-2  p-0" style="line-height: 90px;">검토
+									<div class="col col-sm-2  p-0 font-weight-bold" style="line-height: 90px;">검토
 										내용</div>
-									<div class="col col-sm-9" id="rvwCnDiv">
+									<div class="col col-sm-10" id="rvwCnDiv">
 										<textarea rows="5" cols="5" class="form-control"
 											id="SRPlRvwCn">${sp.rvwCn}</textarea>
 									</div>
 								</div>
-								<button class="btn btn-oti btn-sm" onclick="planUpdate()"
-									id="planBtn"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<button class="btn btn-oti btn-sm" onclick="planUpdate()"
+										id="planBtn"
+										style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
+								</sec:authorize>
 							</div>
 							<%-- *********************************** [ 자원정보 ] ***********************************--%>
 							<div class="tab-pane" id="profile1" role="tabpanel"
@@ -684,14 +724,22 @@ li:before {
 										</table>
 									</div>
 								</div>
-								<button class="btn btn-oti btn-sm"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px;">저장</button>
-								<button onclick="deleteResource()" class="btn btn-oti btn-sm"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">선택
-									삭제</button>
-								<button class="btn btn-oti btn-sm"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
-									data-toggle="modal" data-target="#addSrResourcesModal">추가</button>
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<button onclick="deleteResource()" class="btn btn-oti btn-sm" id="deleteSrResourceBtn"
+										style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
+										<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
+													style="display:none"
+										</c:if>
+										>선택
+										삭제</button>
+									<button class="btn btn-oti btn-sm" id="addSrResourceBtn"
+										style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
+										data-toggle="modal" data-target="#addSrResourcesModal"
+										<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
+											style="display:none"
+										</c:if>
+										>추가</button>
+								</sec:authorize>
 							</div>
 							<%-- *********************************** [ 진척률 ] ***********************************--%>
 							<!-- 진행상태에 따라서 inpu readonly로 출력 및 버튼 안보여야됨 -->
@@ -708,7 +756,7 @@ li:before {
 														<th style="width: 12%;">작업구분</th>
 														<th>시작일</th>
 														<th>종료일</th>
-														<th style="width: 15%;">진척률(누적)</th>
+														<th style="width: 19%;">진척률(누적)</th>
 														<th style="width: 18%;">산출물</th>
 														<th style="width: 8%;"></th>
 													</tr>
@@ -726,10 +774,11 @@ li:before {
 															class="form-control" id="SRPgPrgrsRt0" min="1" max="10"
 															placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse0" aria-expanded="true"
-																	aria-controls="collapse0">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(0)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -737,33 +786,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse0" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
@@ -773,10 +796,11 @@ li:before {
 														<td id="1rt"><input type="number"
 															class="form-control" id="SRPgPrgrsRt1" min="11" max="40"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse1" aria-expanded="true"
-																	aria-controls="collapse1">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(1)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -784,33 +808,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse1" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
@@ -820,10 +818,11 @@ li:before {
 														<td id="2rt"><input type="number"
 															class="form-control" id="SRPgPrgrsRt2" min="41" max="70"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse2" aria-expanded="true"
-																	aria-controls="collapse2">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(2)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -831,33 +830,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse2" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
@@ -868,10 +841,11 @@ li:before {
 															class="form-control" id="SRPgPrgrsRt3" min="71" max="80"></td>
 														<td>
 															<div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse3" aria-expanded="true"
-																	aria-controls="collapse3">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(3)"
+																>첨부파일</button>
 															</div>
 														</td>
 														<td style="padding: 0px; margin: 0px;">
@@ -880,33 +854,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse3" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
@@ -916,10 +864,11 @@ li:before {
 														<td id="4rt"><input type="number"
 															class="form-control" id="SRPgPrgrsRt4" min="81" max="90"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse4" aria-expanded="true"
-																	aria-controls="collapse4">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(4)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -927,33 +876,7 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse4" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 													<tr>
 
 														<td>운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
@@ -963,10 +886,11 @@ li:before {
 														<td id="5rt"><input type="number"
 															class="form-control" id="SRPgPrgrsRt5" min="91" max="100"></td>
 														<td><div class="accordion" id="accordionExample">
-																<button class="btn btn-link btn-block text-center"
-																	type="button" data-toggle="collapse"
-																	data-target="#collapse5" aria-expanded="true"
-																	aria-controls="collapse5">첨부파일</button>
+																<button class="btn btn-link btn-block text-center "
+																type="button" data-toggle="modal"
+																data-target="#deliverableListModal" 
+																onclick="getDeliverablesTableRow(5)"
+																>첨부파일</button>
 															</div></td>
 														<td style="padding: 0px; margin: 0px;">
 															<button class="btn btn-oti btn-lg"
@@ -974,42 +898,13 @@ li:before {
 																style="width: 100%; height: 100%">저장</button>
 														</td>
 													</tr>
-													<tr id="collapse5" class="collapse"
-														aria-labelledby="headingOne"
-														data-parent="#accordionExample">
-														<td colspan="6">
-															<div>
-																<table
-																	class="table table-border text-center deliverableTable"
-																	style="font-size: 12px; padding: 0px;">
-																	<thead>
-																		<tr>
-																			<th style="width: 1px;">#</th>
-																			<th style="width: 1px;"><input type="checkbox"
-																				name="output" value="selectOutputAll"
-																				onclick="selectOutputAll(this)"></th>
-																			<th>산출물구분</th>
-																			<th>산출물명</th>
-																			<th>산출물 경로</th>
-																			<th>등록자</th>
-																			<th>등록일</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-															</div>
-														</td>
-													</tr>
+													
 												</tbody>
 											</table>
 										</div>
 									</div>
 								</div>
-								<button class="btn btn-oti btn-sm" id="delbtn"
-									onclick="deleteDeliverable()"
-									style="float: right; padding-bottom: 10px; margin-bottom: 10px;">선택된
-									산출물 삭제</button>
+								
 								<button class="btn btn-oti btn-sm" id="addbtn"
 									style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
 									추가</button>
@@ -1026,7 +921,7 @@ li:before {
 													<th style="width: 1px;">순번</th>
 													<th>요청자명</th>
 													<th>요청유형</th>
-													<th>변경될 완료예정일</th>
+													<th>변경될 완료요청일</th>
 													<th>승인여부</th>
 												</tr>
 											</thead>
@@ -1042,6 +937,7 @@ li:before {
 							</div>
 						</div>
 					</div>
+				</div>
 				</div>
 			</div>
 		</div>

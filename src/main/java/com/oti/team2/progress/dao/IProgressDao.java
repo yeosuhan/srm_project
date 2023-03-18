@@ -48,8 +48,9 @@ public interface IProgressDao {
 	 * 반영요청 보내기
 	 * 
 	 * @author 여수한
+	 * @param endYmd 
 	 */
-	public void updateProgressYmd(@Param("srNo") String srNo);
+	public void updateProgressYmd(@Param("srNo") String srNo, @Param("endYmd") String endYmd);
 	/**
 	 * 고객이 반영요청 수락하면 운영반영 넣기
 	 * @author 여수한
@@ -58,8 +59,9 @@ public interface IProgressDao {
 	/**
 	 * 진척단계 끝나면 다음 진척단계 시작일 넣기
 	 * @author 여수한
+	 * @param endYmd 
 	 */
-	public void updateBgngYmdByPrgrsId(@Param("prgrsId") int prgrsId);
+	public void updateBgngYmdByPrgrsId(@Param("prgrsId") int prgrsId, @Param("endYmd")String endYmd);
 	/**
 	 * 진척목록의 진척률 조회
 	 * @author 여수한

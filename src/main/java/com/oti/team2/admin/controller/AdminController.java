@@ -73,27 +73,28 @@ public class AdminController {
 	 * @author 최은종
 	 * @return 부서 목록으로 리턴
 	 */
-	@GetMapping("/department/list")
-	public String getDepartmentList(Model model, @RequestParam(value = "deptNm", required = false) String deptNm,
-			@RequestParam(value = "flnm", required = false) String flnm, Authentication auth) {
-		log.info("departmentList 조회");
-		//검색
-		DeptFilterDto deptFilterDto = new DeptFilterDto();
-		if (deptNm != null) {
-			deptFilterDto.setDeptNm(deptNm);
-			model.addAttribute("deptNm", deptNm);
-		}
-		if (flnm != null) {
-			deptFilterDto.setFlnm(flnm);
-			model.addAttribute("flnm", flnm);
-		}
-		
-		//목록 불러오기
-		List<Department> departmentList = departmentService.getDepartmentList(deptFilterDto);
-		model.addAttribute("departmentList", departmentList);
+	   @GetMapping("/department/list")
+	   public String getDepartmentList(Model model, @RequestParam(value = "deptNm", required = false) String deptNm,
+	         @RequestParam(value = "flnm", required = false) String flnm, Authentication auth) {
+	      log.info("departmentList 조회");
+	      // 검색
+	      Department deptFilter = new Department();
+	      if (deptNm != null) {
+	         deptFilter.setDeptNm(deptNm);
+	         model.addAttribute("deptNm", deptNm);
+	      }
+	      if (flnm != null) {
+	         deptFilter.setFlnm(flnm);
+	         model.addAttribute("flnm", flnm);
+	      }
+	      // 목록 불러오기
+	      List<Department> departmentList = departmentService.getDepartmentList(deptFilter);
+	      log.info(departmentList);
 
-		return "management/departmentsList";
-	}
+	      model.addAttribute("departmentList", departmentList);
+
+	      return "management/departmentsList";
+	   }
 
 	/**
 	 * 신규부서 등록 메서드
@@ -164,7 +165,7 @@ public class AdminController {
 			model.addAttribute("flnm", flnm);
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_CLIENT.toString(), filterDto);
-		Pager pager = new Pager(totalRows, page);
+		Pager pager = new Pager(7, totalRows, page);
 		// log.info(pager);
 
 		// 목록 가져오기
@@ -224,7 +225,7 @@ public class AdminController {
 			model.addAttribute("jbgdNm", jbgdNm);
 		}
 		int totalRows = memberService.getTotalRows(Auth.ROLE_DEVELOPER.toString(), filterDto);
-		Pager pager = new Pager(totalRows, page);
+		Pager pager = new Pager(7,totalRows, page);
 		log.info(pager);
 		if (totalRows != 0) {
 			// log.info(totalRows);
@@ -305,8 +306,8 @@ public class AdminController {
 	public String getSrDemandList(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
 			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
-			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
-			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "dmndYmdStart" )  String dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") String dmndYmdEnd,
 			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
 			@RequestParam(required = false, name = "sysCd")String sysCd,
 			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
@@ -320,7 +321,7 @@ public class AdminController {
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, -1);
 			String stringDate = sdf.format(calendar.getTime());
-			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+			dmndYmdStart = stringDate;//기본값 한달전
 		}
 		srFilterDto.setDmndYmdStart(dmndYmdStart);
 		srFilterDto.setDmndYmdEnd(dmndYmdEnd);
@@ -333,7 +334,7 @@ public class AdminController {
 		log.info(srFilterDto);
 		// 목록
 		int totalRows = srdemandService.getCountAllSr(srFilterDto);
-		Pager pager = new Pager(totalRows, Integer.parseInt(page));
+		Pager pager = new Pager(12, totalRows, Integer.parseInt(page));
 		log.info(pager);
 		if(totalRows!=0){
 			List<SrDemand> list = srdemandService.getSrDemandListBy(pager, sort,srFilterDto);
@@ -391,8 +392,8 @@ public class AdminController {
 	public void SrDemandListDownload(Model model, @RequestParam(required = false, name = "dmndno") String dmndno,
 			@RequestParam(required = true, name = "page", defaultValue = "1") String page,
 			@RequestParam(required = true, name = "sort", defaultValue = "DESC")String sort,
-			@RequestParam(required = false, name = "dmndYmdStart" )  Date dmndYmdStart,
-			@RequestParam(required = false, name = "dmndYmdEnd") Date dmndYmdEnd,
+			@RequestParam(required = false, name = "dmndYmdStart" )  String dmndYmdStart,
+			@RequestParam(required = false, name = "dmndYmdEnd") String dmndYmdEnd,
 			@RequestParam(required = false, name = "sttsCd")Integer sttsCd,
 			@RequestParam(required = false, name = "sysCd")String sysCd,
 			@RequestParam(required = false, name = "taskSeCd")String taskSeCd,
@@ -405,7 +406,7 @@ public class AdminController {
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, -1);
 			String stringDate = sdf.format(calendar.getTime());
-			dmndYmdStart = Date.valueOf(stringDate);//기본값 한달전
+			dmndYmdStart = stringDate;//기본값 한달전
 		}
 		srFilterDto.setDmndYmdStart(dmndYmdStart);
 		srFilterDto.setDmndYmdEnd(dmndYmdEnd);

@@ -4,7 +4,11 @@ function showAdminGraph(dmndNo) {
 		url : "/progress/chart?dmndNo=" + dmndNo,
 		type : "GET",
 		success : function(res) {
-			console.log("res  " + res);
+			var gname = res.srNo;
+			if(!res) {
+				console.log("ㅁㅁ");
+				res="계획이 모두 수립되지 않았습니다.";
+			}
 			const chart = Highcharts.chart('adGraph', {
 		        title: {
 		            text: res.srNo + ' 진척계획 및 현황'
@@ -14,7 +18,7 @@ function showAdminGraph(dmndNo) {
 		        },
 		        yAxis: {
 		            title: {
-		                text: 'Fruit eaten'
+		                text: '진척률'
 		            }
 		        },
 		        series: [{

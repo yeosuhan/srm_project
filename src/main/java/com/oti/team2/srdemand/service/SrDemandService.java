@@ -237,7 +237,7 @@ public class SrDemandService implements ISrDemandService {
 	 */
 	public Pager getcountsByCustIdOrPicIdAndSttsCd(String custId, String picId, int sttsCd, int pageNo) {
 		int totalRows = srDemandDao.countByCustIdOrPicIdAndSttsCd(custId, picId, sttsCd);
-		Pager pager = new Pager(totalRows, pageNo);
+		Pager pager = new Pager(5,totalRows, pageNo);
 		return pager;
 	}
 
@@ -257,7 +257,7 @@ public class SrDemandService implements ISrDemandService {
 	 */
 	public Pager getcountsByEmpIdAndSttsCd(String empId, int sttsCd, int pageNo) {
 		int totalRows = srDemandDao.countByEmpIdAndSttsCd(empId, sttsCd);
-		Pager pager = new Pager(totalRows, pageNo);
+		Pager pager = new Pager(5,totalRows, pageNo);
 		return pager;
 	}
 
@@ -388,8 +388,12 @@ public class SrDemandService implements ISrDemandService {
 		for (SrDemand SrDemand : list) {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String dmndYmd = sdf.format(SrDemand.getDmndYmd());
-			String endYmd = sdf.format(SrDemand.getEndYmd());
+			
+			String dmndYmd = null;
+			String endYmd = null;
+			if(SrDemand.getDmndYmd() != null)  dmndYmd = sdf.format(SrDemand.getDmndYmd());
+			if(SrDemand.getEndYmd() != null) endYmd = sdf.format(SrDemand.getEndYmd());
+			
 			row = sheet.createRow(i);
 			cell = null;
 			cs = wb.createCellStyle();

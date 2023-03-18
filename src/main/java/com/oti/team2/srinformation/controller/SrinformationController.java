@@ -63,20 +63,25 @@ public class SrinformationController {
 	@GetMapping(value = "/list")
 	public String getList(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@ModelAttribute SrInfoFilter srInfoFilter, Authentication auth,
-			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort) {
+			@RequestParam(required = true, name = "sort", defaultValue = "1") String sort,
+			@RequestParam(required = true, name = "by", defaultValue = "1") String by,
+			@RequestParam(required = true, name = "ey", defaultValue = "1") String ey) {
 		if (srInfoFilter.isMySrOnly()) {
 			srInfoFilter.setEmpId(auth.getName());
 		}
 		model.addAttribute("sort", sort);
+		model.addAttribute("by", by);
+		model.addAttribute("ey", ey);
 		List<Prgrs> prgrs = progressService.getRrgrs();
 
 		log.info(srInfoFilter);
+		
 		int totalRows = srinformationService.getTotalRow(page, srInfoFilter, auth.getAuthorities().stream().findFirst().get().toString());
-		Pager pager = new Pager(totalRows, page);
+		Pager pager = new Pager(18, totalRows, page);
 		log.info(pager);
 		// log.info(totalRows);
 		if (totalRows != 0) {
-			List<SrinformationList> srlist = srinformationService.getList(pager, srInfoFilter, sort, auth.getAuthorities().stream().findFirst().get().toString());
+			List<SrinformationList> srlist = srinformationService.getList(pager, srInfoFilter, sort, by, ey, auth.getAuthorities().stream().findFirst().get().toString());
 			SrdemandDetail sd = srDemandService.getSrDemandDetail(srlist.get(0).getDmndNo());
 			SrplanInformation sp = srinformationService.getPlan(srlist.get(0).getDmndNo());
 			List<Dept> deptList = srinformationService.getDeptList();
@@ -127,18 +132,25 @@ public class SrinformationController {
 		String empId = auth.getName().toString();
 		log.info("empId" + empId);
 		List<SrResourceAddHistoryDto> drlist = srInformationHistoryService.getDmndNoBySrResouce(dmndNo, empId);
+		log.info("dmndNo" + dmndNo);
+		
 		log.info("drlist" + drlist);
-
 		log.info("drlist size" + drlist.size());
-		if (drlist.size() > 0) {
-			isDnumExists = 1;
-			// isDnumExists = drlist.indexOf(drlist.get(0));
-			log.info("isDnumExists " + isDnumExists);
-		} else {
-			isDnumExists = 0;
-		}
+		
 		// 개발자와 관리자별로 버튼제약 다르게 설정하기 위해 권한 보내기 (최은종)
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
+		
+		if(role.equals("ROLE_DEVELOPER")) {
+			if (drlist.size() > 0) {
+				isDnumExists = 1;
+				// isDnumExists = drlist.indexOf(drlist.get(0));
+				log.info("isDnumExists " + isDnumExists);
+			} else {
+				isDnumExists = 0;
+			}
+		} else if(role.equals("ROLE_ADMIN")) {
+			isDnumExists = 1;
+		}
 
 		total = new SrTotal(dd, pi, isDnumExists, role);
 

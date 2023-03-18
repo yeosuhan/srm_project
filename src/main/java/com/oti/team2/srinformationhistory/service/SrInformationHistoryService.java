@@ -2,7 +2,11 @@ package com.oti.team2.srinformationhistory.service;
 
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +19,7 @@ import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao;
 import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
+import com.oti.team2.srinformationhistory.dto.SrHistoryMailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.srinformationhistory.dto.SrResourceAddHistoryDto;
 import com.oti.team2.srresource.dto.SrResource;
@@ -43,9 +48,13 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 
 	@Autowired
 	private IAlertService alertService;
-	
+
 	@Autowired
 	private IMemberDao memberDao;
+
+/*	@Autowired
+	private JavaMailSender mailSender;*/
+
 	/**
 	 * SR처리 히스토리 내역 조회 메서드 (관리자/개발자용)
 	 * 
@@ -131,11 +140,12 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 			log.info("나는 개발자");
 			// 개발자가 신규등록 할 때
 			srInformationHistoryDao.insertSrHistory(srInformationHistory);
-			//모든 관리자에게 알림 전송
-			srInformationHistory.setHstryId(srInformationHistoryDao.selectLastHstryIdByRqstrId(srInformationHistory.getRqstrId()));
-			List<String> adminList =memberDao.selectAdmin();
-			adminList.forEach((value)->{
-				alertService.sendToClient(value, srInformationHistory.getHstryId(),"CHG_YMD_DVL");
+			// 모든 관리자에게 알림 전송
+			srInformationHistory
+					.setHstryId(srInformationHistoryDao.selectLastHstryIdByRqstrId(srInformationHistory.getRqstrId()));
+			List<String> adminList = memberDao.selectAdmin();
+			adminList.forEach((value) -> {
+				alertService.sendToClient(value, srInformationHistory.getHstryId(), "CHG_YMD_DVL");
 			});
 		} else if (role.equals("ROLE_ADMIN")) {
 			log.info("나는 관리자");
@@ -143,16 +153,17 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 				log.info("나는 관리자:신규등록");
 				// 관리자가 신규등록 할 때
 				srInformationHistoryDao.insertSrHistory(srInformationHistory);
-				//고객에게 알림 전송
-				srInformationHistory.setHstryId(srInformationHistoryDao.selectLastHstryIdByRqstrId(srInformationHistory.getRqstrId()));
+				// 고객에게 알림 전송
+				srInformationHistory.setHstryId(
+						srInformationHistoryDao.selectLastHstryIdByRqstrId(srInformationHistory.getRqstrId()));
 				rcvrId = srDemandDao.selectBySrNo(srInformationHistory.getSrNo());
-				String alertType=null;
-				if(srInformationHistory.getHstryType().equals("B")) {
-					alertType="CHG_YMD"; //예정일 변경 요청
-				}else if(srInformationHistory.getHstryType().equals("C")) {
-					alertType="RTRCN"; //개발 취소
+				String alertType = null;
+				if (srInformationHistory.getHstryType().equals("B")) {
+					alertType = "CHG_YMD"; // 예정일 변경 요청
+				} else if (srInformationHistory.getHstryType().equals("C")) {
+					alertType = "RTRCN"; // 개발 취소
 				}
-				alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),alertType);
+				alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(), alertType);
 			} else if (hstryId != 0) {
 				log.info("나는 관리자:업데이트");
 				// 개발자가 신청한 등록이 있으면
@@ -160,16 +171,17 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 				log.info(srInformationHistory.getHstryStts());
 				srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
 						srInformationHistory.getHstryStts());
-				//개발자 에게 알림 전송
+				// 개발자 에게 알림 전송
 				rcvrId = srInformationHistoryDao.selectRqstrIdByHstryId(srInformationHistory.getHstryId());
-				alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD_DVL");
+				alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(), "CHG_YMD_DVL");
 				if (hstryStts.equals("Y")) {
 					// 고객한테 새로 요청 보내기 (이 때 상태값 I로 바꿔서 insert)
 					srInformationHistoryDao.insertSrHistory(srInformationHistory);
-					//고객에게 알림 전송
-					srInformationHistory.setHstryId(srInformationHistoryDao.selectLastHstryIdByRqstrId(srInformationHistory.getRqstrId()));
+					// 고객에게 알림 전송
+					srInformationHistory.setHstryId(
+							srInformationHistoryDao.selectLastHstryIdByRqstrId(srInformationHistory.getRqstrId()));
 					rcvrId = srDemandDao.selectBySrNo(srInformationHistory.getSrNo());
-					alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD");
+					alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(), "CHG_YMD");
 				}
 			}
 		} else if (role.equals("ROLE_CLIENT")) {
@@ -193,20 +205,20 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 					int row = srDemandService.updateSrDemand(srRequestDto);
 					log.info(srRequestDto);
 					log.info(row);
-					//알림 전송
+					// 알림 전송
 					rcvrId = srInformationHistoryDao.selectRqstrIdByHstryId(srInformationHistory.getHstryId());
-					alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD");
+					alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(), "CHG_YMD");
 				} else {
 					// 요청일 변경 반려시 히스토리 승인여부만 업데이트
 					srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
 							srInformationHistory.getHstryStts());
-					//알림 전송
+					// 알림 전송
 					rcvrId = srInformationHistoryDao.selectRqstrIdByHstryId(srInformationHistory.getHstryId());
-					alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD");
+					alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(), "CHG_YMD");
 				}
 			} else if (hstryType.equals("C")) {
 				// 관리자가 요청한 유형이 개발취소인 경우 일단 상태값 업데이트
-				
+
 				srInformationHistoryDao.updateHstryStts(srInformationHistory.getHstryId(),
 						srInformationHistory.getHstryStts());
 				if (hstryStts.equals("Y")) {
@@ -219,12 +231,13 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 					SrResource srResourceDto = new SrResource();
 					srResourceDto.setSrNo(srNo);
 					srInformationService.updatePrgrsBySrNo(srNo);
+					srInformationService.updateEndYmdBySrNo(srNo);
 					srResourceService.modifySrResource(srResourceDto);
 
 				}
-				//알림 전송
+				// 알림 전송
 				rcvrId = srInformationHistoryDao.selectRqstrIdByHstryId(srInformationHistory.getHstryId());
-				alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(),"CHG_YMD_DVL");
+				alertService.sendToClient(rcvrId, srInformationHistory.getHstryId(), "CHG_YMD_DVL");
 			}
 		}
 	}
@@ -306,4 +319,32 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		int rows = srInformationHistoryDao.countTodoForCust(custId);
 		return rows;
 	}
+
+	@Override
+	public String sendHistoryMail(SrHistoryMailDto historyMailDto, String srNo, String hstryType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * @Override public String sendHistoryMail(SrHistoryMailDto historyMailDto,
+	 * String srNo, String hstryType) {
+	 * 
+	 * String fromEmail = "otiteam2@gmail.com"; // 받는 사람 메일에 표시됨 String fromName =
+	 * "오티아이"; // 발신인 이름 String title = "[OTI 오티아이] OTI-SRM 임시 비밀번호 입니다."; String
+	 * content = memberDto.getMemberId() +
+	 * "님 안녕하세요. 로그인 후 비밀번호를 변경하여 사용 부탁드립니다. 본인이 새로운 비밀번호를 요청하지 않았다면 이 이메일은 무시해 주세요."
+	 * ; content += "OTI-SRM 임시 비밀번호 : " + randomPswd;
+	 * 
+	 * // 수신인 정보 String toEmail = memberDto.getEml();
+	 * 
+	 * // 이메일 발송 MimeMessage msg = mailSender.createMimeMessage(); try {
+	 * MimeMessageHelper helper = new MimeMessageHelper(msg, true, "utf-8");
+	 * helper.setFrom(fromEmail); helper.setTo(toEmail); helper.setSubject(title);
+	 * helper.setText(content, true); mailSender.send(msg); } catch (Exception e) {
+	 * log.info("이메일 발송 실패: " + e); }
+	 * 
+	 * 
+	 * return ""; }
+	 */
 }

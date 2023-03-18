@@ -57,8 +57,8 @@ public class JoinController {
 	 */
 	@GetMapping("/join-employee")
 	public String getJoinEmployee(Model model) {
-		DeptFilterDto deptFilterDto = new DeptFilterDto();
-		List<Department> dept = departmentService.getDepartmentList(deptFilterDto);
+		Department deptFilter = new Department();
+		List<Department> dept = departmentService.getDepartmentList(deptFilter);
 		List<JobGrade> grade = jobGradeService.getJobGradeList();
 		model.addAttribute("dept", dept);
 		model.addAttribute("grade", grade);
@@ -77,7 +77,7 @@ public class JoinController {
 		if(join.getJbgdCd().equals("CXFC") || join.getJbgdCd().equals("ASEC") ||
 				join.getJbgdCd().equals("DPHD") || join.getJbgdCd().equals("ASDR")) {
 			join.setMemberType("ROLE_ADMIN");
-		} else {
+		} else if(join.getJbgdCd().equals("DPTC") || join.getJbgdCd().equals("ASMA") || join.getJbgdCd().equals("CLRK")) {
 			join.setMemberType("ROLE_DEVELOPER");
 		}
 		if(join.getMemberId().length()<8) {

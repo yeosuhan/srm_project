@@ -54,8 +54,8 @@
 			and sd.stts_cd = s.stts_cd
 			and sd.sys_cd = sy.sys_cd
 			and sd.dmnd_no = si.dmnd_no (+)
-			<if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and sd.DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
-			<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(sd.DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= #{srFilterDto.dmndYmdEnd}]]></if>
+			<if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+	  		<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
 			<if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
 			<if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
 			<if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
@@ -225,8 +225,8 @@
 		 </if>
       WHERE CUST_ID=#{clientId}
          and DEL_YN = 0
-         <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
-		 <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= #{srFilterDto.dmndYmdEnd}]]></if>
+         <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+  		<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
 		 <if test="srFilterDto.sttsCd!=null">and stts_cd = #{srFilterDto.sttsCd}</if>
 		 <if test="srFilterDto.sysCd!=null">and sys_cd = #{srFilterDto.sysCd}</if>
 		 <if test="srFilterDto.taskSeCd!=null">and task_se_cd = #{srFilterDto.taskSeCd}</if>
@@ -257,8 +257,8 @@
 	      ) h
 	  </if>
       WHERE DEL_YN = 0
-      <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
-	  <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= #{srFilterDto.dmndYmdEnd}]]></if>
+      <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+	  <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
 	  <if test="srFilterDto.sttsCd!=null">and stts_cd = #{srFilterDto.sttsCd}</if>
 	  <if test="srFilterDto.sysCd!=null">and sys_cd = #{srFilterDto.sysCd}</if>
 	  <if test="srFilterDto.taskSeCd!=null">and task_se_cd = #{srFilterDto.taskSeCd}</if>
@@ -308,8 +308,8 @@
          and sd.stts_cd = s.stts_cd
          and sd.sys_cd = sy.sys_cd
          and sd.dmnd_no = si.dmnd_no(+)
-		 <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and sd.DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
-		 <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(sd.DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= #{srFilterDto.dmndYmdEnd}]]></if>
+		 <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+	  	 <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
 		 <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
 		 <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
 		 <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
@@ -536,8 +536,8 @@
 			and sd.stts_cd = s.stts_cd
 			and sd.sys_cd = sy.sys_cd
 			and sd.dmnd_no = si.dmnd_no (+)
-			<if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and sd.DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
-			<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(sd.DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= #{srFilterDto.dmndYmdEnd}]]></if>
+			<if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+	  		<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
 			<if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
 			<if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
 			<if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
@@ -598,8 +598,8 @@
          and sd.stts_cd = s.stts_cd
          and sd.sys_cd = sy.sys_cd
          and sd.dmnd_no = si.dmnd_no(+)
-		 <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and sd.DMND_YMD >= #{srFilterDto.dmndYmdStart}]]></if>
-		 <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(sd.DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= #{srFilterDto.dmndYmdEnd}]]></if>
+		 <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+	  	<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
 		 <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
 		 <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
 		 <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>

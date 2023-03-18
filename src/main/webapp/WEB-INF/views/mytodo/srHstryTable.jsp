@@ -12,6 +12,15 @@
 #todoHT th, td {
 	text-align: center;
 }
+
+#todoHT th{
+font-size: 15px !important;
+	}
+	
+#todoHT tbody td{
+font-size: 15px !important;
+   padding: 2	;
+	}
 </style>
 <table id="todoHT" class="table table-hover"
 	style="table-layout: fixed;">
@@ -25,8 +34,8 @@
 		<thead>
 			<tr>
 				<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
-					<th>SR번호</th>
-					<th>시스템구분</th>
+					<th class="text-left">SR번호</th>
+					<th class="text-left">시스템구분</th>
 					<th>요청자명</th>
 					<th>요청유형</th>
 					<th>변경될 완료예정일</th>
@@ -34,8 +43,8 @@
 					<th>요청등록일</th>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
-					<th>SR번호</th>
-					<th>시스템구분</th>
+					<th class="text-left">SR번호</th>
+					<th class="text-left">시스템구분</th>
 					<th>요청부서</th>
 					<th>요청유형</th>
 					<th>기존 완료요청일</th>
@@ -50,7 +59,7 @@
 				<tr>
 					<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_DEVELOPER')">
 
-						<td id="srNo1" class="font-weight-bold">${todoHstry.srNo}</td>
+						<td id="srNo1" class="font-weight-bold text-left">${todoHstry.srNo}</td>
 
 						<td id="sysNm1" class="text-left">${todoHstry.sysNm}</td>
 
