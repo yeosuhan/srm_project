@@ -33,7 +33,7 @@ font-size: 13px !important;
 					<th style="text-align: center;">${nPager.startRowNo + status.index}</th>
 					<c:choose>
 						<c:when test="${fn:length(board.bbsTtl) > 19}">
-							<td id="ttl" class="text-left"><c:out
+							<td id="ttl" class="text-left font-weight-bold"><c:out
 									value="${fn:substring(board.bbsTtl,0,18)}" />...</td>
 						</c:when>
 						<c:otherwise>

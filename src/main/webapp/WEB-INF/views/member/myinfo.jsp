@@ -43,11 +43,9 @@ label>img {
 #headerFirst {
 	background: linear-gradient(135deg, #360940 10%, #782748 100%);
 }
-
 .otiFsize {
 	font-size: 15px !important;
 }
-
 </style>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>

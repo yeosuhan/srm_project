@@ -196,7 +196,7 @@
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 13px; font-weight: bold;" data-toggle="tab"
-											href="#chgDmndTab" role="tab">완료예정일 변경</a>
+											href="#chgDmndTab" role="tab">완료요청일 변경</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 15px;" data-toggle="tab"
@@ -210,7 +210,7 @@
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 15px; font-weight: bold;" data-toggle="tab"
-											href="#developerTab" role="tab">완료예정일 변경</a>
+											href="#developerTab" role="tab">완료요청일 변경</a>
 											<div class="slide"></div></li>
 									</sec:authorize>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -220,11 +220,11 @@
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 15px; font-weight: bold;" data-toggle="tab"
-											href="#chgDmndTab" role="tab">완료예정일 변경</a>
+											href="#chgDmndTab" role="tab">완료요청일 변경</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 15px; font-weight: bold;" data-toggle="tab"
-											href="#developerTab" role="tab">완료예정일 변경(from Dev)</a>
+											href="#developerTab" role="tab">완료요청일 변경(from Dev)</a>
 											<div class="slide"></div></li>
 										<li class="nav-item" style="padding: 0px"><a
 											class="nav-link" style="font-size: 15px; font-weight: bold;" data-toggle="tab"

@@ -63,21 +63,25 @@ public class SrinformationController {
 	@GetMapping(value = "/list")
 	public String getList(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@ModelAttribute SrInfoFilter srInfoFilter, Authentication auth,
-			@RequestParam(required = true, name = "sort", defaultValue = "DESC") String sort) {
+			@RequestParam(required = true, name = "sort", defaultValue = "1") String sort,
+			@RequestParam(required = true, name = "by", defaultValue = "1") String by,
+			@RequestParam(required = true, name = "ey", defaultValue = "1") String ey) {
 		if (srInfoFilter.isMySrOnly()) {
 			srInfoFilter.setEmpId(auth.getName());
 		}
 		model.addAttribute("sort", sort);
+		model.addAttribute("by", by);
+		model.addAttribute("ey", ey);
 		List<Prgrs> prgrs = progressService.getRrgrs();
 
 		log.info(srInfoFilter);
 		
 		int totalRows = srinformationService.getTotalRow(page, srInfoFilter, auth.getAuthorities().stream().findFirst().get().toString());
-		Pager pager = new Pager(18, totalRows, page);
+		Pager pager = new Pager(11, totalRows, page);
 		log.info(pager);
 		// log.info(totalRows);
 		if (totalRows != 0) {
-			List<SrinformationList> srlist = srinformationService.getList(pager, srInfoFilter, sort, auth.getAuthorities().stream().findFirst().get().toString());
+			List<SrinformationList> srlist = srinformationService.getList(pager, srInfoFilter, sort, by, ey, auth.getAuthorities().stream().findFirst().get().toString());
 			SrdemandDetail sd = srDemandService.getSrDemandDetail(srlist.get(0).getDmndNo());
 			SrplanInformation sp = srinformationService.getPlan(srlist.get(0).getDmndNo());
 			List<Dept> deptList = srinformationService.getDeptList();

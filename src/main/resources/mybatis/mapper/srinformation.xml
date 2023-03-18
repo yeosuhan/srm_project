@@ -67,12 +67,24 @@
 		AND 
 			H.HSTRY_ID = #{srInfoFilter.hstryId}
 		</if>
-		<if test="sort=='DESC'">
-		order by dmndNo DESC
-		</if>
-		<if test="sort=='ASC'">
-		order by dmndNo ASC
-		</if>
+			<if test="sort=='DESC'">
+			order by dmndNo DESC
+			</if>
+			<if test="sort=='ASC'">
+			order by dmndNo ASC
+			</if>
+			<if test="by=='DESC'">
+			order by bgngYmd DESC
+			</if>
+			<if test="by=='ASC'">
+			order by bgngYmd ASC
+			</if>
+			<if test="ey=='DESC'">
+			order by endYmd DESC
+			</if>
+			<if test="ey=='ASC'">
+			order by endYmd ASC
+			</if>
 		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
 	</select>
 	

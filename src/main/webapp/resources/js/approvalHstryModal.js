@@ -25,7 +25,7 @@ function getHstryDetail(historyId) {
 					$('.AdeptNm').val(result.deptNm);
 					$('.AwrtYmd').val(result.wrtYmd);
 					$('.AcmptnDmndYmd').val(result.cmptnDmndYmd);
-					// 이거 + empty 왜 안먹히는지 모르겠음
+					
 					if (appvHstryType != 'C') {
 						$('.AchgEndYmd').val(result.chgEndYmd);
 					} else {

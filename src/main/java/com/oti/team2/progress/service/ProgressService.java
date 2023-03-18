@@ -75,7 +75,7 @@ public class ProgressService implements IProgressService {
 	               if(endYmd != "") {
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               } else {
@@ -96,7 +96,7 @@ public class ProgressService implements IProgressService {
 	                  log.info(" 다음 진척단계로 넘어감 > 다음 진척단계 시작일을 SYSDATE로 줘야돼.");
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               }
@@ -111,7 +111,7 @@ public class ProgressService implements IProgressService {
 	               if(endYmd != "") {
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               }else {
@@ -127,7 +127,7 @@ public class ProgressService implements IProgressService {
 	               } else if (endYmd != "" && (prgrsRt >= 11 && prgrsRt <= 40)) {
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               }
@@ -142,7 +142,7 @@ public class ProgressService implements IProgressService {
 	               if(endYmd != "") {
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               }else {
@@ -158,7 +158,7 @@ public class ProgressService implements IProgressService {
 	               } else if (endYmd != "" && (prgrsRt >= 41 && prgrsRt <= 70)) {
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  int sttsCd = 4;
 	                  srDemandService.updateSrDemandStts(srNo, sttsCd);
 	                  flag = false;
@@ -175,7 +175,7 @@ public class ProgressService implements IProgressService {
 	               if(endYmd != "") {
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               }else {
@@ -191,7 +191,7 @@ public class ProgressService implements IProgressService {
 	               } else if (endYmd != "" && (prgrsRt >= 71 && prgrsRt <= 80)) {
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               }
@@ -206,7 +206,7 @@ public class ProgressService implements IProgressService {
 	               if(endYmd != "") {
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               }else {
@@ -223,8 +223,8 @@ public class ProgressService implements IProgressService {
 	                  alertService.sendToClient(rcvrId, dmndNo);
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateProgressYmd(srNo); // 운영반영 시작일(=SYSDATE) 업데이트
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateProgressYmd(srNo, endYmd); // 운영반영 시작일(=SYSDATE) 업데이트
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               }
@@ -239,7 +239,7 @@ public class ProgressService implements IProgressService {
 	               if(endYmd != "") {
 	                  progressDao.updateProgressByPrgrsId(prgrsId, bgngYmd, endYmd, prgrsRt);
 	                  prgrsId++;
-	                  progressDao.updateBgngYmdByPrgrsId(prgrsId); // 다음 진척단계 시작일을 SYSDATE로
+	                  progressDao.updateBgngYmdByPrgrsId(prgrsId, endYmd); // 다음 진척단계 시작일을 SYSDATE로
 	                  flag = false;
 	                  break;
 	               }else {

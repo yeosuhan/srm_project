@@ -54,7 +54,7 @@
 		UPDATE
 			PROGRESS
 		SET
-			BGNG_YMD = SYSDATE
+			BGNG_YMD = #{endYmd}
 		WHERE
 			PRGRS_ID = #{prgrsId}
 	</update>
@@ -85,7 +85,7 @@
 		UPDATE
 			PROGRESS
 		SET
-			BGNG_YMD = SYSDATE
+			BGNG_YMD = #{endYmd}
 		WHERE
 			SR_NO = #{srNo}
 		AND
