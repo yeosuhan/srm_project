@@ -22,7 +22,7 @@
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold px-0">관련 근거</div>
 		<div class="col col-sm-9">
-			<textarea class="relGrund" style="width: 100%;">${sd.relGrund}</textarea>
+			<textarea class="relGrund" style="width: 100%;" readonly>${sd.relGrund}</textarea>
 		</div>
 	</div>
 	<hr />
@@ -147,7 +147,7 @@
 		<label class="col-sm-2 px-0 col-form-label font-weight-bold"
 			style="line-height: 100px; font-size: 12px;">SR 내용</label>
 		<div class="col-sm-9">
-			<textarea class="form-control cn" style="width: 100%; height: 120px;">${sd.cn}</textarea>
+			<textarea class="form-control cn" style="width: 100%; height: 120px;" readonly>${sd.cn}</textarea>
 		</div>
 	</div>
 	<hr />

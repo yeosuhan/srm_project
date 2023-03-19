@@ -1,5 +1,6 @@
 package com.oti.team2.progress.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.oti.team2.progress.dto.Prgrs;
@@ -50,6 +51,7 @@ public interface IProgressService {
 	/**
 	 * [나의할일] 해당 진척의 계획과 현재 진척률 그래프로 표현하기
 	 * @author 신정은
+	 * @throws ParseException 
 	 */
-	PrgrsPlanDto showPrgrsChart(String srNo);
+	PrgrsPlanDto showPrgrsChart(String srNo) throws ParseException;
 }

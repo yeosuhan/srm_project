@@ -140,6 +140,12 @@
                            </div>
                            <div class="slide"></div></li>
                      </sec:authorize>
+                        <li class="nav-item btn ">
+                           <div class="nav-link sttsCd3" onclick="moveTab(3)">
+                              개발 중 <span class="badge badge-otitodo">${dtotal}</span>
+                           </div>
+                           <div class="slide"></div>
+                        </li>
                      <sec:authorize access="hasRole('ROLE_DEVELOPER')">
                         <li class="nav-item btn active">
                            <div class="nav-link sttsCd3 active" onclick="moveTab(3)">
