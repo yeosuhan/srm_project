@@ -41,8 +41,6 @@
 			access="hasAnyRole('ROLE_ADMIN', 'ROLE_DEVELOPER')" />
 		<security:intercept-url pattern="/board/write"
 			access="hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')" />
-		<security:intercept-url pattern="/history/*"
-			access="hasAnyRole('ROLE_ADMIN', 'ROLE_DEVELOPER')" />
 		<security:intercept-url pattern="/**"
 			access="isAuthenticated()" />
 			

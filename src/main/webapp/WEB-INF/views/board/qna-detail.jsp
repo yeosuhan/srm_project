@@ -45,7 +45,7 @@
 	padding: 5px 8px;
 }
 </style>
-<div class="card" id="asd" style="height: 800px;">
+<div class="card" id="asd" style="height: 900px;">
 	<form enctype="multipart/form-data">
 		<div class="card-header" style="height: 50px;">
 			<div class="form-group row justify-content-between">

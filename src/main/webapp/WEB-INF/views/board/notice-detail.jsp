@@ -19,7 +19,7 @@
 				<div class="col-sm-2 font-weight-bold">제목</div>
 				<div class="col-sm-6">${board.bbsTtl}</div>
 				<div class="col-sm-2 font-weight-bold text-right">작성자</div>
-				<div class="col-sm-2 text-right">${board.wrtrNm}</div>
+				<div class="col-sm-2 text-right">관리자</div>
 			</div>
 			<div class="form-group row">
 				<p class="col-sm-2 font-weight-bold">내용</p>
