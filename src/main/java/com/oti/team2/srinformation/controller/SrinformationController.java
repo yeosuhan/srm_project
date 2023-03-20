@@ -211,6 +211,7 @@ public class SrinformationController {
 		if (srInfoFilter.isMySrOnly()) {
 			srInfoFilter.setEmpId(auth.getName());
 		}
+		sort = "ASC";
 		model.addAttribute("sort", sort);
 		List<Prgrs> prgrs = progressService.getRrgrs();
 		List<SrinformationList> srlist = srinformationService.getExcelList(srInfoFilter, sort);
