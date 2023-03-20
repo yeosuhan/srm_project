@@ -4,10 +4,23 @@
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
+<script>
+function deleteFile(fileSn) {
+	console.log("삭제 ~~~ ");
+	console.log(fileSn);
+	$.ajax({
+		url : '/file/delete/' + fileSn,
+		type : 'GET',
+		success : function(data) {			
+			alert("삭제 성공");
+		}
+	});
+}
+</script>
 
 <div class="card_body" id="sdupdate"
 	style="font-size: 12px; padding-top: 20px;">
-	<form action="/srdemand/modify" method="post" id="sdUpdateForm">
+	<form action="/srdemand/modify" method="post" id="sdUpdateForm" enctype="multipart/form-data">
 		<input type="hidden" name="dmndNo" class="dmndNo" value="${sd.dmndNo}">
 		<div class="form-group row">
 			<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
@@ -26,7 +39,7 @@
 		<div class="form-group row">
 			<div class="col col-sm-2 font-weight-bold px-0">관련 근거</div>
 			<div class="col col-sm-10">
-				<texarea class="form-control relGrund" name="relGrund">${sd.relGrund}</texarea>
+				<textarea rows="5" cols="5" class="form-control relGrund" name="relGrund">${sd.relGrund}</textarea>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -88,10 +101,18 @@
 							class="glyphicon glyphicon-save" aria-hidden="true"></span> <span>
 								${f.orgnlFileNm} </span>
 						</a> <span> Size : ${f.fileSz} Bytes</span>
+						<img src="${pageContext.request.contextPath}/resources/oti_images/trash.png"
+							 width="20px" height="20px" onclick="deleteFile(${f.fileSn})">
 					</div>
 				</c:forEach>
 			</div>
 		</div>
+		<div class="form-group row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<input type="file" name="nattachFile" multiple>
+				</div>
+			</div>
 	</form>
 	<div class="row">
 		<div class="col-6"></div>

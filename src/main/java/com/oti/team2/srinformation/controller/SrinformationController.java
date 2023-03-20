@@ -77,7 +77,7 @@ public class SrinformationController {
 		log.info(srInfoFilter);
 		
 		int totalRows = srinformationService.getTotalRow(page, srInfoFilter, auth.getAuthorities().stream().findFirst().get().toString());
-		Pager pager = new Pager(18, totalRows, page);
+		Pager pager = new Pager(11, totalRows, page);
 		log.info(pager);
 		// log.info(totalRows);
 		if (totalRows != 0) {

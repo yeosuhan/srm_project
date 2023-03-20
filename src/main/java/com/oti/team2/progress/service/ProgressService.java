@@ -1,5 +1,6 @@
 package com.oti.team2.progress.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -324,8 +325,9 @@ public class ProgressService implements IProgressService {
 	 * [나의할일] 해당 진척의 계획과 현재 진척률 그래프로 표현하기
 	 * 
 	 * @author 신정은
+	 * @throws ParseException 
 	 */
-	public PrgrsPlanDto showPrgrsChart(String srNo) {
+	public PrgrsPlanDto showPrgrsChart(String srNo) throws ParseException {
 		List<Progress> list = getProgress(srNo);
 		log.info(list);
 		int nowRt = progressDao.selectPrgrsRtBySrNoBetweenBgngAndEnd(srNo);

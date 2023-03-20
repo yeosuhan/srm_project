@@ -1,5 +1,6 @@
 package com.oti.team2.progress.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,10 +77,11 @@ public class ProgressController {
 	/**
 	 * [나의할일] 해당 진척의 계획과 현재 진척률 그래프로 표현하기
 	 * @author 신정은
+	 * @throws ParseException 
 	 */
 	@ResponseBody
 	@GetMapping("/progress/chart")
-	public PrgrsPlanDto showPrgrsChart(@RequestParam(required=false, value="dmndNo") String dmndNo, Authentication auth) {
+	public PrgrsPlanDto showPrgrsChart(@RequestParam(required=false, value="dmndNo") String dmndNo, Authentication auth) throws ParseException {
 		
 		String srNo = null;
 		if(dmndNo == null || dmndNo.equals("")) {

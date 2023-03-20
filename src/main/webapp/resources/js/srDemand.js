@@ -35,7 +35,14 @@ function addSr() {
 		console.log(relGrund);
 		console.log(cn);
 		console.log(cmptnDmndYmd);
+
+		var flag = true;
 		
+		if(!sysCd || !taskSeCd || !ttl || !relGrund || !cn || !cmptnDmndYmd){
+			console.log("내용 다 써라");
+			showSraddAlert("모든 내용을 작성해주십시요.");
+			flag = false;
+		} 
 		
 		var formData = new FormData();
 		var flist = $('input[name=attachFile]')[0].files;
@@ -49,24 +56,25 @@ function addSr() {
 		formData.append("cmptnDmndYmd", cmptnDmndYmd);
 					 		
 		
-		var flag = true;
 		// fileInput 개수를 구한다.
 		for (var i = 0; i < flist.length; i++) {
-			var maxSize = 1024 * 1024 * 3;
+			var maxSize = 1024 * 3;
 			var fsize = Math.floor(flist[i].size / 1024);
+			console.log(fsize);
 			var fileName = flist[i].name;
 			let dot = fileName.lastIndexOf('.');
 			let type = fileName.substring(dot+1, fileName.length).toLowerCase();
 			
 			if(type == "exe") {
 				flag = false;
-				alert(".exe 파일은 업로드할 수 없습니다.")
+				//alert(".exe 파일은 업로드할 수 없습니다.")
+				showSraddAlert(".exe 파일은 업로드할 수 없습니다.");
 				break;
 			}
 			
 			if(fsize >= maxSize) {
 				flag = false;
-				alert("3MB이상의 파일은 업로드할 수 없습니다.")
+				showSraddAlert("3MB이상의 파일은 업로드할 수 없습니다.");
 				break;
 			}
 			console.log(type);
@@ -83,12 +91,13 @@ function addSr() {
 		        contentType: false,
 				success : function(res) {
 					alert("요청을 성공적으로 등록했습니다.");
-					location.href("/srdemand/list");
-
+					location.href="/srdemand/list";
+					$("#addmodal").removeClass("show");
 				}			
 			});			
 		}
-		$("#addmodal").removeClass("show");
+		//$("#addmodal").removeClass("show");
+		
 	
 }
 
@@ -221,7 +230,8 @@ function goDecline(dmndNo) {
    console.log("~~~~~~~~~~~~~~~~~~!");
    console.log($('#srRjctRsnn').val());
    if (!rjctRsn) {
-      alert('반려사유를 입력하여주세요.');
+     // alert('반려사유를 입력하여주세요.');
+	   adminAlert("반려사유를 입력하여주세요.")
       $('#srRjctRsnn').focus();
    } else {
       var jsonData = {
