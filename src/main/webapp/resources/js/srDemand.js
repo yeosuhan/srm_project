@@ -259,8 +259,9 @@ function goDecline(dmndNo) {
 }
 
 function endSr() {
-	var selectedElement = document.getElementById("dmndNo");
-	var dmndNo = selectedElement.options[selectedElement.selectedIndex].value;
+	var dmndNo = $('#dmndNo').text()
+
+	console.log("dmndNo : " + dmndNo);
    $.ajax({
       url : '/srdemand/end',
       type : 'POST',

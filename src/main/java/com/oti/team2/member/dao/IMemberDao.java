@@ -117,6 +117,13 @@ public interface IMemberDao {
 	 */
 	public String selectPswd(MemberDto memberDto);
 	
+	/**
+	 * 
+	 * @author 최은종
+	 * 임시 비밀번호를 암호화한 비밀번호로 DB 업데이트 
+	 * 
+	 */
+	
 	public String updatePswdByMemberId(@Param("memberId")String memberId);
 
 	/* 전체 관리자 리스트 조회(알람 전송 수신자)
