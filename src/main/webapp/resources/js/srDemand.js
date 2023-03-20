@@ -24,8 +24,8 @@ function addSr() {
 		var sysCd =  $("select[name=sysCdd]").val();
 		var taskSeCd =  $("select[name=taskSeCdd]").val();
 		var ttl =  $("input[name=ttld]").val();
-		var relGrund =  $("#relGrundd").val();
-		var cn =  $("#cnd").val();
+		var relGrund =  $("#tarea2").val();
+		var cn =  $("#tarea1").val();
 		var cmptnDmndYmd =  $("input[name=cmptnDmndYmdd]").val();
 		
 		console.log(custId);
@@ -249,8 +249,9 @@ function goDecline(dmndNo) {
 }
 
 function endSr() {
-	var selectedElement = document.getElementById("dmndNo");
-	var dmndNo = selectedElement.options[selectedElement.selectedIndex].value;
+	var dmndNo = $('#dmndNo').text()
+
+	console.log("dmndNo : " + dmndNo);
    $.ajax({
       url : '/srdemand/end',
       type : 'POST',

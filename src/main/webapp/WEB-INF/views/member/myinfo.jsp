@@ -60,7 +60,7 @@ label>img {
 			<c:if test="${member.memberType ne 'ROLE_CLIENT'}">
 				<div class="col-12">
 			</c:if>
-			<div class="card" style="height: 660px;">
+			<div class="card" style="height: 700px;">
 				<div class="card-header">
 					<h5 style="font-weight: bold;">나의 정보</h5>
 				</div>
@@ -137,9 +137,9 @@ label>img {
 								class="col-sm-10 form-control form-bar" required="" value="${member.addr}">
 						</div>
 						<div class="form-group form-default" style="padding-top: 20px;">
-							<input value="${inst.instDetailAddr}" class="form-control"
+							<input   value="${member.addrDetail}" class="form-control"
 								type="text" name="addrDetail" placeholder="상세주소"> <span
-								class="form-bar"  value="${member.addrDetail}"></span>
+								class="form-bar"></span>
 						</div>
 						<c:if test="${member.memberType eq 'ROLE_CLIENT'}">
 							<div class="form-group form-default otiFsize row">
@@ -165,17 +165,15 @@ label>img {
 							</div>
 						</c:if>
 					</form>
-					<div class="d-flex">
 						<button type="submit" form="myinfo" class="btn btn-sm btn-oti"
-							style="margin-left: 160px;">저장</button>
-					</div>
+							style="margin-left: 350px;">저장</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<c:if test="${member.memberType eq 'ROLE_CLIENT'}">
 		<div class="col-5">
-			<div class="card" style="height: 660px;">
+			<div class="card" style="height: 700px;">
 				<div class="card-header" id="headerFirst">
 					<h5 style="font-weight: bold;">나의 기관</h5>
 				</div>
@@ -202,7 +200,7 @@ label>img {
 						</div>
 						<div class="form-group form-default" style="padding-top: 20px;">
 							<input value="${inst.instDetailAddr}" class="form-control"
-								type="text" name="InstAddr" placeholder="상세주소"> <span
+								type="text" name="instDetailAddr" placeholder="상세주소"> <span
 								class="form-bar"></span>
 						</div>
 					</form>

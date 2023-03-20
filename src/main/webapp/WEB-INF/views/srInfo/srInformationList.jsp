@@ -412,27 +412,27 @@ font-size: 13px !important;
 														<td>${srlist.endYmd}</td>
 														<td><c:if test="${srlist.prgrsRt  ge 0}">
 																<c:if
-																	test="${(srlist.prgrsRt  ge 1) && (srlist.prgrsRt le 10)}">
+																	test="${(srlist.prgrsRt  ge 1) && (srlist.prgrsRt lt 10)}">
 																	<label class="badge badge-info">요구정의</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 11) && (srlist.prgrsRt le 40)}">
+																	test="${(srlist.prgrsRt  ge 10) && (srlist.prgrsRt lt 40)}">
 																	<label class="badge badge-warning">분석/설계</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 41) && (srlist.prgrsRt le 70)}">
+																	test="${(srlist.prgrsRt  ge 40) && (srlist.prgrsRt lt 70)}">
 																	<label class="badge badge-success">구현</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 71) && (srlist.prgrsRt le 80)}">
+																	test="${(srlist.prgrsRt  ge 70) && (srlist.prgrsRt lt 80)}">
 																	<label class="badge badge-inverse-success">테스트</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 81) && (srlist.prgrsRt le 90)}">
+																	test="${(srlist.prgrsRt  ge 80) && (srlist.prgrsRt lt 90)}">
 																	<label class="badge badge-inverse-primary">반영요청</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 91) && (srlist.prgrsRt le 100)}">
+																	test="${(srlist.prgrsRt  ge 90) && (srlist.prgrsRt le 100)}">
 																	<label class="badge badge-primary">운영반영</label>
 																</c:if>
 															</c:if> <c:if test="${srlist.prgrsRt eq 0}">

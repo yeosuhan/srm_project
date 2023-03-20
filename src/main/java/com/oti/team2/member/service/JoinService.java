@@ -38,7 +38,7 @@ public class JoinService implements IJoinService{
 		
 		join.setPswd(getEncodedPassword(join.getPswd()));
 		log.info(join);
-		joinDao.insertJoin(join);
+		joinDao.insertMember(join);
 	}
 	/**
 	 * 

@@ -105,7 +105,7 @@
             PSWD ,
             FLNM ,
             ADDR ,
-            ADDR_DETAIL as addrDetail,
+            ADDR_DETAIL,
             TELNO ,
             EML ,
             m.INST_CD ,

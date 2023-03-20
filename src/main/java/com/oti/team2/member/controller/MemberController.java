@@ -83,7 +83,7 @@ public class MemberController {
 	 */
 	@PostMapping("/myinfo")
 	public String updateMember(Member member) {
-		log.info(member);
+		log.info("변경할 내정보" + member);
 		memberService.updateMember(member);
 		return "redirect:/member/myinfo";
 	}
