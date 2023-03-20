@@ -171,10 +171,13 @@ function getDetail(dmndNo, srNo) {
 			//파일
 			$("#SRDAttachFile").empty();
 			detail.dd.attachFile.forEach((value)=>{
+				console.log(value.fileSz/(1024 * 1024));
+				var fz = (value.fileSz/(1024 * 1024)).toFixed(1);
+				console.log(fz);
 				$("#SRDAttachFile").append(
 						"<a href='/file/download/'"+value.fileSn+"/>" +
 						"	<span class='glyphicon glyphicon-save' aria-hidden='true'></span>" +
-						"	<span>"+value.orgnlFileNm+"</span><span>"+value.fileSz+" Bytes</span>" +
+						"	<span style='margin-right: 20px;'>"+value.orgnlFileNm+"</span><span>"+ fz + " MB </span>" +
 						"</a>"
 				);
 			});

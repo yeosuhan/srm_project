@@ -175,7 +175,7 @@ table tbody td {
 							style="font-size: 12px; padding: 0px;">
 							<thead>
 								<tr>
-									<th style="width: 1px;">#</th>
+									<th style="width: 1px;"></th>
 									<th style="width: 1px;"></th>
 									<th>산출물구분</th>
 									<th>산출물명</th>
@@ -609,8 +609,10 @@ table tbody td {
 												<div>
 													<a href="<c:url value='/file/download/${f.fileSn}' />">
 														<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-														<span> ${f.orgnlFileNm} </span><span style="">
-															${f.fileSz} Bytes</span>
+														<span style="margin-right: 20px;"> ${f.orgnlFileNm}
+													</span> <span style=""> <fmt:formatNumber type="number"
+																value="${f.fileSz/(1024 * 1024)}" pattern="0.0" /> MB
+													</span>
 													</a>
 												</div>
 											</c:forEach>
@@ -618,7 +620,7 @@ table tbody td {
 									</div>
 									<div class="form-group row">
 										<div class="col-9"></div>
-										<div class="col-3" style="padding-left:3px;">
+										<div class="col-3" style="padding-left: 3px;">
 											<button class="btn btn-oti btn-sm"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
 												data-target="#addHistoryModal">SR 변경요청</button>
