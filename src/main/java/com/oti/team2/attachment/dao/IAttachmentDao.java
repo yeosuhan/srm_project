@@ -37,7 +37,7 @@ public interface IAttachmentDao {
 	 * 파일번호로 해당 게시글 번호 가져오기
 	 * @author 신정은
 	 */
-	int selectBbsNoByFilseSn(int fileSn);
+	Integer selectBbsNoByFilseSn(int fileSn);
 	
 	/**
 	 * 해당 게시글의 총 파일 수 가져오기

@@ -43,15 +43,18 @@ public class AttachmentService implements IAttachmentService{
 	 */
 	@Transactional
 	public void deleteAttach(int fileSn) {
-		int bbsNo = attachmentDao.selectBbsNoByFilseSn(fileSn);
+		Integer bbsNo = attachmentDao.selectBbsNoByFilseSn(fileSn);
 		attachmentDao.deleteAttachByFileSn(fileSn);
 		
 		// 해당 게시글의 첨부파일 갯수 보고 게시글의 첨부파일 유무 상태 update
-		int countFile = attachmentDao.countFilesByBbsNo(bbsNo);
-		if(countFile == 0) {
-			log.info("첨부 이제 없다.");
-			boardDao.updateAtchYn(bbsNo, 0);
+		if(bbsNo != null) {
+			int countFile = attachmentDao.countFilesByBbsNo(bbsNo);
+			if(countFile == 0) {
+				log.info("첨부 이제 없다.");
+				boardDao.updateAtchYn(bbsNo, 0);
+			}
 		}
+		
 	}
 	
 	/**

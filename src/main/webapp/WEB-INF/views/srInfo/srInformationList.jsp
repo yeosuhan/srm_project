@@ -331,7 +331,7 @@ font-size: 13px !important;
 			</div>
 			<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card" style="height: 1140px;">
+				<div class="card" style="height: 760px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
 						<div class="card-header-right">
@@ -365,7 +365,6 @@ font-size: 13px !important;
 												<th style="font-size: 15px; width: 200px;">SR명</th>
 												<th style="font-size: 15px;">시스템구분</th>
 												<th style="font-size: 15px;">업무구분</th>
-												<th style="font-size: 15px;">요청자</th>
 												<th style="font-size: 15px;">완료요청일
 											 <c:if test="${by eq 'DESC' || by eq '1'}">
 														<a href="${pageContext.request.contextPath}/srinformation/list"
@@ -407,7 +406,6 @@ font-size: 13px !important;
 														</c:choose>
 														<td class="text-left">${srlist.sysNm}</td>
 														<td class="text-left">${srlist.taskSeNm}</td>
-														<td>${srlist.flnm}</td>
 														<td>${srlist.bgngYmd}</td>
 														<td>${srlist.endYmd}</td>
 														<td><c:if test="${srlist.prgrsRt  ge 0}">
