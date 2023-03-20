@@ -1,5 +1,6 @@
 package com.oti.team2.srinformationhistory.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
@@ -123,10 +124,12 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	 * SR 히스토리 등록 & 결재를 위한 insert 및 update 메서드
 	 * 
 	 * @author 최은종
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 * @see 개발자, 관리자
 	 */
 	@Transactional
-	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role) {
+	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role) throws IllegalStateException, IOException {
 		log.info("서비스----insert");
 		String hstryType = srInformationHistory.getHstryType();
 		String hstryStts = srInformationHistory.getHstryStts();

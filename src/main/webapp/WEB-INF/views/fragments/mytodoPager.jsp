@@ -5,11 +5,11 @@
 
 <c:if test="${fn:length(srList) gt 0}">
 	<div class="pagination">
-		<c:if test="${pager.startPageNo -1 > 0 }">
+		<c:if test="${pager.startPageNo -1 gt 0 }">
 			<a class="pagination-newer" href="#"
 				onclick="mytodoPaging(${sttsCd},1); event.preventDefault()">PREV</a>
 		</c:if>
-		<c:if test="${pager.startPageNo -1 <= 0 }">
+		<c:if test="${pager.startPageNo -1 lt 0 }">
 			<a style="visibility: hidden" class="pagination-newer" href="#">PREV</a>
 		</c:if>
 		<span class="pagination-inner"> <c:forEach var="num"
@@ -18,16 +18,16 @@
 					<a class="pagination-active" href="#"
 						onclick="mytodoPaging(${sttsCd},${num}); event.preventDefault()">${num}</a>
 				</c:if>
-				<c:if test="${pager.pageNo != num }">
+				<c:if test="${pager.pageNo ne num }">
 					<a href="#" onclick="mytodoPaging(${sttsCd},${num}); event.preventDefault()">${num}</a>
 				</c:if>
 			</c:forEach>
 		</span>
-		<c:if test="${pager.endPageNo < pager.totalPageNo }">
+		<c:if test="${pager.endPageNo lt pager.totalPageNo }">
 			<a class="pagination-older" href="#"
 				onclick="mytodoPaging(${sttsCd},${pager.endPageNo+1}); event.preventDefault()">NEXT</a>
 		</c:if>
-		<c:if test="${pager.endPageNo >= pager.totalPageNo }">
+		<c:if test="${pager.endPageNo gt pager.totalPageNo }">
 			<a style="visibility: hidden" class="pagination-older" href="#">NEXT</a>
 		</c:if>
 	</div>

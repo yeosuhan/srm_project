@@ -375,7 +375,7 @@ table tbody td {
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
 															class="sortBtnAscBy"><i class="fas fa-caret-down"
-															style="color: #782748; font-size: 24px;"></i></a>
+															style="color: #782748; font-size: 24px;"></i> </a>
 													</c:if> <c:if test="${by eq 'ASC'}">
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
@@ -419,27 +419,27 @@ table tbody td {
 														<td>${srlist.endYmd}</td>
 														<td><c:if test="${srlist.prgrsRt  ge 0}">
 																<c:if
-																	test="${(srlist.prgrsRt  ge 1) && (srlist.prgrsRt le 10)}">
+																	test="${(srlist.prgrsRt  ge 1) && (srlist.prgrsRt lt 10)}">
 																	<label class="badge badge-info">요구정의</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 11) && (srlist.prgrsRt le 40)}">
+																	test="${(srlist.prgrsRt  ge 10) && (srlist.prgrsRt lt 40)}">
 																	<label class="badge badge-warning">분석/설계</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 41) && (srlist.prgrsRt le 70)}">
+																	test="${(srlist.prgrsRt  ge 40) && (srlist.prgrsRt lt 70)}">
 																	<label class="badge badge-success">구현</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 71) && (srlist.prgrsRt le 80)}">
+																	test="${(srlist.prgrsRt  ge 70) && (srlist.prgrsRt lt 80)}">
 																	<label class="badge badge-inverse-success">테스트</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 81) && (srlist.prgrsRt le 90)}">
+																	test="${(srlist.prgrsRt  ge 80) && (srlist.prgrsRt lt 90)}">
 																	<label class="badge badge-inverse-primary">반영요청</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 91) && (srlist.prgrsRt le 100)}">
+																	test="${(srlist.prgrsRt  ge 90) && (srlist.prgrsRt le 100)}">
 																	<label class="badge badge-primary">운영반영</label>
 																</c:if>
 															</c:if> <c:if test="${srlist.prgrsRt eq 0}">
@@ -618,14 +618,10 @@ table tbody td {
 									</div>
 									<div class="form-group row">
 										<div class="col-9"></div>
-										<div class="col-3"
-											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
-                                    style="display:none"
-                                 </c:if>>
+										<div class="col-3" style="padding-left:3px;">
 											<button class="btn btn-oti btn-sm"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
-												data-target="#addHistoryModal">SR
-												변경요청</button>
+												data-target="#addHistoryModal">SR 변경요청</button>
 										</div>
 									</div>
 								</div>
@@ -965,4 +961,5 @@ table tbody td {
 	<%@include file="/WEB-INF/views/history/modifyHistoryModal.jsp"%>
 	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 </body>
-</html>F
+</html>
+F

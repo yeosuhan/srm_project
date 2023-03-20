@@ -23,7 +23,8 @@ $(function() {
 		if (content.length > 500) {
 			console.log("500자 초과")
 			$(this).val($(this).val().substring(0, 500));
-			alert('글자수는 최대 500자까지 입력 가능합니다.');
+			//alert('글자수는 최대 500자까지 입력 가능합니다.');
+			showSraddAlert("글자수는 최대 500자까지 입력 가능합니다.");
 		}
 	});	
 	$('textarea').keyup();
@@ -44,7 +45,8 @@ $(function() {
 		if (content.length > 500) {
 			console.log("500자 초과")
 			$(this).val($(this).val().substring(0, 500));
-			alert('글자수는 최대 500자까지 입력 가능합니다.');
+			//alert('글자수는 최대 500자까지 입력 가능합니다.');
+			showSraddAlert("글자수는 최대 500자까지 입력 가능합니다.");
 		}
 	});	
 	$('textarea').keyup();

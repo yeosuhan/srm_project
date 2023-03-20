@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%-- 작성자 : 여수한 / 작성 날짜 : 2023-02-17 --%>
 <%-- 작성자: 최은종 / 작성 날짜: 2023-02-23 --%>
 
@@ -483,13 +484,16 @@ table thead tr {
 									</div>
 									<div class="form-group row">
 										<p class="col-sm-2 p-0 font-weight-bold">첨부파일</p>
-										<div class="col-sm-5">
+										<div class="col-sm-10">
 											<c:forEach var="f" items="${sd.attachFile}">
 												<div>
 													<a href="<c:url value='/file/download/${f.fileSn}' />">
 														<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-														<span> ${f.orgnlFileNm} </span>
-													</a> <span> Size : ${f.fileSz} Bytes</span>
+														<span style="margin-right: 20px;"> ${f.orgnlFileNm}
+													</span> <span style=""> <fmt:formatNumber type="number"
+																value="${f.fileSz/(1024 * 1024)}" pattern="0.0" /> MB
+													</span>
+													</a>
 												</div>
 											</c:forEach>
 										</div>

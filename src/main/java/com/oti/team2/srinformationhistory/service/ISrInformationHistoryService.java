@@ -1,5 +1,6 @@
 package com.oti.team2.srinformationhistory.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
@@ -46,8 +47,10 @@ public interface ISrInformationHistoryService {
 	 * SR 히스토리 등록& 요청 결재를 위한 insert 메서드
 	 * 
 	 * @author 최은종
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
-	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role);
+	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role) throws IllegalStateException, IOException;
 
 	/**
 	 * SR 히스토리 수정을 위한 update 메서드

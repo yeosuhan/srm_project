@@ -8,6 +8,16 @@
 		console.log("userSrDemandList  요청 등록")
 <%--  작성자의 기본 정보 세팅 --%>
 	writerBase();
+	
+	var now_utc = Date.now() // 지금 날짜를 밀리초로
+	var timeOff = new Date().getTimezoneOffset()*60000; 
+	var today = new Date(now_utc-timeOff).toISOString().substring(0, 10);
+	console.log(today);
+	
+	$('#addEndRequestDatepicker').attr('min', today);
+	console.log($('#addEndRequestDatepicker').attr('min'));
+	
+	
 <%-- sr 요청 작성시, 모든 시스템 데이터 드롭다운에 표시하기 위함--%>
 	setSystems();
 		$('#addmodal').addClass('show');
@@ -39,10 +49,7 @@
 		document.body.style = `overflow: scroll`;
 	});
 	
-	var now_utc = Date.now() // 지금 날짜를 밀리초로
-	var timeOff = new Date().getTimezoneOffset()*60000; 
-	var today = new Date(now_utc-timeOff).toISOString().substring(0, 16);
-	document.getElementById("addEndRequestDatepicker").setAttribute("min", today);
+	
 	
 </script>
 <style>
@@ -70,14 +77,14 @@
 }
 
 .m.body {
-	height: 50vh;
+	height: 55vh;
 	overflow-y: auto;
 }
 </style>
 <body>
 	<!-- *********************************** [ modal start ] ***********************************-->
 	<!-- *********************************** [ SR 요청 등록 ] ***********************************-->
-	<div class="modal" id="addmodal">
+	<div class="modal" id="addmodal" style=" z-index: 1040;">
 		<div class="modal_body">
 			<div class="m_head">
 				<div class="modal_title" style="color: white;">SR 요청 등록</div>
@@ -145,12 +152,10 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-sm-6">
-							<div class="col col-sm-4 font-weight-bold">완료 요청일</div>
-							<div class="col col-sm-8">
-								<input type="date" id="addEndRequestDatepicker"
-									name="cmptnDmndYmdd">
-							</div>
+						<div class="col col-sm-2 font-weight-bold">완료 요청일</div>
+						<div class="col col-sm-10">
+							<input type="date" id="addEndRequestDatepicker" style="width:100px;"
+								name="cmptnDmndYmdd">
 						</div>
 					</div>
 				</form>
