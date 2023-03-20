@@ -17,7 +17,7 @@
 			<div class="modal_title" style="color: white">Sr진행정보 변경요청 상세</div>
 		</div>
 		<div class="m_body bg-light">
-			<form id="approvalHistoryForm" action="<c:url value='/history/add'/>">
+			<form id="approvalHistoryForm" action="<c:url value='/history/add'/>" onsubmit="return checkApprVal()">
 				<div class="row my-3">
 					<div class="col-2">SR 번호 :</div>
 					<div class="col-4">

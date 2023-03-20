@@ -23,25 +23,38 @@ function checkVal() {
 			|| !emlValidation.test($("#eml").val())) {
 		console.log($("#eml").val());
 		console.log($("#telNo").val());
-		alert("회원정보를 찾을 수 없습니다. 다시 입력해주세요.");
+		alert("잘못된 형식입니다. 다시 입력해주세요.");
 		return false;
 	}
+
+	var eml = $("#eml").val();
+	var memberId = $("#memberId").val();
+	var telNo = $("#telNo").val();
 
 	$.ajax({
 		type : 'POST',
 		url : '/member/findPswd',
 		data : {
-			eml : "eml",
-			memberId : "memberId",
-			telNo : "telNo"
+			eml : eml,
+			memberId : memberId,
+			telNo : telNo
 		},
 		success : function(result) {
-			console.log(result);
-			alert("이메일로 임시 비밀번호가 전송되었습니다.")
+			console.log("ajax 성공:" + result);
+			if (result == 0) {
+				console.log("회원정보 없음:" + result);
+				alert("일치하는 회원정보가 없습니다. 다시 확인해주세요.")
+				location.href = "/loginForm";
+			} else {
+				console.log("이메일 전송 완료:" + result);
+				alert("이메일로 임시 비밀번호가 전송되었습니다.")
+				location.href = "/loginForm";
+			}
 		},
 		error : function(result) {
+			console.log("ajax 성공:" + result);
 			alert("[전송오류] 관리자에게 문의하세요.")
+			location.href = "/loginForm";
 		}
-
 	});
 }
