@@ -21,7 +21,7 @@
 				<div class="mheadDiv"></div>
 		</div>
 		<div class="m_body bg-light detailDiv">
-			<form id="historyDetailForm" action="<c:url value='/history/add'/>">
+			<form id="historyDetailForm" action="<c:url value='/history/add'/>" onsubmit="return checkApprInfoVal()">
 				<div class="row my-3">
 					<div class="col-2">SR 번호 :</div>
 					<div class="col-4">

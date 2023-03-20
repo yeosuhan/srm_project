@@ -3,7 +3,7 @@ function getHstryDetail(historyId) {
 	console.log("historyId: " + historyId);
 	$('#appvHstrySttsDiv2').empty();
 	$('#footDivUSer').empty();
-	
+
 	$
 			.ajax({
 				url : '/history/detail/' + historyId,
@@ -25,7 +25,7 @@ function getHstryDetail(historyId) {
 					$('.AdeptNm').val(result.deptNm);
 					$('.AwrtYmd').val(result.wrtYmd);
 					$('.AcmptnDmndYmd').val(result.cmptnDmndYmd);
-					
+
 					if (appvHstryType != 'C') {
 						$('.AchgEndYmd').val(result.chgEndYmd);
 					} else {
@@ -107,4 +107,16 @@ function getHstryDetail(historyId) {
 					}
 				}
 			});
+}
+
+/* 유효성 체크 alert */
+function checkApprVal() {
+	// 승인여부 체크 안하면 안넘어가게
+	if ($("input[name='hstryStts']:checked").length == 0) {
+		alert("승인여부를 다시 확인해주세요.");
+		return false;
+	}
+
+	return true;
+
 }
