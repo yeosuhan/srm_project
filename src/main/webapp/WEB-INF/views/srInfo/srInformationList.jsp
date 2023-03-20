@@ -611,16 +611,14 @@ font-size: 13px !important;
 									</div>
 										<div class="form-group row">
 											<div class="col-9"></div>
-											<div class="col-3" 
-											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
-												style="display:none"
-											</c:if>
-											>
-												<button class="btn btn-oti btn-sm"
-													onclick="addHistory('${srNo}')" data-toggle="modal"
-													data-target="#addHistoryModal"
-													>SR 변경요청</button>
-											</div>
+											<div class="col-3"
+				                                 <c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
+				                                    style="padding-left: 3px; display:none"
+				                                 </c:if>>
+				                                 <button class="btn btn-oti btn-sm"
+				                                    onclick="addHistory('${srNo}')" data-toggle="modal"
+				                                    data-target="#addHistoryModal">SR 변경요청</button>
+				                              </div>
 										</div>
 								</div>
 							</div>
