@@ -13,7 +13,6 @@
 			if (localStorage.getItem('logintime')) {
 				var stime = localStorage.getItem('logintime');
 				var myLoginTime = parseInt(stime, 10);
-
 				var timer = setInterval(
 						function() {
 							if (parseInt(localStorage.getItem('logintime'), 10) > 0) {
@@ -28,6 +27,7 @@
 							}
 							 else {
 								showOtiAlert();
+								localStorage.removeItem('logintime');
 							}
 
 						}, 1000);
@@ -112,9 +112,7 @@
 
 <jsp:include page="/WEB-INF/views/member/checkPw.jsp" />
 <jsp:include page="/WEB-INF/views/fragments/otiAlert.jsp" />
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<jsp:include page="/WEB-INF/views/alertModal/sraddAlert.jsp" />
 
 <div id="pcoded" class="pcoded iscollapsed" theme-layout="vertical"
 	vertical-placement="left" vertical-layout="wide"

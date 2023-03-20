@@ -9,12 +9,12 @@
 <style>
 .srTable th{
 font-size: 15px !important;
-	}
+}
 	
 .srTable tbody td{
 	font-size: 15px !important;
-    padding: 2	;
-    }
+    padding: 2;
+   }
 </style>
 <table class="table table-hover srTable" style="table-layout: fixed;">
 	<c:if test="${fn:length(srList) == 0 }">

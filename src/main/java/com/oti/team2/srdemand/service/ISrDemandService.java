@@ -37,8 +37,10 @@ public interface ISrDemandService {
 	 * sr요청 수정 진행
 	 * 
 	 * @author 신정은
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
-	public int updateSrDemand(SrRequestDto srRequestDto);
+	public int updateSrDemand(SrRequestDto srRequestDto) throws IllegalStateException, IOException;
 
 	/**
 	 * 

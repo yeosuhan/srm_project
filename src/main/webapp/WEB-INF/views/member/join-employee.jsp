@@ -6,7 +6,7 @@
 <html>
 <head>
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
-<script src="/resources/js/kakaoAddress.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/kakaoAddress2.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/check.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/image.js"></script>
 </head>
@@ -149,7 +149,7 @@ label>img {
 								<div class="form-group form-primary">
 									<input type="text" name="addr" id="addr"
 										class="form-control" required="" style="width: 70%"> 
-										<button type="button"   id="address_kakao"
+										<button type="button"   id="address_kakao_join"
 										class="btn btn-sm waves-effect waves-light hor-grd btn-oti ml-2"
 										style="width: 100px;">우편번호 찾기</button>
 										<label

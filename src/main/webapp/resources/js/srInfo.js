@@ -305,6 +305,28 @@ function getProgress() {
 				console.log("개발완료");
 			}
 			for (var i = 0; i < Progress.length; i++) {
+				if(Progress[5].endYmd!=null && Progress[5].prgrsRt==100) {
+					console.log("나는 개발완료");
+					$("#delbtn").hide();
+					$("#addbtn").hide();
+					for(var j=0; j<6; j++) {
+						console.log("나는 진짜 개발완료");
+						$("#btn"+j).hide();
+						$("#SRPgBgngYmd"+j).remove();
+						$("#SRPgEndYmd"+j).remove();
+						$("#SRPgPrgrsRt"+j).remove();
+						$("#"+j+"bgngYmd").append($("<input type='text' readonly class='form-control' style='width:100px;margin:0 auto;' id='SRPgBgngYmd"+j+"'>"));
+						$("#"+j+"endYmd").append($("<input type='text' readonly class='form-control' style='width:100px; margin:0 auto;'id='SRPgEndYmd"+j+"'>"));
+						$("#"+j+"rt").append($("<input type='text' readonly class='form-control' id='SRPgPrgrsRt"+j+"'>"));
+						$("#SRPgBgngYmd" + j).val(Progress[j].bgngYmd);
+						$("#SRPgEndYmd" + j).val(Progress[j].endYmd);
+						$("#SRPgPrgrsRt" + j).val(Progress[j].prgrsRt);
+					}
+					i=i+5;
+					break;
+				}
+				$("#delbtn").show();
+				$("#addbtn").show();
 				if(Progress[i].endYmd==null || Progress[i].endYmd>=today) {
 					if((Progress[i].prgrsRt!=10) || (Progress[i].prgrsRt!=40) || (Progress[i].prgrsRt!=70) || (Progress[i].prgrsRt!=80)||(Progress[i].prgrsRt!=90)||(Progress[i].prgrsRt!=100)) {
 						$("#btn"+i).show();
@@ -366,13 +388,6 @@ function getProgress() {
 					$("#"+i+"bgngYmd").append($("<input type='text' readonly class='form-control' style='width:100px;margin:0 auto;' id='SRPgBgngYmd"+i+"'>"));
 					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
 				}
-			}
-			if(Progress[5].endYmd<today) {
-				$("#delbtn").hide();
-				$("#addbtn").hide();
-			} else {
-				$("#delbtn").show();
-				$("#addbtn").show();
 			}
 		}
 	});

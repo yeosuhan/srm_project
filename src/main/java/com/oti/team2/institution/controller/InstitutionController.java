@@ -99,6 +99,7 @@ public class InstitutionController {
 	 */
 	@PostMapping("/update")
 	public String myInstUpdate(Institution institution) {
+		log.info("변경할 기관 주소: " + institution);
 		institution.setInstCd(institution.getInstCd());
 		institution.setInstNm(Jsoup.clean(institution.getInstNm(), Whitelist.basic()));
 		institution.setInstTelno(Jsoup.clean(institution.getInstTelno(), Whitelist.basic()));
