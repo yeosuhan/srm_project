@@ -407,7 +407,7 @@ table tbody td {
 														<c:choose>
 															<c:when test="${fn:length(srlist.ttl) > 15}">
 																<td class="text-left"><c:out
-																		value="${fn:substring(srlist.ttl,0,10)}" />...</td>
+																		value="${fn:substring(srlist.ttl,0,14)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td class="text-left"><c:out value="${srlist.ttl}" /></td>
@@ -620,7 +620,10 @@ table tbody td {
 									</div>
 									<div class="form-group row">
 										<div class="col-9"></div>
-										<div class="col-3" style="padding-left: 3px;">
+										<div class="col-3"
+											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
+                                    style="padding-left: 3px; display:none"
+                                 </c:if>>
 											<button class="btn btn-oti btn-sm"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
 												data-target="#addHistoryModal">SR 변경요청</button>
