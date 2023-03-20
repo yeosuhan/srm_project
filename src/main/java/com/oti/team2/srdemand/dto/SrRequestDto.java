@@ -17,6 +17,7 @@ public class SrRequestDto {
 	private String relGrund; // 관련 근거
 	private String cmptnDmndYmd; // 완료 요청일
 	private List<MultipartFile> attachFile;
+	private List<MultipartFile> nattachFile;
 
 	// 첨부파일 관리 필요함
 }

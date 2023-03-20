@@ -333,11 +333,6 @@ width: 100%;
 					<div class="card-header">
 						<h5>SR 요청 상세정보</h5>
 					</div>
-					<ul class="nav nav-tabs  md-tabs" role="tablist">
-						<li class="nav-item"><a class="nav-link active"
-							data-toggle="tab" href="#srDemandDetail" role="tab">SR요청 상세정보</a>
-							<div class="slide"></div></li>
-					</ul>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
 						<div class="tab-pane active" id="srDemandDetail" role="tabpanel">

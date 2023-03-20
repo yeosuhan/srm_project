@@ -219,9 +219,11 @@ public class SrDemandController {
 	 * SR요청 수정하기
 	 * 
 	 * @author 신정은
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
 	@PostMapping("/modify")
-	public String updateSrDemand(SrRequestDto srRequestDto) {
+	public String updateSrDemand(SrRequestDto srRequestDto) throws IllegalStateException, IOException {
 		// 수정 진행
 		log.info(srRequestDto);
 		srdemandService.updateSrDemand(srRequestDto);

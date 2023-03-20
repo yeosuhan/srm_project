@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="card_body" id="sddetail"
 	style="font-size: 14px; padding-top: 20px;">
@@ -156,9 +157,13 @@
 		<div class="col-sm-10">
 			<c:forEach var="f" items="${sd.attachFile}">
 				<div>
-					<a href="<c:url value='/file/download/${f.fileSn}' />"> <span
-						class="glyphicon glyphicon-save" aria-hidden="true"></span> <span>
-							${f.orgnlFileNm} </span><span style=""> ${f.fileSz} Bytes</span>
+					<a href="<c:url value='/file/download/${f.fileSn}' />">
+					 <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 
+					 <span style="margin-right: 20px;"> ${f.orgnlFileNm} </span>
+					 <span style="">
+							<fmt:formatNumber type="number" value="${f.fileSz/(1024 * 1024)}"  pattern="0.0"/>
+					 		MB
+					 </span>
 					</a>
 				</div>
 			</c:forEach>
