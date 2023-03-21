@@ -36,13 +36,14 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-<%-- 히스토리id가 있는경우 탭을 열고 해당위치로 이동 --%>
-	<c:if test="${srInfoFilter.hstryId ne null}">
+<%-- 히스토리id가 있는경우 탭을 열고 해당위치로 이동 
+		 <c:if test="${srInfoFilter.hstryId ne null}">
 	$(function() {
 		$("#srInfoHistoryTab").trigger("click");
 		$("#srInfoHistoryTab").focus();
 	});
-	</c:if>
+	</c:if> --%>
+
 </script>
 <style>
 .ui-datepicker-trigger {

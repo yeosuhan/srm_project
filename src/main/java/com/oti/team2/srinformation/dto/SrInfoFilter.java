@@ -11,5 +11,5 @@ public class SrInfoFilter {
 	private String dmndNo;
 	private boolean mySrOnly;
 	private String empId;
-	private Integer hstryId;
+	//private Integer hstryId;
 }

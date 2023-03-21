@@ -63,9 +63,10 @@ public class SrinformationController {
 	@GetMapping(value = "/list")
 	public String getList(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@ModelAttribute SrInfoFilter srInfoFilter, Authentication auth,
-			@RequestParam(required = true, name = "sort", defaultValue = "1") String sort,
-			@RequestParam(required = true, name = "by", defaultValue = "1") String by,
-			@RequestParam(required = true, name = "ey", defaultValue = "1") String ey) {
+			@RequestParam(required = false, name = "sort") String sort,
+			@RequestParam(required = false, name = "by") String by,
+			@RequestParam(required = false, name = "ey") String ey,
+			@RequestParam(required = false, name = "hstryId") Integer hstryId) {
 		if (srInfoFilter.isMySrOnly()) {
 			srInfoFilter.setEmpId(auth.getName());
 		}
@@ -73,9 +74,26 @@ public class SrinformationController {
 		model.addAttribute("by", by);
 		model.addAttribute("ey", ey);
 		List<Prgrs> prgrs = progressService.getRrgrs();
-
-		log.info(srInfoFilter);
 		
+		log.info("srInfoFilter");
+		log.info(srInfoFilter);
+		/**************************/
+		/*if(hstryId != null) {
+			// 상세를 조회하는데 rownum이 같이 나온다.
+			
+			
+			// rownum을 통해 속해있는 페이지를 가져온다.
+			
+			//계획과 진척을 가져온다.
+		}*/
+		
+		
+		
+		
+		
+		
+		
+		/**************************/
 		int totalRows = srinformationService.getTotalRow(page, srInfoFilter, auth.getAuthorities().stream().findFirst().get().toString());
 		Pager pager = new Pager(11, totalRows, page);
 		log.info(pager);
