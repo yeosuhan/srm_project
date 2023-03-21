@@ -32,9 +32,9 @@ font-size: 13px !important;
 				<tr onclick="noticeDetail(${board.bbsNo})">
 					<th style="text-align: center;">${nPager.startRowNo + status.index}</th>
 					<c:choose>
-						<c:when test="${fn:length(board.bbsTtl) > 19}">
+						<c:when test="${fn:length(board.bbsTtl) > 17}">
 							<td id="ttl" class="text-left font-weight-bold"><c:out
-									value="${fn:substring(board.bbsTtl,0,18)}" />...</td>
+									value="${fn:substring(board.bbsTtl,0,16)}" />...</td>
 						</c:when>
 						<c:otherwise>
 							<td id="ttl" class="text-left font-weight-bold"><c:out

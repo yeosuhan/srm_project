@@ -94,7 +94,7 @@
 			<!-- bootstrap modal start -->
 			<div class="col-sm-7" id="qnaList">
 				<!--목록-->
-				<div class="card" style="height: 800px;">
+				<div class="card" style="height: 900px;">
 					<div class="card-header">
 						<h5>전체 목록</h5>
 					</div>
@@ -109,10 +109,10 @@
 							<thead>
 								<tr style="font-size: 15px;">
 									<th class="col-1" style="text-align: center; font-size: 15px;">순번</th>
-									<th class="col-6 text-center">제목</th>
-									<th class="col-1">작성자</th>
+									<th class="col-6 text-center" style="font-size: 15px;">제목</th>
+									<th class="col-1" style="font-size: 15px;">작성자</th>
 									<th class="col-3" style="text-align: center; font-size: 15px;">작성날짜</th>
-									<th class="col-3">답변상태</th>
+									<th class="col-3" style="font-size: 15px;">답변상태</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -120,7 +120,7 @@
 									<tr onclick="qnaDetail(${board.bbsNo})" >
 										<th style="text-align: center; font-size: 15px;">${qPager.startRowNo + status.index}</th>
 
-											<td style="font-size: 15px;" id="ttl" class="text-left">${board.bbsTtl}</td>
+											<td style="font-size: 15px;" id="ttl" class="text-left ">${board.bbsTtl}</td>
 
 										<td style="font-size: 15px;">${board.wrtNm}</td>
 										<td style="font-size: 15px;">${board.wrtYmd}</td>

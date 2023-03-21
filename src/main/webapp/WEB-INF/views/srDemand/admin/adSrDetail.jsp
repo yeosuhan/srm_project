@@ -7,7 +7,7 @@
 	style="font-size: 14px; padding-top: 20px;">
 	<div class="form-group row">
 		<div class="col col-sm-2 px-0 font-weight-bold">요청번호</div>
-		<div class="col col-sm-9">
+		<div class="col col-sm-9 p-0">
 			<div type="text" class="dmndNo font-weight-bold"
 				style="font-size: 12px; width: 325px;">${sd.dmndNo}</div>
 		</div>
@@ -15,14 +15,14 @@
 	<hr />
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold px-0 ">SR 제목</div>
-		<div class="col col-sm-9">
+		<div class="col col-sm-9 p-0">
 			<div type="text" class="ttl" style="width: 325px;">${sd.ttl}</div>
 		</div>
 	</div>
 	<hr />
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold px-0">관련 근거</div>
-		<div class="col col-sm-9">
+		<div class="col col-sm-9 p-0">
 			<textarea class="relGrund" style="width: 100%;" readonly>${sd.relGrund}</textarea>
 		</div>
 	</div>
@@ -30,18 +30,18 @@
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">시스템구분</div>
-			<div class="col col-sm-8 sysNm pr-0">${sd.sysNm}</div>
+			<div class="col col-sm-8 sysNm p-0">${sd.sysNm}</div>
 		</div>
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">업무구분</div>
-			<div class="col col-sm-8 taskSeNm">${sd.taskSeNm}</div>
+			<div class="col col-sm-8 taskSeNm ">${sd.taskSeNm}</div>
 		</div>
 	</div>
 	<hr />
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">요청기관</div>
-			<div class="col col-sm-8 instNm pr-0">${sd.instNm}</div>
+			<div class="col col-sm-8 instNm p-0">${sd.instNm}</div>
 
 		</div>
 		<div class="col-sm-6 px-0">
@@ -53,11 +53,11 @@
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">요청일</div>
-			<div class="col col-sm-8 dmndYmd">${sd.dmndYmd}</div>
+			<div class="col col-sm-8 dmndYmd p-0">${sd.dmndYmd}</div>
 		</div>
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">완료요청일</div>
-			<div class="col col-sm-8 cmptnDmndYmd">${sd.cmptnDmndYmd}</div>
+			<div class="col col-sm-8 cmptnDmndYmd ">${sd.cmptnDmndYmd}</div>
 		</div>
 	</div>
 	<hr />
@@ -65,14 +65,14 @@
 		<div class="form-group row">
 			<div class="col-sm-6 px-0">
 				<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
-				<div class="col col-sm-6">
-					<div type="text" class="picNm">${sd.picNm}</div>
+				<div class="col col-sm-6 p-0">
+					<div type="text" class="picNm p-0">${sd.picNm}</div>
 				</div>
 			</div>
 			<div class="col-sm-6 px-0">
 				<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
 				<div class="col col-sm-8">
-					<div type="text" class="deptNm" style="width: 100%;">${sd.deptNm}</div>
+					<div type="text" class="deptNm p-0" style="width: 100%;">${sd.deptNm}</div>
 				</div>
 			</div>
 		</div>
@@ -80,9 +80,9 @@
 	</c:if>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold">진행 상태</div>
-			<div class="col col-sm-6">
-				<div type="text" class="sttsNm">${sd.sttsNm}</div>
+			<div class="col col-sm-4 font-weight-bold p-0">진행 상태</div>
+			<div class="col col-sm-6 p-0">
+				<div type="text" class="sttsNm p-0">${sd.sttsNm}</div>
 			</div>
 		</div>
 		<c:if test="${sd.sttsCd gt 1}">
@@ -96,9 +96,9 @@
 	<div class="form-group row">
 		<c:if test="${sd.sttsCd gt 0}">
 			<div class="col-sm-6 px-0">
-				<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
-				<div class="col col-sm-6">
-					<div class="rvwrNm">${sd.rvwrNm}</div>
+				<div class="col col-sm-4 font-weight-bold ">검토자 이름</div>
+				<div class="col col-sm-6 p-0">
+					<div class="rvwrNm ">${sd.rvwrNm}</div>
 				</div>
 			</div>
 		</c:if>
@@ -147,7 +147,7 @@
 	<div class="form-group row">
 		<label class="col-sm-2 px-0 col-form-label font-weight-bold"
 			style="line-height: 100px; font-size: 12px;">SR 내용</label>
-		<div class="col-sm-9">
+		<div class="col-sm-10 pㅣ-0">
 			<textarea class="form-control cn" style="width: 100%; height: 120px;" readonly>${sd.cn}</textarea>
 		</div>
 	</div>
