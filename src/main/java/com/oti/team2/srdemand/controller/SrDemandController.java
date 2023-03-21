@@ -1,7 +1,6 @@
  package com.oti.team2.srdemand.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -14,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oti.team2.institution.service.IInstitutionService;
 import com.oti.team2.member.service.IMemberService;
-import com.oti.team2.progress.dto.Prgrs;
 import com.oti.team2.progress.service.IProgressService;
 import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrFilterDto;
@@ -33,8 +30,7 @@ import com.oti.team2.srdemand.dto.SrdemandPrgrsrt;
 import com.oti.team2.srdemand.dto.WriteSdBaseDto;
 import com.oti.team2.srdemand.dto.WriterDto;
 import com.oti.team2.srdemand.service.ISrDemandService;
-import com.oti.team2.srinformation.dto.SrInfoFilter;
-import com.oti.team2.srinformation.dto.SrinformationList;
+import com.oti.team2.srinformation.dto.SrDmndRowNum;
 import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.system.dto.SrSystem;
 import com.oti.team2.system.service.ISystemService;
@@ -144,7 +140,6 @@ public class SrDemandController {
 		srFilterDto.setKeyWord(keyWord);
 		srFilterDto.setSysCd(sysCd);
 		srFilterDto.setTaskSeCd(taskSeCd);
-		srFilterDto.setHstryId(hstryId);
 		model.addAttribute("srFilterDto", srFilterDto);
 		log.info(srFilterDto);
 		// 목록
@@ -155,13 +150,28 @@ public class SrDemandController {
 		String prgrsRt = null;
 		if (totalRows != 0) {
 			List<SrDemand> list = null;
-			list = srdemandService.getSrDemandList(memberId, pager, sort, srFilterDto);
-			model.addAttribute("mySrDemandList", list);
+			SrDmndRowNum srDmndRowNum = null;
 			// 기본 첫번째 상세 or 선택된 상세
 			if (dmndno != null) {
+				srDmndRowNum = srdemandService.getRownum(dmndno,memberId);
+				int pn = pager.findPageNo(srDmndRowNum.getRn());
+				pager=new Pager(10,totalRows, pn);
 				prgrsRt = progressService.getPrgrsRt(dmndno);
 				sd = srdemandService.getSrDemandDetail(dmndno);
-			} else {
+				model.addAttribute("noHstry",true);
+				model.addAttribute("rownum", srDmndRowNum.getRn());
+			} 
+			if(hstryId != null) {
+				srDmndRowNum = srdemandService.getRownum(hstryId,memberId);
+				int pn = pager.findPageNo(srDmndRowNum.getRn());
+				pager = new Pager(10,totalRows,pn);
+				log.info("hs"+pager);
+				model.addAttribute("noHstry",false);
+				model.addAttribute("rownum", srDmndRowNum.getRn());
+			}
+			list = srdemandService.getSrDemandList(memberId, pager, sort, srFilterDto);
+			model.addAttribute("mySrDemandList", list);
+			if(dmndno == null&& hstryId ==null ) {
 				prgrsRt = progressService.getPrgrsRt(list.get(0).getDmndNo());
 				sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 			}
@@ -297,7 +307,6 @@ public class SrDemandController {
 		srFilterDto.setKeyWord(keyWord);
 		srFilterDto.setSysCd(sysCd);
 		srFilterDto.setTaskSeCd(taskSeCd);
-		srFilterDto.setHstryId(hstryId);
 		log.info(srFilterDto);
 		List<SrDemand> list = null;
 		list = srdemandService.getMyExcelList(memberId, sort, srFilterDto);

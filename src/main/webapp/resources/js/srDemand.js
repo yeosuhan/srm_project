@@ -9,6 +9,7 @@ function getSrDemandDetail(dmNo) {
          $.ajax({
             url : "/srdemand/detail/" + dmNo,
             type : "GET",
+            async:false, //알림으로 히스토리 확인시 srno가 없어 목록을 불러오지 못함
             success : function(res) {
                $("#sddetail").html(res);
             }
@@ -90,8 +91,10 @@ function addSr() {
 				processData: false, //프로세스 데이터 설정 : false 값을 해야 form data로 인식함
 		        contentType: false,
 				success : function(res) {
-					//alert("요청을 성공적으로 등록했습니다.");
-					location.href="/srdemand/list";
+					showSuccessSraddAlert("요청을 성공적으로 등록했습니다.");
+					$("#sradd button").on("click",function(){
+						location.href="/srdemand/list";
+					});
 					$("#addmodal").removeClass("show");
 				}			
 			});			
@@ -292,6 +295,12 @@ $(function() {
       return true;
    });
    var currentUrlForSort=window.location.href;
+   if(currentUrlForSort.indexOf('dmndNoToHstry')!=-1){
+		currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('dmndNoToHstry')-1);
+	}
+	if(currentUrlForSort.indexOf('hstryId')!=-1){
+		currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('hstryId')-1);
+	}
    // 파라미터 여부
    if(currentUrlForSort.indexOf('?')!=-1 && currentUrlForSort.indexOf('?')!=currentUrlForSort.length-1){
       
@@ -314,7 +323,7 @@ $(function() {
             $(".sortBtnAsc").attr("href","?sort=ASC");
             $(".sortBtnDesc").attr("href","?sort=DESC");
          }else{
-            
+        	console.log("두번 실행 됩니까?");
             filter=currentUrlForSort.substring(indexOfFilter,currentUrlForSort.length);
             $(".sortBtnAsc").attr("href",$(".sortBtnAsc").attr("href")+filter+"&sort=ASC");
             $(".sortBtnDesc").attr("href",$(".sortBtnDesc").attr("href")+filter+"&sort=DESC");
@@ -325,6 +334,7 @@ $(function() {
       $(".sortBtnAsc").attr("href","?sort=ASC");
       $(".sortBtnDesc").attr("href","?sort=DESC");
    }
+   console.log("정확한 기준을 모르겠어요");
 });
 
 /* 요청 필터 바의 업무구분 가져오기 */

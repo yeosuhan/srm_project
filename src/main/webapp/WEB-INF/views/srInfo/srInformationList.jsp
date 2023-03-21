@@ -38,16 +38,25 @@
    });
 <%-- 히스토리id가 있는경우 탭을 열고 해당위치로 이동 --%>
    <c:if test="${hstryId ne null}">
-  		console.log("history id 있습니다요 ~~~~~~~~~~~~~~~~~ ");
+   $(function(){
+	   
   		var trId = "tr"+${hstryId};
   		console.log(trId);
-  		 //$("#trId").trigger("click");
-  		 //$("#srDemandDetail").tab("hide");
- 	      $("#srInfoDetailTab").trigger("click");
-  		 $("#srInfhistoryTab").trigger("click"); 
-  		 /* $("#srDemandDetail").css("display", "none");
-  		 $("#srInfoDetail").css("display", "show");
-  		 $("#srInfhistory").css("display", "show"); */
+  		$("#"+trId).trigger("click");
+ 	    $("#srInfoDetailTab").trigger("click");
+  		$("#srInfhistoryTab").trigger("click"); 
+  		
+   });
+
+   </c:if>
+   <c:if test="${rownum ne null}">
+   $(function(){
+	   
+  		var trId = "tr"+${rownum};
+  		
+  		$("#"+trId).trigger("click");
+  		
+   });
 
    </c:if>
 </script>
@@ -627,6 +636,7 @@ table tbody td {
 											</c:forEach>
 										</div>
 									</div>
+
 									<div class="form-group row">
 										<div class="col-9"></div>
 										<div class="col-3"
