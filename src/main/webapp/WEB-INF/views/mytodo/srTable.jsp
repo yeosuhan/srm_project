@@ -46,7 +46,7 @@ font-size: 15px !important;
 			<c:forEach var="sr" items="${srList}">
 
 				<c:choose>
-					<c:when test="${sttsCd gt 3}">
+					<c:when test="${sttsCd gt 2}">
 							<tr onclick="showAdminGraph('${sr.dmndNo}')">
 					</c:when>
 					<c:otherwise>
