@@ -30,12 +30,12 @@
 				action="<c:url value='/history/add'/>" class="form-material"
 				onsubmit="return checkValue()">
 				<div class="row my-3">
-					<div class="col-2">SR 번호 :</div>
+					<div class="col-2 font-weight-bold ">SR 번호 :</div>
 					<div class="col-4">
 						<input id="HsrNo" name="srNo" style="width: 100%" type="text"
 							value="" readonly>
 					</div>
-					<div class="col-2">요청 유형 :</div>
+					<div class="col-2 font-weight-bold">요청 유형 :</div>
 					<div class="col-4">
 						<div class="dropdown dropdown open">
 							<select name="hstryType" id="hstryType" style="width: 73%">
@@ -51,12 +51,12 @@
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">발신일 :</div>
+					<div class="col-2 font-weight-bold">발신일 :</div>
 					<div class="col-4">
 						<input type="date" id="HwrtYmd" type="text" value="" readonly
 							style="width: 100%">
 					</div>
-					<div class="col-2">발신자 :</div>
+					<div class="col-2 font-weight-bold">발신자 :</div>
 					<div class="col-4">
 						<input type="hidden" id="rqstrId" name="rqstrId"
 							value='<sec:authentication property="principal.username"/>' /> <input
@@ -65,7 +65,7 @@
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2 pr-0">
+					<div class="col-2 pr-0 font-weight-bold">
 						<label for="">기존 완료요청일 : </label>
 					</div>
 					<div class="col-4">
@@ -74,23 +74,23 @@
 					</div>
 
 
-					<div class="col-2" id="chg1">
-						<label for="chgEndYmd">요청 예정일 : </label>
+					<div class="col-2 font-weight-bold" id="chg1">
+						<label for="chgEndYmd ">요청 예정일 : </label>
 					</div>
-					<div class="col-4" id="chg2">
+					<div class="col-4 " id="chg2">
 						<input type="date" id="HchgEndYmd" name="chgEndYmd"
 							style="width: 73%">
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">제목 :</div>
+					<div class="col-2 font-weight-bold">제목 :</div>
 					<div class="col-10">
 						<input id="HhstryTtl" style="width: 90%" type="text"
 							name="hstryTtl" value="">
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2">
+					<div class="col-2 font-weight-bold">
 						사유 :
 						<p class="textCount" style="margin-top: 3px"></p>
 					</div>

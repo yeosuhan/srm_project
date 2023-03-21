@@ -234,22 +234,20 @@ table thead tr {
 									<button type="submit" class="btn btn-sm btn-oti">
 										<i class="ti-search"></i>
 									</button>
-									<button class="btn btn-sm btn-oti" style="height: 30px;"
-										onclick="javascript: form.action='${pageContext.request.contextPath}/srdemand/list/download';">엑셀
-										다운로드</button>
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-
-
 			<%-- *********************************** [SR 요청 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
 						<h5>SR 요청 목록</h5>
+						<button type="submit" class="btn-sm btn-oti" form="srSearchForm"
+									onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
+									style="float: right; margin-right: 50px;">엑셀 다운로드</button>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -266,7 +264,7 @@ table thead tr {
 										style="font-size: 12; width: 100%">
 										<thead>
 											<tr>
-												<th style="width: 1px; font-size: 15px;"></th>
+												<th style="width: 1px;"></th>
 												<th style="font-size: 15px;">요청 번호 <c:if
 														test="${sort eq 'DESC'}">
 														<a
@@ -279,16 +277,13 @@ table thead tr {
 															class="sortBtnDesc"><i class="fas fa-caret-up"
 															style="color: #93344b; font-size: 24px;"></i></a>
 													</c:if>
-
 												</th>
-
-												<th style="font-size: 15px;">제목</th>
-												<th style="font-size: 15px;">관련시스템</th>
-												<th style="font-size: 15px;">소속</th>
+												<th class="text-left" style="font-size: 15px;">제목</th>
+												<th class="text-left" style="font-size: 15px;">관련시스템</th>
+												<th class="text-left"style="font-size: 15px;">소속</th>
 												<th style="font-size: 15px;">진행상태</th>
 												<th style="font-size: 15px;">요청일</th>
 												<th style="font-size: 15px;">완료예정일</th>
-
 											</tr>
 										</thead>
 										<tbody id="dmndTbody">
@@ -299,20 +294,18 @@ table thead tr {
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srDemand.ttl) > 16}">
-																<td id="ttl" class="text-left" style="font-size: 15px;"><c:out
-																		value="${fn:substring(srDemand.ttl,0,15)}" />...</td>
+															<c:when test="${fn:length(srDemand.ttl) > 14}">
+																<td id="ttl" class="text-left" style="font-size: 14px;"><c:out
+																		value="${fn:substring(srDemand.ttl,0,13)}" />...</td>
 															</c:when>
 															<c:otherwise>
-																<td id="ttl" class="text-left" style="font-size: 15px;"><c:out
+																<td id="ttl" class="text-left" style="font-size: 14px;"><c:out
 																		value="${srDemand.ttl}" /></td>
 															</c:otherwise>
 														</c:choose>
-														<%-- <td nowrap id="ttl" class="text-left" style=" font-size:15px;  display: flex;
-  overflow: hidden;"><span class="fontWrapper">${srDemand.ttl}</span></td> --%>
-														<td class="text-left" style="font-size: 15px;">${srDemand.sysNm}</td>
-														<td style="font-size: 15px;" class="text-left">${srDemand.instNm}</td>
-														<td style="font-size: 15px;"><c:if
+														<td class="text-left" style="font-size: 14px;">${srDemand.sysNm}</td>
+														<td style="font-size: 14px;" class="text-left">${srDemand.instNm}</td>
+														<td style="font-size: 14px;"><c:if
 																test="${(srDemand.sttsNm) eq '요청'}">
 																<label class="badge badge-warning">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
@@ -328,8 +321,8 @@ table thead tr {
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
 																<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
 															</c:if></td>
-														<td>${srDemand.dmndYmd}</td>
-														<td><c:if test="${(srDemand.sttsNm) eq '개발취소'}">
+														<td style="font-size: 13px;">${srDemand.dmndYmd}</td>
+														<td style="font-size: 13px;"><c:if test="${(srDemand.sttsNm) eq '개발취소'}">
 															-</c:if> <c:if test="${(srDemand.sttsNm) ne '개발취소'}">
 																${srDemand.endYmd}
 															</c:if></td>
@@ -376,26 +369,29 @@ table thead tr {
 						<div class="tab-pane active" id="srDemandDetail" role="tabpanel">
 							<div class="card-block" id="sddetail">
 								<div class="card_body"
-									style="font-size: 12px; padding-top: 20px;">
+									style="font-size: 14px; padding-top: 20px;">
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 										<div class="col col-sm-10">
-											<div class="form-control" id="dmndNo"
+											<div id="dmndNo"
 												style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
 										</div>
 									</div>
+									<hr />
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold px-0">SR 제목</div>
 										<div class="col col-sm-10">
-											<div class="form-control ttl" style="width: 100%;">${sd.ttl}</div>
+											<div class="ttl" style="width: 100%;">${sd.ttl}</div>
 										</div>
 									</div>
+									<hr />
 									<div class="form-group row">
 										<div class="col-sm-2 font-weight-bold px-0">관련 근거</div>
 										<div class="col-sm-10">
-											<div class="form-control relGrund" style="width: 100%;">${sd.relGrund}</div>
+											<div class="relGrund" style="width: 100%;">${sd.relGrund}</div>
 										</div>
 									</div>
+									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">시스템구분</div>
@@ -406,6 +402,7 @@ table thead tr {
 											<div class="col col-sm-8 taskSeNm">${sd.taskSeNm}</div>
 										</div>
 									</div>
+									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청기관</div>
@@ -416,6 +413,7 @@ table thead tr {
 											<div class="col col-sm-6 dropdown dropdown open clientNm">${sd.clientNm}</div>
 										</div>
 									</div>
+									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">요청일</div>
@@ -426,25 +424,27 @@ table thead tr {
 											<div class="col col-sm-8 cmptnDmndYmd">${sd.cmptnDmndYmd}</div>
 										</div>
 									</div>
+									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">개발 담당자</div>
 											<div class="col col-sm-6">
-												<div class="form-control picNm">${sd.picNm}</div>
+												<div class=" picNm">${sd.picNm}</div>
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold px-0">개발 부서</div>
 											<div class="col col-sm-8">
-												<div class="form-control deptNm" style="width: 100%;">${sd.deptNm}</div>
+												<div class=" deptNm" style="width: 100%;">${sd.deptNm}</div>
 											</div>
 										</div>
 									</div>
+									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">진행 상태</div>
 											<div class="col col-sm-6">
-												<div class="form-control sttsNm">${sd.sttsNm}</div>
+												<div class=" sttsNm">${sd.sttsNm}</div>
 											</div>
 										</div>
 										<c:if test="${sd.sttsCd gt 1}">
@@ -454,14 +454,16 @@ table thead tr {
 											</div>
 										</c:if>
 									</div>
+									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
 											<div class="col col-sm-6">
-												<div class="form-control rvwrNm">${sd.rvwrNm}</div>
+												<div class=" rvwrNm">${sd.rvwrNm}</div>
 											</div>
 										</div>
 									</div>
+									<hr />
 									<c:if test="${sd.sttsCd == 1}">
 										<div class="form-group row">
 											<label id="companion"
@@ -472,6 +474,7 @@ table thead tr {
 													style="height: 100px; width: 325px;" value="${sd.rjctRsn}"></input>
 											</div>
 										</div>
+										<hr />
 									</c:if>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label px-0 font-weight-bold"
@@ -482,6 +485,7 @@ table thead tr {
 												readonly></input>
 										</div>
 									</div>
+									<hr />
 									<div class="form-group row">
 										<p class="col-sm-2 p-0 font-weight-bold">첨부파일</p>
 										<div class="col-sm-10">
@@ -498,6 +502,7 @@ table thead tr {
 											</c:forEach>
 										</div>
 									</div>
+									<hr />
 									<div class="row" id="userButtonDiv">
 										<c:if test="${sd.sttsCd == 0}">
 											<div class="col" style="text-align: right">
@@ -509,11 +514,10 @@ table thead tr {
 													onclick="deleteSr('${sd.dmndNo}')">삭제</div>
 											</div>
 										</c:if>
-										<c:if
-											test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
-											<div class="col" style="text-align: right">
-												<div class='btn btn-sm btn-oti cancle' onclick='endSr()'
-													style='float: right;'>반영요청</div>
+										<c:if test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
+											<div class="col">
+												<div class="btn btn-sm btn-oti cancle" onclick="endSr()"
+													style="width:100%;">반영요청</div>
 											</div>
 										</c:if>
 									</div>
