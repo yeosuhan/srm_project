@@ -69,19 +69,19 @@ font-size: 15px;
 								action="${pageContext.request.contextPath}/admin/employee/list"
 								onsubmit="return search()">
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-label text-right"
+									<label class="col-sm-1 col-form-label text-right font-weight-bold"
 										style="font-size: 14;">이름</label>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" name="flnm"
 											value="${flnm}">
 									</div>
-									<label class="col-sm-1 col-form-label text-right"
+									<label class="col-sm-1 col-form-label text-right font-weight-bold"
 										style="font-size: 14;">부서</label>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" name="deptNm"
 											value="${deptNm}">
 									</div>
-									<label class="col-sm-1 col-form-label text-right"
+									<label class="col-sm-1 col-form-label text-right font-weight-bold"
 										style="font-size: 14;">직급</label>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" name="jbgdNm"

@@ -331,9 +331,6 @@ table tbody td {
 									style="float: center;">
 									<i class="ti-search"></i>
 								</button>
-								<button type="submit" class="btn btn-oti btn-sm"
-									onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
-									style="float: right; margin-left: 50px;">엑셀 다운로드</button>
 							</div>
 						</form>
 					</div>
@@ -344,6 +341,9 @@ table tbody td {
 				<div class="card" style="height: 760px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
+						<button type="submit" class="btn btn-oti btn-sm" form="srInfoFilterForm	"
+									onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
+									style="float: right; margin-right: 50px;">엑셀 다운로드</button>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -373,9 +373,9 @@ table tbody td {
 															style="color: #782748; font-size: 24px;"></i></a>
 													</c:if>
 												</th>
-												<th style="font-size: 15px; width: 200px;">SR명</th>
-												<th style="font-size: 15px;">시스템구분</th>
-												<th style="font-size: 15px;">업무구분</th>
+												<th class="text-left" style="font-size: 15px; width: 200px;">SR명</th>
+												<th class="text-left" style="font-size: 15px;">시스템구분</th>
+												<th class="text-left" style="font-size: 15px;">업무구분</th>
 												<th style="font-size: 15px;">완료요청일 <c:if
 														test="${by eq 'DESC' || by eq '1'}">
 														<a
@@ -445,8 +445,11 @@ table tbody td {
 																	<label class="badge badge-inverse-primary">반영요청</label>
 																</c:if>
 																<c:if
-																	test="${(srlist.prgrsRt  ge 90) && (srlist.prgrsRt le 100)}">
+																	test="${(srlist.prgrsRt  ge 90) && (srlist.prgrsRt lt 100)}">
 																	<label class="badge badge-primary">운영반영</label>
+																</c:if>
+																<c:if test="${(srlist.prgrsRt eq 100)}">
+																	<label class="badge badge-primary">개발완료</label>
 																</c:if>
 															</c:if> <c:if test="${srlist.prgrsRt eq 0}">
 																<c:if test="${(srlist.sttsNm) eq '접수'}">
@@ -744,15 +747,15 @@ table tbody td {
 												id="deleteSrResourceBtn"
 												style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
 												<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
-                                       style="display:none"
-                              </c:if>>선택
+													style="display:none"
+										</c:if>>선택
 												삭제</button>
 											<button class="btn btn-oti btn-sm" id="addSrResourceBtn"
 												style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
 												data-toggle="modal" data-target="#addSrResourcesModal"
 												<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
-                                 style="display:none"
-                              </c:if>>추가</button>
+											style="display:none"
+										</c:if>>추가</button>
 										</sec:authorize>
 									</div>
 									<%-- *********************************** [ 진척률 ] ***********************************--%>
@@ -767,11 +770,11 @@ table tbody td {
 														style="font-size: 12px; padding: 0px; width: 100%; table-layout: fixed">
 														<thead>
 															<tr>
-																<th style="width: 12%;">작업구분</th>
+																<th style="width: 13%;">작업구분</th>
 																<th>시작일</th>
 																<th>종료일</th>
-																<th style="width: 19%;">진척률(누적)</th>
-																<th style="width: 18%;">산출물</th>
+																<th style="width: 19%;">진척률</th>
+																<th style="width: 13%;">산출물</th>
 																<th style="width: 8%;"></th>
 															</tr>
 														</thead>
@@ -797,7 +800,7 @@ table tbody td {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
 																		onclick="updateProgress0()" id="btn0"
-																		style="width: 100%; height: 100%">저장</button>
+																		style="width: 90%; height: 90%">저장</button>
 																</td>
 															</tr>
 
@@ -820,7 +823,7 @@ table tbody td {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
 																		onclick="updateProgress1()" id="btn1"
-																		style="width: 100%; height: 100%">저장</button>
+																		style="width: 90%; height: 90%">저장</button>
 																</td>
 															</tr>
 
@@ -843,7 +846,7 @@ table tbody td {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
 																		onclick="updateProgress2()" id="btn2"
-																		style="width: 100%; height: 100%">저장</button>
+																		style="width: 90%; height: 90%">저장</button>
 																</td>
 															</tr>
 
@@ -868,7 +871,7 @@ table tbody td {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
 																		onclick="updateProgress3()" id="btn3"
-																		style="width: 100%; height: 100%">저장</button>
+																		style="width: 90%; height: 90%">저장</button>
 																</td>
 															</tr>
 
@@ -891,7 +894,7 @@ table tbody td {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
 																		onclick="updateProgress4()" id="btn4"
-																		style="width: 100%; height: 100%">저장</button>
+																		style="width: 90%; height: 90%">저장</button>
 																</td>
 															</tr>
 
@@ -914,7 +917,7 @@ table tbody td {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
 																		onclick="updateProgress5()" id="btn5"
-																		style="width: 100%; height: 100%">저장</button>
+																		style="width: 90%; height: 90%">저장</button>
 																</td>
 															</tr>
 
@@ -925,7 +928,7 @@ table tbody td {
 										</div>
 
 										<button class="btn btn-oti btn-sm" id="addbtn"
-											style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;">산출물
+											style="float: right;width:100%;">산출물
 											추가</button>
 									</div>
 									<%-- *********************************** [ SR 히스토리  ] ***********************************--%>

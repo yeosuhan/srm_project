@@ -90,11 +90,11 @@ font-size: 15px !important;
 					<table class="table table-hover" style="text-align: center;">
 						<thead>
 							<tr>
-								<th class="col-1" style="text-align: center;">순번</th>
-								<th class="col-7 text-left">제목</th>
-								<th class="col-1">작성자</th>
-								<th class="col-3" style="text-align: center;">작성날짜</th>
-								<th class="col-3">조회수</th>
+								<th class="col-1" style="text-align: center; font-size: 15px;">순번</th>
+								<th class="col-7 text-center" style="font-size: 15px;">제목</th>
+								<th class="col-1" style="font-size: 15px;">작성자</th>
+								<th class="col-3" style="text-align: center; font-size: 15px;">작성날짜</th>
+								<th class="col-3" style="font-size: 15px;">조회수</th>
 							</tr>
 						</thead>
 						<tbody style="font-size: 15px !important;">

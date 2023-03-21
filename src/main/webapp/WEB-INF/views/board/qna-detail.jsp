@@ -65,23 +65,23 @@
 		<div class="card-block px-0 py-50">
 			<input type="hidden" value="${board.bbsNo}">
 			<div class="form-group row">
-				<div class="col-sm-2 font-weight-bold">제목</div>
-				<div class="col-sm-6">${board.bbsTtl}</div>
-				<div class="col-sm-2 font-weight-bold text-right">작성자</div>
-				<div class="col-sm-2">${board.wrtrNm}</div>
+				<div class="col-sm-2 font-weight-bold" style="font-size:16px;">제목</div>
+				<div class="col-sm-6" style="font-size:14px;">${board.bbsTtl}</div>
+				<div class="col-sm-2 font-weight-bold text-right"style="font-size:16px;">작성자</div>
+				<div class="col-sm-2"style="font-size:14px;">${board.wrtrNm}</div>
 			</div>
 			<div class="form-group row">
-				<div class="col-sm-2 font-weight-bold">SR번호</div>
-				<div class="col-sm-4">${board.srNo}</div>
+				<div class="col-sm-2 font-weight-bold" style="font-size:16px;">SR번호</div>
+				<div class="col-sm-4"style="font-size:14px;" >${board.srNo}</div>
 			</div>
 			<div class="form-group row">
-				<p class="col-sm-2 font-weight-bold" style="line-height: 150px;">내용</p>
+				<p class="col-sm-2 font-weight-bold" style="line-height: 150px;font-size:16px;">내용</p>
 				<div class="col-sm-9">
 					<textarea class="form-control"
 						style="border: none;  height: 300px; background-color: #DFDEDE;">${board.bbsCn}</textarea>				</div>
 			</div>
 			<div class="form-group row m-0">
-				<p class="col-sm-2 font-weight-bold">첨부파일</p>
+				<p class="col-sm-2 font-weight-bold"style="font-size:16px;">첨부파일</p>
 				<div class="col-sm-6">
 					<c:forEach var="f" items="${board.srcList}">
 						<div>
