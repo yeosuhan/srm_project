@@ -39,10 +39,7 @@ public class PrgrsPlanDto {
 		for(Progress p : pList) {
 			dSet.add(p.getEndYmd().toString());
 		}
-		
-		/*if(pList.get(pList.size()-1).getEndYmd() != null) {
-			dSet.add(pList.get(pList.size()-1).getEndYmd().toString());			
-		}*/
+	
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date now = new java.util.Date();
@@ -79,37 +76,18 @@ public class PrgrsPlanDto {
 				d1 = format2.parse(ppDto.getDateList().get(idx - 1)).getTime() / 1000;
 				d2 = format2.parse(ppDto.getDateList().get(idx)).getTime() / 1000;
 				d3 = format2.parse(ppDto.getDateList().get(idx + 1)).getTime() / 1000;
-				
-				
-				
+								
 				long d31 = (d3 - d1) / (24*60*60);
 				long d21 = (d2 - d1) / (24*60*60);
 				System.out.println(d31);
 				System.out.println(d21);
 				System.out.println(d21/d31);
 				middle = (int) (prgrsList.get(idx - 1) + ((prgrsList.get(idx) - prgrsList.get(idx - 1)) / d31 * d21));
+				prgrsList.add(idx, middle);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}	
-		}
-			
-			
-			
-	/*	}
-		else {
-			try {
-				d1 = format2.parse(ppDto.getDateList().get(idx - 1)).getTime() / 1000;
-				d2 = format2.parse(ppDto.getDateList().get(idx + 1)).getTime() / 1000;
-				
-				int day = (int) ((d2 - d1) / (24*60*60));
-				middle = (int)  prgrsList.get(idx-1) + (prgrsList.get(idx) - prgrsList.get(idx-1)) / day;
-				System.out.println(day);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}*/
-		
-		prgrsList.add(idx, middle);
+		}	
 		
 		ppDto.setPrgrsList(this.prgrsList);
 		return ppDto;
