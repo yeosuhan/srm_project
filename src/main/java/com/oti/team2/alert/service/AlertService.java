@@ -122,9 +122,10 @@ public class AlertService implements IAlertService {
 		String url=null;
 		if(alert.getAltType().equals("RFLT")) {	//반영 요청 관련
 			
-			url="/srdemand/list?dmndno="+alert.getDmndNo();
-			if(role.equals(Auth.ROLE_ADMIN.toString())) {
-				url="/admin"+url;
+			if(!role.equals(Auth.ROLE_CLIENT.toString())) {
+				url="/srinformation/list?dmndNoToHstry="+alert.getDmndNo();
+			}else {
+				url="/srdemand/list?dmndno="+alert.getDmndNo();
 			}
 			
 			//alertDao.updateIdntyYn(alert.getAltNo()); x버튼을 눌러 알람을 닫도록 수정

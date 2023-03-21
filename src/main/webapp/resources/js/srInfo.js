@@ -70,6 +70,7 @@ function getDetail(dmndNo, srNo) {
 	$.ajax({
 		url : '/srinformation/detail/' + dmndNo,
 		type : 'GET',
+		async: false, //알람을 통해 히스토리 탭으로 바로 넘어가는 경우 동기 방식으로
 		data : {
 			dmndNo : dmndNo
 		},

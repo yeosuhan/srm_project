@@ -28,11 +28,18 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-<%-- 히스토리id가 주어질경우 히스토리 탭 열기 --%>
-	<c:if test="${srFilterDto.hstryId ne null}">
-	$(function() {
-		$("#srHistoryTab").trigger("click");
+<%-- rownu이 주어질경우 히스토리 탭 열기 --%>
+	<c:if test="${rownum ne null}">
+	$(function(){
+		   
+			var trId = "tr"+${rownum};
+			console.log(trId);
+			$("#"+trId).trigger("click");
+			<c:if test="${noHstry ne true}">
+				$("#srHistoryTab").trigger("click"); 
+			</c:if>
 	});
+	
 	</c:if>
 </script>
 
@@ -288,9 +295,9 @@ table thead tr {
 										</thead>
 										<tbody id="dmndTbody">
 											<c:if test="${mySrDemandList ne null}">
-												<c:forEach var="srDemand" items="${mySrDemandList}"
+												<c:forEach var="srDemand" items="${mySrDemandList}" 
 													varStatus="status">
-													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" id="tr${pager.startRowNo + status.index}">
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
@@ -358,7 +365,7 @@ table thead tr {
 							data-toggle="tab" href="#srDemandDetail" role="tab"
 							id="srDmndDetailTab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
-						<li class="nav-item" onclick="userHstry()"><a
+						<li class="nav-item" onclick="userHstry()"><a id="srHistoryTab"
 							class="nav-link" data-toggle="tab" href="#srHistory" role="tab">SR
 								히스토리</a>
 							<div class="slide"></div></li>

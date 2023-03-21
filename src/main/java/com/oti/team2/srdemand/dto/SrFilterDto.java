@@ -12,5 +12,4 @@ public class SrFilterDto {
 	private String dmndYmdEnd;
 	private Integer sttsCd;
 	private String keyWord;
-	private Integer hstryId;
 }

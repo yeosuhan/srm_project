@@ -10,6 +10,7 @@ import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrFilterDto;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
+import com.oti.team2.srinformation.dto.SrDmndRowNum;
 import com.oti.team2.util.pager.Pager;
 
 public interface ISrDemandDao {
@@ -174,4 +175,12 @@ public interface ISrDemandDao {
 	 * @return 관리자의 sr요청목록 엑셀 다운로드
 	 */
 	public List<SrDemand> selectAdAllSrDemand(@Param("sort")String sort, @Param("srFilterDto")SrFilterDto srFilterDto);
+
+	/* 알림을 통해 dmndNo가 주어졌을 경우 해당 요청의 행번호
+	 * @author 안한길
+	 * @return rownum
+	 * */
+	public SrDmndRowNum selectRowNumByDmndNo(@Param("dmndNo")String dmndNo);
+
+	public SrDmndRowNum selectRowNumByHstryId(@Param("hstryId")int hstryId);
 }

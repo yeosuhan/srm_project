@@ -124,4 +124,9 @@ public interface ISrinformationService {
 	 *  @author 신정은
 	 */
 	public SrDmndRowNum getRownumByHstryId(int hstryId);
+	/*
+	 * 요청반영 알림 클릭시 해당 진척 상세가 몇번째 인지 조회
+	 * @author 안한길
+	 * */
+	public SrDmndRowNum getRownumByDmndNo(String dmndNoToHstry);
 }

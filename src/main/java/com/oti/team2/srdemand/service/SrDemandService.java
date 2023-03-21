@@ -32,6 +32,7 @@ import com.oti.team2.srdemand.dto.SrDemand;
 import com.oti.team2.srdemand.dto.SrFilterDto;
 import com.oti.team2.srdemand.dto.SrRequestDto;
 import com.oti.team2.srdemand.dto.SrdemandDetail;
+import com.oti.team2.srinformation.dto.SrDmndRowNum;
 import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.util.pager.Pager;
 
@@ -459,4 +460,16 @@ public class SrDemandService implements ISrDemandService {
 		return list;
 	}
 
+	/* 요청의 행번호 조회
+	 * @authoe 안한길 
+	 * @return 
+	 * */
+	@Override
+	public SrDmndRowNum getRownum(String dmndNo) {
+		return srDemandDao.selectRowNumByDmndNo(dmndNo);
+	}
+	@Override
+	public SrDmndRowNum getRownum(int hstryId) {
+		return srDemandDao.selectRowNumByHstryId(hstryId);
+	}
 }

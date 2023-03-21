@@ -24,6 +24,7 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+	
 </script>
 <style>
 #startDatepicker, #endDatepicker, #addDatepicker {
@@ -268,7 +269,7 @@ width: 100%;
 											<c:if test="${srDemandList ne null}">
 												<c:forEach var="srDemand" items="${srDemandList}"
 													varStatus="status">
-													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" style="font-size:13px;">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" style="font-size:13px;" id="tr${pager.startRowNo + status.index}">
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
