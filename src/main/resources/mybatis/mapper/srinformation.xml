@@ -18,9 +18,6 @@
           <if test="srInfoFilter.empId != null and role == 'ROLE_DEVELOPER'">
           , SR_RESOURCES R
           </if>
-         <!--  <if test="srInfoFilter.hstryId != null">
-          , SR_INFORMATION_HISTORY H
-          </if> -->
       WHERE 
           SD.DMND_NO = SI.DMND_NO
       AND
@@ -61,15 +58,11 @@
       AND
          SI.PIC_ID = #{srInfoFilter.empId}
       </if>
-      <!-- <if test="srInfoFilter.hstryId != null">
-      AND
-         SI.SR_NO = H.SR_NO
-      AND 
-         H.HSTRY_ID = #{srInfoFilter.hstryId}
-      </if> -->
-       order by SD.DMND_YMD DESC
+      	 <if test="sort.equals('1') and by.equals('1') and ey.equals('1')">
+      	 order by SD.DMND_YMD DESC
+      	 </if> 
          <if test="sort=='DESC'">
-         , dmndNo DESC
+         order by dmndNo DESC
          </if>
          <if test="sort=='ASC'">
          order by dmndNo ASC
@@ -200,9 +193,6 @@
          <if test="srInfoFilter.empId != null and role == 'ROLE_DEVELOPER'">
          , SR_RESOURCES R
          </if>
-         <!-- <if test="srInfoFilter.hstryId != null">
-          , SR_INFORMATION_HISTORY H
-          </if> -->
       WHERE 
           SD.DMND_NO = SI.DMND_NO
       <if test="srInfoFilter.dmndNo != null">
@@ -241,12 +231,6 @@
       AND
          SI.PIC_ID = #{srInfoFilter.empId}
       </if>
-      <!-- <if test="srInfoFilter.hstryId != null">
-      AND
-         SI.SR_NO = H.SR_NO
-      AND 
-         H.HSTRY_ID = #{srInfoFilter.hstryId}
-      </if> -->
    </select>
    
    <!-- 고객이 문의글 작성 시 : 자신의 모든 진척-요청번호를 보여주기 위함 -->
