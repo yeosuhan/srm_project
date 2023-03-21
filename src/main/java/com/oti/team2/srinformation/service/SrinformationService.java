@@ -27,12 +27,12 @@ import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.srinformation.dao.ISrinformationDao;
 import com.oti.team2.srinformation.dto.Dept;
 import com.oti.team2.srinformation.dto.Manager;
+import com.oti.team2.srinformation.dto.SrDmndRowNum;
 import com.oti.team2.srinformation.dto.SrInfoFilter;
 import com.oti.team2.srinformation.dto.SrInformationRequestDto;
 //github.com/OTI-SRM/srm_project
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInformation;
-import com.oti.team2.srresource.service.ISrResourceService;
 import com.oti.team2.system.service.ISystemService;
 import com.oti.team2.util.pager.Pager;
 
@@ -381,5 +381,13 @@ public class SrinformationService implements ISrinformationService {
 	@Override
 	public void downloadExcel(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {		
+	}
+	
+	/**
+	 * 히스토리id 클릭시 해당 진척상세가 몇번째 인지 조회하기 
+	 *  @author 신정은
+	 */
+	public SrDmndRowNum getRownumByHstryId(int hstryId) {
+		return srinformationDao.selectRowNumByHstryId(hstryId);
 	}
 }

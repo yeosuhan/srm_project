@@ -90,7 +90,7 @@ function addSr() {
 				processData: false, //프로세스 데이터 설정 : false 값을 해야 form data로 인식함
 		        contentType: false,
 				success : function(res) {
-					alert("요청을 성공적으로 등록했습니다.");
+					//alert("요청을 성공적으로 등록했습니다.");
 					location.href="/srdemand/list";
 					$("#addmodal").removeClass("show");
 				}			
@@ -214,8 +214,8 @@ function goAccept(dmndNo) {
       contentType : 'application/json; charset=UTF-8',
       dataType : "json",
       success : function(res) {
-         alert(res.result);
-         location.reload();
+         //alert(res.result);
+    	 location.href="/srdemand/list";
       },
       error : function(error) {
          console.log(error);
@@ -246,8 +246,8 @@ function goDecline(dmndNo) {
          data : JSON.stringify(jsonData),
          contentType : "application/json; charset=UTF-8",
          success : function(res) {
-            alert(res.result);
-            location.reload();
+            //alert(res.result);
+        	location.href="/srdemand/list";
          },
          error : function(error) {
             console.log(error);

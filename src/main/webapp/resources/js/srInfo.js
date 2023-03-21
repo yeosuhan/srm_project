@@ -92,20 +92,20 @@ function getDetail(dmndNo, srNo) {
 			
 			var role = detail.role;
 			
-			// 관리자 & 개발자 권한과 상황에 따른 요청 버튼 제한 (최은종)
-			if(role=='ROLE_DEVELOPER') {
-				if(detail.isDnumExists>0){
-					$(".col-3").show();
-				} else if((detail.isDnumExists)<=0 || (detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
-					$(".col-3").hide();
-				} 
-			} else if(role=='ROLE_ADMIN'){
-				if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
-					$(".col-3").hide();
-				} else {
-					$(".col-3").show();
-				}			
-			}
+	         // 관리자 & 개발자 권한과 상황에 따른 요청 버튼 제한 (최은종)
+	         if(role=='ROLE_DEVELOPER') {
+	            if(detail.isDnumExists>0){
+	               $(".col-3").show();
+	            } else if((detail.isDnumExists)<=0 || (detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+	               $(".col-3").hide();
+	            } 
+	         } else if(role=='ROLE_ADMIN'){
+	            if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+	               $(".col-3").hide();
+	            } else {
+	               $(".col-3").show();
+	            }         
+	         }
 
 
 			/* 개발완료 or 개발취소일 때 계획정보 */
@@ -171,10 +171,13 @@ function getDetail(dmndNo, srNo) {
 			// 파일
 			$("#SRDAttachFile").empty();
 			detail.dd.attachFile.forEach((value)=>{
+				console.log(value.fileSz/(1024 * 1024));
+				var fz = (value.fileSz/(1024 * 1024)).toFixed(1);
+				console.log(fz);
 				$("#SRDAttachFile").append(
 						"<a href='/file/download/'"+value.fileSn+"/>" +
 						"	<span class='glyphicon glyphicon-save' aria-hidden='true'></span>" +
-						"	<span>"+value.orgnlFileNm+"</span><span>"+value.fileSz+" Bytes</span>" +
+						"	<span style='margin-right: 20px;'>"+value.orgnlFileNm+"</span><span>"+ fz + " MB </span>" +
 						"</a>"
 				);
 			});

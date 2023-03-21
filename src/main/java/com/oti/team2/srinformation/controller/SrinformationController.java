@@ -23,6 +23,7 @@ import com.oti.team2.srdemand.dto.SrdemandDetail;
 import com.oti.team2.srdemand.service.ISrDemandService;
 import com.oti.team2.srinformation.dto.Dept;
 import com.oti.team2.srinformation.dto.Manager;
+import com.oti.team2.srinformation.dto.SrDmndRowNum;
 import com.oti.team2.srinformation.dto.SrInfoFilter;
 import com.oti.team2.srinformation.dto.SrTotal;
 import com.oti.team2.srinformation.dto.SrinformationList;
@@ -63,9 +64,10 @@ public class SrinformationController {
 	@GetMapping(value = "/list")
 	public String getList(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@ModelAttribute SrInfoFilter srInfoFilter, Authentication auth,
-			@RequestParam(required = true, name = "sort", defaultValue = "1") String sort,
-			@RequestParam(required = true, name = "by", defaultValue = "1") String by,
-			@RequestParam(required = true, name = "ey", defaultValue = "1") String ey) {
+			@RequestParam(required = false, name = "sort", defaultValue = "1") String sort,
+			@RequestParam(required = false, name = "by", defaultValue = "1") String by,
+			@RequestParam(required = false, name = "ey", defaultValue = "1") String ey,
+			@RequestParam(required = false, name = "hstryId") Integer hstryId) {
 		if (srInfoFilter.isMySrOnly()) {
 			srInfoFilter.setEmpId(auth.getName());
 		}
@@ -73,18 +75,47 @@ public class SrinformationController {
 		model.addAttribute("by", by);
 		model.addAttribute("ey", ey);
 		List<Prgrs> prgrs = progressService.getRrgrs();
-
+		log.info("sort" + sort);
+		log.info("by" + by);
+		log.info("ey" + ey);
+		log.info("srInfoFilter");
 		log.info(srInfoFilter);
-		
 		int totalRows = srinformationService.getTotalRow(page, srInfoFilter, auth.getAuthorities().stream().findFirst().get().toString());
 		Pager pager = new Pager(11, totalRows, page);
+		
+		/**************************/
+		SrDmndRowNum srDmndRowNum = null;
+		SrdemandDetail sd = null;
+		SrplanInformation sp = null;
+		if(hstryId != null) {
+			// 상세를 조회하는데 rownum이 같이 나온다.
+			log.info("histry id 있음");
+			srDmndRowNum = srinformationService.getRownumByHstryId(hstryId);
+			log.info("srDmndRowNum  : " + srDmndRowNum);
+			// rownum을 통해 속해있는 페이지를 가져온다.
+			int pn = pager.findPageNo(srDmndRowNum.getRn());
+			pager = new Pager(11, totalRows, pn);
+			log.info("pn  : " + pn);
+			log.info("histry id 있음  pager  :" + pager);
+			model.addAttribute("hstryId", srDmndRowNum.getRn());
+		}
+				
+		/**************************/
 		log.info(pager);
 		// log.info(totalRows);
 		if (totalRows != 0) {
 			List<SrinformationList> srlist = srinformationService.getList(pager, srInfoFilter, sort, by, ey, auth.getAuthorities().stream().findFirst().get().toString());
-			SrdemandDetail sd = srDemandService.getSrDemandDetail(srlist.get(0).getDmndNo());
-			SrplanInformation sp = srinformationService.getPlan(srlist.get(0).getDmndNo());
+			
+			if(hstryId != null) {
+				sd = srDemandService.getSrDemandDetail(srDmndRowNum.getDmndNo());
+				sp = srinformationService.getPlan(srDmndRowNum.getDmndNo());
+			} else {
+				sd = srDemandService.getSrDemandDetail(srlist.get(0).getDmndNo());
+				sp = srinformationService.getPlan(srlist.get(0).getDmndNo());				
+			}
+			
 			List<Dept> deptList = srinformationService.getDeptList();
+		
 			/*
 			 * log.info("sd 상세 : " + sd); log.info("진척목록: " + srlist); log.info("개발부서 목록: "
 			 * + deptList);

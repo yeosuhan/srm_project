@@ -41,7 +41,7 @@ font-size: 13px !important;
 									value="${board.bbsTtl}" /></td>
 						</c:otherwise>
 					</c:choose>
-					<td>${board.wrtNm}</td>
+					<td>관리자</td>
 					<td>${board.wrtYmd}</td>
 					<td class="text-center">${board.inqCnt}</td>
 
