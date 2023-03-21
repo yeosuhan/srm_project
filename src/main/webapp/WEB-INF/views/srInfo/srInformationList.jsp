@@ -24,25 +24,32 @@
 	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 
 <script>
-	
+   
 <%-- 모달 실행 --%>
-	$(document).on('click', '#addbtn', function(e) {
-		console.log("click event");
-		$('#addmodal').addClass('show');
-		document.body.style = `overflow: hidden`;
-	});
-	$(document).on('click', '#closebtn', function(e) {
-		console.log("click event");
-		$('#addmodal').removeClass('show');
-		document.body.style = `overflow: scroll`;
-	});
+   $(document).on('click', '#addbtn', function(e) {
+      console.log("click event");
+      $('#addmodal').addClass('show');
+      document.body.style = `overflow: hidden`;
+   });
+   $(document).on('click', '#closebtn', function(e) {
+      console.log("click event");
+      $('#addmodal').removeClass('show');
+      document.body.style = `overflow: scroll`;
+   });
 <%-- 히스토리id가 있는경우 탭을 열고 해당위치로 이동 --%>
-	<c:if test="${srInfoFilter.hstryId ne null}">
-	$(function() {
-		$("#srInfoHistoryTab").trigger("click");
-		$("#srInfoHistoryTab").focus();
-	});
-	</c:if>
+   <c:if test="${hstryId ne null}">
+  		console.log("history id 있습니다요 ~~~~~~~~~~~~~~~~~ ");
+  		var trId = "tr"+${hstryId};
+  		console.log(trId);
+  		 //$("#trId").trigger("click");
+  		 //$("#srDemandDetail").tab("hide");
+ 	      $("#srInfoDetailTab").trigger("click");
+  		 $("#srInfhistoryTab").trigger("click"); 
+  		 /* $("#srDemandDetail").css("display", "none");
+  		 $("#srInfoDetail").css("display", "show");
+  		 $("#srInfhistory").css("display", "show"); */
+
+   </c:if>
 </script>
 <style>
 .ui-datepicker-trigger {
@@ -175,7 +182,7 @@ table tbody td {
 							style="font-size: 12px; padding: 0px;">
 							<thead>
 								<tr>
-									<th style="width: 1px;">#</th>
+									<th style="width: 1px;"></th>
 									<th style="width: 1px;"></th>
 									<th>산출물구분</th>
 									<th>산출물명</th>
@@ -349,8 +356,7 @@ table tbody td {
 						<div id="sales-analytics">
 							<div class="card-block table-border-style">
 								<div class="table-responsive">
-									<table class="table table-hover text-center"
-										style="font-size: 12;">
+									<table class="table table-hover text-center">
 										<thead>
 											<tr>
 												<th style="width: 1px;"></th>
@@ -400,14 +406,14 @@ table tbody td {
 										<tbody>
 											<c:if test="${srlist ne null}">
 												<c:forEach var="srlist" items="${srlist}" varStatus="num">
-													<tr
+													<tr id="tr${pager.startRowNo + num.index}"
 														onclick="getDetail('${srlist.dmndNo}','${srlist.srNo}');">
 														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
 														<c:choose>
 															<c:when test="${fn:length(srlist.ttl) > 15}">
 																<td class="text-left"><c:out
-																		value="${fn:substring(srlist.ttl,0,10)}" />...</td>
+																		value="${fn:substring(srlist.ttl,0,14)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td class="text-left"><c:out value="${srlist.ttl}" /></td>
@@ -482,7 +488,7 @@ table tbody td {
 							<li class="nav-item"><a class="nav-link active"
 								data-toggle="tab" href="#srDemandDetail" role="tab">SR 요청 정보</a>
 								<div class="slide"></div></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							<li class="nav-item"><a class="nav-link" data-toggle="tab" id="srInfoDetailTab"
 								href="#srInfoDetail" role="tab">SR 처리 정보</a>
 								<div class="slide"></div></li>
 						</ul>
@@ -612,8 +618,10 @@ table tbody td {
 												<div>
 													<a href="<c:url value='/file/download/${f.fileSn}' />">
 														<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-														<span> ${f.orgnlFileNm} </span><span style="">
-															${f.fileSz} Bytes</span>
+														<span style="margin-right: 20px;"> ${f.orgnlFileNm}
+													</span> <span style=""> <fmt:formatNumber type="number"
+																value="${f.fileSz/(1024 * 1024)}" pattern="0.0" /> MB
+													</span>
 													</a>
 												</div>
 											</c:forEach>
@@ -651,7 +659,7 @@ table tbody td {
 										role="tab">SR 진척률</a>
 										<div class="slide"></div></li>
 									<li class="nav-item font-weight-bold" onclick="empHstry()"><a
-										class="nav-link" data-toggle="tab" href="#srInfhistory"
+										class="nav-link" data-toggle="tab" href="#srInfhistory" id="srInfhistoryTab"
 										role="tab">SR 히스토리</a>
 										<div class="slide"></div></li>
 								</ul>

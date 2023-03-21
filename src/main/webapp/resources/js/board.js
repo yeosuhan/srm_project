@@ -230,10 +230,13 @@ function updateNotice(bbsNo) {
 	});
 }
 
-function getNextNoticeList(url) {
+function getNextNoticeList(pnum) {
 	console.log(" 여기  getNextNoticeList");
+	console.log(pnum);
+	var url = "/board/list?type=notice&page=" + pnum + "&view=myportal";
+	console.log(url);
 	$.ajax({
-		url :"/board/list" + url + "&view=myportal",
+		url :url,
 		type : 'GET',
 		success : function(data) {
 			$("#noticeList").html(data);

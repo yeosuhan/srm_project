@@ -216,8 +216,8 @@ function goAccept(dmndNo) {
       contentType : 'application/json; charset=UTF-8',
       dataType : "json",
       success : function(res) {
-         alert(res.result);
-         location.reload();
+         //alert(res.result);
+    	 location.href="/srdemand/list";
       },
       error : function(error) {
          console.log(error);
@@ -248,8 +248,8 @@ function goDecline(dmndNo) {
          data : JSON.stringify(jsonData),
          contentType : "application/json; charset=UTF-8",
          success : function(res) {
-            alert(res.result);
-            location.reload();
+            //alert(res.result);
+        	location.href="/srdemand/list";
          },
          error : function(error) {
             console.log(error);

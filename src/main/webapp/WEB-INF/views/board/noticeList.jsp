@@ -61,7 +61,7 @@ font-size: 15px !important;
 								<div class="col col-3 px-0">
 									<label for="wrtrNm" style="margin-right: 10px;">작성자</label> <input
 										type="text" name="wrtrNm" id="keyWord"
-										value="${boardFilterDto.wrtrNm}">
+										value="관리자">
 								</div>
 
 								<div class="col col-2 px-0">
@@ -112,7 +112,7 @@ font-size: 15px !important;
 										</c:otherwise>
 									</c:choose> --%>
 									<td id="ttl" class="text-left" style="font-size: 15px;">${board.bbsTtl}</td>
-									<td style="font-size: 15px;">${board.wrtNm}</td>
+									<td style="font-size: 15px;">관리자</td>
 									<td style="font-size: 15px;">${board.wrtYmd}</td>
 									<td style="font-size: 15px;">${board.inqCnt}</td>
 
