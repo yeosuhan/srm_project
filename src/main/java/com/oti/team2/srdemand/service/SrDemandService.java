@@ -465,11 +465,11 @@ public class SrDemandService implements ISrDemandService {
 	 * @return 
 	 * */
 	@Override
-	public SrDmndRowNum getRownum(String dmndNo) {
-		return srDemandDao.selectRowNumByDmndNo(dmndNo);
+	public SrDmndRowNum getRownum(String dmndNo,String custId) {
+		return srDemandDao.selectRowNumByDmndNo(dmndNo,custId);
 	}
 	@Override
-	public SrDmndRowNum getRownum(int hstryId) {
-		return srDemandDao.selectRowNumByHstryId(hstryId);
+	public SrDmndRowNum getRownum(int hstryId , String custId) {
+		return srDemandDao.selectRowNumByHstryId(hstryId,custId);
 	}
 }

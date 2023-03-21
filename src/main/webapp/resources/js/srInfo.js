@@ -417,7 +417,7 @@ function updateProgress0() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -440,7 +440,7 @@ function updateProgress1() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -463,7 +463,7 @@ function updateProgress2() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -486,7 +486,7 @@ function updateProgress3() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -511,7 +511,7 @@ function updateProgress4() {
 			dmndNo:$("#SRDDmndNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -534,7 +534,7 @@ function updateProgress5() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -563,7 +563,7 @@ function planUpdate() {
 			rvwCn : $("#SRPlRvwCn").val()
 		},
 		success : function(res) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }

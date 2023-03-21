@@ -55,7 +55,6 @@
   		var trId = "tr"+${rownum};
   		console.log(trId);
   		$("#"+trId).trigger("click");
- 	    $("#srInfoDetailTab").trigger("click");
   		
    });
 

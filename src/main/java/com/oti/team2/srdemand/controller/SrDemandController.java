@@ -153,7 +153,7 @@ public class SrDemandController {
 			SrDmndRowNum srDmndRowNum = null;
 			// 기본 첫번째 상세 or 선택된 상세
 			if (dmndno != null) {
-				srDmndRowNum = srdemandService.getRownum(dmndno);
+				srDmndRowNum = srdemandService.getRownum(dmndno,memberId);
 				int pn = pager.findPageNo(srDmndRowNum.getRn());
 				pager=new Pager(10,totalRows, pn);
 				prgrsRt = progressService.getPrgrsRt(dmndno);
@@ -162,7 +162,7 @@ public class SrDemandController {
 				model.addAttribute("rownum", srDmndRowNum.getRn());
 			} 
 			if(hstryId != null) {
-				srDmndRowNum = srdemandService.getRownum(hstryId);
+				srDmndRowNum = srdemandService.getRownum(hstryId,memberId);
 				int pn = pager.findPageNo(srDmndRowNum.getRn());
 				pager = new Pager(10,totalRows,pn);
 				log.info("hs"+pager);
@@ -171,7 +171,7 @@ public class SrDemandController {
 			}
 			list = srdemandService.getSrDemandList(memberId, pager, sort, srFilterDto);
 			model.addAttribute("mySrDemandList", list);
-			if(dmndno == null ) {
+			if(dmndno == null&& hstryId ==null ) {
 				prgrsRt = progressService.getPrgrsRt(list.get(0).getDmndNo());
 				sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 			}

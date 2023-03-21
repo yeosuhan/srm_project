@@ -9,6 +9,7 @@ function getSrDemandDetail(dmNo) {
          $.ajax({
             url : "/srdemand/detail/" + dmNo,
             type : "GET",
+            async:false, //알림으로 히스토리 확인시 srno가 없어 목록을 불러오지 못함
             success : function(res) {
                $("#sddetail").html(res);
             }

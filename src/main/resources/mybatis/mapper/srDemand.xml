@@ -576,7 +576,7 @@
 		</if>
    </select>
    <!-- 행번호 조회 -->
-   <select id="selectRowNumByDmndNo" parameterType="String" resultType="srDmndRowNum">
+   <select id="selectRowNumByDmndNo" parameterType="map" resultType="srDmndRowNum">
    		SELECT  rn,  dmndNo
 		from(
 		    select rownum as rn, dmndNo
@@ -585,13 +585,14 @@
 		        select 
 		           DMND_NO AS dmndNo
 		      	FROM  SR_DEMAND 
+		      	WHERE CUST_ID = #{custId}
 		      	order by DMND_YMD DESC
 		     )        
 		 ) 
 	     WHERE dmndNo = #{dmndNo} 
    </select>
    <!-- 행번호 조회 -->
-   <select id="selectRowNumByHstryId" parameterType="int" resultType="srDmndRowNum">
+   <select id="selectRowNumByHstryId" parameterType="map" resultType="srDmndRowNum">
    		SELECT  rn,  dmndNo, srNo
 		 from
 		 (
@@ -602,7 +603,8 @@
 			          SI.DMND_NO AS dmndNo,
 			          SI.SR_NO AS srNo
 			      	FROM SR_INFORMATION SI, SR_DEMAND SD 
-			      	where si.dmnd_no(+) = sd.dmnd_no
+			      	where si.dmnd_no(+) = sd.dmnd_no and
+			      	CUST_ID = #{custId}
 			      	order by SD.DMND_YMD DESC
 			    )        
 		  ) a  , sr_information_history his
@@ -610,5 +612,9 @@
 	      and  his.sr_no = a.srNo  
    </select>
    
+   <!-- 요청 검토자 아이디 조회 -->
+	<select id="selectRvwrId" parameterType="String" resultType="String">
+		SELECT RVWR_ID as rvwrId FROM  SR_DEMAND WHERE DMND_NO = #{dmndNo}
+	</select>
    
 </mapper>

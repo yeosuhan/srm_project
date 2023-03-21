@@ -180,7 +180,14 @@ public interface ISrDemandDao {
 	 * @author 안한길
 	 * @return rownum
 	 * */
-	public SrDmndRowNum selectRowNumByDmndNo(@Param("dmndNo")String dmndNo);
+	public SrDmndRowNum selectRowNumByDmndNo(@Param("dmndNo")String dmndNo,@Param("custId")String custId);
 
-	public SrDmndRowNum selectRowNumByHstryId(@Param("hstryId")int hstryId);
+	public SrDmndRowNum selectRowNumByHstryId(@Param("hstryId")int hstryId,@Param("custId")String custId);
+	/*
+	 * 관리자에게 운영반영 알림을 보내기 위한 아이디 조회
+	 * @author 안한길
+	 * @parameter dmndNo
+	 * @return rvwrId
+	 * */
+	public String selectRvwrId(@Param("dmndNo")String dmNo);
 }
