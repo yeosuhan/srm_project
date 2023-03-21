@@ -151,8 +151,12 @@ function addResource(){
       success:function(result){
          //console.log(result);
          if(result!=0){
+        	if($("#resourceTableRow tr").length==0){
+        		location.reload();
+        	}
             $("#resourceTableRow").empty();
             getResourceTableRow();
+            
          }
       }
    });

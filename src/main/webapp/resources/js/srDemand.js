@@ -90,8 +90,10 @@ function addSr() {
 				processData: false, //프로세스 데이터 설정 : false 값을 해야 form data로 인식함
 		        contentType: false,
 				success : function(res) {
-					alert("요청을 성공적으로 등록했습니다.");
-					location.href="/srdemand/list";
+					showSuccessSraddAlert("요청을 성공적으로 등록했습니다.");
+					$("#sradd button").on("click",function(){
+						location.href="/srdemand/list";
+					});
 					$("#addmodal").removeClass("show");
 				}			
 			});			
