@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	getPlan();
 	var currentUrlForSort=window.location.href;
-	//파라미터 여부
+	// 파라미터 여부
 	if(currentUrlForSort.indexOf('?')!=-1 && currentUrlForSort.indexOf('?')!=currentUrlForSort.length-1){
 		
 		var indexOfFilter = currentUrlForSort.indexOf('&');
@@ -16,7 +16,7 @@ $(document).ready(function(){
 		if(currentUrlForSort.indexOf('ey')!=-1) {
 			currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('ey')-1);
 		}
-		//page파라미터와 다른 파라미터가 있는경우
+		// page파라미터와 다른 파라미터가 있는경우
 		if(indexOfFilter!=-1&&indexOfPage!=-1){
 			filter=currentUrlForSort.substring(indexOfFilter+1,currentUrlForSort.length);
 			
@@ -28,10 +28,10 @@ $(document).ready(function(){
 			
 			$(".sortBtnAscEy").attr("href",$(".sortBtnAscEy").attr("href")+"?"+filter+"&ey=ASC");
 			$(".sortBtnDescEy").attr("href",$(".sortBtnDescEy").attr("href")+"?"+filter+"&ey=DESC");
-		}else if(currentUrlForSort.indexOf('page')==-1){//파라미터가 page가 아닌경우
+		}else if(currentUrlForSort.indexOf('page')==-1){// 파라미터가 page가 아닌경우
 			indexOfFilter=currentUrlForSort.indexOf('?');
 			if(indexOfFilter==-1){
-				//파라미터가 sort밖에 없는경우
+				// 파라미터가 sort밖에 없는경우
 				$(".sortBtnAsc").attr("href","?sort=ASC");
 				$(".sortBtnDesc").attr("href","?sort=DESC");
 				
@@ -124,7 +124,7 @@ function getDetail(dmndNo, srNo) {
 				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
 				/* 버튼 */
 				$("#planBtn").hide();
-				/* 자원정보 버튼*/
+				/* 자원정보 버튼 */
 				$("#deleteSrResourceBtn").hide();
 				$("#addSrResourceBtn").hide();
 			} /* 개발중 */
@@ -143,7 +143,7 @@ function getDetail(dmndNo, srNo) {
 				$("#rvwCnDiv").append($("<textarea rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
 				/* 버튼 */
 				$("#planBtn").show();
-				/* 자원정보 버튼*/
+				/* 자원정보 버튼 */
 				$("#deleteSrResourceBtn").show();
 				$("#addSrResourceBtn").show();
 			}
@@ -167,7 +167,7 @@ function getDetail(dmndNo, srNo) {
 			$("#SRDFile").val(detail.dd.fileNm);
 			$("#dept").val(detail.pi.deptCd).prop("selected", true);
 			$("#SRDSttsNm").val(detail.dd.sttsNm);
-			//파일
+			// 파일
 			$("#SRDAttachFile").empty();
 			detail.dd.attachFile.forEach((value)=>{
 				$("#SRDAttachFile").append(
@@ -502,7 +502,7 @@ function updateProgress4() {
 			endYmd : endYmd,
 			prgrsId : prgrsId,
 			srNo : $("#SRPgSrNo").val(),
-			rcvrId:$("#SRDClientId").val(), /*반영 요청할 요청자 아이디*/
+			rcvrId:$("#SRDClientId").val(), /* 반영 요청할 요청자 아이디 */
 			dmndNo:$("#SRDDmndNo").val()
 		},
 		success : function(prgrs) {
