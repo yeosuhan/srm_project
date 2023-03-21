@@ -51,11 +51,11 @@ function searchDept(){
 					<div >
 						<form id="deptFilter" action="${pageContext.request.contextPath}/admin/department/list" onSubmit="return searchDept()">
 							<div class="form-group row">
-								<label class="col-sm-2 col-form-label text-right">부서명</label>
+								<label class="col-sm-2 col-form-label text-right font-weight-bold" style="font-size:14px;">부서명</label>
 								<div class="col-sm-3">
 									<input type="text" class="form-control" name="deptNm" value="${deptNm}">
 								</div>
-								<label class="col-sm-2 col-form-label text-right">부서
+								<label class="col-sm-2 col-form-label text-right font-weight-bold" style="font-size:14px;">부서
 									담당자명</label>
 								<div class="col-sm-3">
 									<input type="text" class="form-control" name="flnm" value="${flnm}">

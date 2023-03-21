@@ -46,6 +46,9 @@ label>img {
 .otiFsize {
    font-size: 15px !important;
 }
+label {
+	font-weight:bold;
+}
 </style>
 <body>
    <%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -55,7 +58,7 @@ label>img {
       <div class="row">
          <!-- *********** -->
          <c:if test="${member.memberType eq 'ROLE_CLIENT'}">
-            <div class="col-7">
+            <div class="col-8">
          </c:if>
          <c:if test="${member.memberType ne 'ROLE_CLIENT'}">
             <div class="col-12">
@@ -76,6 +79,7 @@ label>img {
                                        test="${member.fileData eq null}">
                                        <img id="defaultImage" src="/resources/oti_images/user.png"
                                           style="width: 230px; height: 230px; align-content: center;">
+                                          <span style="color: gray" id="addImg">프로필 사진을 등록해주세요.</span>
                                     </c:if> <c:if
                                        test="${member.fileData ne null and (member.memberType ne 'ROLE_CLIENT')}">
                                        <img id="defaultImage"
@@ -94,7 +98,7 @@ label>img {
                                  onchange="loadFile(this, '${member.memberId}')">
                            </form>
                         </div>
-                        <span style="color: gray" id="addImg">프로필 사진을 등록해주세요.</span>
+                        
                      </div>
                   </div>
                </div>
@@ -140,6 +144,7 @@ label>img {
                      <input   value="${member.addrDetail}" class="form-control"
                         type="text" name="addrDetail" placeholder="상세주소"> <span
                         class="form-bar"></span>
+                        <label class="float-label font-weight-bold" style="padding-top: 20px; font-weight:bold; font-size:15px;">상세 주소</label>
                   </div>
                   <c:if test="${member.memberType eq 'ROLE_CLIENT'}">
                      <div class="form-group form-default otiFsize row">
@@ -149,7 +154,7 @@ label>img {
 
                         <div class="btn-group dropright col-sm-4">
                            <a href="<c:url value='/institution/add'/>" type="button"
-                              class="btn btn-oti btn-sm ml-2"> 기관 등록 </a>
+                              class="btn btn-oti ml-2"> 기관 등록 </a>
                         </div>
                      </div>
                   </c:if>
@@ -165,47 +170,48 @@ label>img {
                      </div>
                   </c:if>
                </form>
-                  <button type="submit" form="myinfo" class="btn btn-sm btn-oti"
-                     style="margin-left: 350px;">저장</button>
+                  <button type="submit" form="myinfo" class="btn btn-oti"
+                     style=" width:100%;">저장</button>
             </div>
          </div>
       </div>
    </div>
    <c:if test="${member.memberType eq 'ROLE_CLIENT'}">
-      <div class="col-5">
+      <div class="col-4">
          <div class="card" style="height: 700px;">
             <div class="card-header" id="headerFirst">
                <h5 style="font-weight: bold;">나의 기관</h5>
             </div>
-            <div class="col-10 card-block otiFsize"
-               style="margin-top: 10px; padding: 50px;">
+            <div class="col-12 card-block otiFsize"
+               style="margin-top: 10px; padding: 30px;">
                <form method="post" action="<c:url value='/institution/update'/>"
                   id="myInstForm" class="form-material">
                   <div class="form-group form-default">
                      <input type="hidden" value="${inst.instCd}" name="instCd">
                      <input value="${inst.instNm}" type="text" name="InstNm"
                         class="form-control" required style="width: 70%"> <span
-                        class="form-bar"></span> <label class="float-label">기업명</label>
+                        class="form-bar"></span> <label class="float-label font-weight-bold"
+                        style="font-weight:bold; font-size:15px;">기업명</label>
                   </div>
-                  <div class="form-group form-default" style="padding-top: 20px;">
+                  <div class="form-group form-default" style="padding-top: 40px;">
                      <input value="${inst.instTelno}" type="text" name="InstTelno"
                         class="form-control" required="" style="width: 50%"> <span
-                        class="form-bar"></span> <label class="float-label"
-                        style="padding-top: 20px;">대표 번호</label>
+                        class="form-bar"></span> <label class="float-label font-weight-bold"
+                        style="padding-top: 40px; font-weight:bold; font-size:15px;">대표 번호</label>
                   </div>
-                  <div class="form-group form-default" style="padding-top: 20px;">
+                  <div class="form-group form-default" style="padding-top: 40px;">
                      <input type="text" name="InstAddr" id="address_kakao1" style="width: 100%"
                         class="form-control" required value="${inst.instAddr}">
-                     <label class="float-label" style="padding-top: 20px;">주소</label>
+                     <label class="float-label font-weight-bold" style="padding-top: 40px; font-weight:bold; font-size:15px;">주소</label>
                   </div>
-                  <div class="form-group form-default" style="padding-top: 20px;">
+                  <div class="form-group form-default" style="padding-top: 40px;">
                      <input value="${inst.instDetailAddr}" class="form-control"
-                        type="text" name="instDetailAddr" placeholder="상세주소">
-                       <label class="float-label" style="padding-top: 20px;">상세 주소</label>
+                        type="text" name="instDetailAddr">
+                       <label class="float-label font-weight-bold" style="padding-top: 40px; font-weight:bold; font-size:15px;">상세 주소</label>
                   </div>
                </form>
-               <div class="d-flex" style="padding-top: 108px;">
-                  <button type="submit" form="myInstForm" class="btn btn-sm btn-oti">수정</button>
+               <div class="d-flex" style="padding-top: 175px;">
+                  <button type="submit" form="myInstForm" class="btn btn-oti"style="width:100%;">수정</button>
                </div>
             </div>
          </div>
