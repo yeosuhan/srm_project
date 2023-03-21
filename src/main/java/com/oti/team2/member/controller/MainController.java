@@ -68,10 +68,10 @@ public class MainController {
 		noticeList = boardService.getBoardList("notice", null, nPager, null);
 
 		if (role.equals(Auth.ROLE_CLIENT.toString())) {
-			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 0, 1);
-			atotal = pager.getTotalRows();
+			pager = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 2, 1);
+			atotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 0, 1).getTotalRows();
 			rejTotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 1, 1).getTotalRows();
-			rtotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 2, 1).getTotalRows();
+			rtotal = pager.getTotalRows();
 			dtotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 3, 1).getTotalRows();
 			ttotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 4, 1).getTotalRows();
 			comtotal = srdemandService.getcountsByCustIdOrPicIdAndSttsCd(auth.getName(), null, 5, 1).getTotalRows();
@@ -87,7 +87,7 @@ public class MainController {
 			pager = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 3, 1);
 			srList = srdemandService.getMytodoSrListForDeveloper(auth.getName(), 3, pager);
 
-			atotal = pager.getTotalRows();
+			atotal = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 0, 1).getTotalRows();
 			rejTotal = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 1, 1).getTotalRows();
 			rtotal = srdemandService.getcountsByEmpIdAndSttsCd(auth.getName(), 2, 1).getTotalRows();
 			dtotal = pager.getTotalRows();

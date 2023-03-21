@@ -13,8 +13,7 @@
 	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 <script
 	src="${pageContext.request.contextPath}/resources/js/srDemandListHstry.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
+
 <script>
 	
 <%-- 모달 실행 --%>
@@ -275,12 +274,12 @@ table thead tr {
 												<th style="font-size: 15px;">요청 번호 <c:if
 														test="${sort eq 'DESC'}">
 														<a
-															href="${pageContext.request.contextPath}/admin/srdemand/list"
+															href="${pageContext.request.contextPath}/srdemand/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
 															style="color: #93344b; font-size: 24px;"></i></a>
 													</c:if> <c:if test="${sort eq 'ASC'}">
 														<a
-															href="${pageContext.request.contextPath}/admin/srdemand/list"
+															href="${pageContext.request.contextPath}/srdemand/list"
 															class="sortBtnDesc"><i class="fas fa-caret-up"
 															style="color: #93344b; font-size: 24px;"></i></a>
 													</c:if>
@@ -566,7 +565,7 @@ table thead tr {
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 모달 -->
-	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
+	
 	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />

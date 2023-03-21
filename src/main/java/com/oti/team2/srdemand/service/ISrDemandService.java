@@ -157,7 +157,7 @@ public interface ISrDemandService {
 	 * @authoe 안한길 
 	 * @return 
 	 * */
-	public SrDmndRowNum getRownum(String dmndNo);
+	public SrDmndRowNum getRownum(String dmndNo,String custId);
 
-	public SrDmndRowNum getRownum(int hstryId);
+	public SrDmndRowNum getRownum(int hstryId,String custId);
 }

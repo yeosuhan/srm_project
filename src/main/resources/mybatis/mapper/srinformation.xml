@@ -58,7 +58,7 @@
       AND
          SI.PIC_ID = #{srInfoFilter.empId}
       </if>
-      	 <if test="sort.equals('1') and by.equals('1') and ey.equals('1')">
+      	 <if test='sort == "1".toString() and by == "1".toString() and ey == "1".toString()'>
       	 order by SD.DMND_YMD DESC
       	 </if> 
          <if test="sort=='DESC'">
