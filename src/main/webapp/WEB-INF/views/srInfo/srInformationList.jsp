@@ -375,7 +375,7 @@ table tbody td {
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
 															class="sortBtnAscBy"><i class="fas fa-caret-down"
-															style="color: #782748; font-size: 24px;"></i></a>
+															style="color: #782748; font-size: 24px;"></i> </a>
 													</c:if> <c:if test="${by eq 'ASC'}">
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
@@ -627,7 +627,7 @@ table tbody td {
                                  </c:if>>
 											<button class="btn btn-oti btn-sm"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
-												data-target="#addHistoryModal" style="width:100%;">SR 변경요청</button>
+												data-target="#addHistoryModal">SR 변경요청</button>
 										</div>
 									</div>
 								</div>
@@ -968,3 +968,4 @@ table tbody td {
 	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 </body>
 </html>
+F

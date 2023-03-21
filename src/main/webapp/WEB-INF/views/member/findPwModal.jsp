@@ -26,8 +26,7 @@
 				<h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
 			</div>
 			<div class="modal-body">
-				<form class="form-material" id="findPswd"
-					action="<c:url value='/member/findPswd'/>" method="post">
+				<form class="form-material" id="findPswd">
 					<div class="form-group form-primary">
 						<input type="text" id="eml" name="eml" class="form-control"
 							required="" value=""> <span class="form-bar"></span> <label
@@ -47,8 +46,7 @@
 			</div>
 
 			<div class="modal-footer" align="center">
-				<button type="submit" form="findPswd" formmethod="post"
-					onclick="checkVal()" class="btn btn-oti">확인</button>
+				<button type="button" onclick="checkVal()" class="btn btn-oti">확인</button>
 			</div>
 		</div>
 	</div>

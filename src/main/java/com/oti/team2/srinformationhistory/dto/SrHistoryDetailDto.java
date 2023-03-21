@@ -16,7 +16,6 @@ public class SrHistoryDetailDto {
 	private String sysNm;
 	//private String deptCd;
 	private String hstryType;
-	private boolean delYn;
 	private String rqstrId;
 	private String flnm;
 	private String deptNm;

@@ -20,7 +20,6 @@ public class SrInformationHistory {
 	private Date chgEndYmd;*/
 	private String chgEndYmd;
 	private String hstryType;
-	private boolean delYn;
 	private String rqstrId;
 	private String flnm;
 }

@@ -196,3 +196,40 @@ $(document).ready(function() {
 	});
 
 });
+
+/* 유효성 체크 alert */
+function checkApprInfoVal() {
+	// 승인여부 체크 안하면 안넘어가게
+	if ($("input[name='hstryStts']:checked").length == 0) {
+		alert("승인여부를 다시 확인해주세요.");
+		return false;
+	}
+
+	const cYmd3 = document.querySelector('#AchgEndYmd');
+	console.log(cYmd3.value);
+	console.log(document.querySelector('#AchgEndYmd').value);
+
+	var now3 = Date.now();
+	var timeOff3 = new Date().getTimezoneOffset() * 60000;
+	var today3 = new Date(now3 - timeOff3).toISOString().split('T')[0];
+	console.log(today3);
+	// 완료일변경시 변경일자 지정 안하면 값이 넘어가는 것을 막기 + 오늘 이전의 날짜는 선택할 수 없게 제한하는 함수
+	if (cYmd3.value == null || cYmd3.value == "" || cYmd3.value < today3) {
+		console.log(cYmd3.value);
+		alert("변경될 완료일을 다시 확인해주세요.");
+		$('#AchgEndYmd').focus();
+		return false;
+	}
+
+	// 제목이나 사유 빈값이면 안넘어가게
+	const ttl3 = document.querySelector('#AhstryTtl');
+	const cn3 = document.querySelector('#AhstryCn');
+	if (ttl3.value == null || ttl3.value == "" || cn3.value == null
+			|| cn3.value == "") {
+		alert("미입력 칸이 있습니다. 모든 항목을 입력해주세요.");
+		return false;
+	}
+
+	return true;
+
+}
