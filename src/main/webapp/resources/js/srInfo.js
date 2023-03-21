@@ -1,6 +1,12 @@
 $(document).ready(function(){
 	getPlan();
 	var currentUrlForSort=window.location.href;
+	if(currentUrlForSort.indexOf('dmndNoToHstry')!=-1){
+		currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('dmndNoToHstry')-1);
+	}
+	if(currentUrlForSort.indexOf('hstryId')!=-1){
+		currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('hstryId')-1);
+	}
 	// 파라미터 여부
 	if(currentUrlForSort.indexOf('?')!=-1 && currentUrlForSort.indexOf('?')!=currentUrlForSort.length-1){
 		
@@ -16,6 +22,7 @@ $(document).ready(function(){
 		if(currentUrlForSort.indexOf('ey')!=-1) {
 			currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('ey')-1);
 		}
+		
 		// page파라미터와 다른 파라미터가 있는경우
 		if(indexOfFilter!=-1&&indexOfPage!=-1){
 			filter=currentUrlForSort.substring(indexOfFilter+1,currentUrlForSort.length);

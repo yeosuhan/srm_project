@@ -60,7 +60,7 @@ public class SrinformationService implements ISrinformationService {
 	 * @return sr진척 목록 조회
 	 */
 	@Override
-	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort,String role, String ey, String by) {
+	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort,String by, String ey, String role) {
 		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter, sort,role, ey,by);
 		return srlist;
 	}

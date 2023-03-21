@@ -8,8 +8,6 @@
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <script
 	src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 
 <script>
 	

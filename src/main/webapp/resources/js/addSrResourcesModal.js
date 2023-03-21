@@ -152,7 +152,7 @@ function addResource(){
          //console.log(result);
          if(result!=0){
         	if($("#resourceTableRow tr").length==0){
-        		location.reload();
+        		location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
         	}
             $("#resourceTableRow").empty();
             getResourceTableRow();
