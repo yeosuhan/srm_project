@@ -165,12 +165,13 @@ public class SrDemandController {
 				srDmndRowNum = srdemandService.getRownum(hstryId);
 				int pn = pager.findPageNo(srDmndRowNum.getRn());
 				pager = new Pager(10,totalRows,pn);
+				log.info("hs"+pager);
 				model.addAttribute("noHstry",false);
 				model.addAttribute("rownum", srDmndRowNum.getRn());
 			}
 			list = srdemandService.getSrDemandList(memberId, pager, sort, srFilterDto);
 			model.addAttribute("mySrDemandList", list);
-			if(dmndno == null && hstryId == null) {
+			if(dmndno == null ) {
 				prgrsRt = progressService.getPrgrsRt(list.get(0).getDmndNo());
 				sd = srdemandService.getSrDemandDetail(list.get(0).getDmndNo());
 			}
