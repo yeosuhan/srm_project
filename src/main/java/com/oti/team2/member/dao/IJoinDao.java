@@ -7,7 +7,7 @@ import com.oti.team2.member.dto.Join;
 
 public interface IJoinDao {
 
-	void insertJoin(@Param("join") Join join);
+	void insertMember(@Param("join") Join join);
 
 	Integer checkId(@Param("memberId") String memberId);
 

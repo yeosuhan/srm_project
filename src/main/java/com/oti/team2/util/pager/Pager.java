@@ -78,5 +78,12 @@ public class Pager {
 
 		return pager;
 	}
+	
+	public int findPageNo(int rn) {
+		int pn = 0;
+		
+		pn = (rn - 1) / 11 + 1;
+		return pn;
+	}
 
 }

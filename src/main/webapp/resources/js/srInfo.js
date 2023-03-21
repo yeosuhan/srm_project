@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	getPlan();
 	var currentUrlForSort=window.location.href;
-	//파라미터 여부
+	// 파라미터 여부
 	if(currentUrlForSort.indexOf('?')!=-1 && currentUrlForSort.indexOf('?')!=currentUrlForSort.length-1){
 		
 		var indexOfFilter = currentUrlForSort.indexOf('&');
@@ -16,7 +16,7 @@ $(document).ready(function(){
 		if(currentUrlForSort.indexOf('ey')!=-1) {
 			currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('ey')-1);
 		}
-		//page파라미터와 다른 파라미터가 있는경우
+		// page파라미터와 다른 파라미터가 있는경우
 		if(indexOfFilter!=-1&&indexOfPage!=-1){
 			filter=currentUrlForSort.substring(indexOfFilter+1,currentUrlForSort.length);
 			
@@ -28,10 +28,10 @@ $(document).ready(function(){
 			
 			$(".sortBtnAscEy").attr("href",$(".sortBtnAscEy").attr("href")+"?"+filter+"&ey=ASC");
 			$(".sortBtnDescEy").attr("href",$(".sortBtnDescEy").attr("href")+"?"+filter+"&ey=DESC");
-		}else if(currentUrlForSort.indexOf('page')==-1){//파라미터가 page가 아닌경우
+		}else if(currentUrlForSort.indexOf('page')==-1){// 파라미터가 page가 아닌경우
 			indexOfFilter=currentUrlForSort.indexOf('?');
 			if(indexOfFilter==-1){
-				//파라미터가 sort밖에 없는경우
+				// 파라미터가 sort밖에 없는경우
 				$(".sortBtnAsc").attr("href","?sort=ASC");
 				$(".sortBtnDesc").attr("href","?sort=DESC");
 				
@@ -92,20 +92,20 @@ function getDetail(dmndNo, srNo) {
 			
 			var role = detail.role;
 			
-			// 관리자 & 개발자 권한과 상황에 따른 요청 버튼 제한 (최은종)
-			if(role=='ROLE_DEVELOPER') {
-				if(detail.isDnumExists>0){
-					$(".col-3").show();
-				} else if((detail.isDnumExists)<=0 || (detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
-					$(".col-3").hide();
-				} 
-			} else if(role=='ROLE_ADMIN'){
-				if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
-					$(".col-3").hide();
-				} else {
-					$(".col-3").show();
-				}			
-			}
+	         // 관리자 & 개발자 권한과 상황에 따른 요청 버튼 제한 (최은종)
+	         if(role=='ROLE_DEVELOPER') {
+	            if(detail.isDnumExists>0){
+	               $(".col-3").show();
+	            } else if((detail.isDnumExists)<=0 || (detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+	               $(".col-3").hide();
+	            } 
+	         } else if(role=='ROLE_ADMIN'){
+	            if((detail.dd.sttsNm) =='개발완료' || (detail.dd.sttsNm) =='개발취소') {
+	               $(".col-3").hide();
+	            } else {
+	               $(".col-3").show();
+	            }         
+	         }
 
 
 			/* 개발완료 or 개발취소일 때 계획정보 */
@@ -125,7 +125,7 @@ function getDetail(dmndNo, srNo) {
 				$("#rvwCnDiv").append($("<textarea readonly rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
 				/* 버튼 */
 				$("#planBtn").hide();
-				/* 자원정보 버튼*/
+				/* 자원정보 버튼 */
 				$("#deleteSrResourceBtn").hide();
 				$("#addSrResourceBtn").hide();
 			} /* 개발중 */
@@ -144,7 +144,7 @@ function getDetail(dmndNo, srNo) {
 				$("#rvwCnDiv").append($("<textarea rows='5' cols='5' class='form-control' id='SRPlRvwCn'></textarea>"));
 				/* 버튼 */
 				$("#planBtn").show();
-				/* 자원정보 버튼*/
+				/* 자원정보 버튼 */
 				$("#deleteSrResourceBtn").show();
 				$("#addSrResourceBtn").show();
 			}
@@ -168,13 +168,16 @@ function getDetail(dmndNo, srNo) {
 			$("#SRDFile").val(detail.dd.fileNm);
 			$("#dept").val(detail.pi.deptCd).prop("selected", true);
 			$("#SRDSttsNm").val(detail.dd.sttsNm);
-			//파일
+			// 파일
 			$("#SRDAttachFile").empty();
 			detail.dd.attachFile.forEach((value)=>{
+				console.log(value.fileSz/(1024 * 1024));
+				var fz = (value.fileSz/(1024 * 1024)).toFixed(1);
+				console.log(fz);
 				$("#SRDAttachFile").append(
 						"<a href='/file/download/'"+value.fileSn+"/>" +
 						"	<span class='glyphicon glyphicon-save' aria-hidden='true'></span>" +
-						"	<span>"+value.orgnlFileNm+"</span><span>"+value.fileSz+" Bytes</span>" +
+						"	<span style='margin-right: 20px;'>"+value.orgnlFileNm+"</span><span>"+ fz + " MB </span>" +
 						"</a>"
 				);
 			});
@@ -306,6 +309,28 @@ function getProgress() {
 				console.log("개발완료");
 			}
 			for (var i = 0; i < Progress.length; i++) {
+				if(Progress[5].endYmd!=null && Progress[5].prgrsRt==100) {
+					console.log("나는 개발완료");
+					$("#delbtn").hide();
+					$("#addbtn").hide();
+					for(var j=0; j<6; j++) {
+						console.log("나는 진짜 개발완료");
+						$("#btn"+j).hide();
+						$("#SRPgBgngYmd"+j).remove();
+						$("#SRPgEndYmd"+j).remove();
+						$("#SRPgPrgrsRt"+j).remove();
+						$("#"+j+"bgngYmd").append($("<input type='text' readonly class='form-control' style='width:100px;margin:0 auto;' id='SRPgBgngYmd"+j+"'>"));
+						$("#"+j+"endYmd").append($("<input type='text' readonly class='form-control' style='width:100px; margin:0 auto;'id='SRPgEndYmd"+j+"'>"));
+						$("#"+j+"rt").append($("<input type='text' readonly class='form-control' id='SRPgPrgrsRt"+j+"'>"));
+						$("#SRPgBgngYmd" + j).val(Progress[j].bgngYmd);
+						$("#SRPgEndYmd" + j).val(Progress[j].endYmd);
+						$("#SRPgPrgrsRt" + j).val(Progress[j].prgrsRt);
+					}
+					i=i+5;
+					break;
+				}
+				$("#delbtn").show();
+				$("#addbtn").show();
 				if(Progress[i].endYmd==null || Progress[i].endYmd>=today) {
 					if((Progress[i].prgrsRt!=10) || (Progress[i].prgrsRt!=40) || (Progress[i].prgrsRt!=70) || (Progress[i].prgrsRt!=80)||(Progress[i].prgrsRt!=90)||(Progress[i].prgrsRt!=100)) {
 						$("#btn"+i).show();
@@ -367,13 +392,6 @@ function getProgress() {
 					$("#"+i+"bgngYmd").append($("<input type='text' readonly class='form-control' style='width:100px;margin:0 auto;' id='SRPgBgngYmd"+i+"'>"));
 					$("#SRPgBgngYmd" + i).val(Progress[i].bgngYmd);
 				}
-			}
-			if(Progress[5].endYmd<today) {
-				$("#delbtn").hide();
-				$("#addbtn").hide();
-			} else {
-				$("#delbtn").show();
-				$("#addbtn").show();
 			}
 		}
 	});
@@ -488,7 +506,7 @@ function updateProgress4() {
 			endYmd : endYmd,
 			prgrsId : prgrsId,
 			srNo : $("#SRPgSrNo").val(),
-			rcvrId:$("#SRDClientId").val(), /*반영 요청할 요청자 아이디*/
+			rcvrId:$("#SRDClientId").val(), /* 반영 요청할 요청자 아이디 */
 			dmndNo:$("#SRDDmndNo").val()
 		},
 		success : function(prgrs) {

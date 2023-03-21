@@ -1,6 +1,8 @@
 package com.oti.team2.member.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
@@ -83,7 +85,7 @@ public class MemberController {
 	 */
 	@PostMapping("/myinfo")
 	public String updateMember(Member member) {
-		log.info(member);
+		log.info("변경할 내정보" + member);
 		memberService.updateMember(member);
 		return "redirect:/member/myinfo";
 	}
@@ -91,6 +93,7 @@ public class MemberController {
 	/**
 	 * 
 	 * 멤버의 프로필 사진 조회
+	 * 
 	 * @author : 신정은
 	 * @param memberId
 	 * @return
@@ -101,8 +104,8 @@ public class MemberController {
 		log.info(memberId);
 		HttpHeaders headers = new HttpHeaders();
 		String mtypes[] = profileImg.getFileType().split("/");
-		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
-		
+		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));
+
 		return new ResponseEntity<byte[]>(profileImg.getFileData(), headers, HttpStatus.OK);
 	}
 
@@ -154,11 +157,14 @@ public class MemberController {
 	 * @return 로그인 폼
 	 * 
 	 */
+	@ResponseBody
 	@PostMapping("/findPswd")
-	public String getPswd(HttpServletRequest req, Model model, MemberDto memberDto,
+	public int getPswd(HttpServletRequest req, Model model, MemberDto memberDto,
 			@RequestParam(required = true, value = "eml") String eml,
 			@RequestParam(required = true, value = "telNo") String telNo) {
 		log.info("비번찾기 컨트롤러");
+		log.info("1:" + eml);
+		log.info("2:" + telNo);
 
 		// 매개변수로 사용할 dto에 뷰를 통해 받은 검증을 위한 이메일과 전화번호 담아서 보내기
 		memberDto.setEml(eml);
@@ -169,12 +175,11 @@ public class MemberController {
 		model.addAttribute("joinedMember", joinedMember);
 
 		if (joinedMember == null) {
-			// 회원정보가 없다면 비밀번호 찾기로 리다이렉트
+			// 회원정보가 없다면
 			log.info("회원정보 없음");
-			//return "Mismatch";
-			return "redirect:/loginForm";
+			return 0;
 		} else {
-			// 회원정보가 있다면 임시 비밀번호 생성s
+			// 회원정보가 있다면 임시 비밀번호 생성
 			log.info("회원정보 있음");
 			String randomPswd = UUID.randomUUID().toString().replaceAll("-", "");
 			randomPswd = randomPswd.substring(0, 10);
@@ -188,10 +193,13 @@ public class MemberController {
 			// 발신인 정보
 			String fromEmail = "otiteam2@gmail.com"; // 받는 사람 메일에 표시됨
 			String fromName = "오티아이"; // 발신인 이름
-			String title = "[OTI 오티아이] OTI-SRM 임시 비밀번호 입니다.";
-			String content = memberDto.getMemberId()
-					+ "님 안녕하세요. 로그인 후 비밀번호를 변경하여 사용 부탁드립니다. 본인이 새로운 비밀번호를 요청하지 않았다면 이 이메일은 무시해 주세요.";
-			content += "OTI-SRM 임시 비밀번호 : " + randomPswd;
+			String title = "[오티아이] OTI-SRM 임시 비밀번호 입니다.";
+			String content = memberDto.getMemberId() + " 님 안녕하세요.";
+			content += "<p class='card-text'>요청하신 임시 비밀번호 발급 서비스 입니다.</p>";
+			content += "<p class='card-text'>임시 비밀번호: " + randomPswd + "</p>";
+			content += "<p class='card-text'>로그인 후 비밀번호를 변경하여 사용하시길 바랍니다.</p>";
+			content += "<p class='card-text'>감사합니다.</p>";
+			content += "e-mail: otiteam2@gmail.com";
 
 			// 수신인 정보
 			String toEmail = memberDto.getEml();
@@ -208,17 +216,15 @@ public class MemberController {
 			} catch (Exception e) {
 				log.info("이메일 발송 실패: " + e);
 			}
-
-			// 회원정보가 있다면 로그인 폼으로 리턴
-			//return "Match";
-			return "redirect:/loginForm";
+			// 회원정보가 있다면
+			return 1;
 		}
-
 	}
-	
+
 	/**
 	 * 
-	 *  사진 조회
+	 * 사진 조회
+	 * 
 	 * @author : 신정은
 	 * @param memberId
 	 * @return
@@ -226,12 +232,12 @@ public class MemberController {
 	@GetMapping("/img/{memberId}")
 	public ResponseEntity<byte[]> getimg(@PathVariable String memberId) {
 		ProfileImg profileImg = memberService.getProfileImg(memberId);
-		log.info(" 영기 ~~~ " );
+		log.info(" 영기 ~~~ ");
 		log.info(memberId);
 		HttpHeaders headers = new HttpHeaders();
 		String mtypes[] = profileImg.getFileType().split("/");
-		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));			
-		
+		headers.setContentType(new MediaType(mtypes[0], mtypes[1]));
+
 		return new ResponseEntity<byte[]>(profileImg.getFileData(), headers, HttpStatus.OK);
 	}
 

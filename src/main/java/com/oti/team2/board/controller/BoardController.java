@@ -51,6 +51,7 @@ public class BoardController {
 		String memberId = auth.getName();
 		model.addAttribute("memberId", memberId);
 		log.info(memberId);
+		log.info(type);
 		log.info(boardFilterDto);
 		model.addAttribute("boardFilterDto",boardFilterDto);
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
@@ -94,12 +95,17 @@ public class BoardController {
 			model.addAttribute("board", board);
 		}
 		
-		if(view.equals("myportal")) {
+		if(view.equals("myportal") && type.equals("qna")) {
 			log.info("여기 ~~~~~~");
 			log.info(pager);
 			return "mytodo/qna";
 		}
-		if(type.equals("notice")) {
+		else if(view.equals("myportal") && type.equals("notice")) {
+			log.info("여기 ~~~~~~");
+			log.info(pager);
+			return "mytodo/notice";
+		}
+		else if(view.equals("board") && type.equals("notice")) {
 			log.info("notice ~~");
 			return "board/noticeList";
 		}

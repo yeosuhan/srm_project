@@ -3,9 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script
 	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
-<div class="card_body" style="font-size: 12px; padding-top: 20px;">
+<div class="card_body" style="font-size: 14px; padding-top: 20px;">
 	<div class="form-group row">
 		<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 		<div class="col col-sm-10">
@@ -122,10 +123,14 @@
 		<div class="col-sm-10">
 			<c:forEach var="f" items="${sd.attachFile}">
 				<div>
-					<a href="<c:url value='/file/download/${f.fileSn}' />"> <span
-						class="glyphicon glyphicon-save" aria-hidden="true"></span> <span>
-							${f.orgnlFileNm} </span>
-					</a> <span> Size : ${f.fileSz} Bytes</span>
+					<a href="<c:url value='/file/download/${f.fileSn}' />">
+					 <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 
+					 <span style="margin-right: 20px;"> ${f.orgnlFileNm} </span>
+					 <span style="">
+							<fmt:formatNumber type="number" value="${f.fileSz/(1024 * 1024)}"  pattern="0.0"/>
+					 		MB
+					 </span>
+					</a>
 				</div>
 			</c:forEach>
 		</div>

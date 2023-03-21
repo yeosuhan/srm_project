@@ -1,5 +1,6 @@
 package com.oti.team2.srinformationhistory.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,10 +116,12 @@ public class SrInformationHistoryController {
 	 * @author 최은종
 	 * @param SrInformationHistory 객체에 데이터를 입출력하기 위해 매개변수로 설정
 	 * @return 진척정보 페이지 리턴
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 * @see 개발자(히스토리 등록), 관리자(히스토리 등록&등록 요청에 대한 수락상태 업데이트)
 	 */
 	@PostMapping("/add")
-	public String addSrInformationHistory(SrInformationHistory srInformationHistory, Authentication auth) {
+	public String addSrInformationHistory(SrInformationHistory srInformationHistory, Authentication auth) throws IllegalStateException, IOException {
 		log.info("addSrInformationHistory 등록");
 
 		String role = auth.getAuthorities().stream().findFirst().get().toString();

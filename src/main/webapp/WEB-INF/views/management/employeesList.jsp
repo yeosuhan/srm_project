@@ -16,7 +16,8 @@
 <style>
 table, th, td {
 	text-align: center;
-	line-height: 35px;
+	line-height: normal;
+	font-size: 15px !important;
 }
 
 .form-group {
@@ -25,6 +26,7 @@ table, th, td {
 
 p {
 	margin: auto;
+	font-size: 15px;
 }
 
 #headerFirst {
@@ -33,6 +35,9 @@ p {
 
 .card .card-header {
 	background: linear-gradient(135deg, #360940 10%, #782748 100%);
+}
+* {
+font-size: 15px;
 }
 </style>
 </head>
@@ -45,7 +50,7 @@ p {
 			<!-- *********** -->
 			<%-- 사원목록  --%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card">
+				<div class="card"  style="height: 720px; font-size: 15px;">
 					<div class="card-header" id="headerFirst">
 						<h5 style="font-weight: bold;">사원 관리</h5>
 						<div class="card-header-right">
@@ -64,19 +69,19 @@ p {
 								action="${pageContext.request.contextPath}/admin/employee/list"
 								onsubmit="return search()">
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-label text-right"
+									<label class="col-sm-1 col-form-label text-right font-weight-bold"
 										style="font-size: 14;">이름</label>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" name="flnm"
 											value="${flnm}">
 									</div>
-									<label class="col-sm-1 col-form-label text-right"
+									<label class="col-sm-1 col-form-label text-right font-weight-bold"
 										style="font-size: 14;">부서</label>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" name="deptNm"
 											value="${deptNm}">
 									</div>
-									<label class="col-sm-1 col-form-label text-right"
+									<label class="col-sm-1 col-form-label text-right font-weight-bold"
 										style="font-size: 14;">직급</label>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" name="jbgdNm"
@@ -92,7 +97,7 @@ p {
 					</div>
 					<div class="card-block table-border-style p-0">
 						<div class="table-responsive">
-							<table class="table table-hover" style="font-size: 12;">
+							<table class="table table-hover" style="font-size: 15px;">
 								<thead>
 									<tr>
 										<th>번호</th>
