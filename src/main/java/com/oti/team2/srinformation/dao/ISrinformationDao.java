@@ -129,4 +129,9 @@ public interface ISrinformationDao {
 	 *  @author 신정은
 	 */
 	public SrDmndRowNum selectRowNumByHstryId(int hstryId);
+	/**
+	 * 요청반영 알림 클릭시 해당 진척상세가 몇번째 인지 조회하기 
+	 *  @author 안한길
+	 */
+	public SrDmndRowNum selectRowNumByDmndNo(String dmndNo);
 }

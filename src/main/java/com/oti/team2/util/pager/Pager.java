@@ -82,7 +82,7 @@ public class Pager {
 	public int findPageNo(int rn) {
 		int pn = 0;
 		
-		pn = (rn - 1) / 11 + 1;
+		pn = (rn - 1) / rowsPerPage + 1;
 		return pn;
 	}
 

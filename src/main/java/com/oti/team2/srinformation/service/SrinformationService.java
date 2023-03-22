@@ -60,7 +60,7 @@ public class SrinformationService implements ISrinformationService {
 	 * @return sr진척 목록 조회
 	 */
 	@Override
-	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort,String role, String ey, String by) {
+	public List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort,String by, String ey, String role) {
 		List<SrinformationList> srlist = srinformationDao.selectInfoAll(pager, srInfoFilter, sort,role, ey,by);
 		return srlist;
 	}
@@ -389,5 +389,13 @@ public class SrinformationService implements ISrinformationService {
 	 */
 	public SrDmndRowNum getRownumByHstryId(int hstryId) {
 		return srinformationDao.selectRowNumByHstryId(hstryId);
+	}
+	/**
+	 * 요청반영 알림 클릭시 해당 진척상세가 몇번째 인지 조회하기 
+	 *  @author 안한길
+	 */
+	@Override
+	public SrDmndRowNum getRownumByDmndNo(String dmndNo) {
+		return srinformationDao.selectRowNumByDmndNo(dmndNo);
 	}
 }

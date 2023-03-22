@@ -154,6 +154,7 @@
    </section>
    <%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
    <%-- 모달 --%>
+   <%@include file="/WEB-INF/views/alertModal/sraddAlert.jsp"%>
    <%@include file="/WEB-INF/views/member/findPwModal.jsp"%>
 </body>
 </html>

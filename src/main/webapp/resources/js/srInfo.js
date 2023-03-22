@@ -1,6 +1,12 @@
 $(document).ready(function(){
 	getPlan();
 	var currentUrlForSort=window.location.href;
+	if(currentUrlForSort.indexOf('dmndNoToHstry')!=-1){
+		currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('dmndNoToHstry')-1);
+	}
+	if(currentUrlForSort.indexOf('hstryId')!=-1){
+		currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('hstryId')-1);
+	}
 	// 파라미터 여부
 	if(currentUrlForSort.indexOf('?')!=-1 && currentUrlForSort.indexOf('?')!=currentUrlForSort.length-1){
 		
@@ -16,6 +22,7 @@ $(document).ready(function(){
 		if(currentUrlForSort.indexOf('ey')!=-1) {
 			currentUrlForSort=currentUrlForSort.substring(0,currentUrlForSort.indexOf('ey')-1);
 		}
+		
 		// page파라미터와 다른 파라미터가 있는경우
 		if(indexOfFilter!=-1&&indexOfPage!=-1){
 			filter=currentUrlForSort.substring(indexOfFilter+1,currentUrlForSort.length);
@@ -70,6 +77,7 @@ function getDetail(dmndNo, srNo) {
 	$.ajax({
 		url : '/srinformation/detail/' + dmndNo,
 		type : 'GET',
+		async: false, //알람을 통해 히스토리 탭으로 바로 넘어가는 경우 동기 방식으로
 		data : {
 			dmndNo : dmndNo
 		},
@@ -416,7 +424,7 @@ function updateProgress0() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -439,7 +447,7 @@ function updateProgress1() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -462,7 +470,7 @@ function updateProgress2() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -485,7 +493,7 @@ function updateProgress3() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -510,7 +518,7 @@ function updateProgress4() {
 			dmndNo:$("#SRDDmndNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -533,7 +541,7 @@ function updateProgress5() {
 			srNo : $("#SRPgSrNo").val()
 		},
 		success : function(prgrs) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }
@@ -562,7 +570,7 @@ function planUpdate() {
 			rvwCn : $("#SRPlRvwCn").val()
 		},
 		success : function(res) {
-			location.href = "/srinformation/list";
+			location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
 		}
 	});
 }

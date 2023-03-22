@@ -58,7 +58,7 @@
       AND
          SI.PIC_ID = #{srInfoFilter.empId}
       </if>
-      	 <if test="sort.equals('1') and by.equals('1') and ey.equals('1')">
+      	 <if test='sort == "1".toString() and by == "1".toString() and ey == "1".toString()'>
       	 order by SD.DMND_YMD DESC
       	 </if> 
          <if test="sort=='DESC'">
@@ -324,7 +324,7 @@
               where pic_id = #{picId})
       order by sr_no        
    </select>
-   
+   <!-- 행번호 조회 -->
    <select id="selectRowNumByHstryId" parameterType="int" resultType="srDmndRowNum">
    		SELECT  rn,  dmndNo, srNo
 		 from(
@@ -342,5 +342,22 @@
 		      ) a  , sr_information_history his
 	      WHERE his.HSTRY_ID = #{hstryId}
 	      and  his.sr_no = a.srNo  
+   </select>
+   <select id="selectRowNumByDmndNo" parameterType="String" resultType="srDmndRowNum">
+   		SELECT  rn,  dmndNo, srNo
+		 from
+		 (
+			    select rownum as rn, dmndNo, srNo
+			    from
+			    (
+			        select 
+			          SI.DMND_NO AS dmndNo,
+			          SI.SR_NO AS srNo
+			      	FROM SR_INFORMATION SI, SR_DEMAND SD 
+			      	where si.dmnd_no = sd.dmnd_no
+			      	order by SD.DMND_YMD DESC
+			    )        
+		  ) 
+		  WHERE dmndNo = #{dmndNo}
    </select>
 </mapper>

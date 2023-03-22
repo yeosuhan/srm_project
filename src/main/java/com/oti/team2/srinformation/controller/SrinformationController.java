@@ -64,10 +64,11 @@ public class SrinformationController {
 	@GetMapping(value = "/list")
 	public String getList(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@ModelAttribute SrInfoFilter srInfoFilter, Authentication auth,
-			@RequestParam(required = false, name = "sort", defaultValue = "1") String sort,
-			@RequestParam(required = false, name = "by", defaultValue = "1") String by,
-			@RequestParam(required = false, name = "ey", defaultValue = "1") String ey,
-			@RequestParam(required = false, name = "hstryId") Integer hstryId) {
+			@RequestParam(required = false, name = "sort",defaultValue = "1") String sort,
+			@RequestParam(required = false, name = "by",defaultValue = "1") String by,
+			@RequestParam(required = false, name = "ey",defaultValue = "1") String ey,
+			@RequestParam(required = false, name = "hstryId") Integer hstryId,
+			@RequestParam(required = false, name = "dmndNoToHstry") String dmndNoToHstry) {
 		if (srInfoFilter.isMySrOnly()) {
 			srInfoFilter.setEmpId(auth.getName());
 		}
@@ -98,6 +99,17 @@ public class SrinformationController {
 			log.info("pn  : " + pn);
 			log.info("histry id 있음  pager  :" + pager);
 			model.addAttribute("hstryId", srDmndRowNum.getRn());
+		}
+		if(dmndNoToHstry != null) {
+			log.info(dmndNoToHstry);
+			srDmndRowNum = srinformationService.getRownumByDmndNo(dmndNoToHstry);
+			log.info("srDmndRowNum  : " + srDmndRowNum);
+			// rownum을 통해 속해있는 페이지를 가져온다.
+			int pn = pager.findPageNo(srDmndRowNum.getRn());
+			pager = new Pager(11, totalRows, pn);
+			log.info("pn  : " + pn);
+			log.info("dmndNo 있음  pager  :" + pager);
+			model.addAttribute("rownum", srDmndRowNum.getRn());
 		}
 				
 		/**************************/

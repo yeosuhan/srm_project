@@ -13,8 +13,7 @@
 	href="${pageContext.request.contextPath}/resources/css/hstryPager.css">
 <script
 	src="${pageContext.request.contextPath}/resources/js/srDemandListHstry.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
+
 <script>
 	
 <%-- 모달 실행 --%>
@@ -28,11 +27,18 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-<%-- 히스토리id가 주어질경우 히스토리 탭 열기 --%>
-	<c:if test="${srFilterDto.hstryId ne null}">
-	$(function() {
-		$("#srHistoryTab").trigger("click");
+<%-- rownu이 주어질경우 히스토리 탭 열기 --%>
+	<c:if test="${rownum ne null}">
+	$(function(){
+		   
+			var trId = "tr"+${rownum};
+			console.log(trId);
+			$("#"+trId).trigger("click");
+			<c:if test="${noHstry ne true}">
+				$("#srHistoryTab").trigger("click"); 
+			</c:if>
 	});
+	
 	</c:if>
 </script>
 
@@ -246,8 +252,8 @@ table thead tr {
 					<div class="card-header">
 						<h5>SR 요청 목록</h5>
 						<button type="submit" class="btn-sm btn-oti" form="srSearchForm"
-									onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
-									style="float: right; margin-right: 50px;">엑셀 다운로드</button>
+							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
+							style="float: right; margin-right: 50px;">엑셀 다운로드</button>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -267,20 +273,18 @@ table thead tr {
 												<th style="width: 1px;"></th>
 												<th style="font-size: 15px;">요청 번호 <c:if
 														test="${sort eq 'DESC'}">
-														<a
-															href="${pageContext.request.contextPath}/admin/srdemand/list"
+														<a href="${pageContext.request.contextPath}/srdemand/list"
 															class="sortBtnAsc"><i class="fas fa-caret-down"
 															style="color: #93344b; font-size: 24px;"></i></a>
 													</c:if> <c:if test="${sort eq 'ASC'}">
-														<a
-															href="${pageContext.request.contextPath}/admin/srdemand/list"
+														<a href="${pageContext.request.contextPath}/srdemand/list"
 															class="sortBtnDesc"><i class="fas fa-caret-up"
 															style="color: #93344b; font-size: 24px;"></i></a>
 													</c:if>
 												</th>
 												<th class="text-left" style="font-size: 15px;">제목</th>
 												<th class="text-left" style="font-size: 15px;">관련시스템</th>
-												<th class="text-left"style="font-size: 15px;">소속</th>
+												<th class="text-left" style="font-size: 15px;">소속</th>
 												<th style="font-size: 15px;">진행상태</th>
 												<th style="font-size: 15px;">요청일</th>
 												<th style="font-size: 15px;">완료예정일</th>
@@ -290,7 +294,8 @@ table thead tr {
 											<c:if test="${mySrDemandList ne null}">
 												<c:forEach var="srDemand" items="${mySrDemandList}"
 													varStatus="status">
-													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')"
+														id="tr${pager.startRowNo + status.index}">
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
@@ -322,7 +327,8 @@ table thead tr {
 																<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
 															</c:if></td>
 														<td style="font-size: 13px;">${srDemand.dmndYmd}</td>
-														<td style="font-size: 13px;"><c:if test="${(srDemand.sttsNm) eq '개발취소'}">
+														<td style="font-size: 13px;"><c:if
+																test="${(srDemand.sttsNm) eq '개발취소'}">
 															-</c:if> <c:if test="${(srDemand.sttsNm) ne '개발취소'}">
 																${srDemand.endYmd}
 															</c:if></td>
@@ -359,8 +365,8 @@ table thead tr {
 							id="srDmndDetailTab">SR요청 상세정보</a>
 							<div class="slide"></div></li>
 						<li class="nav-item" onclick="userHstry()"><a
-							class="nav-link" data-toggle="tab" href="#srHistory" role="tab">SR
-								히스토리</a>
+							id="srHistoryTab" class="nav-link" data-toggle="tab"
+							href="#srHistory" role="tab">SR 히스토리</a>
 							<div class="slide"></div></li>
 					</ul>
 
@@ -373,8 +379,7 @@ table thead tr {
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 										<div class="col col-sm-10">
-											<div id="dmndNo"
-												style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
+											<div id="dmndNo" style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
 										</div>
 									</div>
 									<hr />
@@ -514,10 +519,11 @@ table thead tr {
 													onclick="deleteSr('${sd.dmndNo}')">삭제</div>
 											</div>
 										</c:if>
-										<c:if test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
+										<c:if
+											test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
 											<div class="col">
 												<div class="btn btn-sm btn-oti cancle" onclick="endSr()"
-													style="width:100%;">반영요청</div>
+													style="width: 100%;">반영요청</div>
 											</div>
 										</c:if>
 									</div>
@@ -559,7 +565,6 @@ table thead tr {
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 모달 -->
-	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
 	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
