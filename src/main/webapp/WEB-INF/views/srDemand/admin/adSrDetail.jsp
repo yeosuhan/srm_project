@@ -172,11 +172,11 @@
 	<div class="row" id="adminButtonDiv">
 		<c:if test="${sd.sttsCd eq 0}">
 			<div class="col" style="text-align: right">
-				<div id="srAccept" style="float: right;"
-					class="btn btn-sm btn-oti center"
+				<div id="srAccept" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px"
+					class="btn btn-sm btn-info"
 					onclick="goAccept('${sd.dmndNo}')">승인</div>
-				<div id="srDecline" style="float: right; margin-right: 5px;"
-					class="btn btn-sm btn-oti cancle"
+				<div id="srDecline" style="float: right; margin-right: 5px;font-weight: bold;font-size: 20px"
+					class="btn btn-sm btn-danger"
 					onclick="goDecline('${sd.dmndNo}')">반려</div>
 			</div>
 		</c:if>

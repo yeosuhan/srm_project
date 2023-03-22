@@ -14,7 +14,7 @@
 <div class="modal fade" id="approvalHistoryModal">
 	<div class="modal-body modal-dialog modal-lg" style="height: 600px;">
 		<div class="m_head ">
-			<div class="modal_title" style="color: white">SR진행정보 변경요청 상세</div>
+			<div class="modal_title" style="color: white; font-weight: bold;font-size: 20px">SR진행정보 변경요청 상세</div>
 		</div>
 		<div class="m_body bg-light">
 			<form id="approvalHistoryForm" action="<c:url value='/history/add'/>" onsubmit="return checkApprVal()">

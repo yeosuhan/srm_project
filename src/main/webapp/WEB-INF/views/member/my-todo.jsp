@@ -125,77 +125,77 @@
                   <ul class="nav card-header-pills nav-tabs md-tabs" role="tablist">
                      <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <li class="nav-item btn"><div
-                              class="nav-link sttsCd0 active" onclick="moveTab(0)">
-                              요청<span class="badge badge-otidanger">${atotal}</span>
+                              class="nav-link sttsCd0 active font-weight-bold" style="font-size:20px;" onclick="moveTab(0)">
+                              요청<span class="badge badge-otidanger"style="font-size:15px;">${atotal}</span>
                            </div>
                            <div class="slide"></div></li>
-                        <li class="nav-item btn"><div class="nav-link sttsCd1"
+                        <li class="nav-item btn"><div class="nav-link sttsCd1 font-weight-bold" style="font-size:20px;"
                               onclick="moveTab(1)">
-                              반려 <span class="badge badge-otitodo">${rejTotal}</span>
+                              반려 <span class="badge badge-otitodo"style="font-size:15px;">${rejTotal}</span>
                            </div>
                            <div class="slide"></div></li>
-                        <li class="nav-item btn"><div class="nav-link sttsCd2"
+                        <li class="nav-item btn"><div class="nav-link sttsCd2 font-weight-bold" style="font-size:20px;"
                               onclick="moveTab(2)">
-                              접수 <span class="badge badge-otitodo">${rtotal}</span>
+                              접수 <span class="badge badge-otitodo"style="font-size:15px;">${rtotal}</span>
                            </div>
                            <div class="slide"></div></li>
                         <li class="nav-item btn ">
-                           <div class="nav-link sttsCd3" onclick="moveTab(3)">
-                              개발 중 <span class="badge badge-otitodo">${dtotal}</span>
+                           <div class="nav-link sttsCd3 font-weight-bold" style="font-size:20px;" onclick="moveTab(3)">
+                              개발 중 <span class="badge badge-otitodo"style="font-size:15px;">${dtotal}</span>
                            </div>
                            <div class="slide"></div>
                         </li>
                      </sec:authorize>
                      <sec:authorize access="hasRole('ROLE_DEVELOPER')">
                         <li class="nav-item btn active">
-                           <div class="nav-link sttsCd3 active" onclick="moveTab(3)">
-                              개발 중 <span class="badge badge-danger">${dtotal}</span>
+                           <div class="nav-link sttsCd3 active font-weight-bold" style="font-size:20px;" onclick="moveTab(3)">
+                              개발 중 <span class="badge badge-danger"style="font-size:15px;">${dtotal}</span>
                            </div>
                            <div class="slide"></div>
                         </li>
                      </sec:authorize>
 
                      <sec:authorize access="hasRole('ROLE_CLIENT')">
-                        <li class="nav-item btn"><div class="nav-link sttsCd0"
+                        <li class="nav-item btn"><div class="nav-link sttsCd0 font-weight-bold" style="font-size:20px;"
                               onclick="moveTab(0)">
-                              요청<span class="badge badge-otitodo">${atotal}</span>
+                              요청<span class="badge badge-otitodo" style="font-size:15px;">${atotal}</span>
                            </div>
                            <div class="slide"></div></li>
-                        <li class="nav-item btn"><div class="nav-link sttsCd1"
+                        <li class="nav-item btn"><div class="nav-link sttsCd1 font-weight-bold" style="font-size:20px;"
                               onclick="moveTab(1)">
-                              반려 <span class="badge badge-otitodo">${rejTotal}</span>
+                              반려 <span class="badge badge-otitodo"style="font-size:15px;">${rejTotal}</span>
                            </div>
                            <div class="slide"></div></li>
                         <li class="nav-item btn"><div
-                              class="nav-link sttsCd2 active" onclick="moveTab(2)">
-                              접수 <span class="badge badge-otidanger">${rtotal}</span>
+                              class="nav-link sttsCd2 active font-weight-bold" style="font-size:20px;" onclick="moveTab(2)">
+                              접수 <span class="badge badge-otidanger"style="font-size:15px;">${rtotal}</span>
                            </div>
                            <div class="slide"></div></li>
                         <li class="nav-item btn">
-                           <div class="nav-link sttsCd3" onclick="moveTab(3)">
-                              개발 중 <span class="badge badge-otitodo">${dtotal}</span>
+                           <div class="nav-link sttsCd3 font-weight-bold" style="font-size:20px;" onclick="moveTab(3)">
+                              개발 중 <span class="badge badge-otitodo"style="font-size:15px;">${dtotal}</span>
                            </div>
                            <div class="slide"></div>
                         </li>
                      </sec:authorize>
-                     <li class="nav-item btn"><div class="nav-link sttsCd4"
+                     <li class="nav-item btn"><div class="nav-link sttsCd4 font-weight-bold" style="font-size:20px;"
                            onclick="moveTab(4)">
-                           테스트 <span class="badge badge-otitodo">${ttotal}</span>
+                           테스트 <span class="badge badge-otitodo"style="font-size:15px;">${ttotal}</span>
                         </div>
                         <div class="slide"></div></li>
-                     <li class="nav-item btn"><div class="nav-link sttsCd5"
+                     <li class="nav-item btn"><div class="nav-link sttsCd5 font-weight-bold" style="font-size:20px;"
                            onclick="moveTab(5)">
-                           개발완료 <span class="badge badge-otitodo">${comtotal}</span>
+                           개발완료 <span class="badge badge-otitodo"style="font-size:15px;">${comtotal}</span>
                         </div>
                         <div class="slide"></div></li>
-                     <li class="nav-item btn"><div class="nav-link sttsCd6"
+                     <li class="nav-item btn"><div class="nav-link sttsCd6 font-weight-bold" style="font-size:20px;"
                            onclick="moveTab(6)">
-                           개발취소 <span class="badge badge-otitodo">${cantotal}</span>
+                           개발취소 <span class="badge badge-otitodo"style="font-size:15px;">${cantotal}</span>
                         </div>
                         <div class="slide"></div></li>
-                     <li class="nav-item btn"><div class="nav-link hstry"
+                     <li class="nav-item btn"><div class="nav-link hstry font-weight-bold" style="font-size:20px;"
                            onclick="moveHstryTab()">
-                           히스토리<span class="badge badge-otitodo">${histotal}</span>
+                           히스토리<span class="badge badge-otitodo"style="font-size:15px;">${histotal}</span>
                         </div>
                         <div class="slide"></div></li>
                   </ul>
@@ -237,7 +237,7 @@
          <sec:authorize access="hasRole('ROLE_CLIENT')">
             <div class="card col-lg-4" style="padding:0px;">
                <div class="card-header">
-                  <h5 class="card-header-text">나의 요청 현황</h5>
+                  <h5 class="card-header-text" style="font-size:20px;font-weight:bold">나의 요청 현황</h5>
                </div>
                <div class="card-body">
                   <canvas id="myChart" height="230"></canvas>

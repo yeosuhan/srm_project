@@ -18,7 +18,7 @@
 <div class="modal fade" id="modifyHistoryModal">
 	<div class="modal-body modal-dialog modal-lg" style="height: 600px;">
 		<div class="m_head ">
-			<div class="modal_title" style="color: white">진척정보 변경요청 수정</div>
+			<div class="modal_title" style="color: white; font-weight: bold;font-size: 20px">진척정보 변경요청 수정</div>
 		</div>
 		<div class="m_body bg-light modifyDiv">
 			<form id="historyModifyForm" method="post"
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<div id="footModiDiv" class="pt-3" align="center">
-					<button type="submit" class="btn btn-oti save center">확인</button>
+					<button type="submit" class="btn btn-info center" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px">확인</button>
 				</div>
 			</form>
 

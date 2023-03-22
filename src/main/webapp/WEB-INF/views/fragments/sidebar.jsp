@@ -67,7 +67,7 @@
 							style="color: #F2EBE5; margin-top: 30px">
 							<div align="center" class="text-center">
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
-									<label class="badge badge-oti" style="position: static;">관리자</label>
+									<label class="badge badge-oti font-weight-bold"style="position: static;font-size:15px;">관리자</label>
 								</sec:authorize>
 								<sec:authorize access="hasRole('ROLE_DEVELOPER')">
 									<label class="badge badge-oti" style="position: static;">개발자</label>
@@ -77,12 +77,12 @@
 								</sec:authorize>
 
 								<sec:authorize access="isAuthenticated()">
-									<b><sec:authentication property="principal.flnm" /> 님</b>
+									<b class="font-weight-bold" style="font-size:20px;"><sec:authentication property="principal.flnm" /> 님</b>
 								</sec:authorize>
 							</div>
 						</div>
 					</div>
-					<div class="pcoded-navigation-label"
+					<div class="pcoded-navigation-label " style="font-size:20px;font-weight: bold;"
 						data-i18n="nav.category.navigation" menu-title-theme="theme1">MY
 						PORTAL</div>
 					<ul class="pcoded-item pcoded-left-item" item-border="true"
@@ -90,12 +90,12 @@
 						<li class=""><a
 							href="${pageContext.request.contextPath}/myportal"
 							class="waves-effect waves-dark"> <span class="pcoded-micon"><i
-									class="ti-home pt-1"></i><b>D</b></span> <span class="pcoded-mtext"
+									class="ti-home pt-1"></i><b>D</b></span> <span class="pcoded-mtext font-weight-bold" style="font-size:15px;"
 								data-i18n="nav.dash.main">나의 할 일</span> <span
 								class="pcoded-mcaret"></span>
 						</a></li>
 					</ul>
-					<div class="pcoded-navigation-label" style="font-weight: bold;"
+					<div class="pcoded-navigation-label " style="font-size:20px;font-weight: bold;"
 						data-i18n="nav.category.forms" menu-title-theme="theme1">회원정보
 						관리</div>
 					<ul class="pcoded-item pcoded-left-item" item-border="true"
@@ -103,12 +103,12 @@
 						<li class=""><a
 							href="${pageContext.request.contextPath}/member/myinfo"
 							class="waves-effect waves-dark"> <span class="pcoded-micon"><i
-									class="ti-user pt-1"></i><b>FC</b></span> <span class="pcoded-mtext"
+									class="ti-user pt-1"></i><b>FC</b></span> <span class="pcoded-mtext font-weight-bold" style="font-size:15px;"
 								data-i18n="nav.form-components.main">내 정보 관리</span> <span
 								class="pcoded-mcaret"></span>
 						</a></li>
 					</ul>
-					<div class="pcoded-navigation-label" style="font-weight: bold;"
+					<div class="pcoded-navigation-label " style="font-size:20px;font-weight: bold;"
 						data-i18n="nav.category.navigation" menu-title-theme="theme1">SR
 						관리</div>
 					<ul class="pcoded-item pcoded-left-item" item-border="true"
@@ -118,7 +118,7 @@
 								href="${pageContext.request.contextPath}/srdemand/list"
 								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 										class="far fa-file-alt pt-1"></i><b>D</b></span> <span
-									class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
+									class="pcoded-mtext font-weight-bold" style="font-size:15px;" data-i18n="nav.dash.main">SR 요청 관리</span>
 									<span class="pcoded-mcaret"></span>
 							</a></li>
 						</sec:authorize>
@@ -127,7 +127,7 @@
 								href="${pageContext.request.contextPath}/admin/srdemand/list"
 								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 										class="far fa-file-alt pt-1"></i><b>D</b></span> <span
-									class="pcoded-mtext" data-i18n="nav.dash.main">SR 요청 관리</span>
+									class="pcoded-mtext font-weight-bold" style="font-size:15px;"data-i18n="nav.dash.main">SR 요청 관리</span>
 									<span class="pcoded-mcaret"></span>
 							</a></li>
 						</sec:authorize>
@@ -137,12 +137,12 @@
 								href="${pageContext.request.contextPath}/srinformation/list"
 								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 										class="fas fa-file-alt pt-1"></i><b>FC</b></span> <span
-									class="pcoded-mtext" data-i18n="nav.form-components.main">SR
+									class="pcoded-mtext font-weight-bold" style="font-size:15px;" data-i18n="nav.form-components.main">SR
 										진척 관리</span> <span class="pcoded-mcaret"></span>
 							</a></li>
 						</sec:authorize>
 					</ul>
-					<div class="pcoded-navigation-label" style="font-weight: bold;"
+					<div class="pcoded-navigation-label " style="font-size:20px;font-weight: bold;" style="font-weight: bold;"
 						data-i18n="nav.category.forms" menu-title-theme="theme1">게시판</div>
 					<ul class="pcoded-item pcoded-left-item" item-border="true"
 						item-border-style="none" subitem-border="true">
@@ -150,19 +150,19 @@
 							href="${pageContext.request.contextPath}/board/list?type=notice"
 							class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 									class="fas fa-bullhorn pt-1"></i><b>FC</b></span> <span
-								class="pcoded-mtext" data-i18n="nav.form-components.main">공지사항</span>
+								class="pcoded-mtext font-weight-bold" style="font-size:15px;" data-i18n="nav.form-components.main">공지사항</span>
 								<span class="pcoded-mcaret"></span>
 						</a></li>
 						<li class=""><a
 							href="${pageContext.request.contextPath}/board/list?type=qna"
 							class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 									class="far fa-comments pt-1"></i><b>FC</b></span> <span
-								class="pcoded-mtext" data-i18n="nav.form-components.main">문의사항</span>
+								class="pcoded-mtext font-weight-bold" style="font-size:15px;" data-i18n="nav.form-components.main">문의사항</span>
 								<span class="pcoded-mcaret"></span>
 						</a></li>
 					</ul>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
-						<div class="pcoded-navigation-label" style="font-weight: bold;"
+						<div class="pcoded-navigation-label" style="font-size:20px;font-weight: bold;"
 							data-i18n="nav.category.navigation" menu-title-theme="theme1">회원
 							관리</div>
 						<ul class="pcoded-item pcoded-left-item" item-border="true"
@@ -171,21 +171,21 @@
 								href="${pageContext.request.contextPath}/admin/client/list"
 								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 										class="far fa-id-card pt-1"></i><b>D</b></span> <span
-									class="pcoded-mtext" data-i18n="nav.dash.main">고객 관리</span> <span
+									class="pcoded-mtext font-weight-bold" style="font-size:15px;" data-i18n="nav.dash.main">고객 관리</span> <span
 									class="pcoded-mcaret"></span>
 							</a></li>
 							<li class=""><a
 								href="${pageContext.request.contextPath}/admin/employee/list"
 								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 										class="fas fa-id-card pt-1"></i><b>D</b></span> <span
-									class="pcoded-mtext" data-i18n="nav.dash.main">사원 관리</span> <span
+									class="pcoded-mtext font-weight-bold" style="font-size:15px;" data-i18n="nav.dash.main">사원 관리</span> <span
 									class="pcoded-mcaret"></span>
 							</a></li>
 							<li class=""><a
 								href="${pageContext.request.contextPath}/admin/department/list"
 								class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 										class="fas fa-sitemap pt-1"></i><b>FC</b></span> <span
-									class="pcoded-mtext" data-i18n="nav.dash.main">부서 관리</span> <span
+									class="pcoded-mtext font-weight-bold" style="font-size:15px;" data-i18n="nav.dash.main">부서 관리</span> <span
 									class="pcoded-mcaret"></span>
 							</a></li>
 						</ul>
