@@ -251,9 +251,13 @@ table thead tr {
 				<div class="card">
 					<div class="card-header">
 						<h5>SR 요청 목록</h5>
-						<button type="submit" class="btn-sm btn-oti" form="srSearchForm"
+						<button type="submit" class="btn-sm btn" form="srSearchForm"
 							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
-							style="float: right; margin-right: 50px;">엑셀 다운로드</button>
+							style="float: right; margin-right: 50px;background-color:transparent;padding:0px;">
+							<img
+								src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png"
+								width="30px;">
+						</button>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
