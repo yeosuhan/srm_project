@@ -555,7 +555,7 @@ table thead tr {
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 
 	<!-- 모달 -->
-	<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />
+	<!--<jsp:include page="/WEB-INF/views/history/addHistoryModal.jsp" />-->
 	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>
 	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
