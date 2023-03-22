@@ -36,6 +36,8 @@ $(document).ready(function(){
           
          /*개발자 목록*/
          getEmployeeList(deptCd);
+         /*역할 목록*/
+         getPtcptnRoleCd();
       }else{
     	  showSchedule();
       }
@@ -151,8 +153,12 @@ function addResource(){
       success:function(result){
          //console.log(result);
          if(result!=0){
+        	if($("#resourceTableRow tr").length==0){
+        		location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
+        	}
             $("#resourceTableRow").empty();
             getResourceTableRow();
+            
          }
       }
    });

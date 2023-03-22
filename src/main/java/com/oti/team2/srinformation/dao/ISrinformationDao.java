@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.oti.team2.board.dto.SRKeyDto;
 import com.oti.team2.srinformation.dto.Dept;
 import com.oti.team2.srinformation.dto.Manager;
+import com.oti.team2.srinformation.dto.SrDmndRowNum;
 import com.oti.team2.srinformation.dto.SrInfoFilter;
 import com.oti.team2.srinformation.dto.SrInformationRequestDto;
 //github.com/OTI-SRM/srm_project
@@ -123,4 +124,14 @@ public interface ISrinformationDao {
 	 */
 	public String selectMaxSrNoByPicId(String picId);
 	
+	/**
+	 * 히스토리id 클릭시 해당 진척상세가 몇번째 인지 조회하기 
+	 *  @author 신정은
+	 */
+	public SrDmndRowNum selectRowNumByHstryId(int hstryId);
+	/**
+	 * 요청반영 알림 클릭시 해당 진척상세가 몇번째 인지 조회하기 
+	 *  @author 안한길
+	 */
+	public SrDmndRowNum selectRowNumByDmndNo(String dmndNo);
 }

@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oti.team2.alert.service.IAlertService;
 import com.oti.team2.progress.dao.IProgressDao;
 import com.oti.team2.progress.dto.Prgrs;
 import com.oti.team2.progress.dto.PrgrsPlanDto;
 import com.oti.team2.progress.dto.Progress;
+import com.oti.team2.srdemand.dao.ISrDemandDao;
 import com.oti.team2.srdemand.service.ISrDemandService;
-import com.oti.team2.alert.service.IAlertService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -28,6 +29,9 @@ public class ProgressService implements IProgressService {
 
 	@Autowired
 	IAlertService alertService;
+	
+	@Autowired
+	private ISrDemandDao srDemandDao;
 
 	/**
 	 * 
@@ -313,6 +317,8 @@ public class ProgressService implements IProgressService {
 	 */
 	@Override
 	public void endProgress(String dmNo) {
+		String rcvrId = srDemandDao.selectRvwrId(dmNo);
+		alertService.sendToClient(rcvrId, dmNo);
 		progressDao.updateEndYmd(dmNo);
 	}
 

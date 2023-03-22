@@ -331,7 +331,6 @@ public class AdminController {
 		srFilterDto.setKeyWord(keyWord);
 		srFilterDto.setSysCd(sysCd);
 		srFilterDto.setTaskSeCd(taskSeCd);
-		srFilterDto.setHstryId(hstryId);
 		model.addAttribute("srFilterDto",srFilterDto);
 		log.info(srFilterDto);
 		// 목록
@@ -416,7 +415,6 @@ public class AdminController {
 		srFilterDto.setKeyWord(keyWord);
 		srFilterDto.setSysCd(sysCd);
 		srFilterDto.setTaskSeCd(taskSeCd);
-		srFilterDto.setHstryId(hstryId);
 		// 목록
 		List<SrDemand> list = srdemandService.getSrExcelList(sort,srFilterDto);
 		srdemandService.SrDemandListdownload(list,request,response);

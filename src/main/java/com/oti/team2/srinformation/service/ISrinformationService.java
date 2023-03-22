@@ -9,6 +9,7 @@ import com.oti.team2.board.dto.SRKeyDto;
 import com.oti.team2.srdemand.dto.SdApprovalDto;
 import com.oti.team2.srinformation.dto.Dept;
 import com.oti.team2.srinformation.dto.Manager;
+import com.oti.team2.srinformation.dto.SrDmndRowNum;
 import com.oti.team2.srinformation.dto.SrInfoFilter;
 import com.oti.team2.srinformation.dto.SrinformationList;
 import com.oti.team2.srinformation.dto.SrplanInformation;
@@ -25,7 +26,7 @@ public interface ISrinformationService {
 	 * @param ey 
 	 * @return sr진척 목록 조회
 	 */
-	List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort, String role, String ey, String by);
+	List<SrinformationList> getList(Pager pager, SrInfoFilter srInfoFilter, String sort, String by, String ey, String role);
 
 	/**
 	 * @author 여수한 작성일자 : 2023-03-02
@@ -117,4 +118,15 @@ public interface ISrinformationService {
 	void SrListdownload(List<SrinformationList> srlist, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	void updateEndYmdBySrNo(String srNo);
+	
+	/**
+	 * 히스토리id 클릭시 해당 진척상세가 몇번째 인지 조회하기 
+	 *  @author 신정은
+	 */
+	public SrDmndRowNum getRownumByHstryId(int hstryId);
+	/*
+	 * 요청반영 알림 클릭시 해당 진척 상세가 몇번째 인지 조회
+	 * @author 안한길
+	 * */
+	public SrDmndRowNum getRownumByDmndNo(String dmndNoToHstry);
 }
