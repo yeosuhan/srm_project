@@ -120,7 +120,7 @@ public class SrDemandService implements ISrDemandService {
 	public int updateSrDemand(SrRequestDto srRequestDto) throws IllegalStateException, IOException {
 		int row = 0;
 		srDemandDao.updateByDmndNo(srRequestDto);
-		if(srRequestDto.getNattachFile().get(0).getSize() != 0) {
+		if(srRequestDto.getNattachFile() != null && srRequestDto.getNattachFile().get(0).getSize() != 0) {
 			log.info("첨부파일 있어요");
 			attachmentService.uploadFiles(srRequestDto.getNattachFile(), 0, srRequestDto.getDmndNo());
 		}
