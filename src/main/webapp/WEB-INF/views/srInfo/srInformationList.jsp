@@ -175,7 +175,7 @@ table tbody td {
 							style="font-size: 12px; padding: 0px;">
 							<thead>
 								<tr>
-									<th style="width: 1px;">#</th>
+									<th style="width: 1px;"></th>
 									<th style="width: 1px;"></th>
 									<th>산출물구분</th>
 									<th>산출물명</th>
@@ -334,9 +334,12 @@ table tbody td {
 				<div class="card" style="height: 760px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
-						<button type="submit" class="btn btn-oti btn-sm" form="srInfoFilterForm	"
+						<button type="submit" class="btn btn-sm" form="srInfoFilterForm"
 									onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
-									style="float: right; margin-right: 50px;">엑셀 다운로드</button>
+									style="float: right; margin-right: 50px; background-color:transparent;padding:0px;">
+									<img src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png" width="30px;">
+									</button>
+									
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -405,9 +408,9 @@ table tbody td {
 														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srlist.ttl) > 15}">
+															<c:when test="${fn:length(srlist.ttl) > 10}">
 																<td class="text-left"><c:out
-																		value="${fn:substring(srlist.ttl,0,10)}" />...</td>
+																		value="${fn:substring(srlist.ttl,0,9)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td class="text-left"><c:out value="${srlist.ttl}" /></td>

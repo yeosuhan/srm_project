@@ -28,11 +28,11 @@ function getDeliverablesTableRow(id){
 					var count = index+1;
 					$(".deliverableTable tbody").append(
 							"<tr id='tr"+value.delivId+"' class='deliverableTr' onclick='modifyDeliverable(this)'>" +
-							"	<th scope='row'>"+count+"</th>" +
-							"	<td class='delivIdTd' onclick='event.cancelBubble=true'>" +
+							"	<th class='delivIdTd' onclick='event.cancelBubble=true'>" +
 							"		<input value='"+value.delivId+"' name='delivId' type='checkbox'>" +
 							"		<button style='display:none' class='btn btn-info' onclick='modifyDeliverableSubmit("+value.delivId+")'>수정</button>"+
-							"	</td>" +
+							"	</th>" +
+							"	<td scope='row'>"+count+"</td>" +
 							"	<td>"+value.prgrsSeNm+"</td>" +
 							"	<td class='delivNmTd'>"+value.delivNm+"</td>" +
 							"	<td class='delivUrlTd'>"+value.delivUrl+"</td>" +

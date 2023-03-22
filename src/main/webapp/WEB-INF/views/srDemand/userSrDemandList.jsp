@@ -245,9 +245,13 @@ table thead tr {
 				<div class="card">
 					<div class="card-header">
 						<h5>SR 요청 목록</h5>
-						<button type="submit" class="btn-sm btn-oti" form="srSearchForm"
-									onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
-									style="float: right; margin-right: 50px;">엑셀 다운로드</button>
+						<button type="submit" class="btn-sm btn" form="srSearchForm"
+							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
+							style="float: right; margin-right: 50px;background-color:transparent;padding:0px;">
+							<img
+								src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png"
+								width="30px;">
+						</button>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -280,7 +284,7 @@ table thead tr {
 												</th>
 												<th class="text-left" style="font-size: 15px;">제목</th>
 												<th class="text-left" style="font-size: 15px;">관련시스템</th>
-												<th class="text-left"style="font-size: 15px;">소속</th>
+												<th class="text-left" style="font-size: 15px;">소속</th>
 												<th style="font-size: 15px;">진행상태</th>
 												<th style="font-size: 15px;">요청일</th>
 												<th style="font-size: 15px;">완료예정일</th>
@@ -322,7 +326,8 @@ table thead tr {
 																<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
 															</c:if></td>
 														<td style="font-size: 13px;">${srDemand.dmndYmd}</td>
-														<td style="font-size: 13px;"><c:if test="${(srDemand.sttsNm) eq '개발취소'}">
+														<td style="font-size: 13px;"><c:if
+																test="${(srDemand.sttsNm) eq '개발취소'}">
 															-</c:if> <c:if test="${(srDemand.sttsNm) ne '개발취소'}">
 																${srDemand.endYmd}
 															</c:if></td>
@@ -373,8 +378,7 @@ table thead tr {
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 										<div class="col col-sm-10">
-											<div id="dmndNo"
-												style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
+											<div id="dmndNo" style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
 										</div>
 									</div>
 									<hr />
@@ -514,10 +518,11 @@ table thead tr {
 													onclick="deleteSr('${sd.dmndNo}')">삭제</div>
 											</div>
 										</c:if>
-										<c:if test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
+										<c:if
+											test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
 											<div class="col">
 												<div class="btn btn-sm btn-oti cancle" onclick="endSr()"
-													style="width:100%;">반영요청</div>
+													style="width: 100%;">반영요청</div>
 											</div>
 										</c:if>
 									</div>

@@ -114,6 +114,13 @@ function getInfoHstryDetail(historyId) {
 											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
 													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
 							$('#footDiv').text("결재 권한이 없습니다.");
+						} else if (ArqstrId != autuId && AhstryStts == 'I') {
+							console.log("---");
+							$('#HstrySttsDiv2')
+									.html(
+											'<label class="mr-3"><input id="AHstryStts1" type="radio" name="hstryStts" value="Y" onclick="return(false);">승인</label>'
+													+ '<label><input id="AHstryStts2" type="radio" name="hstryStts" value="N" onclick="return(false);">반려</label>');
+							$('#footDiv').text("결재 권한이 없습니다.");
 						} else if (AhstryStts == 'Y') {
 							console.log("6");
 							$('#HstrySttsDiv2')
