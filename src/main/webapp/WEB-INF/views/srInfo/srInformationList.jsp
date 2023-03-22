@@ -388,7 +388,7 @@ table tbody td {
 												<th class="text-left" style="font-size: 15px; width: 200px;">SR명</th>
 												<th class="text-left" style="font-size: 15px;">시스템구분</th>
 												<th class="text-left" style="font-size: 15px;">업무구분</th>
-												<th style="font-size: 15px;">완료요청일 <c:if
+												<th style="font-size: 15px;">SR요청일 <c:if
 														test="${by eq 'DESC' || by eq '1'}">
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
