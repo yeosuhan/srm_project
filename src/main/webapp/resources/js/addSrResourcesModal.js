@@ -16,9 +16,9 @@ $(document).ready(function(){
        
           calendar = new FullCalendar.Calendar(calendarEl,{
              headerToolbar:{
-                left : 'prev, next',
+                left : 'prev',
                 center: 'title',
-                right:''
+                right:'next'
              },
              height:400,
              initialView: 'dayGridMonth',
