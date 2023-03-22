@@ -646,9 +646,9 @@ table tbody td {
 											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
                                     style="padding-left: 3px; display:none"
                                  </c:if>>
-											<button class="btn btn-oti btn-sm"
+											<button class="btn btn-info" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
-												data-target="#addHistoryModal">SR 변경요청</button>
+												data-target="#addHistoryModal" >SR 변경요청</button>
 										</div>
 									</div>
 								</div>
@@ -725,9 +725,9 @@ table tbody td {
 											</div>
 										</div>
 										<sec:authorize access="hasRole('ROLE_ADMIN')">
-											<button class="btn btn-oti btn-sm" onclick="planUpdate()"
+											<button class="btn btn-info" onclick="planUpdate()"
 												id="planBtn"
-												style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
+												style="float: right; padding-bottom: 10px; margin-bottom: 10px;width:100%;font-size:25px;">수정</button>
 										</sec:authorize>
 									</div>
 									<%-- *********************************** [ 자원정보 ] ***********************************--%>

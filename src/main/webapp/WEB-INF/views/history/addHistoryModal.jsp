@@ -22,7 +22,7 @@
 <div class="modal" id="addHistoryModal">
 	<div class="modal-body modal-dialog modal-lg" style="height: 500px">
 		<div id="mHd" class="m_head" style="height: 13%">
-			<div class="modal_title" style="color: white">SR 진척정보 변경요청</div>
+			<div class="modal_title" style="color: white; font-weight: bold;font-size: 20px">SR 진척정보 변경요청</div>
 			<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 		</div>
 		<div class="m_body bg-light">
@@ -100,7 +100,7 @@
 					</div>
 				</div>
 				<div align="center">
-					<button id="mBt" type="submit" class="btn btn-oti save center">등록</button>
+					<button id="mBt" type="submit" class="btn btn-info center" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px">등록</button>
 				</div>
 			</form>
 		</div>

@@ -143,7 +143,7 @@ table thead tr {
 					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
-								<h5 style="font-weight: bold;">SR 요청 관리</h5>
+								<h5 style="font-weight: bold;font-size: 20px">SR 요청 관리</h5>
 							</div>
 						</div>
 					</div>
@@ -221,7 +221,7 @@ table thead tr {
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5>SR 요청 목록</h5>
+						<h5 style="font-weight: bold;font-size: 20px">SR 요청 목록</h5>
 						<button type="submit" class="btn btn-sm" form="srSearchForm"
 							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
 							style="float: right; margin-right: 50px;background-color:transparent;padding:0px;">
@@ -334,7 +334,7 @@ table thead tr {
 			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
 					<div class="card-header">
-						<h5>SR 요청 상세정보</h5>
+						<h5 style="font-weight: bold;font-size: 20px">SR 요청 상세정보</h5>
 					</div>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
