@@ -8,8 +8,6 @@
 <%@include file="/WEB-INF/views/fragments/header.jsp"%>
 <script
 	src="${pageContext.request.contextPath}/resources/assets/js/srDemandList.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 
 <script>
 	
@@ -24,6 +22,7 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
+	
 </script>
 <style>
 #startDatepicker, #endDatepicker, #addDatepicker {
@@ -210,9 +209,6 @@ width: 100%;
 										style="margin-right: 10px; height: 30px;">
 										<i class="ti-search"></i>
 									</button>
-										<button type="submit" class="btn-sm btn-oti"
-									onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
-									style="float: right; margin-left: 50px;">엑셀 다운로드</button>
 								</div>
 							</div>
 						</form>
@@ -226,7 +222,7 @@ width: 100%;
 						<h5>SR 요청 목록</h5>
 						<button type="submit" class="btn-sm btn-oti" form="srSearchForm"
 									onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
-									style="float: right; margin-left: 50px;">엑셀 다운로드</button>
+									style="float: right; margin-right: 50px;">엑셀 다운로드</button>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -257,9 +253,9 @@ width: 100%;
 													</c:if>
 
 												</th>
-												<th style="font-size:15px; width: 100%;">제목</th>
-												<th style="font-size:15px;">시스템구분</th>
-												<th style="font-size:15px;">소속</th>
+												<th class="text-left" style="font-size:15px; width: 100%;">제목</th>
+												<th class="text-left" style="font-size:15px;">시스템구분</th>
+												<th class="text-left" style="font-size:15px;">소속</th>
 												<th style="font-size:15px;">진행상태</th>
 												<th style="font-size:15px;">등록일</th>
 												<th style="font-size:15px;">완료예정일</th>
@@ -271,7 +267,7 @@ width: 100%;
 											<c:if test="${srDemandList ne null}">
 												<c:forEach var="srDemand" items="${srDemandList}"
 													varStatus="status">
-													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" style="font-size:13px;">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" style="font-size:13px;" id="tr${pager.startRowNo + status.index}">
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>

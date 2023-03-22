@@ -44,9 +44,7 @@
 			si.END_YMD
 		FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
 			sr_information si
-			<if test="srFilterDto.hstryId != null">
-		    , SR_INFORMATION_HISTORY h
-		    </if>
+			
 		WHERE sd.CUST_ID = #{custId}
 			and sd.DEL_YN = 0
 			and sd.cust_id = m.member_id
@@ -66,12 +64,7 @@
 				sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
 				sd.cn like '%'||#{srFilterDto.keyWord}||'%'
 			)</if>
-			<if test="srFilterDto.hstryId != null">
-			AND
-				si.SR_NO = h.SR_NO
-			AND 
-				h.HSTRY_ID = #{srFilterDto.hstryId}
-			</if>
+			
 		) w , members c
 		where w.rvwr_id = c.member_id(+)
 		<if test="sort=='DESC'">
@@ -213,16 +206,7 @@
       resultType="int">
       SELECT COUNT(DMND_NO)
          FROM SR_DEMAND 
-         <if test="srFilterDto.hstryId != null">
-		    sd, (
-		    SELECT 
-		    	si.DMND_NO as DMNDNO 
-		    FROM SR_INFORMATION si, SR_INFORMATION_HISTORY h 
-		    WHERE 
-		    	si.SR_NO = h.SR_NO AND 
-		    	h.HSTRY_ID=#{srFilterDto.hstryId}
-		    ) h
-		 </if>
+        
       WHERE CUST_ID=#{clientId}
          and DEL_YN = 0
          <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
@@ -237,25 +221,14 @@
 			 ttl like '%'||#{srFilterDto.keyWord}||'%' or
 			 cn like '%'||#{srFilterDto.keyWord}||'%'
 		 )</if>
-		 <if test="srFilterDto.hstryId != null">
-			 AND sd.DMND_NO = h.DMNDNO
-		 </if>
+		 
    </select>
 
    <!-- 관리자의 모든 요청의 총 행의 수 구하기 -->
    <select id="countAllSrDemand" resultType="int">
       SELECT COUNT(DMND_NO)
       FROM SR_DEMAND 
-      <if test="srFilterDto.hstryId != null">
-	      sd, (
-	      SELECT 
-	    	  si.DMND_NO as DMNDNO 
-	      FROM SR_INFORMATION si, SR_INFORMATION_HISTORY h 
-	      WHERE 
-	    	  si.SR_NO = h.SR_NO AND 
-	    	  h.HSTRY_ID=#{srFilterDto.hstryId}
-	      ) h
-	  </if>
+      
       WHERE DEL_YN = 0
       <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
 	  <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
@@ -269,9 +242,7 @@
 		  ttl like '%'||#{srFilterDto.keyWord}||'%' or
 		  cn like '%'||#{srFilterDto.keyWord}||'%'
 	  )</if>
-	  <if test="srFilterDto.hstryId != null">
-		  AND sd.DMND_NO = h.DMNDNO
-	  </if>
+	  
    </select>
 
    <!--관리자 모든 요청 목록 가져오기 -->
@@ -299,9 +270,7 @@
          si.END_YMD
       FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
             sr_information si
-            <if test="srFilterDto.hstryId != null">
-		    , SR_INFORMATION_HISTORY h
-		    </if>
+            
       where sd.cust_id = m.member_id
          and sd.DEL_YN = 0
          and m.inst_cd = i.inst_cd
@@ -320,12 +289,7 @@
 			 sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
 			 sd.cn like '%'||#{srFilterDto.keyWord}||'%'
 		 )</if>
-		 <if test="srFilterDto.hstryId != null">
-			AND
-				si.SR_NO = h.SR_NO
-			AND 
-				h.HSTRY_ID = #{srFilterDto.hstryId}
-		  </if>
+		
       ) w , members c
       where w.rvwr_id = c.member_id(+)
      <if test="sort=='DESC'">
@@ -526,9 +490,7 @@
 			si.END_YMD
 		FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
 			sr_information si
-			<if test="srFilterDto.hstryId != null">
-		    , SR_INFORMATION_HISTORY h
-		    </if>
+			
 		WHERE sd.CUST_ID = #{custId}
 			and sd.DEL_YN = 0
 			and sd.cust_id = m.member_id
@@ -548,12 +510,7 @@
 				sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
 				sd.cn like '%'||#{srFilterDto.keyWord}||'%'
 			)</if>
-			<if test="srFilterDto.hstryId != null">
-			AND
-				si.SR_NO = h.SR_NO
-			AND 
-				h.HSTRY_ID = #{srFilterDto.hstryId}
-			</if>
+			
 		) w , members c
 		where w.rvwr_id = c.member_id(+)
 		<if test="sort=='DESC'">
@@ -589,9 +546,7 @@
          si.END_YMD
       FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
             sr_information si
-            <if test="srFilterDto.hstryId != null">
-		    , SR_INFORMATION_HISTORY h
-		    </if>
+           
       where sd.cust_id = m.member_id
          and sd.DEL_YN = 0
          and m.inst_cd = i.inst_cd
@@ -610,12 +565,7 @@
 			 sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
 			 sd.cn like '%'||#{srFilterDto.keyWord}||'%'
 		 )</if>
-		 <if test="srFilterDto.hstryId != null">
-			AND
-				si.SR_NO = h.SR_NO
-			AND 
-				h.HSTRY_ID = #{srFilterDto.hstryId}
-		  </if>
+		 
       ) w , members c
       where w.rvwr_id = c.member_id(+)
      <if test="sort=='DESC'">
@@ -625,4 +575,46 @@
 		order by dmndNo ASC
 		</if>
    </select>
+   <!-- 행번호 조회 -->
+   <select id="selectRowNumByDmndNo" parameterType="map" resultType="srDmndRowNum">
+   		SELECT  rn,  dmndNo
+		from(
+		    select rownum as rn, dmndNo
+		    from
+		    (
+		        select 
+		           DMND_NO AS dmndNo
+		      	FROM  SR_DEMAND 
+		      	WHERE CUST_ID = #{custId}
+		      	order by DMND_YMD DESC
+		     )        
+		 ) 
+	     WHERE dmndNo = #{dmndNo} 
+   </select>
+   <!-- 행번호 조회 -->
+   <select id="selectRowNumByHstryId" parameterType="map" resultType="srDmndRowNum">
+   		SELECT  rn,  dmndNo, srNo
+		 from
+		 (
+			    select rownum as rn, dmndNo, srNo
+			    from
+			    (
+			        select 
+			          SI.DMND_NO AS dmndNo,
+			          SI.SR_NO AS srNo
+			      	FROM SR_INFORMATION SI, SR_DEMAND SD 
+			      	where si.dmnd_no(+) = sd.dmnd_no and
+			      	CUST_ID = #{custId}
+			      	order by SD.DMND_YMD DESC
+			    )        
+		  ) a  , sr_information_history his
+	      WHERE his.HSTRY_ID = #{hstryId}
+	      and  his.sr_no = a.srNo  
+   </select>
+   
+   <!-- 요청 검토자 아이디 조회 -->
+	<select id="selectRvwrId" parameterType="String" resultType="String">
+		SELECT RVWR_ID as rvwrId FROM  SR_DEMAND WHERE DMND_NO = #{dmndNo}
+	</select>
+   
 </mapper>

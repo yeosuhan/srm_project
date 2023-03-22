@@ -50,5 +50,6 @@
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto" alias="myTodoHistoryListDto" />
 		<typeAlias type="com.oti.team2.member.dto.MemberDto" alias="memberDto"/>
 		<typeAlias type="com.oti.team2.srinformationhistory.dto.SrResourceAddHistoryDto" alias="srResourceAddHistoryDto" />
+	    <typeAlias type="com.oti.team2.srinformation.dto.SrDmndRowNum" alias="srDmndRowNum"/>
 	</typeAliases> 
 </configuration>
