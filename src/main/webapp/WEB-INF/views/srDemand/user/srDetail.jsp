@@ -129,17 +129,17 @@
 	<div class="row" id="userButtonDiv">
 		<c:if test="${sd.sttsCd == 0}">
 			<div class="col" style="text-align: right">
-				<button id="modbtn" style="float: right;"
-					class="btn btn-sm btn-oti center"
-					onclick="updateSr('${sd.dmndNo}')">수정</button>
-				<div class="btn btn-sm btn-oti center"
-					style="float: right; margin-right: 5px;"
+				<div class="btn btn-sm btn-danger"
+					style="float: right; margin-right: 5px;font-weight: bold;font-size: 20px"
 					onclick="deleteSr('${sd.dmndNo}')">삭제</div>
+				<button id="modbtn" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px"
+					class="btn btn-sm btn-info"
+					onclick="updateSr('${sd.dmndNo}')">수정</button>
 			</div>
 		</c:if>
 		<c:if test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
 			<div class="col" style="text-align: right">
-				<div class='btn btn-sm btn-oti cancle' onclick='endSr()'
+				<div class='btn btn-sm btn-success' onclick='endSr()'
 					style='float: right;'>반영요청</div>
 			</div>
 		</c:if>

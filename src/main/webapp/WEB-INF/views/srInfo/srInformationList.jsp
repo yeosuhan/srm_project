@@ -423,9 +423,9 @@ table tbody td {
 														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srlist.ttl) > 10}">
+															<c:when test="${fn:length(srlist.ttl) > 13}">
 																<td class="text-left"><c:out
-																		value="${fn:substring(srlist.ttl,0,9)}" />...</td>
+																		value="${fn:substring(srlist.ttl,0,12)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td class="text-left"><c:out value="${srlist.ttl}" /></td>
@@ -646,9 +646,9 @@ table tbody td {
 											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
                                     style="padding-left: 3px; display:none"
                                  </c:if>>
-											<button class="btn btn-oti btn-sm"
+											<button class="btn btn-info" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
-												data-target="#addHistoryModal">SR 변경요청</button>
+												data-target="#addHistoryModal" >SR 변경요청</button>
 										</div>
 									</div>
 								</div>
@@ -725,9 +725,9 @@ table tbody td {
 											</div>
 										</div>
 										<sec:authorize access="hasRole('ROLE_ADMIN')">
-											<button class="btn btn-oti btn-sm" onclick="planUpdate()"
+											<button class="btn btn-info" onclick="planUpdate()"
 												id="planBtn"
-												style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
+												style="float: right; padding-bottom: 10px; margin-bottom: 10px;width:100%;font-size:25px;">수정</button>
 										</sec:authorize>
 									</div>
 									<%-- *********************************** [ 자원정보 ] ***********************************--%>
@@ -805,10 +805,10 @@ table tbody td {
 																	class="form-control" id="SRPgPrgrsRt0" min="1" max="10"
 																	placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
+																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(0)">첨부파일</button>
+																			onclick="getDeliverablesTableRow(0)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
@@ -828,10 +828,10 @@ table tbody td {
 																	class="form-control" id="SRPgPrgrsRt1" min="11"
 																	max="40"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
+																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(1)">첨부파일</button>
+																			onclick="getDeliverablesTableRow(1)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
@@ -851,10 +851,10 @@ table tbody td {
 																	class="form-control" id="SRPgPrgrsRt2" min="41"
 																	max="70"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
+																		<button class="btn btn-sm btn-primary text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(2)">첨부파일</button>
+																			onclick="getDeliverablesTableRow(2)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
@@ -875,10 +875,10 @@ table tbody td {
 																	max="80"></td>
 																<td>
 																	<div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
+																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(3)">첨부파일</button>
+																			onclick="getDeliverablesTableRow(3)">열기</button>
 																	</div>
 																</td>
 																<td style="padding: 0px; margin: 0px;">
@@ -899,10 +899,10 @@ table tbody td {
 																	class="form-control" id="SRPgPrgrsRt4" min="81"
 																	max="90"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
+																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(4)">첨부파일</button>
+																			onclick="getDeliverablesTableRow(4)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"
@@ -922,10 +922,10 @@ table tbody td {
 																	class="form-control" id="SRPgPrgrsRt5" min="91"
 																	max="100"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
+																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(5)">첨부파일</button>
+																			onclick="getDeliverablesTableRow(5)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-oti btn-lg"

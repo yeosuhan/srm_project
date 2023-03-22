@@ -8,7 +8,7 @@
 </style>
 <div class="card" style="height:450px;">
 	<div class="card-header">
-		<h5 class="card-header-text">문의사항</h5>
+		<h5 class="card-header-text " style="font-size:20px;font-weight:bold">문의사항</h5>
 	</div>
 	<table class="table table-hover">
 			<c:if test="${fn:length(qnaList) == 0 }">

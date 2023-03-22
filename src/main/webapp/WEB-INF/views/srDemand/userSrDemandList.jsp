@@ -163,11 +163,11 @@ table thead tr {
 					<div class="card-header" id="headerFirst">
 						<div class="row justify-content-between">
 							<div class="col-10">
-								<h5 style="font-weight: bold;">SR 요청 관리</h5>
+								<h5 style="font-weight: bold;font-size: 20px">SR 요청 관리</h5>
 							</div>
-							<div class="col-1 mr-2">
+							<div class="col-1 mr-5">
 								<button class="btn btn-oti btn-sm" id="addbtn"
-									style="font-size: 14px">요청 등록</button>
+									style="font-size: 20px;font-weight: bold;">요청 등록</button>
 							</div>
 						</div>
 					</div>
@@ -250,7 +250,7 @@ table thead tr {
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5>SR 요청 목록</h5>
+						<h5 style="font-weight: bold;font-size: 20px">SR 요청 목록</h5>
 						<button type="submit" class="btn-sm btn" form="srSearchForm"
 							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
 							style="float: right; margin-right: 50px; background-color: transparent; padding: 0px;">
@@ -361,16 +361,16 @@ table thead tr {
 			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
 					<div class="card-header">
-						<h5>SR 요청 상세정보</h5>
+						<h5 style="font-weight: bold;font-size: 20px">SR 요청 상세정보</h5>
 					</div>
 					<ul class="nav nav-tabs md-tabs" id="otiTabs" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
 							data-toggle="tab" href="#srDemandDetail" role="tab"
-							id="srDmndDetailTab">SR요청 상세정보</a>
+							id="srDmndDetailTab"style="font-weight: bold;font-size: 20px">SR요청 상세정보</a>
 							<div class="slide"></div></li>
 						<li class="nav-item" onclick="userHstry()"><a
 							id="srHistoryTab" class="nav-link" data-toggle="tab"
-							href="#srHistory" role="tab">SR 히스토리</a>
+							href="#srHistory" role="tab"style="font-weight: bold;font-size: 20px">SR 히스토리</a>
 							<div class="slide"></div></li>
 					</ul>
 
@@ -512,12 +512,12 @@ table thead tr {
 									<div class="row" id="userButtonDiv">
 										<c:if test="${sd.sttsCd == 0}">
 											<div class="col" style="text-align: right">
-												<button id="modbtn" style="float: right;"
-													class="btn btn-sm btn-oti center"
-													onclick="updateSr('${sd.dmndNo}')">수정</button>
-												<div class="btn btn-sm btn-oti btn-round danger cancle"
-													style="float: right; margin-right: 5px;"
+												<div class="btn btn-sm btn-danger"
+													style="float: right; margin-right: 5px;font-weight: bold;font-size: 20px"
 													onclick="deleteSr('${sd.dmndNo}')">삭제</div>
+												<button id="modbtn" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px"
+													class="btn btn-sm btn-info center"
+													onclick="updateSr('${sd.dmndNo}')">수정</button>
 											</div>
 										</c:if>
 										<c:if
