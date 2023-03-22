@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script
 	src="${pageContext.request.contextPath}/resources/js/srDemand.js"></script>
 <div class="card_body" style="font-size: 14px; padding-top: 20px;">
@@ -11,7 +11,7 @@
 		<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 		<div class="col col-sm-10">
 			<div class="form-control dmndNo" id="dmndNo"
-				style="font-size: 12px; width:100%;">${sd.dmndNo}</div>
+				style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
 		</div>
 	</div>
 	<div class="form-group row">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="form-group row">
 		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold">요청일</div>
+			<div class="col col-sm-4 font-weight-bold">등록일</div>
 			<div class="col col-sm-8 dmndYmd">${sd.dmndYmd}</div>
 		</div>
 		<div class="col-sm-6 px-0">
@@ -79,26 +79,18 @@
 				<div type="text" class="form-control sttsNm">${sd.sttsNm}</div>
 			</div>
 		</div>
-		<c:if test="${(sd.sttsCd) gt 1 and (sd.sttsNm) ne '개발취소'}">
-			<div class="col-sm-6 px-0">
-				<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
-				<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
-			</div>
-		</c:if>
- 		<c:if test="${sd.sttsNm eq '개발취소'}">
-			<div class="col-sm-6 px-0">
-				<div class="col col-sm-4 font-weight-bold">개발취소일</div>
-				<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
-			</div>
-		</c:if> 
-	</div>
-	<div class="form-group row">
 		<div class="col-sm-6 px-0">
 			<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
 			<div class="col col-sm-6">
 				<div type="text" class="form-control rvwrNm">${sd.rvwrNm}</div>
 			</div>
 		</div>
+		<c:if test="${sd.sttsNm eq '개발취소'}">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">개발취소일</div>
+				<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
+			</div>
+		</c:if>
 	</div>
 	<c:if test="${sd.sttsCd == 1}">
 		<div class="form-group row">
@@ -123,13 +115,12 @@
 		<div class="col-sm-10">
 			<c:forEach var="f" items="${sd.attachFile}">
 				<div>
-					<a href="<c:url value='/file/download/${f.fileSn}' />">
-					 <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 
-					 <span style="margin-right: 20px;"> ${f.orgnlFileNm} </span>
-					 <span style="">
-							<fmt:formatNumber type="number" value="${f.fileSz/(1024 * 1024)}"  pattern="0.0"/>
-					 		MB
-					 </span>
+					<a href="<c:url value='/file/download/${f.fileSn}' />"> <span
+						class="glyphicon glyphicon-save" aria-hidden="true"></span> <span
+						style="margin-right: 20px;"> ${f.orgnlFileNm} </span> <span
+						style=""> <fmt:formatNumber type="number"
+								value="${f.fileSz/(1024 * 1024)}" pattern="0.0" /> MB
+					</span>
 					</a>
 				</div>
 			</c:forEach>
