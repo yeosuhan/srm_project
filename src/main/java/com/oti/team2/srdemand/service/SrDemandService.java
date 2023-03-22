@@ -115,13 +115,13 @@ public class SrDemandService implements ISrDemandService {
 	 * sr요청 수정 진행
 	 * 
 	 * @author 신정은
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * @throws IOException
+	 * @throws IllegalStateException
 	 */
 	public int updateSrDemand(SrRequestDto srRequestDto) throws IllegalStateException, IOException {
 		int row = 0;
 		srDemandDao.updateByDmndNo(srRequestDto);
-		if(srRequestDto.getNattachFile().get(0).getSize() != 0) {
+		if (srRequestDto.getNattachFile() != null && srRequestDto.getNattachFile().get(0).getSize() != 0) {
 			log.info("첨부파일 있어요");
 			attachmentService.uploadFiles(srRequestDto.getNattachFile(), 0, srRequestDto.getDmndNo());
 		}
@@ -244,7 +244,7 @@ public class SrDemandService implements ISrDemandService {
 	 */
 	public Pager getcountsByCustIdOrPicIdAndSttsCd(String custId, String picId, int sttsCd, int pageNo) {
 		int totalRows = srDemandDao.countByCustIdOrPicIdAndSttsCd(custId, picId, sttsCd);
-		Pager pager = new Pager(5,totalRows, pageNo);
+		Pager pager = new Pager(5, totalRows, pageNo);
 		return pager;
 	}
 
@@ -264,7 +264,7 @@ public class SrDemandService implements ISrDemandService {
 	 */
 	public Pager getcountsByEmpIdAndSttsCd(String empId, int sttsCd, int pageNo) {
 		int totalRows = srDemandDao.countByEmpIdAndSttsCd(empId, sttsCd);
-		Pager pager = new Pager(5,totalRows, pageNo);
+		Pager pager = new Pager(5, totalRows, pageNo);
 		return pager;
 	}
 
@@ -329,7 +329,8 @@ public class SrDemandService implements ISrDemandService {
 	}
 
 	@Override
-	public void SrDemandListdownload(List<SrDemand> list, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void SrDemandListdownload(List<SrDemand> list, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		SXSSFWorkbook wb = new SXSSFWorkbook();
 		Sheet sheet = wb.createSheet();
 		sheet.setColumnWidth((short) 0, (short) 1000);
@@ -395,12 +396,14 @@ public class SrDemandService implements ISrDemandService {
 		for (SrDemand SrDemand : list) {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			
+
 			String dmndYmd = null;
 			String endYmd = null;
-			if(SrDemand.getDmndYmd() != null)  dmndYmd = sdf.format(SrDemand.getDmndYmd());
-			if(SrDemand.getEndYmd() != null) endYmd = sdf.format(SrDemand.getEndYmd());
-			
+			if (SrDemand.getDmndYmd() != null)
+				dmndYmd = sdf.format(SrDemand.getDmndYmd());
+			if (SrDemand.getEndYmd() != null)
+				endYmd = sdf.format(SrDemand.getEndYmd());
+
 			row = sheet.createRow(i);
 			cell = null;
 			cs = wb.createCellStyle();
@@ -449,6 +452,7 @@ public class SrDemandService implements ISrDemandService {
 		response.setHeader("Content-Disposition", String.format("attachment; filename=\"SrDemandList.xlsx\""));
 		wb.write(response.getOutputStream());
 	}
+
 	/**
 	 * 
 	 * @author 여수한 작성일자 : 2023-03-15
