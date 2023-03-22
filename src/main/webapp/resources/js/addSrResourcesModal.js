@@ -36,6 +36,8 @@ $(document).ready(function(){
           
          /*개발자 목록*/
          getEmployeeList(deptCd);
+         /*역할 목록*/
+         getPtcptnRoleCd();
       }else{
     	  showSchedule();
       }
