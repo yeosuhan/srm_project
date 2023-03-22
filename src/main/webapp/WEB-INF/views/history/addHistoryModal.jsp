@@ -100,7 +100,7 @@
 					</div>
 				</div>
 				<div align="center">
-					<button id="mBt" type="submit" class="btn btn-info center" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px">등록</button>
+					<button id="mBt" type="submit" class="btn btn-info center" style="font-weight: bold;font-size: 20px">등록</button>
 				</div>
 			</form>
 		</div>

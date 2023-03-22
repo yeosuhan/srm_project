@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<div id="footModiDiv" class="pt-3" align="center">
-					<button type="submit" class="btn btn-info center" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px">확인</button>
+					<button type="submit" class="btn btn-info center" style="font-weight: bold;font-size: 20px">확인</button>
 				</div>
 			</form>
 

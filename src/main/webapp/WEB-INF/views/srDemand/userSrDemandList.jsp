@@ -303,9 +303,9 @@ table thead tr {
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srDemand.ttl) > 14}">
+															<c:when test="${fn:length(srDemand.ttl) > 13}">
 																<td id="ttl" class="text-left" style="font-size: 14px;"><c:out
-																		value="${fn:substring(srDemand.ttl,0,13)}" />...</td>
+																		value="${fn:substring(srDemand.ttl,0,12)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td id="ttl" class="text-left" style="font-size: 14px;"><c:out
@@ -316,19 +316,19 @@ table thead tr {
 														<td style="font-size: 14px;" class="text-left">${srDemand.instNm}</td>
 														<td style="font-size: 14px;"><c:if
 																test="${(srDemand.sttsNm) eq '요청'}">
-																<label class="badge badge-warning">${srDemand.sttsNm}</label>
+																<label class="badge badge-warning" style="font-size:15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
-																<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger" style="font-size:15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
-																<label class="badge badge-inverse-success">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-success" style="font-size:15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
-																<label class="badge badge-success">${srDemand.sttsNm}</label>
+																<label class="badge badge-success" style="font-size:15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
-																<label class="badge badge-primary">${srDemand.sttsNm}</label>
+																<label class="badge badge-primary" style="font-size:15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
-																<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger" style="font-size:15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
-																<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-primary" style="font-size:15px;">${srDemand.sttsNm}</label>
 															</c:if></td>
 														<td style="font-size: 13px;">${srDemand.dmndYmd}</td>
 														<td style="font-size: 13px;"><c:if
