@@ -253,7 +253,7 @@ table thead tr {
 						<h5 style="font-weight: bold;font-size: 20px">SR 요청 목록</h5>
 						<button type="submit" class="btn-sm btn" form="srSearchForm"
 							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
-							style="float: right; margin-right: 50px;background-color:transparent;padding:0px;">
+							style="float: right; margin-right: 50px; background-color: transparent; padding: 0px;">
 							<img
 								src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png"
 								width="30px;">
@@ -290,8 +290,8 @@ table thead tr {
 												<th class="text-left" style="font-size: 15px;">관련시스템</th>
 												<th class="text-left" style="font-size: 15px;">소속</th>
 												<th style="font-size: 15px;">진행상태</th>
-												<th style="font-size: 15px;">요청일</th>
-												<th style="font-size: 15px;">완료예정일</th>
+												<th style="font-size: 15px;">등록일</th>
+												<th style="font-size: 15px;">완료요청일</th>
 											</tr>
 										</thead>
 										<tbody id="dmndTbody">
@@ -425,7 +425,7 @@ table thead tr {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 font-weight-bold">요청일</div>
+											<div class="col col-sm-4 font-weight-bold">등록일</div>
 											<div class="col col-sm-8 dmndYmd">${sd.dmndYmd}</div>
 										</div>
 										<div class="col-sm-6 px-0">
@@ -456,15 +456,12 @@ table thead tr {
 												<div class=" sttsNm">${sd.sttsNm}</div>
 											</div>
 										</div>
-										<c:if test="${sd.sttsCd gt 1}">
+										<%-- <c:if test="${sd.sttsCd gt 1}">
 											<div class="col-sm-6 px-0">
 												<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
 												<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
 											</div>
-										</c:if>
-									</div>
-									<hr />
-									<div class="form-group row">
+										</c:if> --%>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
 											<div class="col col-sm-6">
@@ -570,7 +567,6 @@ table thead tr {
 
 	<!-- 모달 -->
 	<%@include file="/WEB-INF/views/history/approvalHistoryModal.jsp"%>
-	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
 
 </body>

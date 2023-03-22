@@ -388,7 +388,7 @@ table tbody td {
 												<th class="text-left" style="font-size: 15px; width: 200px;">SR명</th>
 												<th class="text-left" style="font-size: 15px;">시스템구분</th>
 												<th class="text-left" style="font-size: 15px;">업무구분</th>
-												<th style="font-size: 15px;">완료요청일 <c:if
+												<th style="font-size: 15px;">SR요청일 <c:if
 														test="${by eq 'DESC' || by eq '1'}">
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
@@ -423,9 +423,9 @@ table tbody td {
 														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srlist.ttl) > 10}">
+															<c:when test="${fn:length(srlist.ttl) > 13}">
 																<td class="text-left"><c:out
-																		value="${fn:substring(srlist.ttl,0,9)}" />...</td>
+																		value="${fn:substring(srlist.ttl,0,12)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td class="text-left"><c:out value="${srlist.ttl}" /></td>

@@ -352,7 +352,6 @@ table thead tr {
 	<!-- Page-body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 	<!-- 모달 -->
-	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
 </body>
 </html>
