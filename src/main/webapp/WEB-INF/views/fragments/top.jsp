@@ -158,13 +158,13 @@
 					</ul>
 					<ul class="nav-left" style="margin-left: 350px;">
 						<li
-							style="color: white; margin: auto; justify-content: center; font-weight: bolder; font-size: 18px;">
+							style="color: white; margin: auto; justify-content: center; font-weight: bold; font-size: 20px;">
 							세션 만료시간 <span id="loginTime" style="margin-left: 3px;"></span>
 						</li>
 					</ul>
 					<ul class="nav-left">
 						<li><button class="btn btn-sm btn-oti"
-								style="background-color: #92344B; margin-top: 10px; padding: 5px; border-color: white; border-width: 2;"
+								style="font-size: 20px; background-color: #92344B; margin-top: 20px; padding: 5px; border-color: white; border-width: 2;"
 								onclick="resetLoginTime()">로그인 시간 연장</button></li>
 					</ul>
 					<ul class="nav-right">

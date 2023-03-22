@@ -172,6 +172,9 @@ table th {
 table tbody td {
 	font-size: 13px !important;
 }
+label {
+	font-size:15px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/fragments/top.jsp"%>
@@ -347,7 +350,7 @@ table tbody td {
 			</div>
 			<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card" style="height: 760px;">
+				<div class="card" style="height: 820px;">
 					<div class="card-header">
 						<h5>SR 처리 목록</h5>
 						<button type="submit" class="btn btn-sm" form="srInfoFilterForm"
@@ -438,40 +441,40 @@ table tbody td {
 														<td><c:if test="${srlist.prgrsRt  ge 0}">
 																<c:if
 																	test="${(srlist.prgrsRt  ge 1) && (srlist.prgrsRt lt 10)}">
-																	<label class="badge badge-info">요구정의</label>
+																	<label class="badge badge-info"style="font-size:14px;">요구정의</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 10) && (srlist.prgrsRt lt 40)}">
-																	<label class="badge badge-warning">분석/설계</label>
+																	<label class="badge badge-warning"style="font-size:14px;">분석/설계</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 40) && (srlist.prgrsRt lt 70)}">
-																	<label class="badge badge-success">구현</label>
+																	<label class="badge badge-success"style="font-size:14px;">구현</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 70) && (srlist.prgrsRt lt 80)}">
-																	<label class="badge badge-inverse-success">테스트</label>
+																	<label class="badge badge-inverse-success"style="font-size:14px;">테스트</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 80) && (srlist.prgrsRt lt 90)}">
-																	<label class="badge badge-inverse-primary">반영요청</label>
+																	<label class="badge badge-inverse-primary"style="font-size:14px;">반영요청</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 90) && (srlist.prgrsRt lt 100)}">
-																	<label class="badge badge-primary">운영반영</label>
+																	<label class="badge badge-primary"style="font-size:14px;">운영반영</label>
 																</c:if>
 																<c:if test="${(srlist.prgrsRt eq 100)}">
-																	<label class="badge badge-primary">개발완료</label>
+																	<label class="badge badge-primary"style="font-size:14px;">개발완료</label>
 																</c:if>
 															</c:if> <c:if test="${srlist.prgrsRt eq 0}">
 																<c:if test="${(srlist.sttsNm) eq '접수'}">
-																	<label class="badge label-inverse-info">접수</label>
+																	<label class="badge label-inverse-info"style="font-size:14px;">접수</label>
 																</c:if>
 																<c:if test="${srlist.sttsNm eq '개발취소'}">
-																	<label class="badge badge-inverse-danger">개발취소</label>
+																	<label class="badge badge-inverse-danger"style="font-size:14px;">개발취소</label>
 																</c:if>
 																<c:if test="${srlist.sttsNm eq '반려'}">
-																	<label class="badge badge-danger">반려</label>
+																	<label class="badge badge-danger"style="font-size:14px;">반려</label>
 																</c:if>
 															</c:if></td>
 													</tr>
@@ -811,7 +814,7 @@ table tbody td {
 																			onclick="getDeliverablesTableRow(0)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress0()" id="btn0"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -834,9 +837,9 @@ table tbody td {
 																			onclick="getDeliverablesTableRow(1)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress1()" id="btn1"
-																		style="width: 90%; height: 90%">저장</button>
+																		style="width: 90%; height: 80%">저장</button>
 																</td>
 															</tr>
 
@@ -857,7 +860,7 @@ table tbody td {
 																			onclick="getDeliverablesTableRow(2)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress2()" id="btn2"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -882,7 +885,7 @@ table tbody td {
 																	</div>
 																</td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress3()" id="btn3"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -905,7 +908,7 @@ table tbody td {
 																			onclick="getDeliverablesTableRow(4)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress4()" id="btn4"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -928,7 +931,7 @@ table tbody td {
 																			onclick="getDeliverablesTableRow(5)">열기</button>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg radius"
 																		onclick="updateProgress5()" id="btn5"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -941,7 +944,7 @@ table tbody td {
 										</div>
 
 										<button class="btn btn-oti btn-sm" id="addbtn"
-											style="float: right;width:100%;">산출물
+											style="float: right;width:100%;font-size:20px;">산출물
 											추가</button>
 									</div>
 									<%-- *********************************** [ SR 히스토리  ] ***********************************--%>

@@ -80,7 +80,7 @@
 					<div class="col-4 " id="chg2">
 						<input type="date" id="HchgEndYmd" name="chgEndYmd"
 							style="width: 73%">
-					</div>
+					</div> 
 				</div>
 				<div class="row my-3">
 					<div class="col-2 font-weight-bold">제목 :</div>
@@ -100,7 +100,7 @@
 					</div>
 				</div>
 				<div align="center">
-					<button id="mBt" type="submit" class="btn btn-info center" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px">등록</button>
+					<button id="mBt" type="submit" class="btn btn-info center" style="font-weight: bold;font-size: 20px">등록</button>
 				</div>
 			</form>
 		</div>
