@@ -4,7 +4,7 @@
 
 <div class="modal" id="addSrResourcesModal">
 
-	<div class="modal-body modal-dialog modal-lg" style="height: 700px">
+	<div class="modal-body modal-dialog modal-lg" style="height: 800px">
 		<div class="m_head ">
 			<div class="modal_title font-weight-bold" style="color: white">자원정보</div>
 			<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
@@ -60,7 +60,8 @@
 						</div>
 						<div class="row my-3">
 							<div class="col-6">
-								<label for="schdlBgngYmd" class="font-weight-bold">투입 시작일 : </label>
+								<label for="schdlBgngYmd" class="font-weight-bold">투입
+									시작일 : </label>
 							</div>
 							<div class="col-6">
 								<input type="date" id="schdlBgngYmd" name="schdlBgngYmd">
@@ -68,25 +69,35 @@
 						</div>
 						<div class="row my-3">
 							<div class="col-6">
-								<label for="schdlEndYmd" class="font-weight-bold">투입 종료일 : </label>
+								<label for="schdlEndYmd" class="font-weight-bold">투입 종료일
+									: </label>
 							</div>
 							<div class="col-6">
 								<input type="date" id="schdlEndYmd" name="schdlEndYmd">
 							</div>
 						</div>
+
 					</form>
 				</div>
+			</div>
+			<div class="row">
+				<div id="scheduleTable"
+					style="margin: 10px 5px 5px 5px; width: 100%; height: 200px; border: 1px solid; overflow-y: scroll"></div>
 			</div>
 		</div>
 		<div class="m_footer bg-light">
 
-			<button id="addResourceBtn" onclick="addResource()" style = "margin-right:15px"
-				class="btn btn-oti save center font-weight-bold" data-dismiss="modal">확인</button>
-			<button id="modifyResourceBtn" style="display: none;margin-right:15px"
-				onclick="modifyResource()" class="btn btn-oti save center font-weight-bold"
+			<button id="addResourceBtn" onclick="addResource()"
+				style="margin-right: 15px"
+				class="btn btn-oti save center font-weight-bold"
+				data-dismiss="modal">확인</button>
+			<button id="modifyResourceBtn"
+				style="display: none; margin-right: 15px" onclick="modifyResource()"
+				class="btn btn-oti save center font-weight-bold"
 				data-dismiss="modal">수정</button>
 
-			<button class="btn btn-oti danger cancle font-weight-bold" data-dismiss="modal">닫기</button>
+			<button class="btn btn-oti danger cancle font-weight-bold"
+				data-dismiss="modal">닫기</button>
 
 		</div>
 	</div>
