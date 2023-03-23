@@ -218,7 +218,7 @@ function goAccept(dmndNo) {
       dataType : "json",
       success : function(res) {
          //alert(res.result);
-    	 location.href="/srdemand/list";
+    	 location.href="admin/srdemand/list";
       },
       error : function(error) {
          console.log(error);

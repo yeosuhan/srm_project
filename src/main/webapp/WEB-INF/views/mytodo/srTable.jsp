@@ -30,7 +30,7 @@ font-size: 15px !important;
 				<th width="15%" class="text-left">시스템구분</th>
 				<th width="15%" class="text-left">업무구분</th>
 				<th width="25%" class="text-left">제목</th>
-				<c:if test="${sttsCd ne 0}">
+				<c:if test="${sttsCd gt 1}">
 					<th width="7%" class="text-center">담당자</th>
 				</c:if>
 				<th width="10%" class="text-center">완료요청일</th>
@@ -65,7 +65,7 @@ font-size: 15px !important;
 						<td id="ttl" class="text-left"><c:out value="${sr.ttl}" /></td>
 					</c:otherwise>
 				</c:choose>
-				<c:if test="${sttsCd ne 0}">
+				<c:if test="${sttsCd gt 1}">
 					<td id="picNm" class="text-center">${sr.picNm}</td>
 				</c:if>
 				<td id="cmptnDmndYmd" class="text-center text-center">${sr.cmptnDmndYmd}</td>
