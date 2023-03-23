@@ -848,11 +848,9 @@ label {
 																	type="number" class="form-control" id="SRPgPrgrsRt0"
 																	min="1" max="10" placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button
-																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(0)">열기</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(0)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg"
@@ -873,11 +871,9 @@ label {
 																	type="number" class="form-control" id="SRPgPrgrsRt1"
 																	min="11" max="40"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button
-																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(1)">열기</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(1)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg"
@@ -898,11 +894,9 @@ label {
 																	type="number" class="form-control" id="SRPgPrgrsRt2"
 																	min="41" max="70"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button
-																			class="btn btn-sm btn-primary text-center font-weight-bold"
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(2)">열기</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(2)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg"
@@ -924,11 +918,9 @@ label {
 																	min="71" max="80"></td>
 																<td>
 																	<div class="accordion" id="accordionExample">
-																		<button
-																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(3)">열기</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(3)"></i>
 																	</div>
 																</td>
 																<td style="padding: 0px; margin: 0px;">
@@ -950,11 +942,9 @@ label {
 																	type="number" class="form-control" id="SRPgPrgrsRt4"
 																	min="81" max="90"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button
-																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(4)">열기</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(4)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg"
@@ -975,11 +965,9 @@ label {
 																	type="number" class="form-control" id="SRPgPrgrsRt5"
 																	min="91" max="100"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button
-																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(5)">열기</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(5)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg radius"

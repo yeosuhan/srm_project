@@ -79,7 +79,7 @@
 				</div>
 			</div>
 			<div class= "row">
-				<div id="scheduleTable" style="margin:10px 5px 5px 5px;width:100%;height:200px;border:1px solid; overflow-y:scroll"></div>
+				<div id="scheduleTable" style="margin:10px 5px 5px 5px;width:100%; "></div>
 			</div>
 		</div>
 		<div class="m_footer bg-light">

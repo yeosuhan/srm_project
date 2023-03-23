@@ -58,8 +58,12 @@ $(document).ready(function(){
 	       $("#modifyResourceBtn").css("display","none");
 	         
 	       $("#empId").attr("disabled",false);
+	       $("#addSrResourceModalDept").attr("disabled",false);
 	   }
 	   $("#scheduleTable").empty();
+	   $("#scheduleTable").css("border","");
+	   $("#scheduleTable").css("height","");
+	   $("#addSrResourceModalDept").show();
    });
    
    /*자원 정보 수정값 입력시*/
@@ -114,42 +118,51 @@ function showSchedule(){
       data:{empId:empId},
       success:function(result){
     	  
-    	  $("#scheduleTable").html(
-    			  "<table class='table table-striped'>" +
-    			  "	<thead>" +
-    			  "		<tr>" +
-    			  "			<th>" +
-    			  "				SR명" +
-    			  "			</th>" +
-    			  "			<th>" +
-    			  "				시작일" +
-    			  "			</th>" +
-    			  "			<th>" +
-    			  "				종료일" +
-    			  "			</th>" +
-    			  "		</tr>" +
-    			  "	</thead>" +
-    			  "	<tbody></tbody>" +
-    			  "</table>"
-    	  );
     	  
          //이벤트 제거
          calendar.getEvents().forEach((value)=>{
             //console.log(value);
             value.remove();
          });
-         //이벤트 추가
-         //console.log(result);
-         result.forEach((value)=>{
-            calendar.addEvent(value);
-            $("#scheduleTable tbody").append(
-            		"<tr>" +
-            		"	<td>"+value.title+"</td>" +
-            		"	<td>"+value.start +"</td>"+
-            		"	<td>"+value.end +"</td>"+
-            		"</tr>"
-            	);
-         });
+         if(result.length != 0){
+        	 $("#scheduleTable").css("border","1px solid");
+	       	 $("#scheduleTable").css("height","200px");
+	       	 $("#scheduleTable").html(
+	       			  "<table class='table table-striped m-0'>" +
+	       			  "	<thead>" +
+	       			  "		<tr>" +
+	       			  "			<th style='text-align:left; width:544px;padding-left:10px'>" +
+	       			  "				SR명" +
+	       			  "			</th>" +
+	       			  "			<th>" +
+	       			  "				시작일" +
+	       			  "			</th>" +
+	       			  "			<th>" +
+	       			  "				종료일" +
+	       			  "			</th>" +
+	       			  "		</tr>" +
+	       			  "	</thead>" +
+	       			  "</table>" +
+	       			  "<div style='height:150px;overflow-y:scroll'>"+
+	       			  "	<table class='table table-striped'>" +
+	       			  "		<tbody></tbody>" +
+	       			  "	</table>" +
+	       			  "</div>" 
+	       	 );
+	         //이벤트 추가
+	         //console.log(result);
+	         result.forEach((value)=>{
+	            calendar.addEvent(value);
+	            $("#scheduleTable tbody").append(
+	            		"<tr>" +
+	            		"	<td style='width:544px'>"+value.title+"</td>" +
+	            		"	<td style='text-align:center'>"+value.start +"</td>"+
+	            		"	<td style='text-align:center'>"+value.end +"</td>"+
+	            		"</tr>"
+	            	);
+	         });
+	         
+         }
          $(".fc-event-time").empty();
       }
    });
@@ -223,7 +236,13 @@ function openUpdateResourceModal(srSrc,empId,ptcptnRoleCd){
 	
 	//개발자
 	$("#addSrResourceModalDept").attr("disabled",true);
-	$("#empId option[value='"+empId+"']").prop("selected",true);
+	if($("#empId option[value='"+empId+"']").length!=0){
+		$("#empId option[value='"+empId+"']").prop("selected",true);
+	}else{
+		$("#addSrResourceModalDept").hide();
+		$("#empId").append("<option value = "+empId+">"+empId+"</option>");
+		$("#empId option[value='"+empId+"']").prop("selected",true);
+	}
 	showSchedule();
 	$("#empId").attr("disabled",true);
 	
