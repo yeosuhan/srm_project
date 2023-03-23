@@ -18,7 +18,7 @@ public interface ISrInformationHistoryDao {
 	 * @author 최은종
 	 */
 	public List<SrInformationHistory> selectBySrNo(@Param("pager") Pager pager, @Param("srNo") String srNo);
-	
+
 	public List<SrInformationHistory> selectForClientBySrNo(@Param("srNo") String srNo, @Param("pager") Pager pager);
 
 	/**
@@ -27,7 +27,9 @@ public interface ISrInformationHistoryDao {
 	 * @author 최은종
 	 */
 	public int countAllForEmp(@Param("srNo") String srNo);
+
 	public int countAllForClient(@Param("srNo") String srNo);
+
 	/**
 	 * SR처리 히스토리 상세 조회 메서드
 	 * 
@@ -36,12 +38,12 @@ public interface ISrInformationHistoryDao {
 	public SrHistoryDetailDto selectByHstryId(@Param("hstryId") int hstryId);
 
 	/**
-	 * SR처리 히스토리 등록 메서드 
+	 * SR처리 히스토리 등록 메서드
 	 * 
 	 * @author 최은종
 	 */
 	public void insertSrHistory(SrInformationHistory srInformationHistory);
-	
+
 	/**
 	 * SR처리 히스토리 상태 업데이트 메서드
 	 * 
@@ -55,25 +57,33 @@ public interface ISrInformationHistoryDao {
 	 * @author 최은종
 	 */
 	public int updateHstry(SrInformationHistory srInformationHistory);
-	
+
 	/**
 	 * 나의 할 일에서 히스토리 목록 조회 메서드
 	 * 
 	 * @author 최은종
 	 */
 	public List<MyTodoHistoryListDto> selectHstryTodoByPicId(@Param("pager") Pager pager, @Param("picId") String picId);
-	public List<MyTodoHistoryListDto> selectHstryTodoByEmpId(@Param("pager") Pager pager, @Param("rqstrId") String rqstrId, @Param("empId") String empId);
-	public List<MyTodoHistoryListDto> selectHstryTodoByCustId(@Param("pager") Pager pager, @Param("custId") String custId);
-	
-	/* 새로 insert된 히스토리 아이디를 조회(알람 전송에 필요)
-	 * @author 안한길
-	 * */
-	public int selectLastHstryIdByRqstrId(@Param("rqstrId")String rqstrId);
 
-	/* 받은 요청에 대한 발신자 조회
+	public List<MyTodoHistoryListDto> selectHstryTodoByEmpId(@Param("pager") Pager pager,
+			@Param("rqstrId") String rqstrId, @Param("empId") String empId);
+
+	public List<MyTodoHistoryListDto> selectHstryTodoByCustId(@Param("pager") Pager pager,
+			@Param("custId") String custId);
+
+	/*
+	 * 새로 insert된 히스토리 아이디를 조회(알람 전송에 필요)
+	 * 
 	 * @author 안한길
-	 * */
-	public String selectRqstrIdByHstryId(@Param("hstryId")int hstryId);
+	 */
+	public int selectLastHstryIdByRqstrId(@Param("rqstrId") String rqstrId);
+
+	/*
+	 * 받은 요청에 대한 발신자 조회
+	 * 
+	 * @author 안한길
+	 */
+	public String selectRqstrIdByHstryId(@Param("hstryId") int hstryId);
 
 	/**
 	 * 나의 할 일에서 히스토리 목록 페이징 메서드
@@ -81,13 +91,16 @@ public interface ISrInformationHistoryDao {
 	 * @author 최은종
 	 */
 	public int countTodoForAdmin(@Param("picId") String picId);
+
 	public int countTodoForDev(@Param("rqstrId") String rqstrId, @Param("empId") String empId);
+
 	public int countTodoForCust(@Param("custId") String custId);
-	
+
 	/**
 	 * 개발자 : 내가 자원으로 들어가있고 투입종료 이전일 때만 sr요청 버튼 보이게 하기 위한 메서드
 	 * 
 	 * @author 최은종
 	 */
-	public List<SrResourceAddHistoryDto> selectDmndNoBySrResouce(@Param("dmndNo") String dmndNo, @Param("empId") String empId);
+	public List<SrResourceAddHistoryDto> selectDmndNoBySrResouce(@Param("dmndNo") String dmndNo,
+			@Param("empId") String empId);
 }

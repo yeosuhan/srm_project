@@ -19,62 +19,64 @@
       WHERE DMND_NO LIKE #{srCode}
    </select>
 
-	<!-- 고객의 나의 요청 목록 조회 -->
-	<select id="selectByCustId" parameterType="map"
-		resultType="srDemand">
-		SELECT
-			DISTINCT DMND_NO as dmndNo ,
-			TTL as ttl ,
-			SYS_NM as sysNm ,
-			clientNm as custNm ,
-			INST_NM as instNm ,
-			STTS_NM as sttsNm ,
-			DMND_YMD as dmndYmd ,
-			c.flnm as rvwrNm ,
-			END_YMD as endYmd
-			from ( SELECT
-			DISTINCT sd.DMND_NO ,
-			sd.TTL ,
-			sy.SYS_NM ,
-			m.flnm as clientNm ,
-			i.INST_NM ,
-			sd.rvwr_id ,
-			s.STTS_NM ,
-			sd.DMND_YMD ,
-			si.END_YMD
-		FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
-			sr_information si
-			
-		WHERE sd.CUST_ID = #{custId}
-			and sd.DEL_YN = 0
-			and sd.cust_id = m.member_id
-			and m.inst_cd = i.inst_cd
-			and sd.stts_cd = s.stts_cd
-			and sd.sys_cd = sy.sys_cd
-			and sd.dmnd_no = si.dmnd_no (+)
-			<if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
-	  		<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
-			<if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
-			<if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
-			<if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
-			<if test="srFilterDto.keyWord!=null">
-				and (
-				sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
-				sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
-				sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
-				sd.cn like '%'||#{srFilterDto.keyWord}||'%'
-			)</if>
-			
-		) w , members c
-		where w.rvwr_id = c.member_id(+)
-		<if test="sort=='DESC'">
-		order by dmndNo DESC
-		</if>
-		<if test="sort=='ASC'">
-		order by dmndNo ASC
-		</if>
-		OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
-	</select>
+   <!-- 고객의 나의 요청 목록 조회 -->
+   <select id="selectByCustId" parameterType="map"
+      resultType="srDemand">
+      SELECT
+         DISTINCT DMND_NO as dmndNo ,
+         TTL as ttl ,
+         SYS_NM as sysNm ,
+         clientNm as custNm ,
+         INST_NM as instNm ,
+         STTS_NM as sttsNm ,
+         DMND_YMD as dmndYmd ,
+         c.flnm as rvwrNm ,
+         END_YMD as endYmd ,
+         CMPTN_DMND_YMD as cmptnDmndYmd
+         from ( SELECT
+         DISTINCT sd.DMND_NO ,
+         sd.TTL ,
+         sy.SYS_NM ,
+         m.flnm as clientNm ,
+         i.INST_NM ,
+         sd.rvwr_id ,
+         s.STTS_NM ,
+         sd.DMND_YMD ,
+         si.END_YMD,
+         sd.CMPTN_DMND_YMD 
+      FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
+         sr_information si
+         
+      WHERE sd.CUST_ID = #{custId}
+         and sd.DEL_YN = 0
+         and sd.cust_id = m.member_id
+         and m.inst_cd = i.inst_cd
+         and sd.stts_cd = s.stts_cd
+         and sd.sys_cd = sy.sys_cd
+         and sd.dmnd_no = si.dmnd_no (+)
+         <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+           <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
+         <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
+         <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
+         <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
+         <if test="srFilterDto.keyWord!=null">
+            and (
+            sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+            sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+            sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
+            sd.cn like '%'||#{srFilterDto.keyWord}||'%'
+         )</if>
+         
+      ) w , members c
+      where w.rvwr_id = c.member_id(+)
+      <if test="sort=='DESC'">
+      order by dmndNo DESC
+      </if>
+      <if test="sort=='ASC'">
+      order by dmndNo ASC
+      </if>
+      OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
+   </select>
 
    <!-- SR요청 상세 정보 -->
    <select id="selectDetailByDmndNo" parameterType="string"
@@ -210,18 +212,18 @@
       WHERE CUST_ID=#{clientId}
          and DEL_YN = 0
          <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
-  		<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
-		 <if test="srFilterDto.sttsCd!=null">and stts_cd = #{srFilterDto.sttsCd}</if>
-		 <if test="srFilterDto.sysCd!=null">and sys_cd = #{srFilterDto.sysCd}</if>
-		 <if test="srFilterDto.taskSeCd!=null">and task_se_cd = #{srFilterDto.taskSeCd}</if>
-		 <if test="srFilterDto.keyWord!=null">
-			 and (
-			 dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
-			 rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
-			 ttl like '%'||#{srFilterDto.keyWord}||'%' or
-			 cn like '%'||#{srFilterDto.keyWord}||'%'
-		 )</if>
-		 
+        <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
+       <if test="srFilterDto.sttsCd!=null">and stts_cd = #{srFilterDto.sttsCd}</if>
+       <if test="srFilterDto.sysCd!=null">and sys_cd = #{srFilterDto.sysCd}</if>
+       <if test="srFilterDto.taskSeCd!=null">and task_se_cd = #{srFilterDto.taskSeCd}</if>
+       <if test="srFilterDto.keyWord!=null">
+          and (
+          dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+          rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+          ttl like '%'||#{srFilterDto.keyWord}||'%' or
+          cn like '%'||#{srFilterDto.keyWord}||'%'
+       )</if>
+       
    </select>
 
    <!-- 관리자의 모든 요청의 총 행의 수 구하기 -->
@@ -231,18 +233,18 @@
       
       WHERE DEL_YN = 0
       <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
-	  <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
-	  <if test="srFilterDto.sttsCd!=null">and stts_cd = #{srFilterDto.sttsCd}</if>
-	  <if test="srFilterDto.sysCd!=null">and sys_cd = #{srFilterDto.sysCd}</if>
-	  <if test="srFilterDto.taskSeCd!=null">and task_se_cd = #{srFilterDto.taskSeCd}</if>
-	  <if test="srFilterDto.keyWord!=null">
-		  and (
-		  dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
-		  rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
-		  ttl like '%'||#{srFilterDto.keyWord}||'%' or
-		  cn like '%'||#{srFilterDto.keyWord}||'%'
-	  )</if>
-	  
+     <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
+     <if test="srFilterDto.sttsCd!=null">and stts_cd = #{srFilterDto.sttsCd}</if>
+     <if test="srFilterDto.sysCd!=null">and sys_cd = #{srFilterDto.sysCd}</if>
+     <if test="srFilterDto.taskSeCd!=null">and task_se_cd = #{srFilterDto.taskSeCd}</if>
+     <if test="srFilterDto.keyWord!=null">
+        and (
+        dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+        rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+        ttl like '%'||#{srFilterDto.keyWord}||'%' or
+        cn like '%'||#{srFilterDto.keyWord}||'%'
+     )</if>
+     
    </select>
 
    <!--관리자 모든 요청 목록 가져오기 -->
@@ -257,7 +259,8 @@
          STTS_NM as sttsNm ,
          DMND_YMD as dmndYmd ,
          c.flnm as rvwrNm ,
-         END_YMD as endYmd
+         END_YMD as endYmd,
+         cmptnDmndYmd
          from ( SELECT
          DISTINCT sd.DMND_NO ,
          sd.TTL ,
@@ -267,7 +270,8 @@
          sd.rvwr_id ,
          s.STTS_NM ,
          sd.DMND_YMD ,
-         si.END_YMD
+         si.END_YMD ,
+         sd.CMPTN_DMND_YMD as cmptnDmndYmd
       FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
             sr_information si
             
@@ -277,27 +281,27 @@
          and sd.stts_cd = s.stts_cd
          and sd.sys_cd = sy.sys_cd
          and sd.dmnd_no = si.dmnd_no(+)
-		 <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
-	  	 <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
-		 <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
-		 <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
-		 <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
-		 <if test="srFilterDto.keyWord!=null">
-			 and (
-			 sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
-			 sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
-			 sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
-			 sd.cn like '%'||#{srFilterDto.keyWord}||'%'
-		 )</if>
-		
+       <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+         <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
+       <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
+       <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
+       <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
+       <if test="srFilterDto.keyWord!=null">
+          and (
+          sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+          sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+          sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
+          sd.cn like '%'||#{srFilterDto.keyWord}||'%'
+       )</if>
+      
       ) w , members c
       where w.rvwr_id = c.member_id(+)
      <if test="sort=='DESC'">
-		order by dmndNo DESC
-		</if>
-		<if test="sort=='ASC'">
-		order by dmndNo ASC
-		</if>
+      order by dmndNo DESC
+      </if>
+      <if test="sort=='ASC'">
+      order by dmndNo ASC
+      </if>
       OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
    </select>
 
@@ -446,82 +450,82 @@
       OFFSET #{pager.startRowNo}-1 ROWS FETCH NEXT #{pager.rowsPerPage} ROWS ONLY
    </select>
    <!-- 반영요청 수락하기 -->
-	<update id="updateSrdemandStts" parameterType="string">
-		UPDATE
-			SR_DEMAND
-		SET
-			STTS_CD = 5
-		WHERE
-			DMND_NO = #{dmndNo}
-	</update>
-	
-	<!-- srNo를 통해 요청자 id조회 -->
-	<select id="selectBySrNo" parameterType="string" resultType="string">
-		SELECT
-			sd.CUST_ID as custId
-		FROM
-			SR_DEMAND sd , SR_INFORMATION si
-		WHERE
-			sd.DMND_NO = si.DMND_NO AND
-			si.SR_NO = #{srNo}
-	</select>
-	<!-- 고객의 요청 목록 엑셀용 추출 -->
-	<select id="selectMyInfoAllToExcel" parameterType="map"
-		resultType="srDemand">
-		SELECT
-			DISTINCT DMND_NO as dmndNo ,
-			TTL as ttl ,
-			SYS_NM as sysNm ,
-			clientNm as custNm ,
-			INST_NM as instNm ,
-			STTS_NM as sttsNm ,
-			DMND_YMD as dmndYmd ,
-			c.flnm as rvwrNm ,
-			END_YMD as endYmd
-			from ( SELECT
-			DISTINCT sd.DMND_NO ,
-			sd.TTL ,
-			sy.SYS_NM ,
-			m.flnm as clientNm ,
-			i.INST_NM ,
-			sd.rvwr_id ,
-			s.STTS_NM ,
-			sd.DMND_YMD ,
-			si.END_YMD
-		FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
-			sr_information si
-			
-		WHERE sd.CUST_ID = #{custId}
-			and sd.DEL_YN = 0
-			and sd.cust_id = m.member_id
-			and m.inst_cd = i.inst_cd
-			and sd.stts_cd = s.stts_cd
-			and sd.sys_cd = sy.sys_cd
-			and sd.dmnd_no = si.dmnd_no (+)
-			<if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
-	  		<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
-			<if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
-			<if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
-			<if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
-			<if test="srFilterDto.keyWord!=null">
-				and (
-				sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
-				sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
-				sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
-				sd.cn like '%'||#{srFilterDto.keyWord}||'%'
-			)</if>
-			
-		) w , members c
-		where w.rvwr_id = c.member_id(+)
-		<if test="sort=='DESC'">
-		order by dmndNo DESC
-		</if>
-		<if test="sort=='ASC'">
-		order by dmndNo ASC
-		</if>
-	</select>
-	
-	<!-- 관리자의 모든 요청 목록 엑셀용 추출 -->
+   <update id="updateSrdemandStts" parameterType="string">
+      UPDATE
+         SR_DEMAND
+      SET
+         STTS_CD = 5
+      WHERE
+         DMND_NO = #{dmndNo}
+   </update>
+   
+   <!-- srNo를 통해 요청자 id조회 -->
+   <select id="selectBySrNo" parameterType="string" resultType="string">
+      SELECT
+         sd.CUST_ID as custId
+      FROM
+         SR_DEMAND sd , SR_INFORMATION si
+      WHERE
+         sd.DMND_NO = si.DMND_NO AND
+         si.SR_NO = #{srNo}
+   </select>
+   <!-- 고객의 요청 목록 엑셀용 추출 -->
+   <select id="selectMyInfoAllToExcel" parameterType="map"
+      resultType="srDemand">
+      SELECT
+         DISTINCT DMND_NO as dmndNo ,
+         TTL as ttl ,
+         SYS_NM as sysNm ,
+         clientNm as custNm ,
+         INST_NM as instNm ,
+         STTS_NM as sttsNm ,
+         DMND_YMD as dmndYmd ,
+         c.flnm as rvwrNm ,
+         END_YMD as endYmd
+         from ( SELECT
+         DISTINCT sd.DMND_NO ,
+         sd.TTL ,
+         sy.SYS_NM ,
+         m.flnm as clientNm ,
+         i.INST_NM ,
+         sd.rvwr_id ,
+         s.STTS_NM ,
+         sd.DMND_YMD ,
+         si.END_YMD
+      FROM SR_DEMAND sd, MEMBERS m, INSTITUTION i , STATUS s, SYSTEMS sy,
+         sr_information si
+         
+      WHERE sd.CUST_ID = #{custId}
+         and sd.DEL_YN = 0
+         and sd.cust_id = m.member_id
+         and m.inst_cd = i.inst_cd
+         and sd.stts_cd = s.stts_cd
+         and sd.sys_cd = sy.sys_cd
+         and sd.dmnd_no = si.dmnd_no (+)
+         <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+           <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
+         <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
+         <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
+         <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
+         <if test="srFilterDto.keyWord!=null">
+            and (
+            sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+            sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+            sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
+            sd.cn like '%'||#{srFilterDto.keyWord}||'%'
+         )</if>
+         
+      ) w , members c
+      where w.rvwr_id = c.member_id(+)
+      <if test="sort=='DESC'">
+      order by dmndNo DESC
+      </if>
+      <if test="sort=='ASC'">
+      order by dmndNo ASC
+      </if>
+   </select>
+   
+   <!-- 관리자의 모든 요청 목록 엑셀용 추출 -->
    <select id="selectAdAllSrDemand" parameterType="string"
       resultType="srDemand">
       SELECT
@@ -553,68 +557,68 @@
          and sd.stts_cd = s.stts_cd
          and sd.sys_cd = sy.sys_cd
          and sd.dmnd_no = si.dmnd_no(+)
-		 <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
-	  	<if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
-		 <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
-		 <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
-		 <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
-		 <if test="srFilterDto.keyWord!=null">
-			 and (
-			 sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
-			 sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
-			 sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
-			 sd.cn like '%'||#{srFilterDto.keyWord}||'%'
-		 )</if>
-		 
+       <if test="srFilterDto.dmndYmdStart!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') >= TO_DATE(#{srFilterDto.dmndYmdStart},'YYYY-MM-DD')]]></if>
+        <if test="srFilterDto.dmndYmdEnd!=null"><![CDATA[and TO_DATE(TO_CHAR(DMND_YMD,'YYYY-MM-DD'),'YYYY-MM-DD') <= TO_DATE(#{srFilterDto.dmndYmdEnd},'YYYY-MM-DD')]]></if>
+       <if test="srFilterDto.sttsCd!=null">and sd.stts_cd = #{srFilterDto.sttsCd}</if>
+       <if test="srFilterDto.sysCd!=null">and sd.sys_cd = #{srFilterDto.sysCd}</if>
+       <if test="srFilterDto.taskSeCd!=null">and sd.task_se_cd = #{srFilterDto.taskSeCd}</if>
+       <if test="srFilterDto.keyWord!=null">
+          and (
+          sd.dmnd_no like '%'||#{srFilterDto.keyWord}||'%' or
+          sd.rvwr_id like '%'||#{srFilterDto.keyWord}||'%' or
+          sd.ttl like '%'||#{srFilterDto.keyWord}||'%' or
+          sd.cn like '%'||#{srFilterDto.keyWord}||'%'
+       )</if>
+       
       ) w , members c
       where w.rvwr_id = c.member_id(+)
      <if test="sort=='DESC'">
-		order by dmndNo DESC
-		</if>
-		<if test="sort=='ASC'">
-		order by dmndNo ASC
-		</if>
+      order by dmndNo DESC
+      </if>
+      <if test="sort=='ASC'">
+      order by dmndNo ASC
+      </if>
    </select>
    <!-- 행번호 조회 -->
    <select id="selectRowNumByDmndNo" parameterType="map" resultType="srDmndRowNum">
-   		SELECT  rn,  dmndNo
-		from(
-		    select rownum as rn, dmndNo
-		    from
-		    (
-		        select 
-		           DMND_NO AS dmndNo
-		      	FROM  SR_DEMAND 
-		      	WHERE CUST_ID = #{custId}
-		      	order by DMND_YMD DESC
-		     )        
-		 ) 
-	     WHERE dmndNo = #{dmndNo} 
+         SELECT  rn,  dmndNo
+      from(
+          select rownum as rn, dmndNo
+          from
+          (
+              select 
+                 DMND_NO AS dmndNo
+               FROM  SR_DEMAND 
+               WHERE CUST_ID = #{custId}
+               order by DMND_YMD DESC
+           )        
+       ) 
+        WHERE dmndNo = #{dmndNo} 
    </select>
    <!-- 행번호 조회 -->
    <select id="selectRowNumByHstryId" parameterType="map" resultType="srDmndRowNum">
-   		SELECT  rn,  dmndNo, srNo
-		 from
-		 (
-			    select rownum as rn, dmndNo, srNo
-			    from
-			    (
-			        select 
-			          SI.DMND_NO AS dmndNo,
-			          SI.SR_NO AS srNo
-			      	FROM SR_INFORMATION SI, SR_DEMAND SD 
-			      	where si.dmnd_no(+) = sd.dmnd_no and
-			      	CUST_ID = #{custId}
-			      	order by SD.DMND_YMD DESC
-			    )        
-		  ) a  , sr_information_history his
-	      WHERE his.HSTRY_ID = #{hstryId}
-	      and  his.sr_no = a.srNo  
+         SELECT  rn,  dmndNo, srNo
+       from
+       (
+             select rownum as rn, dmndNo, srNo
+             from
+             (
+                 select 
+                   SI.DMND_NO AS dmndNo,
+                   SI.SR_NO AS srNo
+                  FROM SR_INFORMATION SI, SR_DEMAND SD 
+                  where si.dmnd_no(+) = sd.dmnd_no and
+                  CUST_ID = #{custId}
+                  order by SD.DMND_YMD DESC
+             )        
+        ) a  , sr_information_history his
+         WHERE his.HSTRY_ID = #{hstryId}
+         and  his.sr_no = a.srNo  
    </select>
    
    <!-- 요청 검토자 아이디 조회 -->
-	<select id="selectRvwrId" parameterType="String" resultType="String">
-		SELECT RVWR_ID as rvwrId FROM  SR_DEMAND WHERE DMND_NO = #{dmndNo}
-	</select>
+   <select id="selectRvwrId" parameterType="String" resultType="String">
+      SELECT RVWR_ID as rvwrId FROM  SR_DEMAND WHERE DMND_NO = #{dmndNo}
+   </select>
    
 </mapper>

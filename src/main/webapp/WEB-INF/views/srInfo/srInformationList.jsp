@@ -39,23 +39,23 @@
 <%-- 히스토리id가 있는경우 탭을 열고 해당위치로 이동 --%>
    <c:if test="${hstryId ne null}">
    $(function(){
-	   
-  		var trId = "tr"+${hstryId};
-  		console.log(trId);
-  		$("#"+trId).trigger("click");
- 	    $("#srInfoDetailTab").trigger("click");
-  		$("#srInfhistoryTab").trigger("click"); 
-  		
+      
+        var trId = "tr"+${hstryId};
+        console.log(trId);
+        $("#"+trId).trigger("click");
+        $("#srInfoDetailTab").trigger("click");
+        $("#srInfhistoryTab").trigger("click"); 
+        
    });
 
    </c:if>
    <c:if test="${rownum ne null}">
    $(function(){
-	   
-  		var trId = "tr"+${rownum};
-  		
-  		$("#"+trId).trigger("click");
-  		
+      
+        var trId = "tr"+${rownum};
+        
+        $("#"+trId).trigger("click");
+        
    });
 
    </c:if>
@@ -172,17 +172,19 @@ table th {
 table tbody td {
 	font-size: 15px !important;
 }
+
 label {
-	font-size:15px;
+	font-size: 15px;
 }
+
 .fontWrapper {
-   width:100%; 
-   display: block;/* 블록태그로 만들어준다 */
-   text-overflow: ellipsis;/* 말줄임 css */
-   white-space: nowrap;/*글자를 한줄로 모아준다*/
-   overflow: hidden;
-   background:pink;/*실제 글자 영역 상태 확인하기 위함*/
-   margin-right: 0;
+	width: 100%;
+	display: block; /* 블록태그로 만들어준다 */
+	text-overflow: ellipsis; /* 말줄임 css */
+	white-space: nowrap; /*글자를 한줄로 모아준다*/
+	overflow: hidden;
+	background: pink; /*실제 글자 영역 상태 확인하기 위함*/
+	margin-right: 0;
 }
 </style>
 <body>
@@ -361,13 +363,15 @@ label {
 			<div class="col-xl-8 col-md-12">
 				<div class="card" style="height: 820px;">
 					<div class="card-header">
-						<h5 style="font-weight: bold;font-size: 20px">SR 처리 목록</h5>
+						<h5 style="font-weight: bold; font-size: 20px">SR 처리 목록</h5>
 						<button type="submit" class="btn btn-sm" form="srInfoFilterForm"
-									onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
-									style="float: right; margin-right: 50px; background-color:transparent;padding:0px;">
-									<img src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png" width="30px;">
-									</button>
-									
+							onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
+							style="float: right; margin-right: 50px; background-color: transparent; padding: 0px;">
+							<img
+								src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png"
+								width="30px;">
+						</button>
+
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -427,7 +431,7 @@ label {
 												<th style="font-size: 15px;">진행상태</th>
 											</tr>
 										</thead>
-										<tbody style="font-size:15px !important;">
+										<tbody style="font-size: 15px !important;">
 											<c:if test="${srlist ne null}">
 												<c:forEach var="srlist" items="${srlist}" varStatus="num">
 													<tr id="tr${pager.startRowNo + num.index}"
@@ -450,40 +454,50 @@ label {
 														<td><c:if test="${srlist.prgrsRt  ge 0}">
 																<c:if
 																	test="${(srlist.prgrsRt  ge 1) && (srlist.prgrsRt lt 10)}">
-																	<label class="badge badge-info"style="font-size:14px;">요구정의</label>
+																	<label class="badge badge-info"
+																		style="font-size: 14px;">요구정의</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 10) && (srlist.prgrsRt lt 40)}">
-																	<label class="badge badge-warning"style="font-size:14px;">분석/설계</label>
+																	<label class="badge badge-warning"
+																		style="font-size: 14px;">분석/설계</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 40) && (srlist.prgrsRt lt 70)}">
-																	<label class="badge badge-success"style="font-size:14px;">구현</label>
+																	<label class="badge badge-success"
+																		style="font-size: 14px;">구현</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 70) && (srlist.prgrsRt lt 80)}">
-																	<label class="badge badge-inverse-success"style="font-size:14px;">테스트</label>
+																	<label class="badge badge-inverse-success"
+																		style="font-size: 14px;">테스트</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 80) && (srlist.prgrsRt lt 90)}">
-																	<label class="badge badge-inverse-primary"style="font-size:14px;">반영요청</label>
+																	<label class="badge badge-inverse-primary"
+																		style="font-size: 14px;">반영요청</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 90) && (srlist.prgrsRt lt 100)}">
-																	<label class="badge badge-primary"style="font-size:14px;">운영반영</label>
+																	<label class="badge badge-primary"
+																		style="font-size: 14px;">운영반영</label>
 																</c:if>
 																<c:if test="${(srlist.prgrsRt eq 100)}">
-																	<label class="badge badge-primary"style="font-size:14px;">개발완료</label>
+																	<label class="badge badge-primary"
+																		style="font-size: 14px;">개발완료</label>
 																</c:if>
 															</c:if> <c:if test="${srlist.prgrsRt eq 0}">
 																<c:if test="${(srlist.sttsNm) eq '접수'}">
-																	<label class="badge label-inverse-info"style="font-size:14px;">접수</label>
+																	<label class="badge label-inverse-info"
+																		style="font-size: 14px;">접수</label>
 																</c:if>
 																<c:if test="${srlist.sttsNm eq '개발취소'}">
-																	<label class="badge badge-inverse-danger"style="font-size:14px;">개발취소</label>
+																	<label class="badge badge-inverse-danger"
+																		style="font-size: 14px;">개발취소</label>
 																</c:if>
 																<c:if test="${srlist.sttsNm eq '반려'}">
-																	<label class="badge badge-danger"style="font-size:14px;">반려</label>
+																	<label class="badge badge-danger"
+																		style="font-size: 14px;">반려</label>
 																</c:if>
 															</c:if></td>
 													</tr>
@@ -509,10 +523,12 @@ label {
 						style="padding: 0px 10px; background: rgba(0, 0, 0, 0);">
 						<%-- *********************************** 상세 탭 *********************************** --%>
 						<ul class="nav nav-tabs md-tabs card-header-pills" role="tablist">
-							<li class="nav-item"><a class="nav-link active" style="font-weight: bold;font-size: 20px"
-								data-toggle="tab" href="#srDemandDetail" role="tab">SR 요청 정보</a>
+							<li class="nav-item"><a class="nav-link active"
+								style="font-weight: bold; font-size: 20px" data-toggle="tab"
+								href="#srDemandDetail" role="tab">SR 요청 정보</a>
 								<div class="slide"></div></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab" id="srInfoDetailTab" style="font-weight: bold;font-size: 20px"
+							<li class="nav-item"><a class="nav-link" data-toggle="tab"
+								id="srInfoDetailTab" style="font-weight: bold; font-size: 20px"
 								href="#srInfoDetail" role="tab">SR 처리 정보</a>
 								<div class="slide"></div></li>
 						</ul>
@@ -526,7 +542,8 @@ label {
 
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">요청 번호</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">요청 번호</div>
 											<div class="col col-sm-6 px-0">
 												<input type="hidden" id="SRDSrNo" value="${srlist[0].srNo}">
 												<input readonly class="form-control" id="SRDDmndNo"
@@ -534,7 +551,8 @@ label {
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">우선순위</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">우선순위</div>
 											<div class="col col-sm-6 px-0">
 												<input type="text" readonly class="form-control" id="SiRnk"
 													value="${sd.rnk}">
@@ -543,7 +561,8 @@ label {
 									</div>
 									<hr />
 									<div class="form-group row">
-										<div class="col col-sm-2 px-0 font-weight-bold" style="font-size:14px;">SR 제목</div>
+										<div class="col col-sm-2 px-0 font-weight-bold"
+											style="font-size: 14px;">SR 제목</div>
 										<div class="col col-sm-9 px-0">
 											<input readonly class="form-control" id="SRDTitle"
 												value="${sd.ttl}">
@@ -551,7 +570,8 @@ label {
 									</div>
 									<hr />
 									<div class="form-group row">
-										<div class="col col-sm-2 px-0 font-weight-bold" style="font-size:14px;">관련근거</div>
+										<div class="col col-sm-2 px-0 font-weight-bold"
+											style="font-size: 14px;">관련근거</div>
 										<div class="col col-sm-9 px-0">
 											<input readonly class="form-control" id="SRDRelgrund"
 												value="${sd.relGrund}">
@@ -560,14 +580,16 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">시스템구분</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">시스템구분</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDSys"
 													value="${sd.sysNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">업무구분</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">업무구분</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDTask"
 													value="${sd.taskSeNm}">
@@ -577,14 +599,16 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">요청기관</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">요청기관</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDInst"
 													value="${sd.instNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">요청자</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">요청자</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDClientNm"
 													value="${sd.clientNm}"> <input type="hidden"
@@ -595,14 +619,16 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">SR요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">SR요청일</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDDmndymd"
 													value="${sd.dmndYmd}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">완료요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">완료요청일</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDCmptnDmndYmd"
 													value="${sd.cmptnDmndYmd}">
@@ -621,14 +647,16 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">검토자</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">검토자</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDRvwrNm"
 													value="${sd.rvwrNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 font-weight-bold" style="font-size:14px;">진행상태</div>
+											<div class="col col-sm-4 font-weight-bold"
+												style="font-size: 14px;">진행상태</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDSttsNm"
 													value="${sd.sttsNm}">
@@ -636,7 +664,8 @@ label {
 										</div>
 									</div>
 									<div class="form-group row">
-										<p class="col-sm-2 font-weight-bold px-0" style="font-size:14px;">첨부파일</p>
+										<p class="col-sm-2 font-weight-bold px-0"
+											style="font-size: 14px;">첨부파일</p>
 										<div class="col-sm-10" id="SRDAttachFile">
 											<c:forEach var="f" items="${sd.attachFile}">
 												<div>
@@ -658,9 +687,10 @@ label {
 											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
                                     style="padding-left: 3px; display:none"
                                  </c:if>>
-											<button class="btn btn-info" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px"
+											<button class="btn btn-oti"
+												style="float: right; margin-right: 5px; font-weight: bold; font-size: 20px"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
-												data-target="#addHistoryModal" >SR 변경요청</button>
+												data-target="#addHistoryModal">SR 변경요청</button>
 										</div>
 									</div>
 								</div>
@@ -683,8 +713,8 @@ label {
 										role="tab">SR 진척률</a>
 										<div class="slide"></div></li>
 									<li class="nav-item font-weight-bold" onclick="empHstry()"><a
-										class="nav-link" data-toggle="tab" href="#srInfhistory" id="srInfhistoryTab"
-										role="tab">SR 히스토리</a>
+										class="nav-link" data-toggle="tab" href="#srInfhistory"
+										id="srInfhistoryTab" role="tab">SR 히스토리</a>
 										<div class="slide"></div></li>
 								</ul>
 								<%-- *********************************** [ 계획정보 ] ***********************************--%>
@@ -739,7 +769,7 @@ label {
 										<sec:authorize access="hasRole('ROLE_ADMIN')">
 											<button class="btn btn-info" onclick="planUpdate()"
 												id="planBtn"
-												style="float: right; padding-bottom: 10px; margin-bottom: 10px;width:100%;font-size:25px;">수정</button>
+												style="float: right; padding-bottom: 10px; margin-bottom: 10px; width: 100%; font-size: 25px;">수정</button>
 										</sec:authorize>
 									</div>
 									<%-- *********************************** [ 자원정보 ] ***********************************--%>
@@ -772,15 +802,15 @@ label {
 												id="deleteSrResourceBtn"
 												style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
 												<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
-													style="display:none"
-										</c:if>>선택
+                                       style="display:none"
+                              </c:if>>선택
 												삭제</button>
 											<button class="btn btn-oti btn-sm" id="addSrResourceBtn"
 												style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
 												data-toggle="modal" data-target="#addSrResourcesModal"
 												<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
-											style="display:none"
-										</c:if>>추가</button>
+                                 style="display:none"
+                              </c:if>>추가</button>
 										</sec:authorize>
 									</div>
 									<%-- *********************************** [ 진척률 ] ***********************************--%>
@@ -806,18 +836,20 @@ label {
 														<tbody>
 															<tr>
 
-																<td style="font-size:12px !important;">요구정의 <input type="hidden" id="SRPgPrgrsId0">
-																	<input type="hidden" id="SRPgSrNo">
+																<td style="font-size: 12px !important;">요구정의 <input
+																	type="hidden" id="SRPgPrgrsId0"> <input
+																	type="hidden" id="SRPgSrNo">
 																</td>
-																<td style="font-size:12px !important;"id="0bgngYmd"><input type="date"
-																	id="SRPgBgngYmd0"></td>
-																<td style="font-size:12px !important;"id="0endYmd"><input type="date"
-																	id="SRPgEndYmd0"></td>
-																<td style="font-size:12px !important;"id="0rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt0" min="1" max="10"
-																	placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
+																<td style="font-size: 12px !important;" id="0bgngYmd"><input
+																	type="date" id="SRPgBgngYmd0"></td>
+																<td style="font-size: 12px !important;" id="0endYmd"><input
+																	type="date" id="SRPgEndYmd0"></td>
+																<td style="font-size: 12px !important;" id="0rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt0"
+																	min="1" max="10" placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
+																		<button
+																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
 																			onclick="getDeliverablesTableRow(0)">열기</button>
@@ -831,16 +863,18 @@ label {
 
 															<tr>
 
-																<td style="font-size:12px !important;">분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
-																<td style="font-size:12px !important;"id="1bgngYmd"><input type="date"
-																	id="SRPgBgngYmd1"></td>
-																<td style="font-size:12px !important;"id="1endYmd"><input type="date"
-																	id="SRPgEndYmd1"></td>
-																<td style="font-size:12px !important;" id="1rt"><input type="number" 
-																	class="form-control" id="SRPgPrgrsRt1" min="11"
-																	max="40"></td>
+																<td style="font-size: 12px !important;">분석/설계<input
+																	type="hidden" id="SRPgPrgrsId1"></td>
+																<td style="font-size: 12px !important;" id="1bgngYmd"><input
+																	type="date" id="SRPgBgngYmd1"></td>
+																<td style="font-size: 12px !important;" id="1endYmd"><input
+																	type="date" id="SRPgEndYmd1"></td>
+																<td style="font-size: 12px !important;" id="1rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt1"
+																	min="11" max="40"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
+																		<button
+																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
 																			onclick="getDeliverablesTableRow(1)">열기</button>
@@ -854,16 +888,18 @@ label {
 
 															<tr>
 
-																<td style="font-size:12px !important;">구현<input type="hidden" id="SRPgPrgrsId2"></td>
-																<td style="font-size:12px !important;"id="2bgngYmd"><input type="date"
-																	id="SRPgBgngYmd2"></td>
-																<td style="font-size:12px !important;"id="2endYmd"><input type="date"
-																	id="SRPgEndYmd2"></td>
-																<td style="font-size:12px !important;"id="2rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt2" min="41"
-																	max="70"></td>
+																<td style="font-size: 12px !important;">구현<input
+																	type="hidden" id="SRPgPrgrsId2"></td>
+																<td style="font-size: 12px !important;" id="2bgngYmd"><input
+																	type="date" id="SRPgBgngYmd2"></td>
+																<td style="font-size: 12px !important;" id="2endYmd"><input
+																	type="date" id="SRPgEndYmd2"></td>
+																<td style="font-size: 12px !important;" id="2rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt2"
+																	min="41" max="70"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-sm btn-primary text-center font-weight-bold"
+																		<button
+																			class="btn btn-sm btn-primary text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
 																			onclick="getDeliverablesTableRow(2)">열기</button>
@@ -877,17 +913,19 @@ label {
 
 															<tr>
 
-																<td style="font-size:12px !important;">테스트<input type="hidden" id="SRPgPrgrsId3"></td>
-																<td style="font-size:12px !important;"id="3bgngYmd"><input type="date"
-																	id="SRPgBgngYmd3"></td>
-																<td style="font-size:12px !important;"id="3endYmd"><input type="date"
-																	id="SRPgEndYmd3"></td>
-																<td style="font-size:12px !important;"id="3rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt3" min="71"
-																	max="80"></td>
+																<td style="font-size: 12px !important;">테스트<input
+																	type="hidden" id="SRPgPrgrsId3"></td>
+																<td style="font-size: 12px !important;" id="3bgngYmd"><input
+																	type="date" id="SRPgBgngYmd3"></td>
+																<td style="font-size: 12px !important;" id="3endYmd"><input
+																	type="date" id="SRPgEndYmd3"></td>
+																<td style="font-size: 12px !important;" id="3rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt3"
+																	min="71" max="80"></td>
 																<td>
 																	<div class="accordion" id="accordionExample">
-																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
+																		<button
+																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
 																			onclick="getDeliverablesTableRow(3)">열기</button>
@@ -902,16 +940,18 @@ label {
 
 															<tr>
 
-																<td style="font-size:12px !important;">반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
-																<td style="font-size:12px !important;"id="4bgngYmd"><input type="date"
-																	id="SRPgBgngYmd4"></td>
-																<td style="font-size:12px !important;"id="4endYmd"><input type="date"
-																	id="SRPgEndYmd4"></td>
-																<td style="font-size:12px !important;"id="4rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt4" min="81"
-																	max="90"></td>
+																<td style="font-size: 12px !important;">반영요청<input
+																	type="hidden" id="SRPgPrgrsId4"></td>
+																<td style="font-size: 12px !important;" id="4bgngYmd"><input
+																	type="date" id="SRPgBgngYmd4"></td>
+																<td style="font-size: 12px !important;" id="4endYmd"><input
+																	type="date" id="SRPgEndYmd4"></td>
+																<td style="font-size: 12px !important;" id="4rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt4"
+																	min="81" max="90"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
+																		<button
+																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
 																			onclick="getDeliverablesTableRow(4)">열기</button>
@@ -925,16 +965,18 @@ label {
 
 															<tr>
 
-																<td style="font-size:12px !important;">운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
-																<td style="font-size:12px !important;"id="5bgngYmd"><input type="date"
-																	id="SRPgBgngYmd5"></td>
-																<td style="font-size:12px !important;"id="5endYmd"><input type="date"
-																	id="SRPgEndYmd5"></td>
-																<td style="font-size:12px !important;"id="5rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt5" min="91"
-																	max="100"></td>
+																<td style="font-size: 12px !important;">운영반영<input
+																	type="hidden" id="SRPgPrgrsId5"></td>
+																<td style="font-size: 12px !important;" id="5bgngYmd"><input
+																	type="date" id="SRPgBgngYmd5"></td>
+																<td style="font-size: 12px !important;" id="5endYmd"><input
+																	type="date" id="SRPgEndYmd5"></td>
+																<td style="font-size: 12px !important;" id="5rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt5"
+																	min="91" max="100"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn  btn-sm btn-primary  text-center font-weight-bold"
+																		<button
+																			class="btn  btn-sm btn-primary  text-center font-weight-bold"
 																			type="button" data-toggle="modal"
 																			data-target="#deliverableListModal"
 																			onclick="getDeliverablesTableRow(5)">열기</button>
@@ -953,7 +995,7 @@ label {
 										</div>
 
 										<button class="btn btn-oti btn-sm" id="addbtn"
-											style="float: right;width:100%;font-size:20px;">산출물
+											style="float: right; width: 100%; font-size: 20px;">산출물
 											추가</button>
 									</div>
 									<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
@@ -1001,4 +1043,3 @@ label {
 	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 </body>
 </html>
-F
