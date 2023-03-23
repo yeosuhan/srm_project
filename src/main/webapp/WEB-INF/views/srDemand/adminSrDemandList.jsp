@@ -265,9 +265,9 @@ table tbody td {
 												<th class="text-left" style="font-size: 15px; width: 100%;">제목</th>
 												<th class="text-left" style="font-size: 15px;">시스템구분</th>
 												<th class="text-left" style="font-size: 15px;">소속</th>
-												<th style="font-size: 15px;">진행상태</th>
 												<th style="font-size: 15px;">등록일</th>
 												<th style="font-size: 15px;">완료예정일</th>
+												<th style="font-size: 15px;">진행상태</th>
 
 											</tr>
 
@@ -292,6 +292,8 @@ table tbody td {
 														<%-- <td nowrap id="ttl" class="text-left fontWrapper" ><span class="fontWrapper">${srDemand.ttl}</span></td> --%>
 														<td class="text-left">${srDemand.sysNm}</td>
 														<td class="text-left">${srDemand.instNm}</td>
+														<td>${srDemand.dmndYmd}</td>
+														<td>${srDemand.endYmd}</td>
 														<td style="font-size: 15px;"><c:if
 																test="${(srDemand.sttsNm) eq '요청'}">
 																<label class="badge badge-warning"style="font-size:15px;">${srDemand.sttsNm}</label>
@@ -308,8 +310,6 @@ table tbody td {
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
 																<label class="badge badge-inverse-primary"style="font-size:15px;">${srDemand.sttsNm}</label>
 															</c:if></td>
-														<td>${srDemand.dmndYmd}</td>
-														<td>${srDemand.endYmd}</td>
 													</tr>
 												</c:forEach>
 											</c:if>
