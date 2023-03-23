@@ -392,7 +392,7 @@ public class SrDemandService implements ISrDemandService {
 		setHeaderCS(cs, font, cell);
 
 		int i = 2;
-		int ii = list.size();
+		int ii = 1;
 		for (SrDemand SrDemand : list) {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -401,8 +401,8 @@ public class SrDemandService implements ISrDemandService {
 			String endYmd = null;
 			if (SrDemand.getDmndYmd() != null)
 				dmndYmd = sdf.format(SrDemand.getDmndYmd());
-			if (SrDemand.getEndYmd() != null)
-				endYmd = sdf.format(SrDemand.getEndYmd());
+			if (SrDemand.getCmptnDmndYmd() != null)
+				endYmd = sdf.format(SrDemand.getCmptnDmndYmd());
 
 			row = sheet.createRow(i);
 			cell = null;
@@ -446,7 +446,7 @@ public class SrDemandService implements ISrDemandService {
 			setCmmnCS2(cs, cell);
 
 			i++;
-			ii--;
+			ii++;
 		}
 		response.setHeader("Set-Cookie", "fileDownload=true; path=/");
 		response.setHeader("Content-Disposition", String.format("attachment; filename=\"SrDemandList.xlsx\""));
@@ -464,16 +464,20 @@ public class SrDemandService implements ISrDemandService {
 		return list;
 	}
 
-	/* 요청의 행번호 조회
-	 * @authoe 안한길 
-	 * @return 
-	 * */
+	/*
+	 * 요청의 행번호 조회
+	 * 
+	 * @authoe 안한길
+	 * 
+	 * @return
+	 */
 	@Override
-	public SrDmndRowNum getRownum(String dmndNo,String custId) {
-		return srDemandDao.selectRowNumByDmndNo(dmndNo,custId);
+	public SrDmndRowNum getRownum(String dmndNo, String custId) {
+		return srDemandDao.selectRowNumByDmndNo(dmndNo, custId);
 	}
+
 	@Override
-	public SrDmndRowNum getRownum(int hstryId , String custId) {
-		return srDemandDao.selectRowNumByHstryId(hstryId,custId);
+	public SrDmndRowNum getRownum(int hstryId, String custId) {
+		return srDemandDao.selectRowNumByHstryId(hstryId, custId);
 	}
 }

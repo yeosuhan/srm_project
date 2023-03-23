@@ -15,31 +15,31 @@
 	src="${pageContext.request.contextPath}/resources/js/srDemandListHstry.js"></script>
 
 <script>
-	
+   
 <%-- 모달 실행 --%>
-	$(document).on('click', '#addbtn', function(e) {
-		console.log("click event");
-		$('#addmodal').addClass('show');
-		document.body.style = `overflow: hidden`;
-	});
-	$(document).on('click', '#closebtn', function(e) {
-		console.log("click event");
-		$('#addmodal').removeClass('show');
-		document.body.style = `overflow: scroll`;
-	});
+   $(document).on('click', '#addbtn', function(e) {
+      console.log("click event");
+      $('#addmodal').addClass('show');
+      document.body.style = `overflow: hidden`;
+   });
+   $(document).on('click', '#closebtn', function(e) {
+      console.log("click event");
+      $('#addmodal').removeClass('show');
+      document.body.style = `overflow: scroll`;
+   });
 <%-- rownu이 주어질경우 히스토리 탭 열기 --%>
-	<c:if test="${rownum ne null}">
-	$(function(){
-		   
-			var trId = "tr"+${rownum};
-			console.log(trId);
-			$("#"+trId).trigger("click");
-			<c:if test="${noHstry ne true}">
-				$("#srHistoryTab").trigger("click"); 
-			</c:if>
-	});
-	
-	</c:if>
+   <c:if test="${rownum ne null}">
+   $(function(){
+         
+         var trId = "tr"+${rownum};
+         console.log(trId);
+         $("#"+trId).trigger("click");
+         <c:if test="${noHstry ne true}">
+            $("#srHistoryTab").trigger("click"); 
+         </c:if>
+   });
+   
+   </c:if>
 </script>
 
 <style>
@@ -82,7 +82,7 @@ th {
 }
 
 .card .card-block {
-	padding: 0px 5px !important;
+	padding: 0px;
 }
 
 .col-xl-1 {
@@ -135,8 +135,16 @@ th {
 	background-color: white !important;
 }
 
+table th {
+	font-size: 15px !important;
+}
+
 table thead tr {
 	width: 100%;
+}
+
+table tbody td {
+	font-size: 15px !important;
 }
 
 .fontWrapper {
@@ -163,11 +171,11 @@ table thead tr {
 					<div class="card-header" id="headerFirst">
 						<div class="row justify-content-between">
 							<div class="col-10">
-								<h5 style="font-weight: bold;font-size: 20px">SR 요청 관리</h5>
+								<h5 style="font-weight: bold; font-size: 20px">SR 요청 관리</h5>
 							</div>
 							<div class="col-1 mr-5">
 								<button class="btn btn-oti btn-sm" id="addbtn"
-									style="font-size: 20px;font-weight: bold;">요청 등록</button>
+									style="font-size: 20px; font-weight: bold;">요청 등록</button>
 							</div>
 						</div>
 					</div>
@@ -250,7 +258,7 @@ table thead tr {
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5 style="font-weight: bold;font-size: 20px">SR 요청 목록</h5>
+						<h5 style="font-weight: bold; font-size: 20px">SR 요청 목록</h5>
 						<button type="submit" class="btn-sm btn" form="srSearchForm"
 							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
 							style="float: right; margin-right: 50px; background-color: transparent; padding: 0px;">
@@ -303,9 +311,9 @@ table thead tr {
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srDemand.ttl) > 13}">
+															<c:when test="${fn:length(srDemand.ttl) > 20}">
 																<td id="ttl" class="text-left" style="font-size: 14px;"><c:out
-																		value="${fn:substring(srDemand.ttl,0,12)}" />...</td>
+																		value="${fn:substring(srDemand.ttl,0,19)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td id="ttl" class="text-left" style="font-size: 14px;"><c:out
@@ -316,26 +324,34 @@ table thead tr {
 														<td style="font-size: 14px;" class="text-left">${srDemand.instNm}</td>
 														<td style="font-size: 14px;"><c:if
 																test="${(srDemand.sttsNm) eq '요청'}">
-																<label class="badge badge-warning" style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-warning"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
-																<label class="badge badge-danger" style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
-																<label class="badge badge-inverse-success" style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-success"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
-																<label class="badge badge-success" style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-success"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
-																<label class="badge badge-primary" style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-primary"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
-																<label class="badge badge-danger" style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
-																<label class="badge badge-inverse-primary" style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-primary"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if></td>
 														<td style="font-size: 13px;">${srDemand.dmndYmd}</td>
 														<td style="font-size: 13px;"><c:if
 																test="${(srDemand.sttsNm) eq '개발취소'}">
-															-</c:if> <c:if test="${(srDemand.sttsNm) ne '개발취소'}">
-																${srDemand.endYmd}
-															</c:if></td>
+                                             -</c:if> <c:if
+																test="${(srDemand.sttsNm) ne '개발취소'}">
+                                                ${srDemand.cmptnDmndYmd}
+                                             </c:if></td>
 													</tr>
 												</c:forEach>
 											</c:if>
@@ -361,21 +377,22 @@ table thead tr {
 			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
 					<div class="card-header">
-						<h5 style="font-weight: bold;font-size: 20px">SR 요청 상세정보</h5>
+						<h5 style="font-weight: bold; font-size: 20px">SR 요청 상세정보</h5>
 					</div>
 					<ul class="nav nav-tabs md-tabs" id="otiTabs" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
 							data-toggle="tab" href="#srDemandDetail" role="tab"
-							id="srDmndDetailTab"style="font-weight: bold;font-size: 20px">SR요청 상세정보</a>
+							id="srDmndDetailTab" style="font-weight: bold; font-size: 20px">SR요청
+								상세정보</a>
 							<div class="slide"></div></li>
 						<li class="nav-item" onclick="userHstry()"><a
 							id="srHistoryTab" class="nav-link" data-toggle="tab"
-							href="#srHistory" role="tab"style="font-weight: bold;font-size: 20px">SR 히스토리</a>
+							href="#srHistory" role="tab"
+							style="font-weight: bold; font-size: 20px">SR 히스토리</a>
 							<div class="slide"></div></li>
 					</ul>
 
-					<div class="tab-content tabs card-block"
-						style="padding: 0px; padding-top: 20px;">
+					<div class="tab-content tabs card-block" style="padding: 0px;">
 						<div class="tab-pane active" id="srDemandDetail" role="tabpanel">
 							<div class="card-block" id="sddetail">
 								<div class="card_body"
@@ -383,7 +400,7 @@ table thead tr {
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 										<div class="col col-sm-10">
-											<div id="dmndNo" style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
+											<div id="dmndNo" style="width: 100%;">${sd.dmndNo}</div>
 										</div>
 									</div>
 									<hr />
@@ -457,11 +474,11 @@ table thead tr {
 											</div>
 										</div>
 										<%-- <c:if test="${sd.sttsCd gt 1}">
-											<div class="col-sm-6 px-0">
-												<div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
-												<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
-											</div>
-										</c:if> --%>
+                                 <div class="col-sm-6 px-0">
+                                    <div class="col col-sm-4 font-weight-bold">완료(예정)일</div>
+                                    <div class="col col-sm-6 endYmd">${sd.endYmd}</div>
+                                 </div>
+                              </c:if> --%>
 										<div class="col-sm-6 px-0">
 											<div class="col col-sm-4 font-weight-bold">검토자 이름</div>
 											<div class="col col-sm-6">
@@ -513,9 +530,10 @@ table thead tr {
 										<c:if test="${sd.sttsCd == 0}">
 											<div class="col" style="text-align: right">
 												<div class="btn btn-sm btn-danger"
-													style="float: right; margin-right: 5px;font-weight: bold;font-size: 20px"
+													style="float: right; margin-right: 5px; font-weight: bold; font-size: 20px"
 													onclick="deleteSr('${sd.dmndNo}')">삭제</div>
-												<button id="modbtn" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px"
+												<button id="modbtn"
+													style="float: right; margin-right: 5px; font-weight: bold; font-size: 20px"
 													class="btn btn-sm btn-info center"
 													onclick="updateSr('${sd.dmndNo}')">수정</button>
 											</div>

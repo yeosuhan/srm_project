@@ -22,7 +22,6 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-	
 </script>
 <style>
 #startDatepicker, #endDatepicker, #addDatepicker {
@@ -65,12 +64,8 @@ th {
 }
 /* 
 .table td, .table th {
-	padding: 0.75rem;
+   padding: 0.75rem;
 } */
-.card .card-block {
-	padding: 0px 5px !important;
-}
-
 .col-xl-1 {
 	padding-top: 8px;
 	padding-right: 0px;
@@ -112,12 +107,20 @@ th {
 	padding: 5px 8px;
 }
 
+.card .card-block {
+	padding: 0px;
+}
+
 table th {
 	font-size: 15px !important;
 }
 
 table thead tr {
 	width: 100%;
+}
+
+table tbody td {
+	font-size: 15px !important;
 }
 
 .fontWrapper {
@@ -143,7 +146,7 @@ table thead tr {
 					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
-								<h5 style="font-weight: bold;font-size: 20px">SR 요청 관리</h5>
+								<h5 style="font-weight: bold; font-size: 20px">SR 요청 관리</h5>
 							</div>
 						</div>
 					</div>
@@ -221,10 +224,10 @@ table thead tr {
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5 style="font-weight: bold;font-size: 20px">SR 요청 목록</h5>
+						<h5 style="font-weight: bold; font-size: 20px">SR 요청 목록</h5>
 						<button type="submit" class="btn btn-sm" form="srSearchForm"
 							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
-							style="float: right; margin-right: 50px;background-color:transparent;padding:0px;">
+							style="float: right; margin-right: 50px; background-color: transparent; padding: 0px;">
 							<img
 								src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png"
 								width="30px;">
@@ -237,7 +240,7 @@ table thead tr {
 							</ul>
 						</div>
 					</div>
-					<div class="card-block" id="list">
+					<div class="card-block p-0" id="list">
 						<div id="sales-analytics">
 							<div class="card-block table-border-style" style="height: 820px;">
 								<div class="table-responsive">
@@ -264,7 +267,7 @@ table thead tr {
 												<th class="text-left" style="font-size: 15px;">소속</th>
 												<th style="font-size: 15px;">진행상태</th>
 												<th style="font-size: 15px;">등록일</th>
-												<th style="font-size: 15px;">완료예정일</th>
+												<th style="font-size: 15px;">완료요청일</th>
 
 											</tr>
 
@@ -273,40 +276,48 @@ table thead tr {
 											<c:if test="${srDemandList ne null}">
 												<c:forEach var="srDemand" items="${srDemandList}"
 													varStatus="status">
-													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" style="font-size:13px;" id="tr${pager.startRowNo + status.index}">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')"
+														id="tr${pager.startRowNo + status.index}">
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srDemand.ttl) > 14}">
-																<td id="ttl" class="text-left" style="font-size: 13px;"><c:out
-																		value="${fn:substring(srDemand.ttl,0,13)}" />...</td>
+															<c:when test="${fn:length(srDemand.ttl) > 20}">
+																<td id="ttl" class="text-left"><c:out
+																		value="${fn:substring(srDemand.ttl,0,19)}" />...</td>
 															</c:when>
 															<c:otherwise>
-																<td id="ttl" class="text-left" style="font-size: 13px;"><c:out
+																<td id="ttl" class="text-left"><c:out
 																		value="${srDemand.ttl}" /></td>
 															</c:otherwise>
 														</c:choose>
 														<%-- <td nowrap id="ttl" class="text-left fontWrapper" ><span class="fontWrapper">${srDemand.ttl}</span></td> --%>
-														<td class="text-left" style="font-size: 13px;">${srDemand.sysNm}</td>
-														<td class="text-left" style="font-size: 13px;">${srDemand.instNm}</td>
+														<td class="text-left">${srDemand.sysNm}</td>
+														<td class="text-left">${srDemand.instNm}</td>
 														<td style="font-size: 15px;"><c:if
 																test="${(srDemand.sttsNm) eq '요청'}">
-																<label class="badge badge-warning"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-warning"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
-																<label class="badge badge-danger"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
-																<label class="badge badge-inverse-success"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-success"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
-																<label class="badge badge-success"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-success"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
-																<label class="badge badge-primary"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-primary"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
-																<label class="badge badge-danger"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
-																<label class="badge badge-inverse-primary"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-primary"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if></td>
-														<td style="font-size: 13px;">${srDemand.dmndYmd}</td>
-														<td style="font-size: 13px;">${srDemand.endYmd}</td>
+														<td>${srDemand.dmndYmd}</td>
+														<td>${srDemand.cmptnDmndYmd}</td>
 													</tr>
 												</c:forEach>
 											</c:if>
@@ -333,8 +344,8 @@ table thead tr {
 			<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
 			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
-					<div class="card-header">
-						<h5 style="font-weight: bold;font-size: 20px">SR 요청 상세정보</h5>
+					<div class="card-header">s
+						<h5 style="font-weight: bold; font-size: 20px">SR 요청 상세정보</h5>
 					</div>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
