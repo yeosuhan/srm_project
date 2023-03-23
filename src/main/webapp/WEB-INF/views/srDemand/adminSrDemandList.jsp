@@ -22,7 +22,6 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-	
 </script>
 <style>
 #startDatepicker, #endDatepicker, #addDatepicker {
@@ -65,10 +64,8 @@ th {
 }
 /* 
 .table td, .table th {
-	padding: 0.75rem;
+   padding: 0.75rem;
 } */
-
-
 .col-xl-1 {
 	padding-top: 8px;
 	padding-right: 0px;
@@ -109,9 +106,11 @@ th {
 .badge {
 	padding: 5px 8px;
 }
- .card .card-block {
- 	padding:0px;
- }
+
+.card .card-block {
+	padding: 0px;
+}
+
 table th {
 	font-size: 15px !important;
 }
@@ -123,6 +122,7 @@ table thead tr {
 table tbody td {
 	font-size: 15px !important;
 }
+
 .fontWrapper {
 	width: 100%;
 	display: block; /* 블록태그로 만들어준다 */
@@ -146,7 +146,7 @@ table tbody td {
 					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
-								<h5 style="font-weight: bold;font-size: 20px">SR 요청 관리</h5>
+								<h5 style="font-weight: bold; font-size: 20px">SR 요청 관리</h5>
 							</div>
 						</div>
 					</div>
@@ -224,10 +224,10 @@ table tbody td {
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5 style="font-weight: bold;font-size: 20px">SR 요청 목록</h5>
+						<h5 style="font-weight: bold; font-size: 20px">SR 요청 목록</h5>
 						<button type="submit" class="btn btn-sm" form="srSearchForm"
 							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
-							style="float: right; margin-right: 50px;background-color:transparent;padding:0px;">
+							style="float: right; margin-right: 50px; background-color: transparent; padding: 0px;">
 							<img
 								src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png"
 								width="30px;">
@@ -267,7 +267,7 @@ table tbody td {
 												<th class="text-left" style="font-size: 15px;">소속</th>
 												<th style="font-size: 15px;">진행상태</th>
 												<th style="font-size: 15px;">등록일</th>
-												<th style="font-size: 15px;">완료예정일</th>
+												<th style="font-size: 15px;">완료요청일</th>
 
 											</tr>
 
@@ -276,7 +276,8 @@ table tbody td {
 											<c:if test="${srDemandList ne null}">
 												<c:forEach var="srDemand" items="${srDemandList}"
 													varStatus="status">
-													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" id="tr${pager.startRowNo + status.index}">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')"
+														id="tr${pager.startRowNo + status.index}">
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
@@ -294,22 +295,29 @@ table tbody td {
 														<td class="text-left">${srDemand.instNm}</td>
 														<td style="font-size: 15px;"><c:if
 																test="${(srDemand.sttsNm) eq '요청'}">
-																<label class="badge badge-warning"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-warning"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
-																<label class="badge badge-danger"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
-																<label class="badge badge-inverse-success"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-success"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
-																<label class="badge badge-success"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-success"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
-																<label class="badge badge-primary"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-primary"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
-																<label class="badge badge-danger"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
-																<label class="badge badge-inverse-primary"style="font-size:15px;">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-primary"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if></td>
 														<td>${srDemand.dmndYmd}</td>
-														<td>${srDemand.endYmd}</td>
+														<td>${srDemand.cmptnDmndYmd}</td>
 													</tr>
 												</c:forEach>
 											</c:if>
@@ -336,8 +344,8 @@ table tbody td {
 			<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
 			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
-					<div class="card-header">
-						<h5 style="font-weight: bold;font-size: 20px">SR 요청 상세정보</h5>
+					<div class="card-header">s
+						<h5 style="font-weight: bold; font-size: 20px">SR 요청 상세정보</h5>
 					</div>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">

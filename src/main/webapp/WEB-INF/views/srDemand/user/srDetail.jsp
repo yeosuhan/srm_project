@@ -51,10 +51,19 @@
 			<div class="col col-sm-4 font-weight-bold">등록일</div>
 			<div class="col col-sm-8 dmndYmd">${sd.dmndYmd}</div>
 		</div>
-		<div class="col-sm-6 px-0">
-			<div class="col col-sm-4 font-weight-bold">완료요청일</div>
-			<div class="col col-sm-8 cmptnDmndYmd">${sd.cmptnDmndYmd}</div>
-		</div>
+		<c:if test="${sd.sttsNm ne '개발취소'}">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">완료요청일</div>
+				<div class="col col-sm-8 cmptnDmndYmd">${sd.cmptnDmndYmd}</div>
+			</div>
+		</c:if>
+		<c:if test="${sd.sttsNm eq '개발취소'}">
+			<div class="col-sm-6 px-0">
+				<div class="col col-sm-4 font-weight-bold">개발취소일</div>
+				<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
+			</div>
+		</c:if>
+
 	</div>
 	<c:if test="${sd.sttsCd gt 1}">
 		<div class="form-group row">
@@ -85,12 +94,6 @@
 				<div type="text" class="form-control rvwrNm">${sd.rvwrNm}</div>
 			</div>
 		</div>
-		<c:if test="${sd.sttsNm eq '개발취소'}">
-			<div class="col-sm-6 px-0">
-				<div class="col col-sm-4 font-weight-bold">개발취소일</div>
-				<div class="col col-sm-6 endYmd">${sd.endYmd}</div>
-			</div>
-		</c:if>
 	</div>
 	<c:if test="${sd.sttsCd == 1}">
 		<div class="form-group row">
@@ -130,11 +133,11 @@
 		<c:if test="${sd.sttsCd == 0}">
 			<div class="col" style="text-align: right">
 				<div class="btn btn-sm btn-danger"
-					style="float: right; margin-right: 5px;font-weight: bold;font-size: 20px"
+					style="float: right; margin-right: 5px; font-weight: bold; font-size: 20px"
 					onclick="deleteSr('${sd.dmndNo}')">삭제</div>
-				<button id="modbtn" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px"
-					class="btn btn-sm btn-info"
-					onclick="updateSr('${sd.dmndNo}')">수정</button>
+				<button id="modbtn"
+					style="float: right; margin-right: 5px; font-weight: bold; font-size: 20px"
+					class="btn btn-sm btn-info" onclick="updateSr('${sd.dmndNo}')">수정</button>
 			</div>
 		</c:if>
 		<c:if test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
