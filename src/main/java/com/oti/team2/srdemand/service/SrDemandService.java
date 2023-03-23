@@ -388,7 +388,7 @@ public class SrDemandService implements ISrDemandService {
 		setHeaderCS(cs, font, cell);
 
 		cell = row.createCell(8);
-		cell.setCellValue("완료예정일");
+		cell.setCellValue("완료요청일");
 		setHeaderCS(cs, font, cell);
 
 		int i = 2;
@@ -401,8 +401,8 @@ public class SrDemandService implements ISrDemandService {
 			String endYmd = null;
 			if (SrDemand.getDmndYmd() != null)
 				dmndYmd = sdf.format(SrDemand.getDmndYmd());
-			if (SrDemand.getEndYmd() != null)
-				endYmd = sdf.format(SrDemand.getEndYmd());
+			if (SrDemand.getCmptnDmndYmd() != null)
+				endYmd = sdf.format(SrDemand.getCmptnDmndYmd());
 
 			row = sheet.createRow(i);
 			cell = null;

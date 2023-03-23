@@ -342,7 +342,7 @@ table tbody td {
                                           <td style="font-size: 13px;"><c:if
                                                 test="${(srDemand.sttsNm) eq '개발취소'}">
                                              -</c:if> <c:if test="${(srDemand.sttsNm) ne '개발취소'}">
-                                                ${srDemand.endYmd}
+                                                ${srDemand.cmptnDmndYmd}
                                              </c:if></td>
                                        </tr>
                                     </c:forEach>

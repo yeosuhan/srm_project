@@ -26,5 +26,7 @@ public class SrDemand {
 	private String sysNm;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date endYmd; // 계획 종료일
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	private Date cmptnDmndYmd; // 고객이 요청한 완료일
 	private String sttsNm;
 }

@@ -267,7 +267,7 @@ table tbody td {
                                     <th class="text-left" style="font-size: 15px;">소속</th>
                                     <th style="font-size: 15px;">진행상태</th>
                                     <th style="font-size: 15px;">등록일</th>
-                                    <th style="font-size: 15px;">완료예정일</th>
+                                    <th style="font-size: 15px;">완료요청일</th>
 
                                  </tr>
 
@@ -309,7 +309,7 @@ table tbody td {
                                                 <label class="badge badge-inverse-primary"style="font-size:15px;">${srDemand.sttsNm}</label>
                                              </c:if></td>
                                           <td>${srDemand.dmndYmd}</td>
-                                          <td>${srDemand.endYmd}</td>
+                                          <td>${srDemand.cmptnDmndYmd}</td>
                                        </tr>
                                     </c:forEach>
                                  </c:if>
