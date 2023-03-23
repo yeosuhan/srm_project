@@ -687,7 +687,7 @@ label {
 											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
                                     style="padding-left: 3px; display:none"
                                  </c:if>>
-											<button class="btn btn-info"
+											<button class="btn btn-oti"
 												style="float: right; margin-right: 5px; font-weight: bold; font-size: 20px"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
 												data-target="#addHistoryModal">SR 변경요청</button>

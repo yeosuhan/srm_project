@@ -1,17 +1,17 @@
 var calendar=null;
 
 $(document).ready(function(){
-   /* 자원정보 추가 모달
-    * @author: 안한길
-    * */
+   /*
+	 * 자원정보 추가 모달 @author: 안한길
+	 */
    $("#addSrResourcesModal").on('show.bs.modal',function(){
       var calendarEl=null;
       var deptCd=$("#dept").val();
-      //console.log(deptCd);
+      // console.log(deptCd);
       $("#addSrResourceModalDept option[value='"+deptCd+"']").prop("selected",true);
-      //console.log(getContextPath());
+      // console.log(getContextPath());
       if($("#empId option").length==0){
-    	  /*달력*/
+         /* 달력 */
           calendarEl= $('#calendar')[0];
        
           calendar = new FullCalendar.Calendar(calendarEl,{
@@ -23,28 +23,28 @@ $(document).ready(function(){
              height:400,
              initialView: 'dayGridMonth',
              eventDataTransform: function(events) {                                                                                                                                
-           	  if(events.allDay) {                                                                                                                                               
-           		  events.end = moment(events.end,'YYYY-MM-DD').add(1, 'days').format('YYYY-MM-DD HH:mm:SS')                                                                                                                 
-           	  }
-           	  return event;  
+                if(events.allDay) {                                                                                                                                               
+                   events.end = moment(events.end,'YYYY-MM-DD').add(1, 'days').format('YYYY-MM-DD HH:mm:SS')                                                                                                                 
+                }
+                return event;  
              }  ,
           });
           calendar.render();
-          //처음 모달을 열때 달력이 안보이는 문제
+          // 처음 모달을 열때 달력이 안보이는 문제
           $(".fc-scroller td, th").css('width','50px');
           $(".fc-event-time").empty();
           
-         /*개발자 목록*/
+         /* 개발자 목록 */
          getEmployeeList(deptCd);
-         /*역할 목록*/
+         /* 역할 목록 */
          getPtcptnRoleCd();
       }else{
-    	  showSchedule();
+         showSchedule();
       }
       
    });
    
-   /*모달 닫을때*/
+   /* 모달 닫을때 */
    $("#addSrResourcesModal").on('hide.bs.modal',function(){
 	   $("#addResourceForm #schdlEndYmd").val("");
 	   $("#addResourceForm #schdlBgngYmd").val("");
@@ -64,36 +64,37 @@ $(document).ready(function(){
 	   $("#scheduleTable").css("border","");
 	   $("#scheduleTable").css("height","");
 	   $("#addSrResourceModalDept").show();
+
    });
    
-   /*자원 정보 수정값 입력시*/
+   /* 자원 정보 수정값 입력시 */
    $("#ptcptnRoleCd").change(function(){
-	  $(this).addClass("changed"); 
+     $(this).addClass("changed"); 
    });
    $("#schdlBgngYmd").change(function(){
-		  $(this).addClass("changed"); 
+        $(this).addClass("changed"); 
    });
    $("#schdlEndYmd").change(function(){
-		  $(this).addClass("changed"); 
+        $(this).addClass("changed"); 
    });
-   //부서 변경시 개발자 목록 불러오기
+   // 부서 변경시 개발자 목록 불러오기
    $("#addSrResourceModalDept").change(function(){
-	  getEmployeeList($("#addSrResourceModalDept option:selected").val()); 
+     getEmployeeList($("#addSrResourceModalDept option:selected").val()); 
    });
 });
-/* 개발자 목록 가져오는 함수
- * @author : 안한길
- * */
+/*
+ * 개발자 목록 가져오는 함수 @author : 안한길
+ */
 function getEmployeeList(deptCd){
-	$("#empId").empty();
-	$("#empId").append(
+   $("#empId").empty();
+   $("#empId").append(
             "<option>선택</option>"
     );
-	calendar.getEvents().forEach((value)=>{
-        //console.log(value);
+   calendar.getEvents().forEach((value)=>{
+        // console.log(value);
         value.remove();
     });
-	$.ajax({
+   $.ajax({
         url:"/member/department",
         type:"GET",
         async: false,
@@ -107,9 +108,9 @@ function getEmployeeList(deptCd){
         }
      });
 }
-/* 선택된 개발자 일정 가져오는 함수
- * @author: 안한길
- * */
+/*
+ * 선택된 개발자 일정 가져오는 함수 @author: 안한길
+ */
 function showSchedule(){
    var empId=$("#empId option:selected").val();
    $.ajax({
@@ -117,11 +118,9 @@ function showSchedule(){
       type:"GET",
       data:{empId:empId},
       success:function(result){
-    	  
-    	  
-         //이벤트 제거
+         // 이벤트 제거
          calendar.getEvents().forEach((value)=>{
-            //console.log(value);
+            // console.log(value);
             value.remove();
          });
          if(result.length != 0){
@@ -163,19 +162,21 @@ function showSchedule(){
 	         });
 	         
          }
+
          $(".fc-event-time").empty();
       }
    });
 
 };
-/* 입력한 자원정보 추가
- * @author : 안한길
- * */
+/*
+ * 입력한 자원정보 추가 @author : 안한길
+ */
 function addResource(){
-   //var resourceForm = $("#addResourceForm").serialize();//serialize()로 생성되는 데이터는 json형식과 맞지 않는다.
+   // var resourceForm = $("#addResourceForm").serialize();//serialize()로 생성되는
+	// 데이터는 json형식과 맞지 않는다.
    var firstResource=false;
    if($("#resourceTableRow tr").length==0){
-	   firstResource=true;
+      firstResource=true;
    }
    var resourceForm ={
          "srNo":$("#addResourceForm #srNo").val(),
@@ -185,18 +186,18 @@ function addResource(){
          "schdlEndYmd":$("#addResourceForm #schdlEndYmd").val(),
          "firstResource":firstResource
    }
-   //console.log(resourceForm);
+   // console.log(resourceForm);
    $.ajax({
       url:"/sr-resource/resource/add",
       type:"POST",
-      //contentType:"application/json", //form데이터를 json 형식으로
+      // contentType:"application/json", //form데이터를 json 형식으로
       data:resourceForm,
       success:function(result){
-         //console.log(result);
+         // console.log(result);
          if(result!=0){
-        	if($("#resourceTableRow tr").length==0){
-        		location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
-        	}
+           if($("#resourceTableRow tr").length==0){
+              location.href = "/srinformation/list?dmndNoToHstry="+$("#SRDDmndNo").val();
+           }
             $("#resourceTableRow").empty();
             getResourceTableRow();
             
@@ -205,32 +206,32 @@ function addResource(){
    });
    
 }
-/* 개발자의 역할 목록을 가져오는 함수
- * @Author : 안한길
- * */
+/*
+ * 개발자의 역할 목록을 가져오는 함수 @Author : 안한길
+ */
 function getPtcptnRoleCd(){
-	
-	if(!$("#ptcptnRoleCd option").length){
-		$.ajax({
-			url:"/roles",
-			type:"GET",
+   
+   if(!$("#ptcptnRoleCd option").length){
+      $.ajax({
+         url:"/roles",
+         type:"GET",
             async: false,
-			success:function(result){
-				result.forEach((value)=>{
-					$("#ptcptnRoleCd").append(
-							"<option value='"+value.roleCd+"'>" +
-									value.roleNm+
-							"</option>"
-					);
-				});
-			}
-		})
-	}
-	
+         success:function(result){
+            result.forEach((value)=>{
+               $("#ptcptnRoleCd").append(
+                     "<option value='"+value.roleCd+"'>" +
+                           value.roleNm+
+                     "</option>"
+               );
+            });
+         }
+      })
+   }
+   
 }
 
 
-/*자원 정보 수정 모달로 변경*/
+/* 자원 정보 수정 모달로 변경 */
 function openUpdateResourceModal(srSrc,empId,ptcptnRoleCd){
 	$("#addSrResourcesModal").modal("show");
 	
@@ -262,32 +263,31 @@ function openUpdateResourceModal(srSrc,empId,ptcptnRoleCd){
 	
 	$("#addResourceBtn").css("display","none");
 	$("#modifyResourceBtn").css("display","");
-	
 }
 
 function modifyResource(){
-	//변경된 값이 있다면
-	console.log($(".changed").length);
-	if($(".changed").length){
-		var resourceForm ={
-	         "srSrc":$("#addResourceForm #updateSrSrc").val(),
-	         "ptcptnRoleCd":$("#addResourceForm #ptcptnRoleCd.changed").val(),
-	         "schdlBgngYmd":$("#addResourceForm #schdlBgngYmd.changed").val(),
-	         "schdlEndYmd":$("#addResourceForm #schdlEndYmd.changed").val()
-	   }
-	   //console.log(resourceForm);
-	   $.ajax({
-	      url:"/sr-resource/resource/modify",
-	      type:"POST",
-	      data:resourceForm,
-	      success:function(result){
-	         //console.log(result);
-	         if(result!=0){
-	            $("#resourceTableRow").empty();
-	            getResourceTableRow();
-	         }
-	         
-	      }
-	   });
-	}
+   // 변경된 값이 있다면
+   console.log($(".changed").length);
+   if($(".changed").length){
+      var resourceForm ={
+            "srSrc":$("#addResourceForm #updateSrSrc").val(),
+            "ptcptnRoleCd":$("#addResourceForm #ptcptnRoleCd.changed").val(),
+            "schdlBgngYmd":$("#addResourceForm #schdlBgngYmd.changed").val(),
+            "schdlEndYmd":$("#addResourceForm #schdlEndYmd.changed").val()
+      }
+      // console.log(resourceForm);
+      $.ajax({
+         url:"/sr-resource/resource/modify",
+         type:"POST",
+         data:resourceForm,
+         success:function(result){
+            // console.log(result);
+            if(result!=0){
+               $("#resourceTableRow").empty();
+               getResourceTableRow();
+            }
+            
+         }
+      });
+   }
 }
