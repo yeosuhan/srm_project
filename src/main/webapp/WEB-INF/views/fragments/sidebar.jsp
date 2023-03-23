@@ -55,7 +55,7 @@
 				<div id="mCSB_1"
 					class="mCustomScrollBox mCS-light mCSB_vertical_horizontal mCSB_inside"
 					style="max-height: none;" tabindex="0">
-					<div class="main-menu-header row mr-0">
+					<div class="main-menu-header row mr-0" style="padding-bottom:0px;">
 						<div class="profile_wrapper row mr-0 pr-0">
 							<div class="gradation_animate"></div>
 							<div class="image_wrapper">
@@ -64,7 +64,7 @@
 							</div>
 						</div>
 						<div class="user-details col-12 row"
-							style="color: #F2EBE5; margin-top: 30px">
+							style="color: #F2EBE5;">
 							<div align="center" class="text-center">
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
 									<label class="badge badge-oti font-weight-bold"style="position: static;font-size:15px;">관리자</label>

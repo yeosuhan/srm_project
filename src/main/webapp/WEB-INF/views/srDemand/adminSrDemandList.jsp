@@ -67,9 +67,7 @@ th {
 .table td, .table th {
 	padding: 0.75rem;
 } */
-.card .card-block {
-	padding: 0px 5px !important;
-}
+
 
 .col-xl-1 {
 	padding-top: 8px;
@@ -111,7 +109,9 @@ th {
 .badge {
 	padding: 5px 8px;
 }
-
+ .card .card-block {
+ 	padding:0px;
+ }
 table th {
 	font-size: 15px !important;
 }
@@ -120,6 +120,9 @@ table thead tr {
 	width: 100%;
 }
 
+table tbody td {
+	font-size: 15px !important;
+}
 .fontWrapper {
 	width: 100%;
 	display: block; /* 블록태그로 만들어준다 */
@@ -237,7 +240,7 @@ table thead tr {
 							</ul>
 						</div>
 					</div>
-					<div class="card-block" id="list">
+					<div class="card-block p-0" id="list">
 						<div id="sales-analytics">
 							<div class="card-block table-border-style" style="height: 820px;">
 								<div class="table-responsive">
@@ -273,22 +276,22 @@ table thead tr {
 											<c:if test="${srDemandList ne null}">
 												<c:forEach var="srDemand" items="${srDemandList}"
 													varStatus="status">
-													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" style="font-size:13px;" id="tr${pager.startRowNo + status.index}">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" id="tr${pager.startRowNo + status.index}">
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srDemand.ttl) > 14}">
-																<td id="ttl" class="text-left" style="font-size: 13px;"><c:out
-																		value="${fn:substring(srDemand.ttl,0,13)}" />...</td>
+															<c:when test="${fn:length(srDemand.ttl) > 20}">
+																<td id="ttl" class="text-left"><c:out
+																		value="${fn:substring(srDemand.ttl,0,19)}" />...</td>
 															</c:when>
 															<c:otherwise>
-																<td id="ttl" class="text-left" style="font-size: 13px;"><c:out
+																<td id="ttl" class="text-left"><c:out
 																		value="${srDemand.ttl}" /></td>
 															</c:otherwise>
 														</c:choose>
 														<%-- <td nowrap id="ttl" class="text-left fontWrapper" ><span class="fontWrapper">${srDemand.ttl}</span></td> --%>
-														<td class="text-left" style="font-size: 13px;">${srDemand.sysNm}</td>
-														<td class="text-left" style="font-size: 13px;">${srDemand.instNm}</td>
+														<td class="text-left">${srDemand.sysNm}</td>
+														<td class="text-left">${srDemand.instNm}</td>
 														<td style="font-size: 15px;"><c:if
 																test="${(srDemand.sttsNm) eq '요청'}">
 																<label class="badge badge-warning"style="font-size:15px;">${srDemand.sttsNm}</label>
@@ -305,8 +308,8 @@ table thead tr {
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
 																<label class="badge badge-inverse-primary"style="font-size:15px;">${srDemand.sttsNm}</label>
 															</c:if></td>
-														<td style="font-size: 13px;">${srDemand.dmndYmd}</td>
-														<td style="font-size: 13px;">${srDemand.endYmd}</td>
+														<td>${srDemand.dmndYmd}</td>
+														<td>${srDemand.endYmd}</td>
 													</tr>
 												</c:forEach>
 											</c:if>

@@ -108,7 +108,7 @@ th {
    padding: 0.75rem;
 } */
 .card .card-block {
-	padding: 0px 5px;
+	padding: 0px;
 }
 
 .col-xl-1 {
@@ -170,10 +170,19 @@ table th {
 }
 
 table tbody td {
-	font-size: 13px !important;
+	font-size: 15px !important;
 }
 label {
 	font-size:15px;
+}
+.fontWrapper {
+   width:100%; 
+   display: block;/* 블록태그로 만들어준다 */
+   text-overflow: ellipsis;/* 말줄임 css */
+   white-space: nowrap;/*글자를 한줄로 모아준다*/
+   overflow: hidden;
+   background:pink;/*실제 글자 영역 상태 확인하기 위함*/
+   margin-right: 0;
 }
 </style>
 <body>
@@ -352,7 +361,7 @@ label {
 			<div class="col-xl-8 col-md-12">
 				<div class="card" style="height: 820px;">
 					<div class="card-header">
-						<h5>SR 처리 목록</h5>
+						<h5 style="font-weight: bold;font-size: 20px">SR 처리 목록</h5>
 						<button type="submit" class="btn btn-sm" form="srInfoFilterForm"
 									onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
 									style="float: right; margin-right: 50px; background-color:transparent;padding:0px;">
@@ -374,7 +383,7 @@ label {
 									<table class="table table-hover text-center">
 										<thead>
 											<tr>
-												<th style="width: 1px;"></th>
+												<th></th>
 												<th style="font-size: 15px;">SR번호 <c:if
 														test="${sort eq 'DESC' || sort eq '1'}">
 														<a
@@ -418,7 +427,7 @@ label {
 												<th style="font-size: 15px;">진행상태</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody style="font-size:15px !important;">
 											<c:if test="${srlist ne null}">
 												<c:forEach var="srlist" items="${srlist}" varStatus="num">
 													<tr id="tr${pager.startRowNo + num.index}"
@@ -426,9 +435,9 @@ label {
 														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srlist.ttl) > 13}">
+															<c:when test="${fn:length(srlist.ttl) > 18}">
 																<td class="text-left"><c:out
-																		value="${fn:substring(srlist.ttl,0,12)}" />...</td>
+																		value="${fn:substring(srlist.ttl,0,17)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td class="text-left"><c:out value="${srlist.ttl}" /></td>
@@ -500,10 +509,10 @@ label {
 						style="padding: 0px 10px; background: rgba(0, 0, 0, 0);">
 						<%-- *********************************** 상세 탭 *********************************** --%>
 						<ul class="nav nav-tabs md-tabs card-header-pills" role="tablist">
-							<li class="nav-item"><a class="nav-link active"
+							<li class="nav-item"><a class="nav-link active" style="font-weight: bold;font-size: 20px"
 								data-toggle="tab" href="#srDemandDetail" role="tab">SR 요청 정보</a>
 								<div class="slide"></div></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab" id="srInfoDetailTab"
+							<li class="nav-item"><a class="nav-link" data-toggle="tab" id="srInfoDetailTab" style="font-weight: bold;font-size: 20px"
 								href="#srInfoDetail" role="tab">SR 처리 정보</a>
 								<div class="slide"></div></li>
 						</ul>
@@ -517,7 +526,7 @@ label {
 
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청 번호</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">요청 번호</div>
 											<div class="col col-sm-6 px-0">
 												<input type="hidden" id="SRDSrNo" value="${srlist[0].srNo}">
 												<input readonly class="form-control" id="SRDDmndNo"
@@ -525,7 +534,7 @@ label {
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">우선순위</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">우선순위</div>
 											<div class="col col-sm-6 px-0">
 												<input type="text" readonly class="form-control" id="SiRnk"
 													value="${sd.rnk}">
@@ -534,7 +543,7 @@ label {
 									</div>
 									<hr />
 									<div class="form-group row">
-										<div class="col col-sm-2 px-0 font-weight-bold">SR 제목</div>
+										<div class="col col-sm-2 px-0 font-weight-bold" style="font-size:14px;">SR 제목</div>
 										<div class="col col-sm-9 px-0">
 											<input readonly class="form-control" id="SRDTitle"
 												value="${sd.ttl}">
@@ -542,7 +551,7 @@ label {
 									</div>
 									<hr />
 									<div class="form-group row">
-										<div class="col col-sm-2 px-0 font-weight-bold">관련근거</div>
+										<div class="col col-sm-2 px-0 font-weight-bold" style="font-size:14px;">관련근거</div>
 										<div class="col col-sm-9 px-0">
 											<input readonly class="form-control" id="SRDRelgrund"
 												value="${sd.relGrund}">
@@ -551,14 +560,14 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">시스템구분</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">시스템구분</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDSys"
 													value="${sd.sysNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">업무구분</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">업무구분</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDTask"
 													value="${sd.taskSeNm}">
@@ -568,14 +577,14 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청기관</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">요청기관</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDInst"
 													value="${sd.instNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청자</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">요청자</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDClientNm"
 													value="${sd.clientNm}"> <input type="hidden"
@@ -586,14 +595,14 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">SR요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">SR요청일</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDDmndymd"
 													value="${sd.dmndYmd}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">완료요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">완료요청일</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDCmptnDmndYmd"
 													value="${sd.cmptnDmndYmd}">
@@ -603,7 +612,7 @@ label {
 									<hr />
 									<div class="form-group row">
 										<label class="col-sm-2 px-0 col-form-label font-weight-bold"
-											style="line-height: 100px; font-size: 12px">SR 내용</label>
+											style="line-height: 100px; font-size: 14px">SR 내용</label>
 										<div class="col-sm-9 px-0">
 											<input readonly class="form-control" style="height: 100px;"
 												id="SRDCn" value="${sd.cn}">
@@ -612,14 +621,14 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">검토자</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">검토자</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDRvwrNm"
 													value="${sd.rvwrNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 font-weight-bold">진행상태</div>
+											<div class="col col-sm-4 font-weight-bold" style="font-size:14px;">진행상태</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDSttsNm"
 													value="${sd.sttsNm}">
@@ -627,7 +636,7 @@ label {
 										</div>
 									</div>
 									<div class="form-group row">
-										<p class="col-sm-2 font-weight-bold px-0">첨부파일</p>
+										<p class="col-sm-2 font-weight-bold px-0" style="font-size:14px;">첨부파일</p>
 										<div class="col-sm-10" id="SRDAttachFile">
 											<c:forEach var="f" items="${sd.attachFile}">
 												<div>
@@ -797,14 +806,14 @@ label {
 														<tbody>
 															<tr>
 
-																<td>요구정의 <input type="hidden" id="SRPgPrgrsId0">
+																<td style="font-size:12px !important;">요구정의 <input type="hidden" id="SRPgPrgrsId0">
 																	<input type="hidden" id="SRPgSrNo">
 																</td>
-																<td id="0bgngYmd"><input type="date"
+																<td style="font-size:12px !important;"id="0bgngYmd"><input type="date"
 																	id="SRPgBgngYmd0"></td>
-																<td id="0endYmd"><input type="date"
+																<td style="font-size:12px !important;"id="0endYmd"><input type="date"
 																	id="SRPgEndYmd0"></td>
-																<td id="0rt"><input type="number"
+																<td style="font-size:12px !important;"id="0rt"><input type="number"
 																	class="form-control" id="SRPgPrgrsRt0" min="1" max="10"
 																	placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
 																<td><div class="accordion" id="accordionExample">
@@ -822,12 +831,12 @@ label {
 
 															<tr>
 
-																<td>분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
-																<td id="1bgngYmd"><input type="date"
+																<td style="font-size:12px !important;">분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
+																<td style="font-size:12px !important;"id="1bgngYmd"><input type="date"
 																	id="SRPgBgngYmd1"></td>
-																<td id="1endYmd"><input type="date"
+																<td style="font-size:12px !important;"id="1endYmd"><input type="date"
 																	id="SRPgEndYmd1"></td>
-																<td id="1rt"><input type="number"
+																<td style="font-size:12px !important;" id="1rt"><input type="number" 
 																	class="form-control" id="SRPgPrgrsRt1" min="11"
 																	max="40"></td>
 																<td><div class="accordion" id="accordionExample">
@@ -845,12 +854,12 @@ label {
 
 															<tr>
 
-																<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
-																<td id="2bgngYmd"><input type="date"
+																<td style="font-size:12px !important;">구현<input type="hidden" id="SRPgPrgrsId2"></td>
+																<td style="font-size:12px !important;"id="2bgngYmd"><input type="date"
 																	id="SRPgBgngYmd2"></td>
-																<td id="2endYmd"><input type="date"
+																<td style="font-size:12px !important;"id="2endYmd"><input type="date"
 																	id="SRPgEndYmd2"></td>
-																<td id="2rt"><input type="number"
+																<td style="font-size:12px !important;"id="2rt"><input type="number"
 																	class="form-control" id="SRPgPrgrsRt2" min="41"
 																	max="70"></td>
 																<td><div class="accordion" id="accordionExample">
@@ -868,12 +877,12 @@ label {
 
 															<tr>
 
-																<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
-																<td id="3bgngYmd"><input type="date"
+																<td style="font-size:12px !important;">테스트<input type="hidden" id="SRPgPrgrsId3"></td>
+																<td style="font-size:12px !important;"id="3bgngYmd"><input type="date"
 																	id="SRPgBgngYmd3"></td>
-																<td id="3endYmd"><input type="date"
+																<td style="font-size:12px !important;"id="3endYmd"><input type="date"
 																	id="SRPgEndYmd3"></td>
-																<td id="3rt"><input type="number"
+																<td style="font-size:12px !important;"id="3rt"><input type="number"
 																	class="form-control" id="SRPgPrgrsRt3" min="71"
 																	max="80"></td>
 																<td>
@@ -893,12 +902,12 @@ label {
 
 															<tr>
 
-																<td>반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
-																<td id="4bgngYmd"><input type="date"
+																<td style="font-size:12px !important;">반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
+																<td style="font-size:12px !important;"id="4bgngYmd"><input type="date"
 																	id="SRPgBgngYmd4"></td>
-																<td id="4endYmd"><input type="date"
+																<td style="font-size:12px !important;"id="4endYmd"><input type="date"
 																	id="SRPgEndYmd4"></td>
-																<td id="4rt"><input type="number"
+																<td style="font-size:12px !important;"id="4rt"><input type="number"
 																	class="form-control" id="SRPgPrgrsRt4" min="81"
 																	max="90"></td>
 																<td><div class="accordion" id="accordionExample">
@@ -916,12 +925,12 @@ label {
 
 															<tr>
 
-																<td>운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
-																<td id="5bgngYmd"><input type="date"
+																<td style="font-size:12px !important;">운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
+																<td style="font-size:12px !important;"id="5bgngYmd"><input type="date"
 																	id="SRPgBgngYmd5"></td>
-																<td id="5endYmd"><input type="date"
+																<td style="font-size:12px !important;"id="5endYmd"><input type="date"
 																	id="SRPgEndYmd5"></td>
-																<td id="5rt"><input type="number"
+																<td style="font-size:12px !important;"id="5rt"><input type="number"
 																	class="form-control" id="SRPgPrgrsRt5" min="91"
 																	max="100"></td>
 																<td><div class="accordion" id="accordionExample">
