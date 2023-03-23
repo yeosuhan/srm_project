@@ -464,16 +464,20 @@ public class SrDemandService implements ISrDemandService {
 		return list;
 	}
 
-	/* 요청의 행번호 조회
-	 * @authoe 안한길 
-	 * @return 
-	 * */
+	/*
+	 * 요청의 행번호 조회
+	 * 
+	 * @authoe 안한길
+	 * 
+	 * @return
+	 */
 	@Override
-	public SrDmndRowNum getRownum(String dmndNo,String custId) {
-		return srDemandDao.selectRowNumByDmndNo(dmndNo,custId);
+	public SrDmndRowNum getRownum(String dmndNo, String custId) {
+		return srDemandDao.selectRowNumByDmndNo(dmndNo, custId);
 	}
+
 	@Override
-	public SrDmndRowNum getRownum(int hstryId , String custId) {
-		return srDemandDao.selectRowNumByHstryId(hstryId,custId);
+	public SrDmndRowNum getRownum(int hstryId, String custId) {
+		return srDemandDao.selectRowNumByHstryId(hstryId, custId);
 	}
 }

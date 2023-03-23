@@ -20,7 +20,7 @@ public class GoogleService {
 		authURL += "?client_id=384557297665-3n8abq0eana7g9igakohgfsiu1q57qh3.apps.googleusercontent.com";
 		authURL += "&response_type=code";
 		authURL += "&redirect_uri=http://localhost:8080/login/oauth2/google/callback";
-		authURL += "&email profile";
+		authURL += "&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
 		return authURL;
 	}		
 	
