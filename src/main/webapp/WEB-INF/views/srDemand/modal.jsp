@@ -87,7 +87,7 @@
 	<div class="modal" id="addmodal" style=" z-index: 1040;">
 		<div class="modal_body">
 			<div class="m_head">
-				<div class="modal_title" style="color: white;">SR 요청 등록</div>
+				<div class="modal_title" style="color: white;font-weight: bold;font-size: 20px">SR 요청 등록</div>
 			</div>
 			<div class="m_body">
 				<form  id="srRequest" enctype="multipart/form-data">
@@ -161,9 +161,9 @@
 				</form>
 			</div>
 			<div class="m_footer">
-				<button class="modal_btn btn-oti save center"
+				<button class="modal_btn btn-info center" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px; padding-bottom:30px;"
 					onclick="addSr()">등록</button>
-				<div class="modal_btn btn-oti cancle" id="closebtn">닫기</div>
+				<div class="modal_btn btn-danger" id="closebtn" style="float: right; margin-right: 5px;font-weight: bold;font-size: 20px;padding-bottom:35px;">닫기</div>
 			</div>
 		</div>
 

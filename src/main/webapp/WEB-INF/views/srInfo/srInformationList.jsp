@@ -39,23 +39,23 @@
 <%-- 히스토리id가 있는경우 탭을 열고 해당위치로 이동 --%>
    <c:if test="${hstryId ne null}">
    $(function(){
-	   
-  		var trId = "tr"+${hstryId};
-  		console.log(trId);
-  		$("#"+trId).trigger("click");
- 	    $("#srInfoDetailTab").trigger("click");
-  		$("#srInfhistoryTab").trigger("click"); 
-  		
+      
+        var trId = "tr"+${hstryId};
+        console.log(trId);
+        $("#"+trId).trigger("click");
+        $("#srInfoDetailTab").trigger("click");
+        $("#srInfhistoryTab").trigger("click"); 
+        
    });
 
    </c:if>
    <c:if test="${rownum ne null}">
    $(function(){
-	   
-  		var trId = "tr"+${rownum};
-  		
-  		$("#"+trId).trigger("click");
-  		
+      
+        var trId = "tr"+${rownum};
+        
+        $("#"+trId).trigger("click");
+        
    });
 
    </c:if>
@@ -108,7 +108,7 @@ th {
    padding: 0.75rem;
 } */
 .card .card-block {
-	padding: 0px 5px;
+	padding: 0px;
 }
 
 .col-xl-1 {
@@ -170,7 +170,21 @@ table th {
 }
 
 table tbody td {
-	font-size: 13px !important;
+	font-size: 15px !important;
+}
+
+label {
+	font-size: 15px;
+}
+
+.fontWrapper {
+	width: 100%;
+	display: block; /* 블록태그로 만들어준다 */
+	text-overflow: ellipsis; /* 말줄임 css */
+	white-space: nowrap; /*글자를 한줄로 모아준다*/
+	overflow: hidden;
+	background: pink; /*실제 글자 영역 상태 확인하기 위함*/
+	margin-right: 0;
 }
 </style>
 <body>
@@ -347,12 +361,17 @@ table tbody td {
 			</div>
 			<%-- *********************************** [SR 처리 목록 ] ***********************************--%>
 			<div class="col-xl-8 col-md-12">
-				<div class="card" style="height: 760px;">
+				<div class="card" style="height: 820px;">
 					<div class="card-header">
-						<h5>SR 처리 목록</h5>
-						<button type="submit" class="btn btn-oti btn-sm" form="srInfoFilterForm	"
-									onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
-									style="float: right; margin-right: 50px;">엑셀 다운로드</button>
+						<h5 style="font-weight: bold; font-size: 20px">SR 처리 목록</h5>
+						<button type="submit" class="btn btn-sm" form="srInfoFilterForm"
+							onclick="javascript: form.action='${pageContext.request.contextPath}/srinformation/list/download';"
+							style="float: right; margin-right: 50px; background-color: transparent; padding: 0px;">
+							<img
+								src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png"
+								width="30px;">
+						</button>
+
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -368,7 +387,7 @@ table tbody td {
 									<table class="table table-hover text-center">
 										<thead>
 											<tr>
-												<th style="width: 1px;"></th>
+												<th></th>
 												<th style="font-size: 15px;">SR번호 <c:if
 														test="${sort eq 'DESC' || sort eq '1'}">
 														<a
@@ -385,7 +404,7 @@ table tbody td {
 												<th class="text-left" style="font-size: 15px; width: 200px;">SR명</th>
 												<th class="text-left" style="font-size: 15px;">시스템구분</th>
 												<th class="text-left" style="font-size: 15px;">업무구분</th>
-												<th style="font-size: 15px;">완료요청일 <c:if
+												<th style="font-size: 15px;">SR요청일 <c:if
 														test="${by eq 'DESC' || by eq '1'}">
 														<a
 															href="${pageContext.request.contextPath}/srinformation/list"
@@ -412,7 +431,7 @@ table tbody td {
 												<th style="font-size: 15px;">진행상태</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody style="font-size: 15px !important;">
 											<c:if test="${srlist ne null}">
 												<c:forEach var="srlist" items="${srlist}" varStatus="num">
 													<tr id="tr${pager.startRowNo + num.index}"
@@ -420,9 +439,9 @@ table tbody td {
 														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srlist.ttl) > 15}">
+															<c:when test="${fn:length(srlist.ttl) > 18}">
 																<td class="text-left"><c:out
-																		value="${fn:substring(srlist.ttl,0,14)}" />...</td>
+																		value="${fn:substring(srlist.ttl,0,17)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td class="text-left"><c:out value="${srlist.ttl}" /></td>
@@ -435,40 +454,50 @@ table tbody td {
 														<td><c:if test="${srlist.prgrsRt  ge 0}">
 																<c:if
 																	test="${(srlist.prgrsRt  ge 1) && (srlist.prgrsRt lt 10)}">
-																	<label class="badge badge-info">요구정의</label>
+																	<label class="badge badge-info"
+																		style="font-size: 14px;">요구정의</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 10) && (srlist.prgrsRt lt 40)}">
-																	<label class="badge badge-warning">분석/설계</label>
+																	<label class="badge badge-warning"
+																		style="font-size: 14px;">분석/설계</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 40) && (srlist.prgrsRt lt 70)}">
-																	<label class="badge badge-success">구현</label>
+																	<label class="badge badge-success"
+																		style="font-size: 14px;">구현</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 70) && (srlist.prgrsRt lt 80)}">
-																	<label class="badge badge-inverse-success">테스트</label>
+																	<label class="badge badge-inverse-success"
+																		style="font-size: 14px;">테스트</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 80) && (srlist.prgrsRt lt 90)}">
-																	<label class="badge badge-inverse-primary">반영요청</label>
+																	<label class="badge badge-inverse-primary"
+																		style="font-size: 14px;">반영요청</label>
 																</c:if>
 																<c:if
 																	test="${(srlist.prgrsRt  ge 90) && (srlist.prgrsRt lt 100)}">
-																	<label class="badge badge-primary">운영반영</label>
+																	<label class="badge badge-primary"
+																		style="font-size: 14px;">운영반영</label>
 																</c:if>
 																<c:if test="${(srlist.prgrsRt eq 100)}">
-																	<label class="badge badge-primary">개발완료</label>
+																	<label class="badge badge-primary"
+																		style="font-size: 14px;">개발완료</label>
 																</c:if>
 															</c:if> <c:if test="${srlist.prgrsRt eq 0}">
 																<c:if test="${(srlist.sttsNm) eq '접수'}">
-																	<label class="badge label-inverse-info">접수</label>
+																	<label class="badge label-inverse-info"
+																		style="font-size: 14px;">접수</label>
 																</c:if>
 																<c:if test="${srlist.sttsNm eq '개발취소'}">
-																	<label class="badge badge-inverse-danger">개발취소</label>
+																	<label class="badge badge-inverse-danger"
+																		style="font-size: 14px;">개발취소</label>
 																</c:if>
 																<c:if test="${srlist.sttsNm eq '반려'}">
-																	<label class="badge badge-danger">반려</label>
+																	<label class="badge badge-danger"
+																		style="font-size: 14px;">반려</label>
 																</c:if>
 															</c:if></td>
 													</tr>
@@ -495,9 +524,11 @@ table tbody td {
 						<%-- *********************************** 상세 탭 *********************************** --%>
 						<ul class="nav nav-tabs md-tabs card-header-pills" role="tablist">
 							<li class="nav-item"><a class="nav-link active"
-								data-toggle="tab" href="#srDemandDetail" role="tab">SR 요청 정보</a>
+								style="font-weight: bold; font-size: 20px" data-toggle="tab"
+								href="#srDemandDetail" role="tab">SR 요청 정보</a>
 								<div class="slide"></div></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab" id="srInfoDetailTab"
+							<li class="nav-item"><a class="nav-link" data-toggle="tab"
+								id="srInfoDetailTab" style="font-weight: bold; font-size: 20px"
 								href="#srInfoDetail" role="tab">SR 처리 정보</a>
 								<div class="slide"></div></li>
 						</ul>
@@ -511,7 +542,8 @@ table tbody td {
 
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청 번호</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">요청 번호</div>
 											<div class="col col-sm-6 px-0">
 												<input type="hidden" id="SRDSrNo" value="${srlist[0].srNo}">
 												<input readonly class="form-control" id="SRDDmndNo"
@@ -519,7 +551,8 @@ table tbody td {
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">우선순위</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">우선순위</div>
 											<div class="col col-sm-6 px-0">
 												<input type="text" readonly class="form-control" id="SiRnk"
 													value="${sd.rnk}">
@@ -528,7 +561,8 @@ table tbody td {
 									</div>
 									<hr />
 									<div class="form-group row">
-										<div class="col col-sm-2 px-0 font-weight-bold">SR 제목</div>
+										<div class="col col-sm-2 px-0 font-weight-bold"
+											style="font-size: 14px;">SR 제목</div>
 										<div class="col col-sm-9 px-0">
 											<input readonly class="form-control" id="SRDTitle"
 												value="${sd.ttl}">
@@ -536,7 +570,8 @@ table tbody td {
 									</div>
 									<hr />
 									<div class="form-group row">
-										<div class="col col-sm-2 px-0 font-weight-bold">관련근거</div>
+										<div class="col col-sm-2 px-0 font-weight-bold"
+											style="font-size: 14px;">관련근거</div>
 										<div class="col col-sm-9 px-0">
 											<input readonly class="form-control" id="SRDRelgrund"
 												value="${sd.relGrund}">
@@ -545,14 +580,16 @@ table tbody td {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">시스템구분</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">시스템구분</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDSys"
 													value="${sd.sysNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">업무구분</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">업무구분</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDTask"
 													value="${sd.taskSeNm}">
@@ -562,14 +599,16 @@ table tbody td {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청기관</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">요청기관</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDInst"
 													value="${sd.instNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청자</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">요청자</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDClientNm"
 													value="${sd.clientNm}"> <input type="hidden"
@@ -580,14 +619,16 @@ table tbody td {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">SR요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">SR요청일</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDDmndymd"
 													value="${sd.dmndYmd}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">완료요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">완료요청일</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDCmptnDmndYmd"
 													value="${sd.cmptnDmndYmd}">
@@ -597,7 +638,7 @@ table tbody td {
 									<hr />
 									<div class="form-group row">
 										<label class="col-sm-2 px-0 col-form-label font-weight-bold"
-											style="line-height: 100px; font-size: 12px">SR 내용</label>
+											style="line-height: 100px; font-size: 14px">SR 내용</label>
 										<div class="col-sm-9 px-0">
 											<input readonly class="form-control" style="height: 100px;"
 												id="SRDCn" value="${sd.cn}">
@@ -606,14 +647,16 @@ table tbody td {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">검토자</div>
+											<div class="col col-sm-4 px-0 font-weight-bold"
+												style="font-size: 14px;">검토자</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDRvwrNm"
 													value="${sd.rvwrNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 font-weight-bold">진행상태</div>
+											<div class="col col-sm-4 font-weight-bold"
+												style="font-size: 14px;">진행상태</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDSttsNm"
 													value="${sd.sttsNm}">
@@ -621,7 +664,8 @@ table tbody td {
 										</div>
 									</div>
 									<div class="form-group row">
-										<p class="col-sm-2 font-weight-bold px-0">첨부파일</p>
+										<p class="col-sm-2 font-weight-bold px-0"
+											style="font-size: 14px;">첨부파일</p>
 										<div class="col-sm-10" id="SRDAttachFile">
 											<c:forEach var="f" items="${sd.attachFile}">
 												<div>
@@ -643,7 +687,8 @@ table tbody td {
 											<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
                                     style="padding-left: 3px; display:none"
                                  </c:if>>
-											<button class="btn btn-oti btn-sm"
+											<button class="btn btn-oti"
+												style="float: right; margin-right: 5px; font-weight: bold; font-size: 20px"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
 												data-target="#addHistoryModal">SR 변경요청</button>
 										</div>
@@ -668,8 +713,8 @@ table tbody td {
 										role="tab">SR 진척률</a>
 										<div class="slide"></div></li>
 									<li class="nav-item font-weight-bold" onclick="empHstry()"><a
-										class="nav-link" data-toggle="tab" href="#srInfhistory" id="srInfhistoryTab"
-										role="tab">SR 히스토리</a>
+										class="nav-link" data-toggle="tab" href="#srInfhistory"
+										id="srInfhistoryTab" role="tab">SR 히스토리</a>
 										<div class="slide"></div></li>
 								</ul>
 								<%-- *********************************** [ 계획정보 ] ***********************************--%>
@@ -722,9 +767,9 @@ table tbody td {
 											</div>
 										</div>
 										<sec:authorize access="hasRole('ROLE_ADMIN')">
-											<button class="btn btn-oti btn-sm" onclick="planUpdate()"
+											<button class="btn btn-info" onclick="planUpdate()"
 												id="planBtn"
-												style="float: right; padding-bottom: 10px; margin-bottom: 10px;">수정</button>
+												style="float: right; padding-bottom: 10px; margin-bottom: 10px; width: 100%; font-size: 25px;">수정</button>
 										</sec:authorize>
 									</div>
 									<%-- *********************************** [ 자원정보 ] ***********************************--%>
@@ -757,15 +802,15 @@ table tbody td {
 												id="deleteSrResourceBtn"
 												style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
 												<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
-													style="display:none"
-										</c:if>>선택
+                                       style="display:none"
+                              </c:if>>선택
 												삭제</button>
 											<button class="btn btn-oti btn-sm" id="addSrResourceBtn"
 												style="float: right; padding-bottom: 10px; margin-bottom: 10px; margin-right: 10px;"
 												data-toggle="modal" data-target="#addSrResourcesModal"
 												<c:if test="${sd.sttsNm eq '개발취소' || sd.sttsNm eq '개발완료'}">
-											style="display:none"
-										</c:if>>추가</button>
+                                 style="display:none"
+                              </c:if>>추가</button>
 										</sec:authorize>
 									</div>
 									<%-- *********************************** [ 진척률 ] ***********************************--%>
@@ -791,24 +836,24 @@ table tbody td {
 														<tbody>
 															<tr>
 
-																<td>요구정의 <input type="hidden" id="SRPgPrgrsId0">
-																	<input type="hidden" id="SRPgSrNo">
+																<td style="font-size: 12px !important;">요구정의 <input
+																	type="hidden" id="SRPgPrgrsId0"> <input
+																	type="hidden" id="SRPgSrNo">
 																</td>
-																<td id="0bgngYmd"><input type="date"
-																	id="SRPgBgngYmd0"></td>
-																<td id="0endYmd"><input type="date"
-																	id="SRPgEndYmd0"></td>
-																<td id="0rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt0" min="1" max="10"
-																	placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
+																<td style="font-size: 12px !important;" id="0bgngYmd"><input
+																	type="date" id="SRPgBgngYmd0"></td>
+																<td style="font-size: 12px !important;" id="0endYmd"><input
+																	type="date" id="SRPgEndYmd0"></td>
+																<td style="font-size: 12px !important;" id="0rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt0"
+																	min="1" max="10" placeholder="1~10이하 범위의 진척률을 입력하세요"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(0)">첨부파일</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(0)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress0()" id="btn0"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -816,45 +861,45 @@ table tbody td {
 
 															<tr>
 
-																<td>분석/설계<input type="hidden" id="SRPgPrgrsId1"></td>
-																<td id="1bgngYmd"><input type="date"
-																	id="SRPgBgngYmd1"></td>
-																<td id="1endYmd"><input type="date"
-																	id="SRPgEndYmd1"></td>
-																<td id="1rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt1" min="11"
-																	max="40"></td>
+																<td style="font-size: 12px !important;">분석/설계<input
+																	type="hidden" id="SRPgPrgrsId1"></td>
+																<td style="font-size: 12px !important;" id="1bgngYmd"><input
+																	type="date" id="SRPgBgngYmd1"></td>
+																<td style="font-size: 12px !important;" id="1endYmd"><input
+																	type="date" id="SRPgEndYmd1"></td>
+																<td style="font-size: 12px !important;" id="1rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt1"
+																	min="11" max="40"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(1)">첨부파일</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(1)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress1()" id="btn1"
-																		style="width: 90%; height: 90%">저장</button>
+																		style="width: 90%; height: 80%">저장</button>
 																</td>
 															</tr>
 
 															<tr>
 
-																<td>구현<input type="hidden" id="SRPgPrgrsId2"></td>
-																<td id="2bgngYmd"><input type="date"
-																	id="SRPgBgngYmd2"></td>
-																<td id="2endYmd"><input type="date"
-																	id="SRPgEndYmd2"></td>
-																<td id="2rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt2" min="41"
-																	max="70"></td>
+																<td style="font-size: 12px !important;">구현<input
+																	type="hidden" id="SRPgPrgrsId2"></td>
+																<td style="font-size: 12px !important;" id="2bgngYmd"><input
+																	type="date" id="SRPgBgngYmd2"></td>
+																<td style="font-size: 12px !important;" id="2endYmd"><input
+																	type="date" id="SRPgEndYmd2"></td>
+																<td style="font-size: 12px !important;" id="2rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt2"
+																	min="41" max="70"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(2)">첨부파일</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(2)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress2()" id="btn2"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -862,24 +907,24 @@ table tbody td {
 
 															<tr>
 
-																<td>테스트<input type="hidden" id="SRPgPrgrsId3"></td>
-																<td id="3bgngYmd"><input type="date"
-																	id="SRPgBgngYmd3"></td>
-																<td id="3endYmd"><input type="date"
-																	id="SRPgEndYmd3"></td>
-																<td id="3rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt3" min="71"
-																	max="80"></td>
+																<td style="font-size: 12px !important;">테스트<input
+																	type="hidden" id="SRPgPrgrsId3"></td>
+																<td style="font-size: 12px !important;" id="3bgngYmd"><input
+																	type="date" id="SRPgBgngYmd3"></td>
+																<td style="font-size: 12px !important;" id="3endYmd"><input
+																	type="date" id="SRPgEndYmd3"></td>
+																<td style="font-size: 12px !important;" id="3rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt3"
+																	min="71" max="80"></td>
 																<td>
 																	<div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(3)">첨부파일</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(3)"></i>
 																	</div>
 																</td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress3()" id="btn3"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -887,22 +932,22 @@ table tbody td {
 
 															<tr>
 
-																<td>반영요청<input type="hidden" id="SRPgPrgrsId4"></td>
-																<td id="4bgngYmd"><input type="date"
-																	id="SRPgBgngYmd4"></td>
-																<td id="4endYmd"><input type="date"
-																	id="SRPgEndYmd4"></td>
-																<td id="4rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt4" min="81"
-																	max="90"></td>
+																<td style="font-size: 12px !important;">반영요청<input
+																	type="hidden" id="SRPgPrgrsId4"></td>
+																<td style="font-size: 12px !important;" id="4bgngYmd"><input
+																	type="date" id="SRPgBgngYmd4"></td>
+																<td style="font-size: 12px !important;" id="4endYmd"><input
+																	type="date" id="SRPgEndYmd4"></td>
+																<td style="font-size: 12px !important;" id="4rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt4"
+																	min="81" max="90"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(4)">첨부파일</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(4)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress4()" id="btn4"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -910,22 +955,22 @@ table tbody td {
 
 															<tr>
 
-																<td>운영반영<input type="hidden" id="SRPgPrgrsId5"></td>
-																<td id="5bgngYmd"><input type="date"
-																	id="SRPgBgngYmd5"></td>
-																<td id="5endYmd"><input type="date"
-																	id="SRPgEndYmd5"></td>
-																<td id="5rt"><input type="number"
-																	class="form-control" id="SRPgPrgrsRt5" min="91"
-																	max="100"></td>
+																<td style="font-size: 12px !important;">운영반영<input
+																	type="hidden" id="SRPgPrgrsId5"></td>
+																<td style="font-size: 12px !important;" id="5bgngYmd"><input
+																	type="date" id="SRPgBgngYmd5"></td>
+																<td style="font-size: 12px !important;" id="5endYmd"><input
+																	type="date" id="SRPgEndYmd5"></td>
+																<td style="font-size: 12px !important;" id="5rt"><input
+																	type="number" class="form-control" id="SRPgPrgrsRt5"
+																	min="91" max="100"></td>
 																<td><div class="accordion" id="accordionExample">
-																		<button class="btn btn-link btn-block text-center "
-																			type="button" data-toggle="modal"
-																			data-target="#deliverableListModal"
-																			onclick="getDeliverablesTableRow(5)">첨부파일</button>
+																		<i class="fa fa-file-o" style="color:black" data-toggle="modal"
+																		data-target="#deliverableListModal"
+																		onclick="getDeliverablesTableRow(5)"></i>
 																	</div></td>
 																<td style="padding: 0px; margin: 0px;">
-																	<button class="btn btn-oti btn-lg"
+																	<button class="btn btn-success btn-lg radius"
 																		onclick="updateProgress5()" id="btn5"
 																		style="width: 90%; height: 90%">저장</button>
 																</td>
@@ -938,7 +983,7 @@ table tbody td {
 										</div>
 
 										<button class="btn btn-oti btn-sm" id="addbtn"
-											style="float: right;width:100%;">산출물
+											style="float: right; width: 100%; font-size: 20px;">산출물
 											추가</button>
 									</div>
 									<%-- *********************************** [ SR 히스토리  ] ***********************************--%>
@@ -986,4 +1031,3 @@ table tbody td {
 	<%@include file="/WEB-INF/views/srInfo/addSrResourcesModal.jsp"%>
 </body>
 </html>
-F

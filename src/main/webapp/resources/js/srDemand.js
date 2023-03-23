@@ -132,6 +132,7 @@ function writerBase() {
  * 작성자 : 신정은 내용 : sr 요청 작성시, 모든 시스템 데이터 드롭다운에 표시하기 위함
  */
 function setSystems() {
+	 $('.sysTask').empty();
    $.ajax({
       url : '/srsystem/list',
       type : 'GET',
@@ -218,7 +219,7 @@ function goAccept(dmndNo) {
       dataType : "json",
       success : function(res) {
          //alert(res.result);
-    	 location.href="/srdemand/list";
+    	 location.href="/admin/srdemand/list";
       },
       error : function(error) {
          console.log(error);
@@ -250,7 +251,7 @@ function goDecline(dmndNo) {
          contentType : "application/json; charset=UTF-8",
          success : function(res) {
             //alert(res.result);
-        	location.href="/srdemand/list";
+        	location.href="/admin/srdemand/list";
          },
          error : function(error) {
             console.log(error);

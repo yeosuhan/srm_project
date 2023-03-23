@@ -61,6 +61,12 @@ public class ProgressService implements IProgressService {
 	      log.info("prgrsId : " + prgrsId);
 	      log.info("prgrsSeNm : " + prgrsSeNm);
 	      log.info("srNo : " + srNo);
+	      //종료일이 시작일보다 이전 날짜인 경우
+	      String[] bgng = bgngYmd.split("-");
+	      String[] end = endYmd.split("-");
+	      for(int i=0; i<3; i++) {
+	    	  
+	      }
 	      // 진척률이 종료값일 경우
 	      for (int i = 0; i < array.length; i++) {
 	         // 진척률이 종료값이지만 종료일이 없을경우

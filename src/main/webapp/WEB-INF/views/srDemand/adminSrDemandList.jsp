@@ -22,7 +22,6 @@
 		$('#addmodal').removeClass('show');
 		document.body.style = `overflow: scroll`;
 	});
-	
 </script>
 <style>
 #startDatepicker, #endDatepicker, #addDatepicker {
@@ -65,12 +64,8 @@ th {
 }
 /* 
 .table td, .table th {
-	padding: 0.75rem;
+   padding: 0.75rem;
 } */
-.card .card-block {
-	padding: 0px 5px !important;
-}
-
 .col-xl-1 {
 	padding-top: 8px;
 	padding-right: 0px;
@@ -112,20 +107,29 @@ th {
 	padding: 5px 8px;
 }
 
-table th{
-font-size: 15px !important;
-	}
-	
-table thead tr {
-width: 100%;
+.card .card-block {
+	padding: 0px;
 }
+
+table th {
+	font-size: 15px !important;
+}
+
+table thead tr {
+	width: 100%;
+}
+
+table tbody td {
+	font-size: 15px !important;
+}
+
 .fontWrapper {
-	width:100%; 
-	display: block;/* 블록태그로 만들어준다 */
-	text-overflow: ellipsis;/* 말줄임 css */
-	white-space: nowrap;/*글자를 한줄로 모아준다*/
+	width: 100%;
+	display: block; /* 블록태그로 만들어준다 */
+	text-overflow: ellipsis; /* 말줄임 css */
+	white-space: nowrap; /*글자를 한줄로 모아준다*/
 	overflow: hidden;
-	background:pink;/*실제 글자 영역 상태 확인하기 위함*/
+	background: pink; /*실제 글자 영역 상태 확인하기 위함*/
 	margin-right: 0;
 }
 </style>
@@ -142,12 +146,13 @@ width: 100%;
 					<div class="card-header" id="headerFirst">
 						<div class="row">
 							<div class="col-10">
-								<h5 style="font-weight: bold;">SR 요청 관리</h5>
+								<h5 style="font-weight: bold; font-size: 20px">SR 요청 관리</h5>
 							</div>
 						</div>
 					</div>
-					<div class="card-body" style="height:70px;">
-						<form name ="srSearchForm" id="srSearchForm" action="${pageContext.request.contextPath}/admin/srdemand/list">
+					<div class="card-body" style="height: 70px;">
+						<form name="srSearchForm" id="srSearchForm"
+							action="${pageContext.request.contextPath}/admin/srdemand/list">
 							<div class="row">
 								<div class="col col-3 pr-0 font-weight-bold">
 									<label for="dmndYmdStart" style="margin-right: 10px;">조회
@@ -157,8 +162,8 @@ width: 100%;
 										value="${srFilterDto.dmndYmdEnd}">
 								</div>
 								<div class="col col-2 pr-0 font-weight-bold">
-									<label for="sttsCd" >진행 상태</label> <select
-										id="sttsCd" name="sttsCd">
+									<label for="sttsCd">진행 상태</label> <select id="sttsCd"
+										name="sttsCd">
 										<option value="">전체</option>
 										<option value="0"
 											<c:if test="${srFilterDto.sttsCd eq 0 }">selected</c:if>>요청</option>
@@ -177,7 +182,7 @@ width: 100%;
 								</div>
 								<div class="col-4 pr-0 mr-0 pl-0 ml-0 font-weight-bold">
 									<label for="sysCd" style="margin-right: 5px;">시스템 구분</label> <select
-										id="sysCd" name="sysCd"  onchange="systemFilter()">
+										id="sysCd" name="sysCd" onchange="systemFilter()">
 										<option value="">전체</option>
 										<c:forEach var="system" items="${systemList}">
 											<c:if test="${srFilterDto.sysCd eq system.sysCd}">
@@ -187,7 +192,7 @@ width: 100%;
 												<option value="${system.sysCd}">${system.sysNm}</option>
 											</c:if>
 										</c:forEach>
-									</select> <select id="taskSeCd" name="taskSeCd" >
+									</select> <select id="taskSeCd" name="taskSeCd">
 										<option value="">전체</option>
 										<c:if test="${taskList ne null}">
 											<c:forEach var="task" items="${taskList}">
@@ -219,10 +224,14 @@ width: 100%;
 			<div class="col-xl-8 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h5>SR 요청 목록</h5>
-						<button type="submit" class="btn-sm btn-oti" form="srSearchForm"
-									onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
-									style="float: right; margin-right: 50px;">엑셀 다운로드</button>
+						<h5 style="font-weight: bold; font-size: 20px">SR 요청 목록</h5>
+						<button type="submit" class="btn btn-sm" form="srSearchForm"
+							onclick="javascript: form.action='${pageContext.request.contextPath}/admin/srdemand/list/download';"
+							style="float: right; margin-right: 50px; background-color: transparent; padding: 0px;">
+							<img
+								src="${pageContext.request.contextPath}/resources/oti_images/엑셀.png"
+								width="30px;">
+						</button>
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
 								<li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -231,9 +240,9 @@ width: 100%;
 							</ul>
 						</div>
 					</div>
-					<div class="card-block" id="list">
+					<div class="card-block p-0" id="list">
 						<div id="sales-analytics">
-							<div class="card-block table-border-style" style="height: 783px;">
+							<div class="card-block table-border-style" style="height: 820px;">
 								<div class="table-responsive">
 									<table class="table table-hover text-center">
 										<thead>
@@ -253,13 +262,12 @@ width: 100%;
 													</c:if>
 
 												</th>
-												<th class="text-left" style="font-size:15px; width: 100%;">제목</th>
-												<th class="text-left" style="font-size:15px;">시스템구분</th>
-												<th class="text-left" style="font-size:15px;">소속</th>
-												<th style="font-size:15px;">진행상태</th>
-												<th style="font-size:15px;">등록일</th>
-												<th style="font-size:15px;">완료예정일</th>
-
+												<th class="text-left" style="font-size: 15px; width: 100%;">제목</th>
+												<th class="text-left" style="font-size: 15px;">시스템구분</th>
+												<th class="text-left" style="font-size: 15px;">소속</th>
+												<th style="font-size: 15px;">등록일</th>
+												<th style="font-size: 15px;">완료요청일</th>
+												<th style="font-size: 15px;">진행상태</th>
 											</tr>
 
 										</thead>
@@ -267,39 +275,48 @@ width: 100%;
 											<c:if test="${srDemandList ne null}">
 												<c:forEach var="srDemand" items="${srDemandList}"
 													varStatus="status">
-													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')" style="font-size:13px;" id="tr${pager.startRowNo + status.index}">
+													<tr onclick="getSrDemandDetail('${srDemand.dmndNo}')"
+														id="tr${pager.startRowNo + status.index}">
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srDemand.ttl) > 15}">
-																<td id="ttl" class="text-left" style="font-size:13px;"><c:out
-																		value="${fn:substring(srDemand.ttl,0,14)}" />...</td>
+															<c:when test="${fn:length(srDemand.ttl) > 20}">
+																<td id="ttl" class="text-left"><c:out
+																		value="${fn:substring(srDemand.ttl,0,19)}" />...</td>
 															</c:when>
 															<c:otherwise>
-																<td id="ttl" class="text-left" style="font-size:13px;"><c:out
+																<td id="ttl" class="text-left"><c:out
 																		value="${srDemand.ttl}" /></td>
 															</c:otherwise>
-														</c:choose> 
+														</c:choose>
 														<%-- <td nowrap id="ttl" class="text-left fontWrapper" ><span class="fontWrapper">${srDemand.ttl}</span></td> --%>
-														<td class="text-left" style="font-size:13px;">${srDemand.sysNm}</td>
-														<td class="text-left" style="font-size:13px;">${srDemand.instNm}</td>
-														<td style="font-size:15px;"><c:if test="${(srDemand.sttsNm) eq '요청'}">
-																<label class="badge badge-warning">${srDemand.sttsNm}</label>
+														<td class="text-left">${srDemand.sysNm}</td>
+														<td class="text-left">${srDemand.instNm}</td>
+														<td>${srDemand.dmndYmd}</td>
+														<td>${srDemand.cmptnDmndYmd}</td>
+														<td style="font-size: 15px;"><c:if
+																test="${(srDemand.sttsNm) eq '요청'}">
+																<label class="badge badge-warning"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '반려'}">
-																<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '접수'}">
-																<label class="badge badge-inverse-success">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-success"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발중'}">
-																<label class="badge badge-success">${srDemand.sttsNm}</label>
+																<label class="badge badge-success"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발완료'}">
-																<label class="badge badge-primary">${srDemand.sttsNm}</label>
+																<label class="badge badge-primary"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '개발취소'}">
-																<label class="badge badge-danger">${srDemand.sttsNm}</label>
+																<label class="badge badge-danger"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if> <c:if test="${(srDemand.sttsNm) eq '테스트'}">
-																<label class="badge badge-inverse-primary">${srDemand.sttsNm}</label>
+																<label class="badge badge-inverse-primary"
+																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if></td>
-														<td style="font-size:13px;">${srDemand.dmndYmd}</td>
-														<td style="font-size:13px;">${srDemand.endYmd}</td>
 													</tr>
 												</c:forEach>
 											</c:if>
@@ -326,8 +343,8 @@ width: 100%;
 			<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
 			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
-					<div class="card-header">
-						<h5>SR 요청 상세정보</h5>
+					<div class="card-header">s
+						<h5 style="font-weight: bold; font-size: 20px">SR 요청 상세정보</h5>
 					</div>
 					<div class="tab-content tabs card-block"
 						style="padding: 0px; padding-top: 20px;">
@@ -345,7 +362,6 @@ width: 100%;
 	<!-- Page-body end -->
 	<%@include file="/WEB-INF/views/fragments/bottom.jsp"%>
 	<!-- 모달 -->
-	<jsp:include page="/WEB-INF/views/srDemand/srDemandDetail.jsp" />
 	<jsp:include page="/WEB-INF/views/srDemand/modal.jsp" />
 </body>
 </html>

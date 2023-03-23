@@ -1,7 +1,7 @@
 /* 비밀번호 찾기 기능 - 작성자 최은종 */
 
 function checkVal() {
-	
+
 	var emlValidation = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
 	var telNoValidation = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
@@ -30,8 +30,9 @@ function checkVal() {
 	var eml = $("#eml").val();
 	var memberId = $("#memberId").val();
 	var telNo = $("#telNo").val();
-	$("#findPwModal button").html("<span class='spinner-border'></span>");
-	$("#findPwModal button").prop("disabled",true);
+	$("#confirmBtn").hide();
+	$("#loadingBtn").show();
+	$("#loadingBtn").parent().prop("disabled",true);
 	$.ajax({
 		type : 'POST',
 		url : '/member/findPswd',
@@ -50,12 +51,10 @@ function checkVal() {
 				console.log("이메일 전송 완료:" + result);
 				$("#findPwModal").modal("hide");
 				showSuccessSraddAlert("이메일로 임시 비밀번호가 전송되었습니다.");
-				$("#sradd button").on("click",function(){
-					location.href="/loginForm";
+				$("#sradd button").on("click", function() {
+					location.href = "/loginForm";
 				});
-				
-				$("#findPwModal button").removeClass("spinner-border text-muted");
-				
+
 			}
 		},
 		error : function(result) {

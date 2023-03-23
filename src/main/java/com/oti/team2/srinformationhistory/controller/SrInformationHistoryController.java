@@ -39,16 +39,17 @@ public class SrInformationHistoryController {
 	 */
 	@ResponseBody
 	@GetMapping("/list")
-	public SrHistoryListDto getSrInformationHistoryList(@RequestParam String dmndNo, @RequestParam(defaultValue = "1") int pageNo, Authentication auth) {
+	public SrHistoryListDto getSrInformationHistoryList(@RequestParam String dmndNo,
+			@RequestParam(defaultValue = "1") int pageNo, Authentication auth) {
 		log.info("srInformationHistoryList 조회");
 
 		String srNo = srInformationHistoryService.getSrNo(dmndNo);
 		log.info("dmndNo 조회" + dmndNo);
-		
+
 		int totalRows = srInformationHistoryService.getCountAllForClient(srNo);
 		Pager pager = new Pager(5, totalRows, pageNo);
 		log.info("pageNo 조회" + pageNo);
-		
+
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		log.info("role 조회" + role);
 
@@ -97,11 +98,11 @@ public class SrInformationHistoryController {
 	@GetMapping("/detail/{hstryId}")
 	public SrHistoryDetailDto getSrInformationHistory(@PathVariable("hstryId") int hstryId, Authentication auth) {
 		log.info("srInformationHistory 상세조회");
-	
+
 		SrHistoryDetailDto srHistoryDetailDto = srInformationHistoryService.getSrInformationHistory(hstryId);
-		//auth의 권한(role) 얻어오기
+		// auth의 권한(role) 얻어오기
 		srHistoryDetailDto.setAuth(auth.getAuthorities().stream().findFirst().get().toString());
-		//auth의 아이디 얻어오기
+		// auth의 아이디 얻어오기
 		srHistoryDetailDto.setAuthId(auth.getName().toString());
 		log.info(hstryId);
 		log.info(auth.getName().toString());
@@ -116,21 +117,22 @@ public class SrInformationHistoryController {
 	 * @author 최은종
 	 * @param SrInformationHistory 객체에 데이터를 입출력하기 위해 매개변수로 설정
 	 * @return 진척정보 페이지 리턴
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * @throws IOException
+	 * @throws IllegalStateException
 	 * @see 개발자(히스토리 등록), 관리자(히스토리 등록&등록 요청에 대한 수락상태 업데이트)
 	 */
 	@PostMapping("/add")
-	public String addSrInformationHistory(SrInformationHistory srInformationHistory, Authentication auth) throws IllegalStateException, IOException {
+	public String addSrInformationHistory(SrInformationHistory srInformationHistory, Authentication auth)
+			throws IllegalStateException, IOException {
 		log.info("addSrInformationHistory 등록");
 
 		String role = auth.getAuthorities().stream().findFirst().get().toString();
 		log.info("role 조회" + role);
 
 		if (role.equals("ROLE_CLIENT")) {
-			//dmndNo
+			// dmndNo
 			srInformationHistory.setDmndNo(srInformationHistory.getSrNo());
-			//srNo
+			// srNo
 			String srNo = srInformationHistoryService.getSrNo(srInformationHistory.getSrNo());
 			srInformationHistory.setSrNo(srNo);
 		}

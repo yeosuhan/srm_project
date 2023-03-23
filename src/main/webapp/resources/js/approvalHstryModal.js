@@ -47,7 +47,7 @@ function getHstryDetail(historyId) {
 							$('.AhstryId').val(appvHstryId);
 							$('#footDivUSer')
 									.html(
-											'<button type="submit" form="approvalHistoryForm" formmethod="post" class="btn btn-oti center">등록</button>');
+											'<button type="submit" form="approvalHistoryForm" formmethod="post" class="btn btn-oti center" style="font-weight: bold;font-size: 20px">등록</button>');
 
 							$(document)
 									.ready(
