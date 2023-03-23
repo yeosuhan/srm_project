@@ -60,8 +60,15 @@ public class BoardController {
 		
 		boardFilterDto.setBtype(type);
 		if(role.equals(Auth.ROLE_CLIENT.toString()) && type.equals("qna")) {
-			if(view.equals("myportal")) pager = new Pager(6,boardService.getTotalRow(type, memberId, boardFilterDto), page);
-			else pager = new Pager(10,boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			if(view.equals("myportal")) {
+				pager = new Pager(6,boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			}
+			else {
+				if(!bbsNo.equals("")) {
+					page = boardService.getRowNum(type,memberId,bbsNo)/10;
+				}
+				pager = new Pager(10,boardService.getTotalRow(type, memberId, boardFilterDto), page);
+			}
 			
 			list = boardService.getBoardList(type, memberId, pager, boardFilterDto);
 			model.addAttribute("qPager", pager);
@@ -69,7 +76,12 @@ public class BoardController {
 		}
 		else {
 			if(view.equals("myportal")) pager = new Pager(6,boardService.getTotalRow(type, null, boardFilterDto), page);
-			else pager = new Pager(10,boardService.getTotalRow(type, null, boardFilterDto), page);
+			else {
+				if(!bbsNo.equals("")) {
+					page = boardService.getRowNum(type,null,bbsNo)/10;
+				}
+				pager = new Pager(10,boardService.getTotalRow(type, null, boardFilterDto), page);
+			}
 			
 			list = boardService.getBoardList(type, null, pager, boardFilterDto);
 			if(type.equals("qna")) {
