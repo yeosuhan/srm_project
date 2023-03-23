@@ -82,7 +82,7 @@ th {
 }
 
 .card .card-block {
-	padding: 0px 5px !important;
+	padding: 0px;
 }
 
 .col-xl-1 {
@@ -135,8 +135,16 @@ th {
 	background-color: white !important;
 }
 
+table th {
+	font-size: 15px !important;
+}
+
 table thead tr {
 	width: 100%;
+}
+
+table tbody td {
+	font-size: 15px !important;
 }
 
 .fontWrapper {
@@ -303,9 +311,9 @@ table thead tr {
 														<th scope="row">${pager.startRowNo + status.index}</th>
 														<td><strong>${srDemand.dmndNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srDemand.ttl) > 13}">
+															<c:when test="${fn:length(srDemand.ttl) > 20}">
 																<td id="ttl" class="text-left" style="font-size: 14px;"><c:out
-																		value="${fn:substring(srDemand.ttl,0,12)}" />...</td>
+																		value="${fn:substring(srDemand.ttl,0,19)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td id="ttl" class="text-left" style="font-size: 14px;"><c:out
@@ -375,15 +383,15 @@ table thead tr {
 					</ul>
 
 					<div class="tab-content tabs card-block"
-						style="padding: 0px; padding-top: 20px;">
+						style="padding: 0px;">
 						<div class="tab-pane active" id="srDemandDetail" role="tabpanel">
 							<div class="card-block" id="sddetail">
 								<div class="card_body"
-									style="font-size: 14px; padding-top: 20px;">
+									style="font-size: 15px; padding-top: 20px;">
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 										<div class="col col-sm-10">
-											<div id="dmndNo" style="font-size: 12px; width: 100%;">${sd.dmndNo}</div>
+											<div id="dmndNo" style="width: 100%;">${sd.dmndNo}</div>
 										</div>
 									</div>
 									<hr />
