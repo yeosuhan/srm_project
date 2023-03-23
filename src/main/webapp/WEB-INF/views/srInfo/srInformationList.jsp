@@ -325,7 +325,7 @@ label {
 									<select name="sttsCd" id="sttsCdFilter">
 										<option value="">전체</option>
 										<option value="3"
-											<c:if test="${srInfoFilter.sttsCd eq 3}"> selected</c:if>>구현</option>
+											<c:if test="${srInfoFilter.sttsCd eq 3}"> selected</c:if>>개발중</option>
 										<option value="4"
 											<c:if test="${srInfoFilter.sttsCd eq 4}"> selected</c:if>>테스트</option>
 										<option value="5"
@@ -374,9 +374,9 @@ label {
 
 						<div class="card-header-right">
 							<ul class="list-unstyled card-option">
-								<li><i class="fa fa fa-wrench open-card-option"></i></li>
-								<li><i class="fa fa-window-maximize full-card"></i></li>
-								<li><i class="fa fa-refresh reload-card"></i></li>
+								<li><i class="fa fa fa-wrench open-card-option"style="color:white;"></i></li>
+								<li><i class="fa fa-window-maximize full-card"style="color:white;"></i></li>
+								<li><i class="fa fa-refresh reload-card"style="color:white;"></i></li>
 							</ul>
 						</div>
 					</div>
@@ -439,9 +439,9 @@ label {
 														<th scope="row">${pager.startRowNo + num.index}</th>
 														<td id=""><strong>${srlist.srNo}</strong></td>
 														<c:choose>
-															<c:when test="${fn:length(srlist.ttl) > 18}">
+															<c:when test="${fn:length(srlist.ttl) > 17}">
 																<td class="text-left"><c:out
-																		value="${fn:substring(srlist.ttl,0,17)}" />...</td>
+																		value="${fn:substring(srlist.ttl,0,16)}" />...</td>
 															</c:when>
 															<c:otherwise>
 																<td class="text-left"><c:out value="${srlist.ttl}" /></td>
@@ -688,7 +688,7 @@ label {
                                     style="padding-left: 3px; display:none"
                                  </c:if>>
 											<button class="btn btn-oti"
-												style="float: right; margin-right: 5px; font-weight: bold; font-size: 20px"
+												style="float: right; margin-right: 5px; font-weight: bold; font-size: 20px; margin-bottom:10px;"
 												onclick="addHistory('${srNo}')" data-toggle="modal"
 												data-target="#addHistoryModal">SR 변경요청</button>
 										</div>
@@ -836,7 +836,7 @@ label {
 														<tbody>
 															<tr>
 
-																<td style="font-size: 12px !important;">요구정의 <input
+																<td style="font-size: 12px !important;font-weight:bold;">요구정의 <input
 																	type="hidden" id="SRPgPrgrsId0"> <input
 																	type="hidden" id="SRPgSrNo">
 																</td>
@@ -857,13 +857,13 @@ label {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress0()" id="btn0"
-																		style="width: 90%; height: 90%">저장</button>
+																		style=" height: 90%;border-radius:10px;">저장</button>
 																</td>
 															</tr>
 
 															<tr>
 
-																<td style="font-size: 12px !important;">분석/설계<input
+																<td style="font-size: 12px !important;font-weight:bold;">분석/설계<input
 																	type="hidden" id="SRPgPrgrsId1"></td>
 																<td style="font-size: 12px !important;" id="1bgngYmd"><input
 																	type="date" id="SRPgBgngYmd1"></td>
@@ -882,13 +882,13 @@ label {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress1()" id="btn1"
-																		style="width: 90%; height: 80%">저장</button>
+																		style="height: 90%;border-radius:10px;">저장</button>
 																</td>
 															</tr>
 
 															<tr>
 
-																<td style="font-size: 12px !important;">구현<input
+																<td style="font-size: 12px !important;font-weight:bold;">구현<input
 																	type="hidden" id="SRPgPrgrsId2"></td>
 																<td style="font-size: 12px !important;" id="2bgngYmd"><input
 																	type="date" id="SRPgBgngYmd2"></td>
@@ -907,13 +907,13 @@ label {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress2()" id="btn2"
-																		style="width: 90%; height: 90%">저장</button>
+																		style="height: 90%;border-radius:10px;">저장</button>
 																</td>
 															</tr>
 
 															<tr>
 
-																<td style="font-size: 12px !important;">테스트<input
+																<td style="font-size: 12px !important;font-weight:bold;">테스트<input
 																	type="hidden" id="SRPgPrgrsId3"></td>
 																<td style="font-size: 12px !important;" id="3bgngYmd"><input
 																	type="date" id="SRPgBgngYmd3"></td>
@@ -934,13 +934,13 @@ label {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress3()" id="btn3"
-																		style="width: 90%; height: 90%">저장</button>
+																		style="height: 90%;border-radius:10px;">저장</button>
 																</td>
 															</tr>
 
 															<tr>
 
-																<td style="font-size: 12px !important;">반영요청<input
+																<td style="font-size: 12px !important;font-weight:bold;">반영요청<input
 																	type="hidden" id="SRPgPrgrsId4"></td>
 																<td style="font-size: 12px !important;" id="4bgngYmd"><input
 																	type="date" id="SRPgBgngYmd4"></td>
@@ -959,13 +959,13 @@ label {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg"
 																		onclick="updateProgress4()" id="btn4"
-																		style="width: 90%; height: 90%">저장</button>
+																		style="height: 90%;border-radius:10px;">저장</button>
 																</td>
 															</tr>
 
 															<tr>
 
-																<td style="font-size: 12px !important;">운영반영<input
+																<td style="font-size: 12px !important;font-weight:bold;">운영반영<input
 																	type="hidden" id="SRPgPrgrsId5"></td>
 																<td style="font-size: 12px !important;" id="5bgngYmd"><input
 																	type="date" id="SRPgBgngYmd5"></td>
@@ -984,7 +984,7 @@ label {
 																<td style="padding: 0px; margin: 0px;">
 																	<button class="btn btn-success btn-lg radius"
 																		onclick="updateProgress5()" id="btn5"
-																		style="width: 90%; height: 90%">저장</button>
+																		style="height: 90%; border-radius:10px;">저장</button>
 																</td>
 															</tr>
 
@@ -994,7 +994,7 @@ label {
 											</div>
 										</div>
 
-										<button class="btn btn-oti btn-sm" id="addbtn"
+										<button class="btn btn-oti btn-sm my-3" id="addbtn"
 											style="float: right; width: 100%; font-size: 20px;">산출물
 											추가</button>
 									</div>
