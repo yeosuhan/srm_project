@@ -132,6 +132,7 @@ function writerBase() {
  * 작성자 : 신정은 내용 : sr 요청 작성시, 모든 시스템 데이터 드롭다운에 표시하기 위함
  */
 function setSystems() {
+	 $('.sysTask').empty();
    $.ajax({
       url : '/srsystem/list',
       type : 'GET',
@@ -217,8 +218,7 @@ function goAccept(dmndNo) {
       contentType : 'application/json; charset=UTF-8',
       dataType : "json",
       success : function(res) {
-         //alert(res.result);
-    	 location.href="admin/srdemand/list";
+    	 location.href="/admin/srdemand/list";
       },
       error : function(error) {
          console.log(error);
@@ -230,8 +230,6 @@ function goAccept(dmndNo) {
 function goDecline(dmndNo) {
    // 반려사유 작성하지 않을 경우 g화면 다시 이동시키기
    var rjctRsn = $('#srRjctRsnn').val();
-   console.log("~~~~~~~~~~~~~~~~~~!");
-   console.log($('#srRjctRsnn').val());
    if (!rjctRsn) {
      // alert('반려사유를 입력하여주세요.');
 	   adminAlert("반려사유를 입력하여주세요.")
@@ -250,7 +248,7 @@ function goDecline(dmndNo) {
          contentType : "application/json; charset=UTF-8",
          success : function(res) {
             //alert(res.result);
-        	location.href="/srdemand/list";
+        	location.href="/admin/srdemand/list";
          },
          error : function(error) {
             console.log(error);

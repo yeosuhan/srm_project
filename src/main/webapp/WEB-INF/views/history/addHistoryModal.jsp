@@ -20,9 +20,9 @@
 }
 </style>
 <div class="modal" id="addHistoryModal">
-	<div class="modal-body modal-dialog modal-lg" style="height: 500px">
+	<div class="modal-body modal-dialog modal-lg" style="height: 500px;">
 		<div id="mHd" class="m_head" style="height: 13%">
-			<div class="modal_title" style="color: white">SR 진척정보 변경요청</div>
+			<div class="modal_title" style="color: white; font-weight: bold;font-size: 20px">SR 진척정보 변경요청</div>
 			<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 		</div>
 		<div class="m_body bg-light">
@@ -30,12 +30,12 @@
 				action="<c:url value='/history/add'/>" class="form-material"
 				onsubmit="return checkValue()">
 				<div class="row my-3">
-					<div class="col-2 font-weight-bold ">SR 번호 :</div>
+					<div class="col-2 font-weight-bold ">SR 번호</div>
 					<div class="col-4">
 						<input id="HsrNo" name="srNo" style="width: 100%" type="text"
 							value="" readonly>
 					</div>
-					<div class="col-2 font-weight-bold">요청 유형 :</div>
+					<div class="col-2 font-weight-bold">요청 유형</div>
 					<div class="col-4">
 						<div class="dropdown dropdown open">
 							<select name="hstryType" id="hstryType" style="width: 73%">
@@ -51,12 +51,12 @@
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col-2 font-weight-bold">발신일 :</div>
+					<div class="col-2 font-weight-bold">발신일</div>
 					<div class="col-4">
 						<input type="date" id="HwrtYmd" type="text" value="" readonly
 							style="width: 100%">
 					</div>
-					<div class="col-2 font-weight-bold">발신자 :</div>
+					<div class="col-2 font-weight-bold">발신자</div>
 					<div class="col-4">
 						<input type="hidden" id="rqstrId" name="rqstrId"
 							value='<sec:authentication property="principal.username"/>' /> <input
@@ -66,7 +66,7 @@
 				</div>
 				<div class="row my-3">
 					<div class="col-2 pr-0 font-weight-bold">
-						<label for="">기존 완료요청일 : </label>
+						<label for="">기존 완료요청일</label>
 					</div>
 					<div class="col-4">
 						<input id="HcmptnDmndYmd" type="text" value="" readonly
@@ -75,15 +75,15 @@
 
 
 					<div class="col-2 font-weight-bold" id="chg1">
-						<label for="chgEndYmd ">요청 예정일 : </label>
+						<label for="chgEndYmd ">요청 예정일</label>
 					</div>
 					<div class="col-4 " id="chg2">
 						<input type="date" id="HchgEndYmd" name="chgEndYmd"
 							style="width: 73%">
-					</div>
+					</div> 
 				</div>
 				<div class="row my-3">
-					<div class="col-2 font-weight-bold">제목 :</div>
+					<div class="col-2 font-weight-bold">제목</div>
 					<div class="col-10">
 						<input id="HhstryTtl" style="width: 90%" type="text"
 							name="hstryTtl" value="">
@@ -91,7 +91,7 @@
 				</div>
 				<div class="row my-3">
 					<div class="col-2 font-weight-bold">
-						사유 :
+						사유
 						<p class="textCount" style="margin-top: 3px"></p>
 					</div>
 					<div class="col-10">
@@ -100,7 +100,7 @@
 					</div>
 				</div>
 				<div align="center">
-					<button id="mBt" type="submit" class="btn btn-oti save center">등록</button>
+					<button id="mBt" type="submit" class="btn btn-oti center" style="font-weight: bold;font-size: 20px">등록</button>
 				</div>
 			</form>
 		</div>

@@ -52,7 +52,7 @@ function getInfoHstryDetail(historyId) {
 							$('.AhstryId').val(AhstryId);
 							$('#footDiv')
 									.html(
-											'<button type="submit" form="historyDetailForm" formmethod="post" class="btn btn-oti center">등록</button>');
+											'<button type="submit" form="historyDetailForm" formmethod="post" class="btn btn-oti btn-sm center" style="font-weight: bold;font-size: 20px">등록</button>');
 
 							$(document)
 									.ready(
@@ -107,7 +107,7 @@ function getInfoHstryDetail(historyId) {
 							$('.AhstryId').val(AhstryId);
 							$('.mheadDiv')
 									.html(
-											'<input type="button" class="btn btn-oti btn-sm" style="line-height: 8px" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
+											'<input type="button" class="btn btn-oti btn-sm" style="line-height: 12px; font-weight: bold;font-size: 18px" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
 													+ '<input type="hidden" class="AhstryId" name="hstryId" value="">');
 							$('#HstrySttsDiv2')
 									.html(
@@ -141,7 +141,7 @@ function getInfoHstryDetail(historyId) {
 							$('.AhstryId').val(AhstryId);
 							$('.mheadDiv')
 									.html(
-											'<input type="button" class="btn btn-oti btn-sm" style="line-height: 8px" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
+											'<input type="button" class="btn btn-oti btn-sm" style="line-height: 12px; font-weight: bold;font-size: 18px" value="수정" data-toggle="modal" data-target="#modifyHistoryModal">'
 													+ '<input type="hidden" class="AhstryId" name="hstryId" value="">');
 							$('#HstrySttsDiv2')
 									.html(

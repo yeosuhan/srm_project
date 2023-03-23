@@ -136,8 +136,8 @@
 			</form>
 		</div>
 		<div class="m_footer bg-light">
-			<button class="btn btn-oti save center" data-dismiss="modal">승인</button>
-			<button class="btn btn-oti danger cancle" data-dismiss="modal">반려</button>
+			<button class="btn btn-info center" data-dismiss="modal" style="font-weight: bold;font-size: 20px">승인</button>
+			<button class="btn btn-danger cancle" data-dismiss="modal" style="font-weight: bold;font-size: 20px">반려</button>
 		</div>
 	</div>
 </div>

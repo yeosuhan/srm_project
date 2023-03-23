@@ -11612,11 +11612,11 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
   #checkbox-select tr td.select-checkbox:before, #checkbox-select tr td.select-checkbox:after, #checkbox-select tr th.select-checkbox:before, #checkbox-select tr th.select-checkbox:after {
     left: 15px; }
 
-.table td, .table th {
+/* .table td, .table th {
   padding: 0.75rem 0.75rem; }
-
+ */
 .table thead th {
-	padding:1.25rem 0.75rem;
+	/* padding:1.25rem 0.75rem; */
   border-bottom: 1px solid #d6dde1; }
 
 .invoive-info .table td, .invoive-info .table th,

@@ -392,7 +392,7 @@ public class SrDemandService implements ISrDemandService {
 		setHeaderCS(cs, font, cell);
 
 		int i = 2;
-		int ii = list.size();
+		int ii = 1;
 		for (SrDemand SrDemand : list) {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -446,7 +446,7 @@ public class SrDemandService implements ISrDemandService {
 			setCmmnCS2(cs, cell);
 
 			i++;
-			ii--;
+			ii++;
 		}
 		response.setHeader("Set-Cookie", "fileDownload=true; path=/");
 		response.setHeader("Content-Disposition", String.format("attachment; filename=\"SrDemandList.xlsx\""));

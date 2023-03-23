@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="card_body" id="sddetail"
-	style="font-size: 14px; padding-top: 20px;">
+	style="font-size: 14px;">
 	<div class="form-group row">
 		<div class="col col-sm-2 px-0 font-weight-bold">요청번호</div>
 		<div class="col col-sm-9 p-0">
@@ -172,11 +172,11 @@
 	<div class="row" id="adminButtonDiv">
 		<c:if test="${sd.sttsCd eq 0}">
 			<div class="col" style="text-align: right">
-				<div id="srAccept" style="float: right;"
-					class="btn btn-sm btn-oti center"
+				<div id="srAccept" style="float: right;margin-right: 5px;font-weight: bold;font-size: 20px"
+					class="btn btn-sm btn-info"
 					onclick="goAccept('${sd.dmndNo}')">승인</div>
-				<div id="srDecline" style="float: right; margin-right: 5px;"
-					class="btn btn-sm btn-oti cancle"
+				<div id="srDecline" style="float: right; margin-right: 5px;font-weight: bold;font-size: 20px"
+					class="btn btn-sm btn-danger"
 					onclick="goDecline('${sd.dmndNo}')">반려</div>
 			</div>
 		</c:if>

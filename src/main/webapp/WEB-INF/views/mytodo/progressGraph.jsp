@@ -16,7 +16,7 @@
 
 <div class="card">
 	<div class="card-header">
-		<h5 class="card-header-text">진행률</h5>
+		<h5 class="card-header-text " style="font-size:20px;font-weight:bold">진행률</h5>
 	</div>
 	<div id="adGraph" style="width:100%; height:400px;"></div>
 </div>

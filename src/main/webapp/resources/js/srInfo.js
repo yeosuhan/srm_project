@@ -411,7 +411,10 @@ function updateProgress0() {
 	var endYmd = $("#SRPgEndYmd0").val();
 	var prgrsRt = $("#SRPgPrgrsRt0").val();
 	var prgrsSeNm = "요구정의";
-	console.log(prgrsSeNm);
+	if(bgngYmd>endYmd) {
+		bgngYmd = null;
+		endYmd = null;
+	}
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
@@ -434,7 +437,10 @@ function updateProgress1() {
 	var endYmd = $("#SRPgEndYmd1").val();
 	var prgrsRt = $("#SRPgPrgrsRt1").val();
 	var prgrsSeNm = "분석/설계";
-	console.log(prgrsSeNm);
+	if(bgngYmd>endYmd) {
+		bgngYmd = null;
+		endYmd = null;
+	}
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
@@ -457,7 +463,10 @@ function updateProgress2() {
 	var endYmd = $("#SRPgEndYmd2").val();
 	var prgrsRt = $("#SRPgPrgrsRt2").val();
 	var prgrsSeNm = "구현";
-	console.log(prgrsSeNm);
+	if(bgngYmd>endYmd) {
+		bgngYmd = null;
+		endYmd = null;
+	}
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
@@ -480,7 +489,10 @@ function updateProgress3() {
 	var endYmd = $("#SRPgEndYmd3").val();
 	var prgrsRt = $("#SRPgPrgrsRt3").val();
 	var prgrsSeNm = "테스트";
-	console.log(prgrsSeNm);
+	if(bgngYmd>endYmd) {
+		bgngYmd = null;
+		endYmd = null;
+	}
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
@@ -503,7 +515,10 @@ function updateProgress4() {
 	var endYmd = $("#SRPgEndYmd4").val();
 	var prgrsRt = $("#SRPgPrgrsRt4").val();
 	var prgrsSeNm = "반영요청";
-	console.log(prgrsSeNm);
+	if(bgngYmd>endYmd) {
+		bgngYmd = null;
+		endYmd = null;
+	}
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',
@@ -528,7 +543,10 @@ function updateProgress5() {
 	var endYmd = $("#SRPgEndYmd5").val();
 	var prgrsRt = $("#SRPgPrgrsRt5").val();
 	var prgrsSeNm = "운영반영";
-	console.log(prgrsSeNm);
+	if(bgngYmd>endYmd) {
+		bgngYmd = null;
+		endYmd = null;
+	}
 	$.ajax({
 		url : '/srinformation/progress/update',
 		type : 'POST',

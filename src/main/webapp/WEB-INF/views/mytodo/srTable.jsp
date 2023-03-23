@@ -47,10 +47,25 @@ font-size: 15px !important;
 
 				<c:choose>
 					<c:when test="${sttsCd gt 2}">
-							<tr onclick="showAdminGraph('${sr.dmndNo}')">
+						<sec:authorize access="hasAnyRole('ROLE_DEVELOPER', 'ROLE_ADMIN')">
+							<tr onclick="showAdminGraph('${sr.dmndNo}')" ondblclick="location.href='/srinformation/list?dmndNoToHstry=${sr.dmndNo}'">
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+							<tr onclick="showAdminGraph('${sr.dmndNo}')" ondblclick="location.href='/srdemand/list?dmndno=${sr.dmndNo}'">
+						</sec:authorize>
+						
 					</c:when>
+					
 					<c:otherwise>
-						<tr>
+						<sec:authorize access="hasAnyRole( 'ROLE_ADMIN')">
+							<tr ondblclick="location.href='/admin/srdemand/list?dmndno=${sr.dmndNo}'">
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ROLE_CLIENT')">
+							<tr ondblclick="location.href='/srdemand/list?dmndno=${sr.dmndNo}'">
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole( 'ROLE_DEVELOPER')">
+							<tr>
+						</sec:authorize>
 					</c:otherwise>
 				</c:choose>
 				<td id="dmndNo" class="text-left font-weight-bold">${sr.dmndNo}</td>
