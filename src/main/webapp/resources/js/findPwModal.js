@@ -30,7 +30,9 @@ function checkVal() {
 	var eml = $("#eml").val();
 	var memberId = $("#memberId").val();
 	var telNo = $("#telNo").val();
-
+	$("#confirmBtn").hide();
+	$("#loadingBtn").show();
+	$("#loadingBtn").parent().prop("disabled",true);
 	$.ajax({
 		type : 'POST',
 		url : '/member/findPswd',

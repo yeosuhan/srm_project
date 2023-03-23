@@ -46,20 +46,25 @@ $(document).ready(function(){
    
    /* 모달 닫을때 */
    $("#addSrResourcesModal").on('hide.bs.modal',function(){
-      $("#addResourceForm #schdlEndYmd").val("");
-      $("#addResourceForm #schdlBgngYmd").val("");
-      $("#addResourceForm #empId option:selected").prop("selected",false);
-      $("#addResourceForm #ptcptnRoleCd option:selected").prop("selected",false);
-      if($("#addResourceForm #updateSrSrc").length){
-         $(".changed").removeClass("changed");
-          $("#addResourceForm #updateSrSrc").remove();
-            
-          $("#addResourceBtn").css("display","");
-          $("#modifyResourceBtn").css("display","none");
-            
-          $("#empId").attr("disabled",false);
-      }
-      $("#scheduleTable").empty();
+	   $("#addResourceForm #schdlEndYmd").val("");
+	   $("#addResourceForm #schdlBgngYmd").val("");
+	   $("#addResourceForm #empId option:selected").prop("selected",false);
+	   $("#addResourceForm #ptcptnRoleCd option:selected").prop("selected",false);
+	   if($("#addResourceForm #updateSrSrc").length){
+		   $(".changed").removeClass("changed");
+	       $("#addResourceForm #updateSrSrc").remove();
+	         
+	       $("#addResourceBtn").css("display","");
+	       $("#modifyResourceBtn").css("display","none");
+	         
+	       $("#empId").attr("disabled",false);
+	       $("#addSrResourceModalDept").attr("disabled",false);
+	   }
+	   $("#scheduleTable").empty();
+	   $("#scheduleTable").css("border","");
+	   $("#scheduleTable").css("height","");
+	   $("#addSrResourceModalDept").show();
+
    });
    
    /* 자원 정보 수정값 입력시 */
@@ -113,43 +118,51 @@ function showSchedule(){
       type:"GET",
       data:{empId:empId},
       success:function(result){
-         
-         $("#scheduleTable").html(
-               "<table class='table table-striped'>" +
-               "   <thead>" +
-               "      <tr>" +
-               "         <th>" +
-               "            SR명" +
-               "         </th>" +
-               "         <th>" +
-               "            시작일" +
-               "         </th>" +
-               "         <th>" +
-               "            종료일" +
-               "         </th>" +
-               "      </tr>" +
-               "   </thead>" +
-               "   <tbody></tbody>" +
-               "</table>"
-         );
-         
          // 이벤트 제거
          calendar.getEvents().forEach((value)=>{
             // console.log(value);
             value.remove();
          });
-         // 이벤트 추가
-         // console.log(result);
-         result.forEach((value)=>{
-            calendar.addEvent(value);
-            $("#scheduleTable tbody").append(
-                  "<tr>" +
-                  "   <td>"+value.title+"</td>" +
-                  "   <td>"+value.start +"</td>"+
-                  "   <td>"+value.end +"</td>"+
-                  "</tr>"
-               );
-         });
+         if(result.length != 0){
+        	 $("#scheduleTable").css("border","1px solid");
+	       	 $("#scheduleTable").css("height","200px");
+	       	 $("#scheduleTable").html(
+	       			  "<table class='table table-striped m-0'>" +
+	       			  "	<thead>" +
+	       			  "		<tr>" +
+	       			  "			<th style='text-align:left; width:544px;padding-left:10px'>" +
+	       			  "				SR명" +
+	       			  "			</th>" +
+	       			  "			<th>" +
+	       			  "				시작일" +
+	       			  "			</th>" +
+	       			  "			<th>" +
+	       			  "				종료일" +
+	       			  "			</th>" +
+	       			  "		</tr>" +
+	       			  "	</thead>" +
+	       			  "</table>" +
+	       			  "<div style='height:150px;overflow-y:scroll'>"+
+	       			  "	<table class='table table-striped'>" +
+	       			  "		<tbody></tbody>" +
+	       			  "	</table>" +
+	       			  "</div>" 
+	       	 );
+	         //이벤트 추가
+	         //console.log(result);
+	         result.forEach((value)=>{
+	            calendar.addEvent(value);
+	            $("#scheduleTable tbody").append(
+	            		"<tr>" +
+	            		"	<td style='width:544px'>"+value.title+"</td>" +
+	            		"	<td style='text-align:center'>"+value.start +"</td>"+
+	            		"	<td style='text-align:center'>"+value.end +"</td>"+
+	            		"</tr>"
+	            	);
+	         });
+	         
+         }
+
          $(".fc-event-time").empty();
       }
    });
@@ -220,31 +233,36 @@ function getPtcptnRoleCd(){
 
 /* 자원 정보 수정 모달로 변경 */
 function openUpdateResourceModal(srSrc,empId,ptcptnRoleCd){
-   $("#addSrResourcesModal").modal("show");
-   
-   // 개발자
-   $("#addSrResourceModalDept").attr("disabled",true);
-   $("#empId option[value='"+empId+"']").prop("selected",true);
-   showSchedule();
-   $("#empId").attr("disabled",true);
-   
-   // 역할
-   getPtcptnRoleCd();
-   $("#ptcptnRoleCd option[value='"+ptcptnRoleCd+"']").prop("selected",true);
-   
-   
-   // 투입 시작일
-   $("#schdlBgngYmd").val($("#schdlBgngYmd"+srSrc).text());
-   // 투입 종료일
-   $("#schdlEndYmd").val($("#schdlEndYmd"+srSrc).text());
-   // srSrc 값 추가
-   $("#addResourceForm").append(
-         "<input type='hidden' id='updateSrSrc' value='"+srSrc+"'>"
-   );
-   
-   $("#addResourceBtn").css("display","none");
-   $("#modifyResourceBtn").css("display","");
-   
+	$("#addSrResourcesModal").modal("show");
+	
+	//개발자
+	$("#addSrResourceModalDept").attr("disabled",true);
+	if($("#empId option[value='"+empId+"']").length!=0){
+		$("#empId option[value='"+empId+"']").prop("selected",true);
+	}else{
+		$("#addSrResourceModalDept").hide();
+		$("#empId").append("<option value = "+empId+">"+empId+"</option>");
+		$("#empId option[value='"+empId+"']").prop("selected",true);
+	}
+	showSchedule();
+	$("#empId").attr("disabled",true);
+	
+	//역할 
+	getPtcptnRoleCd();
+	$("#ptcptnRoleCd option[value='"+ptcptnRoleCd+"']").prop("selected",true);
+	
+	
+	//투입 시작일
+	$("#schdlBgngYmd").val($("#schdlBgngYmd"+srSrc).text());
+	//투입 종료일
+	$("#schdlEndYmd").val($("#schdlEndYmd"+srSrc).text());
+	//srSrc 값 추가
+	$("#addResourceForm").append(
+			"<input type='hidden' id='updateSrSrc' value='"+srSrc+"'>"
+	);
+	
+	$("#addResourceBtn").css("display","none");
+	$("#modifyResourceBtn").css("display","");
 }
 
 function modifyResource(){
