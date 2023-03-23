@@ -315,7 +315,7 @@ public class SrinformationService implements ISrinformationService {
 		  setHeaderCS(cs, font, cell);
 		  
 		  int i = 2;
-		  int ii = srlist.size();
+		  int ii = 1;
 		  for (SrinformationList srinformationList : srlist) {
 		      
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -363,7 +363,7 @@ public class SrinformationService implements ISrinformationService {
 		  setCmmnCS2(cs, cell);
 		  
 		  i++;
-		  ii--;
+		  ii++;
 		}
 		  response.setHeader("Set-Cookie", "fileDownload=true; path=/");
 		  response.setHeader("Content-Disposition", String.format("attachment; filename=\"SrInformationList.xlsx\""));
