@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
-import com.oti.team2.srinformationhistory.dto.SrHistoryMailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.srinformationhistory.dto.SrResourceAddHistoryDto;
 import com.oti.team2.util.pager.Pager;
@@ -27,6 +26,7 @@ public interface ISrInformationHistoryService {
 	 * @author 최은종
 	 */
 	public int getCountAllForEmp(String srNo);
+
 	public int getCountAllForClient(String srNo);
 
 	/**
@@ -47,10 +47,11 @@ public interface ISrInformationHistoryService {
 	 * SR 히스토리 등록& 요청 결재를 위한 insert 메서드
 	 * 
 	 * @author 최은종
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * @throws IOException
+	 * @throws IllegalStateException
 	 */
-	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role) throws IllegalStateException, IOException;
+	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role)
+			throws IllegalStateException, IOException;
 
 	/**
 	 * SR 히스토리 수정을 위한 update 메서드
@@ -77,15 +78,15 @@ public interface ISrInformationHistoryService {
 	 * @author 최은종
 	 */
 	public List<SrResourceAddHistoryDto> getDmndNoBySrResouce(String dmndNo, String empId);
-	
+
 	/**
 	 * 나의 할 일에서 히스토리 목록 페이징 메서드
 	 * 
 	 * @author 최은종
 	 */
 	public int getCountTodoForAdmin(String picId);
-	public int getCountTodoForDev(String rqstrId, String empId);
-	public int getCountTodoForCust(String custId);
 
-	public String sendHistoryMail(SrHistoryMailDto historyMailDto, String srNo, String hstryType);
+	public int getCountTodoForDev(String rqstrId, String empId);
+
+	public int getCountTodoForCust(String custId);
 }
