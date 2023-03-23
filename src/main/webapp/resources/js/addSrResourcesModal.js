@@ -59,6 +59,7 @@ $(document).ready(function(){
 	         
 	       $("#empId").attr("disabled",false);
 	   }
+	   $("#scheduleTable").empty();
    });
    
    /*자원 정보 수정값 입력시*/
@@ -112,6 +113,26 @@ function showSchedule(){
       type:"GET",
       data:{empId:empId},
       success:function(result){
+    	  
+    	  $("#scheduleTable").html(
+    			  "<table class='table table-striped'>" +
+    			  "	<thead>" +
+    			  "		<tr>" +
+    			  "			<th>" +
+    			  "				SR명" +
+    			  "			</th>" +
+    			  "			<th>" +
+    			  "				시작일" +
+    			  "			</th>" +
+    			  "			<th>" +
+    			  "				종료일" +
+    			  "			</th>" +
+    			  "		</tr>" +
+    			  "	</thead>" +
+    			  "	<tbody></tbody>" +
+    			  "</table>"
+    	  );
+    	  
          //이벤트 제거
          calendar.getEvents().forEach((value)=>{
             //console.log(value);
@@ -121,6 +142,13 @@ function showSchedule(){
          //console.log(result);
          result.forEach((value)=>{
             calendar.addEvent(value);
+            $("#scheduleTable tbody").append(
+            		"<tr>" +
+            		"	<td>"+value.title+"</td>" +
+            		"	<td>"+value.start +"</td>"+
+            		"	<td>"+value.end +"</td>"+
+            		"</tr>"
+            	);
          });
          $(".fc-event-time").empty();
       }
