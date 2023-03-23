@@ -387,7 +387,7 @@ table tbody td {
 						<div class="tab-pane active" id="srDemandDetail" role="tabpanel">
 							<div class="card-block" id="sddetail">
 								<div class="card_body"
-									style="font-size: 15px; padding-top: 20px;">
+									style="font-size: 14px; padding-top: 20px;">
 									<div class="form-group row">
 										<div class="col col-sm-2 font-weight-bold  px-0">SR번호</div>
 										<div class="col col-sm-10">

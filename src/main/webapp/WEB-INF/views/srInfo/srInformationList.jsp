@@ -526,7 +526,7 @@ label {
 
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청 번호</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">요청 번호</div>
 											<div class="col col-sm-6 px-0">
 												<input type="hidden" id="SRDSrNo" value="${srlist[0].srNo}">
 												<input readonly class="form-control" id="SRDDmndNo"
@@ -534,7 +534,7 @@ label {
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">우선순위</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">우선순위</div>
 											<div class="col col-sm-6 px-0">
 												<input type="text" readonly class="form-control" id="SiRnk"
 													value="${sd.rnk}">
@@ -543,7 +543,7 @@ label {
 									</div>
 									<hr />
 									<div class="form-group row">
-										<div class="col col-sm-2 px-0 font-weight-bold">SR 제목</div>
+										<div class="col col-sm-2 px-0 font-weight-bold" style="font-size:14px;">SR 제목</div>
 										<div class="col col-sm-9 px-0">
 											<input readonly class="form-control" id="SRDTitle"
 												value="${sd.ttl}">
@@ -551,7 +551,7 @@ label {
 									</div>
 									<hr />
 									<div class="form-group row">
-										<div class="col col-sm-2 px-0 font-weight-bold">관련근거</div>
+										<div class="col col-sm-2 px-0 font-weight-bold" style="font-size:14px;">관련근거</div>
 										<div class="col col-sm-9 px-0">
 											<input readonly class="form-control" id="SRDRelgrund"
 												value="${sd.relGrund}">
@@ -560,14 +560,14 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">시스템구분</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">시스템구분</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDSys"
 													value="${sd.sysNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">업무구분</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">업무구분</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDTask"
 													value="${sd.taskSeNm}">
@@ -577,14 +577,14 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청기관</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">요청기관</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDInst"
 													value="${sd.instNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">요청자</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">요청자</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDClientNm"
 													value="${sd.clientNm}"> <input type="hidden"
@@ -595,14 +595,14 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">SR요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">SR요청일</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDDmndymd"
 													value="${sd.dmndYmd}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">완료요청일</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">완료요청일</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDCmptnDmndYmd"
 													value="${sd.cmptnDmndYmd}">
@@ -612,7 +612,7 @@ label {
 									<hr />
 									<div class="form-group row">
 										<label class="col-sm-2 px-0 col-form-label font-weight-bold"
-											style="line-height: 100px; font-size: 12px">SR 내용</label>
+											style="line-height: 100px; font-size: 14px">SR 내용</label>
 										<div class="col-sm-9 px-0">
 											<input readonly class="form-control" style="height: 100px;"
 												id="SRDCn" value="${sd.cn}">
@@ -621,14 +621,14 @@ label {
 									<hr />
 									<div class="form-group row">
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 px-0 font-weight-bold">검토자</div>
+											<div class="col col-sm-4 px-0 font-weight-bold" style="font-size:14px;">검토자</div>
 											<div class="col col-sm-8 pl-0">
 												<input readonly class="form-control" id="SRDRvwrNm"
 													value="${sd.rvwrNm}">
 											</div>
 										</div>
 										<div class="col-sm-6 px-0">
-											<div class="col col-sm-4 font-weight-bold">진행상태</div>
+											<div class="col col-sm-4 font-weight-bold" style="font-size:14px;">진행상태</div>
 											<div class="col col-sm-7 pl-0">
 												<input readonly class="form-control" id="SRDSttsNm"
 													value="${sd.sttsNm}">
@@ -636,7 +636,7 @@ label {
 										</div>
 									</div>
 									<div class="form-group row">
-										<p class="col-sm-2 font-weight-bold px-0">첨부파일</p>
+										<p class="col-sm-2 font-weight-bold px-0" style="font-size:14px;">첨부파일</p>
 										<div class="col-sm-10" id="SRDAttachFile">
 											<c:forEach var="f" items="${sd.attachFile}">
 												<div>
