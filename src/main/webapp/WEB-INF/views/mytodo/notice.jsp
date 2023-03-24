@@ -29,7 +29,7 @@ font-size: 13px !important;
 		</thead>
 		<tbody>
 			<c:forEach items="${noticeList}" var="board" varStatus="status">
-				<tr onclick="noticeDetail(${board.bbsNo})">
+				<tr onclick="noticeDetail(${board.bbsNo})" ondblclick="location.href='board/list?type=notice&bbsNo=${board.bbsNo}'">
 					<th style="text-align: center;">${nPager.startRowNo + status.index}</th>
 					<c:choose>
 						<c:when test="${fn:length(board.bbsTtl) > 17}">
