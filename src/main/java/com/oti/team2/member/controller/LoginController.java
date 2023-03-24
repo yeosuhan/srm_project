@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oti.team2.member.dto.Users;
 import com.oti.team2.util.springsecurity.GoogleService;
 
 import lombok.extern.log4j.Log4j2;
@@ -54,43 +55,24 @@ public class LoginController {
 		return auth;
 	}	
 	
-	@GetMapping("/google_login")
+	@GetMapping("/google/login")
 	public String googleLogin() {
 		log.info("실행");
 		return "redirect:" + googleService.getAuthURL();
 	}     
     
-    @RequestMapping("/google_callback")
+    @RequestMapping("/login/oauth2/google/callback")
     public String googleLogin(String code) throws Exception {
     	log.info("code: " + code);
     	
     	String access_token = googleService.getAccessToken(code);
     	
-    	Map<String, String> result = googleService.getUserInfo(access_token);
-    	String email = (String) result.get("email");
-    	
-    	List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-        Authentication auth = new UsernamePasswordAuthenticationToken(email, null, roles);        
+    	Users user = googleService.getUserInfo(access_token);    	
+                
+        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());        
         SecurityContextHolder.getContext().setAuthentication(auth);
        
         return "redirect:/";
     }    
     
-    @RequestMapping(value="/userInfo", produces="application/json; charset=UTF-8")
-	@ResponseBody
-	public String userInfo(Authentication authentication) {
-		String mid = authentication.getName();
-		List<String> authorityList = new ArrayList<>();
-		for(GrantedAuthority authority : authentication.getAuthorities()) {
-			authorityList.add(authority.getAuthority());
-		}
-
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("mid", mid);
-		jsonObject.put("mrole", authorityList.get(0));
-		
-		String json = jsonObject.toString();
-		return json;
-	}    
 }
