@@ -328,7 +328,7 @@ table tbody td {
 															-</c:if> <c:if test="${(srDemand.sttsNm) ne '개발취소'}">
 																${srDemand.cmptnDmndYmd}
 															</c:if></td>
-															<td style="font-size: 14px;"><c:if
+														<td style="font-size: 14px;"><c:if
 																test="${(srDemand.sttsNm) eq '요청'}">
 																<label class="badge badge-warning"
 																	style="font-size: 15px;">${srDemand.sttsNm}</label>

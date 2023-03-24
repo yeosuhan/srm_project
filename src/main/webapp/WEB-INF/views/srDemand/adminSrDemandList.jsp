@@ -343,7 +343,8 @@ table tbody td {
 			<%-- *********************************** [SR요청 처리정보 ] ***********************************--%>
 			<div class="col-xl-4 col-md-12 p-0">
 				<div class="card">
-					<div class="card-header">s
+					<div class="card-header">
+						s
 						<h5 style="font-weight: bold; font-size: 20px">SR 요청 상세정보</h5>
 					</div>
 					<div class="tab-content tabs card-block"
