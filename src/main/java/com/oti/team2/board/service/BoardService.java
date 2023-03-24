@@ -135,4 +135,9 @@ public class BoardService implements IBoardService {
 		return boardDao.selectBoardByEmpId(empId, pager, boardFilterDto);
 	}
 
+	@Override
+	public int getRowNum(String type, String memberId, String bbsNo) {
+		return boardDao.selectRowNumByBbsNo(type,memberId,bbsNo);
+	}
+
 }

@@ -65,4 +65,9 @@ public interface IBoardService {
 	 * @author 신정은
 	 */
 	List<BoardListDto> getBoardListByEmpId(String empId, Pager pager, BoardFilterDto boardFilterDto);
+	/*
+	 * 게시글의 행수 조회
+	 * @author 안한길
+	 * */
+	int getRowNum(String type, String memberId, String bbsNo);
 }

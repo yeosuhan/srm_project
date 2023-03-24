@@ -41,6 +41,9 @@ $(document).ready(function(){
 	if(currentUrl.indexOf('dmndno')!=-1){
 		currentUrl=currentUrl.substring(0,currentUrl.indexOf('dmndno')-1);
 	}
+	if(currentUrl.indexOf('bbsNo')!=-1){
+		currentUrl=currentUrl.substring(0,currentUrl.indexOf('bbsNo')-1);
+	}
 	//파라미터 여부
 	if(currentUrl.indexOf('?')!=-1 && currentUrl.indexOf('?')!=currentUrl.length-1){
 		
