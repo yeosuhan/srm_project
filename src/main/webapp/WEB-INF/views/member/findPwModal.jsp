@@ -46,7 +46,11 @@
 			</div>
 
 			<div class="modal-footer" align="center">
-				<button type="button" onclick="checkVal()" class="btn btn-oti">확인</button>
+				<button type="button" onclick="checkVal()" class="btn btn-oti">
+	    			<div id="confirmBtn">확인</div>
+	    			<div id="loadingBtn" style=" width: 30px;height: 30px; border-radius:50px; border: 2px solid currentColor;border-right-color: transparent;
+	    				animation: spin 1s linear infinite;display:none"></div>
+    			</button>
 			</div>
 		</div>
 	</div>

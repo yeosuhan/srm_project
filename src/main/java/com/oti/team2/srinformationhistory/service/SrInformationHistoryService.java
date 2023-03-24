@@ -3,11 +3,7 @@ package com.oti.team2.srinformationhistory.service;
 import java.io.IOException;
 import java.util.List;
 
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +16,6 @@ import com.oti.team2.srinformation.service.ISrinformationService;
 import com.oti.team2.srinformationhistory.dao.ISrInformationHistoryDao;
 import com.oti.team2.srinformationhistory.dto.MyTodoHistoryListDto;
 import com.oti.team2.srinformationhistory.dto.SrHistoryDetailDto;
-import com.oti.team2.srinformationhistory.dto.SrHistoryMailDto;
 import com.oti.team2.srinformationhistory.dto.SrInformationHistory;
 import com.oti.team2.srinformationhistory.dto.SrResourceAddHistoryDto;
 import com.oti.team2.srresource.dto.SrResource;
@@ -52,9 +47,6 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 
 	@Autowired
 	private IMemberDao memberDao;
-
-/*	@Autowired
-	private JavaMailSender mailSender;*/
 
 	/**
 	 * SR처리 히스토리 내역 조회 메서드 (관리자/개발자용)
@@ -124,12 +116,13 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 	 * SR 히스토리 등록 & 결재를 위한 insert 및 update 메서드
 	 * 
 	 * @author 최은종
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * @throws IOException
+	 * @throws IllegalStateException
 	 * @see 개발자, 관리자
 	 */
 	@Transactional
-	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role) throws IllegalStateException, IOException {
+	public void addSrInformationHistory(SrInformationHistory srInformationHistory, String role)
+			throws IllegalStateException, IOException {
 		log.info("서비스----insert");
 		String hstryType = srInformationHistory.getHstryType();
 		String hstryStts = srInformationHistory.getHstryStts();
@@ -323,31 +316,4 @@ public class SrInformationHistoryService implements ISrInformationHistoryService
 		return rows;
 	}
 
-	@Override
-	public String sendHistoryMail(SrHistoryMailDto historyMailDto, String srNo, String hstryType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*
-	 * @Override public String sendHistoryMail(SrHistoryMailDto historyMailDto,
-	 * String srNo, String hstryType) {
-	 * 
-	 * String fromEmail = "otiteam2@gmail.com"; // 받는 사람 메일에 표시됨 String fromName =
-	 * "오티아이"; // 발신인 이름 String title = "[OTI 오티아이] OTI-SRM 임시 비밀번호 입니다."; String
-	 * content = memberDto.getMemberId() +
-	 * "님 안녕하세요. 로그인 후 비밀번호를 변경하여 사용 부탁드립니다. 본인이 새로운 비밀번호를 요청하지 않았다면 이 이메일은 무시해 주세요."
-	 * ; content += "OTI-SRM 임시 비밀번호 : " + randomPswd;
-	 * 
-	 * // 수신인 정보 String toEmail = memberDto.getEml();
-	 * 
-	 * // 이메일 발송 MimeMessage msg = mailSender.createMimeMessage(); try {
-	 * MimeMessageHelper helper = new MimeMessageHelper(msg, true, "utf-8");
-	 * helper.setFrom(fromEmail); helper.setTo(toEmail); helper.setSubject(title);
-	 * helper.setText(content, true); mailSender.send(msg); } catch (Exception e) {
-	 * log.info("이메일 발송 실패: " + e); }
-	 * 
-	 * 
-	 * return ""; }
-	 */
 }
