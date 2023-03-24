@@ -322,6 +322,13 @@ table tbody td {
 														</c:choose>
 														<td class="text-left" style="font-size: 14px;">${srDemand.sysNm}</td>
 														<td style="font-size: 14px;" class="text-left">${srDemand.instNm}</td>
+														<td style="font-size: 13px;">${srDemand.dmndYmd}</td>
+														<td style="font-size: 13px;"><c:if
+																test="${(srDemand.sttsNm) eq '개발취소'}">
+                                             -</c:if> <c:if
+																test="${(srDemand.sttsNm) ne '개발취소'}">
+                                                ${srDemand.cmptnDmndYmd}
+                                             </c:if></td>
 														<td style="font-size: 14px;"><c:if
 																test="${(srDemand.sttsNm) eq '요청'}">
 																<label class="badge badge-warning"
@@ -345,13 +352,6 @@ table tbody td {
 																<label class="badge badge-inverse-primary"
 																	style="font-size: 15px;">${srDemand.sttsNm}</label>
 															</c:if></td>
-														<td style="font-size: 13px;">${srDemand.dmndYmd}</td>
-														<td style="font-size: 13px;"><c:if
-																test="${(srDemand.sttsNm) eq '개발취소'}">
-                                             -</c:if> <c:if
-																test="${(srDemand.sttsNm) ne '개발취소'}">
-                                                ${srDemand.cmptnDmndYmd}
-                                             </c:if></td>
 													</tr>
 												</c:forEach>
 											</c:if>
