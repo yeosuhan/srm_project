@@ -28,7 +28,7 @@
 				</thead>
 				<tbody>
 				<c:forEach items="${qnaList}" var="board" varStatus="status">
-					<tr onclick="qnaDetail(${board.bbsNo})">
+					<tr onclick="qnaDetail(${board.bbsNo})" ondblclick="location.href='board/list?type=qna&bbsNo=${board.bbsNo}'">
 						<th style="text-align: center;">${qPager.startRowNo + status.index}</th>
 						<c:choose>
 							<c:when test="${fn:length(board.bbsTtl) > 15}">

@@ -77,4 +77,9 @@ public interface IBoardDao {
 	 * @author 신정은
 	 */
 	int updateAnsYn(int bbsNo);
+	/**
+	 * 행수 조회
+	 * @author 안한길
+	 */
+	int selectRowNumByBbsNo(@Param("type")String type,@Param("memberId") String memberId,@Param("bbsNo") String bbsNo);
 }

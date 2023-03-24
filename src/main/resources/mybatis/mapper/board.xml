@@ -216,4 +216,26 @@
         	ANS_YN != 1
 	</update>
 		
+		<!-- 행번호 조회 -->
+    <select id="selectRowNumByBbsNo" parameterType="map" resultType="int">
+         SELECT  rn
+       from
+       (
+             select rownum as rn,
+             BBS_NO
+             from
+             (
+                 select 
+                   BBS_NO
+                 FROM BOARD b, MEMBERS m
+				 where b.WRTR_ID = m.member_id
+				 <if test="memberId != null">
+					and b.WRTR_ID = #{memberId}
+				 </if>
+				 and BBS_TYPE = upper(#{type})
+				 ORDER BY WRT_YMD DESC
+             )        
+        ) 
+         WHERE BBS_NO=#{bbsNo}
+    </select>
 </mapper>
