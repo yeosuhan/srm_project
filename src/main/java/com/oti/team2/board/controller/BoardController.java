@@ -65,7 +65,7 @@ public class BoardController {
 			}
 			else {
 				if(!bbsNo.equals("")) {
-					page = boardService.getRowNum(type,memberId,bbsNo)/10;
+					page = boardService.getRowNum(type,memberId,bbsNo)/10+1;
 				}
 				pager = new Pager(10,boardService.getTotalRow(type, memberId, boardFilterDto), page);
 			}
@@ -78,7 +78,7 @@ public class BoardController {
 			if(view.equals("myportal")) pager = new Pager(6,boardService.getTotalRow(type, null, boardFilterDto), page);
 			else {
 				if(!bbsNo.equals("")) {
-					page = boardService.getRowNum(type,null,bbsNo)/10;
+					page = boardService.getRowNum(type,null,bbsNo)/10+1;
 				}
 				pager = new Pager(10,boardService.getTotalRow(type, null, boardFilterDto), page);
 			}
