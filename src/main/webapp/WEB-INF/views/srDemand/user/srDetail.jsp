@@ -143,7 +143,7 @@
 		<c:if test="${sd.sttsCd > 1 && sd.sttsCd < 5 && prgrsRt eq '90'}">
 			<div class="col" style="text-align: right">
 				<div class='btn btn-sm btn-success' onclick='endSr()'
-					style='float: right;'>반영요청</div>
+					style='float: right;width:100%;font-size:20px;'>반영요청</div>
 			</div>
 		</c:if>
 	</div>
